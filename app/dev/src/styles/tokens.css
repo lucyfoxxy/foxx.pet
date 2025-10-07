@@ -1,0 +1,108 @@
+:root { 
+  /* ====== Main Colors ====== */
+  --primary-text-color:         oklch(92% 0.03 310);
+
+  --accent-color:               oklch(91% 0.0437 240);
+  --highlight-color:            oklch(83% 0.07 315);
+  --outline-color:              color-mix(in oklch, var(--highlight-color) 20%, transparent);
+
+  --primary-background-color:   oklch(26% 0.08 310 / 0.65);
+  --secondary-background-color: oklch(20% 0.065 310 / 0.80); 
+
+  --primary-shadow-color:       color-mix(in oklch, var(--primary-background-color) 70%, black);
+  --secondary-shadow-color:     color-mix(in oklch, var(--secondary-background-color) 70%, black);
+  --highlight-shadow-color:     color-mix(in oklch, var(--highlight-color) 80%, black); 
+  --accent-shadow-color:        color-mix(in oklch, var(--accent-color) 70%, black); 
+
+
+  /* ====== Decorations ====== */
+  --background-overlay:         radial-gradient(1200px 600px at 50% 10%, transparent 0%, rgba(0,0,0,.35) 60%, rgba(0,0,0,.6) 100%);
+  
+  --small-blur:                 10px;
+  --medium-blur:                14px;   
+  --large-blur:                 18px;
+
+  --small-radius:               10px;
+  --medium-radius:              14px;
+  --large-radius:               18px;
+ 
+  --primary-text-shadow:        0 0 10px var(--primary-background-color),0 0 4px color-mix(in oklab, var(--highlight-color) 60%, transparent 10%);
+  --secondary-text-shadow:      0 0 10px var(--primary-background-color),0 0 3px var(--highlight-color);
+  --accent-text-shadow:         0 0 11px var(--accent-shadow-color);
+  --highlight-text-shadow:      0 0 9px var(--highlight-shadow-color);
+
+  --medium-shadow:              0 0 14px 4px var(--primary-shadow-color), 0 0 24px -14px var(--highlight-shadow-color);
+  --large-shadow:               0 0 3px -13px var(--primary-shadow-color), 0 0 12px -4px var(--secondary-shadow-color);
+
+  --focus-glow-accent:          0 0 16px -12px var(--accent-shadow-color)   , 0 0 0 1px var(--accent-color), 0 0 4px 1px var(--accent-shadow-color) ;
+  --focus-glow-highlight:       0 0 20px -12px var(--highlight-shadow-color), 0 0 0 2px var(--highlight-color), 0 0 7px 4px var(--highlight-color), inset 0 0 12px 0 var(--highlight-shadow-color);
+
+
+  /* ====== Fonts ====== */
+  --primary-font-family:        Grandstander, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --secondary-font-family:      'Fuzzy Bubbles', var(--primary-font-family);
+
+  --thin-font-weight:           300;
+  --normal-font-weight:         400;
+  --thick-font-weight:          500;
+  --bold-font-weight:           700;
+
+  --xsmall-font-size:           clamp(.82rem, .48rem + .35vw, 1rem);
+  --small-font-size:            clamp(.98rem,  .7rem + .55vw, 1.22rem);
+  --medium-font-size:           clamp(1.15rem, .82rem + .75vw, 1.4rem);
+  --large-font-size:            clamp(1.25rem, .87rem + .9vw, 1.65rem);
+  --xlarge-font-size:           clamp(1.45rem, 1.1rem + 1.1vw, 2.45rem);
+
+  --xsmall-line-height:         1;
+  --small-line-height:          1.5;
+  --medium-line-height:         1.35;
+  --large-line-height:          1.225;
+  --xlarge-line-height:         1.2;
+
+  --small-letter-spacing:       .0065em;
+  --medium-letter-spacing:      .0225em;
+  --large-letter-spacing:       .0425em;
+  --prose-flow-spacing:         clamp(.65rem, .5rem + .3vw, .95rem);
+
+
+
+  /* ====== Layout / Structures ====== */
+  --container-max:              1280px;
+  --container-gap:              clamp(.75rem, 3.5vw, 2.75rem);
+  --container-padding:          max(var(--container-gap), calc((100vw - var(--container-max)) / 2));
+
+  --navbar-background:          color-mix(in oklab, var(--secondary-background-color), black 6%);
+  --navbar-blur:                var(--medium-blur);   
+  --navbar-shadow:              var(--medium-shadow); 
+  --navbar-padding:             clamp(.75rem, 1.2vw, 1rem);
+  --navbar-margin:              0 var(--navbar-gap);
+  --navbar-gap:                 clamp(1rem, 2vw, 2rem);
+
+  --panel-background:           var(--primary-background-color); 
+  --panel-padding:              clamp(1rem, 2vw, 3rem);
+  --panel-blur:                 var(--large-blur);   
+  --panel-shadow:               var(--large-shadow);
+
+  --content-gap:                clamp(1rem, 2vw, 1.75rem);
+  --content-background:         color-mix(in oklab, var(--navbar-background), transparent 40%);          
+  --content-padding:            var(--panel-padding);
+  --content-margin:             clamp(1rem, 2vw, 1.75rem);
+  --content-blur:               var(--panel-blur);   
+  --content-shadow:             var(--panel-shadow);
+  --content-media-size:         min(360px, 100%);
+
+  --brand-size:                 clamp(70px, 12vw, 180px);
+  --brand-gap:                  calc(var(--content-gap) * .85);
+  --brand-gap-mobile:           calc(var(--content-gap) * .5);
+
+  /* ====== Gallery ====== */
+  --gallery-frame-size: calc(
+      (var(--container-max) - 
+        (var(--container-gap) + var(--panel-padding)+var(--content-margin)+var(--content-gap)) * 2
+      ) / 2
+    );
+  --thumb-size: clamp(64px, 9vw, 128px);
+  --kenburns-offset: clamp(8rem, 20vh, 25rem);                                  
+  --gallery-interval: 8000ms;  
+  --gallery-interval-compact: 7000ms;
+}

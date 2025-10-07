@@ -1,0 +1,24 @@
+{
+  "name": "faelis.art",
+  "private": true,
+  "type": "module",
+  "workspaces": ["app/dev", "app/prod"],
+  "scripts": {
+    "fetch:dev": "npm run -w app/dev fetch",
+    "fetch:prod": "npm run -w app/prod fetch",
+    "fetch-quiet:dev": "npm run --silent --loglevel=silent -w app/dev fetch-quiet",
+    "fetch-quiet:prod": "npm run --silent --loglevel=silent -w app/prod fetch-quiet",
+    "build:dev": "npm run -w app/dev build",
+    "build:prod": "npm run -w app/prod build",
+    "preview:dev": "npm run -w app/dev preview",
+    "preview:prod": "npm run -w app/prod preview",
+    "sync:dev": "npm run -w app/dev sync",
+    "sync:prod": "npm run -w app/prod sync",
+    "dev:dev": "npm run -w app/dev dev",
+    "dev:prod": "npm run -w app/prod dev"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.1",
+    "sharp": "^0.33.4"
+  }
+}

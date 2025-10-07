@@ -1,0 +1,10 @@
+thumb-*
+full-*-*-*
+index.json
+node_modules
+dist
+.astro
+package-lock.json
+package.json
+ToDo.md
+*.webp~

@@ -1,0 +1,77 @@
+---
+import '@Styles/tokens.css';
+import '@Styles/base.css';
+import '@Styles/typography.css';
+import '@Styles/site.css';
+import '@Styles/content.css';
+import '@Styles/ui.css';
+import '@Styles/media.css';
+import '@Styles/table.css';
+import { ASSETS } from '@Design/Assets.astro';
+
+const {
+  title = 'Faelis Paw Artistry',
+  description = 'Furry Art & Commissions',
+  url = 'https://faelis.art',
+} = Astro.props?.meta ?? {};
+
+const navLinks = [
+  { href: '/', label: 'Home', includeInHeader: false },
+  { href: '/galleries', label: 'Gallery', includeInHeader: true },
+  { href: '/pricing', label: 'Pricing', includeInHeader: true },
+  { href: '/imprint', label: 'Imprint', includeInHeader: true }
+];
+---
+<html lang="en">
+  <head>
+    <title>{title}</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ASSETS.og.src} />
+    <meta property="og:url" content={url} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ASSETS.og.src} />    
+    <link rel="icon" type="image/webp" href={ASSETS.favicon.src} />
+    <link rel="preload" href={ASSETS.bg.src} as="image" type="image/webp" /> 
+    <link rel="preload" href={ASSETS.logo.src} as="image" type="image/webp" />
+    <link rel="preload" href="/fonts/FuzzyBubbles_400.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/FuzzyBubbles_700.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/Grandstander_italic_100-900.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/Grandstander_normal_100-900.woff2" as="font" type="font/woff2" crossorigin />
+  </head>
+  <body style={`--background-image: url(${ASSETS.bg.src});`}>
+   
+    <header class="site-header">
+      <a href="/"><img class="site-header__logo" src={ASSETS.logo.src} alt="Faelis.Art" /></a>
+      <nav class="site-header__nav">
+        {navLinks
+          .filter((link) => link.includeInHeader)
+          .map((link) => (
+            <a href={link.href}>{link.label}</a>
+          ))}
+      </nav>
+    </header>
+
+    <div class="container">
+      <main class="panel">
+        <slot />
+      </main>
+    </div>
+
+    <footer class="site-footer">
+      ©<span data-current-year></span>&nbsp;faelis.art – Site made with ♥ by&nbsp;<a href="https://lucy.foxx.pet/">Lucy Foxx</a>
+    </footer>
+    <script>
+      const yearEl = document.querySelector('[data-current-year]');
+      if (yearEl) {
+        yearEl.textContent = new Date().getFullYear().toString();
+      }
+    </script>
+  </body>
+</html>

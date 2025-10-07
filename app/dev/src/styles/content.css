@@ -1,0 +1,93 @@
+/* ====== CONTENT: COMPONENTS & ELEMENTS ===================== */
+/* ====== Depends on: tokens.css (vars), site.css (layout) ====== */
+
+/* ====== TYPO FLOW (Panel) ====== */
+
+
+/* ====== Section ====== */
+.section + .section { margin-top: var(--content-margin); }
+.section :where(h2) { margin: 0 0 .25rem 0; }
+
+/* ====== FULL-SIZE CONTENT HEAD ====== */
+.content-head {  
+  display: grid; 
+
+
+}
+.content-head > :where(h1, h2, h3, p) { margin: 0; }
+.content-head > p { opacity: .9; max-inline-size: 80ch; }
+
+/* ====== GENERAL CONTENT LAYOUTS ====== */
+.content-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--content-gap);
+  align-items: stretch;
+}
+.content-layout.media-gallery__hook {
+  margin-block-start: calc(var(--content-gap) * .25);
+}
+.content-layout__split {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+@media (max-width: 720px) {
+  .content-layout__split { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* ====== CONTENT CARD ====== */
+.content-card,.content-card__rows {
+  display: flex;
+}
+.content-card {
+  flex-direction: column;
+  height: 100%;
+  padding: var(--content-padding);
+  background: var(--content-background);
+  box-shadow: var(--content-shadow);
+  backdrop-filter: blur(var(--content-blur));
+  -webkit-backdrop-filter: blur(var(--content-blur)); 
+  border-radius: var(--large-radius);  
+}
+.content-card__title,
+.content-card__subtitle {
+  place-self: center;
+  text-align: center;
+}
+.content-card__title {
+  margin-block-end: calc(var(--prose-flow-spacing)*1.2);
+
+  max-inline-size: var(--content-text-size);
+}
+.content-card__subtitle {
+  font-style: italic;
+}
+.content-card__rows {
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  width: 100%;
+}
+
+
+
+/* ====== PROSE CONTENT ====== */
+.prose {
+  display: grid;
+  gap: var(--prose-flow-spacing);
+  margin-block: var(--prose-flow-spacing);
+}
+.prose:first-child { margin-top: 0; }
+.prose > * { margin: 0; }
+.prose ul,
+.prose ol {
+  padding-inline-start: 1.2em;
+  margin: 0;
+}
+.prose li + li { margin-top: calc(var(--prose-flow-spacing) * .5); }
+.prose a { 
+  text-underline-offset: 2px; 
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  color: var(--highlight-color);
+  text-shadow: var(--secondary-text-shadow);
+}

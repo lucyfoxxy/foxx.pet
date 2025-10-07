@@ -1,0 +1,19 @@
+{
+  "name": "faelis-art-prod",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "prod": "astro prod",
+    "build": "astro build",
+    "preview": "astro preview",
+    "sync": "astro sync",
+    "fetch": "DOTENV_CONFIG_PATH=.env node ../../scripts/fetch-immich.mjs --target=prod",
+    "fetch-quiet": "DOTENV_CONFIG_PATH=.env DOTENV_SILENT=true node --redirect-warnings=../../prod-fetch.log ../../scripts/fetch-immich.mjs --target=prod --quiet",
+    "gen": "npm run fetch && npm run build"
+  },
+  "prodDependencies": {
+    "@types/node": "^24.3.0",
+    "astro": "^5.13.5"
+  }
+}

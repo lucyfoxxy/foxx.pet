@@ -1,0 +1,126 @@
+---
+interface PriceItem {
+  name: string;
+  price?: number;
+  note?: string;   // z.B. "from", "per view", "60 € total"
+}
+interface PriceCategory {
+  title: string;
+  slug?: string;
+  subtitle?: string;
+  items: PriceItem[];
+}
+interface CatalogData {
+  currency?: string;
+  categories: PriceCategory[];
+}
+
+type PriceCategoryWithAnchor = PriceCategory & {
+  anchorId: string;
+  albumHref?: string;
+};
+
+const { catalog } = Astro.props as { catalog: CatalogData };
+const toSlug = (value: string) =>
+  value
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .replace(/-{2,}/g, "-");
+const categories: PriceCategoryWithAnchor[] = catalog.categories.map((cat) => {
+  const slug = cat.slug?.trim();
+  const anchorId = slug?.length ? slug : toSlug(cat.title);
+  const albumHref = slug ? `/galleries/${slug}` : undefined;
+  return {
+    ...cat,
+    anchorId,
+    albumHref,
+  };
+});
+
+const COLS = ["60%", "40%"]; // Type / Price(+Note)
+const title = "Pricing";
+const currency = catalog.currency ?? "EUR";
+const createCurrencyFormatter = (currency: string) => {
+  try {
+    const formatter = new Intl.NumberFormat("de-DE", {
+      style: "currency",
+      currency,
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    });
+    return (value: number) => formatter.format(value);
+  }
+  catch {
+    return (value: number) => `${value} ${currency}`;
+  }
+};
+const formatCurrency = createCurrencyFormatter(currency);
+const formatPrice = (it: PriceItem) => {
+  if (it.price != null) return formatCurrency(it.price);
+  return "auf Anfrage";
+};
+---
+<section class="content-head content-card__title section">
+  <h1>{title}</h1>
+  <div class="prose ">
+    <p>Here is my current pricing table. - Prices are:<br>
+    per character · depending on complexity  · excl. shipping <br>
+    Final prices are always dicussed in advance.
+  </p>
+  </div>
+</section>
+
+<section class="section content-layout">
+  {categories.map((cat) => {
+    return (
+      <section id={cat.anchorId} class="content-card content-card--head">
+        <div class="content-card__rows">
+          <h2>{cat.title}</h2>
+          <p>{cat.albumHref ? (
+            <a class="ui-chip" href={cat.albumHref} aria-label={`Open ${cat.title} album`}>
+                → See Examples
+            </a> ) : cat.title}
+          </p>
+        </div>
+        <div class="content-card__subtitle">
+          {cat.subtitle && <p>{cat.subtitle}</p>}
+        </div>
+        
+        <div class="table__wrap">
+          <table class="table">
+            <colgroup>
+              <col style={`width:${COLS[0]}`} />
+              <col style={`width:${COLS[1]}`} />
+            </colgroup>
+
+            <thead>
+              <tr>
+                <th class="table__th table__th--left">Type</th>
+                <th class="table__th table__th--right">Price</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {cat.items.map((it, i) => (
+                <tr class={`table__tr ${i % 2 ? "is-alt" : ""}`}>
+                  <td class="table__td">
+                    {it.name}
+                  </td>
+
+                  <td class="table__td table__td--right">
+                    {it.note && <span class="ui-badge">{it.note}</span>}
+                    <span class="table__price">{formatPrice(it)}</span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+    );
+  })}
+</section>
