@@ -12,7 +12,7 @@ import { ASSETS } from '@Design/Assets.astro';
 const {
   title = 'Faelis Paw Artistry',
   description = 'Furry Art & Commissions',
-  url = 'https://faelis.art',
+  url = 'https://foxx.pet',
 } = Astro.props?.meta ?? {};
 
 const navLinks = [
@@ -48,7 +48,7 @@ const navLinks = [
   <body style={`--background-image: url(${ASSETS.bg.src});`}>
    
     <header class="site-header">
-      <a href="/"><img class="site-header__logo" src={ASSETS.logo.src} alt="Faelis.Art" /></a>
+      <a href="/"><img class="site-header__logo" src={ASSETS.logo.src} alt="foxx.pet" /></a>
       <nav class="site-header__nav">
         {navLinks
           .filter((link) => link.includeInHeader)
@@ -60,12 +60,17 @@ const navLinks = [
 
     <div class="container">
       <main class="panel">
+        <div class="panel__bar">
+            <div class="ui-badge">Back</div>
+            <div class="ui-badge">Home</div>
+            <div class="ui-badge">Next</div>
+          </div>
         <slot />
       </main>
     </div>
 
     <footer class="site-footer">
-      ©<span data-current-year></span>&nbsp;faelis.art – Site made with ♥ by&nbsp;<a href="https://lucy.foxx.pet/">Lucy Foxx</a>
+      ©<span data-current-year></span>&nbsp;foxx.pet – Site made with ♥ by&nbsp;<a href="https://lucy.foxx.pet/">Lucy Foxx</a>
     </footer>
     <script>
       const yearEl = document.querySelector('[data-current-year]');

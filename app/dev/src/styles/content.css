@@ -84,10 +84,22 @@
   margin: 0;
 }
 .prose li + li { margin-top: calc(var(--prose-flow-spacing) * .5); }
-.prose a { 
-  text-underline-offset: 2px; 
+.prose a {
+  text-underline-offset: 2px;
   text-decoration: underline;
   text-underline-offset: 2px;
   color: var(--highlight-color);
   text-shadow: var(--secondary-text-shadow);
 }
+
+.feature-slot {
+  display: grid;
+  gap: var(--prose-flow-spacing);
+  margin-block-start: var(--prose-flow-spacing);
+  padding: clamp(0.75rem, 2vw, 1.25rem);
+  border-radius: var(--medium-radius);
+  background: color-mix(in oklab, var(--panel-background) 88%, black 12%);
+  box-shadow: var(--small-shadow);
+  color: inherit;
+}
+

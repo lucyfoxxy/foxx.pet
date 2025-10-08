@@ -1,6 +1,6 @@
-# faelis.art
+# foxx.pet
 
-Faelis.art is the codebase for the public portfolio and commission site of Faelis Paw Artistry. The site is built with [Astro](https://astro.build) and ships two workspaces – a **dev** app for local iteration and a **prod** app that mirrors the production deployment. Shared helper scripts live in the repository root.
+foxx.pet is the codebase for the public portfolio and commission site of Faelis Paw Artistry. The site is built with [Astro](https://astro.build) and ships two workspaces – a **dev** app for local iteration and a **prod** app that mirrors the production deployment. Shared helper scripts live in the repository root.
 
 ## Repository layout
 
@@ -50,7 +50,7 @@ Provide the following environment variables in `app/<target>/.env` before runnin
 
 | Variable | Purpose |
 | --- | --- |
-| `IMMICH_BASE_URL` (or `IMMICH_URL`) | Base URL of the Immich server (e.g. `https://i.faelis.art`). |
+| `IMMICH_BASE_URL` (or `IMMICH_URL`) | Base URL of the Immich server (e.g. `https://i.foxx.pet`). |
 | `IMMICH_API_KEY` | Immich API key with access to the referenced albums. |
 | `IMMICH_ALBUMS` | Comma separated map of gallery slugs to Immich album IDs (`slug:uuid,slug:uuid`). |
 | `IMMICH_BESTOF_ALBUM` | Optional album ID for the curated “best of” gallery. |

@@ -1,13 +1,13 @@
 :root { 
   /* ====== Main Colors ====== */
-  --primary-text-color:         oklch(92% 0.03 310);
+  --primary-text-color:         oklch(92% 0.03 300);
 
-  --accent-color:               oklch(91% 0.0437 240);
-  --highlight-color:            oklch(83% 0.07 315);
+  --accent-color:               oklch(91% 0.0437 190);
+  --highlight-color:            oklch(83% 0.07 300);
   --outline-color:              color-mix(in oklch, var(--highlight-color) 20%, transparent);
 
-  --primary-background-color:   oklch(26% 0.08 310 / 0.65);
-  --secondary-background-color: oklch(20% 0.065 310 / 0.80); 
+  --primary-background-color:   oklch(26% 0.08 300 / 0.65);
+  --secondary-background-color: oklch(20% 0.065 300 / 0.80); 
 
   --primary-shadow-color:       color-mix(in oklch, var(--primary-background-color) 70%, black);
   --secondary-shadow-color:     color-mix(in oklch, var(--secondary-background-color) 70%, black);
@@ -91,7 +91,7 @@
   --content-shadow:             var(--panel-shadow);
   --content-media-size:         min(360px, 100%);
 
-  --brand-size:                 clamp(70px, 12vw, 180px);
+  --brand-size:                 clamp(360px, 50vw, 920px);
   --brand-gap:                  calc(var(--content-gap) * .85);
   --brand-gap-mobile:           calc(var(--content-gap) * .5);
 

@@ -1,6 +1,6 @@
 ---
 export interface Props {
-  kind: 'telegram' | 'mail' | 'facebook' | 'instagram' | 'furaffinity';
+  kind: 'telegram' | 'mail' | 'facebook' | 'instagram' | 'furaffinity' | 'link';
   size?: number | string;
   stroke?: number;
 }
@@ -49,7 +49,16 @@ const { kind, size = 32, stroke = 2 } = Astro.props;
     </>
   )}
 
-  
+
+  {kind === 'link' && (
+    <>
+      <path d="M9 7h-2a4 4 0 0 0 0 8h2" />
+      <path d="M15 7h2a4 4 0 0 1 0 8h-2" />
+      <line x1="8" y1="12" x2="16" y2="12" />
+    </>
+  )}
+
+
  {kind === 'furaffinity' && (
     <g
       fill="currentColor"

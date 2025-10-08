@@ -1,16 +1,16 @@
 SHELL := /bin/bash
 MAKEFLAGS += -s   # suppress command echoing, only show our messages
 
-BASE_PATH 			  ?= /srv/faelis.art/app
+BASE_PATH 			  ?= /srv/foxx.pet/app
 WEB_ROOT 			  ?= /var/www
 
 DEV_APP        		  ?= ${BASE_PATH}/dev
 DEV_DIST  			  ?= ${DEV_APP}/dist
-DEV_PUB			      ?= ${WEB_ROOT}/dev.faelis.art/public
+DEV_PUB			      ?= ${WEB_ROOT}/dev.foxx.pet/public
 
 PROD_APP        	  ?= ${BASE_PATH}/prod
 PROD_DIST  			  ?= ${PROD_APP}/dist
-PROD_PUB			  ?= ${WEB_ROOT}/faelis.art/public
+PROD_PUB			  ?= ${WEB_ROOT}/foxx.pet/public
 
 .PHONY: sync-src do-release \
         dev-install dev-dev dev-build dev-deploy dev-fetch dev-gen dev-publish dev-clean-gen \
@@ -58,7 +58,7 @@ dev-fetch-quiet:
 
 prod-fetch-quiet:
 	
-	
+	@npm run fetch-quiet:prod
 	
 
 # ===== Build =====
@@ -107,24 +107,3 @@ prod-publish:
 	$(MAKE) -s prod-deploy
 	@echo "✅ PROD publish done"
 
-prod-pretty-publish:
-	echo "✨ Gallery update started! ✨" 
-	exec > >(tee -a "scripts/prod-pretty-publish.log") 
-
-	echo "";
-	echo "🔄 [1/3] Fetching images... this may take a while..." 
-	@npm run --loglevel=silent --silent fetch-quiet:prod
-	echo "✅ [1/3] Fetch done." 
-
-	echo ""; 
-	echo "🔨 [2/3] Building site..." 
-	$(MAKE) -s prod-build >/dev/null 2>&1
-	echo "✅ [2/3] Build done." 
-	
-	echo ""; 
-	echo "📤 [3/3] Publishing site..." 
-	$(MAKE) -s prod-deploy >/dev/null 2>&1
-	echo "✅ [3/3] Publishing done." 
-	
-	echo ""; 
-	echo "🎉 Gallery update successful! 🎉"

@@ -66,6 +66,7 @@
 .ui-btn__contact--facebook   { --bg: #1778f2; }
 .ui-btn__contact--instagram  { --bg: #e1306c; }
 .ui-btn__contact--furaffinity{ --bg: #08a57b; }
+.ui-btn__contact--link       { --bg: #4c6ef5; }
 .ui-btn__contact:hover {
   background: color-mix(in oklch, var(--bg) 82%, white 22%);
   transform: translateY(-1px);

@@ -1,123 +1,96 @@
 ---
+import Layout from '@Design/Layout.astro';
 import Icon from '@Design/Icons.astro';
 import { ASSETS } from '@Design/Assets.astro';
-export const defaults = {
-  title: 'Home - Faelis Paw Artistry',
-  hero: {
-    mascot: { src: ASSETS.mascot.src, alt: '' },
-    logo: { src: ASSETS.logo.src, alt: 'Faelis Paw Artistry' },
-  },
-  intro: {
-    heading: 'Welcome,',
-    paragraphs: [
-      'My name is Faelis Skribblekitty, passionate artistic kitten since 2003.',
-      "Whether you need some logo for your website, a ref-sheet / badge for your fursona or something completely different <i> - maybe something kinky? Love it! -</i> You've found the artistic kitten, suitable for all sorts of creative tasks! ",
-      'Wanna see my art style? <i>Take a look at my <a href="/galleries">Gallery</a>! </i>',
-    ],
-    signature: '<i>Faelis Skribblekitty 💜</i>',
-  },
-  gallery: {
-    slug: 'bestof',
-    heading: 'Preview:',
-    autoplay: true,
-    interval: 7000,
-    random: true,
-  },
-  links: [
-    { href: 'https://t.me/faelispawartistry', label: 'Telegram', kind: 'telegram' },
-    { href: 'mailto:info@faelis.art', label: 'Email', kind: 'mail' },
-    { href: 'https://www.facebook.com/FaelisPawArtistry', label: 'Facebook', kind: 'facebook' },
-    { href: 'https://www.instagram.com/faeliskitty', label: 'Instagram', kind: 'instagram' },
-    { href: 'https://www.furaffinity.net/user/faelis', label: 'FurAffinity', kind: 'furaffinity' },
-  ],
-  headings: {
-    welcome: 'Welcome,',
-    preview: 'Preview:',
-    contact: 'Contact:',
-  },
+
+export const prerender = true;
+
+const meta = {
+  title: 'Base Template - Your Project Name',
+  description: 'Use this page as a starting point for a new Astro page.',
 };
 
-const props = Astro.props ?? {};
-const {
-  hero = defaults.hero,
-  intro = defaults.intro,
-  gallery = defaults.gallery,
-  links = defaults.links,
-  headings = {},
-} = props;
+const hero = {
+  logo: ASSETS.logo.src,
+  image: ASSETS.mascot.src,
+  heading: 'Welcome to',
+  subheading: 'Home of a small purple fox flying around!',
+};
 
-const welcomeHeading = headings?.welcome ?? intro.heading ?? defaults.headings.welcome;
-const previewHeading = headings?.preview ?? gallery.heading ?? defaults.headings.preview;
-const contactHeading = headings?.contact ?? defaults.headings.contact;
+const intro = {
+  heading: 'Welcome Title',
+  paragraphs: [
+    'Introduce yourself or your project with a warm welcome.',
+    'Explain what visitors can expect to find on this page.',
+    'Highlight a call to action such as linking to your gallery or services.',
+  ],
+  signature: 'Your Name',
+};
 
-const { slug, autoplay = true, interval = 7000, random = true, heading: galleryHeading } = gallery;
+const feature = {
+  heading: 'Featured Section',
+  description:
+    'Use this area to showcase a highlight, image carousel, or any other element you want to bring attention to.',
+};
 
-const isExternalLink = (href) => typeof href === 'string' && href.startsWith('http');
+const links = [
+  { href: 'https://example.com', label: 'External Link', kind: 'link' },
+  { href: 'mailto:you@example.com', label: 'Email', kind: 'mail' },
+];
 
-export const title = defaults.title;
+const isExternalLink = (href: string) => href.startsWith('http');
 ---
-<head>
-  <link rel="preload" href={hero.mascot.src} as="image" type="image/webp" />
-</head>
+<Layout meta={meta}>
+  <head>
+    <link rel="preload" href={hero.image} as="image" type="image/webp" />
+  </head>
 
-<section class="media-hero section">
-  <img class="media-hero__mascot" src={hero.mascot.src}  alt={hero.mascot.alt ?? ''} />
-  <img class="media-hero__logo" src={hero.logo.src} alt={hero.logo.alt} />
-</section>
+  <section class="media-hero section">
+    
+    <div class="media-hero__logo">
 
-<section class="content-layout content-layout__split section">
-  <section class="content-card">
-    <h2 set:html={welcomeHeading}></h2>
-    <div class="prose">
-      {intro.paragraphs.map((paragraph) => (
-        <p set:html={paragraph}></p>
+      <img src={hero.logo} alt={hero.heading} loading="lazy" />   
+ 
+      
+    </div>
+       
+  </section>
+
+  <section class="content-layout content-layout__split section">
+    <section class="content-card">
+      <h2>{intro.heading}</h2>
+      <div class="prose">
+        {intro.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+      </div>
+      <h3><i>{intro.signature}</i></h3>
+    </section>
+
+    <section class="content-card">
+      <h2>{feature.heading}</h2>
+      <p>{feature.description}</p>
+      <div class="feature-slot">
+        <p>
+          Replace this block with your own gallery, pricing table, or any custom
+          component. You can also import existing components and render them here.
+        </p>
+      </div>
+    </section>
+  </section>
+
+  <section class="content-card section">
+    <h2>Get in Touch</h2>
+    <div class="ui-btn__contact--wrap">
+      {links.map((link) => (
+        <a
+          class={`ui-btn__contact ui-btn__contact--${link.kind}`}
+          href={link.href}
+          rel={isExternalLink(link.href) ? 'noopener noreferrer' : undefined}
+          target={isExternalLink(link.href) ? '_blank' : undefined}
+        >
+          <span class="ui-btn__contact--icon"><Icon kind={link.kind} /></span>
+          <span>{link.label}</span>
+        </a>
       ))}
     </div>
-    <h3 set:html={intro.signature}></h3>
   </section>
-
-  <section
-    class="content-card media-gallery__hook"
-    data-slug={slug}
-    data-autoplay={String(autoplay)}
-    data-interval={String(interval)}
-    data-random={String(random)}
-  >
-    <h2 set:html={galleryHeading ?? previewHeading}></h2>
-
-      <div class="media-gallery">
-        <div class="media-gallery__frame compact">
-          <img class="media-gallery__image compact" alt="Best of artworks" loading="lazy" />
-          <div class="media-gallery__progress compact" />
-        </div>
-      </div>
-
-  </section>
-</section>
-
-<section class="content-card section">
-  <h2 set:html={contactHeading}></h2>
-  <div class="ui-btn__contact--wrap">
-    {links.map((l) => {
-      const external = isExternalLink(l.href);
-      return (
-        <a
-          class={`ui-btn__contact ui-btn__contact--${l.kind}`}
-          href={l.href}
-          rel={external ? 'me noopener noreferrer' : 'me'}
-          target={external ? '_blank' : undefined}
-        >
-          <span class="ui-btn__contact--icon"><Icon kind={l.kind} /></span>
-          <span>{l.label}</span>
-        </a>
-      );
-    })}
-  </div>
-</section>
-
-<script>
-  import initGalleryIntro from '@Scripts/galleryViewer_compact.js';
-  import { runOnReady } from '@Scripts/utils/_runOnReady.js';
-
-  runOnReady(initGalleryIntro);
-</script>
+</Layout>
