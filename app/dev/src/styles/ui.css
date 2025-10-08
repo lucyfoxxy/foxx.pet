@@ -11,8 +11,8 @@
   vertical-align: middle;  
   text-decoration: none;
   background: color-mix(in oklab, var(--content-background) 45%, black 5%);
-  box-shadow: var(--content-shadow);
-  backdrop-filter: blur(var(--content-blur));
+  box-shadow: var(--large-shadow);
+  backdrop-filter: blur(var(--large-blur));
   color: var(--highlight-color);
 }
 .ui-badge {

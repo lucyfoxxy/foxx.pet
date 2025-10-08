@@ -15,9 +15,9 @@
   flex-wrap: nowrap;
   padding: var(--navbar-padding);
   background: var(--navbar-background);
-  box-shadow: var(--navbar-shadow);
-  backdrop-filter: blur(var(--navbar-blur));
-  -webkit-backdrop-filter: blur(var(--navbar-blur));
+  box-shadow: var(--medium-shadow);
+  backdrop-filter: blur(var(--medium-blur));
+  -webkit-backdrop-filter: blur(var(--medium-blur));
   outline: 1px solid var(--outline-color);
   margin-inline: 0;
 }
@@ -37,7 +37,7 @@
   display: flex;
   align-items: center;
   gap: .5rem; /* falls Text/Img nebeneinander */
-  height: 55px;
+  height: 50px;
 }
 .site-header__nav {
   display: flex;
@@ -81,10 +81,10 @@
 main.panel {
   padding: var(--panel-padding);
   background: var(--panel-background);
-  backdrop-filter: blur(var(--panel-blur));
-  -webkit-backdrop-filter: blur(var(--panel-blur)); 
+  backdrop-filter: blur(var(--large-blur));
+  -webkit-backdrop-filter: blur(var(--large-blur)); 
   border-radius: var(--large-radius);
-  box-shadow: var(--panel-shadow);
+  box-shadow: var(--large-shadow);
   outline: 2px solid var(--outline-color);
 }
 

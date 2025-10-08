@@ -43,9 +43,9 @@
   height: 100%;
   padding: var(--content-padding);
   background: var(--content-background);
-  box-shadow: var(--content-shadow);
-  backdrop-filter: blur(var(--content-blur));
-  -webkit-backdrop-filter: blur(var(--content-blur)); 
+  box-shadow: var(--large-shadow);
+  backdrop-filter: blur(var(--large-blur));
+  -webkit-backdrop-filter: blur(var(--large-blur)); 
   border-radius: var(--large-radius);  
 }
 .content-card__title,
