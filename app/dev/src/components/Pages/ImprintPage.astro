@@ -1,11 +1,15 @@
 ---
-export const title = 'Imprint / Impressum';
+import { sitePages } from '@Content/sitePages';
+
+const imprintContent = sitePages.imprint;
+const title = imprintContent.heading;
+const intro = imprintContent.description;
 ---
 
 <section class="content-head content-card__title section">
   <h1>{title}</h1>
   <div class="prose">
-    <p>In case of any suspected copyright infringement or any other legal claims, you may contact us at:</p>
+    <p>{intro}</p>
   </div>
 </section>
 

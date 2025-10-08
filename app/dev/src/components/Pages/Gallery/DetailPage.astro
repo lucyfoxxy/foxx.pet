@@ -2,7 +2,6 @@
 type Props = { albumSlug: string; title?: string; description?: string };
 
 const { albumSlug, title, description } = Astro.props as Props;
-const pricingHref = albumSlug ? `/pricing#${albumSlug}` : '/pricing';
 const detailTitle = title ?? 'Gallery';
 ---
 
@@ -12,10 +11,7 @@ const detailTitle = title ?? 'Gallery';
     <h1>{detailTitle}</h1>
     {description && <p class="prose">{description}</p>}
   </div>
-   <div class="content-card__rows">
-    <p><a class="ui-chip" href="/galleries">← Back to Overview</a></p>
-    <p><a class="ui-chip" href={pricingHref}>See Price Info →</a></p>
-  </div> 
+  <p><a class="ui-chip" href="/galleries">← Back to Overview</a></p>
 </section>
 
 <section

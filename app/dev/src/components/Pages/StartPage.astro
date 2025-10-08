@@ -2,40 +2,23 @@
 import Layout from '@Design/Layout.astro';
 import Icon from '@Design/Icons.astro';
 import { ASSETS } from '@Design/Assets.astro';
+import { sitePages } from '@Content/sitePages';
 
 export const prerender = true;
 
-const meta = {
-  title: 'Base Template - Your Project Name',
-  description: 'Use this page as a starting point for a new Astro page.',
-};
+const homeContent = sitePages.home;
+const meta = homeContent.meta;
 
+const heroAsset = ASSETS[homeContent.hero.assetKey as keyof typeof ASSETS];
 const hero = {
-  logo: ASSETS.logo_hero.src,
-  heading: 'Welcome to',
-  subheading: 'Home of a small purple fox flying around!',
+  image: heroAsset?.src ?? ASSETS.logo_hero.src,
+  heading: homeContent.hero.heading,
+  subheading: homeContent.hero.subheading,
 };
 
-const intro = {
-  heading: 'Welcome Title',
-  paragraphs: [
-    'Introduce yourself or your project with a warm welcome.',
-    'Explain what visitors can expect to find on this page.',
-    'Highlight a call to action such as linking to your gallery or services.',
-  ],
-  signature: 'Your Name',
-};
-
-const feature = {
-  heading: 'Featured Section',
-  description:
-    'Use this area to showcase a highlight, image carousel, or any other element you want to bring attention to.',
-};
-
-const links = [
-  { href: 'https://example.com', label: 'External Link', kind: 'link' },
-  { href: 'mailto:you@example.com', label: 'Email', kind: 'mail' },
-];
+const intro = homeContent.intro;
+const feature = homeContent.feature;
+const links = homeContent.contactLinks;
 
 const isExternalLink = (href: string) => href.startsWith('http');
 ---
@@ -48,7 +31,7 @@ const isExternalLink = (href: string) => href.startsWith('http');
     
     <div class="media-hero__logo">
 
-      <img src={hero.logo} alt={hero.heading} loading="lazy" />   
+      <img src={hero.image} alt={hero.heading} loading="lazy" />
  
       
     </div>
@@ -69,7 +52,7 @@ const isExternalLink = (href: string) => href.startsWith('http');
       <p>{feature.description}</p>
       <div class="feature-slot">
         <p>
-          Replace this block with your own gallery, pricing table, or any custom
+          Replace this block with your own gallery, story teaser, or any custom
           component. You can also import existing components and render them here.
         </p>
       </div>

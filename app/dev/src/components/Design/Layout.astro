@@ -8,12 +8,7 @@ import '@Styles/ui.css';
 import '@Styles/media.css';
 import '@Styles/table.css';
 import { ASSETS } from '@Design/Assets.astro';
-
-const defaultMeta = {
-  title: 'Lucy\s Cosmos',
-  description: 'A small cosmic fox on their big journey across the universe!',
-  url: 'https://foxx.pet',
-};
+import { defaultMeta, headerNavPages, orderedSitePages } from '@Content/sitePages';
 
 const props = Astro.props ?? {};
 const meta = {
@@ -28,12 +23,11 @@ if (typeof props.title === 'string' && props.title.trim().length > 0) {
 const { title, description, url } = meta;
 const pageTitle = title;
 
-const navLinks = [
-  { href: '/', label: 'Home', includeInHeader: false },
-  { href: '/galleries', label: 'Galleries', includeInHeader: true },
-  { href: '/pricing', label: 'Pricing', includeInHeader: true },
-  { href: '/imprint', label: 'Imprint', includeInHeader: true }
-];
+const navLinks = orderedSitePages.map((page) => ({
+  href: page.href,
+  label: page.navLabel,
+  includeInHeader: page.includeInHeader ?? false,
+}));
 
 const normalizePath = (path: string) => {
   if (!path || path === '/') return '/';
@@ -76,17 +70,8 @@ segments.forEach((segment, index) => {
   });
 });
 
-const navIndex = navLinks.findIndex((link) => {
-  const normalizedHref = normalizePath(link.href);
-  if (normalizedHref === '/') return normalizedCurrentPath === '/';
-  return (
-    normalizedCurrentPath === normalizedHref ||
-    normalizedCurrentPath.startsWith(`${normalizedHref}/`)
-  );
-});
-
-const previousNav = navIndex > 0 ? navLinks[navIndex - 1] : undefined;
-const nextNav = navIndex >= 0 && navIndex < navLinks.length - 1 ? navLinks[navIndex + 1] : undefined;
+const homeLink = navLinks.find((link) => normalizePath(link.href) === '/');
+const showHomeAction = normalizedCurrentPath !== '/' && Boolean(homeLink);
 ---
 <html lang="en">
   <head>
@@ -116,11 +101,9 @@ const nextNav = navIndex >= 0 && navIndex < navLinks.length - 1 ? navLinks[navIn
     <header class="site-header">
       <a href="/"><img class="site-header__logo" src={ASSETS.logo_header.src} alt="foxx.pet" /></a>
       <nav class="site-header__nav">
-        {navLinks
-          .filter((link) => link.includeInHeader)
-          .map((link) => (
-            <a href={link.href}>{link.label}</a>
-          ))}
+        {headerNavPages.map((page) => (
+          <a href={page.href}>{page.navLabel}</a>
+        ))}
       </nav>
     </header>
 
@@ -128,58 +111,50 @@ const nextNav = navIndex >= 0 && navIndex < navLinks.length - 1 ? navLinks[navIn
       <main class="panel">
           <nav class="panel" aria-label="Breadcrumb">
             <div class="panel__breadcrumbs-nav">
-            <ol class="panel__breadcrumbs">
-              {breadcrumbs.map((crumb, index) => (
-                <li>
-                  {crumb.isCurrent ? (
-                    <span class="panel__breadcrumbs-current" aria-current="page">{crumb.label}</span>
-                  ) : (
-                    <a href={crumb.href}>{crumb.label}</a>
-                  )}
-                  {index < breadcrumbs.length - 1 && (
-                    <span class="panel__breadcrumbs-separator" aria-hidden="true">›</span>
-                  )}
-                </li>
-              ))}
-            </ol>
+              <ol class="panel__breadcrumbs">
+                {breadcrumbs.map((crumb, index) => (
+                  <li>
+                    {crumb.isCurrent ? (
+                      <span class="panel__breadcrumbs-current" aria-current="page">{crumb.label}</span>
+                    ) : (
+                      <a href={crumb.href}>{crumb.label}</a>
+                    )}
+                    {index < breadcrumbs.length - 1 && (
+                      <span class="panel__breadcrumbs-separator" aria-hidden="true">›</span>
+                    )}
+                  </li>
+                ))}
+              </ol>
             </div>
-          
-          {(previousNav || nextNav) && (
-            <div class="panel__actions" role="navigation" aria-label="Sibling pages">
-              {previousNav && (
-                <a class="ui-chip panel__action panel__action--prev" href={previousNav.href}>
+
+            {showHomeAction && homeLink && (
+              <div class="panel__actions" role="navigation" aria-label="Page shortcuts">
+                <a class="ui-chip panel__action panel__action--home" href={homeLink.href}>
                   <span aria-hidden="true">←</span>
-                  <span>{previousNav.label}</span>
+                  <span>{homeLink.label}</span>
                 </a>
-              )}
-              {nextNav && (
-                <a class="ui-chip panel__action panel__action--next" href={nextNav.href}>
-                  <span>{nextNav.label}</span>
-                  <span aria-hidden="true">→</span>
-                </a>
-              )}
-            </div>
-          )}
+              </div>
+            )}
           </nav>
         <slot />
           <nav class="panel" aria-label="Breadcrumb">
-            
-            <ol class="panel__breadcrumbs">
-              {breadcrumbs.map((crumb, index) => (
-                <li>
-                  {crumb.isCurrent ? (
-                    <span class="panel__breadcrumbs-current" aria-current="page">{crumb.label}</span>
-                  ) : (
-                    <a href={crumb.href}>{crumb.label}</a>
-                  )}
-                  {index < breadcrumbs.length - 1 && (
-                    <span class="panel__breadcrumbs-separator" aria-hidden="true">›</span>
-                  )}
-                </li>
-              ))}
-            </ol>
-          </div>
-          </nav>        
+            <div class="panel__breadcrumbs-nav">
+              <ol class="panel__breadcrumbs">
+                {breadcrumbs.map((crumb, index) => (
+                  <li>
+                    {crumb.isCurrent ? (
+                      <span class="panel__breadcrumbs-current" aria-current="page">{crumb.label}</span>
+                    ) : (
+                      <a href={crumb.href}>{crumb.label}</a>
+                    )}
+                    {index < breadcrumbs.length - 1 && (
+                      <span class="panel__breadcrumbs-separator" aria-hidden="true">›</span>
+                    )}
+                  </li>
+                ))}
+              </ol>
+            </div>
+          </nav>
       </main>
     </div>
 

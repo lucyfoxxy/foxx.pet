@@ -4,12 +4,18 @@ interface CategoryEntry {
   title: string;
 }
 
-const { categories } = Astro.props as { categories: CategoryEntry[] };
+interface Props {
+  categories: CategoryEntry[];
+  heading: string;
+  description: string;
+}
+
+const { categories, heading, description } = Astro.props as Props;
 ---
 <section class="content-head content-card__title section">
-  <h1>Galleries</h1>
+  <h1>{heading}</h1>
   <div class="prose">
-    <p>Here you gonna find a selection of my previous works.</p>
+    <p>{description}</p>
   </div>
 </section>
 

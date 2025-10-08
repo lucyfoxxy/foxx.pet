@@ -1,0 +1,20 @@
+---
+import { sitePages } from '@Content/sitePages';
+
+const storiesContent = sitePages.stories;
+---
+
+<section class="content-head content-card__title section">
+  <h1>{storiesContent.heading}</h1>
+  <div class="prose">
+    {storiesContent.paragraphs.map((paragraph) => (
+      <p>{paragraph}</p>
+    ))}
+  </div>
+</section>
+
+<section class="content-card section">
+  <div class="content-card__subtitle">
+    <p>More chapters are being written behind the scenes. Stay tuned!</p>
+  </div>
+</section>
