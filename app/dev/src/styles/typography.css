@@ -122,7 +122,7 @@ p :where(em,i) {
   margin: var(--prose-flow-spacing) 0;
   padding: calc(var(--prose-flow-spacing) * .75) var(--prose-flow-spacing);
   border-left: 3px solid var(--accent-color);
-  background: color-mix(in oklab, var(--content-background), black 10%);
+  background: color-mix(in oklab, var(--content-background), white 10%);
   border-radius: .5rem;
 }
 

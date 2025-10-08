@@ -20,11 +20,11 @@
   opacity: .7;
   margin-inline-end: .25rem;
   border-radius: 999px;
-  padding: .35rem .75rem;
+  padding: calc(var(--xsmall-spacing)*.5) var(--small-spacing);
 }
 .ui-chip {
-  gap: .35rem;
-  padding: .45rem .85rem;
+  gap: var(--xsmall-spacing);
+  padding: calc(var(--small-padding)*.8);
   border-radius: 999px;
   background: color-mix(in oklab, var(--content-background) 70%, transparent 20%);
   transition: color .12s ease, text-shadow .12s ease, transform .12s ease, box-shadow .12s ease, background .12s ease;
@@ -51,8 +51,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: .55rem;
-  padding: .72rem 1.05rem;
+  gap: var(--small-spacing);
+  padding: var(--small-padding) var(--medium-padding);
   border-radius: var(--large-radius);
   background: var(--bg);
   color: var(--fg);
@@ -108,7 +108,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: clamp(.5rem, 3vw, .75rem);
+    gap: var(--small-spacing);
     flex-wrap: nowrap;
     overflow-x: auto;
     padding-block: .25rem;

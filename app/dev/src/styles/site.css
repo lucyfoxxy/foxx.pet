@@ -36,7 +36,7 @@
 .site-header__logo {
   display: flex;
   align-items: center;
-  gap: .5rem; /* falls Text/Img nebeneinander */
+  gap: var(--xsmall-spacing);
   height: 50px;
 }
 .site-header__nav {
@@ -97,7 +97,6 @@ nav.is-site-nav {
   box-shadow: var(--small-shadow);
 }
 
-
 main.panel > nav.is-breadcrumbs {
     margin-block: calc(-1 * var(--content-spacing))  var(--content-spacing);
     margin-inline: calc(-1 * var(--content-spacing));
@@ -105,7 +104,6 @@ main.panel > nav.is-breadcrumbs {
     border-top-right-radius: var(--medium-radius);
     justify-content: stretch;
 }
-
 
 main.panel > nav.is-breadcrumbs ol {
   display: flex;

@@ -1,0 +1,534 @@
+{
+  "slug": "suitwalks-rheinpark-mai-2025",
+  "albumId": "bb873323-be2e-4570-b846-01673f2ff56a",
+  "albumName": "Suitwalk: Rheinpark (Mai 2025)",
+  "title": "Rheinpark (Mai 2025)",
+  "category": {
+    "name": "Suitwalks",
+    "slug": "suitwalks"
+  },
+  "assetMode": "remote",
+  "count": 65,
+  "items": [
+    {
+      "id": "15f401e2-3a96-424f-9214-f373f6d17a0a",
+      "thumb": "https://img.foxx.pet/api/assets/15f401e2-3a96-424f-9214-f373f6d17a0a/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/15f401e2-3a96-424f-9214-f373f6d17a0a/original",
+      "filename": "IMG_20250519_202238_321.jpg",
+      "width": 2608,
+      "height": 4640
+    },
+    {
+      "id": "45e33af2-0ca4-4fd8-bdc0-85d71cccaab0",
+      "thumb": "https://img.foxx.pet/api/assets/45e33af2-0ca4-4fd8-bdc0-85d71cccaab0/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/45e33af2-0ca4-4fd8-bdc0-85d71cccaab0/original",
+      "filename": "IMG_20250517_201244.jpg",
+      "width": 4000,
+      "height": 3000
+    },
+    {
+      "id": "e6e000bd-59eb-40ef-8a83-b05740d3ee9c",
+      "thumb": "https://img.foxx.pet/api/assets/e6e000bd-59eb-40ef-8a83-b05740d3ee9c/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/e6e000bd-59eb-40ef-8a83-b05740d3ee9c/original",
+      "filename": "IMG_20250517_191836.jpg",
+      "width": 4000,
+      "height": 3000
+    },
+    {
+      "id": "9d0eb164-8b00-4d04-b793-8d48d89f3562",
+      "thumb": "https://img.foxx.pet/api/assets/9d0eb164-8b00-4d04-b793-8d48d89f3562/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/9d0eb164-8b00-4d04-b793-8d48d89f3562/original",
+      "filename": "IMG_20250517_191828.jpg",
+      "width": 4000,
+      "height": 3000
+    },
+    {
+      "id": "f06a33ed-67d7-4963-8202-1a067b340200",
+      "thumb": "https://img.foxx.pet/api/assets/f06a33ed-67d7-4963-8202-1a067b340200/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/f06a33ed-67d7-4963-8202-1a067b340200/original",
+      "filename": "IMG_20250517_191822.jpg",
+      "width": 4000,
+      "height": 3000
+    },
+    {
+      "id": "14967ea5-4505-42f5-b63f-80e37b528be8",
+      "thumb": "https://img.foxx.pet/api/assets/14967ea5-4505-42f5-b63f-80e37b528be8/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/14967ea5-4505-42f5-b63f-80e37b528be8/original",
+      "filename": "IMG_20250517_182022.jpg",
+      "width": 4608,
+      "height": 3456
+    },
+    {
+      "id": "74190124-3054-4e61-abef-fda904c3a2e6",
+      "thumb": "https://img.foxx.pet/api/assets/74190124-3054-4e61-abef-fda904c3a2e6/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/74190124-3054-4e61-abef-fda904c3a2e6/original",
+      "filename": "IMG_20250517_182009.jpg",
+      "width": 4608,
+      "height": 3456
+    },
+    {
+      "id": "a7a1d022-dd45-4669-8187-a3e8e2f82bbf",
+      "thumb": "https://img.foxx.pet/api/assets/a7a1d022-dd45-4669-8187-a3e8e2f82bbf/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/a7a1d022-dd45-4669-8187-a3e8e2f82bbf/original",
+      "filename": "VID_20250517_181947.mp4",
+      "width": 1440,
+      "height": 1080
+    },
+    {
+      "id": "ace5fe78-8d45-4686-b17b-cbf4210667e8",
+      "thumb": "https://img.foxx.pet/api/assets/ace5fe78-8d45-4686-b17b-cbf4210667e8/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/ace5fe78-8d45-4686-b17b-cbf4210667e8/original",
+      "filename": "IMG_20250517_181853.jpg",
+      "width": 4608,
+      "height": 3456
+    },
+    {
+      "id": "670de731-ea8f-4d1f-a587-73c16796b306",
+      "thumb": "https://img.foxx.pet/api/assets/670de731-ea8f-4d1f-a587-73c16796b306/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/670de731-ea8f-4d1f-a587-73c16796b306/original",
+      "filename": "IMG_20250517_181842.jpg",
+      "width": 4608,
+      "height": 3456
+    },
+    {
+      "id": "d2912968-992d-4194-af65-bd77d4bafa22",
+      "thumb": "https://img.foxx.pet/api/assets/d2912968-992d-4194-af65-bd77d4bafa22/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/d2912968-992d-4194-af65-bd77d4bafa22/original",
+      "filename": "IMG_20250517_181832.jpg",
+      "width": 4608,
+      "height": 3456
+    },
+    {
+      "id": "6c3e3f7f-7964-4452-8805-abd25d4ccb34",
+      "thumb": "https://img.foxx.pet/api/assets/6c3e3f7f-7964-4452-8805-abd25d4ccb34/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/6c3e3f7f-7964-4452-8805-abd25d4ccb34/original",
+      "filename": "IMG_20250517_181817.jpg",
+      "width": 4608,
+      "height": 3456
+    },
+    {
+      "id": "1bed34f5-ba70-4628-a662-4f235f9c288c",
+      "thumb": "https://img.foxx.pet/api/assets/1bed34f5-ba70-4628-a662-4f235f9c288c/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/1bed34f5-ba70-4628-a662-4f235f9c288c/original",
+      "filename": "IMG_20250517_181757.jpg",
+      "width": 4608,
+      "height": 3456
+    },
+    {
+      "id": "fc5d52dc-6763-4a68-a9e8-0354a8e5f867",
+      "thumb": "https://img.foxx.pet/api/assets/fc5d52dc-6763-4a68-a9e8-0354a8e5f867/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/fc5d52dc-6763-4a68-a9e8-0354a8e5f867/original",
+      "filename": "IMG_20250517_181748.jpg",
+      "width": 4608,
+      "height": 3456
+    },
+    {
+      "id": "00acdd6a-010b-4aa0-a729-b6d115b7f963",
+      "thumb": "https://img.foxx.pet/api/assets/00acdd6a-010b-4aa0-a729-b6d115b7f963/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/00acdd6a-010b-4aa0-a729-b6d115b7f963/original",
+      "filename": "IMG_20250517_181738.jpg",
+      "width": 4608,
+      "height": 3456
+    },
+    {
+      "id": "a595f729-8641-4ec1-a5be-6ce1c3ad3fe9",
+      "thumb": "https://img.foxx.pet/api/assets/a595f729-8641-4ec1-a5be-6ce1c3ad3fe9/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/a595f729-8641-4ec1-a5be-6ce1c3ad3fe9/original",
+      "filename": "IMG_20250517_181726.jpg",
+      "width": 4608,
+      "height": 3456
+    },
+    {
+      "id": "60a261c8-8a0c-4c11-a4a5-6ebfa77c73dc",
+      "thumb": "https://img.foxx.pet/api/assets/60a261c8-8a0c-4c11-a4a5-6ebfa77c73dc/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/60a261c8-8a0c-4c11-a4a5-6ebfa77c73dc/original",
+      "filename": "IMG_20250517_181509.jpg",
+      "width": 4608,
+      "height": 3456
+    },
+    {
+      "id": "3b6f6a5f-b32e-4804-a054-1259f4465cdd",
+      "thumb": "https://img.foxx.pet/api/assets/3b6f6a5f-b32e-4804-a054-1259f4465cdd/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/3b6f6a5f-b32e-4804-a054-1259f4465cdd/original",
+      "filename": "IMG_20250517_181446.jpg",
+      "width": 4608,
+      "height": 3456
+    },
+    {
+      "id": "99fb0d2e-c011-4902-852e-1b5ddd359d34",
+      "thumb": "https://img.foxx.pet/api/assets/99fb0d2e-c011-4902-852e-1b5ddd359d34/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/99fb0d2e-c011-4902-852e-1b5ddd359d34/original",
+      "filename": "IMG_20250517_180703.jpg",
+      "width": 4000,
+      "height": 3000
+    },
+    {
+      "id": "1ae8e8ad-62ec-43bc-9743-765d488c9b3b",
+      "thumb": "https://img.foxx.pet/api/assets/1ae8e8ad-62ec-43bc-9743-765d488c9b3b/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/1ae8e8ad-62ec-43bc-9743-765d488c9b3b/original",
+      "filename": "IMG_20250517_180658.jpg",
+      "width": 4000,
+      "height": 3000
+    },
+    {
+      "id": "88ae8360-afaf-4ebd-8078-41a1066ba93a",
+      "thumb": "https://img.foxx.pet/api/assets/88ae8360-afaf-4ebd-8078-41a1066ba93a/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/88ae8360-afaf-4ebd-8078-41a1066ba93a/original",
+      "filename": "IMG_20250517_180656.jpg",
+      "width": 4000,
+      "height": 3000
+    },
+    {
+      "id": "ecc4cfe2-678a-4f40-a47e-66d5a495a867",
+      "thumb": "https://img.foxx.pet/api/assets/ecc4cfe2-678a-4f40-a47e-66d5a495a867/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/ecc4cfe2-678a-4f40-a47e-66d5a495a867/original",
+      "filename": "IMG_20250517_180638.jpg",
+      "width": 4000,
+      "height": 3000
+    },
+    {
+      "id": "d5b12e37-1e2a-4c71-b829-c7214666ac34",
+      "thumb": "https://img.foxx.pet/api/assets/d5b12e37-1e2a-4c71-b829-c7214666ac34/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/d5b12e37-1e2a-4c71-b829-c7214666ac34/original",
+      "filename": "IMG_20250517_180634.jpg",
+      "width": 4000,
+      "height": 3000
+    },
+    {
+      "id": "a2a6c072-7a04-4aea-bd31-7239f1b66c68",
+      "thumb": "https://img.foxx.pet/api/assets/a2a6c072-7a04-4aea-bd31-7239f1b66c68/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/a2a6c072-7a04-4aea-bd31-7239f1b66c68/original",
+      "filename": "IMG_20250517_180631.jpg",
+      "width": 4000,
+      "height": 3000
+    },
+    {
+      "id": "3ada2444-e608-4be8-baf8-c7dd8cba8b71",
+      "thumb": "https://img.foxx.pet/api/assets/3ada2444-e608-4be8-baf8-c7dd8cba8b71/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/3ada2444-e608-4be8-baf8-c7dd8cba8b71/original",
+      "filename": "IMG_20250517_180619(1).jpg",
+      "width": 4000,
+      "height": 3000
+    },
+    {
+      "id": "65dea969-8d77-4ca5-b41d-df33b9d1469b",
+      "thumb": "https://img.foxx.pet/api/assets/65dea969-8d77-4ca5-b41d-df33b9d1469b/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/65dea969-8d77-4ca5-b41d-df33b9d1469b/original",
+      "filename": "IMG_20250517_180614(1).jpg",
+      "width": 4000,
+      "height": 3000
+    },
+    {
+      "id": "995a4a69-ed18-4fee-a7e5-f276c37c3fee",
+      "thumb": "https://img.foxx.pet/api/assets/995a4a69-ed18-4fee-a7e5-f276c37c3fee/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/995a4a69-ed18-4fee-a7e5-f276c37c3fee/original",
+      "filename": "IMG_20250517_180609(1).jpg",
+      "width": 4000,
+      "height": 3000
+    },
+    {
+      "id": "99635e21-1bf2-4980-8114-4ee902f93d19",
+      "thumb": "https://img.foxx.pet/api/assets/99635e21-1bf2-4980-8114-4ee902f93d19/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/99635e21-1bf2-4980-8114-4ee902f93d19/original",
+      "filename": "IMG_20250517_180538(1).jpg",
+      "width": 4000,
+      "height": 3000
+    },
+    {
+      "id": "d9675dc5-7667-45f8-92b6-236f61e40cc8",
+      "thumb": "https://img.foxx.pet/api/assets/d9675dc5-7667-45f8-92b6-236f61e40cc8/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/d9675dc5-7667-45f8-92b6-236f61e40cc8/original",
+      "filename": "IMG_20250517_180505(1).jpg",
+      "width": 4000,
+      "height": 3000
+    },
+    {
+      "id": "bc4c1cb7-cc26-4e14-be54-74241af615e6",
+      "thumb": "https://img.foxx.pet/api/assets/bc4c1cb7-cc26-4e14-be54-74241af615e6/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/bc4c1cb7-cc26-4e14-be54-74241af615e6/original",
+      "filename": "IMG_20250517_180502(1).jpg",
+      "width": 4000,
+      "height": 3000
+    },
+    {
+      "id": "b439505c-adba-4f20-9c09-e83593cd8f2f",
+      "thumb": "https://img.foxx.pet/api/assets/b439505c-adba-4f20-9c09-e83593cd8f2f/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/b439505c-adba-4f20-9c09-e83593cd8f2f/original",
+      "filename": "IMG_20250517_180501(1).jpg",
+      "width": 4000,
+      "height": 3000
+    },
+    {
+      "id": "c86d20de-092e-4a92-8d2f-72f5819198d3",
+      "thumb": "https://img.foxx.pet/api/assets/c86d20de-092e-4a92-8d2f-72f5819198d3/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/c86d20de-092e-4a92-8d2f-72f5819198d3/original",
+      "filename": "IMG_20250517_180403(1).jpg",
+      "width": 4000,
+      "height": 3000
+    },
+    {
+      "id": "8534f8f0-5046-45d1-8161-c82b32ebe705",
+      "thumb": "https://img.foxx.pet/api/assets/8534f8f0-5046-45d1-8161-c82b32ebe705/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/8534f8f0-5046-45d1-8161-c82b32ebe705/original",
+      "filename": "IMG_20250517_180402(1).jpg",
+      "width": 4000,
+      "height": 3000
+    },
+    {
+      "id": "a6fc35de-5a13-41c1-8409-fb3db27b7173",
+      "thumb": "https://img.foxx.pet/api/assets/a6fc35de-5a13-41c1-8409-fb3db27b7173/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/a6fc35de-5a13-41c1-8409-fb3db27b7173/original",
+      "filename": "IMG_20250517_180357(1).jpg",
+      "width": 4000,
+      "height": 3000
+    },
+    {
+      "id": "9018e733-0031-4a07-af85-814fd173c600",
+      "thumb": "https://img.foxx.pet/api/assets/9018e733-0031-4a07-af85-814fd173c600/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/9018e733-0031-4a07-af85-814fd173c600/original",
+      "filename": "IMG_20250517_180354.jpg",
+      "width": 4000,
+      "height": 3000
+    },
+    {
+      "id": "b74961dd-047e-4485-9c84-c0bf7dafccf2",
+      "thumb": "https://img.foxx.pet/api/assets/b74961dd-047e-4485-9c84-c0bf7dafccf2/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/b74961dd-047e-4485-9c84-c0bf7dafccf2/original",
+      "filename": "IMG_20250517_180301(1).jpg",
+      "width": 4000,
+      "height": 3000
+    },
+    {
+      "id": "948a4d1c-f42f-4272-bb30-bf896de0e95c",
+      "thumb": "https://img.foxx.pet/api/assets/948a4d1c-f42f-4272-bb30-bf896de0e95c/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/948a4d1c-f42f-4272-bb30-bf896de0e95c/original",
+      "filename": "IMG_20250517_180300(1).jpg",
+      "width": 4000,
+      "height": 3000
+    },
+    {
+      "id": "3869d0ff-f7a1-4658-a6ab-fd631f93b2eb",
+      "thumb": "https://img.foxx.pet/api/assets/3869d0ff-f7a1-4658-a6ab-fd631f93b2eb/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/3869d0ff-f7a1-4658-a6ab-fd631f93b2eb/original",
+      "filename": "IMG_20250517_180257(1).jpg",
+      "width": 4000,
+      "height": 3000
+    },
+    {
+      "id": "eaaf717f-195d-46d1-b58b-add5f32628fa",
+      "thumb": "https://img.foxx.pet/api/assets/eaaf717f-195d-46d1-b58b-add5f32628fa/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/eaaf717f-195d-46d1-b58b-add5f32628fa/original",
+      "filename": "IMG_20250517_180239(1).jpg",
+      "width": 4000,
+      "height": 3000
+    },
+    {
+      "id": "3067a28d-330a-45ac-a48e-7a9fb9b5c2a5",
+      "thumb": "https://img.foxx.pet/api/assets/3067a28d-330a-45ac-a48e-7a9fb9b5c2a5/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/3067a28d-330a-45ac-a48e-7a9fb9b5c2a5/original",
+      "filename": "IMG_20250517_180232(1).jpg",
+      "width": 4000,
+      "height": 3000
+    },
+    {
+      "id": "1ae673da-04f5-4e26-b2bd-291c597f21d8",
+      "thumb": "https://img.foxx.pet/api/assets/1ae673da-04f5-4e26-b2bd-291c597f21d8/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/1ae673da-04f5-4e26-b2bd-291c597f21d8/original",
+      "filename": "IMG_20250517_180228(1).jpg",
+      "width": 4000,
+      "height": 3000
+    },
+    {
+      "id": "485f3c69-b171-4daa-862b-222a8e8c6061",
+      "thumb": "https://img.foxx.pet/api/assets/485f3c69-b171-4daa-862b-222a8e8c6061/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/485f3c69-b171-4daa-862b-222a8e8c6061/original",
+      "filename": "IMG_20250517_180213(1).jpg",
+      "width": 4000,
+      "height": 3000
+    },
+    {
+      "id": "c9e079b4-aff4-43b7-9af1-72b9a7de430c",
+      "thumb": "https://img.foxx.pet/api/assets/c9e079b4-aff4-43b7-9af1-72b9a7de430c/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/c9e079b4-aff4-43b7-9af1-72b9a7de430c/original",
+      "filename": "IMG_20250517_180207(1).jpg",
+      "width": 4000,
+      "height": 3000
+    },
+    {
+      "id": "c910d65d-61e6-43c7-a8d3-99d47a9be5ae",
+      "thumb": "https://img.foxx.pet/api/assets/c910d65d-61e6-43c7-a8d3-99d47a9be5ae/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/c910d65d-61e6-43c7-a8d3-99d47a9be5ae/original",
+      "filename": "IMG_20250517_180205(1).jpg",
+      "width": 4000,
+      "height": 3000
+    },
+    {
+      "id": "9c8a492a-7beb-4fe0-bb6a-62f573252d5b",
+      "thumb": "https://img.foxx.pet/api/assets/9c8a492a-7beb-4fe0-bb6a-62f573252d5b/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/9c8a492a-7beb-4fe0-bb6a-62f573252d5b/original",
+      "filename": "IMG_20250517_180133(1).jpg",
+      "width": 4000,
+      "height": 3000
+    },
+    {
+      "id": "03ee5323-96d3-42df-b7af-8922f8deaf73",
+      "thumb": "https://img.foxx.pet/api/assets/03ee5323-96d3-42df-b7af-8922f8deaf73/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/03ee5323-96d3-42df-b7af-8922f8deaf73/original",
+      "filename": "IMG_20250517_180132(1).jpg",
+      "width": 4000,
+      "height": 3000
+    },
+    {
+      "id": "3da86063-79af-4419-ba2e-d0c2289b7d4f",
+      "thumb": "https://img.foxx.pet/api/assets/3da86063-79af-4419-ba2e-d0c2289b7d4f/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/3da86063-79af-4419-ba2e-d0c2289b7d4f/original",
+      "filename": "IMG_20250517_180120(1).jpg",
+      "width": 4000,
+      "height": 3000
+    },
+    {
+      "id": "58152932-eded-4463-bbe9-ef7de971ed96",
+      "thumb": "https://img.foxx.pet/api/assets/58152932-eded-4463-bbe9-ef7de971ed96/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/58152932-eded-4463-bbe9-ef7de971ed96/original",
+      "filename": "IMG_20250517_180117(1).jpg",
+      "width": 4000,
+      "height": 3000
+    },
+    {
+      "id": "0daec9e7-5b3d-46ce-808f-0d0fce78f834",
+      "thumb": "https://img.foxx.pet/api/assets/0daec9e7-5b3d-46ce-808f-0d0fce78f834/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/0daec9e7-5b3d-46ce-808f-0d0fce78f834/original",
+      "filename": "IMG_20250517_180112(1).jpg",
+      "width": 4000,
+      "height": 3000
+    },
+    {
+      "id": "7acb8ef8-9621-4ddc-b59b-e843dcb13955",
+      "thumb": "https://img.foxx.pet/api/assets/7acb8ef8-9621-4ddc-b59b-e843dcb13955/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/7acb8ef8-9621-4ddc-b59b-e843dcb13955/original",
+      "filename": "IMG_20250517_175700(1).jpg",
+      "width": 4000,
+      "height": 3000
+    },
+    {
+      "id": "38375fd1-99c2-4e3c-9c41-e255c341e1e6",
+      "thumb": "https://img.foxx.pet/api/assets/38375fd1-99c2-4e3c-9c41-e255c341e1e6/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/38375fd1-99c2-4e3c-9c41-e255c341e1e6/original",
+      "filename": "IMG_20250517_175659(1).jpg",
+      "width": 4000,
+      "height": 3000
+    },
+    {
+      "id": "bdbee2ec-b4ab-446c-9f69-1f0da4350bd8",
+      "thumb": "https://img.foxx.pet/api/assets/bdbee2ec-b4ab-446c-9f69-1f0da4350bd8/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/bdbee2ec-b4ab-446c-9f69-1f0da4350bd8/original",
+      "filename": "IMG_20250517_175651(1).jpg",
+      "width": 4000,
+      "height": 3000
+    },
+    {
+      "id": "3720c092-a690-4ecd-98cb-4bf3a5cd7ddf",
+      "thumb": "https://img.foxx.pet/api/assets/3720c092-a690-4ecd-98cb-4bf3a5cd7ddf/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/3720c092-a690-4ecd-98cb-4bf3a5cd7ddf/original",
+      "filename": "IMG_20250517_175648(1).jpg",
+      "width": 4000,
+      "height": 3000
+    },
+    {
+      "id": "1f51de12-ab3e-4304-8f9f-d2a446a94f6a",
+      "thumb": "https://img.foxx.pet/api/assets/1f51de12-ab3e-4304-8f9f-d2a446a94f6a/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/1f51de12-ab3e-4304-8f9f-d2a446a94f6a/original",
+      "filename": "IMG_20250517_175643(1).jpg",
+      "width": 4000,
+      "height": 3000
+    },
+    {
+      "id": "da452983-0d6d-4321-a8ed-1cdf37094fd2",
+      "thumb": "https://img.foxx.pet/api/assets/da452983-0d6d-4321-a8ed-1cdf37094fd2/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/da452983-0d6d-4321-a8ed-1cdf37094fd2/original",
+      "filename": "IMG_20250517_175632(1).jpg",
+      "width": 4000,
+      "height": 3000
+    },
+    {
+      "id": "056bd53c-052f-4ea4-b07d-634743ef617e",
+      "thumb": "https://img.foxx.pet/api/assets/056bd53c-052f-4ea4-b07d-634743ef617e/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/056bd53c-052f-4ea4-b07d-634743ef617e/original",
+      "filename": "IMG_20250517_175631(1).jpg",
+      "width": 4000,
+      "height": 3000
+    },
+    {
+      "id": "8666c137-8967-4585-a52f-c35581fcfbe5",
+      "thumb": "https://img.foxx.pet/api/assets/8666c137-8967-4585-a52f-c35581fcfbe5/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/8666c137-8967-4585-a52f-c35581fcfbe5/original",
+      "filename": "IMG_20250517_175629(1).jpg",
+      "width": 4000,
+      "height": 3000
+    },
+    {
+      "id": "8dfbaa0c-8d19-48fe-8201-48490e5e6ca5",
+      "thumb": "https://img.foxx.pet/api/assets/8dfbaa0c-8d19-48fe-8201-48490e5e6ca5/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/8dfbaa0c-8d19-48fe-8201-48490e5e6ca5/original",
+      "filename": "IMG_20250517_175622(1).jpg",
+      "width": 4000,
+      "height": 3000
+    },
+    {
+      "id": "31ab3fb8-8b3e-437c-8441-86edcffb0a17",
+      "thumb": "https://img.foxx.pet/api/assets/31ab3fb8-8b3e-437c-8441-86edcffb0a17/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/31ab3fb8-8b3e-437c-8441-86edcffb0a17/original",
+      "filename": "IMG_20250517_175619(1).jpg",
+      "width": 4000,
+      "height": 3000
+    },
+    {
+      "id": "58e0e893-75b4-4fc9-b7b5-99c8590a4589",
+      "thumb": "https://img.foxx.pet/api/assets/58e0e893-75b4-4fc9-b7b5-99c8590a4589/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/58e0e893-75b4-4fc9-b7b5-99c8590a4589/original",
+      "filename": "IMG_20250517_175617(1).jpg",
+      "width": 4000,
+      "height": 3000
+    },
+    {
+      "id": "9c6a9c77-ea90-42ea-a41a-17017f440c8b",
+      "thumb": "https://img.foxx.pet/api/assets/9c6a9c77-ea90-42ea-a41a-17017f440c8b/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/9c6a9c77-ea90-42ea-a41a-17017f440c8b/original",
+      "filename": "IMG_20250517_175513(1).jpg",
+      "width": 4000,
+      "height": 3000
+    },
+    {
+      "id": "ba049047-1be9-46da-aa1e-e972a2bcbc64",
+      "thumb": "https://img.foxx.pet/api/assets/ba049047-1be9-46da-aa1e-e972a2bcbc64/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/ba049047-1be9-46da-aa1e-e972a2bcbc64/original",
+      "filename": "IMG_20250517_175502(1).jpg",
+      "width": 4000,
+      "height": 3000
+    },
+    {
+      "id": "d0d35615-18f7-4789-931f-a9ddea780c8a",
+      "thumb": "https://img.foxx.pet/api/assets/d0d35615-18f7-4789-931f-a9ddea780c8a/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/d0d35615-18f7-4789-931f-a9ddea780c8a/original",
+      "filename": "IMG_20250517_175500(1).jpg",
+      "width": 4000,
+      "height": 3000
+    },
+    {
+      "id": "bec62a93-9a1a-418d-bf06-b3fd1fd7ddf3",
+      "thumb": "https://img.foxx.pet/api/assets/bec62a93-9a1a-418d-bf06-b3fd1fd7ddf3/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/bec62a93-9a1a-418d-bf06-b3fd1fd7ddf3/original",
+      "filename": "IMG_20250517_175446(1).jpg",
+      "width": 4000,
+      "height": 3000
+    },
+    {
+      "id": "8aab4ec0-9305-490a-82e0-c15e0812d6a4",
+      "thumb": "https://img.foxx.pet/api/assets/8aab4ec0-9305-490a-82e0-c15e0812d6a4/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/8aab4ec0-9305-490a-82e0-c15e0812d6a4/original",
+      "filename": "IMG_20250517_175443(1).jpg",
+      "width": 4000,
+      "height": 3000
+    }
+  ]
+}

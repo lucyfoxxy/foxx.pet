@@ -1,0 +1,54 @@
+{
+  "slug": "furmeets-dortmund-jun-2024",
+  "albumId": "1278e863-14ef-42da-bc70-2ec03e9062ae",
+  "albumName": "Furmeet: Dortmund (Jun 2024)",
+  "title": "Dortmund (Jun 2024)",
+  "category": {
+    "name": "Furmeets",
+    "slug": "furmeets"
+  },
+  "assetMode": "remote",
+  "count": 5,
+  "items": [
+    {
+      "id": "297876f5-b267-4c50-81e0-486fd88c485a",
+      "thumb": "https://img.foxx.pet/api/assets/297876f5-b267-4c50-81e0-486fd88c485a/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/297876f5-b267-4c50-81e0-486fd88c485a/original",
+      "filename": "photo_2024-06-16_17-20-54.jpg",
+      "width": 1280,
+      "height": 964
+    },
+    {
+      "id": "a9f33a5e-14a4-45e7-a48d-72d1ec15a819",
+      "thumb": "https://img.foxx.pet/api/assets/a9f33a5e-14a4-45e7-a48d-72d1ec15a819/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/a9f33a5e-14a4-45e7-a48d-72d1ec15a819/original",
+      "filename": "photo_2024-06-16_17-20-47.jpg",
+      "width": 1280,
+      "height": 673
+    },
+    {
+      "id": "b9eb2842-099a-4dce-860e-88b20d3d5e06",
+      "thumb": "https://img.foxx.pet/api/assets/b9eb2842-099a-4dce-860e-88b20d3d5e06/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/b9eb2842-099a-4dce-860e-88b20d3d5e06/original",
+      "filename": "photo_2024-06-16_17-20-40.jpg",
+      "width": 1280,
+      "height": 853
+    },
+    {
+      "id": "943e6f7f-c910-4692-ab6b-2138ab6435f0",
+      "thumb": "https://img.foxx.pet/api/assets/943e6f7f-c910-4692-ab6b-2138ab6435f0/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/943e6f7f-c910-4692-ab6b-2138ab6435f0/original",
+      "filename": "photo_2024-06-16_17-20-32.jpg",
+      "width": 1280,
+      "height": 853
+    },
+    {
+      "id": "7c7320d3-7b50-4206-9166-db1635c79859",
+      "thumb": "https://img.foxx.pet/api/assets/7c7320d3-7b50-4206-9166-db1635c79859/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/7c7320d3-7b50-4206-9166-db1635c79859/original",
+      "filename": "photo_2024-06-16_17-19-42.jpg",
+      "width": 1280,
+      "height": 853
+    }
+  ]
+}

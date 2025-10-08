@@ -1,0 +1,30 @@
+{
+  "slug": "conventions-furciety-2025",
+  "albumId": "5a129091-a9e7-4d66-9abf-fd14d7425b32",
+  "albumName": "Convention: Furciety (2025)",
+  "title": "Furciety (2025)",
+  "category": {
+    "name": "Conventions",
+    "slug": "conventions"
+  },
+  "assetMode": "remote",
+  "count": 2,
+  "items": [
+    {
+      "id": "a9d1b9da-4262-43d3-b72d-360a67be29fc",
+      "thumb": "https://img.foxx.pet/api/assets/a9d1b9da-4262-43d3-b72d-360a67be29fc/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/a9d1b9da-4262-43d3-b72d-360a67be29fc/original",
+      "filename": "4_5832566915112901860.MOV",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "689d1959-8ea8-4169-8584-e55038a425c6",
+      "thumb": "https://img.foxx.pet/api/assets/689d1959-8ea8-4169-8584-e55038a425c6/thumbnail",
+      "full": "https://img.foxx.pet/api/assets/689d1959-8ea8-4169-8584-e55038a425c6/original",
+      "filename": "2_5256003354177335854.mp4",
+      "width": 1920,
+      "height": 1080
+    }
+  ]
+}

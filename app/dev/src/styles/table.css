@@ -27,7 +27,7 @@
 }
 .table__th,
 .table__td {
-  padding-block: .6rem .6rem;
+  padding-block: var(--xsmall-spacing);
   padding-inline: calc(.5*var(--content-padding)); }              
 .table__th {
   background: color-mix(in oklab, var(--primary-background-color, #000) 65%, white 3%);
@@ -42,7 +42,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: .5rem;
+  gap: var(--xsmall-spacing);
   white-space: nowrap; }
 .table__price { display: inline-block; }
 .table__unit { opacity: .7; }

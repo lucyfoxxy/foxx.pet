@@ -52,10 +52,10 @@
 .media-galleries__card {
   display: flex;                
   flex-direction: column;
-  gap: .35rem;
+  gap: var(--xsmall-spacing); 
   background: var(--content-background);
   border-radius: var(--medium-radius);
-  padding: .75rem;
+  padding: var(--small-padding);
   box-shadow: var(--large-shadow);
   outline: 1px solid var(--outline-color);
   transition: transform .25s ease, box-shadow .25s;
@@ -82,7 +82,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: clamp(0.35rem, 0.6vw, 0.75rem);
+  gap: var(--xsmall-spacing);
   inline-size: 100%;
 }
 
@@ -261,10 +261,10 @@
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
-  gap: clamp(.4rem, 1vw, .7rem);
+  gap: var(--xsmall-spacing); 
   background: color-mix(in oklab, var(--content-background) 88%, black 12%);
   border-radius: calc(var(--medium-radius) - 2px);
-  padding: .4rem .55rem;
+  padding: calc(var(--xsmall-spacing)*.6) var(--small-spacing);
   box-shadow: var(--medium-shadow);
   transition: transform .3s ease, box-shadow .3s ease;
 }
@@ -272,7 +272,7 @@
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: var(--thumb-size);
-  gap: var(--content-spacing);
+  gap: var(--content-spacing); 
   margin-block: calc(var(--content-spacing) * .35);
   overflow: hidden;
 }
