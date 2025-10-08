@@ -39,7 +39,7 @@ const navLinks = [
     <meta name="twitter:image" content={ASSETS.og.src} />    
     <link rel="icon" type="image/webp" href={ASSETS.favicon.src} />
     <link rel="preload" href={ASSETS.bg.src} as="image" type="image/webp" /> 
-    <link rel="preload" href={ASSETS.logo.src} as="image" type="image/webp" />
+    <link rel="preload" href={ASSETS.logo_header.src} as="image" type="image/webp" />
     <link rel="preload" href="/fonts/FuzzyBubbles_400.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/FuzzyBubbles_700.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/Grandstander_italic_100-900.woff2" as="font" type="font/woff2" crossorigin />
@@ -48,7 +48,7 @@ const navLinks = [
   <body style={`--background-image: url(${ASSETS.bg.src});`}>
    
     <header class="site-header">
-      <a href="/"><img class="site-header__logo" src={ASSETS.logo.src} alt="foxx.pet" /></a>
+      <a href="/"><img class="site-header__logo" src={ASSETS.logo_header.src} alt="foxx.pet" /></a>
       <nav class="site-header__nav">
         {navLinks
           .filter((link) => link.includeInHeader)
