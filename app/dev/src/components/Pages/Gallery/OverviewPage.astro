@@ -1,15 +1,18 @@
 ---
+import { siteContent } from '@Content/site';
+
 interface CategoryEntry {
   slug: string;
   title: string;
 }
 
 const { categories } = Astro.props as { categories: CategoryEntry[] };
+const { intro } = siteContent.pages.galleries;
 ---
 <section class="content-head content-card__title section">
-  <h1>Galleries</h1>
+  <h1>{intro.heading}</h1>
   <div class="prose">
-    <p>Here you gonna find a selection of my previous works.</p>
+    <p>{intro.description}</p>
   </div>
 </section>
 

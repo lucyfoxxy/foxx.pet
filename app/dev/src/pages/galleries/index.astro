@@ -1,14 +1,13 @@
 ---
-import { getEntry } from 'astro:content';
 import Layout from '@Design/Layout.astro';
 import GalleryOverviewPage from '@Pages/Gallery/OverviewPage.astro';
+import { siteContent } from '@Content/site';
+
 export const prerender = true;
 
-const catalog = (await getEntry('albumCatalog', 'categories')).data;
-const categories = catalog.categories
-  .filter((cat): cat is typeof cat & { slug: string } => Boolean(cat.slug))
-  .map((cat) => ({ slug: cat.slug, title: cat.title }));
+const { meta, categories } = siteContent.pages.galleries;
+const overviewCategories = categories.map(({ slug, title }) => ({ slug, title }));
 ---
-<Layout title="Galleries">
-  <GalleryOverviewPage {categories} />
+<Layout {meta}>
+  <GalleryOverviewPage categories={overviewCategories} />
 </Layout>

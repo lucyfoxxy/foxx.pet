@@ -1,21 +1,25 @@
 ---
-import { getEntry } from 'astro:content';
 import Layout from '@Design/Layout.astro';
 import GalleryDetailPage from '@Pages/Gallery/DetailPage.astro';
+import { siteContent } from '@Content/site';
 
-export async function getStaticPaths() {
-  const catalog = (await getEntry('albumCatalog', 'categories')).data;
-  return catalog.categories
-    .filter((c) => c.slug)
-    .map((c) => ({
-      params: { slug: c.slug! },
-      props:  { title: c.title, description: c.description ?? '' },
-    }));
+export function getStaticPaths() {
+  return siteContent.pages.galleries.categories.map((category) => ({
+    params: { slug: category.slug },
+    props: { title: category.title, description: category.description ?? '' },
+  }));
 }
 
-const { slug }  = Astro.params;
+const { slug } = Astro.params;
 const { title, description } = Astro.props as { title?: string; description?: string };
+
+const galleryMeta = siteContent.pages.galleries.meta;
+const meta = {
+  ...galleryMeta,
+  title: title ?? galleryMeta.title,
+  description: description?.length ? description : galleryMeta.description,
+};
 ---
-<Layout title={title}>
+<Layout {meta}>
   <GalleryDetailPage albumSlug={slug} title={title} description={description} />
 </Layout>

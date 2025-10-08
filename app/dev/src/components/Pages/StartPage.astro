@@ -2,40 +2,21 @@
 import Layout from '@Design/Layout.astro';
 import Icon from '@Design/Icons.astro';
 import { ASSETS } from '@Design/Assets.astro';
+import { siteContent } from '@Content/site';
 
 export const prerender = true;
 
-const meta = {
-  title: 'Base Template - Your Project Name',
-  description: 'Use this page as a starting point for a new Astro page.',
-};
-
+const content = siteContent.pages.home;
+const meta = content.meta;
 const hero = {
   logo: ASSETS.logo_hero.src,
-  heading: 'Welcome to',
-  subheading: 'Home of a small purple fox flying around!',
+  heading: content.hero.heading,
+  subheading: content.hero.subheading,
 };
-
-const intro = {
-  heading: 'Welcome Title',
-  paragraphs: [
-    'Introduce yourself or your project with a warm welcome.',
-    'Explain what visitors can expect to find on this page.',
-    'Highlight a call to action such as linking to your gallery or services.',
-  ],
-  signature: 'Your Name',
-};
-
-const feature = {
-  heading: 'Featured Section',
-  description:
-    'Use this area to showcase a highlight, image carousel, or any other element you want to bring attention to.',
-};
-
-const links = [
-  { href: 'https://example.com', label: 'External Link', kind: 'link' },
-  { href: 'mailto:you@example.com', label: 'Email', kind: 'mail' },
-];
+const intro = content.intro;
+const feature = content.feature;
+const contact = content.contact;
+const links = contact.links;
 
 const isExternalLink = (href: string) => href.startsWith('http');
 ---
@@ -69,7 +50,7 @@ const isExternalLink = (href: string) => href.startsWith('http');
       <p>{feature.description}</p>
       <div class="feature-slot">
         <p>
-          Replace this block with your own gallery, pricing table, or any custom
+          Replace this block with your own gallery, story teaser, or any custom
           component. You can also import existing components and render them here.
         </p>
       </div>
@@ -77,7 +58,7 @@ const isExternalLink = (href: string) => href.startsWith('http');
   </section>
 
   <section class="content-card section">
-    <h2>Get in Touch</h2>
+    <h2>{contact.heading}</h2>
     <div class="ui-btn__contact--wrap">
       {links.map((link) => (
         <a

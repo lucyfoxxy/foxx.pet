@@ -1,0 +1,26 @@
+---
+import { siteContent } from '@Content/site';
+
+const { meta, sections } = siteContent.pages.stories;
+---
+<section class="content-head content-card__title section">
+  <h1>{meta.title}</h1>
+  <div class="prose">
+    <p>{meta.description}</p>
+  </div>
+</section>
+
+<section class="content-layout section">
+  {sections.map((section) => (
+    <article class="content-card">
+      <div class="content-card__title">
+        <h2>{section.heading}</h2>
+      </div>
+      <div class="prose">
+        {section.paragraphs.map((paragraph) => (
+          <p>{paragraph}</p>
+        ))}
+      </div>
+    </article>
+  ))}
+</section>

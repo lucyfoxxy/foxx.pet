@@ -8,6 +8,7 @@ import '@Styles/ui.css';
 import '@Styles/media.css';
 import '@Styles/table.css';
 import { ASSETS } from '@Design/Assets.astro';
+import { siteContent } from '@Content/site';
 
 const defaultMeta = {
   title: 'Lucy\s Cosmos',
@@ -28,12 +29,7 @@ if (typeof props.title === 'string' && props.title.trim().length > 0) {
 const { title, description, url } = meta;
 const pageTitle = title;
 
-const navLinks = [
-  { href: '/', label: 'Home', includeInHeader: false },
-  { href: '/galleries', label: 'Galleries', includeInHeader: true },
-  { href: '/pricing', label: 'Pricing', includeInHeader: true },
-  { href: '/imprint', label: 'Imprint', includeInHeader: true }
-];
+const navLinks = siteContent.navigation;
 
 const normalizePath = (path: string) => {
   if (!path || path === '/') return '/';
@@ -76,17 +72,7 @@ segments.forEach((segment, index) => {
   });
 });
 
-const navIndex = navLinks.findIndex((link) => {
-  const normalizedHref = normalizePath(link.href);
-  if (normalizedHref === '/') return normalizedCurrentPath === '/';
-  return (
-    normalizedCurrentPath === normalizedHref ||
-    normalizedCurrentPath.startsWith(`${normalizedHref}/`)
-  );
-});
-
-const previousNav = navIndex > 0 ? navLinks[navIndex - 1] : undefined;
-const nextNav = navIndex >= 0 && navIndex < navLinks.length - 1 ? navLinks[navIndex + 1] : undefined;
+const showHomeAction = normalizedCurrentPath !== '/';
 ---
 <html lang="en">
   <head>
@@ -144,42 +130,42 @@ const nextNav = navIndex >= 0 && navIndex < navLinks.length - 1 ? navLinks[navIn
             </ol>
             </div>
           
-          {(previousNav || nextNav) && (
-            <div class="panel__actions" role="navigation" aria-label="Sibling pages">
-              {previousNav && (
-                <a class="ui-chip panel__action panel__action--prev" href={previousNav.href}>
-                  <span aria-hidden="true">←</span>
-                  <span>{previousNav.label}</span>
-                </a>
-              )}
-              {nextNav && (
-                <a class="ui-chip panel__action panel__action--next" href={nextNav.href}>
-                  <span>{nextNav.label}</span>
-                  <span aria-hidden="true">→</span>
-                </a>
-              )}
+          {showHomeAction && (
+            <div class="panel__actions" role="navigation" aria-label="Page shortcuts">
+              <a class="ui-chip panel__action panel__action--home" href="/">
+                <span aria-hidden="true">←</span>
+                <span>Home</span>
+              </a>
             </div>
           )}
           </nav>
         <slot />
           <nav class="panel" aria-label="Breadcrumb">
-            
-            <ol class="panel__breadcrumbs">
-              {breadcrumbs.map((crumb, index) => (
-                <li>
-                  {crumb.isCurrent ? (
-                    <span class="panel__breadcrumbs-current" aria-current="page">{crumb.label}</span>
-                  ) : (
-                    <a href={crumb.href}>{crumb.label}</a>
-                  )}
-                  {index < breadcrumbs.length - 1 && (
-                    <span class="panel__breadcrumbs-separator" aria-hidden="true">›</span>
-                  )}
-                </li>
-              ))}
-            </ol>
-          </div>
-          </nav>        
+            <div class="panel__breadcrumbs-nav">
+              <ol class="panel__breadcrumbs">
+                {breadcrumbs.map((crumb, index) => (
+                  <li>
+                    {crumb.isCurrent ? (
+                      <span class="panel__breadcrumbs-current" aria-current="page">{crumb.label}</span>
+                    ) : (
+                      <a href={crumb.href}>{crumb.label}</a>
+                    )}
+                    {index < breadcrumbs.length - 1 && (
+                      <span class="panel__breadcrumbs-separator" aria-hidden="true">›</span>
+                    )}
+                  </li>
+                ))}
+              </ol>
+            </div>
+            {showHomeAction && (
+              <div class="panel__actions" role="navigation" aria-label="Page shortcuts">
+                <a class="ui-chip panel__action panel__action--home" href="/">
+                  <span aria-hidden="true">←</span>
+                  <span>Home</span>
+                </a>
+              </div>
+            )}
+          </nav>
       </main>
     </div>
 
