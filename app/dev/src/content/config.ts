@@ -17,6 +17,16 @@ const albumData = defineCollection({
   type: "data",
   schema: z.object({
     slug: z.string(),
+    albumId: z.string().optional(),
+    albumName: z.string().optional(),
+    title: z.string().optional(),
+    category: z
+      .object({
+        name: z.string(),
+        slug: z.string(),
+      })
+      .optional(),
+    assetMode: z.enum(["remote", "download"]).optional(),
     count: z.number(),
     items: z.array(
       z.object({

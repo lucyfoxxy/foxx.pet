@@ -1,7 +1,7 @@
 import { createGalleryItemsBySlug } from './utils/_slugLoader.js';
 import { loadImageWithTransition } from './utils/_transitionLoader.js';
 
-const metas = import.meta.glob('@Content/albumData/*.json', {
+const metas = import.meta.glob('@Content/albumData/**/*.json', {
   query: '?json',
   eager: true,
 });

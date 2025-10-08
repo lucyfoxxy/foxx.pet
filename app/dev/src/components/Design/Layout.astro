@@ -9,7 +9,9 @@ import '@Styles/media.css';
 import '@Styles/table.css';
 import { ASSETS } from '@Design/Assets.astro';
 import { findPageByHref, getNavigationLinks, getPageContent } from '@Content/siteContent';
-
+const goatCounterBase = import.meta.env.PUBLIC_GOATCOUNTER_URL?.replace(/\/$/, '');
+const goatCounterScriptSrc = import.meta.env.PUBLIC_GOATCOUNTER_SCRIPT?.trim() || 'https://gc.zgo.at/count.js';
+const enableAnalytics = import.meta.env.PROD && !!goatCounterBase;
 const homePage = getPageContent('home');
 const defaultMeta = {
   title: homePage.title,
@@ -50,8 +52,8 @@ const navLabelByPath = new Map(navLinks.map((link) => [normalizePath(link.href),
 const segments = normalizedCurrentPath === '/' ? [] : normalizedCurrentPath.slice(1).split('/');
 const breadcrumbs = [] as { label: string; href: string; isCurrent: boolean }[];
 
-const homeLink = findPageByHref('/') ?? { href: '/', navLabel: 'Home', title: 'Home' };
-const homeLabel = (homeLink as { navLabel?: string; title?: string }).navLabel ?? homeLink.title ?? 'Home';
+const homeLink = findPageByHref('/') ?? { href: '/', navLabel: 'Home ↩', title: 'Home ↩' };
+const homeLabel = (homeLink as { navLabel?: string; title?: string }).navLabel ?? homeLink.title ?? 'Home ↩';
 breadcrumbs.push({
   label: homeLabel,
   href: '/',
@@ -115,66 +117,35 @@ const homeAction = showHomeAction ? (homeLink as { href: string }) : undefined;
 
     <div class="container">
       <main class="panel">
-        <nav class="panel" aria-label="Breadcrumb">
-          <div class="panel__breadcrumbs-nav">
-            <ol class="panel__breadcrumbs">
-              {breadcrumbs.map((crumb, index) => (
-                <li>
-                  {crumb.isCurrent ? (
-                    <span class="panel__breadcrumbs-current" aria-current="page">{crumb.label}</span>
-                  ) : (
-                    <a href={crumb.href}>{crumb.label}</a>
-                  )}
-                  {index < breadcrumbs.length - 1 && (
-                    <span class="panel__breadcrumbs-separator" aria-hidden="true">›</span>
-                  )}
-                </li>
-              ))}
-            </ol>
-          </div>
-
-          {homeAction && (
-            <div class="panel__actions" role="navigation" aria-label="Page actions">
-              <a class="ui-chip panel__action panel__action--home" href={homeAction.href}>
-                <span aria-hidden="true">←</span>
-                <span>{homeLabel}</span>
-              </a>
-            </div>
-          )}
+        <nav class="is-breadcrumbs" aria-label="Breadcrumb">
+          <ol>
+            {breadcrumbs.map((crumb, index) => (
+              <li>
+                {crumb.isCurrent ? (
+                  <span class="breadcrumbs__current" aria-current="page">{crumb.label}</span>
+                ) : (
+                  <a href={crumb.href}>{crumb.label}</a>
+                )}
+                {index < breadcrumbs.length - 1 && (
+                  <span class="breadcrumbs__seperator" aria-hidden="true">›</span>
+                )}
+              </li>
+            ))}
+          </ol>
         </nav>
-        <slot />
-        <nav class="panel" aria-label="Breadcrumb">
-          <div class="panel__breadcrumbs-nav">
-            <ol class="panel__breadcrumbs">
-              {breadcrumbs.map((crumb, index) => (
-                <li>
-                  {crumb.isCurrent ? (
-                    <span class="panel__breadcrumbs-current" aria-current="page">{crumb.label}</span>
-                  ) : (
-                    <a href={crumb.href}>{crumb.label}</a>
-                  )}
-                  {index < breadcrumbs.length - 1 && (
-                    <span class="panel__breadcrumbs-separator" aria-hidden="true">›</span>
-                  )}
-                </li>
-              ))}
-            </ol>
-          </div>
 
-          {homeAction && (
-            <div class="panel__actions" role="navigation" aria-label="Page actions">
-              <a class="ui-chip panel__action panel__action--home" href={homeAction.href}>
-                <span aria-hidden="true">←</span>
-                <span>{homeLabel}</span>
-              </a>
-            </div>
-          )}
+        <slot />
+
+        <nav class="is-page-nav" aria-label="Page navigation">
+          <span class="ui-chip">
+            <a href="#top">⇈ Page Top ↑↑</a>
+          </span>
         </nav>
       </main>
     </div>
 
     <footer class="site-footer">
-      ©<span data-current-year></span>&nbsp;foxx.pet – Site made with ♥ by&nbsp;<a href="https://lucy.foxx.pet/">Lucy Foxx</a>
+      ©<span data-current-year></span><i>&nbsp;by&nbsp;<b>Lucy Foxx</b>&nbsp;–&nbsp;all rights reserved.</i> &nbsp;–&nbsp; <a href="/imprint">Imprint</a> &nbsp;–&nbsp; powered by &nbsp;<a href="https://astro.build">astro</a>&nbsp;
     </footer>
     <script>
       const yearEl = document.querySelector('[data-current-year]');
@@ -182,5 +153,8 @@ const homeAction = showHomeAction ? (homeLink as { href: string }) : undefined;
         yearEl.textContent = new Date().getFullYear().toString();
       }
     </script>
+        {enableAnalytics && (
+      <script data-goatcounter={`${goatCounterBase}/count`} async src={goatCounterScriptSrc}></script>
+    )}
   </body>
 </html>

@@ -17,10 +17,10 @@ export function createGalleryItemsBySlug(metaModules, assetModules) {
 
   const itemsBySlug = new Map();
   for (const [path, data] of Object.entries(metaModules)) {
-    const match = path.match(/\/albumData\/([^/]+)\.json$/);
-    if (!match) continue;
+    const slug = (data && data.slug)
+      || path.match(/\/albumData\/(.+?)\.json$/)?.[1];
+    if (!slug) continue;
 
-    const slug = match[1];
     const items = (data?.items ?? []).map((item) => {
       const id = item.id
          || item.full?.match(/full-(.+)\.\w+$/)?.[1]

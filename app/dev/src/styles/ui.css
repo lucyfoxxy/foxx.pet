@@ -17,7 +17,7 @@
   color: var(--highlight-color);
 }
 .ui-badge {
-  opacity: .9;
+  opacity: .7;
   margin-inline-end: .25rem;
   border-radius: 999px;
   padding: .35rem .75rem;

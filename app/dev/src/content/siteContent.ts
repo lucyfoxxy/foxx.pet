@@ -3,7 +3,7 @@ export const SITE_CONTENT = {
     id: 'home',
     href: '/',
     title: 'Lucy\'s Cosmos',
-    navLabel: 'Home',
+    navLabel: '↩ Home',
     includeInHeader: false,
     description: "A small cosmic fox on their big journey across the universe!",
     hero: {
