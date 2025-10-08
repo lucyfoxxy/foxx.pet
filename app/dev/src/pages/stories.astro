@@ -1,11 +1,13 @@
 ---
-import { getEntry } from 'astro:content';
 import Layout from '@Design/Layout.astro';
-import StoryPage from '@Pages/PricingPage.astro';
+import StoriesPage from '@Pages/StoriesPage.astro';
+import { getPageContent } from '@Content/siteContent';
 
-const title = 'Stories';
+export const prerender = true;
 
+const content = getPageContent('stories');
+const meta = { title: content.title, description: content.description };
 ---
-<Layout {title}>
-  <StoryPage  />
+<Layout title={content.title} meta={meta}>
+  <StoriesPage />
 </Layout>

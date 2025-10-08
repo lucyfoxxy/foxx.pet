@@ -4,7 +4,7 @@ import Layout from '@Design/Layout.astro';
 import GalleryDetailPage from '@Pages/Gallery/DetailPage.astro';
 
 export async function getStaticPaths() {
-  const catalog = (await getEntry('albumCatalog', 'categories')).data;
+  const catalog = (await getEntry('galleryCatalog', 'categories')).data;
   return catalog.categories
     .filter((c) => c.slug)
     .map((c) => ({
@@ -15,7 +15,11 @@ export async function getStaticPaths() {
 
 const { slug }  = Astro.params;
 const { title, description } = Astro.props as { title?: string; description?: string };
+const meta = {
+  title: title ?? 'Gallery',
+  description: description ?? '',
+};
 ---
-<Layout title={title}>
-  <GalleryDetailPage albumSlug={slug} title={title} description={description} />
+<Layout title={meta.title} meta={meta}>
+  <GalleryDetailPage albumSlug={slug} title={title ?? meta.title} description={description} />
 </Layout>
