@@ -1,7 +1,7 @@
 ---
 import { getEntry } from 'astro:content';
 import Layout from '@Design/Layout.astro';
-import GalleryOverviewPage from '@Pages/Gallery/OverviewPage.astro'
+import GalleryOverviewPage from '@Pages/Gallery/OverviewPage.astro';
 export const prerender = true;
 
 const catalog = (await getEntry('albumCatalog', 'categories')).data;
@@ -9,6 +9,6 @@ const categories = catalog.categories
   .filter((cat): cat is typeof cat & { slug: string } => Boolean(cat.slug))
   .map((cat) => ({ slug: cat.slug, title: cat.title }));
 ---
-<Layout title="Gallery">
+<Layout title="Galleries">
   <GalleryOverviewPage {categories} />
 </Layout>

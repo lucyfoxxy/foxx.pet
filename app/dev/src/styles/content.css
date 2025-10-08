@@ -5,7 +5,7 @@
 
 
 /* ====== Section ====== */
-.section + .section { margin-top: var(--content-margin); }
+.section + .section { margin-top: var(--content-spacing); }
 .section :where(h2) { margin: 0 0 .25rem 0; }
 
 /* ====== FULL-SIZE CONTENT HEAD ====== */
@@ -21,11 +21,11 @@
 .content-layout {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: var(--content-gap);
+  gap: var(--content-spacing);
   align-items: stretch;
 }
 .content-layout.media-gallery__hook {
-  margin-block-start: calc(var(--content-gap) * .25);
+  margin-block-start: calc(var(--content-spacing) * .25);
 }
 .content-layout__split {
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -98,7 +98,7 @@
   margin-block-start: var(--prose-flow-spacing);
   padding: clamp(0.75rem, 2vw, 1.25rem);
   border-radius: var(--medium-radius);
-  background: color-mix(in oklab, var(--panel-background) 88%, black 12%);
+  background: color-mix(in oklab, var(--primary-background-color) 88%, black 12%);
   box-shadow: var(--small-shadow);
   color: inherit;
 }

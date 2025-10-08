@@ -28,15 +28,15 @@
 .table__th,
 .table__td {
   padding-block: .6rem .6rem;
-  padding-inline: calc(.5*var(--panel-padding)); }              
+  padding-inline: calc(.5*var(--content-padding)); }              
 .table__th {
-  background: color-mix(in oklab, var(--panel-background, #000) 65%, white 3%);
+  background: color-mix(in oklab, var(--primary-background-color, #000) 65%, white 3%);
   color: var(--primary-text-color);
 }
 .table__th--left  { border-top-left-radius: var(--medium-radius);  text-align: left; }
 .table__th--right { border-top-right-radius: var(--medium-radius); text-align: right; }
 .table__tr { background: transparent; }
-.table__tr.is-alt { background: color-mix(in oklab, var(--panel-background, #000) 74%, white 6%); }
+.table__tr.is-alt { background: color-mix(in oklab, var(--primary-background-color, #000) 74%, white 6%); }
 .table__td { vertical-align: middle;  word-break: break-word; }
 .table__td--right { 
   display: flex;

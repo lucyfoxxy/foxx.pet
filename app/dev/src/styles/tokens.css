@@ -2,12 +2,13 @@
   /* ====== Main Colors ====== */
   --primary-text-color:         oklch(92% 0.03 300);
 
-  --accent-color:               oklch(91% 0.0437 190);
-  --highlight-color:            oklch(83% 0.07 300);
-  --outline-color:              color-mix(in oklch, var(--highlight-color) 20%, transparent);
+  --accent-color:    oklch(89% 0.045 295); /* sanftes Lavendelblau – für Icons, Rahmen, passive Chips */
+  --highlight-color: oklch(87.891% 0.11049 310);  /* dieselbe Nuance, aber doppelt so satt – Hover, Buttons, aktive States */
 
-  --primary-background-color:   oklch(26% 0.08 300 / 0.65);
-  --secondary-background-color: oklch(20% 0.065 300 / 0.80); 
+  --outline-color:              color-mix(in oklch, var(--highlight-color) 10%, transparent);
+
+  --primary-background-color:   oklch(32% 0.075 295 / 0.65);
+  --secondary-background-color: oklch(24% 0.065 295 / 0.85); 
 
   --primary-shadow-color:       color-mix(in oklch, var(--primary-background-color) 70%, black);
   --secondary-shadow-color:     color-mix(in oklch, var(--secondary-background-color) 70%, black);
@@ -16,7 +17,10 @@
 
 
   /* ====== Decorations ====== */
-  --background-overlay:         radial-gradient(1200px 600px at 50% 10%, transparent 0%, rgba(0,0,0,.35) 60%, rgba(0,0,0,.6) 100%);
+  --background-overlay: radial-gradient(1200px 600px at 50% 10%,
+                            rgba(0, 0, 0, 0.116) 0%,
+                            rgba(46, 2, 87, 0.138) 70%,
+                            rgba(53, 6, 92, 0.136) 100%);
   
   --small-blur:                 10px;
   --medium-blur:                14px;   
@@ -31,11 +35,12 @@
   --accent-text-shadow:         0 0 11px var(--accent-shadow-color);
   --highlight-text-shadow:      0 0 9px var(--highlight-shadow-color);
 
+  --small-shadow:               0 0 6px -4px var(--secondary-shadow-color);
   --medium-shadow:              0 0 14px 4px var(--primary-shadow-color), 0 0 24px -14px var(--highlight-shadow-color);
   --large-shadow:               0 0 3px -13px var(--primary-shadow-color), 0 0 12px -4px var(--secondary-shadow-color);
 
   --focus-glow-accent:          0 0 16px -12px var(--accent-shadow-color)   , 0 0 0 1px var(--accent-color), 0 0 4px 1px var(--accent-shadow-color) ;
-  --focus-glow-highlight:       0 0 20px -12px var(--highlight-shadow-color), 0 0 0 2px var(--highlight-color), 0 0 7px 4px var(--highlight-color), inset 0 0 12px 0 var(--highlight-shadow-color);
+  --focus-glow-highlight:       0 0 18px -12px var(--highlight-shadow-color),inset 0 0 1px 1px var(--highlight-color), 0 0 2px 1px var(--highlight-shadow-color);
 
 
   /* ====== Fonts ====== */
@@ -51,7 +56,7 @@
   --small-font-size:            clamp(.98rem,  .7rem + .55vw, 1.22rem);
   --medium-font-size:           clamp(1.15rem, .82rem + .75vw, 1.4rem);
   --large-font-size:            clamp(1.25rem, .87rem + .9vw, 1.65rem);
-  --xlarge-font-size:           clamp(1.45rem, 1.1rem + 1.1vw, 2.45rem);
+  --xlarge-font-size:           clamp(1.65rem, 1.1rem + 1.1vw, 2.5rem);
 
   --xsmall-line-height:         1;
   --small-line-height:          1.5;
@@ -61,39 +66,41 @@
 
   --small-letter-spacing:       .0065em;
   --medium-letter-spacing:      .0225em;
-  --large-letter-spacing:       .0425em;
+  --large-letter-spacing:       .0525em;
   --prose-flow-spacing:         clamp(.65rem, .5rem + .3vw, .95rem);
 
 
 
   /* ====== Layout / Structures ====== */
+  --small-padding: clamp(.75rem, 1.2vw, 1rem);
+  --medium-padding: clamp(1rem, 2vw, 3rem);
+
+  --tiny-spacing: clamp(.4rem, .4rem + .15vw, .6rem);
+  --xsmall-spacing: clamp(.65rem, .5rem + .3vw, .95rem);
+  --small-spacing: clamp(.75rem, 1vw, 1.25rem);
+  --medium-spacing: clamp(1rem, 2vw, 1.75rem);
+  --large-spacing: clamp(.75rem, 3.5vw, 3rem);
+
   --container-max:              1280px;
-  --container-gap:              clamp(.75rem, 3.5vw, 2.75rem);
-  --container-padding:          max(var(--container-gap), calc((100vw - var(--container-max)) / 2));
+  --container-spacing:          var(--large-spacing);
+  --container-padding:          max(var(--large-spacing), calc((100vw - var(--container-max)) / 2));
 
-  --navbar-background:          color-mix(in oklab, var(--secondary-background-color), black 6%);
+  --navbar-padding:             var(--small-padding);
+  --navbar-spacing:             var(--large-spacing);   
+  
+  --content-background:         color-mix(in oklab, var(--secondary-background-color)60%, black 15%);          
+  --content-padding:            var(--medium-padding);
+  --content-spacing:            var(--medium-spacing);
 
-  --navbar-padding:             clamp(.75rem, 1.2vw, 1rem);
-  --navbar-margin:              0 var(--navbar-gap);
-  --navbar-gap:                 clamp(1rem, 2vw, 2rem);
-
-  --panel-background:           var(--primary-background-color); 
-  --panel-padding:              clamp(1rem, 2vw, 3rem);
-
-  --content-gap:                clamp(1rem, 2vw, 1.75rem);
-  --content-background:         color-mix(in oklab, var(--navbar-background), transparent 40%);          
-  --content-padding:            var(--panel-padding);
-  --content-margin:             clamp(1rem, 2vw, 1.75rem);
-  --content-spacing:            clamp(1rem, 2vw, 1.75rem)
-
-  --brand-size:                 clamp(360px, 50vw, 920px);
-  --brand-gap:                  calc(var(--content-gap) * .85);
-  --brand-gap-mobile:           calc(var(--content-gap) * .5);
+  --brand-size:                 clamp(360px, 55vw, 1024px);
+  --brand-gap:                  var(--small-spacing);
+  --brand-gap-mobile:           var(--xsmall-spacing);
 
   /* ====== Gallery ====== */
   --gallery-frame-size: calc(
       (var(--container-max) - 
-        (var(--container-gap) + var(--panel-padding)+var(--content-margin)+var(--content-gap)) * 2
+        (var(--container-spacing) + var(--content-padding)) * 2
+        +var(--content-spacing) * 4
       ) / 2
     );
   --thumb-size: clamp(64px, 9vw, 128px);

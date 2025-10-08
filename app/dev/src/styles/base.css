@@ -34,7 +34,7 @@ body::before{
 }
 :where(a):hover,
 :where(a):focus-visible {
-  text-shadow: var(--accent-text-shadow);
+  text-shadow: var(--sec-text-shadow);
 }
 
 img, picture, video, canvas, svg { display: block; max-inline-size: 100%; }

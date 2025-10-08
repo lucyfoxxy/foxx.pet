@@ -9,18 +9,84 @@ import '@Styles/media.css';
 import '@Styles/table.css';
 import { ASSETS } from '@Design/Assets.astro';
 
-const {
-  title = 'Faelis Paw Artistry',
-  description = 'Furry Art & Commissions',
-  url = 'https://foxx.pet',
-} = Astro.props?.meta ?? {};
+const defaultMeta = {
+  title: 'Lucy\s Cosmos',
+  description: 'A small cosmic fox on their big journey across the universe!',
+  url: 'https://foxx.pet',
+};
+
+const props = Astro.props ?? {};
+const meta = {
+  ...defaultMeta,
+  ...(props.meta ?? {}),
+};
+
+if (typeof props.title === 'string' && props.title.trim().length > 0) {
+  meta.title = props.title.trim();
+}
+
+const { title, description, url } = meta;
+const pageTitle = title;
 
 const navLinks = [
   { href: '/', label: 'Home', includeInHeader: false },
-  { href: '/galleries', label: 'Gallery', includeInHeader: true },
+  { href: '/galleries', label: 'Galleries', includeInHeader: true },
   { href: '/pricing', label: 'Pricing', includeInHeader: true },
   { href: '/imprint', label: 'Imprint', includeInHeader: true }
 ];
+
+const normalizePath = (path: string) => {
+  if (!path || path === '/') return '/';
+  return path.replace(/\/+$/, '') || '/';
+};
+
+const toTitleCase = (value: string) =>
+  value
+    .split(/[-_]/g)
+    .filter(Boolean)
+    .map((segment) => segment.charAt(0).toUpperCase() + segment.slice(1))
+    .join(' ');
+
+const normalizedCurrentPath = normalizePath(Astro.url.pathname);
+const navLabelByPath = new Map(navLinks.map((link) => [normalizePath(link.href), link.label]));
+
+const segments = normalizedCurrentPath === '/' ? [] : normalizedCurrentPath.slice(1).split('/');
+const breadcrumbs = [] as { label: string; href: string; isCurrent: boolean }[];
+
+const homeLabel = navLabelByPath.get('/') ?? 'Home';
+breadcrumbs.push({
+  label: homeLabel,
+  href: '/',
+  isCurrent: segments.length === 0,
+});
+
+const collectedSegments: string[] = [];
+segments.forEach((segment, index) => {
+  collectedSegments.push(segment);
+  const href = normalizePath(`/${collectedSegments.join('/')}`);
+  const isLast = index === segments.length - 1;
+  let label = navLabelByPath.get(href) ?? toTitleCase(segment);
+  if (isLast && pageTitle?.trim().length) {
+    label = pageTitle.trim();
+  }
+  breadcrumbs.push({
+    label,
+    href,
+    isCurrent: isLast,
+  });
+});
+
+const navIndex = navLinks.findIndex((link) => {
+  const normalizedHref = normalizePath(link.href);
+  if (normalizedHref === '/') return normalizedCurrentPath === '/';
+  return (
+    normalizedCurrentPath === normalizedHref ||
+    normalizedCurrentPath.startsWith(`${normalizedHref}/`)
+  );
+});
+
+const previousNav = navIndex > 0 ? navLinks[navIndex - 1] : undefined;
+const nextNav = navIndex >= 0 && navIndex < navLinks.length - 1 ? navLinks[navIndex + 1] : undefined;
 ---
 <html lang="en">
   <head>
@@ -60,12 +126,60 @@ const navLinks = [
 
     <div class="container">
       <main class="panel">
-        <div class="panel__bar">
-            <div class="ui-badge">Back</div>
-            <div class="ui-badge">Home</div>
-            <div class="ui-badge">Next</div>
-          </div>
+          <nav class="panel" aria-label="Breadcrumb">
+            <div class="panel__breadcrumbs-nav">
+            <ol class="panel__breadcrumbs">
+              {breadcrumbs.map((crumb, index) => (
+                <li>
+                  {crumb.isCurrent ? (
+                    <span class="panel__breadcrumbs-current" aria-current="page">{crumb.label}</span>
+                  ) : (
+                    <a href={crumb.href}>{crumb.label}</a>
+                  )}
+                  {index < breadcrumbs.length - 1 && (
+                    <span class="panel__breadcrumbs-separator" aria-hidden="true">›</span>
+                  )}
+                </li>
+              ))}
+            </ol>
+            </div>
+          
+          {(previousNav || nextNav) && (
+            <div class="panel__actions" role="navigation" aria-label="Sibling pages">
+              {previousNav && (
+                <a class="ui-chip panel__action panel__action--prev" href={previousNav.href}>
+                  <span aria-hidden="true">←</span>
+                  <span>{previousNav.label}</span>
+                </a>
+              )}
+              {nextNav && (
+                <a class="ui-chip panel__action panel__action--next" href={nextNav.href}>
+                  <span>{nextNav.label}</span>
+                  <span aria-hidden="true">→</span>
+                </a>
+              )}
+            </div>
+          )}
+          </nav>
         <slot />
+          <nav class="panel" aria-label="Breadcrumb">
+            
+            <ol class="panel__breadcrumbs">
+              {breadcrumbs.map((crumb, index) => (
+                <li>
+                  {crumb.isCurrent ? (
+                    <span class="panel__breadcrumbs-current" aria-current="page">{crumb.label}</span>
+                  ) : (
+                    <a href={crumb.href}>{crumb.label}</a>
+                  )}
+                  {index < breadcrumbs.length - 1 && (
+                    <span class="panel__breadcrumbs-separator" aria-hidden="true">›</span>
+                  )}
+                </li>
+              ))}
+            </ol>
+          </div>
+          </nav>        
       </main>
     </div>
 

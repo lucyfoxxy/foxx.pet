@@ -29,3 +29,4 @@ package-lock.json
 **/*.*~
 **/app_dev_tree.txt
 **/*.txt
+**/thumbs.db

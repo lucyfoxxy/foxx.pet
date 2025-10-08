@@ -62,19 +62,14 @@ p :where(em,i) {
 }
 
 .site-footer,
-.ui-badge { 
+.ui-badge,
+.ui-chip { 
   font-size: var(--xsmall-font-size); 
+  font-weight: var(--thin-font-weight);
+  line-height: var(--xsmall-line-height);
 }
 
 /* ====== BADGE & CHIP ====== */
-.ui-chip, 
-.ui-badge {
-  line-height: var(--xsmall-line-height);
-}
-.ui-chip {
-  font-size: var(--small-font-size);
-  font-weight: var(--thin-font-weight);
-}
 
 /* ====== HEADINGS ====== */
 :where(h1,h2,h3, .site-header__nav a) { 
@@ -99,7 +94,7 @@ p :where(em,i) {
   text-shadow: var(--primary-text-shadow);
   font-weight: var(--normal-font-weight);
   color: var(--highlight-color);
-  text-shadow: var(--highlight-text-shadow);
+  text-shadow: var(--accent-text-shadow);
 }
 
 .panel :where(h3){
@@ -107,7 +102,7 @@ p :where(em,i) {
   font-weight: var(--normal-font-weight);
   font-size: var(--medium-font-size);
 
-  text-shadow: var(--accent-text-shadow);
+  text-shadow: var(--highlight-text-shadow);
 }
 
 /* ====== PROSE & LISTEN ====== */
