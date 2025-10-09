@@ -99,8 +99,7 @@
   /* ====== Gallery ====== */
   --gallery-frame-size: calc(
       (var(--container-max) - 
-        (var(--container-spacing) + var(--content-padding)) * 2
-        +var(--content-spacing) * 4
+        (var(--container-spacing) + var(--content-padding)) * 2 + var(--content-spacing) * 4
       ) / 2
     );
   --thumb-size: clamp(64px, 9vw, 128px);
