@@ -110,7 +110,7 @@ const homeAction = showHomeAction ? (homeLink as { href: string }) : undefined;
         {navLinks
           .filter((link) => link.includeInHeader)
           .map((link) => (
-            <a href={link.href}>{link.label}</a>
+            <span class="ui-chip"><a href={link.href}>{link.label}</a></span>
           ))}
       </nav>
     </header>
@@ -138,14 +138,8 @@ const homeAction = showHomeAction ? (homeLink as { href: string }) : undefined;
 
         <nav class="is-site-nav" aria-label="Page navigation">
           <span class="ui-chip ui-chip--small">
-            <a href="#top">⇈ Page Top ↑↑</a>
-          </span>
-          <span class="ui-chip ui-chip--small-2">
-            <a href="#top">⇈ Page Top ↑↑</a>
-          </span>
-          <span class="ui-chip ui-chip--small-3">
-            <a href="#top">⇈ Page Top ↑↑</a>
-          </span>                    
+            <a href="#top">⇡ Scroll Up ⇡</a>
+          </span>                  
         </nav>
       </main>
     </div>

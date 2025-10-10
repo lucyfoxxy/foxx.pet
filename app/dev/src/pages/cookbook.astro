@@ -1,0 +1,13 @@
+---
+import Layout from '@Design/Layout.astro';
+import StoriesPage from '@Pages/CookbookPage.astro';
+import { getPageContent } from '@Content/siteContent';
+
+export const prerender = true;
+
+const content = getPageContent('cookbook');
+const meta = { title: content.title, description: content.description };
+---
+<Layout title={content.title} meta={meta}>
+  <StoriesPage />
+</Layout>

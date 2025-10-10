@@ -11,9 +11,9 @@
   align-items: center;
   vertical-align: middle; 
   text-decoration: none;
-  background: color-mix(in oklab, var(--content-background) 45%, black 5%);
-  box-shadow: var(--large-shadow);
-  backdrop-filter: blur(var(--large-blur));
+  
+  
+ 
   color: var(--highlight-color);
 }
 .ui-badge {
@@ -24,47 +24,33 @@
 }
 .ui-chip {
   gap: var(--xsmall-spacing);
-  padding: calc(var(--medium-padding)*.8);
+  padding: var(--small-padding) var(--medium-padding);
   border-radius: 999px;
-  background: color-mix(in oklab, var(--content-background) 50%, transparent 20%);
-  transition: color .12s ease, text-shadow .12s ease, transform .12s ease, box-shadow .12s ease, background .12s ease;
+  
+  
+  
+  
+
+  
+  transition: color .12s ease, text-shadow .12s ease, transform .12s ease, box-shadow .12s ease;
+}
+span.ui-chip a {
+  text-shadow: 2px 2px 3px var(--accent-shadow-color),1px 1px 10px var(--primary-shadow-color), var(--accent-text-shadow);
 }
 .ui-chip--small {
-  padding-block: var(--tiny-spacing);
+  padding: var(--small-padding) var(--medium-padding) ;
   background: transparent;
-  
-  backdrop-filter: blur(18px) saturate(0);
-
-
-  box-shadow: var(--small-shadow);
-
-}
-.ui-chip--small-2 {
-  padding-block: var(--tiny-spacing);
-  background: color-mix(in oklab, var(--accent-color) 10%, transparent);
-  
-  backdrop-filter: blur(18px) saturate(0);
-
-
-  box-shadow: var(--small-shadow);
-
-}
-.ui-chip--small-3 {
-  padding-block: var(--tiny-spacing);
-  background: transparent;
-  
   backdrop-filter: unset;
-
-
-  box-shadow: unset;
+  box-shadow: inset 0 0 0 999px oklch(72% 0.14 295 / 25%),
+  1px 1px 2px 1px color-mix(in srgb, black 10%, transparent);
 
 }
 .ui-chip:hover,
 .ui-chip:focus-visible {
-  background: color-mix(in oklab, var(--content-background) 75%, var(--highlight-color) 5%);
-  color: var(--accent-color);
-  text-shadow: var(--highlight-text-shadow);
-  box-shadow: var(--focus-glow-highlight);
+  
+  color: var(--highlight-color);
+  text-shadow: 2px 2px 3px var(--accent-color),var(--focus-glow-highlight), var(--highlight-text-shadow);
+  
 }
 
 /* ====== Contact Buttons ====== */

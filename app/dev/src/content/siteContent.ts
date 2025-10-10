@@ -34,8 +34,8 @@ export const SITE_CONTENT = {
   galleries: {
     id: 'galleries',
     href: '/galleries',
-    title: 'Galleries',
-    navLabel: 'Galleries',
+    title: 'Paw Prints 🐾',
+    navLabel: 'Paw Prints 🐾',
     includeInHeader: true,
     description: 'Here you gonna find a selection of my previous works.',
     introParagraphs: [
@@ -45,8 +45,8 @@ export const SITE_CONTENT = {
   stories: {
     id: 'stories',
     href: '/stories',
-    title: 'Stories',
-    navLabel: 'Stories',
+    title: 'Fuzzy Fops 🚀',
+    navLabel: 'Fuzzy Fops 🚀',
     includeInHeader: true,
     description: 'Narrative experiments and cosmic adventures — coming soon.',
     introParagraphs: [
@@ -74,7 +74,7 @@ export const SITE_CONTENT = {
     href: '/imprint',
     title: 'Imprint / Impressum',
     navLabel: 'Imprint',
-    includeInHeader: true,
+    includeInHeader: false,
     description: 'Legal and contact information for foxx.pet.',
     introParagraphs: [
       'In case of any suspected copyright infringement or other legal claims, you may contact us at the following addresses.',
@@ -105,6 +105,33 @@ export const SITE_CONTENT = {
       'This is a private art website. No liability for external links; operators of linked pages remain responsible for their content.',
     ],
   },
+  cookbook: {
+    id: 'cookbook',
+    href: '/cookbook',
+    title: 'Nom Noms 🍪',
+    navLabel: 'Nom Noms 🍪',
+    includeInHeader: true,
+    description: 'Baking and Cooking recipes approved by the cosmic dinner foundation will soon be published here!',
+    introParagraphs: [
+      'This is the upcoming place where you gonna find all the foxx\' recipes!',
+
+    ],
+    sections: [
+      {
+        title: 'Cakes are still baking...',
+        paragraphs: [
+          'Soon there will be a lot to munch!',
+        ],
+      },
+      {
+        title: '...eggs are still cooking',
+        paragraphs: [
+          'For now it seems you\'ll need to look somewhere else to get something delicious!',
+          'But soon, that will for sure gonna change!',
+        ],
+      },
+    ],
+  }
 } as const;
 
 type SiteContent = typeof SITE_CONTENT;

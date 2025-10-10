@@ -50,13 +50,14 @@
 .site-header__nav a {
   color: var(--accent-text-color);
   text-shadow: var(--accent-text-shadow);
-  transition: color .05s text-shadow .05s ease transform .05s ease;
+  transition: ease-in-out 2.5s text-shadow 2.5s ease-in-out transform 2.5s ease-in-out;
 }
 .site-header__nav a:hover,
 .site-header__nav a:focus-visible {   
-  transform: translateY(-1px) ;
+  transform: translateY(-1px) scale(1.05) ;
   text-shadow: var(--highlight-text-shadow);
   color: var(--highlight-color);
+  transition: ease-in-out 2.5s text-shadow 2.5s ease-in-out transform 2.5s ease-in-out;
 }
 
 .site-footer {
@@ -83,15 +84,17 @@
 }
 
 main.panel {
-  background: 
-    linear-gradient(135deg, 
-      color-mix(in oklch,oklch(70% .14 300) 15%, transparent) 
-      color-mix(in oklch, var(--highlight-color) 10%,transparent));
-  
-  backdrop-filter: blur(18px) saturate(1.25) brightness(1.55);
-  border: 4px solid var(--outline-color);
+  --panel-border-size: 0px;
+  background:
+    linear-gradient(138deg,
+      color-mix(in oklch, oklch(72% .12 300) 18%, transparent) 0%,
+      color-mix(in oklch, var(--highlight-color) 16%, transparent) 45%,
+      color-mix(in oklch, var(--highlight-shadow-color) 28%, transparent) 100%);
 
-  box-shadow: 0 10px 35px oklch(0% 0 0 / .25),inset 0 0 0 4px var(--outline-color);
+  backdrop-filter: blur(18px) saturate(1.25) brightness(1.6);
+  border: var(--panel-border-size) solid var(--outline-color);
+
+    box-shadow: 0 12px 32px oklch(0% 0 0 / .2), inset 0 0 0 var(--panel-border-size) color-mix(in srgb, var(--outline-color) 65%, transparent);
   padding: var(--content-padding);  
   -webkit-backdrop-filter: blur(var(--large-blur)); 
   border-radius: var(--large-radius);
@@ -103,8 +106,9 @@ nav.is-site-nav {
   align-items: center;
   gap: var(--small-spacing);
   
-  padding: var(--small-padding) var(--large-padding);
-  box-shadow: inset 0 0 999px 0px var(--outline-color);
+  padding: var(--medium-padding) var(--large-padding);
+  background: var(--outline-color);
+  box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--outline-color) 65%, transparent), inset 0 18px 32px -28px color-mix(in srgb, black 40%, transparent);
 }
 
 main.panel > nav.is-breadcrumbs {
@@ -112,7 +116,7 @@ main.panel > nav.is-breadcrumbs {
     margin-inline: calc(-1 * var(--content-spacing));
     border-top-left-radius: var(--small-radius);
     border-top-right-radius: var(--small-radius);
-    border-bottom: 4px solid var(--outline-color);
+    border-bottom: 4px hidden;
     justify-content: stretch;
 }
 
@@ -146,7 +150,7 @@ main.panel > nav.is-breadcrumbs .breadcrumbs-separator {
 }
 
 main.panel > nav.is-site-nav {
-    border-top: 4px solid var(--outline-color);
+    border-top: 4px hidden;
     margin-block: var(--content-spacing) calc(-1 * var(--content-spacing));
     margin-inline: calc(-1 * var(--content-spacing));
     border-bottom-left-radius: var(--small-radius);
