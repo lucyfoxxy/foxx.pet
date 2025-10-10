@@ -24,10 +24,40 @@
 }
 .ui-chip {
   gap: var(--xsmall-spacing);
-  padding: calc(var(--small-padding)*.8);
+  padding: calc(var(--medium-padding)*.8);
   border-radius: 999px;
-  background: color-mix(in oklab, var(--content-background) 70%, transparent 20%);
+  background: color-mix(in oklab, var(--content-background) 50%, transparent 20%);
   transition: color .12s ease, text-shadow .12s ease, transform .12s ease, box-shadow .12s ease, background .12s ease;
+}
+.ui-chip--small {
+  padding-block: var(--tiny-spacing);
+  background: transparent;
+  
+  backdrop-filter: blur(18px) saturate(0);
+
+
+  box-shadow: var(--small-shadow);
+
+}
+.ui-chip--small-2 {
+  padding-block: var(--tiny-spacing);
+  background: color-mix(in oklab, var(--accent-color) 10%, transparent);
+  
+  backdrop-filter: blur(18px) saturate(0);
+
+
+  box-shadow: var(--small-shadow);
+
+}
+.ui-chip--small-3 {
+  padding-block: var(--tiny-spacing);
+  background: transparent;
+  
+  backdrop-filter: unset;
+
+
+  box-shadow: unset;
+
 }
 .ui-chip:hover,
 .ui-chip:focus-visible {
@@ -52,7 +82,7 @@
   align-items: center;
   justify-content: center;
   gap: var(--small-spacing);
-  padding: var(--small-padding) var(--medium-padding);
+  padding: var(--medium-padding) var(--large-padding);
   border-radius: var(--large-radius);
   background: var(--bg);
   color: var(--fg);

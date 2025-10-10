@@ -1,14 +1,17 @@
 :root { 
   /* ====== Main Colors ====== */
-  --primary-text-color:         oklch(92% 0.03 300);
+  --primary-text-color:         oklch(96% 0.03 310);
+  --accent-text-color:       color-mix(in oklch, var(--primary-text-color) 85%, var(--accent-color));
+  --highlight-text-color:       color-mix(in oklch, var(--primary-text-color) 25%, var(--higlight-color));
 
-  --accent-color:    oklch(89% 0.045 295); /* sanftes Lavendelblau – für Icons, Rahmen, passive Chips */
-  --highlight-color: oklch(87.891% 0.11049 310);  /* dieselbe Nuance, aber doppelt so satt – Hover, Buttons, aktive States */
+  --accent-color:    oklch(89% 0.10 295); /* sanftes Lavendelblau – für Icons, Rahmen, passive Chips */
+  --highlight-color: oklch(93% 0.15 310);  /* dieselbe Nuance, aber doppelt so satt – Hover, Buttons, aktive States */
 
-  --outline-color:              color-mix(in oklch, var(--highlight-color) 10%, transparent);
+  --outline-color:              color-mix(in oklch, var(--highlight-color) 5%, transparent);
 
   --primary-background-color:   oklch(32% 0.075 295 / 0.65);
-  --secondary-background-color: oklch(24% 0.065 295 / 0.85); 
+  --secondary-background-color: oklch(24% 0.065 295 / 0.95); 
+  --content-background:         color-mix(in oklab, var(--secondary-background-color) 15%, black 15%); 
 
   --primary-shadow-color:       color-mix(in oklch, var(--primary-background-color) 70%, black);
   --secondary-shadow-color:     color-mix(in oklch, var(--secondary-background-color) 70%, black);
@@ -18,9 +21,9 @@
 
   /* ====== Decorations ====== */
   --background-overlay: radial-gradient(1200px 600px at 50% 10%,
-                            rgba(0, 0, 0, 0.116) 0%,
-                            rgba(46, 2, 87, 0.138) 70%,
-                            rgba(53, 6, 92, 0.136) 100%);
+                            rgba(0, 0, 0, 0.1) 0%,
+                            rgba(46, 2, 87, 0.1) 70%,
+                            rgba(53, 6, 92, 0.1) 100%);
   
   --small-blur:                 10px;
   --medium-blur:                14px;   
@@ -30,14 +33,14 @@
   --medium-radius:              14px;
   --large-radius:               18px;
  
-  --primary-text-shadow:        0 0 10px var(--primary-background-color),0 0 4px color-mix(in oklab, var(--highlight-color) 60%, transparent 10%);
-  --secondary-text-shadow:      0 0 10px var(--primary-background-color),0 0 3px var(--highlight-color);
-  --accent-text-shadow:         0 0 11px var(--accent-shadow-color);
-  --highlight-text-shadow:      0 0 9px var(--highlight-shadow-color);
+  --primary-text-shadow:        0 0 9px var(--primary-background-color),0 0 4px color-mix(in oklab, var(--highlight-color) 60%, transparent 10%);
+  --secondary-text-shadow:      0 0 9px var(--primary-background-color),0 0 3px var(--highlight-color);
+  --accent-text-shadow:         0 0 10px var(--accent-shadow-color);
+  --highlight-text-shadow:      0 0 14px var(--highlight-shadow-color);
 
   --small-shadow:               0 0 6px -4px var(--secondary-shadow-color);
-  --medium-shadow:              0 0 14px 4px var(--primary-shadow-color), 0 0 24px -14px var(--highlight-shadow-color);
-  --large-shadow:               0 0 3px -13px var(--primary-shadow-color), 0 0 12px -4px var(--secondary-shadow-color);
+  --medium-shadow:              0 0 28px -2px var(--primary-shadow-color);
+  --large-shadow:               0 0 3px -13px var(--primary-shadow-color);
 
   --focus-glow-accent:          0 0 16px -12px var(--accent-shadow-color)   , 0 0 0 1px var(--accent-color), 0 0 4px 1px var(--accent-shadow-color) ;
   --focus-glow-highlight:       0 0 18px -12px var(--highlight-shadow-color),inset 0 0 1px 1px var(--highlight-color), 0 0 2px 1px var(--highlight-shadow-color);
@@ -54,9 +57,9 @@
 
   --xsmall-font-size:           clamp(.82rem, .48rem + .35vw, 1rem);
   --small-font-size:            clamp(.98rem,  .7rem + .55vw, 1.22rem);
-  --medium-font-size:           clamp(1.15rem, .82rem + .75vw, 1.4rem);
-  --large-font-size:            clamp(1.25rem, .87rem + .9vw, 1.65rem);
-  --xlarge-font-size:           clamp(1.65rem, 1.1rem + 1.1vw, 2.5rem);
+  --medium-font-size:           clamp(1.22rem, .82rem + .75vw, 1.55rem);
+  --large-font-size:            clamp(1.65rem, .9rem + 1vw, 1.85rem);
+  --xlarge-font-size:           clamp(2.5rem, 2.55rem + 2.5vw, 3.75rem);
 
   --xsmall-line-height:         1;
   --small-line-height:          1.5;
@@ -72,8 +75,9 @@
 
 
   /* ====== Layout / Structures ====== */
-  --small-padding: clamp(.75rem, 1.2vw, 1rem);
-  --medium-padding: clamp(1rem, 2vw, 3rem);
+  --small-padding: clamp(.35rem, .3vw, .5rem);
+  --medium-padding: clamp(.75rem, 1.2vw, 1rem);
+  --large-padding: clamp(1rem, 2vw, 3rem);
 
   --tiny-spacing: clamp(.4rem, .4rem + .15vw, .6rem);
   --xsmall-spacing: clamp(.65rem, .5rem + .3vw, .95rem);
@@ -85,11 +89,12 @@
   --container-spacing:          var(--large-spacing);
   --container-padding:          max(var(--large-spacing), calc((100vw - var(--container-max)) / 2));
 
-  --navbar-padding:             var(--small-padding);
+  --navbar-padding:             var(--medium-padding);
   --navbar-spacing:             var(--large-spacing);   
   
-  --content-background:         color-mix(in oklab, var(--secondary-background-color)60%, black 15%);          
-  --content-padding:            var(--medium-padding);
+  --panel-bar-padding:          var(--small-padding);     
+  
+  --content-padding:            var(--large-padding);
   --content-spacing:            var(--medium-spacing);
 
   --brand-size:                 clamp(360px, 55vw, 1024px);

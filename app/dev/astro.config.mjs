@@ -5,7 +5,11 @@ import 'dotenv/config';
 import goatcounterInline from './integrations/goatcounter-inline.js';
 
 export default defineConfig({
+  server: { host: true, port: 4321 },
   vite: {
+    server: {
+      hmr: { host: 'dev.foxx.pet', protocol: 'wss', clientPort: 443 }
+    },
     build: {
       assetsInlineLimit: 0
     },             

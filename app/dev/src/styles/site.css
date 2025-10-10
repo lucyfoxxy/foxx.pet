@@ -14,10 +14,14 @@
   align-items: center;
   flex-wrap: nowrap;
   padding: var(--navbar-padding);
-  background: var(--secondary-background-color);
+  background: 
+      
+
+  linear-gradient(135deg, color-mix(in oklab,var(--primary-shadow-color)55%,black 4%),var(--content-background) );
+  
   box-shadow: var(--medium-shadow);
-  backdrop-filter: blur(var(--medium-blur));
-  -webkit-backdrop-filter: blur(var(--medium-blur));
+  backdrop-filter: blur(var(--large-blur)) saturate(1.25) brightness(1.85);
+  -webkit-backdrop-filter: blur(var(--large-blur));
   outline: 1px solid var(--outline-color);
   margin-inline: 0;
 }
@@ -44,15 +48,15 @@
   gap: var(--navbar-spacing); 
 }
 .site-header__nav a {
-  color: var(--highlight-color);
+  color: var(--accent-text-color);
   text-shadow: var(--accent-text-shadow);
-  transition: color .03s text-shadow .03s ease;
+  transition: color .05s text-shadow .05s ease transform .05s ease;
 }
 .site-header__nav a:hover,
 .site-header__nav a:focus-visible {   
   transform: translateY(-1px) ;
   text-shadow: var(--highlight-text-shadow);
-  color: var(--accent-color)
+  color: var(--highlight-color);
 }
 
 .site-footer {
@@ -79,29 +83,36 @@
 }
 
 main.panel {
-  padding: var(--content-padding);
-  background: var(--primary-background-color);
-  backdrop-filter: blur(var(--large-blur));
+  background: 
+    linear-gradient(135deg, 
+      color-mix(in oklch,oklch(70% .14 300) 15%, transparent) 
+      color-mix(in oklch, var(--highlight-color) 10%,transparent));
+  
+  backdrop-filter: blur(18px) saturate(1.25) brightness(1.55);
+  border: 4px solid var(--outline-color);
+
+  box-shadow: 0 10px 35px oklch(0% 0 0 / .25),inset 0 0 0 4px var(--outline-color);
+  padding: var(--content-padding);  
   -webkit-backdrop-filter: blur(var(--large-blur)); 
   border-radius: var(--large-radius);
-  box-shadow: var(--large-shadow);
-  outline: 2px solid var(--outline-color);
+  
 }
 nav.is-breadcrumbs,
 nav.is-site-nav {
   display: flex;
   align-items: center;
   gap: var(--small-spacing);
-  background: color-mix(in oklab, var(--secondary-background-color) 10%, transparent);
-  padding: var(--small-padding) var(--medium-padding);
-  box-shadow: var(--small-shadow);
+  
+  padding: var(--small-padding) var(--large-padding);
+  box-shadow: inset 0 0 999px 0px var(--outline-color);
 }
 
 main.panel > nav.is-breadcrumbs {
     margin-block: calc(-1 * var(--content-spacing))  var(--content-spacing);
     margin-inline: calc(-1 * var(--content-spacing));
-    border-top-left-radius: var(--medium-radius);
-    border-top-right-radius: var(--medium-radius);
+    border-top-left-radius: var(--small-radius);
+    border-top-right-radius: var(--small-radius);
+    border-bottom: 4px solid var(--outline-color);
     justify-content: stretch;
 }
 
@@ -135,15 +146,27 @@ main.panel > nav.is-breadcrumbs .breadcrumbs-separator {
 }
 
 main.panel > nav.is-site-nav {
+    border-top: 4px solid var(--outline-color);
     margin-block: var(--content-spacing) calc(-1 * var(--content-spacing));
     margin-inline: calc(-1 * var(--content-spacing));
-    border-bottom-left-radius: var(--medium-radius);
-    border-bottom-right-radius: var(--medium-radius);
+    border-bottom-left-radius: var(--small-radius);
+    border-bottom-right-radius: var(--small-radius);
+    
     justify-content: center;
 }
-.panel :where(p, .prose) { hyphens: auto; }
+.panel :where(p, .prose) { 
+  hyphens: auto; 
+}
 
 .container > .panel {
   max-width: var(--container-max);
   margin-inline: auto;
+}
+
+
+/* Karten bleiben ruhiger/dunkler, damit nichts “dopplet” wirkt */
+.cosmic-card {
+
+  
+
 }

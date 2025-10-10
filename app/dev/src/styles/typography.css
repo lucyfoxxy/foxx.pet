@@ -57,7 +57,7 @@ p :where(em,i) {
 }
 
 .site-header__nav a {
-  font-weight: var(--thick-font-weight);
+  font-weight: var(--bold-font-weight);
   font-size: var(--medium-font-size);
 }
 
@@ -74,6 +74,7 @@ p :where(em,i) {
 /* ====== HEADINGS ====== */
 :where(h1,h2,h3, .site-header__nav a) { 
   font-family: var(--secondary-font-family); 
+  font-variant: small-caps;
 }
 
 .panel :where(h1,h2,h3,.prose p) { 
@@ -92,13 +93,13 @@ p :where(em,i) {
   font-size: var(--large-font-size);
   line-height: var(--large-line-height);
   text-shadow: var(--primary-text-shadow);
-  font-weight: var(--normal-font-weight);
-  color: var(--highlight-color);
+  font-weight: var(--bold-font-weight);
+  
   text-shadow: var(--accent-text-shadow);
 }
 
 .panel :where(h3){
-  color: var(--highlight-color);
+  
   font-weight: var(--normal-font-weight);
   font-size: var(--medium-font-size);
 
@@ -122,7 +123,7 @@ p :where(em,i) {
   margin: var(--prose-flow-spacing) 0;
   padding: calc(var(--prose-flow-spacing) * .75) var(--prose-flow-spacing);
   border-left: 3px solid var(--accent-color);
-  background: color-mix(in oklab, var(--content-background), white 10%);
+  background: color-mix(in oklab, var(--content-background) 4%, transparent);
   border-radius: .5rem;
 }
 

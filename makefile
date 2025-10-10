@@ -71,7 +71,15 @@ prod-build:
 	@echo "🏗️  Building PROD"
 	npm run build:prod
 	@echo "✅ PROD build done"
+dev-dev:
+	@echo "🏗️  dev server started for DEV"
+	npm run dev:dev
+	@echo "✅ dev server ended"
 
+prod-dev:
+	@echo "🏗️  dev server started for PROD"
+	npm run prod:dev
+	@echo "✅ dev server ended"
 # ===== Deploy (nur rsync) =====
 dev-deploy:
 	@echo "🚚 Deploying DEV → $(DEV_PUB)"

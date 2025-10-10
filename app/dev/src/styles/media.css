@@ -55,7 +55,7 @@
   gap: var(--xsmall-spacing); 
   background: var(--content-background);
   border-radius: var(--medium-radius);
-  padding: var(--small-padding);
+  padding: var(--medium-padding);
   box-shadow: var(--large-shadow);
   outline: 1px solid var(--outline-color);
   transition: transform .25s ease, box-shadow .25s;

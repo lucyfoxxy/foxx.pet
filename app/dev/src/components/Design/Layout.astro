@@ -136,10 +136,16 @@ const homeAction = showHomeAction ? (homeLink as { href: string }) : undefined;
 
         <slot />
 
-        <nav class="is-page-nav" aria-label="Page navigation">
-          <span class="ui-chip">
+        <nav class="is-site-nav" aria-label="Page navigation">
+          <span class="ui-chip ui-chip--small">
             <a href="#top">⇈ Page Top ↑↑</a>
           </span>
+          <span class="ui-chip ui-chip--small-2">
+            <a href="#top">⇈ Page Top ↑↑</a>
+          </span>
+          <span class="ui-chip ui-chip--small-3">
+            <a href="#top">⇈ Page Top ↑↑</a>
+          </span>                    
         </nav>
       </main>
     </div>
