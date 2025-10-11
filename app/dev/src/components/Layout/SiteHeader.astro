@@ -15,8 +15,11 @@ type Props = {
 const { navLinks = [] } = (Astro.props ?? {}) as Props;
 ---
 
-<header class="site-header">
-  <a href="/"><img class="site-header__logo" src={ASSETS.logo_header.src} alt="foxx.pet" /></a>
+<header id="site-header" class={`site-header ${Astro.request.url.pathname === '/' ? 'is-home' : 'is-compact'}`}>
+  <a class="site-header__brand" aria-label="Home" href="/">
+   <img class="site-header__logo site-header__logo--compact" src={ASSETS.logo_header.src} alt="foxx.pet" />
+   <img class="site-header__logo site-header__logo--hero" src={ASSETS.logo_hero.src} alt="foxx.pet" />
+  </a>
   <nav class="site-header__nav">
     {navLinks
       .filter((link) => link.includeInHeader)
@@ -25,6 +28,6 @@ const { navLinks = [] } = (Astro.props ?? {}) as Props;
       ))
     }
   </nav>
-  
+ {Astro.request.url.pathname === '/' && <div id="hero-sentinel" aria-hidden="true"></div>}  
 </header>
 

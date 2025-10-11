@@ -5,7 +5,7 @@ const content = getPageContent('cookbook');
 const introParagraphs = content.introParagraphs ?? [content.description];
 const sections = content.sections ?? [];
 ---
-<Fragment slot="panel:inside">
+
   <section class="content-head content-card__title section">
     <h1>{content.title}</h1>
     <div class="prose">
@@ -29,4 +29,3 @@ const sections = content.sections ?? [];
       ))}
     </section>
   )}
-</Fragment>
