@@ -1,5 +1,7 @@
-/* ====== TABLES / LISTS STRUCTURE =========================== */
-/* ====== Depends on: tokens.css (vars), site.css (layout) ====== */
+/* ============================================ */
+/* ======== TABLES & DEFINITION LISTS ========= */
+/* ====== Depends on: tokens, site, typography ====== */
+/* ============================================ */
 
 /* ====== DEFINITION LIST ====== */
 .deflist {
@@ -7,46 +9,84 @@
   grid-template-columns: auto 1fr;
   gap: .35rem .75rem;
   margin: .5rem 0 0;
-  text-align: left;
+  text-align: start;
 }
-.deflist__term {  opacity: .8;  white-space: nowrap;  }
-.deflist__desc {  margin: 0;  word-break: break-word; }
 
-/* ====== TABLE ====== */
-.table__wrap { 
-  overflow-x: clip; 
-  overflow-y: visible; 
-  border-radius: var(--medium-radius); 
-  scrollbar-gutter: stable both-edges; }
+.deflist__term {
+  opacity: .8;
+  white-space: nowrap;
+}
+
+.deflist__desc {
+  margin: 0;
+  word-break: break-word;
+}
+
+/* ====== TABLE WRAPPER ====== */
+.table__wrap {
+  overflow-x: clip;
+  overflow-y: visible;
+  border-radius: var(--medium-radius);
+  scrollbar-gutter: stable both-edges;
+}
+
 .table {
-  width: 100%;
-  min-width: 0;                 
+  inline-size: 100%;
+  min-inline-size: 0;
   border-collapse: separate;
   border-spacing: 0;
   table-layout: fixed;
 }
+
 .table__th,
 .table__td {
   padding-block: var(--xsmall-spacing);
-  padding-inline: calc(.5*var(--content-padding)); }              
+  padding-inline: calc(.5 * var(--content-padding));
+}
+
 .table__th {
   background: color-mix(in oklab, var(--primary-background-color, #000) 65%, white 3%);
   color: var(--primary-text-color);
 }
-.table__th--left  { border-top-left-radius: var(--medium-radius);  text-align: left; }
-.table__th--right { border-top-right-radius: var(--medium-radius); text-align: right; }
-.table__tr { background: transparent; }
-.table__tr.is-alt { background: color-mix(in oklab, var(--primary-background-color, #000) 74%, white 6%); }
-.table__td { vertical-align: middle;  word-break: break-word; }
-.table__td--right { 
+
+.table__th--left {
+  border-top-left-radius: var(--medium-radius);
+  text-align: start;
+}
+
+.table__th--right {
+  border-top-right-radius: var(--medium-radius);
+  text-align: end;
+}
+
+.table__tr {
+  background: transparent;
+}
+
+.table__tr.is-alt {
+  background: color-mix(in oklab, var(--primary-background-color, #000) 74%, white 6%);
+}
+
+.table__td {
+  vertical-align: middle;
+  word-break: break-word;
+}
+
+.table__td--right {
   display: flex;
   align-items: center;
   justify-content: flex-end;
   gap: var(--xsmall-spacing);
-  white-space: nowrap; }
-.table__price { display: inline-block; }
-.table__unit { opacity: .7; }
+  white-space: nowrap;
+}
 
+.table__price {
+  display: inline-block;
+}
+
+.table__unit {
+  opacity: .7;
+}
 
 @media (max-width: 430px) {
   .table__td--right {
@@ -54,5 +94,8 @@
     align-items: flex-end;
     gap: .25rem;
   }
-  .table__price { display: block; }
+
+  .table__price {
+    display: block;
+  }
 }

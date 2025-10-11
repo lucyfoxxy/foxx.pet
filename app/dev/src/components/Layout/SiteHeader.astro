@@ -1,0 +1,30 @@
+---
+import { ASSETS } from '@Layout/SiteAssets/Images.astro';
+
+type NavLink = {
+  href: string;
+  label: string;
+  includeInHeader?: boolean;
+};
+
+type Props = {
+  navLinks: NavLink[];
+  meta?: { title?: string; description?: string; url?: string };
+};
+
+const { navLinks = [] } = (Astro.props ?? {}) as Props;
+---
+
+<header class="site-header">
+  <a href="/"><img class="site-header__logo" src={ASSETS.logo_header.src} alt="foxx.pet" /></a>
+  <nav class="site-header__nav">
+    {navLinks
+      .filter((link) => link.includeInHeader)
+      .map((link) => (
+        <span class="ui-chip"><a href={link.href}>{link.label}</a></span>
+      ))
+    }
+  </nav>
+  
+</header>
+

@@ -10,33 +10,32 @@ const { categories } = Astro.props as { categories: CategoryEntry[] };
 const content = getPageContent('galleries');
 const introParagraphs = content.introParagraphs ?? [content.description];
 ---
-<section class="content-head content-card__title section">
-  <h1>{content.title}</h1>
-  <div class="prose">
-    {introParagraphs.map((paragraph) => (
-      <p>{paragraph}</p>
-    ))}
-  </div>
-</section>
-
-<section class="content-layout section">
-  <div class="media-galleries">
-    
-      {categories.map(({ slug, title }) => (
-        <a class="media-galleries__card" href={`/galleries/${slug}`} aria-label={`Open ${title}`}>
-          <div class="content-card__title">
-            <h2>{title}</h2>
-          </div>
-          <div class="media-galleries__thumb" data-slug={slug}></div>        
-        </a>
+<Fragment slot="panel:inside">
+  <section class="content-head content-card__title section">
+    <h1>{content.title}</h1>
+    <div class="prose">
+      {introParagraphs.map((paragraph) => (
+        <p>{paragraph}</p>
       ))}
-    
-  </div>
-</section>
+    </div>
+  </section>
 
-<script>
-  import initGalleryCovers from '@Scripts/galleryOverview.js';
-  import { runOnReady } from '@Scripts/utils/_runOnReady.js';
+  <section class="content-layout section">
+    <div class="media-galleries">
+        {categories.map(({ slug, title }) => (
+          <a class="media-galleries__card" href={`/galleries/${slug}`} aria-label={`Open ${title}`}>
+            <div class="content-card__title">
+              <h2>{title}</h2>
+            </div>
+            <div class="media-galleries__thumb" data-slug={slug}></div>        
+          </a>
+        ))}
+    </div>
+  </section>
 
-  runOnReady(initGalleryCovers);
-</script>
+  <script>
+    import initGalleryCovers from '@Scripts/galleryOverview.js';
+    import { runOnReady } from '@Scripts/utils/_runOnReady.js';
+    runOnReady(initGalleryCovers);
+  </script>
+</Fragment>

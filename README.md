@@ -75,7 +75,7 @@ Typography tokens are centralised in [`app/dev/src/styles/tokens.css`](app/dev/s
 - **Secondary font family** – `Fuzzy Bubbles`, falling back to the primary stack. Applied to display elements such as headings, navigation links, pricing table highlights, and accent chips.
 - **Font weights** – Normal text uses `var(--normal-font-weight)` (400) and emphasis uses `var(--bold-font-weight)` (700).
 
-Fonts are preloaded in the shared layout (`@Design/Layout.astro`) to avoid layout shifts.
+Fonts are preloaded in the shared layout (`@Layout/Main.astro`) to avoid layout shifts.
 
 ### Type scale tokens
 

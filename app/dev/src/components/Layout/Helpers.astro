@@ -1,0 +1,24 @@
+---
+type Props = {
+  enableAnalytics: boolean;
+  goatCounterBase?: string;
+  goatCounterScriptSrc: string;
+};
+
+const {
+  enableAnalytics = false,
+  goatCounterBase = '',
+  goatCounterScriptSrc = 'https://gc.zgo.at/count.js',
+} = (Astro.props ?? {}) as Partial<Props>;
+---
+
+<script>
+  const yearEl = document.querySelector('[data-current-year]');
+  if (yearEl) {
+    yearEl.textContent = new Date().getFullYear().toString();
+  }
+</script>
+
+{enableAnalytics && (
+  <script data-goatcounter={`${goatCounterBase}/count`} async src={goatCounterScriptSrc}></script>
+)}

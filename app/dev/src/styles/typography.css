@@ -36,11 +36,10 @@ body {
   line-height: var(--small-line-height);
   letter-spacing: var(--small-letter-spacing);
   color: var(--primary-text-color);
-  text-decoration: none;
 }
 
-p :where(em,i) { 
-  font-style: italic; 
+p :where(em, i) {
+  font-style: italic;
   font-weight: var(--thick-font-weight);
 }
 
@@ -58,27 +57,25 @@ p :where(em,i) {
 
 .site-header__nav a {
   font-weight: var(--bold-font-weight);
-  font-size: var(--large-font-size);
+  font-size: var(--medium-font-size);
 }
 
 .site-footer,
 .ui-badge,
-.ui-chip { 
-  font-size: var(--xsmall-font-size); 
+.ui-chip {
+  font-size: var(--xsmall-font-size);
   font-weight: var(--thin-font-weight);
   line-height: var(--xsmall-line-height);
 }
 
-/* ====== BADGE & CHIP ====== */
-
 /* ====== HEADINGS ====== */
-:where(h1,h2,h3, .site-header__nav a) { 
-  font-family: var(--secondary-font-family); 
+:where(h1, h2, h3, .site-header__nav a) {
+  font-family: var(--secondary-font-family);
   font-variant: small-caps;
 }
 
-.panel :where(h1,h2,h3,.prose p) { 
-  margin: 0; 
+.panel :where(h1, h2, h3, .prose p) {
+  margin: 0;
 }
 
 .panel :where(h1) {
@@ -89,20 +86,16 @@ p :where(em,i) {
   text-shadow: var(--secondary-text-shadow);
 }
 
-.panel :where(h2) { 
+.panel :where(h2) {
   font-size: var(--large-font-size);
   line-height: var(--large-line-height);
-  text-shadow: var(--primary-text-shadow);
   font-weight: var(--bold-font-weight);
-  
   text-shadow: var(--accent-text-shadow);
 }
 
-.panel :where(h3){
-  
+.panel :where(h3) {
   font-weight: var(--normal-font-weight);
   font-size: var(--medium-font-size);
-
   text-shadow: var(--highlight-text-shadow);
 }
 
@@ -111,15 +104,15 @@ p :where(em,i) {
   margin: 0 0 var(--prose-flow-spacing);  
 }
 
-.panel :where(ul,ol) {
+.panel :where(ul, ol) {
   padding-inline-start: 1.2rem;
   margin: var(--prose-flow-spacing) 0;
 }
-.panel :where(li) {  
-  margin: calc(var(--prose-flow-spacing) * .35) 0;  
+.panel :where(li) {
+  margin: calc(var(--prose-flow-spacing) * .35) 0;
 }
 
-.panel :where(blockquote){
+.panel :where(blockquote) {
   margin: var(--prose-flow-spacing) 0;
   padding: calc(var(--prose-flow-spacing) * .75) var(--prose-flow-spacing);
   border-left: 3px solid var(--accent-color);

@@ -5,27 +5,28 @@ const content = getPageContent('cookbook');
 const introParagraphs = content.introParagraphs ?? [content.description];
 const sections = content.sections ?? [];
 ---
-
-<section class="content-head content-card__title section">
-  <h1>{content.title}</h1>
-  <div class="prose">
-    {introParagraphs.map((paragraph) => (
-      <p>{paragraph}</p>
-    ))}
-  </div>
-</section>
-
-{sections.length > 0 && (
-  <section class="content-layout section">
-    {sections.map((section) => (
-      <section class="content-card" key={section.title}>
-        <h2>{section.title}</h2>
-        <div class="prose">
-          {section.paragraphs.map((paragraph) => (
-            <p>{paragraph}</p>
-          ))}
-        </div>
-      </section>
-    ))}
+<Fragment slot="panel:inside">
+  <section class="content-head content-card__title section">
+    <h1>{content.title}</h1>
+    <div class="prose">
+      {introParagraphs.map((paragraph) => (
+        <p>{paragraph}</p>
+      ))}
+    </div>
   </section>
-)}
+
+  {sections.length > 0 && (
+    <section class="content-layout section">
+      {sections.map((section) => (
+        <section class="content-card" key={section.title}>
+          <h2>{section.title}</h2>
+          <div class="prose">
+            {section.paragraphs.map((paragraph) => (
+              <p>{paragraph}</p>
+            ))}
+          </div>
+        </section>
+      ))}
+    </section>
+  )}
+</Fragment>

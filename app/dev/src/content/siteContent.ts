@@ -34,8 +34,8 @@ export const SITE_CONTENT = {
   galleries: {
     id: 'galleries',
     href: '/galleries',
-    title: 'Paw Prints 🐾',
-    navLabel: 'Paw Prints 🐾',
+    title: 'Paw\u202FPrints\u202F🐾',
+    navLabel: 'Paw\u202FPrints\u202F🐾',
     includeInHeader: true,
     description: 'Here you gonna find a selection of my previous works.',
     introParagraphs: [
@@ -45,8 +45,8 @@ export const SITE_CONTENT = {
   stories: {
     id: 'stories',
     href: '/stories',
-    title: 'Fuzzy Fops 🚀',
-    navLabel: 'Fuzzy Fops 🚀',
+    title: 'Fuzzy\u202FFops\u202F🚀',
+    navLabel: 'Fuzzy\u202FFops\u202F🚀',
     includeInHeader: true,
     description: 'Narrative experiments and cosmic adventures — coming soon.',
     introParagraphs: [
@@ -108,8 +108,8 @@ export const SITE_CONTENT = {
   cookbook: {
     id: 'cookbook',
     href: '/cookbook',
-    title: 'Nom Noms 🍪',
-    navLabel: 'Nom Noms 🍪',
+    title: 'Nom\u202FNoms\u202F🍪',
+    navLabel: 'Nom\u202FNoms\u202F🍪',
     includeInHeader: true,
     description: 'Baking and Cooking recipes approved by the cosmic dinner foundation will soon be published here!',
     introParagraphs: [

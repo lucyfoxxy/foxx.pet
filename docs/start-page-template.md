@@ -10,7 +10,7 @@ The `StartPage.astro` component (located at `app/dev/src/components/Pages/StartP
 
 ```astro
 ---
-import Layout from '@Design/Layout.astro';
+import Layout from '@Layout/Main.astro';
 import StartPage, { defaults } from '@Pages/StartPage.astro';
 
 const myContent = {
@@ -66,7 +66,7 @@ If you also maintain the production workspace, duplicate the file inside `app/pr
 | `hero` | `{ mascot: { src, alt? }, logo: { src, alt } }` | Controls the masthead artwork. Provide project-relative asset paths or external URLs. |
 | `intro` | `{ heading, paragraphs[], signature }` | Primary welcome copy. Each string inside `paragraphs` is rendered as a `<p>` and can include inline HTML. |
 | `gallery` | `{ slug, heading?, autoplay?, interval?, random? }` | Configures the preview gallery hook. Supply your own slug to connect a different media manifest. |
-| `links` | `Array<{ href, label, kind }>` | Contact buttons rendered at the bottom of the page. `kind` must be one of the icons exposed by `@Design/Icons.astro`. |
+| `links` | `Array<{ href, label, kind }>` | Contact buttons rendered at the bottom of the page. `kind` must be one of the icons exposed by `@Layout/Icons.astro`. |
 | `headings` | `Partial<{ welcome, preview, contact }>` | Overrides for the section headings while keeping the original structure intact. |
 
 Remember to preload any new hero image via the `<head>` slot or by pointing `hero.mascot.src` at an asset handled by Astro.

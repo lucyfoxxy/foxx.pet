@@ -1,0 +1,178 @@
+---
+import '@Styles/tokens.css';
+import '@Styles/base.css';
+import '@Styles/typography.css';
+import '@Styles/site.css';
+import '@Styles/content.css';
+import '@Styles/ui.css';
+import '@Styles/media.css';
+import '@Styles/table.css';
+
+import { ASSETS } from '@Layout/SiteAssets/Images.astro';
+import { findPageByHref, getNavigationLinks, getPageContent } from '@Content/siteContent';
+import Head from '@Layout/Head.astro';
+import SiteHeader from '@Layout/SiteHeader.astro';
+import SiteFooter from '@Layout/SiteFooter.astro';
+import Helpers from '@Layout/Helpers.astro';
+
+// ---------------------------------------------------------------------------
+// Types & helpers
+// ---------------------------------------------------------------------------
+type NavLink = ReturnType<typeof getNavigationLinks>[number];
+
+type Breadcrumb = {
+  label: string;
+  href: string;
+  isCurrent: boolean;
+};
+
+type LayoutMeta = {
+  title: string;
+  description: string;
+  url: string;
+};
+
+type LayoutProps = {
+  title?: string;
+  meta?: Partial<LayoutMeta>;
+};
+
+const normalizePath = (path: string) => {
+  if (!path || path === '/') return '/';
+  return path.replace(/\/+$/, '') || '/';
+};
+
+const toTitleCase = (value: string) =>
+  value
+    .split(/[-_]/g)
+    .filter(Boolean)
+    .map((segment) => segment.charAt(0).toUpperCase() + segment.slice(1))
+    .join(' ');
+
+const buildBreadcrumbs = ({
+  currentPath,
+  navLinks,
+  pageTitle,
+}: {
+  currentPath: string;
+  navLinks: NavLink[];
+  pageTitle: string;
+}): Breadcrumb[] => {
+  const normalizedCurrentPath = normalizePath(currentPath);
+  const navLabelByPath = new Map(navLinks.map((link) => [normalizePath(link.href), link.label]));
+  const segments = normalizedCurrentPath === '/' ? [] : normalizedCurrentPath.slice(1).split('/');
+  const collectedSegments: string[] = [];
+  const homeLink = findPageByHref('/') ?? { href: '/', navLabel: 'Home ↩', title: 'Home ↩' };
+  const homeLabel = (homeLink as { navLabel?: string; title?: string }).navLabel ?? homeLink.title ?? 'Home ↩';
+
+  const crumbs: Breadcrumb[] = [
+    {
+      label: homeLabel,
+      href: '/',
+      isCurrent: segments.length === 0,
+    },
+  ];
+
+  segments.forEach((segment, index) => {
+    collectedSegments.push(segment);
+    const href = normalizePath(`/${collectedSegments.join('/')}`);
+    const isLast = index === segments.length - 1;
+    let label = navLabelByPath.get(href) ?? toTitleCase(segment);
+    if (isLast && pageTitle?.trim().length) {
+      label = pageTitle.trim();
+    }
+    crumbs.push({
+      label,
+      href,
+      isCurrent: isLast,
+    });
+  });
+
+  return crumbs;
+};
+
+// ---------------------------------------------------------------------------
+// Metadata setup
+// ---------------------------------------------------------------------------
+const homePage = getPageContent('home');
+const defaultMeta: LayoutMeta = {
+  title: homePage.title,
+  description: homePage.description,
+  url: 'https://foxx.pet',
+};
+
+const props = (Astro.props ?? {}) as LayoutProps;
+const meta: LayoutMeta = {
+  ...defaultMeta,
+  ...(props.meta ?? {}),
+  title: props.title?.trim() || props.meta?.title?.trim() || defaultMeta.title,
+};
+
+const { title, description, url } = meta;
+
+// ---------------------------------------------------------------------------
+// Navigation & breadcrumbs
+// ---------------------------------------------------------------------------
+const navLinks = getNavigationLinks();
+const breadcrumbs = buildBreadcrumbs({
+  currentPath: Astro.url.pathname,
+  navLinks,
+  pageTitle: title,
+});
+
+// ---------------------------------------------------------------------------
+// Analytics (GoatCounter)
+// ---------------------------------------------------------------------------
+const goatCounterBase = import.meta.env.PUBLIC_GOATCOUNTER_URL?.replace(/\/$/, '');
+const goatCounterScriptSrc = import.meta.env.PUBLIC_GOATCOUNTER_SCRIPT?.trim() || 'https://gc.zgo.at/count.js';
+const enableAnalytics = true || !!goatCounterBase;
+---
+<html lang="en">
+  <Head title={title} description={description} url={url} />
+  <body style={`--background-image: url(${ASSETS.bg.src});`}>
+    <SiteHeader meta={meta} navLinks={navLinks} />
+
+    </body>
+
+    <div class="container">
+      <!-- TODO: Consider extracting the breadcrumbs into a <Breadcrumbs /> component -->
+
+      <main class="panel">
+        <nav class="is-breadcrumbs" aria-label="Breadcrumb">
+          <ol>
+            {breadcrumbs.map((crumb, index) => (
+              <li>
+                {crumb.isCurrent ? (
+                  <span class="breadcrumbs__current" aria-current="page">{crumb.label}</span>
+                ) : (
+                  <a href={crumb.href}>{crumb.label}</a>
+                )}
+                {index < breadcrumbs.length - 1 && (
+                  <span class="breadcrumbs__seperator" aria-hidden="true">›</span>
+                )}
+              </li>
+            ))}
+          </ol>
+        </nav>
+
+        <slot />
+
+        <!-- TODO: Consider extracting the page actions into a <PageNavigation /> component -->
+        <nav class="is-site-nav" aria-label="Page navigation">
+          <span class="ui-chip ui-chip--small">
+            <a href="#top">⇡ Scroll Up ⇡</a>
+          </span>
+        </nav>
+      </main>
+    </div>
+
+    <SiteFooter />
+
+    <Helpers
+      enableAnalytics={enableAnalytics}
+      goatCounterBase={goatCounterBase}
+      goatCounterScriptSrc={goatCounterScriptSrc}
+    />
+  </body>
+</html>
+

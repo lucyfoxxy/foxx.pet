@@ -1,0 +1,42 @@
+---
+import { ASSETS } from '@Layout/SiteAssets/Images.astro';
+
+type LayoutMeta = {
+  title: string;
+  description: string;
+  url: string;
+};
+
+const {
+  title = 'foxx.pet',
+  description = '',
+  url = 'https://foxx.pet',
+} = (Astro.props ?? {}) as Partial<LayoutMeta>;
+---
+
+<head>
+  <!-- Page metadata -->
+  <title>{title}</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content={description} />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={ASSETS.og.src} />
+  <meta property="og:url" content={url} />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ASSETS.og} />
+
+  <link rel="icon" type="image/webp" href={ASSETS.favicon.src} />
+  <link rel="preload" href={ASSETS.bg.src} as="image" type="image/webp" />
+  <link rel="preload" href={ASSETS.logo_header.src} as="image" type="image/webp" />
+  <link rel="preload" href="/fonts/FuzzyBubbles_400.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/FuzzyBubbles_700.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/Grandstander_italic_100-900.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/Grandstander_normal_100-900.woff2" as="font" type="font/woff2" crossorigin />
+</head>

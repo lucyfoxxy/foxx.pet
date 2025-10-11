@@ -1,7 +1,7 @@
 ---
-import Layout from '@Design/Layout.astro';
-import Icon from '@Design/Icons.astro';
-import { ASSETS } from '@Design/Assets.astro';
+import Layout from '@Layout/Main.astro';
+import Icon from '@Layout/SiteAssets/Icons.astro';
+import { ASSETS } from '@Layout/SiteAssets/Images.astro';
 import { getPageContent } from '@Content/siteContent';
 
 export const prerender = true;
@@ -30,49 +30,46 @@ const isExternalLink = (href: string) => href.startsWith('http');
     <link rel="preload" href={hero.image} as="image" type="image/webp" />
   </head>
 
-  <section class="media-hero section">
-    
-    <div class="media-hero__logo">
 
-      <img src={hero.logo} alt={hero.heading} loading="lazy" />   
- 
-      
-    </div>
-       
-  </section>
-
-  <section class="content-layout content-layout__split section">
-    <section class="content-card">
-      <h2>{intro.heading}</h2>
-      <div class="prose">
-        {intro.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
-      </div>
-      <h3><i>{intro.signature}</i></h3>
-    </section>
-
-    <section class="content-card">
-      <h2>{feature.heading}</h2>
-      <p>{feature.description}</p>
-      <div class="feature-slot">
-        <p>{feature.placeholder}</p>
+    <section class="media-hero section">   
+      <div class="media-hero__logo">
+        <img src={hero.logo} alt={hero.heading} loading="lazy" />   
       </div>
     </section>
-  </section>
 
-  <section class="content-card section">
-    <h2>Get in Touch</h2>
-    <div class="ui-btn__contact--wrap">
-      {links.map((link) => (
-        <a
-          class={`ui-btn__contact ui-btn__contact--${link.kind}`}
-          href={link.href}
-          rel={isExternalLink(link.href) ? 'noopener noreferrer' : undefined}
-          target={isExternalLink(link.href) ? '_blank' : undefined}
-        >
-          <span class="ui-btn__contact--icon"><Icon kind={link.kind} /></span>
-          <span>{link.label}</span>
-        </a>
-      ))}
-    </div>
-  </section>
+    <section class="content-layout content-layout__split section">
+      <section class="content-card">
+        <h2>{intro.heading}</h2>
+        <div class="prose">
+          {intro.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+        </div>
+        <h3><i>{intro.signature}</i></h3>
+      </section>
+
+      <section class="content-card">
+        <h2>{feature.heading}</h2>
+        <p>{feature.description}</p>
+        <div class="feature-slot">
+          <p>{feature.placeholder}</p>
+        </div>
+      </section>
+    </section>
+
+    <section class="content-card section">
+      <h2>Get in Touch</h2>
+      <div class="ui-btn__contact--wrap">
+        {links.map((link) => (
+          <a
+            class={`ui-btn__contact ui-btn__contact--${link.kind}`}
+            href={link.href}
+            rel={isExternalLink(link.href) ? 'noopener noreferrer' : undefined}
+            target={isExternalLink(link.href) ? '_blank' : undefined}
+          >
+            <span class="ui-btn__contact--icon"><Icon kind={link.kind} /></span>
+            <span>{link.label}</span>
+          </a>
+        ))}
+      </div>
+    </section>
+
 </Layout>

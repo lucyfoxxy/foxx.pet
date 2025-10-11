@@ -7,49 +7,49 @@ const contacts = content.contacts ?? [];
 const disclaimer = content.disclaimer ?? [];
 ---
 
-<section class="content-head content-card__title section">
-  <h1>{content.title}</h1>
-  <div class="prose">
-    {introParagraphs.map((paragraph) => (
-      <p>{paragraph}</p>
-    ))}
-  </div>
-</section>
-
-<section class="content-layout content-layout__split section">
-  {contacts.map((contact) => (
-    <section class="content-card" key={contact.title}>
-      <div class="content-card__title">
-        <h2>{contact.title}</h2>
-        {contact.subtitle && <p><em>{contact.subtitle}</em></p>}
-      </div>
-      <dl class="deflist">
-        {contact.entries.flatMap((entry) => [
-          <dt class="deflist__term">{entry.term}</dt>,
-          <dd class="deflist__desc">
-            {entry.kind === 'mail' ? (
-              <a href={`mailto:${entry.description}`}>{entry.description}</a>
-            ) : (
-              entry.description
-            )}
-          </dd>,
-        ])}
-      </dl>
-    </section>
-  ))}
-</section>
-
-{disclaimer.length > 0 && (
-  <section class="content-card section">
-    <div class="content-card__subtitle">
-      <h2>Disclaimer</h2>
-      <div class="prose">
-        {disclaimer.map((paragraph) => (
-          <p>
-            <em>{paragraph}</em>
-          </p>
-        ))}
-      </div>
+  <section class="content-head content-card__title section">
+    <h1>{content.title}</h1>
+    <div class="prose">
+      {introParagraphs.map((paragraph) => (
+        <p>{paragraph}</p>
+      ))}
     </div>
   </section>
-)}
+
+  <section class="content-layout content-layout__split section">
+    {contacts.map((contact) => (
+      <section class="content-card" key={contact.title}>
+        <div class="content-card__title">
+          <h2>{contact.title}</h2>
+          {contact.subtitle && <p><em>{contact.subtitle}</em></p>}
+        </div>
+        <dl class="deflist">
+          {contact.entries.flatMap((entry) => [
+            <dt class="deflist__term">{entry.term}</dt>,
+            <dd class="deflist__desc">
+              {entry.kind === 'mail' ? (
+                <a href={`mailto:${entry.description}`}>{entry.description}</a>
+              ) : (
+                entry.description
+              )}
+            </dd>,
+          ])}
+        </dl>
+      </section>
+    ))}
+  </section>
+
+  {disclaimer.length > 0 && (
+    <section class="content-card section">
+      <div class="content-card__subtitle">
+        <h2>Disclaimer</h2>
+        <div class="prose">
+          {disclaimer.map((paragraph) => (
+            <p>
+              <em>{paragraph}</em>
+            </p>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}

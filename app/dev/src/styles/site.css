@@ -1,84 +1,99 @@
 /* ============================================ */
 /* ======== SITE: LAYOUT & STRUCTURE ========== */
-/* ====== Depends on= tokens, base, typography ====== */
+/* ====== Depends on: tokens, base, typography ====== */
 /* ============================================ */
-/* Logo-Block */
 
-
-
-/* ====== HEADER / FOOTER ======*/
+/* ====== HEADER / FOOTER ====== */
 .site-header,
 .site-footer {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  flex-wrap: nowrap;
-  padding: var(--navbar-padding);
-  background: 
-      
-
-  linear-gradient(135deg, color-mix(in oklab,var(--primary-shadow-color)55%,black 4%),var(--content-background) );
+justify-content: center;
   
+  background:
+    linear-gradient(
+      135deg,
+      color-mix(in oklab, var(--primary-shadow-color) 55%, black 4%),
+      var(--content-background)
+    );
   box-shadow: var(--medium-shadow);
   backdrop-filter: blur(var(--large-blur)) saturate(1.25) brightness(1.85);
   -webkit-backdrop-filter: blur(var(--large-blur));
   outline: 1px solid var(--outline-color);
   margin-inline: 0;
 }
-@media (max-width: 720px) {
-  .site-header {
-    flex-direction: column;
-  }
-}
+
 .site-header {
+  padding-block: var(--medium-padding) ;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;  
   border-radius: 0 0 var(--medium-radius) var(--medium-radius);
   margin-block-end: var(--navbar-spacing);
   padding-inline: var(--container-padding);
-  justify-content: space-between;
-  gap: var(--navbar-spacing);
+  justify-content: center;
+  gap: var(--navbar-gap);
 }
+
 .site-header__logo {
   display: flex;
   align-items: center;
   gap: var(--xsmall-spacing);
-  height: 50px;
+  block-size: 50px;
+      filter: drop-shadow(0 3px 2px color-mix(in oklab,var(--secondary-shadow-color) 75%,black 25%)) 
+            drop-shadow(0 4px 18px color-mix(in oklab,var(--highlight-color)50%,black 16%))
+            drop-shadow(0 0 48px color-mix(in oklab,var(--highlight-shadow-color)50%,white 15%))
+            ;
 }
+
 .site-header__nav {
   display: flex;
-  gap: var(--navbar-spacing); 
+  gap: var(--navbar-spacing);
 }
+
 .site-header__nav a {
   color: var(--accent-text-color);
   text-shadow: var(--accent-text-shadow);
-  transition: ease-in-out 2.5s text-shadow 2.5s ease-in-out transform 2.5s ease-in-out;
+  transition: var(--transition-nav);
+      filter: drop-shadow(0 3px 2px color-mix(in oklab,var(--secondary-shadow-color) 75%,black 25%)) 
+            drop-shadow(0 4px 18px color-mix(in oklab,var(--highlight-color)50%,black 16%))
+            drop-shadow(0 0 48px color-mix(in oklab,var(--highlight-shadow-color)50%,white 15%))
+            ;
 }
+
 .site-header__nav a:hover,
-.site-header__nav a:focus-visible {   
-  transform: translateY(-1px) scale(1.05) ;
+.site-header__nav a:focus-visible {
+  transform: translateY(-1px) scale(1.05);
   text-shadow: var(--highlight-text-shadow);
   color: var(--highlight-color);
-  transition: ease-in-out 2.5s text-shadow 2.5s ease-in-out transform 2.5s ease-in-out;
+  transition: var(--transition-nav);
 }
 
 .site-footer {
-  width: 100%;
+  padding-block: var(--medium-padding) var(--large-padding);
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  justify-items: center;
+  
+  align-self: center;
+  flex-wrap: wrap;
+  inline-size: 100%;
   border-radius: var(--medium-radius) var(--medium-radius) 0 0;
   margin-block: var(--navbar-spacing) 0;
   justify-content: center;
 }
 
-.site-footer a { 
+.site-footer a {
   text-decoration: underline;
-  text-underline-offset: 2px; 
+  text-underline-offset: 2px;
   color: var(--highlight-color);
   text-shadow: var(--secondary-text-shadow);
 }
 
-/* ====== CONTAINER / PANEL====== */
+/* ====== CONTAINER / PANEL ====== */
 .container {
   flex: 1 0 auto;
-  width: 100%;
-  max-width: none;
+  inline-size: 100%;
+  max-inline-size: none;
   margin: 0;
   padding-inline: var(--container-padding);
 }
@@ -86,38 +101,41 @@
 main.panel {
   --panel-border-size: 0px;
   background:
-    linear-gradient(138deg,
+    linear-gradient(
+      138deg,
       color-mix(in oklch, oklch(72% .12 300) 18%, transparent) 0%,
       color-mix(in oklch, var(--highlight-color) 16%, transparent) 45%,
-      color-mix(in oklch, var(--highlight-shadow-color) 28%, transparent) 100%);
-
+      color-mix(in oklch, var(--highlight-shadow-color) 28%, transparent) 100%
+    );
   backdrop-filter: blur(18px) saturate(1.25) brightness(1.6);
   border: var(--panel-border-size) solid var(--outline-color);
-
-    box-shadow: 0 12px 32px oklch(0% 0 0 / .2), inset 0 0 0 var(--panel-border-size) color-mix(in srgb, var(--outline-color) 65%, transparent);
-  padding: var(--content-padding);  
-  -webkit-backdrop-filter: blur(var(--large-blur)); 
+  box-shadow:
+    0 12px 32px oklch(0% 0 0 / .2),
+    inset 0 0 0 var(--panel-border-size) color-mix(in srgb, var(--outline-color) 65%, transparent);
+  padding: var(--content-padding);
+  -webkit-backdrop-filter: blur(var(--large-blur));
   border-radius: var(--large-radius);
-  
 }
+
 nav.is-breadcrumbs,
 nav.is-site-nav {
   display: flex;
   align-items: center;
   gap: var(--small-spacing);
-  
   padding: var(--medium-padding) var(--large-padding);
   background: var(--outline-color);
-  box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--outline-color) 65%, transparent), inset 0 18px 32px -28px color-mix(in srgb, black 40%, transparent);
+  box-shadow:
+    inset 0 0 0 1px color-mix(in oklab, var(--outline-color) 65%, transparent),
+    inset 0 18px 32px -28px color-mix(in srgb, black 40%, transparent);
 }
 
 main.panel > nav.is-breadcrumbs {
-    margin-block: calc(-1 * var(--content-spacing))  var(--content-spacing);
-    margin-inline: calc(-1 * var(--content-spacing));
-    border-top-left-radius: var(--small-radius);
-    border-top-right-radius: var(--small-radius);
-    border-bottom: 4px hidden;
-    justify-content: stretch;
+  margin-block: calc(-1 * var(--content-spacing)) var(--content-spacing);
+  margin-inline: calc(-1 * var(--content-spacing));
+  border-top-left-radius: var(--small-radius);
+  border-top-right-radius: var(--small-radius);
+  border-bottom: 4px hidden;
+  justify-content: stretch;
 }
 
 main.panel > nav.is-breadcrumbs ol {
@@ -132,45 +150,41 @@ main.panel > nav.is-breadcrumbs ol {
   color: var(--highlight-color);
   text-shadow: var(--secondary-text-shadow);
 }
+
 main.panel > nav.is-breadcrumbs li {
   display: inline-flex;
 }
+
 main.panel > nav.is-breadcrumbs,
 main.panel > nav.is-breadcrumbs li {
   align-items: center;
   gap: calc(var(--xsmall-spacing) * .5);
 }
+
 main.panel > nav.is-breadcrumbs .breadcrumbs-current {
   font-weight: var(--thick-font-weight);
   color: var(--accent-color);
   text-shadow: var(--highlight-text-shadow);
 }
+
 main.panel > nav.is-breadcrumbs .breadcrumbs-separator {
   opacity: .65;
 }
 
 main.panel > nav.is-site-nav {
-    border-top: 4px hidden;
-    margin-block: var(--content-spacing) calc(-1 * var(--content-spacing));
-    margin-inline: calc(-1 * var(--content-spacing));
-    border-bottom-left-radius: var(--small-radius);
-    border-bottom-right-radius: var(--small-radius);
-    
-    justify-content: center;
+  border-top: 4px hidden;
+  margin-block: var(--content-spacing) calc(-1 * var(--content-spacing));
+  margin-inline: calc(-1 * var(--content-spacing));
+  border-bottom-left-radius: var(--small-radius);
+  border-bottom-right-radius: var(--small-radius);
+  justify-content: center;
 }
-.panel :where(p, .prose) { 
-  hyphens: auto; 
+
+.panel :where(p, .prose) {
+  hyphens: auto;
 }
 
 .container > .panel {
-  max-width: var(--container-max);
+  max-inline-size: var(--container-max);
   margin-inline: auto;
-}
-
-
-/* Karten bleiben ruhiger/dunkler, damit nichts “dopplet” wirkt */
-.cosmic-card {
-
-  
-
 }

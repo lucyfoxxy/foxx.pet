@@ -1,42 +1,71 @@
 :root { 
-  /* ====== Main Colors ====== */
+ /* ====== Layout Structures ====== */
+  --tiny-spacing: clamp(.4rem, .4rem + .15vw, .6rem);
+  --xsmall-spacing: clamp(.65rem, .5rem + .3vw, .95rem);
+  --small-spacing: clamp(.75rem, 1vw, 1.25rem);
+  --medium-spacing: clamp(1rem, 2vw, 1.75rem);
+  --large-spacing: clamp(.75rem, 3.5vw, 3rem);
+  --xlarge-spacing: clamp(1.75rem, 5.9vw, 6.75rem);
+
+  --small-padding: clamp(.35rem, .3vw, .5rem);
+  --medium-padding: clamp(.75rem, 1.2vw, 1rem);
+  --large-padding: clamp(1rem, 2vw, 3rem);
+  
+
+  --container-max:              1280px;  
+
+  --container-padding:          max(var(--large-spacing), calc((100vw - var(--container-max)) / 2));
+  --navbar-padding:             var(--small-padding);
+  --panel-bar-padding:          var(--small-padding);
+  --content-padding:            var(--large-padding);  
+  
+  --container-spacing:          var(--large-spacing);
+  --navbar-spacing:             var(--large-spacing); 
+  --content-spacing:            var(--medium-spacing);
+  --prose-flow-spacing:         var(--xsmall-spacing);  
+
+  --navbar-gap:                 var(--xlarge-spacing);
+  --brand-size:                 clamp(420px, 65vw, 1024px);
+  --brand-gap:                  var(--small-spacing);
+  --brand-gap-mobile:           var(--xsmall-spacing);
+
+  /* ====== Main Colors =======*/
   --primary-text-color:         oklch(96% 0.03 310);
+
+  --accent-color:    oklch(89% 0.10 285); /* sanftes Lavendelblau – für Icons, Rahmen, passive Chips */
   --accent-text-color:       color-mix(in oklch, var(--primary-text-color) 85%, var(--accent-color));
+  
+  --highlight-color: oklch(93% 0.13 295);  /* dieselbe Nuance, aber doppelt so satt – Hover, Buttons, aktive States */
   --highlight-text-color:       color-mix(in oklch, var(--primary-text-color) 25%, var(--higlight-color));
 
-  --accent-color:    oklch(89% 0.10 295); /* sanftes Lavendelblau – für Icons, Rahmen, passive Chips */
-  --highlight-color: oklch(93% 0.15 310);  /* dieselbe Nuance, aber doppelt so satt – Hover, Buttons, aktive States */
 
-  --outline-color:              color-mix(in oklch, var(--highlight-color) 5%, transparent);
+  /* ====== bg Colors / FX ====== */
 
   --primary-background-color:   oklch(32% 0.075 295 / 0.65);
   --secondary-background-color: oklch(24% 0.065 295 / 0.95); 
   --content-background:         color-mix(in oklab, var(--secondary-background-color) 15%, black 15%); 
 
-  --primary-shadow-color:       color-mix(in oklch, var(--primary-background-color) 70%, black);
-  --secondary-shadow-color:     color-mix(in oklch, var(--secondary-background-color) 70%, black);
-  --highlight-shadow-color:     color-mix(in oklch, var(--highlight-color) 80%, black); 
-  --accent-shadow-color:        color-mix(in oklch, var(--accent-color) 70%, black); 
+  --background-overlay:         radial-gradient(1200px 600px at 50% 10%,
+                                  rgba(0, 0, 0, 0.1) 0%,
+                                  rgba(46, 2, 87, 0.1) 70%,
+                                  rgba(53, 6, 92, 0.1) 100%);  
 
-
-  /* ====== Decorations ====== */
-  --background-overlay: radial-gradient(1200px 600px at 50% 10%,
-                            rgba(0, 0, 0, 0.1) 0%,
-                            rgba(46, 2, 87, 0.1) 70%,
-                            rgba(53, 6, 92, 0.1) 100%);
-  
   --small-blur:                 10px;
   --medium-blur:                14px;   
   --large-blur:                 18px;
 
-  --small-radius:               10px;
-  --medium-radius:              14px;
-  --large-radius:               18px;
- 
-  --primary-text-shadow:        0 0 9px var(--primary-background-color),0 0 4px color-mix(in oklab, var(--highlight-color) 60%, transparent 10%);
+  /* ====== Shadow & Glow ====== */
+  --primary-shadow-color:       color-mix(in oklch, var(--primary-background-color) 70%, black);
+  --primary-text-shadow:        0 0 9px var(--primary-background-color),0 0 4px color-mix(in oklab, var(--highlight-color) 60%, transparent 10%);  
+  
+  --secondary-shadow-color:     color-mix(in oklch, var(--secondary-background-color) 70%, black);
   --secondary-text-shadow:      0 0 9px var(--primary-background-color),0 0 3px var(--highlight-color);
+  
+  --highlight-shadow-color:     color-mix(in oklch, var(--highlight-color) 80%, black); 
+  --highlight-text-shadow:      1px 1px 6px var(--highlight-shadow-color),1px 1px 2px var(--highlight-color);  
+  
+  --accent-shadow-color:        color-mix(in oklch, var(--accent-color) 70%, black); 
   --accent-text-shadow:         1px 1px 4px var(--accent-shadow-color);
-  --highlight-text-shadow:      1px 1px 6px var(--highlight-shadow-color),1px 1px 2px var(--highlight-color);
 
   --small-shadow:               0 0 6px -4px var(--secondary-shadow-color);
   --medium-shadow:              0 0 28px -2px var(--primary-shadow-color);
@@ -45,8 +74,14 @@
   --focus-glow-accent:          0 0 16px -12px var(--accent-shadow-color)   , 0 0 0 1px var(--accent-color), 0 0 4px 1px var(--accent-shadow-color) ;
   --focus-glow-highlight:       0 0 18px -12px var(--highlight-shadow-color),inset 0 0 1px 1px var(--highlight-color), 0 0 2px 1px var(--highlight-shadow-color);
 
+  /* ====== Borders / Outlines ====== */
+  --small-radius:               10px;
+  --medium-radius:              14px;
+  --large-radius:               18px;
 
-  /* ====== Fonts ====== */
+  --outline-color:              color-mix(in oklch, var(--highlight-color) 5%, transparent);
+
+  /* ====== Font Styles ====== */
   --primary-font-family:        Grandstander, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --secondary-font-family:      'Fuzzy Bubbles', var(--primary-font-family);
 
@@ -70,36 +105,6 @@
   --small-letter-spacing:       .0065em;
   --medium-letter-spacing:      .0225em;
   --large-letter-spacing:       .0525em;
-  --prose-flow-spacing:         clamp(.65rem, .5rem + .3vw, .95rem);
-
-
-
-  /* ====== Layout / Structures ====== */
-  --small-padding: clamp(.35rem, .3vw, .5rem);
-  --medium-padding: clamp(.75rem, 1.2vw, 1rem);
-  --large-padding: clamp(1rem, 2vw, 3rem);
-
-  --tiny-spacing: clamp(.4rem, .4rem + .15vw, .6rem);
-  --xsmall-spacing: clamp(.65rem, .5rem + .3vw, .95rem);
-  --small-spacing: clamp(.75rem, 1vw, 1.25rem);
-  --medium-spacing: clamp(1rem, 2vw, 1.75rem);
-  --large-spacing: clamp(.75rem, 3.5vw, 3rem);
-
-  --container-max:              1280px;
-  --container-spacing:          var(--large-spacing);
-  --container-padding:          max(var(--large-spacing), calc((100vw - var(--container-max)) / 2));
-
-  --navbar-padding:             var(--medium-padding);
-  --navbar-spacing:             var(--large-spacing);   
-  
-  --panel-bar-padding:          var(--small-padding);     
-  
-  --content-padding:            var(--large-padding);
-  --content-spacing:            var(--medium-spacing);
-
-  --brand-size:                 clamp(360px, 55vw, 1024px);
-  --brand-gap:                  var(--small-spacing);
-  --brand-gap-mobile:           var(--xsmall-spacing);
 
   /* ====== Gallery ====== */
   --gallery-frame-size: calc(
@@ -111,4 +116,11 @@
   --kenburns-offset: clamp(8rem, 20vh, 25rem);                                  
   --gallery-interval: 8000ms;  
   --gallery-interval-compact: 7000ms;
+
+  /* ====== Motion ====== */
+  --transition-interactive: color .2s ease, text-shadow .2s ease;
+  --transition-raise: transform .12s ease, box-shadow .12s ease;
+  --transition-glow: color .12s ease, text-shadow .12s ease, transform .12s ease, box-shadow .12s ease;
+  --transition-soft: opacity .25s ease, transform .25s ease, background .25s ease, box-shadow .25s ease;
+  --transition-nav: transform .5s ease-in-out, text-shadow .5s ease-in-out;
 }
