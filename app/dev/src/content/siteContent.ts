@@ -35,7 +35,10 @@ export const SITE_CONTENT = {
     id: 'galleries',
     href: '/galleries',
     title: 'Paw\u202FPrints\u202F🐾',
-    navLabel: 'Paw\u202FPrints\u202F🐾',
+    navLabel: {
+      text: 'Paw Prints',
+      emoji: '🐾',
+    },
     includeInHeader: true,
     description: 'Here you gonna find a selection of my previous works.',
     introParagraphs: [
@@ -46,7 +49,10 @@ export const SITE_CONTENT = {
     id: 'stories',
     href: '/stories',
     title: 'Fuzzy\u202FFops\u202F🚀',
-    navLabel: 'Fuzzy\u202FFops\u202F🚀',
+    navLabel: {
+      text: 'Fuzzy Fops',
+      emoji: '🚀',
+    },
     includeInHeader: true,
     description: 'Narrative experiments and cosmic adventures — coming soon.',
     introParagraphs: [
@@ -109,7 +115,10 @@ export const SITE_CONTENT = {
     id: 'cookbook',
     href: '/cookbook',
     title: 'Nom\u202FNoms\u202F🍪',
-    navLabel: 'Nom\u202FNoms\u202F🍪',
+    navLabel: {
+      text: 'Nom Noms',
+      emoji: '🍪',
+    },
     includeInHeader: true,
     description: 'Baking and Cooking recipes approved by the cosmic dinner foundation will soon be published here!',
     introParagraphs: [
@@ -142,14 +151,35 @@ const pagesList = Object.values(SITE_CONTENT);
 
 const normalizePath = (path: string) => (path === '/' ? '/' : path.replace(/\/+$/, '') || '/');
 
+const normalizeNavLabel = (label: PageContent['navLabel'], fallback: string) => {
+  if (!label) {
+    return { text: fallback, emoji: undefined as string | undefined };
+  }
+
+  if (typeof label === 'string') {
+    return { text: label, emoji: undefined as string | undefined };
+  }
+
+  const text = label.text?.trim().length ? label.text : fallback;
+  const emoji = label.emoji?.trim().length ? label.emoji : undefined;
+
+  return { text, emoji };
+};
+
 export const getPageContent = <K extends PageKey>(key: K): PageContent<K> => SITE_CONTENT[key];
 
+export const getNavLabelParts = (page: PageContent) => normalizeNavLabel(page.navLabel, page.title);
+
 export const getNavigationLinks = () =>
-  pagesList.map((page) => ({
-    href: page.href,
-    label: page.navLabel ?? page.title,
-    includeInHeader: page.includeInHeader ?? true,
-  }));
+  pagesList.map((page) => {
+    const { text, emoji } = getNavLabelParts(page);
+    return {
+      href: page.href,
+      label: text,
+      emoji,
+      includeInHeader: page.includeInHeader ?? true,
+    };
+  });
 
 export const findPageByHref = (href: string) => {
   const target = normalizePath(href);

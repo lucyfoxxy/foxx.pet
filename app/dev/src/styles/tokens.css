@@ -25,7 +25,7 @@
   --prose-flow-spacing:         var(--xsmall-spacing);  
 
   --navbar-gap:                 var(--xlarge-spacing);
-  --brand-size:                 clamp(420px, 65vw, 1024px);
+  --brand-size:                 clamp(420px, 65vw, 644px);
   --brand-gap:                  var(--small-spacing);
   --brand-gap-mobile:           var(--xsmall-spacing);
 

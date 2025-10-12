@@ -9,7 +9,12 @@ import '@Styles/media.css';
 import '@Styles/table.css';
 
 import { ASSETS } from '@Layout/SiteAssets/Images.astro';
-import { findPageByHref, getNavigationLinks, getPageContent } from '@Content/siteContent';
+import {
+  findPageByHref,
+  getNavLabelParts,
+  getNavigationLinks,
+  getPageContent,
+} from '@Content/siteContent';
 import Head from '@Layout/Head.astro';
 import SiteHeader from '@Layout/SiteHeader.astro';
 import SiteFooter from '@Layout/SiteFooter.astro';
@@ -62,8 +67,8 @@ const buildBreadcrumbs = ({
   const navLabelByPath = new Map(navLinks.map((link) => [normalizePath(link.href), link.label]));
   const segments = normalizedCurrentPath === '/' ? [] : normalizedCurrentPath.slice(1).split('/');
   const collectedSegments: string[] = [];
-  const homeLink = findPageByHref('/') ?? { href: '/', navLabel: 'Home ↩', title: 'Home ↩' };
-  const homeLabel = (homeLink as { navLabel?: string; title?: string }).navLabel ?? homeLink.title ?? 'Home ↩';
+  const homeLink = findPageByHref('/');
+  const homeLabel = homeLink ? getNavLabelParts(homeLink).text : '↩ Home';
 
   const crumbs: Breadcrumb[] = [
     {

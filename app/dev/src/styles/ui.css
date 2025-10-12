@@ -27,12 +27,7 @@
   transition: var(--transition-glow);
 }
 
-.ui-chip a {
-  text-shadow:
-    2px 2px 3px var(--accent-shadow-color),
-    1px 1px 10px var(--primary-shadow-color),
-    var(--accent-text-shadow);
-}
+
 
 .ui-chip--small {
   padding: var(--small-padding) var(--medium-padding);

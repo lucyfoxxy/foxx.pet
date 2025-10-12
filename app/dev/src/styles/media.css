@@ -6,10 +6,10 @@
 /* ====== START PAGE HERO ====== */
 .media-hero {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: nowrap;
   overflow: hidden;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
   gap: var(--brand-gap);
   margin-block: 0;
@@ -18,7 +18,7 @@
   position: relative;
   z-index: 1;
   width: 100%;
-  padding-block: var(--xlarge-spacing) var(--large-spacing);
+  padding-block: var(--xsmall-spacing) var(--large-spacing);
   text-align: center;
   
 }
@@ -29,25 +29,13 @@
   max-inline-size: var(--brand-size);
   
 }
-.media-hero__logo::before{
-  filter: blur(19px);
-}
-.media-hero__logo::after {
-  content: "";
-  position: absolute;
-  inset-inline: 0;
-  bottom: calc(var(--content-padding) * 1.5);
-  block-size: 6px;
-  border-radius: 999px;
-  
-  opacity: .25;
-}
+
 
 @supports (color: oklch(50% 0 0)) {
   .media-hero__logo {
     filter: drop-shadow(0 3px 2px color-mix(in oklab,var(--secondary-shadow-color) 75%,black 25%)) 
-            drop-shadow(0 4px 18px color-mix(in oklab,var(--highlight-color)50%,black 16%))
-            drop-shadow(0 0 48px color-mix(in oklab,var(--highlight-shadow-color)50%,white 15%))
+            drop-shadow(0 4px 28px color-mix(in oklab,var(--highlight-color)20%,white 4%))
+            drop-shadow(0 0 18px color-mix(in oklab,var(--highlight-shadow-color)20%,white 15%))
             ;
     backdrop-filter: radial-gradient(
       circle at 50% 30%,

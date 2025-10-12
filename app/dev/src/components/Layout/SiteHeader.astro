@@ -4,6 +4,7 @@ import { ASSETS } from '@Layout/SiteAssets/Images.astro';
 type NavLink = {
   href: string;
   label: string;
+  emoji?: string;
   includeInHeader?: boolean;
 };
 
@@ -24,10 +25,17 @@ const { navLinks = [] } = (Astro.props ?? {}) as Props;
     {navLinks
       .filter((link) => link.includeInHeader)
       .map((link) => (
-        <span class="ui-chip"><a href={link.href}>{link.label}</a></span>
+        <span class="ui-chip">
+          <a class="site-header__nav-link" href={link.href}>
+            <span class="site-header__nav-text">{link.label}</span>
+            {link.emoji && (
+              <span class="site-header__nav-emoji">{link.emoji}</span>
+            )}
+          </a>
+        </span>
       ))
     }
   </nav>
- {Astro.request.url.pathname === '/' && <div id="hero-sentinel" aria-hidden="true"></div>}  
+ 
 </header>
 
