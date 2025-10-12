@@ -4,60 +4,20 @@
 /* ============================================ */
 
 /* ====== BADGES & CHIPS ====== */
-.ui-badge,
-.ui-chip {
+.button {
   display: inline-flex;
   align-items: center;
   vertical-align: middle;
-  text-decoration: none;
+
   color: var(--highlight-color);
-}
-
-.ui-badge {
-  opacity: .7;
-  margin-inline-end: .25rem;
-  border-radius: 999px;
-  padding: calc(var(--xsmall-spacing) * .5) var(--small-spacing);
-}
-
-.ui-chip {
   gap: var(--xsmall-spacing);
   padding: var(--small-padding) var(--medium-padding);
-  border-radius: 999px;
   transition: var(--transition-glow);
 }
 
+.button__large {
+  --bg: var(--secondary-background-color);
 
-
-.ui-chip--small {
-  padding: var(--small-padding) var(--medium-padding);
-  background: transparent;
-  backdrop-filter: none;
-  box-shadow:
-    inset 0 0 0 999px oklch(72% 0.14 295 / 25%),
-    1px 1px 2px 1px color-mix(in srgb, black 10%, transparent);
-}
-
-.ui-chip:hover,
-.ui-chip:focus-visible {
-  color: var(--highlight-color);
-  text-shadow:
-    2px 2px 3px var(--accent-color),
-    var(--focus-glow-highlight),
-    var(--highlight-text-shadow);
-}
-
-/* ====== CONTACT BUTTONS ====== */
-.ui-btn__contact--wrap {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: .75rem;
-  margin-block: .75rem 1rem;
-}
-
-.ui-btn__contact {
-  --bg: var(--primary-background-color);
-  --fg: #fff;
   --fg-hover: var(--primary-text-color);
   display: inline-flex;
   align-items: center;
@@ -65,52 +25,66 @@
   gap: var(--small-spacing);
   padding: var(--medium-padding) var(--large-padding);
   border-radius: var(--large-radius);
-  background: var(--bg);
-  color: var(--fg);
-  font-weight: 500;
-  line-height: 1;
-  text-decoration: none;
-  box-shadow:
-    0 10px 22px -12px oklch(0% 0 0 / .55),
-    inset 0 1px 0 0 oklch(100% 0 0 / .20),
-    var(--medium-shadow);
+  background: color-mix(in oklab, var(--highlight-color) 25%, transparent);
+
+  font-weight: var(--thick-font-weight);
+  line-height: var(--xsmall-line-height);
+
+  box-shadow:     2px 2px 2px 1px color-mix(in srgb, black 5%, transparent);    
   transition:
     color .15s ease,
     filter .15s ease,
     var(--transition-raise);
 }
 
-.ui-btn__contact--telegram { --bg: #28a8e9; }
-.ui-btn__contact--mail { --bg: #a858c0; }
-.ui-btn__contact--facebook { --bg: #1778f2; }
-.ui-btn__contact--instagram { --bg: #e1306c; }
-.ui-btn__contact--furaffinity { --bg: #08a57b; }
-.ui-btn__contact--link { --bg: #4c6ef5; }
-
-.ui-btn__contact:hover {
-  background: color-mix(in oklch, var(--bg) 82%, white 22%);
-  transform: translateY(-1px);
-  box-shadow: var(--medium-shadow);
-  color: var(--fg-hover);
+.button__small {
+  border-radius: 999px;
+  padding: var(--small-padding) var(--medium-padding);
+  background: color-mix(var(--secondary-background-color)10%,transparent);
+  backdrop-filter: none;
+  box-shadow:
+    inset 0 0 0 999px oklch(72% 0.14 295 / 55%),
+    1px 1px 2px 1px color-mix(in srgb, black 15%, transparent);
 }
 
-.ui-btn__contact:active {
+.button:hover,
+.button:focus-visible,
+.button__large:hover,
+.button__large:focus-visible {
+  color: var(--highlight-color);
+  text-shadow:
+    2px 2px 3px var(--accent-color),
+    var(--focus-glow-highlight),
+    var(--highlight-text-shadow);
+  background: var(--primary-background-color);
+  transform: translateY(-1px);
+  box-shadow: var(--medium-shadow);
+  color: var(--highlight-color);    
+}
+
+
+.button__large--wrap {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--small-spacing);
+  margin-block-start: var(--xsmall-spacing);
+}
+
+.button__large:active {
   background: color-mix(in oklch, var(--bg) 88%, black 12%);
   transform: translateY(0);
-  color: var(--fg);
+  
 }
 
 @supports not (color: oklch(50% 0 0)) {
-  .ui-btn__contact:hover { filter: brightness(1.08); }
-  .ui-btn__contact:active { filter: brightness(.92); }
+  .button__large:hover { filter: brightness(1.08); }
+  .button__large:active { filter: brightness(.92); }
 }
 
-.ui-btn__contact:focus-visible {
-  color: var(--fg-hover);
-  outline-offset: 2px;
-}
 
-.ui-btn__contact--icon {
+
+.button__large--icon {
+  
   display: inline-grid;
   place-items: center;
   inline-size: 1.75rem;
@@ -119,13 +93,13 @@
   background: none;
 }
 
-.ui-btn__contact--icon svg {
+.button__large--icon svg {
   inline-size: 1.75rem;
   block-size: 1.75rem;
 }
 
 @media (max-width: 780px) {
-  .ui-btn__contact--wrap {
+  .button__large--wrap {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -135,7 +109,7 @@
     padding-block: .25rem;
   }
 
-  .ui-btn__contact {
+  .button__large {
     position: relative;
     inline-size: clamp(3rem, 16vw, 3.4rem);
     block-size: clamp(3rem, 16vw, 3.4rem);
@@ -144,7 +118,7 @@
     gap: 0;
   }
 
-  .ui-btn__contact > span:last-child {
+  .button__large > span:last-child {
     position: absolute;
     inline-size: 1px;
     block-size: 1px;
@@ -156,12 +130,12 @@
     white-space: nowrap;
   }
 
-  .ui-btn__contact--icon {
+  .button__large--icon {
     inline-size: 100%;
     block-size: 100%;
   }
 
-  .ui-btn__contact--icon svg {
+  .button__large--icon svg {
     inline-size: clamp(1.45rem, 6vw, 1.65rem);
     block-size: clamp(1.45rem, 6vw, 1.65rem);
   }

@@ -18,13 +18,6 @@ const {
     yearEl.textContent = new Date().getFullYear().toString();
   }
 </script>
-<script>
-  import initHeaderToggle from '@Scripts/utils/_headerToggle.js';
-  import { runOnReady } from '@Scripts/utils/_runOnReady.js';
-
-  runOnReady(initHeaderToggle);
-</script>
-
 {enableAnalytics && (
   <script data-goatcounter={`${goatCounterBase}/count`} async src={goatCounterScriptSrc}></script>
 )}

@@ -18,7 +18,7 @@
   position: relative;
   z-index: 1;
   width: 100%;
-  padding-block: var(--xsmall-spacing) var(--large-spacing);
+  padding-block: var(--tiny-spacing) var(--small-spacing);
   text-align: center;
   
 }
@@ -34,8 +34,8 @@
 @supports (color: oklch(50% 0 0)) {
   .media-hero__logo {
     filter: drop-shadow(0 3px 2px color-mix(in oklab,var(--secondary-shadow-color) 75%,black 25%)) 
-            drop-shadow(0 4px 28px color-mix(in oklab,var(--highlight-color)20%,white 4%))
-            drop-shadow(0 0 18px color-mix(in oklab,var(--highlight-shadow-color)20%,white 15%))
+            
+            drop-shadow(0 0 8px color-mix(in oklab,var(--highlight-shadow-color)20%,black 25%))
             ;
     backdrop-filter: radial-gradient(
       circle at 50% 30%,

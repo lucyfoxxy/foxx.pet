@@ -62,7 +62,7 @@ p :where(em, i) {
 
 .site-footer,
 .ui-badge,
-.ui-chip {
+.button {
   font-size: var(--xsmall-font-size);
   font-weight: var(--thin-font-weight);
   line-height: var(--xsmall-line-height);
@@ -95,8 +95,9 @@ p :where(em, i) {
 
 .panel :where(h3) {
   font-weight: var(--normal-font-weight);
-  font-size: var(--medium-font-size);
+  font-size: var(--large-font-size);
   text-shadow: var(--highlight-text-shadow);
+  letter-spacing: var(--large-letter-spacing);
 }
 
 /* ====== PROSE & LISTEN ====== */

@@ -11,24 +11,25 @@ export const SITE_CONTENT = {
       subheading: 'Home of a small purple fox flying around!',
     },
     intro: {
-      heading: 'Welcome Title',
+      heading: 'Welcome to my Cosmos',
       paragraphs: [
-        'Introduce yourself or your project with a warm welcome.',
-        'Explain what visitors can expect to find on this page.',
-        'Highlight a call to action such as linking to your gallery or services.',
+        'My name is Lucy Foxx and I welcome you to my personal space!',
+        'Hop on my rocket to — watch me fuzzing around, learn to make delicious Nom Noms, and catch up on how my journey’s been so far!',
       ],
-      signature: 'Your Name',
+      signature: 'Lucy Foxx',
     },
     feature: {
-      heading: 'Featured Section',
+      heading: 'Recent Fuzz:',
       description:
-        'Use this area to showcase a highlight, image carousel, or any other element you want to bring attention to.',
+        'My latest adventure:',
       placeholder:
-        'Replace this block with your own gallery, story teaser, or any custom component.',
+        '<Most recent gallery images here>',
     },
+    contact:   {heading:'Reach me across the Universe'},
     contactLinks: [
-      { href: 'https://example.com', label: 'External Link', kind: 'link' },
-      { href: 'mailto:you@example.com', label: 'Email', kind: 'mail' },
+      { href: 'https://t.me/LucyFoxx', label: 'Telegram', kind: 'telegram' },
+      { href: 'https://bsky.app/profile/lucy.foxx.pet', label: 'BlueSky', kind: 'bluesky' },
+      { href: 'mailto:lucy@foxx.pet', label: 'E-Mail', kind: 'mail' },
     ],
   },
   galleries: {
@@ -87,18 +88,8 @@ export const SITE_CONTENT = {
     ],
     contacts: [
       {
-        title: 'Content Management',
-        subtitle: '- Artworks -',
-        entries: [
-          { term: 'Nickname', description: 'Faelis Skribblekitty' },
-          { term: 'Name, Surname', description: 'Jungmann, Stephanie' },
-          { term: 'Address', description: 'Michaelstr. 38, 47055 Duisburg, NRW, Germany' },
-          { term: 'Email', description: 'content@foxx.pet', kind: 'mail' },
-        ],
-      },
-      {
-        title: 'Site Administration',
-        subtitle: '- Domain & Infrastructure -',
+        title: 'Administration',
+        subtitle: '- Site & Content -',
         entries: [
           { term: 'Nickname', description: 'Lucy Foxx' },
           { term: 'Name, Surname', description: 'Wiese, Julian' },
