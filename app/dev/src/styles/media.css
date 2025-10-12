@@ -18,7 +18,7 @@
   position: relative;
   z-index: 1;
   width: 100%;
-  padding-block: var(--tiny-spacing) var(--small-spacing);
+  padding-block: var(--small-spacing) var(--medium-spacing);
   text-align: center;
   
 }
