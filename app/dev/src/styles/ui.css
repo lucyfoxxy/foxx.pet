@@ -4,33 +4,30 @@
 /* ============================================ */
 
 /* ====== BADGES & CHIPS ====== */
-.button {
+:where(.button, .button__large, .button__small) {
   display: inline-flex;
   align-items: center;
-  vertical-align: middle;
-
   color: var(--highlight-color);
-  gap: var(--xsmall-spacing);
-  padding: var(--small-padding) var(--medium-padding);
   transition: var(--transition-glow);
+  vertical-align: middle;
 }
 
+.button,
+.button__small {
+  gap: var(--xsmall-spacing);
+  padding: var(--small-padding) var(--medium-padding);
+}
 .button__large {
   --bg: var(--secondary-background-color);
 
-  --fg-hover: var(--primary-text-color);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   gap: var(--small-spacing);
+  justify-content: center;
   padding: var(--medium-padding) var(--large-padding);
   border-radius: var(--large-radius);
   background: color-mix(in oklab, var(--highlight-color) 25%, transparent);
-
   font-weight: var(--thick-font-weight);
   line-height: var(--xsmall-line-height);
-
-  box-shadow:     2px 2px 2px 1px color-mix(in srgb, black 5%, transparent);    
+  box-shadow: 2px 2px 2px 1px color-mix(in srgb, black 5%, transparent);
   transition:
     color .15s ease,
     filter .15s ease,
@@ -39,8 +36,7 @@
 
 .button__small {
   border-radius: 999px;
-  padding: var(--small-padding) var(--medium-padding);
-  background: color-mix(var(--secondary-background-color)10%,transparent);
+  background: color-mix(in oklab, var(--secondary-background-color) 10%, transparent);
   backdrop-filter: none;
   box-shadow:
     inset 0 0 0 999px oklch(72% 0.14 295 / 55%),
@@ -51,7 +47,6 @@
 .button:focus-visible,
 .button__large:hover,
 .button__large:focus-visible {
-  color: var(--highlight-color);
   text-shadow:
     2px 2px 3px var(--accent-color),
     var(--focus-glow-highlight),
@@ -59,9 +54,8 @@
   background: var(--primary-background-color);
   transform: translateY(-1px);
   box-shadow: var(--medium-shadow);
-  color: var(--highlight-color);    
+  color: var(--highlight-color);
 }
-
 
 .button__large--wrap {
   display: grid;
@@ -73,7 +67,6 @@
 .button__large:active {
   background: color-mix(in oklch, var(--bg) 88%, black 12%);
   transform: translateY(0);
-  
 }
 
 @supports not (color: oklch(50% 0 0)) {
@@ -81,10 +74,7 @@
   .button__large:active { filter: brightness(.92); }
 }
 
-
-
 .button__large--icon {
-  
   display: inline-grid;
   place-items: center;
   inline-size: 1.75rem;

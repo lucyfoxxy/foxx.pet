@@ -69,13 +69,13 @@
       color-mix(in oklab, var(--highlight-color) 18%, white 4%, transparent) 48%,
       color-mix(in oklab, var(--secondary-shadow-color) 34%, black 6%, transparent) 92%
     );
-  backdrop-filter: blur(var(--large-blur));
-  -webkit-backdrop-filter: blur(var(--large-blur));
+  backdrop-filter: var(--backdrop-blur-strong);
+  -webkit-backdrop-filter: var(--backdrop-blur-strong);
   box-shadow:
-    4px 4px 14px -9px color-mix(in srgb, rgb(47, 25, 71) 85%, transparent),
-    0 26px 44px -30px oklch(72% 0.05 300 / .55),
+    4px 4px 14px -9px color-mix(in oklab, var(--secondary-shadow-color) 85%, transparent),
+    var(--shadow-ambient-far),
     
-    inset 0 0 0 999px oklch(42% 0.18 295 / 35%);
+    inset 0 0 0 999px oklch(42% 0.18 295 / 40%);
 }
 
 

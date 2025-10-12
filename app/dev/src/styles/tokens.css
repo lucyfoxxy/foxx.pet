@@ -51,8 +51,9 @@
                                   rgba(53, 6, 92, 0.1) 100%);  
 
   --small-blur:                 10px;
-  --medium-blur:                14px;   
+  --medium-blur:                14px;
   --large-blur:                 18px;
+  --backdrop-blur-strong:       blur(var(--large-blur));
 
   /* ====== Shadow & Glow ====== */
   --primary-shadow-color:       color-mix(in oklch, var(--primary-background-color) 70%, black);
@@ -64,8 +65,9 @@
   --highlight-shadow-color:     color-mix(in oklch, var(--highlight-color) 80%, black); 
   --highlight-text-shadow:      1px 1px 6px var(--highlight-shadow-color),1px 1px 2px var(--highlight-color);  
   
-  --accent-shadow-color:        color-mix(in oklch, var(--accent-color) 70%, black); 
+  --accent-shadow-color:        color-mix(in oklch, var(--accent-color) 70%, black);
   --accent-text-shadow:         1px 1px 4px var(--accent-shadow-color);
+  --shadow-ambient-far:         0 26px 44px -30px oklch(72% 0.05 300 / .55);
 
   --small-shadow:               0 0 6px -4px var(--secondary-shadow-color);
   --medium-shadow:              0 0 28px -2px var(--primary-shadow-color);
