@@ -49,17 +49,17 @@
                                   rgba(0, 0, 0, 0.1) 0%,
                                   rgba(46, 2, 87, 0.1) 70%,
                                   rgba(53, 6, 92, 0.1) 100%);  
-
+ 
   --small-blur:                 10px;
   --medium-blur:                14px;
   --large-blur:                 18px;
   --backdrop-blur-strong:       blur(var(--large-blur));
 
   /* ====== Shadow & Glow ====== */
-  --primary-shadow-color:       color-mix(in oklab, var(--primary-background-color) 70%, black 6%);
+  --primary-shadow-color:       color-mix(in oklab, var(--primary-background-color) 70%, black 4%);
   --soft-text-shadow:           2px 2px 2px var(--primary-shadow-color);  
    
-  --secondary-shadow-color:     color-mix(in oklab, var(--secondary-background-color) 70%, black 12%);
+  --secondary-shadow-color:     color-mix(in oklab, var(--secondary-background-color) 70%, black 4%);
   --strong-text-shadow:           3px 3px 3px var(--secondary-shadow-color);
 
   
@@ -70,9 +70,10 @@
   --soft-text-glow:             1px 1px 3px var(--accent-glow-color);
   --shadow-ambient-far:         0 26px 44px -30px oklch(72% 0.05 300 / .55);
 
-  --small-shadow:               0 0 6px -4px var(--secondary-shadow-color);
-  --medium-shadow:              0 0 28px -2px var(--primary-shadow-color);
-  --large-shadow:               0 0 3px -13px var(--primary-shadow-color);
+  --small-shadow:               2px 3px 6px -2px var(--primary-shadow-color),2px 3px 6px -2px var(--secondary-shadow-color),2px 3px 3px -4px color-mix(in srgb, black 55%, transparent); 
+
+  --medium-shadow:              12px 12px 18px -14px var(--primary-shadow-color),12px 12px 24px -18px var(--secondary-shadow-color);
+  --large-shadow:               2px 4px 18px -14px var(--primary-shadow-color),2px 4px 24px -18px var(--secondary-shadow-color),2px 4px 14px -6px color-mix(in srgb, black 95%, transparent);
 
   --focus-glow-accent:          0 0 16px -12px var(--accent-shadow-color)   , 0 0 0 1px var(--accent-color), 0 0 4px 1px var(--accent-shadow-color) ;
   --focus-glow-highlight:       0 0 18px -12px var(--highlight-glow-color),inset 0 0 1px 1px var(--highlight-color), 0 0 2px 1px var(--highlight-glow-color);

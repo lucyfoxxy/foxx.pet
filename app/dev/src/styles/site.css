@@ -9,10 +9,12 @@
   justify-content: center;
   transition: box-shadow .25s ease, background .25s ease, padding .25s ease;
   box-shadow:
-    2px 6px 14px -6px color-mix(in srgb, black 35%, transparent),
-    var(--shadow-ambient-far),
-    var(--medium-shadow),
-    inset 0 0 0 999px oklch(72% 0.18 295 / 45%);
+
+    
+    var(--large-shadow),
+    inset 0 0 0 999px oklch(30% 0.14 295 / 44%);
+  background: oklch(30% 0.14 295 / 44%);
+  backdrop-filter: blur(var(--large-blur)) opacity(.95) brightness(1.95);  
   outline: 1px solid var(--outline-color);
   margin-inline: 0;
 }
@@ -21,7 +23,8 @@
   position: sticky;
   top: 0;
   z-index: 10;
-  backdrop-filter: blur(var(--large-blur)) saturate(1.25) brightness(1.85);
+  
+  
   -webkit-backdrop-filter: var(--backdrop-blur-strong);
   padding-block: var(--medium-padding) ;
   display: flex;
@@ -98,13 +101,14 @@
   flex-direction: row;
   align-items: center;
   justify-items: center;
-  background: linear-gradient(var(--primary-background-color),var(--primary-shadow-color));
+  background: oklch(32% 0.13 295 / 70%);;
   align-self: center;
   flex-wrap: wrap;
   inline-size: 100%;
   border-radius: var(--medium-radius) var(--medium-radius) 0 0;
   margin-block: var(--navbar-spacing) 0;
   justify-content: center;
+  
 }
 
 .site-footer a {
@@ -125,18 +129,10 @@
 
 main.panel {
   --panel-border-size: 0px;
-  background:
-    linear-gradient(
-      138deg,
-      color-mix(in oklch, oklch(72% .12 300) 18%, transparent) 0%,
-      color-mix(in oklch, var(--highlight-color) 16%, transparent) 45%,
-      color-mix(in oklch, var(--highlight-glow-color) 28%, transparent) 100%
-    );
+
   backdrop-filter: blur(18px) saturate(1.25) brightness(1.6);
   border: var(--panel-border-size) solid var(--outline-color);
-  box-shadow:
-    0 12px 32px oklch(0% 0 0 / .2),
-    inset 0 0 0 var(--panel-border-size) color-mix(in srgb, var(--outline-color) 65%, transparent);
+  box-shadow: var(--large-shadow);
   padding: var(--content-padding);
   -webkit-backdrop-filter: var(--backdrop-blur-strong);
   border-radius: var(--large-radius);
@@ -147,17 +143,16 @@ nav.is-site-nav {
   display: flex;
   align-items: center;
   gap: var(--small-spacing);
-  padding: var(--medium-padding) var(--large-padding);
-  background: var(--outline-color);
-  box-shadow:
-    inset 0 0 0 1px color-mix(in oklab, var(--outline-color) 65%, transparent),
-    inset 0 18px 32px -28px color-mix(in srgb, black 40%, transparent);
+  padding: var(--small-padding) var(--large-padding);
+  background: oklch(32% 0.13 295 / 18%);
+  box-shadow: 0 0 4px 8px oklch(32% 0.13 295 / 18%); 
+
 }
 
 main.panel > nav.is-breadcrumbs {
   margin-block: calc(-1 * var(--content-spacing)) var(--content-spacing);
   margin-inline: calc(-1 * var(--content-spacing));
-  border-top-left-radius: var(--small-radius);
+  border-top-left-radius: var(--medium-radius);
   border-top-right-radius: var(--small-radius);
   border-bottom: 4px hidden;
   justify-content: stretch;

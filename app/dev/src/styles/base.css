@@ -14,10 +14,7 @@ body {
   display: flex;
   flex-direction: column;
 }
-:root {
-  --background-top: oklch(25% 0.065 315 / 70%);
-  --background-bottom: oklch(26% 0.061 285 / 70%);
-}
+
 
 body::before {
   content: "";
@@ -25,28 +22,24 @@ body::before {
   inset: 0;
   z-index: -1;
 
-  -webkit-backdrop-filter: blur(18px) saturate(1.15);
-  backdrop-filter: blur(18px) saturate(1.95);
-
+  -webkit-backdrop-filter: blur(var(--small-blur));
+  backdrop-filter: blur(var(--small-blur));
   background:
     radial-gradient(
       140% 80% at 15% 10%,
-      oklch(48% 0.11 290 / 50%) 28%,
-      oklch(63% 0.11 320 / 65%) 38%,
-      oklch(48% 0.11 305 / 50%) 65%
+      oklch(48% 0.11 290 / 15%) 28%,
+      oklch(74% 0.11 205 / 16%) 48%,
+      oklch(48% 0.11 295 / 15%) 65%
     ),
     radial-gradient(
       circle at 50% 35%,
-      color-mix(in oklab, black 50%, transparent) 0%,
+      color-mix(in oklab, black 20%, transparent) 0%,
       transparent 50%
     ),
-    linear-gradient(
-      to bottom,
-      var(--background-top),
-      var(--background-bottom)
-    ),
-    var(--background-image, none) center / cover no-repeat;
 
+    radial-gradient(circle at center, transparent 60%, black 120%),
+    var(--background-image, none) center / cover no-repeat;
+  background-blend-mode: multiply;
   will-change: transform;
   transform: translateZ(0);
 }

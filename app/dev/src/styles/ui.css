@@ -10,24 +10,29 @@
   color: var(--highlight-color);
   transition: var(--transition-glow);
   vertical-align: middle;
+  background: oklch(82% 0.22 295 / 43%); 
+  box-shadow: var(--small-shadow);
+  
+  
 }
-
+ 
 .button,
 .button__small {
   gap: var(--xsmall-spacing);
   padding: var(--small-padding) var(--medium-padding);
+  background: oklch(32% 0.13 295 / 18%);
 }
 .button__large {
   --bg: var(--secondary-background-color);
-
+  border-radius: 999px;
   gap: var(--small-spacing);
   justify-content: center;
-  padding: var(--medium-padding) var(--large-padding);
-  border-radius: var(--large-radius);
-  background: color-mix(in oklab, var(--highlight-color) 25%, transparent);
+  padding: var(--medium-padding) var(--medium-padding);
+  border-radius: var(--medium-radius);
   font-weight: var(--thick-font-weight);
   line-height: var(--xsmall-line-height);
-  box-shadow: 2px 2px 2px 1px color-mix(in srgb, black 5%, transparent);
+  box-shadow: var(--medium-shadow);
+
   transition:
     color .15s ease,
     filter .15s ease,
@@ -35,12 +40,8 @@
 }
 
 .button__small {
-  border-radius: 999px;
-  background: color-mix(in oklab, var(--secondary-background-color) 10%, transparent);
-  backdrop-filter: none;
-  box-shadow:
-    inset 0 0 0 999px oklch(72% 0.14 295 / 55%),
-    1px 1px 2px 1px color-mix(in srgb, black 15%, transparent);
+  border-radius: var(--small-radius);
+
 }
 
 .button:hover,
@@ -60,7 +61,7 @@
 .button__large--wrap {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: var(--small-spacing);
+  gap: var(--medium-spacing);
   margin-block-start: var(--xsmall-spacing);
 }
 
