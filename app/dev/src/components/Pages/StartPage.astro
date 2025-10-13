@@ -34,7 +34,7 @@ const isExternalLink = (href: string) => href.startsWith('http');
 
     <section class="content-head media-hero section">   
       <div class="content__title">
-        <h3>{hero.heading}</h3>
+        <h1>{hero.heading}</h1>
       </div>
       <div class="media-hero__logo">
         <img src={hero.logo} alt={hero.heading} loading="lazy" />   
@@ -64,15 +64,15 @@ const isExternalLink = (href: string) => href.startsWith('http');
 
     <section class="content-card section">
       <h2>{contact.heading}</h2>
-      <div class="button__large--wrap">
+      <div class="button--large--wrap">
         {links.map((link) => (
           <a
-            class={`button__large button__large--${link.kind}`}
+            class={`button--large button--large--${link.kind}`}
             href={link.href}
             rel={isExternalLink(link.href) ? 'noopener noreferrer' : undefined}
             target={isExternalLink(link.href) ? '_blank' : undefined}
           >
-            <span class="button__large--icon"><Icon kind={link.kind} /></span>
+            <span class="button--large--icon"><Icon kind={link.kind} /></span>
             <span>{link.label}</span>
           </a>
         ))}

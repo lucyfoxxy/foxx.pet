@@ -143,12 +143,12 @@ const enableAnalytics = true || !!goatCounterBase;
             {breadcrumbs.map((crumb, index) => (
               <li>
                 {crumb.isCurrent ? (
-                  <span class="breadcrumbs__current" aria-current="page">{crumb.label}</span>
+                  <span class="is-current" aria-current="page">{crumb.label}</span>
                 ) : (
                   <a href={crumb.href}>{crumb.label}</a>
                 )}
                 {index < breadcrumbs.length - 1 && (
-                  <span class="breadcrumbs__seperator" aria-hidden="true">›</span>
+                  <span class="is-seperator" aria-hidden="true">›</span>
                 )}
               </li>
             ))}
@@ -159,7 +159,7 @@ const enableAnalytics = true || !!goatCounterBase;
 
         <!-- TODO: Consider extracting the page actions into a <PageNavigation /> component -->
         <nav class="is-site-nav" aria-label="Page navigation">
-          <span class="button button__small">
+          <span class="button button--small">
             <a href="#top">⇡ Scroll Up ⇡</a>
           </span>
         </nav>

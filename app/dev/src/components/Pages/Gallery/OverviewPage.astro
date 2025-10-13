@@ -23,7 +23,7 @@ const introParagraphs = content.introParagraphs ?? [content.description];
   <section class="content-layout section">
     <div class="media-galleries">
         {categories.map(({ slug, title }) => (
-          <a class="media-galleries__card" href={`/galleries/${slug}`} aria-label={`Open ${title}`}>
+          <a class="content-card--soft" href={`/galleries/${slug}`} aria-label={`Open ${title}`}>
             <div class="content-card__title">
               <h2>{title}</h2>
             </div>

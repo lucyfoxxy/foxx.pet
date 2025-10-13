@@ -116,7 +116,7 @@ p :where(em, i) {
 .panel :where(blockquote) {
   margin: var(--prose-flow-spacing) 0;
   padding: calc(var(--prose-flow-spacing) * .75) var(--prose-flow-spacing);
-  border-left: 3px solid var(--accent-color);
+  border-left: 3px solid var(--accent-foreground);
   background: color-mix(in oklab, var(--content-background) 4%, transparent);
   border-radius: .5rem;
 }
@@ -127,6 +127,6 @@ p :where(em, i) {
 .table__price { font-weight: var(--normal-font-weight); }
 
 /* ====== MEDIA GALLERIES ====== */
-.media-galleries__card h3 {
+.content-card--softh3 {
    font-size: var(--medium-font-size);
 }

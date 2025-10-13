@@ -1,5 +1,6 @@
 /* ====== Reset & Baseline ====== */
-*, *::before, *::after { box-sizing: border-box; }
+*, 
+*::before, *::after { box-sizing: border-box; }
 * { margin: 0; }
 html:focus-within { scroll-behavior: smooth; }
 html, 
@@ -15,37 +16,24 @@ body {
   flex-direction: column;
 }
 
-
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   z-index: -1;
-
   -webkit-backdrop-filter: blur(var(--small-blur));
   backdrop-filter: blur(var(--small-blur));
-  background:
-    radial-gradient(
-      140% 80% at 15% 10%,
-      oklch(48% 0.11 290 / 15%) 28%,
-      oklch(74% 0.11 205 / 16%) 48%,
-      oklch(48% 0.11 295 / 15%) 65%
-    ),
-    radial-gradient(
-      circle at 50% 35%,
-      color-mix(in oklab, black 20%, transparent) 0%,
-      transparent 50%
-    ),
-
-    radial-gradient(circle at center, transparent 60%, black 120%),
+  background:    
+    var(--background-overlay),
     var(--background-image, none) center / cover no-repeat;
   background-blend-mode: multiply;
   will-change: transform;
   transform: translateZ(0);
 }
+
 :where(h1, h2, h3, h4, a) {
   text-shadow: var(--soft-text-shadow);
-  color: var(--accent-text-color);
+  color: var(--accent-text);
 }
 :where(a) {
   text-decoration: none;
@@ -54,7 +42,7 @@ body::before {
 :where(a):hover,
 :where(a):focus-visible {
   text-shadow: var(--strong-text-glow);
-  color: var(--highlight-text-color);
+  color: var(--highlight-text);
 }
 
 img,
@@ -76,7 +64,7 @@ select {
 
 /* ====== ACCESSIBILITY ====== */
 :focus-visible {
-  outline: 2px solid var(--accent-color);
+  outline: 2px solid var(--accent-foreground);
   outline-offset: 2px;
 }
 

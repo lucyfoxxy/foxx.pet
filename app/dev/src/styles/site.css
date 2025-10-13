@@ -23,9 +23,6 @@
   position: sticky;
   top: 0;
   z-index: 10;
-  
-  
-  -webkit-backdrop-filter: var(--backdrop-blur-strong);
   padding-block: var(--medium-padding) ;
   display: flex;
   align-items: center;
@@ -63,7 +60,7 @@
 }
 
 .site-header__nav a {
-  color: var(--accent-text-color);
+  color: var(--accent-text);
   text-shadow: var(--soft-text-glow),var(--strong-text-shadow);
   transition: var(--transition-nav);
 }
@@ -88,7 +85,7 @@
 .site-header__nav a:focus-visible {
   transform: translateY(-1px) scale(1.05);
   text-shadow: var(--strong-text-glow);
-  color: var(--highlight-glow-color); 
+  color: var(--highlight-foreground); 
   transition: var(--transition-nav);
 }
 
@@ -114,7 +111,7 @@
 .site-footer a {
   text-decoration: underline;
   text-underline-offset: 2px;
-  color: var(--highlight-color);
+  color: var(--highlight-foreground);
   text-shadow: var(--strong-text-shadow);
 }
 
@@ -167,8 +164,8 @@ main.panel > nav.is-breadcrumbs ol {
   padding: 0;
   list-style: none;
   font-size: var(--xsmall-font-size);
-  color: var(--highlight-color);
-  text-shadow: var(--strong-text-shadow);
+  color: var(--accent-text);
+  text-shadow: var(--soft-text-shadow);
 }
 
 main.panel > nav.is-breadcrumbs li {
@@ -181,13 +178,13 @@ main.panel > nav.is-breadcrumbs li {
   gap: calc(var(--xsmall-spacing) * .5);
 }
 
-main.panel > nav.is-breadcrumbs .breadcrumbs-current {
+main.panel > nav.is-breadcrumbs .is-current {
   font-weight: var(--thick-font-weight);
-  color: var(--accent-color);
-  text-shadow: var(--strong-text-glow);
+  color: var(--highlight-text);
+  text-shadow: var(--soft-text-shadow),var(--soft-text-glow);
 }
 
-main.panel > nav.is-breadcrumbs .breadcrumbs-separator {
+main.panel > nav.is-breadcrumbs .is-separator {
   opacity: .65;
 }
 
