@@ -87,7 +87,7 @@
 .site-header__nav a:hover,
 .site-header__nav a:focus-visible {
   transform: translateY(-1px) scale(1.05);
-  text-shadow: var(--highlight-text-shadow);
+  text-shadow: var(--strong-text-glow);
   color: var(--highlight-color);
   transition: var(--transition-nav);
 }
@@ -192,7 +192,7 @@ main.panel > nav.is-breadcrumbs li {
 main.panel > nav.is-breadcrumbs .breadcrumbs-current {
   font-weight: var(--thick-font-weight);
   color: var(--accent-color);
-  text-shadow: var(--highlight-text-shadow);
+  text-shadow: var(--strong-text-glow);
 }
 
 main.panel > nav.is-breadcrumbs .breadcrumbs-separator {

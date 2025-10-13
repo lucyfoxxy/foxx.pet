@@ -50,7 +50,7 @@
   text-shadow:
     2px 2px 3px var(--accent-color),
     var(--focus-glow-highlight),
-    var(--highlight-text-shadow);
+    var(--strong-text-glow);
   background: var(--primary-background-color);
   transform: translateY(-1px);
   box-shadow: var(--medium-shadow);

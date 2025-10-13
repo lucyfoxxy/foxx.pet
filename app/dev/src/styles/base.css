@@ -60,7 +60,7 @@ body::before {
 }
 :where(a):hover,
 :where(a):focus-visible {
-  text-shadow: var(--highlight-text-shadow);
+  text-shadow: var(--strong-text-glow);
   color: var(--highlight-text-color);
 }
 

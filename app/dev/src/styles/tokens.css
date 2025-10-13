@@ -30,19 +30,19 @@
   --brand-gap-mobile:           var(--xsmall-spacing);
 
   /* ====== Main Colors =======*/
-  --primary-text-color:         oklch(96% 0.03 310);
+  --primary-text-color:         oklch(96% 0.03 290);
 
-  --accent-color:    oklch(89% 0.10 285); /* sanftes Lavendelblau – für Icons, Rahmen, passive Chips */
+  --accent-color:    oklch(89% 0.13 285); /* sanftes Lavendelblau – für Icons, Rahmen, passive Chips */
   --accent-text-color:       color-mix(in oklch, var(--primary-text-color) 85%, var(--accent-color));
   
   --highlight-color: oklch(93% 0.13 295);  /* dieselbe Nuance, aber doppelt so satt – Hover, Buttons, aktive States */
-  --highlight-text-color:       color-mix(in oklch, var(--primary-text-color) 25%, var(--higlight-color));
+  --highlight-text-color:       color-mix(in oklch, var(--primary-text-color) 25%, var(--highlight-color));
 
 
   /* ====== bg Colors / FX ====== */
 
-  --primary-background-color:   oklch(32% 0.075 295 / 0.65);
-  --secondary-background-color: oklch(24% 0.065 295 / 0.95); 
+  --primary-background-color:   oklch(32% 0.075 290 / 0.65);
+  --secondary-background-color: oklch(24% 0.065 290 / 0.95); 
   --content-background:         color-mix(in oklab, var(--secondary-background-color) 15%, black 15%); 
 
   --background-overlay:         radial-gradient(1200px 600px at 50% 10%,
@@ -63,10 +63,10 @@
   --secondary-text-shadow:      0 0 9px var(--primary-background-color),0 0 3px var(--highlight-color);
   
   --highlight-shadow-color:     color-mix(in oklch, var(--highlight-color) 80%, black); 
-  --highlight-text-shadow:      1px 1px 6px var(--highlight-shadow-color),1px 1px 2px var(--highlight-color);  
+  --strong-text-glow:      1px 1px 6px var(--highlight-color);  
   
   --accent-shadow-color:        color-mix(in oklch, var(--accent-color) 70%, black);
-  --accent-text-shadow:         1px 1px 4px var(--accent-shadow-color);
+  --accent-text-shadow:         1px 1px 4px var(--accent-color);
   --shadow-ambient-far:         0 26px 44px -30px oklch(72% 0.05 300 / .55);
 
   --small-shadow:               0 0 6px -4px var(--secondary-shadow-color);
