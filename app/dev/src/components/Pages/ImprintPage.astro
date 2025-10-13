@@ -1,7 +1,7 @@
 ---
 import { getPageContent } from '@Content/siteContent';
 
-const content = getPageContent('imprint');
+const content = await getPageContent('imprint');
 const introParagraphs = content.introParagraphs ?? [];
 const contacts = content.contacts ?? [];
 const disclaimer = content.disclaimer ?? [];

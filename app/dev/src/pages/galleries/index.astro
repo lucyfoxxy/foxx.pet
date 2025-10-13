@@ -5,7 +5,7 @@ import GalleryOverviewPage from '@Pages/Gallery/OverviewPage.astro';
 import { getPageContent } from '@Content/siteContent';
 export const prerender = true;
 
-const content = getPageContent('galleries');
+const content = await getPageContent('galleries');
 const catalog = (await getEntry('galleryCatalog', 'categories')).data;
 const categories = catalog.categories
   .filter((cat): cat is typeof cat & { slug: string } => Boolean(cat.slug))

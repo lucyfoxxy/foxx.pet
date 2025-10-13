@@ -51,7 +51,7 @@ body::before {
   transform: translateZ(0);
 }
 :where(h1, h2, h3, h4, a) {
-  text-shadow: var(--primary-text-shadow);
+  text-shadow: var(--soft-text-shadow);
   color: var(--accent-text-color);
 }
 :where(a) {

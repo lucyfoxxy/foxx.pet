@@ -7,7 +7,7 @@ interface CategoryEntry {
 }
 
 const { categories } = Astro.props as { categories: CategoryEntry[] };
-const content = getPageContent('galleries');
+const content = await getPageContent('galleries');
 const introParagraphs = content.introParagraphs ?? [content.description];
 ---
 <Fragment slot="panel:inside">

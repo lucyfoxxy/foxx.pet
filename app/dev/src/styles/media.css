@@ -35,7 +35,7 @@
   .media-hero__logo {
     filter: drop-shadow(0 3px 2px color-mix(in oklab,var(--secondary-shadow-color) 75%,black 25%)) 
             
-            drop-shadow(0 0 8px color-mix(in oklab,var(--highlight-shadow-color)20%,black 25%))
+            drop-shadow(0 0 8px color-mix(in oklab,var(--highlight-glow-color)20%,black 25%))
             ;
     backdrop-filter: radial-gradient(
       circle at 50% 30%,

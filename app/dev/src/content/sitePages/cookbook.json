@@ -1,0 +1,18 @@
+{
+  "id": "cookbook",
+  "href": "/cookbook",
+  "title": "Nom Noms 🍪",
+  "navLabel": {
+    "text": "Nom Noms",
+    "emoji": "🍪"
+  },
+  "includeInHeader": true,
+  "description": "Baking and Cooking recipes approved by the cosmic dinner foundation will soon be published here!",
+  "introParagraphs": [
+    "This is the upcoming place where you gonna find all the foxx' recipes!"
+  ],
+  "overview": {
+    "emptyState": "Cakes are still baking...",
+    "cta": "As soon as recipes launch they'll appear here with filters for flavours, effort, and more."
+  }
+}

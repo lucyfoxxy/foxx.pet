@@ -1,0 +1,26 @@
+{
+  "id": "imprint",
+  "href": "/imprint",
+  "title": "Imprint / Impressum",
+  "navLabel": "Imprint",
+  "includeInHeader": false,
+  "description": "Legal and contact information for foxx.pet.",
+  "introParagraphs": [
+    "In case of any suspected copyright infringement or other legal claims, you may contact us at the following addresses."
+  ],
+  "contacts": [
+    {
+      "title": "Administration",
+      "subtitle": "- Site & Content -",
+      "entries": [
+        { "term": "Nickname", "description": "Lucy Foxx" },
+        { "term": "Name, Surname", "description": "Wiese, Julian" },
+        { "term": "Address", "description": "Michaelstr. 38, 47055 Duisburg, NRW, Germany" },
+        { "term": "Email", "description": "admin@foxx.pet", "kind": "mail" }
+      ]
+    }
+  ],
+  "disclaimer": [
+    "This is a private art website. No liability for external links; operators of linked pages remain responsible for their content."
+  ]
+}

@@ -1,0 +1,68 @@
+---
+import Layout from '@Layout/Main.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+import { getPageContent } from '@Content/siteContent';
+
+export async function getStaticPaths() {
+  const recipes = await getCollection('recipes');
+  return recipes.map((recipe) => ({
+    params: { slug: recipe.slug },
+    props: { recipe },
+  }));
+}
+
+const { recipe } = Astro.props as { recipe: CollectionEntry<'recipes'> };
+const parentPage = await getPageContent('cookbook');
+const { Content } = await recipe.render();
+
+const formatDate = (date: Date) => new Intl.DateTimeFormat('en', { dateStyle: 'medium' }).format(date);
+const meta = {
+  title: `${recipe.data.title} | ${parentPage.title}`,
+  description: recipe.data.description ?? parentPage.description,
+};
+---
+<Layout title={recipe.data.title} meta={meta}>
+  <article class="content-card section">
+    <div class="content-card__title">
+      <h1>{recipe.data.title}</h1>
+      <p>
+        <strong>Published:</strong> {formatDate(recipe.data.publishDate)}
+        {recipe.data.categories?.length && (
+          <>
+            <br />
+            <strong>Categories:</strong> {recipe.data.categories.join(', ')}
+          </>
+        )}
+        {recipe.data.tags?.length && (
+          <>
+            <br />
+            <strong>Tags:</strong> {recipe.data.tags.join(', ')}
+          </>
+        )}
+      </p>
+      <ul>
+        {recipe.data.prepTime && (
+          <li>
+            <strong>Prep:</strong> {recipe.data.prepTime}
+          </li>
+        )}
+        {recipe.data.cookTime && (
+          <li>
+            <strong>Cook:</strong> {recipe.data.cookTime}
+          </li>
+        )}
+        {recipe.data.servings && (
+          <li>
+            <strong>Serves:</strong> {recipe.data.servings}
+          </li>
+        )}
+      </ul>
+    </div>
+    <div class="prose">
+      <Content />
+    </div>
+    <p>
+      <a href="/cookbook">← Back to the cookbook</a>
+    </p>
+  </article>
+</Layout>

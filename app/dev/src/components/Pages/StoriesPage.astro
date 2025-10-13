@@ -1,9 +1,26 @@
 ---
+import { getCollection, type CollectionEntry } from 'astro:content';
 import { getPageContent } from '@Content/siteContent';
 
-const content = getPageContent('stories');
-const introParagraphs = content.introParagraphs ?? [content.description];
-const sections = content.sections ?? [];
+type StoryEntry = CollectionEntry<'stories'>;
+
+const content = await getPageContent('stories');
+const introParagraphs = content.introParagraphs ?? (content.description ? [content.description] : []);
+const overview = content.overview ?? {};
+const stories = (await getCollection('stories')).sort(
+  (a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime(),
+);
+
+const categoryFacets = Array.from(
+  new Set(stories.flatMap((story) => story.data.categories ?? [])),
+).sort((a, b) => a.localeCompare(b));
+
+const tagFacets = Array.from(new Set(stories.flatMap((story) => story.data.tags ?? []))).sort((a, b) =>
+  a.localeCompare(b),
+);
+
+const formatDate = (date: Date) => new Intl.DateTimeFormat('en', { dateStyle: 'medium' }).format(date);
+const hasStories = stories.length > 0;
 ---
 
   <section class="content-head content-card__title section">
@@ -15,17 +32,84 @@ const sections = content.sections ?? [];
     </div>
   </section>
 
-  {sections.length > 0 && (
-    <section class="content-layout section">
-      {sections.map((section) => (
-        <section class="content-card" key={section.title}>
-          <h2>{section.title}</h2>
+  {hasStories ? (
+    <>
+      <section class="content-layout section">
+        <section class="content-card" aria-labelledby="stories-facets">
+          <div class="content-card__title">
+            <h2 id="stories-facets">Browse the archive</h2>
+            <p>
+              Use these collections to wire up dynamic filters. Grouping by category or tag mirrors how the gallery page
+              organises albums.
+            </p>
+          </div>
           <div class="prose">
-            {section.paragraphs.map((paragraph) => (
-              <p>{paragraph}</p>
-            ))}
+            {categoryFacets.length > 0 && (
+              <p>
+                <strong>Categories:</strong>
+                {' '}
+                {categoryFacets.join(', ')}
+              </p>
+            )}
+            {tagFacets.length > 0 && (
+              <p>
+                <strong>Tags:</strong>
+                {' '}
+                {tagFacets.join(', ')}
+              </p>
+            )}
+            {categoryFacets.length === 0 && tagFacets.length === 0 && (
+              <p>
+                Add <code>categories</code> or <code>tags</code> frontmatter fields to expose richer filtering options.
+              </p>
+            )}
           </div>
         </section>
-      ))}
+      </section>
+
+      <section class="content-layout section">
+        {stories.map((story: StoryEntry) => {
+          const excerpt = story.data.description ?? '';
+          return (
+            <article class="content-card" key={story.id}>
+              <div class="content-card__title">
+                <h2>
+                  <a href={`/stories/${story.slug}/`}>{story.data.title}</a>
+                </h2>
+                <p>
+                  <strong>Published:</strong> {formatDate(story.data.publishDate)}
+                  {story.data.categories?.length ? (
+                    <>
+                      <br />
+                      <strong>Categories:</strong> {story.data.categories.join(', ')}
+                    </>
+                  ) : null}
+                  {story.data.tags?.length ? (
+                    <>
+                      <br />
+                      <strong>Tags:</strong> {story.data.tags.join(', ')}
+                    </>
+                  ) : null}
+                </p>
+              </div>
+              <div class="prose">
+                {excerpt && <p>{excerpt}</p>}
+                <p>
+                  <a href={`/stories/${story.slug}/`}>Read full story →</a>
+                </p>
+              </div>
+            </article>
+          );
+        })}
+      </section>
+    </>
+  ) : (
+    <section class="content-card section">
+      <div class="content-card__title">
+        <h2>{overview.emptyState ?? 'Stories are still brewing'}</h2>
+      </div>
+      <div class="prose">
+        <p>{overview.cta ?? 'Once tales launch, they will appear here automatically.'}</p>
+      </div>
     </section>
   )}

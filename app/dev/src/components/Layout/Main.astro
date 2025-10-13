@@ -9,12 +9,7 @@ import '@Styles/media.css';
 import '@Styles/table.css';
 
 import { ASSETS } from '@Layout/SiteAssets/Images.astro';
-import {
-  findPageByHref,
-  getNavLabelParts,
-  getNavigationLinks,
-  getPageContent,
-} from '@Content/siteContent';
+import { getNavigationLinks, getPageContent } from '@Content/siteContent';
 import Head from '@Layout/Head.astro';
 import SiteHeader from '@Layout/SiteHeader.astro';
 import SiteFooter from '@Layout/SiteFooter.astro';
@@ -23,7 +18,7 @@ import Helpers from '@Layout/Helpers.astro';
 // ---------------------------------------------------------------------------
 // Types & helpers
 // ---------------------------------------------------------------------------
-type NavLink = ReturnType<typeof getNavigationLinks>[number];
+type NavLink = Awaited<ReturnType<typeof getNavigationLinks>>[number];
 
 type Breadcrumb = {
   label: string;
@@ -67,8 +62,8 @@ const buildBreadcrumbs = ({
   const navLabelByPath = new Map(navLinks.map((link) => [normalizePath(link.href), link.label]));
   const segments = normalizedCurrentPath === '/' ? [] : normalizedCurrentPath.slice(1).split('/');
   const collectedSegments: string[] = [];
-  const homeLink = findPageByHref('/');
-  const homeLabel = homeLink ? getNavLabelParts(homeLink).text : '↩ Home';
+  const homeLink = navLinks.find((link) => normalizePath(link.href) === '/');
+  const homeLabel = homeLink ? homeLink.label : '↩ Home';
 
   const crumbs: Breadcrumb[] = [
     {
@@ -99,7 +94,7 @@ const buildBreadcrumbs = ({
 // ---------------------------------------------------------------------------
 // Metadata setup
 // ---------------------------------------------------------------------------
-const homePage = getPageContent('home');
+const homePage = await getPageContent('home');
 const defaultMeta: LayoutMeta = {
   title: homePage.title,
   description: homePage.description,
@@ -118,7 +113,7 @@ const { title, description, url } = meta;
 // ---------------------------------------------------------------------------
 // Navigation & breadcrumbs
 // ---------------------------------------------------------------------------
-const navLinks = getNavigationLinks();
+const navLinks = await getNavigationLinks();
 const breadcrumbs = buildBreadcrumbs({
   currentPath: Astro.url.pathname,
   navLinks,

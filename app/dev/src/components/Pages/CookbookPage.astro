@@ -1,9 +1,26 @@
 ---
+import { getCollection, type CollectionEntry } from 'astro:content';
 import { getPageContent } from '@Content/siteContent';
 
-const content = getPageContent('cookbook');
-const introParagraphs = content.introParagraphs ?? [content.description];
-const sections = content.sections ?? [];
+type RecipeEntry = CollectionEntry<'recipes'>;
+
+const content = await getPageContent('cookbook');
+const introParagraphs = content.introParagraphs ?? (content.description ? [content.description] : []);
+const overview = content.overview ?? {};
+const recipes = (await getCollection('recipes')).sort(
+  (a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime(),
+);
+
+const categoryFacets = Array.from(
+  new Set(recipes.flatMap((recipe) => recipe.data.categories ?? [])),
+).sort((a, b) => a.localeCompare(b));
+
+const tagFacets = Array.from(new Set(recipes.flatMap((recipe) => recipe.data.tags ?? []))).sort((a, b) =>
+  a.localeCompare(b),
+);
+
+const formatDate = (date: Date) => new Intl.DateTimeFormat('en', { dateStyle: 'medium' }).format(date);
+const hasRecipes = recipes.length > 0;
 ---
 
   <section class="content-head content-card__title section">
@@ -15,17 +32,98 @@ const sections = content.sections ?? [];
     </div>
   </section>
 
-  {sections.length > 0 && (
-    <section class="content-layout section">
-      {sections.map((section) => (
-        <section class="content-card" key={section.title}>
-          <h2>{section.title}</h2>
+  {hasRecipes ? (
+    <>
+      <section class="content-layout section">
+        <section class="content-card" aria-labelledby="cookbook-facets">
+          <div class="content-card__title">
+            <h2 id="cookbook-facets">Plan your feast</h2>
+            <p>
+              Categories and tags make it simple to build seasonal menus or filter by dietary needs. Hook them into client-side
+              state or query parameters for an experience similar to the gallery overview.
+            </p>
+          </div>
           <div class="prose">
-            {section.paragraphs.map((paragraph) => (
-              <p>{paragraph}</p>
-            ))}
+            {categoryFacets.length > 0 && (
+              <p>
+                <strong>Categories:</strong>
+                {' '}
+                {categoryFacets.join(', ')}
+              </p>
+            )}
+            {tagFacets.length > 0 && (
+              <p>
+                <strong>Tags:</strong>
+                {' '}
+                {tagFacets.join(', ')}
+              </p>
+            )}
+            {categoryFacets.length === 0 && tagFacets.length === 0 && (
+              <p>
+                Start tagging recipes with flavour profiles, seasons, or difficulty to unlock richer filtering.
+              </p>
+            )}
           </div>
         </section>
-      ))}
+      </section>
+
+      <section class="content-layout section">
+        {recipes.map((recipe: RecipeEntry) => (
+          <article class="content-card" key={recipe.id}>
+            <div class="content-card__title">
+              <h2>
+                <a href={`/cookbook/${recipe.slug}/`}>{recipe.data.title}</a>
+              </h2>
+              <p>
+                <strong>Published:</strong> {formatDate(recipe.data.publishDate)}
+                {recipe.data.categories?.length ? (
+                  <>
+                    <br />
+                    <strong>Categories:</strong> {recipe.data.categories.join(', ')}
+                  </>
+                ) : null}
+                {recipe.data.tags?.length ? (
+                  <>
+                    <br />
+                    <strong>Tags:</strong> {recipe.data.tags.join(', ')}
+                  </>
+                ) : null}
+              </p>
+            </div>
+            <div class="prose">
+              {recipe.data.description && <p>{recipe.data.description}</p>}
+              <ul>
+                {recipe.data.prepTime && (
+                  <li>
+                    <strong>Prep:</strong> {recipe.data.prepTime}
+                  </li>
+                )}
+                {recipe.data.cookTime && (
+                  <li>
+                    <strong>Cook:</strong> {recipe.data.cookTime}
+                  </li>
+                )}
+                {recipe.data.servings && (
+                  <li>
+                    <strong>Serves:</strong> {recipe.data.servings}
+                  </li>
+                )}
+              </ul>
+              <p>
+                <a href={`/cookbook/${recipe.slug}/`}>Open recipe →</a>
+              </p>
+            </div>
+          </article>
+        ))}
+      </section>
+    </>
+  ) : (
+    <section class="content-card section">
+      <div class="content-card__title">
+        <h2>{overview.emptyState ?? 'Cakes are still baking...'}</h2>
+      </div>
+      <div class="prose">
+        <p>{overview.cta ?? 'Add markdown recipes to populate this overview automatically.'}</p>
+      </div>
     </section>
   )}

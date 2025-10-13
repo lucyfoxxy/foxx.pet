@@ -44,7 +44,7 @@
 .site-header__logo img {
   display: block;
   inline-size: auto;
-  height: clamp(28px, 5vw, 48px);
+  height: clamp(38px, 15vw, 48px);
   transition: opacity .25s ease, transform .25s ease, height .25s ease;
   will-change: opacity, transform, height;
       filter: drop-shadow(0 3px 2px color-mix(in oklab,var(--secondary-shadow-color) 75%,black 25%))
@@ -54,18 +54,15 @@
 .site-header__nav {
   display: flex;
   align-items: center;
+  justify-content: center;
   flex-wrap: wrap;
   gap: var(--large-spacing);
 }
 
 .site-header__nav a {
   color: var(--accent-text-color);
-  text-shadow: var(--accent-text-shadow);
+  text-shadow: var(--soft-text-glow),var(--strong-text-shadow);
   transition: var(--transition-nav);
-      filter: drop-shadow(2px 2px 2px color-mix(in oklab,var(--secondary-shadow-color) 75%,black 25%))
-            drop-shadow(2px 2px 4px color-mix(in oklab,var(--secondary-shadow-color)30%,black 6%))
-            
-            ;
 }
 
 .site-header__nav-link {
@@ -88,7 +85,7 @@
 .site-header__nav a:focus-visible {
   transform: translateY(-1px) scale(1.05);
   text-shadow: var(--strong-text-glow);
-  color: var(--highlight-color);
+  color: var(--highlight-glow-color); 
   transition: var(--transition-nav);
 }
 
@@ -114,7 +111,7 @@
   text-decoration: underline;
   text-underline-offset: 2px;
   color: var(--highlight-color);
-  text-shadow: var(--secondary-text-shadow);
+  text-shadow: var(--strong-text-shadow);
 }
 
 /* ====== CONTAINER / PANEL ====== */
@@ -133,7 +130,7 @@ main.panel {
       138deg,
       color-mix(in oklch, oklch(72% .12 300) 18%, transparent) 0%,
       color-mix(in oklch, var(--highlight-color) 16%, transparent) 45%,
-      color-mix(in oklch, var(--highlight-shadow-color) 28%, transparent) 100%
+      color-mix(in oklch, var(--highlight-glow-color) 28%, transparent) 100%
     );
   backdrop-filter: blur(18px) saturate(1.25) brightness(1.6);
   border: var(--panel-border-size) solid var(--outline-color);
@@ -176,7 +173,7 @@ main.panel > nav.is-breadcrumbs ol {
   list-style: none;
   font-size: var(--xsmall-font-size);
   color: var(--highlight-color);
-  text-shadow: var(--secondary-text-shadow);
+  text-shadow: var(--strong-text-shadow);
 }
 
 main.panel > nav.is-breadcrumbs li {

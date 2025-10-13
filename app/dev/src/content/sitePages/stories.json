@@ -1,0 +1,19 @@
+{
+  "id": "stories",
+  "href": "/stories",
+  "title": "Fuzzy Fops 🚀",
+  "navLabel": {
+    "text": "Fuzzy Fops",
+    "emoji": "🚀"
+  },
+  "includeInHeader": true,
+  "description": "Narrative experiments and cosmic adventures — coming soon.",
+  "introParagraphs": [
+    "This is the new home for short tales and blog-style updates about Lucy's travels.",
+    "Expect cosy updates, creative experiments, and behind-the-scenes looks once the first entries launch."
+  ],
+  "overview": {
+    "emptyState": "Stories are still brewing",
+    "cta": "New adventures will appear here as soon as they are published."
+  }
+}

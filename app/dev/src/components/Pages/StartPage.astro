@@ -6,7 +6,7 @@ import { getPageContent } from '@Content/siteContent';
 
 export const prerender = true;
 
-const content = getPageContent('home');
+const content = await getPageContent('home');
 
 const meta = {
   title: content.title,
@@ -33,9 +33,14 @@ const isExternalLink = (href: string) => href.startsWith('http');
 
 
     <section class="content-head media-hero section">   
- 
+      <div class="content__title">
+        <h3>{hero.heading}</h3>
+      </div>
       <div class="media-hero__logo">
         <img src={hero.logo} alt={hero.heading} loading="lazy" />   
+      </div>
+      <div class="content__subtitle">
+        <h3><em>...where cosmic foxes make...eeeeeeeeeeeek!</em></h3>
       </div>
     </section>
 

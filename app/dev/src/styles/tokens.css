@@ -56,17 +56,18 @@
   --backdrop-blur-strong:       blur(var(--large-blur));
 
   /* ====== Shadow & Glow ====== */
-  --primary-shadow-color:       color-mix(in oklch, var(--primary-background-color) 70%, black);
-  --primary-text-shadow:        0 0 9px var(--primary-background-color),0 0 4px color-mix(in oklab, var(--highlight-color) 60%, transparent 10%);  
+  --primary-shadow-color:       color-mix(in oklab, var(--primary-background-color) 70%, black 6%);
+  --soft-text-shadow:           2px 2px 2px var(--primary-shadow-color);  
+   
+  --secondary-shadow-color:     color-mix(in oklab, var(--secondary-background-color) 70%, black 12%);
+  --strong-text-shadow:           3px 3px 3px var(--secondary-shadow-color);
+
   
-  --secondary-shadow-color:     color-mix(in oklch, var(--secondary-background-color) 70%, black);
-  --secondary-text-shadow:      0 0 9px var(--primary-background-color),0 0 3px var(--highlight-color);
+  --highlight-glow-color:     color-mix(in oklab, var(--highlight-color) 70%, white 12%); 
+  --strong-text-glow:           1px 1px 6px var(--highlight-glow-color);  
   
-  --highlight-shadow-color:     color-mix(in oklch, var(--highlight-color) 80%, black); 
-  --strong-text-glow:      1px 1px 6px var(--highlight-color);  
-  
-  --accent-shadow-color:        color-mix(in oklch, var(--accent-color) 70%, black);
-  --accent-text-shadow:         1px 1px 4px var(--accent-color);
+  --accent-glow-color:        color-mix(in oklch, var(--accent-color) 70%, white 6%);
+  --soft-text-glow:             1px 1px 3px var(--accent-glow-color);
   --shadow-ambient-far:         0 26px 44px -30px oklch(72% 0.05 300 / .55);
 
   --small-shadow:               0 0 6px -4px var(--secondary-shadow-color);
@@ -74,7 +75,7 @@
   --large-shadow:               0 0 3px -13px var(--primary-shadow-color);
 
   --focus-glow-accent:          0 0 16px -12px var(--accent-shadow-color)   , 0 0 0 1px var(--accent-color), 0 0 4px 1px var(--accent-shadow-color) ;
-  --focus-glow-highlight:       0 0 18px -12px var(--highlight-shadow-color),inset 0 0 1px 1px var(--highlight-color), 0 0 2px 1px var(--highlight-shadow-color);
+  --focus-glow-highlight:       0 0 18px -12px var(--highlight-glow-color),inset 0 0 1px 1px var(--highlight-color), 0 0 2px 1px var(--highlight-glow-color);
 
   /* ====== Borders / Outlines ====== */
   --small-radius:               10px;

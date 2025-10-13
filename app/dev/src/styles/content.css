@@ -131,7 +131,7 @@
   text-decoration: underline;
   text-underline-offset: 2px;
   color: var(--highlight-color);
-  text-shadow: var(--secondary-text-shadow);
+  text-shadow: var(--strong-text-shadow);
 }
 
 .feature-slot {

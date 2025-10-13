@@ -4,7 +4,7 @@ import ImprintPage from '@Pages/ImprintPage.astro';
 import { getPageContent } from '@Content/siteContent';
 export const prerender = true;
 
-const content = getPageContent('imprint');
+const content = await getPageContent('imprint');
 const meta = { title: content.title, description: content.description };
 ---
 <Layout title={content.title} meta={meta}>

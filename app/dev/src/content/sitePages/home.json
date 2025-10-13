@@ -1,0 +1,34 @@
+{
+  "id": "home",
+  "href": "/",
+  "title": "Lucy's Cosmos",
+  "navLabel": "↩ Home",
+  "includeInHeader": false,
+  "description": "A small cosmic fox on their big journey across the universe!",
+  "hero": {
+    "heading": "Welcome to",
+    "subtitle": "eeeeeeeeeek!",
+    "subheading": "123"
+  },
+  "intro": {
+    "heading": "Welcome to my Cosmos",
+    "paragraphs": [
+      "My name is Lucy Foxx and I welcome you to my personal space!",
+      "Hop on my rocket to — watch me fuzzing around, learn to make delicious Nom Noms, and catch up on how my journey’s been so far!"
+    ],
+    "signature": "Lucy Foxx"
+  },
+  "feature": {
+    "heading": "Recent Fuzz:",
+    "description": "My latest adventure:",
+    "placeholder": "<Most recent gallery images here>"
+  },
+  "contact": {
+    "heading": "Reach me across the Universe"
+  },
+  "contactLinks": [
+    { "href": "https://t.me/LucyFoxx", "label": "Telegram", "kind": "telegram" },
+    { "href": "https://bsky.app/profile/lucy.foxx.pet", "label": "BlueSky", "kind": "bluesky" },
+    { "href": "mailto:lucy@foxx.pet", "label": "E-Mail", "kind": "mail" }
+  ]
+}
