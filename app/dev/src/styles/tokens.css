@@ -46,7 +46,7 @@
   --card-background--soft:      color-mix(in oklab, var(--secondary-background-color) 15%, black 15%); 
   --card-background:            oklch(18.5% 0.075 300 / 0.7);
 
-  --site-background:            oklch(32% 0.13 295);
+  --site-background:            oklch(20% 0.13 295);
   --site-background--bars:      color-mix(in oklch, var(--site-background) 70%, transparent);
   --site-background--panel:     color-mix(in oklch, var(--site-background) 18%, transparent);
   --site-backdrop:              blur(var(--large-blur));
@@ -99,7 +99,7 @@
   --large-radius:               18px;
 
   --outline-color:              color-mix(in oklch, var(--highlight-foreground) 5%, transparent);
-
+  --outline:                    1px solid var(--outline-color);
   /* ====== Font Styles ====== */
   --primary-font-family:        Grandstander, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --secondary-font-family:      'Fuzzy Bubbles', var(--primary-font-family);

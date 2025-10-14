@@ -64,7 +64,7 @@ flex-wrap: wrap;
 
 .site-header__nav a {
   color: var(--accent-text);
-  text-shadow: var(--soft-text-glow),var(--strong-text-shadow);
+  text-shadow: var(--strong-text-shadow);
   transition: var(--transition-nav);
 }
 
@@ -116,16 +116,16 @@ nav.is-site-nav {
   display: flex;
   align-items: center;
   gap: var(--small-spacing);
-  padding-inline:  var(--large-padding);
+  padding-inline:  var(--medium-padding);
   background: var(--site-background--panel);
-  padding-block: var(--medium-padding) var(--medium-padding);
+  padding-block: var(--small-padding);
+  border-radius: 999px;
+  outline: var(--outline);
 }
 
 main.panel > nav.is-breadcrumbs {
   margin-block: calc(-1 * var(--content-spacing)) var(--content-spacing);
   margin-inline: calc(-1 * var(--content-spacing));
-  border-top-left-radius: var(--medium-radius);
-  border-top-right-radius: var(--medium-radius);
   border-bottom: 4px hidden;
   justify-content: stretch;
   
@@ -178,8 +178,6 @@ main.panel > nav.is-site-nav {
   border-top: 4px hidden;
   margin-block: var(--content-spacing) calc(-1 * var(--content-spacing));
   margin-inline: calc(-1 * var(--content-spacing));
-  border-bottom-left-radius: var(--small-radius);
-  border-bottom-right-radius: var(--small-radius);
   justify-content: center;
 }
 
