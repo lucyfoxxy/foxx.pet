@@ -118,17 +118,17 @@ nav.is-site-nav {
   gap: var(--small-spacing);
   padding-inline:  var(--large-padding);
   background: var(--site-background--panel);
-  box-shadow: 0 0 4px 8px var(--site-background--panel);
+  padding-block: var(--medium-padding) var(--medium-padding);
 }
 
 main.panel > nav.is-breadcrumbs {
   margin-block: calc(-1 * var(--content-spacing)) var(--content-spacing);
   margin-inline: calc(-1 * var(--content-spacing));
   border-top-left-radius: var(--medium-radius);
-  border-top-right-radius: var(--small-radius);
+  border-top-right-radius: var(--medium-radius);
   border-bottom: 4px hidden;
   justify-content: stretch;
-  padding-block: var(--medium-padding) var(--small-padding);
+  
 }
 
 main.panel > nav.is-breadcrumbs .breadcrumbs-actions {
@@ -181,7 +181,6 @@ main.panel > nav.is-site-nav {
   border-bottom-left-radius: var(--small-radius);
   border-bottom-right-radius: var(--small-radius);
   justify-content: center;
-  padding-block: var(--small-padding) var(--medium-padding);
 }
 
 .panel :where(p, .prose) {
