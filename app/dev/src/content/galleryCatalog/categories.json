@@ -1,49 +1,19 @@
 {
   "categories": [
     {
-      "title": "Full Art - SFW",
-      "slug": "full-art-sfw",
-      "description": "Full-colour illustrations that bring your characters to life with vibrant scenes and cosmic backdrops."
+      "title": "Suitwalks",
+      "slug": "suitwalks",
+      "description": "See me floating around the world."
     },
     {
-      "title": "Full Art - NSFW",
-      "slug": "full-art-nsfw",
-      "description": "Sensual story-driven artworks for mature audiences, crafted with the same colourful energy as every other adventure."
+      "title": "Furmeets",
+      "slug": "furmeets",
+      "description": "See me hanging around with others."
     },
     {
-      "title": "Reference Sheets",
-      "slug": "ref-sheets",
-      "description": "Character blueprints covering outfits, markings, and props – everything a maker needs to know."
-    },
-    {
-      "title": "Badges",
-      "slug": "badges",
-      "description": "Wearable pieces of art perfect for conventions and meet-ups, laminated and ready to shine."
-    },
-    {
-      "title": "Sticker Packs",
-      "slug": "sticker-packs",
-      "description": "Expressive sticker bundles for your favourite messengers – SFW and NSFW emotions included."
-    },
-    {
-      "title": "Prints",
-      "slug": "prints",
-      "description": "Physical stickers and buttons to decorate bags, journals, and everything in between."
-    },
-    {
-      "title": "Sketches",
-      "slug": "sketch",
-      "description": "Loose explorations that capture ideas quickly before they head off into orbit."
-    },
-    {
-      "title": "Line Art",
-      "slug": "line-art",
-      "description": "Clean line work that invites you to colour the cosmos yourself."
-    },
-    {
-      "title": "Logos & Tribals",
-      "slug": "logos-tribals",
-      "description": "Custom emblems and marks for your wall, car, or even your own fur."
+      "title": "Conventions",
+      "slug": "conventions",
+      "description": "Explore the world of me and other furballs."
     }
   ]
 }

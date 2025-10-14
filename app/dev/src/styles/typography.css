@@ -83,7 +83,7 @@ p :where(em, i) {
   font-size: var(--xlarge-font-size);
   line-height: var(--xlarge-line-height);
   letter-spacing: var(--large-letter-spacing);
-  text-shadow: var(--strong-text-shadow),var(--strong-text-glow);
+  text-shadow: var(--strong-text-shadow);
 }
 
 .panel :where(h2) {
