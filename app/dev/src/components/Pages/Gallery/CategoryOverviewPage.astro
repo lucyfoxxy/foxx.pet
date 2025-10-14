@@ -1,0 +1,60 @@
+---
+interface AlbumEntry {
+  slug: string;
+  title: string;
+  description?: string;
+  href?: string;
+  count?: number;
+}
+
+interface CategoryInfo {
+  slug: string;
+  title: string;
+  description?: string;
+}
+
+const { category, albums } = Astro.props as {
+  category: CategoryInfo;
+  albums: AlbumEntry[];
+};
+---
+<Fragment slot="panel:inside">
+  <section class="content-head content-card__title section">
+    <h1>{category.title}</h1>
+    {category.description ? <p class="prose">{category.description}</p> : null}
+    <div class="content-card__rows">
+      <p>
+        <a class="button" href="/galleries">← Back to Galleries</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="content-layout section">
+    <div class="media-galleries">
+      {albums.map(({ slug, title, description, href, count }) => (
+        <a
+          class="content-card--soft"
+          href={href ?? `/galleries/${category.slug}/${slug}`}
+          aria-label={`Open ${title}`}
+        >
+          <div class="content-card__title">
+            <h2>{title}</h2>
+          </div>
+          <div class="content-card__subtitle">
+            {description ? <p>{description}</p> : null}
+            {typeof count === 'number'
+              ? <p>{count > 0 ? `${count} photos` : 'No photos yet'}</p>
+              : null}
+          </div>
+          <div class="media-galleries__thumb" data-slug={slug}></div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <script>
+    import initGalleryCovers from '@Scripts/galleryOverview.js';
+    import { runOnReady } from '@Scripts/utils/_runOnReady.js';
+    runOnReady(initGalleryCovers);
+  </script>
+</Fragment>

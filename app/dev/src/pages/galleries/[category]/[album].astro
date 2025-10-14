@@ -1,0 +1,46 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '@Layout/Main.astro';
+import GalleryDetailPage from '@Pages/Gallery/DetailPage.astro';
+
+export async function getStaticPaths() {
+  const albums = await getCollection('albumData');
+  return albums
+    .filter(({ data }) => data.slug && data.category?.slug)
+    .map(({ data }) => ({
+      params: {
+        category: data.category!.slug,
+        album: data.slug,
+      },
+      props: {
+        slug: data.slug,
+        title: data.title ?? data.albumName ?? data.slug,
+        description: data.albumName ?? undefined,
+        category: {
+          title: data.category?.name ?? data.category?.slug ?? '',
+          slug: data.category?.slug ?? '',
+        },
+      },
+    }));
+}
+
+const { slug, title, description, category } = Astro.props as {
+  slug: string;
+  title?: string;
+  description?: string;
+  category?: { title: string; slug: string };
+};
+
+const meta = {
+  title: title ?? 'Gallery',
+  description: description ?? '',
+};
+---
+<Layout title={meta.title} meta={meta}>
+  <GalleryDetailPage
+    albumSlug={slug}
+    title={title ?? meta.title}
+    description={description}
+    category={category}
+  />
+</Layout>

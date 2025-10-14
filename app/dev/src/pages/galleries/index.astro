@@ -9,7 +9,11 @@ const content = await getPageContent('galleries');
 const catalog = (await getEntry('galleryCatalog', 'categories')).data;
 const categories = catalog.categories
   .filter((cat): cat is typeof cat & { slug: string } => Boolean(cat.slug))
-  .map((cat) => ({ slug: cat.slug, title: cat.title }));
+  .map((cat) => ({
+    slug: cat.slug,
+    title: cat.title,
+    description: cat.description ?? '',
+  }));
 const meta = { title: content.title, description: content.description };
 ---
 <Layout title={content.title} meta={meta}>

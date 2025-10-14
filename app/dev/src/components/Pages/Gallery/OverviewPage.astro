@@ -4,7 +4,8 @@ import { getPageContent } from '@Content/siteContent';
 interface CategoryEntry {
   slug: string;
   title: string;
-  description: string;
+  description?: string;
+  href?: string;
 }
 
 const { categories } = Astro.props as { categories: CategoryEntry[] };
@@ -23,15 +24,15 @@ const introParagraphs = content.introParagraphs ?? [content.description];
 
   <section class="content-layout section">
     <div class="media-galleries">
-        {categories.map(({ slug, title }) => (
-          <a class="content-card--soft" href={`/galleries/${slug}`} aria-label={`Open ${title}`}>
+        {categories.map(({ slug, title, description, href }) => (
+          <a class="content-card--soft" href={href ?? `/galleries/${slug}`} aria-label={`Open ${title}`}>
             <div class="content-card__title">
               <h2>{title}</h2>
             </div>
             <div class="content-card__subtitle">
-              <p>*description here*</p>
+              {description ? <p>{description}</p> : null}
             </div>
-            <div class="media-galleries__thumb" data-slug={slug}></div>        
+            <div class="media-galleries__thumb" data-slug={slug}></div>
           </a>
         ))}
     </div>

@@ -1,8 +1,15 @@
 ---
-type Props = { albumSlug: string; title?: string; description?: string };
+type Props = {
+  albumSlug: string;
+  title?: string;
+  description?: string;
+  category?: { title?: string; slug?: string };
+};
 
-const { albumSlug, title, description } = Astro.props as Props;
+const { albumSlug, title, description, category } = Astro.props as Props;
 const detailTitle = title ?? 'Gallery';
+const backHref = category?.slug ? `/galleries/${category.slug}` : '/galleries';
+const backLabel = category?.title ? `← Back to ${category.title}` : '← Back to Overview';
 ---
 <Fragment slot="panel:inside">
   <section class="content-head section">
@@ -12,7 +19,7 @@ const detailTitle = title ?? 'Gallery';
       {description && <p class="prose">{description}</p>}
     </div>
     <div class="content-card__rows">
-      <p><a class="button" href="/galleries">← Back to Overview</a></p>
+      <p><a class="button" href={backHref}>{backLabel}</a></p>
     </div>
   </section>
 
