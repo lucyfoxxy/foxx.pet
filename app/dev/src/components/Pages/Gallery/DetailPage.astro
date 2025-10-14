@@ -11,18 +11,17 @@ const detailTitle = title ?? 'Gallery';
 const backHref = category?.slug ? `/galleries/${category.slug}` : '/galleries';
 const backLabel = category?.title ? `← Back to ${category.title}` : '← Back to Overview';
 ---
-<Fragment slot="panel:inside">
+  <a class="button--small" href={backHref}>{backLabel}</a>
   <section class="content-head section">
-
+    
     <div class="content-card__title">
       <h1>{detailTitle}</h1>
       {description && <p class="prose">{description}</p>}
     </div>
-    <div class="content-card__rows">
-      <p><a class="button" href={backHref}>{backLabel}</a></p>
-    </div>
-  </section>
 
+    
+  </section>
+  
   <section
     class="content-layout media-gallery__hook section"
     data-slug={albumSlug}
@@ -52,4 +51,3 @@ const backLabel = category?.title ? `← Back to ${category.title}` : '← Back 
 
     runOnReady(initGalleryPage);
   </script>
-</Fragment>
