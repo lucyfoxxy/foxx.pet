@@ -35,12 +35,17 @@ const meta = {
   title: title ?? 'Gallery',
   description: description ?? '',
 };
+
+const backHref = category?.slug ? `/galleries/${category.slug}` : '/galleries';
+const backLabel = category?.title ? `← Back to ${category.title}` : '← Back to Overview';
 ---
 <Layout title={meta.title} meta={meta}>
+  <Fragment slot="breadcrumbs-actions">
+    <a class="button--small" href={backHref}>{backLabel}</a>
+  </Fragment>
   <GalleryDetailPage
     albumSlug={slug}
     title={title ?? meta.title}
     description={description}
-    category={category}
   />
 </Layout>

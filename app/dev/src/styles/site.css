@@ -116,7 +116,7 @@ nav.is-site-nav {
   display: flex;
   align-items: center;
   gap: var(--small-spacing);
-  padding: var(--small-padding) var(--large-padding);
+  padding-inline:  var(--large-padding);
   background: var(--site-background--panel);
   box-shadow: 0 0 4px 8px var(--site-background--panel);
 }
@@ -128,6 +128,17 @@ main.panel > nav.is-breadcrumbs {
   border-top-right-radius: var(--small-radius);
   border-bottom: 4px hidden;
   justify-content: stretch;
+  padding-block: var(--medium-padding) var(--small-padding);
+}
+
+main.panel > nav.is-breadcrumbs .breadcrumbs-actions {
+  margin-inline-start: auto;
+  display: inline-flex;
+  align-items: center;
+}
+
+main.panel > nav.is-breadcrumbs .breadcrumbs-actions:empty {
+  display: none;
 }
 
 main.panel > nav.is-breadcrumbs ol {
@@ -170,6 +181,7 @@ main.panel > nav.is-site-nav {
   border-bottom-left-radius: var(--small-radius);
   border-bottom-right-radius: var(--small-radius);
   justify-content: center;
+  padding-block: var(--small-padding) var(--medium-padding);
 }
 
 .panel :where(p, .prose) {

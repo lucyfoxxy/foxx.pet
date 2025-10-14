@@ -32,13 +32,13 @@
   --primary-text-color:         oklch(96% 0.03 290);
 
   --accent-background:          oklch(78% 0.22 295 / 43%);
-  --accent-background--soft:    oklch(32% 0.13 295 / 18%);
+  --accent-background--soft:    oklch(27% 0.08 295 / 43%);
   --accent-foreground:          oklch(89% 0.13 285); 
   --accent-text:                color-mix(in oklab, var(--primary-text-color) 85%, var(--accent-foreground));
   --accent-glow:                0 0 4px -2px var(--accent-foreground);
  
   --highlight-background:       oklch(92% 0.22 295 / 49%);
-  --highlight-background--soft: oklch(88% 0.13 295 / 24%); 
+  --highlight-background--soft: oklch(88% 0.13 295 / 39%); 
   --highlight-foreground:       oklch(93% 0.13 295);  
   --highlight-text:             color-mix(in oklab, var(--primary-text-color) 25%, var(--highlight-foreground));
   --highlight-glow:             0 0 6px -2px var(--highlight-foreground);

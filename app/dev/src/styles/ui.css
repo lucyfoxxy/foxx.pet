@@ -10,7 +10,7 @@
   color: var(--highlight-foreground);
   transition: var(--transition-glow);
   vertical-align: middle;
-  background: var(--accent-background); 
+  
   box-shadow: var(--medium-shadow);
   justify-content: center;
   line-height: var(--xsmall-line-height);
@@ -22,13 +22,14 @@
 .button--small {
   gap: var(--xsmall-spacing);
   padding: var(--small-padding) var(--medium-padding);
-  background: var(--accent-background--soft);
-  border-radius: var(--small-radius);
+  background: var(--card-background--soft);
+  border-radius: var(--large-radius);
 }
 .button--large {
   gap: var(--small-spacing); 
   padding: var(--medium-padding) var(--medium-padding);
   border-radius: var(--medium-radius);
+  background: var(--accent-background); 
   font-weight: var(--thick-font-weight);
 }
 

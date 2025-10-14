@@ -18,15 +18,10 @@ const { category, albums } = Astro.props as {
   albums: AlbumEntry[];
 };
 ---
-<Fragment slot="panel:inside">
+
   <section class="content-head content-card__title section">
     <h1>{category.title}</h1>
     {category.description ? <p class="prose">{category.description}</p> : null}
-    <div class="content-card__rows">
-      <p>
-        <a class="button" href="/galleries">← Back to Galleries</a>
-      </p>
-    </div>
   </section>
 
   <section class="content-layout section">
@@ -57,4 +52,4 @@ const { category, albums } = Astro.props as {
     import { runOnReady } from '@Scripts/utils/_runOnReady.js';
     runOnReady(initGalleryCovers);
   </script>
-</Fragment>
+

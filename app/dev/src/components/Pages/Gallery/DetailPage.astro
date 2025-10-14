@@ -3,17 +3,13 @@ type Props = {
   albumSlug: string;
   title?: string;
   description?: string;
-  category?: { title?: string; slug?: string };
 };
 
-const { albumSlug, title, description, category } = Astro.props as Props;
+const { albumSlug, title, description } = Astro.props as Props;
 const detailTitle = title ?? 'Gallery';
-const backHref = category?.slug ? `/galleries/${category.slug}` : '/galleries';
-const backLabel = category?.title ? `← Back to ${category.title}` : '← Back to Overview';
 ---
-  <a class="button--small" href={backHref}>{backLabel}</a>
   <section class="content-head section">
-    
+
     <div class="content-card__title">
       <h1>{detailTitle}</h1>
       {description && <p class="prose">{description}</p>}

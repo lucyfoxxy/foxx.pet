@@ -12,7 +12,7 @@ const { categories } = Astro.props as { categories: CategoryEntry[] };
 const content = await getPageContent('galleries');
 const introParagraphs = content.introParagraphs ?? [content.description];
 ---
-<Fragment slot="panel:inside">
+
   <section class="content-head content-card__title section">
     <h1>{content.title}</h1>
     <div class="prose">
@@ -43,4 +43,3 @@ const introParagraphs = content.introParagraphs ?? [content.description];
     import { runOnReady } from '@Scripts/utils/_runOnReady.js';
     runOnReady(initGalleryCovers);
   </script>
-</Fragment>

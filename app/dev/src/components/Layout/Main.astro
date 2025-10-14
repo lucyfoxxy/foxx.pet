@@ -153,6 +153,9 @@ const enableAnalytics = true || !!goatCounterBase;
               </li>
             ))}
           </ol>
+          <div class="breadcrumbs-actions">
+            <slot name="breadcrumbs-actions" />
+          </div>
         </nav>
 
         <slot />

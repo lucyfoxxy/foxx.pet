@@ -78,13 +78,15 @@
 .media-gallery {
   position: relative;
   display: flex;
+  
   flex-direction: column;
-  gap: var(--xsmall-spacing);
+  gap: var(--medium-spacing);
   inline-size: 100%;
 }
 
 .media-gallery__frame {
   position: relative;
+  align-self: center;
   inline-size: var(--gallery-frame-size);
   max-block-size: 45vh;
   block-size: auto;
@@ -302,8 +304,8 @@
   grid-template-columns: auto 1fr auto;
   align-items: center;
   gap: var(--xsmall-spacing);
-  background: color-mix(in oklab, var(--content-background) 88%, black 12%);
-  border-radius: calc(var(--medium-radius) - 2px);
+  background: color-mix(in oklab, var(--accent-background) 88%, black 12%);
+  border-radius: var(--medium-radius);
   padding: calc(var(--xsmall-spacing) * .6) var(--small-spacing);
   box-shadow: var(--medium-shadow);
   transition: var(--transition-soft);
