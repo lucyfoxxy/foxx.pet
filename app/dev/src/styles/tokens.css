@@ -1,16 +1,15 @@
 :root { 
  /* ====== Layout Structures ====== */
-  --tiny-spacing: clamp(.4rem, .4rem + .15vw, .6rem);
-  --xsmall-spacing: clamp(.65rem, .5rem + .3vw, .95rem);
-  --small-spacing: clamp(.75rem, 1vw, 1.25rem);
-  --medium-spacing: clamp(1rem, 2vw, 1.75rem);
-  --large-spacing: clamp(.75rem, 3.5vw, 3rem);
-  --xlarge-spacing: clamp(1.75rem, 5.9vw, 6.75rem);
+  --tiny-spacing:               clamp(.4rem, .4rem + .15vw, .6rem);
+  --xsmall-spacing:             clamp(.65rem, .5rem + .3vw, .95rem);
+  --small-spacing:              clamp(.75rem, 1vw, 1.25rem);
+  --medium-spacing:             clamp(1rem, 2vw, 1.75rem);
+  --large-spacing:              clamp(.75rem, 3.5vw, 3rem);
+  --xlarge-spacing:             clamp(1.75rem, 5.9vw, 6.75rem);
 
-  --small-padding: clamp(.35rem, .3vw, .5rem);
-  --medium-padding: clamp(.75rem, 1.2vw, 1rem);
-  --large-padding: clamp(1rem, 2vw, 3rem);
-  
+  --small-padding:              clamp(.35rem, .3vw, .5rem);
+  --medium-padding:             clamp(.75rem, 1.2vw, 1rem);
+  --large-padding:              clamp(1rem, 2vw, 3rem);
 
   --container-max:              1280px;  
 
@@ -28,7 +27,6 @@
   --navbar-gap:                 var(--large-spacing);
   --brand-size:                 clamp(320px, 45vw, 480px);
   --brand-gap:                  var(--small-spacing);
-  --brand-gap-mobile:           var(--xsmall-spacing);
 
   /* ====== Main Colors =======*/
   --primary-text-color:         oklch(96% 0.03 290);
@@ -39,18 +37,28 @@
   --accent-text:                color-mix(in oklab, var(--primary-text-color) 85%, var(--accent-foreground));
   --accent-glow:                0 0 4px -2px var(--accent-foreground);
  
-  --highlight-background:          oklch(92% 0.22 295 / 49%);
-  --highlight-background--soft:    oklch(88% 0.13 295 / 24%); 
+  --highlight-background:       oklch(92% 0.22 295 / 49%);
+  --highlight-background--soft: oklch(88% 0.13 295 / 24%); 
   --highlight-foreground:       oklch(93% 0.13 295);  
   --highlight-text:             color-mix(in oklab, var(--primary-text-color) 25%, var(--highlight-foreground));
   --highlight-glow:             0 0 6px -2px var(--highlight-foreground);
+
+  --card-background--soft:      color-mix(in oklab, var(--secondary-background-color) 15%, black 15%); 
+  --card-background:            oklch(18.5% 0.075 300 / 0.7);
+
+  --site-background:            oklch(32% 0.13 295);
+  --site-background--bars:      color-mix(in oklch, var(--site-background) 70%, transparent);
+  --site-background--panel:     color-mix(in oklch, var(--site-background) 18%, transparent);
+  --site-backdrop:              blur(var(--large-blur));
+  --site-backdrop--bars:        var(--site-backdrop) opacity(.95) brightness(1.95);
+  --site-backdrop--panel:       blur(var(--large-blur)) saturate(1.25) brightness(1.6);
+  
+  --site-logo--size:            clamp(38px, 15vw, 48px);
+  --site-logo--filter:          drop-shadow(0 3px 2px color-mix(in oklab,var(--secondary-shadow-color) 75%,black 25%));
   /* ====== bg Colors / FX ====== */
 /*TODO: REWORK REMAINING COLORS & SHADOWS : --site-background ?*/
   --primary-background-color:   oklch(32% 0.075 290 / 0.65);
-  --secondary-background-color: oklch(24% 0.065 290 / 0.95); 
-  --card-background--soft:         color-mix(in oklab, var(--secondary-background-color) 15%, black 15%); 
-  --card-background:               oklch(18.5% 0.075 300 / 0.7);
-            
+  --secondary-background-color: oklch(24% 0.065 290 / 0.95);            
 
   --background-overlay:         radial-gradient(
                                   140% 80% at 15% 10%,
@@ -74,24 +82,16 @@
 
   /* ====== Shadow & Glow ====== */
   --primary-shadow-color:       color-mix(in oklab, var(--primary-background-color) 70%, black 4%);
- 
-   
   --secondary-shadow-color:     color-mix(in oklab, var(--secondary-background-color) 70%, black 4%);
-  
+
+  --small-shadow:               2px 3px 6px -2px var(--primary-shadow-color),2px 3px 6px -2px var(--secondary-shadow-color),2px 3px 3px -4px color-mix(in srgb, black 55%, transparent); 
+  --medium-shadow:              12px 12px 18px -14px var(--primary-shadow-color),12px 12px 24px -18px var(--secondary-shadow-color);
+  --large-shadow:               0 0 20px -14px var(--primary-shadow-color),0 0 28px -18px var(--secondary-shadow-color),0 0 14px -4px color-mix(in srgb, black 95%, transparent);
 
   --soft-text-shadow:           2px 2px 2px var(--primary-shadow-color);  
   --strong-text-shadow:         3px 3px 3px var(--secondary-shadow-color);
   --soft-text-glow:             1px 1px 3px var(--accent-foreground);
   --strong-text-glow:           1px 1px 6px var(--highlight-foreground); 
-
-  --shadow-ambient-far:         0 26px 44px -30px oklch(72% 0.05 300 / .55);
-  --small-shadow:               2px 3px 6px -2px var(--primary-shadow-color),2px 3px 6px -2px var(--secondary-shadow-color),2px 3px 3px -4px color-mix(in srgb, black 55%, transparent); 
-
-  --medium-shadow:              12px 12px 18px -14px var(--primary-shadow-color),12px 12px 24px -18px var(--secondary-shadow-color);
-  --large-shadow:               2px 4px 18px -14px var(--primary-shadow-color),2px 4px 24px -18px var(--secondary-shadow-color),2px 4px 14px -6px color-mix(in srgb, black 95%, transparent);
-
-  --focus-glow-accent:          0 0 16px -12px var(--accent-shadow-color)   , 0 0 0 1px var(--accent-foreground), 0 0 4px 1px var(--accent-shadow-color) ;
-  
 
   /* ====== Borders / Outlines ====== */
   --small-radius:               10px;

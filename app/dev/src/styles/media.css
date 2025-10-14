@@ -49,9 +49,7 @@
     filter: drop-shadow(0 3px 2px color-mix(in oklab,var(--secondary-shadow-color) 75%,black 25%)) 
             
             drop-shadow(0 0 8px color-mix(in oklab,var(--highlight-foreground)20%,black 25%))
-            ;
-
-            
+            ;           
   }
 }
 
@@ -374,7 +372,7 @@
 .media-gallery__thumb:hover,
 .media-gallery__thumb:focus-visible {
   transform: translateY(-3px);
-  box-shadow: var(--focus-glow-accent);
+  box-shadow: var(--accent-glow);
 }
 
 .media-gallery__thumb:hover img,

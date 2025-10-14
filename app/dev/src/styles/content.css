@@ -77,7 +77,7 @@
 .content-card--soft:hover,
 .content-card--soft:focus-visible {
   transform: scale(1.05);
-  box-shadow: var(--focus-glow-accent);
+  box-shadow: var(--highlight-glow);
 }
 .content-card--soft> .content-card__title {
   margin-block: 0 var(--tiny-spacing);
