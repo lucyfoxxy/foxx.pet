@@ -5,6 +5,10 @@ interface AlbumEntry {
   description?: string;
   href?: string;
   count?: number;
+  startDate?: string;
+  shareKey?: string;
+  albumThumbnailAssetId?: string;
+  coverUrl?: string;
 }
 
 interface CategoryInfo {
@@ -17,6 +21,30 @@ const { category, albums } = Astro.props as {
   category: CategoryInfo;
   albums: AlbumEntry[];
 };
+
+const dateFormatter = new Intl.DateTimeFormat('en', { month: 'long', year: 'numeric' });
+
+const normalizedAlbums = albums.map((album) => {
+  const trimmedTitle = album.title.trim();
+  const parsedStartDate = album.startDate ? Date.parse(album.startDate) : Number.NaN;
+  const hasValidStartDate = Number.isFinite(parsedStartDate);
+  const formattedStartDate = hasValidStartDate
+    ? dateFormatter.format(new Date(parsedStartDate))
+    : undefined;
+
+  const coverUrl =
+    album.coverUrl ??
+    (album.shareKey && album.albumThumbnailAssetId
+      ? `https://img.foxx.pet/api/assets/${album.albumThumbnailAssetId}/thumbnail?key=${album.shareKey}`
+      : undefined);
+
+  return {
+    ...album,
+    title: trimmedTitle,
+    formattedStartDate,
+    coverUrl,
+  };
+});
 ---
 
   <section class="content-section">
@@ -28,7 +56,15 @@ const { category, albums } = Astro.props as {
 
   <section class="content-section">
     
-      {albums.map(({ slug, title, description, href, count }) => (
+      {normalizedAlbums.map(({
+        slug,
+        title,
+        description,
+        href,
+        count,
+        formattedStartDate,
+        coverUrl,
+      }) => (
         <a
           class="content-card--soft"
           href={href ?? `/galleries/${category.slug}/${slug}`}
@@ -36,6 +72,9 @@ const { category, albums } = Astro.props as {
         >
           <div class="content-card__title">
             <h2>{title}</h2>
+            {formattedStartDate ? (
+              <p class="media-album__date">{formattedStartDate}</p>
+            ) : null}
           </div>
           <div class="content-card__subtitle">
             {description ? <p>{description}</p> : null}
@@ -43,15 +82,14 @@ const { category, albums } = Astro.props as {
               ? <p>{count > 0 ? `${count} photos` : 'No photos yet'}</p>
               : null}
           </div>
-          <div class="media-album__cover" data-slug={slug}></div>
+          <div class="media-album__cover" data-slug={slug}>
+            {coverUrl ? (
+              <img src={coverUrl} alt="" loading="lazy" decoding="async" />
+            ) : (
+              <div class="media-album__cover-placeholder" aria-hidden="true"></div>
+            )}
+          </div>
         </a>
       ))}
-    
+
   </section>
-
-  <script>
-    import initGalleryCovers from '@Scripts/galleryOverview.js';
-    import { runOnReady } from '@Scripts/utils/_runOnReady.js';
-    runOnReady(initGalleryCovers);
-  </script>
-

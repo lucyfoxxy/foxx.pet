@@ -21,15 +21,53 @@ const meta = {
 };
 
 const albums = await getCollection('albumData', ({ data }) => (data.category?.slug ?? '') === slug);
-const albumEntries = albums.map(({ data }) => ({
-  slug: data.slug,
-  title: data.title ?? data.albumName ?? data.slug,
-  description:
-    data.albumName && data.albumName !== data.title
-      ? data.albumName
-      : undefined,
-  count: data.count,
-}));
+const albumEntries = albums
+  .map(({ data }, index) => {
+    const startDateRaw = data.startDate ?? undefined;
+    const parsedStartDate = startDateRaw ? Date.parse(startDateRaw) : Number.NaN;
+    const hasValidStartDate = Number.isFinite(parsedStartDate);
+    const normalizedStartDate = hasValidStartDate
+      ? new Date(parsedStartDate).toISOString()
+      : undefined;
+
+    const shareKey = data.shareKey ?? undefined;
+    const albumThumbnailAssetId = data.albumThumbnailAssetId ?? undefined;
+    const coverUrl =
+      shareKey && albumThumbnailAssetId
+        ? `https://img.foxx.pet/api/assets/${albumThumbnailAssetId}/thumbnail?key=${shareKey}`
+        : undefined;
+
+    return {
+      slug: data.slug,
+      title: data.title ?? data.albumName ?? data.slug,
+      description:
+        data.albumName && data.albumName !== data.title
+          ? data.albumName
+          : undefined,
+      count: data.count,
+      startDate: normalizedStartDate,
+      shareKey,
+      albumThumbnailAssetId,
+      coverUrl,
+      _sortValue: hasValidStartDate ? parsedStartDate : undefined,
+      _originalIndex: index,
+    };
+  })
+  .sort((a, b) => {
+    const aHasDate = typeof a._sortValue === 'number';
+    const bHasDate = typeof b._sortValue === 'number';
+
+    if (aHasDate && bHasDate) {
+      // Descending by start date
+      return (b._sortValue as number) - (a._sortValue as number);
+    }
+
+    if (aHasDate) return -1;
+    if (bHasDate) return 1;
+
+    return a._originalIndex - b._originalIndex;
+  })
+  .map(({ _sortValue, _originalIndex, ...entry }) => entry);
 
 const category = { slug, title: meta.title, description: meta.description };
 const backHref = '/galleries';

@@ -33,14 +33,10 @@ const introParagraphs = content.introParagraphs ?? [content.description];
             <div class="content-card__subtitle">
               {description ? <p>{description}</p> : null}
             </div>
-            <div class="media-album__cover" data-slug={slug}></div>
+            <div class="media-album__cover" data-slug={slug}>
+              <div class="media-album__cover-placeholder" aria-hidden="true"></div>
+            </div>
           </a>
         ))}
-    
-  </section>
 
-  <script>
-    import initGalleryCovers from '@Scripts/galleryOverview.js';
-    import { runOnReady } from '@Scripts/utils/_runOnReady.js';
-    runOnReady(initGalleryCovers);
-  </script>
+  </section>
