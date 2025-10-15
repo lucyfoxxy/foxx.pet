@@ -23,7 +23,7 @@ const introParagraphs = content.introParagraphs ?? [content.description];
   </section>
 
   <section class="content-layout section">
-    <div class="media-galleries">
+    
         {categories.map(({ slug, title, description, href }) => (
           <a class="content-card--soft" href={href ?? `/galleries/${slug}`} aria-label={`Open ${title}`}>
             <div class="content-card__title">
@@ -32,10 +32,10 @@ const introParagraphs = content.introParagraphs ?? [content.description];
             <div class="content-card__subtitle">
               {description ? <p>{description}</p> : null}
             </div>
-            <div class="media-galleries__thumb" data-slug={slug}></div>
+            <div class="media-album__cover" data-slug={slug}></div>
           </a>
         ))}
-    </div>
+    
   </section>
 
   <script>

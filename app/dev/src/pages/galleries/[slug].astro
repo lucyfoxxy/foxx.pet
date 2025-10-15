@@ -36,7 +36,7 @@ const backHref = '/galleries';
 const backLabel = '← Back to Paw Prints';
 ---
 <Layout title={meta.title} meta={meta}>
-  <Fragment slot="panel__bar--actions">
+  <Fragment slot="breadcrumbs-actions">
     <a class="button button--small" href={backHref}>{backLabel}</a>
   </Fragment>
   <GalleryCategoryOverviewPage category={category} albums={albumEntries} />

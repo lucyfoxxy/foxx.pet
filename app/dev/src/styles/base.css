@@ -43,6 +43,7 @@ body::before {
 :where(a):focus-visible {
   text-shadow: var(--strong-text-glow);
   color: var(--highlight-text);
+  opacity: 1;
 }
 
 img,

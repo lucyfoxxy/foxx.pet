@@ -14,14 +14,18 @@
   --container-max:              1280px;  
   --container-spacing:          var(--large-spacing);
   --container-padding:          max(var(--large-spacing), calc((100vw - var(--container-max)) / 2));
-  --navbar-padding:             var(--medium-padding);
-  --navbar-spacing:             var(--large-spacing);
-  --navbar-gap:                 var(--xlarge-spacing);
-  --navbar-gap--compact:        var(--xsmall-spacing);
-  --panel-bar-padding:          var(--small-padding);
-    
-  --content-spacing:            var(--medium-spacing);
-  --content-padding:            var(--large-padding); 
+
+  --site-bars-padding:          var(--medium-padding);
+  --site-bars-spacing:          var(--large-spacing);
+  --site-bars-gap:              var(--xlarge-spacing);
+  --site-bars-gap--compact:     var(--xsmall-spacing);
+  
+  --card-spacing:               var(--medium-spacing);
+  --card-padding:               var(--large-padding);
+  --card-size--compact:         calc(10rem + 6vw);
+  --card-size:                  calc(11.5rem);
+  --card-size--spacy:           20rem;
+
   --prose-flow-spacing:         var(--tiny-spacing);  
   
   --brand-size:                 clamp(320px, 45vw, 480px);
@@ -30,27 +34,25 @@
   /* ====== Main Colors =======*/
   --primary-text-color:         oklch(96% 0.03 290);
 
-  --accent-background:          oklch(78% 0.22 295 / 43%);
-  --accent-background--soft:    oklch(27% 0.08 295 / 43%);
-  --accent-foreground:          oklch(89% 0.13 285); 
+  --accent-background:          oklch(78% 0.22 285 / 43%);
+  --accent-background--soft:    oklch(78% 0.22 285 / 12%);
+  --accent-foreground:          oklch(86% 0.13 285); 
   --accent-text:                color-mix(in oklab, var(--primary-text-color) 85%, var(--accent-foreground));
-  --accent-glow:                0 0 4px -2px var(--accent-foreground);
+  --accent-glow:                0 0 5px -2px var(--accent-foreground);
  
   --highlight-background:       oklch(92% 0.22 295 / 49%);
-  --highlight-background--soft: oklch(88% 0.13 295 / 39%); 
-  --highlight-foreground:       oklch(93% 0.13 295);  
+  --highlight-background--soft: oklch(88% 0.13 295 / 29%); 
+  --highlight-foreground:       oklch(92% 0.15 300);  
   --highlight-text:             color-mix(in oklab, var(--primary-text-color) 25%, var(--highlight-foreground));
-  --highlight-glow:             0 0 6px -2px var(--highlight-foreground);
+  --highlight-glow:             0 0 7px -1px var(--highlight-foreground);
 
   --card-background--soft:      color-mix(in oklab, var(--secondary-background-color) 15%, black 15%); 
   --card-background:            oklch(18.5% 0.075 300 / 0.7);
 
-  --site-background:            oklch(20% 0.13 295);
-  --site-background--bars:      color-mix(in oklch, var(--site-background) 70%, transparent);
-  --site-background--panel:     color-mix(in oklch, var(--site-background) 18%, transparent);
-  --site-backdrop:              blur(var(--large-blur));
-  --site-backdrop--bars:        var(--site-backdrop) opacity(.95) brightness(1.95);
-  --site-backdrop--panel:       blur(var(--large-blur)) saturate(1.25) brightness(1.6);
+  --site-bars-background:      oklch(20% 0.13 295 / 67%);
+  --site-bars-backdrop:         blur(var(--large-blur)) opacity(.95) brightness(1.95);
+
+  --panel-backdrop:       blur(var(--large-blur)) saturate(1.25) brightness(1.6);
   
   --site-logo--size:            clamp(24px, 10vw, 48px);
   --site-logo--filter:          drop-shadow(0 3px 2px color-mix(in oklab,var(--secondary-shadow-color) 75%,black 25%));
@@ -97,8 +99,8 @@
   --medium-radius:              14px;
   --large-radius:               18px;
 
-  --outline-color:              color-mix(in oklch, var(--highlight-foreground) 5%, transparent);
-  --outline:                    1px solid var(--outline-color);
+  --outline-color:              color-mix(in oklch, var(--accent-foreground) 75%, transparent);
+  --outline:                    2px solid var(--outline-color);
   /* ====== Font Styles ====== */
   --primary-font-family:        Grandstander, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --secondary-font-family:      'Fuzzy Bubbles', var(--primary-font-family);
@@ -127,7 +129,7 @@
   /* ====== Gallery ====== */
   --gallery-frame-size: calc(
       (var(--container-max) - 
-        (var(--container-spacing) + var(--content-padding)) * 2 + var(--content-spacing) * 4
+        (var(--container-spacing) + var(--card-padding)) * 2 + var(--card-spacing) * 4
       ) / 2
     );
   --thumb-size: clamp(64px, 9vw, 128px);

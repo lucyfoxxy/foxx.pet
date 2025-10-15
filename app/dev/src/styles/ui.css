@@ -10,54 +10,53 @@
   color: var(--accent-text);
   transition: var(--transition-glow);
   vertical-align: middle;
-  
+  text-shadow: var(--soft-text-glow),var(--soft-text-shadow);
   box-shadow: var(--medium-shadow);
   justify-content: center;
   line-height: var(--xsmall-line-height);
   transition:
-    color .15s ease,
-    filter .15s ease,
+    color .25s ease,
+    filter .25s ease,
+    transform .25s ease,
     var(--transition-raise);
 }
 .button--small {
-  gap: var(--xsmall-spacing);
-  padding: var(--small-padding) var(--medium-padding);
-  background: var(--card-background--soft);
-  border-radius: var(--large-radius);
+  gap: 0;
+  padding-inline: 0;
+
+  
 }
 .button--large {
   gap: var(--small-spacing); 
   padding: var(--medium-padding) var(--medium-padding);
-  border-radius: var(--medium-radius);
+  border-radius: var(--large-radius);
   background: var(--accent-background); 
   font-weight: var(--thick-font-weight);
+  
 }
 
-.button--small:hover,
-.button--small:focus-visible, 
-.button--large:hover,
-.button--large:focus-visible
+
+.button:hover,
+.button:focus-visible
 {
   text-shadow: var(--strong-text-glow);
   color: var(--highlight-text);
-  box-shadow: var(--highlight-glow);
-  transform: translateY(-1px);
+  
+  transform: translateY(-1px) scale(1.01);
 }
 
-.button--small:hover,
-.button--small:focus-visible {
-  background: var(--highlight-background--soft);
-}
+
 .button--large:hover,
 .button--large:focus-visible {
-  background: var(--highlight-background); 
+  background: var(--highlight-background);
+  box-shadow: var(--highlight-glow); 
 }
 
 .button--large--wrap {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   gap: var(--medium-spacing);
-  margin-block-start: var(--xsmall-spacing);
+  margin-block-start: var(--tiny-spacing);
 }
 
 .button--large:active {
@@ -72,6 +71,7 @@
 
 .button--large--icon {
   display: inline-grid;
+  
   place-items: center;
   inline-size: 1.75rem;
   block-size: 1.75rem;
@@ -84,7 +84,7 @@
   block-size: 1.75rem;
 }
 
-@media (max-width: 780px) {
+@media (max-width: 680px) {
   .button--large--wrap {
     display: flex;
     justify-content: center;

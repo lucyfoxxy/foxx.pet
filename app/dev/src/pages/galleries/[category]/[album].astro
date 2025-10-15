@@ -41,7 +41,7 @@ const backLabel = category?.title ? `← Back to ${category.title}` : '← Back 
 ---
 <Layout title={meta.title} meta={meta}>
   <Fragment slot="panel__bar--actions">
-    <a class="button--small" href={backHref}>{backLabel}</a>
+    <a class="button button--small" href={backHref}>{backLabel}</a>
   </Fragment>
   <GalleryDetailPage
     albumSlug={slug}
