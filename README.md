@@ -53,7 +53,7 @@ Provide the following environment variables in `app/<target>/.env` before runnin
 | `IMMICH_BASE_URL` (or `IMMICH_URL`) | Base URL of the Immich server (e.g. `https://i.foxx.pet`). |
 | `IMMICH_API_KEY` | Immich API key with access to the referenced albums. |
 | `IMMICH_ALBUMS` | Comma separated map of gallery slugs to Immich album IDs (`slug:uuid,slug:uuid`). |
-| `IMMICH_BESTOF_ALBUM` | Optional album ID for the curated “best of” gallery. |
+| `IMMICH_BESTOF_SHARED_LINK` | Optional shared link ID or key for the curated “best of” gallery. |
 
 The script downloads assets into `app/<target>/src/assets/galleries/<slug>/`, renders thumbnails and resized images via Sharp, and writes JSON indices to `app/<target>/src/content/galleries/index/`. The manifest stored at `app/<target>/src/content/galleries/manifest.json` is regenerated automatically and only references slugs supplied through `IMMICH_ALBUMS`.
 

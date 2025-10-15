@@ -73,12 +73,12 @@ const normalizedAlbums = albums.map((album) => {
           <div class="content-card__title">
             <h3>{title}</h3>
             {formattedStartDate ? (
-              <p class="badge">{formattedStartDate}</p>
+              <p class="badge badge--small">{formattedStartDate}</p>
               
             ) : null}
             <div class="badge--wrapper">
                         {typeof count === 'number'
-              ? <p class="badge">{count > 0 ? `${count} photos` : 'No photos yet'}</p>
+              ? <p class="badge badge--small">{count > 0 ? `${count} photos` : 'No photos yet'}</p>
               : null}
             </div>
           </div>

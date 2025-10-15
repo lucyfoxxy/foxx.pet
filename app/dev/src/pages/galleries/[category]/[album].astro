@@ -39,6 +39,12 @@ const meta = {
 const [albumEntry] = await getCollection('albumData', ({ data }) => data.slug === slug);
 const albumData = albumEntry?.data;
 
+const categoryTitle = category?.title?.trim() || category?.slug?.trim() || undefined;
+
+const startDateRaw = albumData?.startDate ?? undefined;
+const normalizedStartDate =
+  typeof startDateRaw === 'string' && startDateRaw.trim().length > 0 ? startDateRaw : undefined;
+
 const shareKey = albumData?.shareKey ?? undefined;
 const albumItems = Array.isArray(albumData?.items) ? albumData?.items : [];
 const primaryItem = albumItems.find((item) => item && (item.full || item.thumb));
@@ -63,6 +69,8 @@ const backLabel = category?.title ? `← ${category.title}` : '← Overview';
     albumSlug={slug}
     title={title ?? meta.title}
     description={description}
+    category={categoryTitle}
+    startDate={normalizedStartDate}
     shareKey={shareKey}
     initialItem={initialItem}
   />

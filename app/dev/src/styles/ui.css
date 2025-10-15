@@ -24,13 +24,19 @@
   gap: 0;
   padding-inline: 0; 
 }
-.badge {
+.badge--small {
   background: var(--accent-background--soft);
   padding: var(--tiny-spacing) var(--tiny-spacing);
   border-radius: var(--small-radius);
   margin-block-start: var(--tiny-spacing);
   
   
+}
+.badge--large {
+    background: var(--accent-background);
+  padding: var(--tiny-spacing) var(--xsmall-spacing);
+  border-radius: var(--medium-radius);
+  margin-block-start: var(--tiny-spacing);
 }
 
 .badge--wrapper{
@@ -40,7 +46,7 @@
   inline-size: auto;
   justify-content: stretch;
   flex-wrap: nowrap;
-  
+  gap: var(--xsmall-spacing);
 }
 .button--large {
   gap: var(--small-spacing); 

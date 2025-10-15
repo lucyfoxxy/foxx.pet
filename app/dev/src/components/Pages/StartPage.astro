@@ -23,7 +23,8 @@ const intro = content.intro;
 const feature = content.feature;
 const links = content.contactLinks ?? [];
 const contact = content.contact;
-
+const albumSlug='bestof';
+const shareKey= "KEkdKYpvFNPFgS654sbWB28rHuXIohcLo5MtrD1BERFqwHOtrQjmDxMhsRTnRSsKRSw";
 const isExternalLink = (href: string) => href.startsWith('http');
 ---
 <Layout meta={meta}>
@@ -59,15 +60,32 @@ const isExternalLink = (href: string) => href.startsWith('http');
         <h3><i>{intro.signature}</i></h3>
       </section>
 
-      <section class="content-card">
-        <h2>{feature.heading}</h2>
-        <p>{feature.description}</p>
-        <div class="feature-slot">
-          <p>{feature.placeholder}</p>
-        </div>
+      
+        
+        
+        
+          <section
+            class="media-gallery__hook content-card"
+            data-slug={albumSlug}
+            data-autoplay="true"
+            data-interval="8000"
+            data-random="true"
+            data-share-key={shareKey}
+          ><h2>{feature.heading}</h2>
+            <div class="media-gallery">
+      
+              <div class="media-gallery__frame" role="button" tabindex="0" aria-label="Open artwork in lightbox">
+                <img
+                  class="media-gallery__image compact"
+
+                />
+              </div>
+              <div class="media-gallery__progress" aria-hidden="true"></div>
+            </div>
+        
+        
       </section>
     </div>
-
     <section class="content-card content-section">
       <h2>{contact.heading}</h2>
       <div class="button--large--wrap">
@@ -84,5 +102,10 @@ const isExternalLink = (href: string) => href.startsWith('http');
         ))}
       </div>
     </section>
+  <script>
+    import initGalleryIntro from '@Scripts/galleryViewer_compact.js';
+    import { runOnReady } from '@Scripts/utils/_runOnReady.js';
 
+    runOnReady(initGalleryIntro);
+  </script>
 </Layout>

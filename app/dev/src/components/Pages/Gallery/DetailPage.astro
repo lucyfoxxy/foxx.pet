@@ -12,14 +12,25 @@ type Props = {
   albumSlug: string;
   title?: string;
   description?: string;
-  category?: string;
-  startDate?: string;
+  category?: string | null;
+  startDate?: string | null;
   shareKey?: string;
   initialItem?: GalleryItem | null;
 };
 
-const { albumSlug, title, description, shareKey, initialItem,category } = Astro.props as Props;
+const { albumSlug, title, category, startDate, shareKey, initialItem } = Astro.props as Props;
 const detailTitle = title ?? 'Gallery';
+
+const trimmedCategory = typeof category === 'string' ? category.trim() : '';
+const normalizedCategory = trimmedCategory.length > 0 ? trimmedCategory : undefined;
+
+const parsedStartDate = startDate ? Date.parse(startDate) : Number.NaN;
+const hasValidStartDate = Number.isFinite(parsedStartDate);
+const formattedStartDate = hasValidStartDate
+  ? new Intl.DateTimeFormat('en', { month: 'long', year: 'numeric' }).format(
+      new Date(parsedStartDate),
+    )
+  : undefined;
 
 const normalizedInitialItem = initialItem && (initialItem.full || initialItem.thumb)
   ? {
@@ -39,13 +50,20 @@ const initialFullSrc = normalizedInitialItem?.full;
 const initialWidth = normalizedInitialItem?.width;
 const initialHeight = normalizedInitialItem?.height;
 ---
-  <section class="content-head content-section">
+  <section class=" content-section">
 
-    <div class="content-card__title">
+    <div class="content-card__title content-head">
       <h1>{detailTitle}</h1>
-      {category && <p class="prose">{category}</p>}
+          <div class="content-card__subtitle">
+      *description goes here*
     </div>
+      <div class="badge--wrapper">
+        {normalizedCategory ? <p class="badge badge--large">{normalizedCategory}</p> : null}
+        {formattedStartDate ? <p class="badge badge--large">{formattedStartDate}</p> : null}
+      </div>
+    
 
+</div>
     
   </section>
   
@@ -58,6 +76,7 @@ const initialHeight = normalizedInitialItem?.height;
     data-share-key={shareKey}
   >
     <div class="media-gallery content-card content-section">
+      
       <div class="media-gallery__frame" role="button" tabindex="0" aria-label="Open artwork in lightbox">
         <img
           class="media-gallery__image"

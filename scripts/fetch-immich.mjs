@@ -27,7 +27,7 @@ const CATEGORY_MAP = new Map([
   ['furmeet', { name: 'Furmeets', slug: 'furmeets' }],
   ['convention', { name: 'Conventions', slug: 'conventions' }]
 ]);
-const BESTOF_ID = (process.env.IMMICH_BESTOF_ALBUM || '').trim();
+const BESTOF_LINK_ID = (process.env.IMMICH_BESTOF_SHARED_LINK || '').trim();
 
 if (!['dev', 'prod'].includes(TARGET)) {
   console.error(`Invalid TARGET "${TARGET}". Exiting.`);
@@ -101,7 +101,7 @@ async function main() {
     console.log(`   entries: ${PATHS.albumData}`);
   }
 
-  const sharedLinkMap = await listRelevantSharedLinks();
+  const { map: sharedLinkMap, links: sharedLinks } = await listRelevantSharedLinks();
   const albums = await listRelevantAlbums();
 
   const albumEntries = [];
@@ -125,15 +125,22 @@ async function main() {
   }
 
   let bestOfEntry = null;
-  if (BESTOF_ID) {
-    const bestOfShare = sharedLinkMap.get(BESTOF_ID);
+  if (BESTOF_LINK_ID) {
+    const bestOfShare = resolveBestOfShareLink({
+      linkId: BESTOF_LINK_ID,
+      sharedLinks
+    });
     if (!bestOfShare) {
       console.warn(
-        `⚠️  Missing shared link for Best Of album (${BESTOF_ID}). Skipping.`
+        `⚠️  Missing shared link for Best Of selection (${BESTOF_LINK_ID}). Skipping.`
+      );
+    } else if (!bestOfShare.albumId) {
+      console.warn(
+        `⚠️  Best Of shared link (${BESTOF_LINK_ID}) is not associated with an album. Skipping.`
       );
     } else {
-      const bestOfAlbum = await fetchAlbumInfo(BESTOF_ID);
-      const assets = await getAssetsCached(BESTOF_ID);
+      const bestOfAlbum = await fetchAlbumInfo(bestOfShare.albumId);
+      const assets = await getAssetsCached(bestOfShare.albumId);
       bestOfEntry = {
         album: bestOfAlbum,
         assets,
@@ -387,7 +394,23 @@ async function listRelevantSharedLinks() {
     if (!link.key) continue;
     map.set(albumId, { key: link.key, linkId: link.id ?? null });
   }
-  return map;
+  return { map, links };
+}
+
+function resolveBestOfShareLink({ linkId, sharedLinks }) {
+  if (!linkId) return null;
+  const match = sharedLinks.find((link) => {
+    if (!link) return false;
+    if (link.userId && link.userId !== OWNER_ID) return false;
+    if (link.id && link.id === linkId) return true;
+    if (link.key && link.key === linkId) return true;
+    return false;
+  });
+  if (!match) return null;
+  const albumId = match.album?.id ?? match.albumId ?? null;
+  const key = match.key ?? null;
+  const linkUuid = match.id ?? null;
+  return { albumId, key, linkId: linkUuid };
 }
 
 function createAssetStrategy({ baseUrl, preferredMode, quiet }) {
@@ -673,10 +696,9 @@ function deriveAlbumMeta(album) {
 
 function createBestOfMeta(album) {
   const title = album?.albumName?.trim() || 'Best Of';
-  const cleanTitle = sanitizeSegment(title) || 'Best Of';
   return {
     slug: 'bestof',
-    albumId: album?.id ?? BESTOF_ID,
+    albumId: album?.id ?? BESTOF_LINK_ID,
     albumName: album?.albumName ?? 'Best Of',
     title,
     rawTitle: title,
