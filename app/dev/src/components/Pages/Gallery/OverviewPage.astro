@@ -13,16 +13,17 @@ const content = await getPageContent('galleries');
 const introParagraphs = content.introParagraphs ?? [content.description];
 ---
 
-  <section class="content-head content-card__title section">
+  <section class="content-section">
+    <div class="content-head content-card__title">
     <h1>{content.title}</h1>
-    <div class="prose">
+    
       {introParagraphs.map((paragraph) => (
-        <p>{paragraph}</p>
+        <p class="prose">{paragraph}</p>
       ))}
     </div>
   </section>
 
-  <section class="content-layout section">
+  <section class="content-section">
     
         {categories.map(({ slug, title, description, href }) => (
           <a class="content-card--soft" href={href ?? `/galleries/${slug}`} aria-label={`Open ${title}`}>

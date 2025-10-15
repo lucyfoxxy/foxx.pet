@@ -23,19 +23,22 @@ const formatDate = (date: Date) => new Intl.DateTimeFormat('en', { dateStyle: 'm
 const hasRecipes = recipes.length > 0;
 ---
 
-  <section class="content-head content-card__title section">
-    <h1>{content.title}</h1>
-    <div class="prose">
+  <section class="content-section">
+    <div class="content-head ">
+    <div class="content-card__title">
+      <h1>{content.title}</h1>
+    
       {introParagraphs.map((paragraph) => (
-        <p>{paragraph}</p>
+        <p class="prose">{paragraph}</p>
       ))}
+      </div>
     </div>
   </section>
 
   {hasRecipes ? (
     <>
-      <section class="content-layout section">
-        <section class="content-card" aria-labelledby="cookbook-facets">
+      <section class="content-section">
+        <div class="content-card" aria-labelledby="cookbook-facets">
           <div class="content-card__title">
             <h2 id="cookbook-facets">Plan your feast</h2>
             <p>
@@ -64,10 +67,10 @@ const hasRecipes = recipes.length > 0;
               </p>
             )}
           </div>
-        </section>
+        </div>
       </section>
 
-      <section class="content-layout section">
+      <section class="content-section">
         {recipes.map((recipe: RecipeEntry) => (
           <article class="content-card" key={recipe.id}>
             <div class="content-card__title">
@@ -118,7 +121,7 @@ const hasRecipes = recipes.length > 0;
       </section>
     </>
   ) : (
-    <section class="content-card section">
+    <section class="content-card content-section">
       <div class="content-card__title">
         <h2>{overview.emptyState ?? 'Cakes are still baking...'}</h2>
       </div>

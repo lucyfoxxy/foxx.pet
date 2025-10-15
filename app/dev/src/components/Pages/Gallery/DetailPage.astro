@@ -8,7 +8,7 @@ type Props = {
 const { albumSlug, title, description } = Astro.props as Props;
 const detailTitle = title ?? 'Gallery';
 ---
-  <section class="content-head section">
+  <section class="content-head content-section">
 
     <div class="content-card__title">
       <h1>{detailTitle}</h1>
@@ -19,13 +19,13 @@ const detailTitle = title ?? 'Gallery';
   </section>
   
   <section
-    class="content-layout media-gallery__hook section"
+    class="content-section media-gallery__hook content-section"
     data-slug={albumSlug}
     data-autoplay="true"
     data-interval="8000"
     data-random="true"
   >
-    <div class="media-gallery content-card section">
+    <div class="media-gallery content-card content-section">
       <div class="media-gallery__frame" role="button" tabindex="0" aria-label="Open artwork in lightbox">
         <img class="media-gallery__image" alt="" />
         <button class="media-gallery__nav media-gallery__prev" aria-label="Previous" type="button">❮</button>

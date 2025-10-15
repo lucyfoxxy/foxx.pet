@@ -7,18 +7,20 @@ const contacts = content.contacts ?? [];
 const disclaimer = content.disclaimer ?? [];
 ---
 
-  <section class="content-head content-card__title section">
+  <section class="content-section">
+    <div class="content-head content-card__title">
     <h1>{content.title}</h1>
-    <div class="prose">
-      {introParagraphs.map((paragraph) => (
-        <p>{paragraph}</p>
-      ))}
+      <div class="prose">
+        {introParagraphs.map((paragraph) => (
+          <p>{paragraph}</p>
+        ))}
+      </div>
     </div>
   </section>
 
-  <section class="content-layout content-layout__split section">
+  <section class="content-section">
     {contacts.map((contact) => (
-      <section class="content-card" key={contact.title}>
+      <div class="content-card" key={contact.title}>
         <div class="content-card__title">
           <h2>{contact.title}</h2>
           {contact.subtitle && <p><em>{contact.subtitle}</em></p>}
@@ -35,21 +37,22 @@ const disclaimer = content.disclaimer ?? [];
             </dd>,
           ])}
         </dl>
-      </section>
+      </div>
     ))}
-  </section>
+  
 
-  {disclaimer.length > 0 && (
-    <section class="content-card section">
-      <div class="content-card__subtitle">
-        <h2>Disclaimer</h2>
-        <div class="prose">
-          {disclaimer.map((paragraph) => (
-            <p>
-              <em>{paragraph}</em>
-            </p>
-          ))}
+    {disclaimer.length > 0 && (
+      <div class="content-card">
+        <div class="content-card__title">
+          <h2>Disclaimer</h2>
+          
+            {disclaimer.map((paragraph) => (
+              <p class="prose">
+                <em>{paragraph}</em>
+              </p>
+            ))}
+          
         </div>
       </div>
-    </section>
-  )}
+    )}
+  </section>

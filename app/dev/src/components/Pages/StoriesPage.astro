@@ -23,19 +23,21 @@ const formatDate = (date: Date) => new Intl.DateTimeFormat('en', { dateStyle: 'm
 const hasStories = stories.length > 0;
 ---
 
-  <section class="content-head content-card__title section">
+  <section class="content-section">
+    <div class="content-head content-card__title">
     <h1>{content.title}</h1>
     <div class="prose">
       {introParagraphs.map((paragraph) => (
         <p>{paragraph}</p>
       ))}
     </div>
+    </div>
   </section>
 
   {hasStories ? (
     <>
-      <section class="content-layout section">
-        <section class="content-card" aria-labelledby="stories-facets">
+      <section class="content-section">
+        <div class="content-card" aria-labelledby="stories-facets">
           <div class="content-card__title">
             <h2 id="stories-facets">Browse the archive</h2>
             <p>
@@ -64,10 +66,10 @@ const hasStories = stories.length > 0;
               </p>
             )}
           </div>
-        </section>
+        </div>
       </section>
 
-      <section class="content-layout section">
+      <section class="content-section">
         {stories.map((story: StoryEntry) => {
           const excerpt = story.data.description ?? '';
           return (
@@ -104,7 +106,7 @@ const hasStories = stories.length > 0;
       </section>
     </>
   ) : (
-    <section class="content-card section">
+    <section class="content-card content-section">
       <div class="content-card__title">
         <h2>{overview.emptyState ?? 'Stories are still brewing'}</h2>
       </div>

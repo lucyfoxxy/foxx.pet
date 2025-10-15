@@ -3,12 +3,12 @@
 /* ====== Depends on: tokens, site, typography ====== */
 /* ============================================ */
 
-/* ====== SECTION SPACING ====== */
-.section + .section {
+/* ====== content-section SPACING ====== */
+.content-section + .content-section {
   margin-block-start: var(--card-spacing);
 }
 
-.section :where(h2) {
+.content-section :where(h2) {
   margin: 0 0 .25rem 0;
 }
 
@@ -29,7 +29,7 @@
 }
 
 /* ====== GENERAL CONTENT LAYOUTS ====== */
-.content-layout {
+.content-section {
   display: grid;
   --max-cols: 4;
   grid-template-columns: repeat(
@@ -44,17 +44,17 @@
   );
   gap: var(--card-spacing);
 }
-.content-layout--compact {
+.content-section--compact {
   grid-template-columns: repeat(auto-fit, minmax(var(--card-size--compact), 1fr));
 }
-.content-layout--spacy {
+.content-section--spacy {
   grid-template-columns: repeat(auto-fit, minmax(var(--card-size--spacy), 1fr));
 }
-.content-layout.media-gallery__hook {
+.content-section.media-gallery__hook {
   margin-block-start: calc(var(--card-spacing) * .25);
 }
 
-.content-layout__split {
+.content-section__split {
   display: grid;
     --min: 18rem;                 /* min Card-Breite (anpassbar) */
   grid-template-columns: repeat(auto-fit, minmax(var(--min), 1fr));  
@@ -104,6 +104,7 @@
 .content-card__title {
   margin-block-end: calc(var(--prose-flow-spacing) * 1.2);
   max-inline-size: var(--content-text-size);
+  gap: var(--prose-flow-spacing);
 }
 
 .content-card__subtitle {

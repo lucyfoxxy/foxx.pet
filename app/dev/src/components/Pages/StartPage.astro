@@ -32,7 +32,7 @@ const isExternalLink = (href: string) => href.startsWith('http');
   </head>
 
 
-    <section class="content-head media-hero section">   
+    <section class="content-head media-hero content-section">   
       <div class="content__title">
         <h1>{hero.heading}</h1>
       </div>
@@ -50,7 +50,7 @@ const isExternalLink = (href: string) => href.startsWith('http');
       </div>
     </section>
 
-    <section class="content-layout content-layout__split section">
+    <div class="content-section">
       <section class="content-card">
         <h2>{intro.heading}</h2>
         <div class="prose">
@@ -66,9 +66,9 @@ const isExternalLink = (href: string) => href.startsWith('http');
           <p>{feature.placeholder}</p>
         </div>
       </section>
-    </section>
+    </div>
 
-    <section class="content-card section">
+    <section class="content-card content-section">
       <h2>{contact.heading}</h2>
       <div class="button--large--wrap">
         {links.map((link) => (

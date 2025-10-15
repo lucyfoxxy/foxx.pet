@@ -19,12 +19,14 @@ const { category, albums } = Astro.props as {
 };
 ---
 
-  <section class="content-head content-card__title section">
+  <section class="content-section">
+    <div class="content-head content-card__title">
     <h1>{category.title}</h1>
     {category.description ? <p class="prose">{category.description}</p> : null}
+    </div>
   </section>
 
-  <section class="content-layout section">
+  <section class="content-section">
     
       {albums.map(({ slug, title, description, href, count }) => (
         <a
