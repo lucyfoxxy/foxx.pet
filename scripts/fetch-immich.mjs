@@ -19,6 +19,9 @@ const BASE = process.env.IMMICH_BASE_URL || process.env.IMMICH_URL;
 const KEY = process.env.IMMICH_API_KEY;
 const OWNER_ID = 'd3e4dd84-d590-4c98-b2d1-07ed6811a693';
 const KEYWORDS = ['suitwalk', 'furmeet', 'convention'];
+const DISPLAY_KEYWORDS = KEYWORDS.map((kw) =>
+  kw.replace(/^./, (c) => c.toUpperCase())
+);
 const CATEGORY_MAP = new Map([
   ['suitwalk', { name: 'Suitwalks', slug: 'suitwalks' }],
   ['furmeet', { name: 'Furmeets', slug: 'furmeets' }],
@@ -98,22 +101,48 @@ async function main() {
     console.log(`   entries: ${PATHS.albumData}`);
   }
 
+  const sharedLinkMap = await listRelevantSharedLinks();
   const albums = await listRelevantAlbums();
 
   const albumEntries = [];
   let grandTotal = 0;
   for (const album of albums) {
+    const sharedLink = sharedLinkMap.get(album.id);
+    if (!sharedLink) {
+      console.warn(
+        `⚠️  Missing shared link for album ${album.albumName} (${album.id}). Skipping.`
+      );
+      continue;
+    }
     const assets = await getAssetsCached(album.id);
-    albumEntries.push({ album, assets });
+    albumEntries.push({
+      album,
+      assets,
+      shareKey: sharedLink.key,
+      shareLinkId: sharedLink.linkId
+    });
     grandTotal += assets.length;
   }
 
   let bestOfEntry = null;
   if (BESTOF_ID) {
-    const bestOfAlbum = await fetchAlbumInfo(BESTOF_ID);
-    const assets = await getAssetsCached(BESTOF_ID);
-    bestOfEntry = { album: bestOfAlbum, assets, metaOverride: createBestOfMeta(bestOfAlbum) };
-    grandTotal += assets.length;
+    const bestOfShare = sharedLinkMap.get(BESTOF_ID);
+    if (!bestOfShare) {
+      console.warn(
+        `⚠️  Missing shared link for Best Of album (${BESTOF_ID}). Skipping.`
+      );
+    } else {
+      const bestOfAlbum = await fetchAlbumInfo(BESTOF_ID);
+      const assets = await getAssetsCached(BESTOF_ID);
+      bestOfEntry = {
+        album: bestOfAlbum,
+        assets,
+        metaOverride: createBestOfMeta(bestOfAlbum),
+        shareKey: bestOfShare.key,
+        shareLinkId: bestOfShare.linkId
+      };
+      grandTotal += assets.length;
+    }
   }
 
   if (albumEntries.length === 0 && !bestOfEntry) {
@@ -132,6 +161,7 @@ async function main() {
     await processAlbum({
       album: entry.album,
       assets: entry.assets,
+      shareKey: entry.shareKey,
       counters,
       paths: PATHS,
       baseUrl: BASE,
@@ -144,6 +174,7 @@ async function main() {
     await processAlbum({
       album: bestOfEntry.album,
       assets: bestOfEntry.assets,
+      shareKey: bestOfEntry.shareKey,
       counters,
       paths: PATHS,
       baseUrl: BASE,
@@ -170,6 +201,7 @@ process.on('exit', () => {
 async function processAlbum({
   album,
   assets = null,
+  shareKey = null,
   counters,
   paths,
   baseUrl,
@@ -192,7 +224,7 @@ async function processAlbum({
   const albumDataDir = path.join(paths.albumData, ...meta.dataDirSegments);
   const albumDataFile = path.join(albumDataDir, `${meta.dataFileName}.json`);
 
-  let mode = await assetStrategy.resolve(albumAssets[0]?.id ?? null);
+  let mode = await assetStrategy.resolve(albumAssets[0]?.id ?? null, shareKey);
   if (!mode) mode = 'download';
 
   if (mode === 'remote') {
@@ -222,7 +254,7 @@ async function processAlbum({
     const asset = albumAssets[i];
     try {
       if (mode === 'remote') {
-        items.push(createRemoteAssetItem({ asset, baseUrl }));
+        items.push(createRemoteAssetItem({ asset, baseUrl, shareKey }));
       } else {
         const { thumbName, fullName } = await ensureAssetVariants({
           asset,
@@ -258,7 +290,9 @@ async function processAlbum({
     filePath: albumDataFile,
     meta,
     mode,
-    items
+    items,
+    shareKey,
+    album
   });
 
   if (!QUIET) {
@@ -268,15 +302,25 @@ async function processAlbum({
   return { slug: meta.slug, mode };
 }
 
-async function writeAlbumIndex({ filePath, meta, mode, items }) {
+async function writeAlbumIndex({ filePath, meta, mode, items, shareKey,album }) {
+  const albumInfo = {
+    startDate: toIsoString(album?.startDate ?? null),
+    description: album?.description ?? null,
+    albumThumbnailAssetId: album?.albumThumbnailAssetId ?? null
+  };
   const index = {
     slug: meta.slug,
     albumId: meta.albumId,
+    shareKey: shareKey,
     albumName: meta.albumName,
     title: meta.title,
+    startDate: albumInfo.startDate,
+    description: albumInfo.description,
+    albumThumbnailAssetId: albumInfo.albumThumbnailAssetId,
     category: meta.category,
     assetMode: mode,
     count: items.length,
+    
     items
   };
   await fs.writeFile(filePath, JSON.stringify(index, null, 2), 'utf-8');
@@ -322,6 +366,30 @@ async function fetchAlbumInfo(albumId) {
   return response.json();
 }
 
+async function listRelevantSharedLinks() {
+  const response = await fetch(`${BASE}/api/shared-links`, {
+    headers: { 'x-api-key': KEY },
+    dispatcher: FETCH_AGENT
+  });
+  if (!response.ok) {
+    throw new Error(`SHARED LINK LIST ${response.status}`);
+  }
+  const links = (await response.json()) ?? [];
+  const map = new Map();
+  for (const link of links) {
+    if (!link || link.type !== 'ALBUM') continue;
+    if (!link.userId || link.userId !== OWNER_ID) continue;
+    if (!link.album || typeof link.album.albumName !== 'string') continue;
+    const albumId = link.album?.id ?? link.albumId;
+    if (!albumId) continue;
+    const lower = link.album.albumName.toLowerCase();
+    if (!KEYWORDS.some((keyword) => lower.includes(keyword))) continue;
+    if (!link.key) continue;
+    map.set(albumId, { key: link.key, linkId: link.id ?? null });
+  }
+  return map;
+}
+
 function createAssetStrategy({ baseUrl, preferredMode, quiet }) {
   const normalized = normalizeMode(preferredMode);
   let resolved = normalized ?? null;
@@ -329,11 +397,11 @@ function createAssetStrategy({ baseUrl, preferredMode, quiet }) {
   let noticeShown = Boolean(normalized);
 
   return {
-    async resolve(sampleAssetId) {
+    async resolve(sampleAssetId, shareKey) {
       if (resolved) return resolved;
       if (!tested && sampleAssetId) {
         tested = true;
-        const accessible = await checkRemoteAccess(baseUrl, sampleAssetId);
+        const accessible = await checkRemoteAccess(baseUrl, sampleAssetId, shareKey);
         resolved = accessible ? 'remote' : 'download';
         if (!noticeShown && !quiet) {
           const message = accessible
@@ -355,14 +423,19 @@ function createAssetStrategy({ baseUrl, preferredMode, quiet }) {
   };
 }
 
-function createRemoteAssetItem({ asset, baseUrl }) {
+function createRemoteAssetItem({ asset, baseUrl, shareKey }) {
+  if (!shareKey) {
+    throw new Error('Missing share key for remote asset item');
+  }
+  const keyParam = `?key=${encodeURIComponent(shareKey)}`;
   return {
     id: asset.id,
-    thumb: `${baseUrl}/api/assets/${asset.id}/thumbnail`,
-    full: `${baseUrl}/api/assets/${asset.id}/original`,
+    thumb: `${baseUrl}/api/assets/${asset.id}/thumbnail${keyParam}`,
+    full: `${baseUrl}/api/assets/${asset.id}/original${keyParam}`,
     filename: asset.originalFileName,
     width: asset.exifInfo?.exifImageWidth ?? null,
-    height: asset.exifInfo?.exifImageHeight ?? null
+    height: asset.exifInfo?.exifImageHeight ?? null,
+    shareKey: shareKey ?? null
   };
 }
 
@@ -532,8 +605,11 @@ function normalizeMode(value) {
   return null;
 }
 
-async function checkRemoteAccess(baseUrl, assetId) {
-  const url = `${baseUrl}/api/assets/${assetId}/thumbnail`;
+async function checkRemoteAccess(baseUrl, assetId, shareKey) {
+  if (!assetId || !shareKey) return false;
+  const url = `${baseUrl}/api/assets/${assetId}/thumbnail?key=${encodeURIComponent(
+    shareKey
+  )}`;
   try {
     const response = await fetch(url, { method: 'HEAD', dispatcher: FETCH_AGENT });
     return response.ok;
@@ -568,25 +644,32 @@ function deriveAlbumMeta(album) {
   };
 
   const nameParts = album.albumName.split(':');
-  const title = nameParts.length > 1
-    ? nameParts.slice(1).join(':').trim()
-    : album.albumName.trim();
+  const rawTitle =
+    nameParts.length > 1
+      ? nameParts.slice(1).join(':').trim()
+      : album.albumName.trim();
+  const displayTitle = createDisplayTitle(rawTitle);
 
   const cleanCategory = sanitizeSegment(category.name) || 'Galleries';
-  const cleanTitle = sanitizeSegment(title) || sanitizeSegment(album.albumName) || album.id;
-  const slug = slugify(`${category.slug}-${title}`) || slugify(`${category.slug}-${album.id}`);
+  const cleanTitle =
+    sanitizeSegment(rawTitle) || sanitizeSegment(album.albumName) || album.id;
+  const slug =
+    slugify(`${category.slug}-${rawTitle}`) || slugify(`${category.slug}-${album.id}`);
 
   return {
     slug,
     albumId: album.id,
     albumName: album.albumName,
-    title,
+    title: displayTitle,
+    rawTitle,
     category: { name: category.name, slug: category.slug },
-    dataDirSegments: [cleanCategory],
-    dataFileName: cleanTitle,
+    dataDirSegments: [category.slug],
+    dataFileName: slug,
     assetDirSegments: [category.slug, slug]
   };
 }
+
+
 
 function createBestOfMeta(album) {
   const title = album?.albumName?.trim() || 'Best Of';
@@ -596,11 +679,38 @@ function createBestOfMeta(album) {
     albumId: album?.id ?? BESTOF_ID,
     albumName: album?.albumName ?? 'Best Of',
     title,
+    rawTitle: title,
     category: { name: 'Highlights', slug: 'bestof' },
     dataDirSegments: [],
     dataFileName: 'bestof',
     assetDirSegments: ['bestof']
   };
+}
+
+function createDisplayTitle(value) {
+  if (!value || typeof value !== 'string') return value;
+  let result = value.trim();
+
+  if (result) {
+    const leadingPattern = new RegExp(
+      `^\\s*(?:${DISPLAY_KEYWORDS.join('|')})\\b(?:[\\s:–—-]+)*`,
+      'i'
+    );
+    result = result.replace(leadingPattern, '').trim();
+  }
+
+  if (result) {
+    const trailingDatePattern = /\s*\((?:[^\d()]*?)\s+\d{4}\)\s*$/u;
+    if (trailingDatePattern.test(result)) {
+      result = result.replace(trailingDatePattern, '').trim();
+    }
+  }
+
+  if (!result) {
+    return value.trim();
+  }
+
+  return result;
 }
 
 function sanitizeSegment(value) {
@@ -623,4 +733,11 @@ function slugify(value) {
     .replace(/[\s_-]+/g, '-')
     .replace(/^-+|-+$/g, '')
     .toLowerCase();
+}
+
+function toIsoString(value) {
+  if (!value) return null;
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return null;
+  return date.toISOString();
 }

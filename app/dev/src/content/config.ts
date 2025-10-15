@@ -105,8 +105,12 @@ const albumData = defineCollection({
   schema: z.object({
     slug: z.string(),
     albumId: z.string().optional(),
+    shareKey: z.string(),
     albumName: z.string().optional(),
     title: z.string().optional(),
+    startDate: z.string(),
+    description: z.string().optional(),
+    albumThumbnailAssetId: z.string(),
     category: z
       .object({
         name: z.string(),
@@ -123,6 +127,7 @@ const albumData = defineCollection({
         filename: z.string().optional(),
         width: z.number().nullable().optional(),
         height: z.number().nullable().optional(),
+        shareKey: z.string(),
       }),
     ),
   }),
