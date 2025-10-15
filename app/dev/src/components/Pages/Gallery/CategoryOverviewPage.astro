@@ -71,17 +71,18 @@ const normalizedAlbums = albums.map((album) => {
           aria-label={`Open ${title}`}
         >
           <div class="content-card__title">
-            <h2>{title}</h2>
+            <h3>{title}</h3>
             {formattedStartDate ? (
-              <p class="media-album__date">{formattedStartDate}</p>
+              <p class="badge">{formattedStartDate}</p>
+              
             ) : null}
-          </div>
-          <div class="content-card__subtitle">
-            {description ? <p>{description}</p> : null}
-            {typeof count === 'number'
-              ? <p>{count > 0 ? `${count} photos` : 'No photos yet'}</p>
+            <div class="badge--wrapper">
+                        {typeof count === 'number'
+              ? <p class="badge">{count > 0 ? `${count} photos` : 'No photos yet'}</p>
               : null}
+            </div>
           </div>
+
           <div class="media-album__cover" data-slug={slug}>
             {coverUrl ? (
               <img src={coverUrl} alt="" loading="lazy" decoding="async" />
@@ -89,6 +90,9 @@ const normalizedAlbums = albums.map((album) => {
               <div class="media-album__cover-placeholder" aria-hidden="true"></div>
             )}
           </div>
+          <div class="content-card__subtitle">
+            {description ? <p></p> : null}
+          </div>          
         </a>
       ))}
 

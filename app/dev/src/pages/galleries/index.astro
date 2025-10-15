@@ -16,10 +16,10 @@ const categories = catalog.categories
   }));
 const meta = { title: content.title, description: content.description };
 const backHref = '/';
-const backLabel = '← Back to Home';
+const backLabel = '← Home';
 ---
 <Layout title={content.title} meta={meta}>
-  <Fragment slot="breadcrumbs-actions">
+  <Fragment slot="panel__bar--actions">
     <a class="button button--small" href={backHref}>{backLabel}</a>
   </Fragment>  
   <GalleryOverviewPage {categories} />

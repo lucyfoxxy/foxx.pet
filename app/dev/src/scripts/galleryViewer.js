@@ -21,6 +21,12 @@ const parseLength = (value) => {
   return Number.isFinite(length) ? length : null;
 };
 
+const buildRemoteUrl = (id, shareKey, kind) => {
+  if (!id || !shareKey) return undefined;
+  const endpoint = kind === 'thumb' ? 'thumbnail' : 'original';
+  return `https://img.foxx.pet/api/assets/${id}/${endpoint}?key=${shareKey}`;
+};
+
 export default function initGalleryPage() {
   const root = document.querySelector('.media-gallery__hook[data-slug]');
   if (!root) return;
@@ -44,8 +50,39 @@ export default function initGalleryPage() {
 
   if (!viewer || !frame || !imgEl || !btnPrev || !btnNext || !btnPlay || !progress || !thumbsWrap || !thumbsPrev || !thumbsNext) return;
 
-  // hier: items kommen bereits mit gehashten URLs aus itemsBySlug
-  const items = itemsBySlug.get(slug) ?? [];
+  const albumEntry = itemsBySlug.get(slug);
+  const attrShareKey = root.getAttribute('data-share-key') || undefined;
+  const { items: rawItems = [], shareKey: albumShareKey } = Array.isArray(albumEntry)
+    ? { items: albumEntry, shareKey: attrShareKey }
+    : albumEntry ?? {};
+
+  const resolvedShareKey = albumShareKey || attrShareKey || undefined;
+
+  const items = rawItems.reduce((acc, raw) => {
+    if (!raw || typeof raw !== 'object') return acc;
+    const itemShareKey = raw.shareKey || resolvedShareKey || undefined;
+    const id = raw.id || undefined;
+    const full = raw.full
+      || buildRemoteUrl(id, itemShareKey, 'full')
+      || null;
+    const thumb = raw.thumb
+      || buildRemoteUrl(id, itemShareKey, 'thumb')
+      || raw.full
+      || full
+      || null;
+
+    if (!full) return acc;
+
+    acc.push({
+      ...raw,
+      id,
+      shareKey: itemShareKey,
+      full,
+      thumb,
+    });
+    return acc;
+  }, []);
+
   const order = items.map((_, index) => index);
   if (random) order.sort(() => Math.random() - 0.5);
 
@@ -223,7 +260,7 @@ export default function initGalleryPage() {
       button.setAttribute('role', 'listitem');
 
       const img = document.createElement('img');
-      img.src = item.thumb;
+      img.src = item.thumb || item.full;
       img.alt = '';
       img.loading = 'lazy';
       img.decoding = 'async';
@@ -296,10 +333,27 @@ export default function initGalleryPage() {
     const item = items[order[i]];
     if (!item) return;
 
+    const altText = item.alt || item.filename || '';
+    const width = Number.isFinite(item.width) ? item.width : null;
+    const height = Number.isFinite(item.height) ? item.height : null;
+
     loadImageWithTransition(imgEl, {
       src: item.full,
-      alt: item.alt || '',
-      fallbackSrc: item.full,
+      alt: altText,
+      fallbackSrc: item.thumb || item.full,
+      onApply: () => {
+        if (width && width > 0) {
+          imgEl.width = width;
+        } else {
+          imgEl.removeAttribute('width');
+        }
+        if (height && height > 0) {
+          imgEl.height = height;
+        } else {
+          imgEl.removeAttribute('height');
+        }
+        delete imgEl.dataset.initialFull;
+      },
     });
 
     ensureThumbVisibility(direction);

@@ -119,18 +119,19 @@
 .media-gallery {
   position: relative;
   display: flex;
+   max-block-size: 100%;
   
   flex-direction: column;
   gap: var(--medium-spacing);
-  inline-size: 100%;
+  max-block-size: 100%;
 }
 
 .media-gallery__frame {
   position: relative;
   align-self: center;
-  inline-size: var(--gallery-frame-size);
-  max-block-size: 45vh;
-  block-size: auto;
+  inline-size: calc(min(var(--gallery-frame-size),100%));
+  max-block-size: 65vh;
+  block-size: calc(min(var(--gallery-frame-size),100%));
   aspect-ratio: 4 / 3;
   object-fit: cover;
   border-radius: var(--large-radius);

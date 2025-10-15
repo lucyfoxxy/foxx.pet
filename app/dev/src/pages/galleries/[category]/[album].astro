@@ -36,8 +36,24 @@ const meta = {
   description: description ?? '',
 };
 
+const [albumEntry] = await getCollection('albumData', ({ data }) => data.slug === slug);
+const albumData = albumEntry?.data;
+
+const shareKey = albumData?.shareKey ?? undefined;
+const albumItems = Array.isArray(albumData?.items) ? albumData?.items : [];
+const primaryItem = albumItems.find((item) => item && (item.full || item.thumb));
+const initialItem = primaryItem
+  ? {
+      full: primaryItem.full,
+      thumb: primaryItem.thumb,
+      alt: primaryItem.filename ?? undefined,
+      width: typeof primaryItem.width === 'number' ? primaryItem.width : undefined,
+      height: typeof primaryItem.height === 'number' ? primaryItem.height : undefined,
+    }
+  : undefined;
+
 const backHref = category?.slug ? `/galleries/${category.slug}` : '/galleries';
-const backLabel = category?.title ? `← Back to ${category.title}` : '← Back to Overview';
+const backLabel = category?.title ? `← ${category.title}` : '← Overview';
 ---
 <Layout title={meta.title} meta={meta}>
   <Fragment slot="panel__bar--actions">
@@ -47,5 +63,7 @@ const backLabel = category?.title ? `← Back to ${category.title}` : '← Back 
     albumSlug={slug}
     title={title ?? meta.title}
     description={description}
+    shareKey={shareKey}
+    initialItem={initialItem}
   />
 </Layout>

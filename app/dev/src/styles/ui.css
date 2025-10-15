@@ -4,7 +4,7 @@
 /* ============================================ */
 
 /* ====== BADGES & CHIPS ====== */
-.button {
+.button,.badge {
   display: inline-flex;
   align-items: center;
   color: var(--accent-text);
@@ -22,8 +22,24 @@
 }
 .button--small {
   gap: 0;
-  padding-inline: 0;
+  padding-inline: 0; 
+}
+.badge {
+  background: var(--accent-background--soft);
+  padding: var(--tiny-spacing) var(--tiny-spacing);
+  border-radius: var(--small-radius);
+  margin-block-start: var(--tiny-spacing);
+  
+  
+}
 
+.badge--wrapper{
+  display: inline-flex;
+  vertical-align: middle;
+  align-items: center;
+  inline-size: auto;
+  justify-content: stretch;
+  flex-wrap: nowrap;
   
 }
 .button--large {
@@ -32,9 +48,7 @@
   border-radius: var(--large-radius);
   background: var(--accent-background); 
   font-weight: var(--thick-font-weight);
-  
 }
-
 
 .button:hover,
 .button:focus-visible

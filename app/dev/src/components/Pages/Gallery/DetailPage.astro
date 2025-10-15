@@ -1,18 +1,49 @@
 ---
+
+type GalleryItem = {
+  full?: string | null;
+  thumb?: string | null;
+  alt?: string | null;
+  width?: number;
+  height?: number;
+};
+
 type Props = {
   albumSlug: string;
   title?: string;
   description?: string;
+  category?: string;
+  startDate?: string;
+  shareKey?: string;
+  initialItem?: GalleryItem | null;
 };
 
-const { albumSlug, title, description } = Astro.props as Props;
+const { albumSlug, title, description, shareKey, initialItem,category } = Astro.props as Props;
 const detailTitle = title ?? 'Gallery';
+
+const normalizedInitialItem = initialItem && (initialItem.full || initialItem.thumb)
+  ? {
+      full: typeof initialItem.full === 'string' ? initialItem.full : undefined,
+      thumb: typeof initialItem.thumb === 'string' ? initialItem.thumb : undefined,
+      width: typeof initialItem.width === 'number' && Number.isFinite(initialItem.width)
+        ? initialItem.width
+        : undefined,
+      height: typeof initialItem.height === 'number' && Number.isFinite(initialItem.height)
+        ? initialItem.height
+        : undefined,
+    }
+  : null;
+
+const initialThumbSrc = normalizedInitialItem?.thumb;
+const initialFullSrc = normalizedInitialItem?.full;
+const initialWidth = normalizedInitialItem?.width;
+const initialHeight = normalizedInitialItem?.height;
 ---
   <section class="content-head content-section">
 
     <div class="content-card__title">
       <h1>{detailTitle}</h1>
-      {description && <p class="prose">{description}</p>}
+      {category && <p class="prose">{category}</p>}
     </div>
 
     
@@ -24,10 +55,20 @@ const detailTitle = title ?? 'Gallery';
     data-autoplay="true"
     data-interval="8000"
     data-random="true"
+    data-share-key={shareKey}
   >
     <div class="media-gallery content-card content-section">
       <div class="media-gallery__frame" role="button" tabindex="0" aria-label="Open artwork in lightbox">
-        <img class="media-gallery__image" alt="" />
+        <img
+          class="media-gallery__image"
+          src={initialThumbSrc}
+          data-initial-full={initialFullSrc}
+          width={initialWidth}
+          height={initialHeight}
+          alt=""
+          loading={initialThumbSrc ? 'eager' : undefined}
+          decoding="async"
+        />
         <button class="media-gallery__nav media-gallery__prev" aria-label="Previous" type="button">❮</button>
         <button class="media-gallery__nav media-gallery__next" aria-label="Next" type="button">❯</button>
         <button class="media-gallery__playpause" aria-label="Pause autoplay" type="button">⏸</button>

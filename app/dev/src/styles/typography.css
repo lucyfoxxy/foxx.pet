@@ -61,7 +61,7 @@ p :where(em, i) {
 }
 
 .site-footer,
-.ui-badge,
+.badge,
 .button--small {
   font-size: var(--xsmall-font-size);
   font-weight: var(--thin-font-weight);

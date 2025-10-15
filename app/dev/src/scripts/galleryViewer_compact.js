@@ -14,6 +14,12 @@ const assetModules = import.meta.glob('@Assets/albums/bestof/*', {
 
 const itemsBySlug = createGalleryItemsBySlug(metas, assetModules);
 
+const buildRemoteUrl = (id, shareKey, kind) => {
+  if (!id || !shareKey) return undefined;
+  const endpoint = kind === 'thumb' ? 'thumbnail' : 'original';
+  return `https://img.foxx.pet/api/assets/${id}/${endpoint}?key=${shareKey}`;
+};
+
 export default function initGalleryIntro() {
   const root = document.querySelector('.media-gallery__hook[data-slug]');
   if (!root) return;
@@ -30,8 +36,38 @@ export default function initGalleryIntro() {
 
   if (!viewer || !frame || !imgEl || !progress) return;
 
-  // hier: items kommen bereits mit gehashten URLs aus itemsBySlug
-  const items = itemsBySlug.get(slug) ?? [];
+  const albumEntry = itemsBySlug.get(slug);
+  const attrShareKey = root.getAttribute('data-share-key') || undefined;
+  const { items: rawItems = [], shareKey: albumShareKey } = Array.isArray(albumEntry)
+    ? { items: albumEntry, shareKey: attrShareKey }
+    : albumEntry ?? {};
+
+  const resolvedShareKey = albumShareKey || attrShareKey || undefined;
+
+  const items = rawItems.reduce((acc, raw) => {
+    if (!raw || typeof raw !== 'object') return acc;
+    const itemShareKey = raw.shareKey || resolvedShareKey || undefined;
+    const id = raw.id || undefined;
+    const full = raw.full
+      || buildRemoteUrl(id, itemShareKey, 'full')
+      || null;
+    const thumb = raw.thumb
+      || buildRemoteUrl(id, itemShareKey, 'thumb')
+      || raw.full
+      || full
+      || null;
+
+    if (!full) return acc;
+
+    acc.push({
+      ...raw,
+      id,
+      shareKey: itemShareKey,
+      full,
+      thumb,
+    });
+    return acc;
+  }, []);
   const order = items.map((_, index) => index);
   if (random) order.sort(() => Math.random() - 0.5);
 
@@ -57,10 +93,12 @@ export default function initGalleryIntro() {
     const item = items[order[i]];
     if (!item) return;
 
+    const altText = item.alt || item.filename || '';
+
     loadImageWithTransition(imgEl, {
       src: item.full,
-      alt: item.alt || '',
-      fallbackSrc: item.full,
+      alt: altText,
+      fallbackSrc: item.thumb || item.full,
     });
 
     setProgress(0);
