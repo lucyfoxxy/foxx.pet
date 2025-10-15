@@ -15,6 +15,8 @@
       "@Assets/*": ["src/assets/*"],
       "@Scripts/*": ["src/scripts/*"]
     },
-    "types": ["astro/client"]
+    "types": ["astro/client"],
+    "jsx": "react-jsx",
+    "jsxImportSource": "astro"
   }
 }

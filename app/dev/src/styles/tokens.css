@@ -1,6 +1,6 @@
 :root { 
  /* ====== Layout Structures ====== */
-  --tiny-spacing:               clamp(.4rem, .4rem + .15vw, .6rem);
+  --tiny-spacing:               clamp(.25rem, .25rem + .1vw, .35rem);
   --xsmall-spacing:             clamp(.65rem, .5rem + .3vw, .95rem);
   --small-spacing:              clamp(.75rem, 1vw, 1.25rem);
   --medium-spacing:             clamp(1rem, 2vw, 1.75rem);
@@ -12,21 +12,20 @@
   --large-padding:              clamp(1rem, 2vw, 3rem);
 
   --container-max:              1280px;  
-
+  --container-spacing:          var(--large-spacing);
   --container-padding:          max(var(--large-spacing), calc((100vw - var(--container-max)) / 2));
   --navbar-padding:             var(--medium-padding);
   --navbar-spacing:             var(--large-spacing);
+  --navbar-gap:                 var(--xlarge-spacing);
+  --navbar-gap--compact:        var(--xsmall-spacing);
   --panel-bar-padding:          var(--small-padding);
-  
-  --container-spacing:          var(--large-spacing);
-   
+    
   --content-spacing:            var(--medium-spacing);
   --content-padding:            var(--large-padding); 
-  --prose-flow-spacing:         var(--xsmall-spacing);  
-
-  --navbar-gap:                 var(--large-spacing);
+  --prose-flow-spacing:         var(--tiny-spacing);  
+  
   --brand-size:                 clamp(320px, 45vw, 480px);
-  --brand-gap:                  var(--small-spacing);
+  --brand-gap:                  var(--xsmall-spacing);
 
   /* ====== Main Colors =======*/
   --primary-text-color:         oklch(96% 0.03 290);
@@ -53,7 +52,7 @@
   --site-backdrop--bars:        var(--site-backdrop) opacity(.95) brightness(1.95);
   --site-backdrop--panel:       blur(var(--large-blur)) saturate(1.25) brightness(1.6);
   
-  --site-logo--size:            clamp(38px, 15vw, 48px);
+  --site-logo--size:            clamp(24px, 10vw, 48px);
   --site-logo--filter:          drop-shadow(0 3px 2px color-mix(in oklab,var(--secondary-shadow-color) 75%,black 25%));
   /* ====== bg Colors / FX ====== */
 /*TODO: REWORK REMAINING COLORS & SHADOWS : --site-background ?*/
@@ -112,8 +111,8 @@
   --xsmall-font-size:           clamp(.82rem, .48rem + .35vw, 1rem);
   --small-font-size:            clamp(.98rem,  .7rem + .55vw, 1.22rem);
   --medium-font-size:           clamp(1.22rem, .82rem + .75vw, 1.55rem);
-  --large-font-size:            clamp(1.65rem, .9rem + 1vw, 1.85rem);
-  --xlarge-font-size:           clamp(2.5rem, 2.55rem + 2.5vw, 3.75rem);
+  --large-font-size:            clamp(1.4rem, 1rem + 1vw, 2rem);
+  --xlarge-font-size:           clamp(1.65rem, 1.35rem + 2vw, 3.75rem);
 
   --xsmall-line-height:         1;
   --small-line-height:          1.5;

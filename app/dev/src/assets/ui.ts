@@ -1,0 +1,10 @@
+import type { ImageMetadata } from 'astro';
+import bg from '@Assets/ui/bg.webp';
+import logo_header from '@Assets/ui/logo-header.webp';
+import logo_hero from '@Assets/ui/logo-hero.webp';
+import favicon from '@Assets/ui/favicon.webp';
+import og from '@Assets/ui/default-og.webp';
+
+export const ASSETS: Record<string, ImageMetadata> = {
+  favicon, bg, logo_header, logo_hero, og,
+};

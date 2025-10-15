@@ -4,10 +4,10 @@
 /* ============================================ */
 
 /* ====== BADGES & CHIPS ====== */
-.button--large,.button--small {
+.button {
   display: inline-flex;
   align-items: center;
-  color: var(--highlight-foreground);
+  color: var(--accent-text);
   transition: var(--transition-glow);
   vertical-align: middle;
   

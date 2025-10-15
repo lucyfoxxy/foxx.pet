@@ -8,7 +8,17 @@ export default defineConfig({
   server: { host: true, port: 4321 },
   vite: {
     server: {
-      hmr: { host: 'dev.foxx.pet', protocol: 'wss', clientPort: 443 }
+      hmr: { 
+        host: 'dev.foxx.pet', 
+        protocol: 'wss', 
+        clientPort: 443, 
+        usePolling: true,  
+        interval: 150,
+        awaitWriteFinish: {    // verhindert halbfertige Reads
+          stabilityThreshold: 250, // warte 250 ms nach letztem Write-Event
+          pollInterval: 50
+        }               
+      }
     },
     build: {
       assetsInlineLimit: 0

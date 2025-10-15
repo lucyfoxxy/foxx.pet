@@ -8,7 +8,7 @@ import '@Styles/ui.css';
 import '@Styles/media.css';
 import '@Styles/table.css';
 
-import { ASSETS } from '@Layout/SiteAssets/Images.astro';
+import { ASSETS } from '@Assets/ui';
 import { getNavigationLinks, getPageContent } from '@Content/siteContent';
 import Head from '@Layout/Head.astro';
 import SiteHeader from '@Layout/SiteHeader.astro';
@@ -119,26 +119,16 @@ const breadcrumbs = buildBreadcrumbs({
   navLinks,
   pageTitle: title,
 });
-
-// ---------------------------------------------------------------------------
-// Analytics (GoatCounter)
-// ---------------------------------------------------------------------------
-const goatCounterBase = import.meta.env.PUBLIC_GOATCOUNTER_URL?.replace(/\/$/, '');
-const goatCounterScriptSrc = import.meta.env.PUBLIC_GOATCOUNTER_SCRIPT?.trim() || 'https://gc.zgo.at/count.js';
-const enableAnalytics = true || !!goatCounterBase;
 ---
 <html lang="en">
   <Head title={title} description={description} url={url} />
   <body style={`--background-image: url(${ASSETS.bg.src});`}>
     <SiteHeader meta={meta} navLinks={navLinks} />
 
-    </body>
-
     <div class="container">
-      <!-- TODO: Consider extracting the breadcrumbs into a <Breadcrumbs /> component -->
 
       <main class="panel">
-        <nav class="is-breadcrumbs" aria-label="Breadcrumb">
+        <nav class="panel__bar panel__bar--top" aria-label="Breadcrumb">
           <ol>
             {breadcrumbs.map((crumb, index) => (
               <li>
@@ -147,35 +137,30 @@ const enableAnalytics = true || !!goatCounterBase;
                 ) : (
                   <a href={crumb.href}>{crumb.label}</a>
                 )}
-                {index < breadcrumbs.length - 1 && (
-                  <span class="is-seperator" aria-hidden="true">›</span>
-                )}
+
               </li>
             ))}
           </ol>
-          <div class="breadcrumbs-actions">
-            <slot name="breadcrumbs-actions" />
+          <div class="panel__bar--actions">
+            <slot name="panel__bar--actions" />
           </div>
         </nav>
 
         <slot />
 
-        <!-- TODO: Consider extracting the page actions into a <PageNavigation /> component -->
-        <nav class="is-site-nav" aria-label="Page navigation">
-          <span class="button button--small">
-            <a href="#top">⇡ Scroll Up ⇡</a>
-          </span>
+        <nav class="panel__bar panel__bar--bottom" aria-label="Page navigation">
+          <div class="panel__bar--actions">
+            <span class="button button--small">
+              <a href="#top">⇡ Scroll Up ⇡</a>
+            </span>
+          </div>
         </nav>
       </main>
     </div>
 
     <SiteFooter />
 
-    <Helpers
-      enableAnalytics={enableAnalytics}
-      goatCounterBase={goatCounterBase}
-      goatCounterScriptSrc={goatCounterScriptSrc}
-    />
+    <Helpers />
   </body>
 </html>
 

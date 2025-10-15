@@ -1,9 +1,9 @@
 ---
 import Layout from '@Layout/Main.astro';
 import Icon from '@Layout/SiteAssets/Icons.astro';
-import { ASSETS } from '@Layout/SiteAssets/Images.astro';
+import { ASSETS } from '@Assets/ui';
 import { getPageContent } from '@Content/siteContent';
-
+import { Image,Picture } from 'astro:assets';
 export const prerender = true;
 
 const content = await getPageContent('home');
@@ -28,7 +28,7 @@ const isExternalLink = (href: string) => href.startsWith('http');
 ---
 <Layout meta={meta}>
   <head>
-    <link rel="preload" href={hero.image} as="image" type="image/webp" />
+    <link rel="preload" href={ASSETS.logo_hero.src} as="image" type="image/webp" />
   </head>
 
 
@@ -36,9 +36,15 @@ const isExternalLink = (href: string) => href.startsWith('http');
       <div class="content__title">
         <h1>{hero.heading}</h1>
       </div>
-      <div class="media-hero__logo">
-        <img src={hero.logo} alt={hero.heading} loading="lazy" />   
-      </div>
+      <Picture
+        src={ASSETS.logo_hero}
+        formats={['webp']}
+        inferSize  
+        alt={hero.heading}
+        fetchpriority="high"
+        class="media-hero__logo"
+      />
+
       <div class="content__subtitle">
         <h3><em>...where cosmic foxes make...eeeeeeeeeeeek!</em></h3>
       </div>
@@ -67,7 +73,7 @@ const isExternalLink = (href: string) => href.startsWith('http');
       <div class="button--large--wrap">
         {links.map((link) => (
           <a
-            class={`button--large button--large--${link.kind}`}
+            class={`button button--large button--large--${link.kind}`}
             href={link.href}
             rel={isExternalLink(link.href) ? 'noopener noreferrer' : undefined}
             target={isExternalLink(link.href) ? '_blank' : undefined}

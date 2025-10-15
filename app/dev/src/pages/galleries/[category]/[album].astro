@@ -40,7 +40,7 @@ const backHref = category?.slug ? `/galleries/${category.slug}` : '/galleries';
 const backLabel = category?.title ? `← Back to ${category.title}` : '← Back to Overview';
 ---
 <Layout title={meta.title} meta={meta}>
-  <Fragment slot="breadcrumbs-actions">
+  <Fragment slot="panel__bar--actions">
     <a class="button--small" href={backHref}>{backLabel}</a>
   </Fragment>
   <GalleryDetailPage
