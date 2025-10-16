@@ -61,7 +61,7 @@ const isExternalLink = (href: string) => href.startsWith('http');
     </div>
 
     <div class="contact-slot content-card">
-      <h2>{contact.heading}</h2>
+      <h3>{contact.heading}</h3>
       <div class="button--large--wrap">
         {links.map((link) => (
           <a
@@ -70,7 +70,7 @@ const isExternalLink = (href: string) => href.startsWith('http');
             rel={isExternalLink(link.href) ? 'noopener noreferrer' : undefined}
             target={isExternalLink(link.href) ? '_blank' : undefined}
           >
-            <span class="button--large--icon"><Icon kind={link.kind} /></span>
+            <span class="button__round--icon"><Icon kind={link.kind} /></span>
             <span>{link.label}</span>
           </a>
         ))}
@@ -85,7 +85,7 @@ const isExternalLink = (href: string) => href.startsWith('http');
       data-random="true"
       data-share-key={shareKey}
     >
-      <h2>{feature.heading}</h2>
+      <h3>{feature.heading}</h3>
       <div class="media__wrapper">
         <div class="media__frame media__frame--compact" role="button" tabindex="0" aria-label="Open artwork in lightbox">
           <img class="media__image" alt="" />

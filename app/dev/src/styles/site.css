@@ -9,9 +9,9 @@
   position: sticky;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap;  
+  flex-wrap: wrap;
   margin-inline: 0;
-  padding-block: var(--medium-padding);
+  padding-block: var(--site-bars-padding-block);
   box-shadow: var(--large-shadow);
   background: var(--site-bars-background);
   backdrop-filter: var(--site-bars-backdrop);
@@ -37,7 +37,7 @@
   display: flex;
   border-radius: 0 0 var(--medium-radius) var(--medium-radius);
   margin-block-end: var(--site-bars-spacing);
-  padding-inline: var(--container-padding);
+  padding-inline: var(--site-bars-padding-inline);
   column-gap: var(--site-bars-gap);
   row-gap: var(--site-bars-gap--compact);
 }
@@ -62,7 +62,8 @@
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  gap: var(--large-spacing);
+  column-gap: var(--site-bars-gap);
+  row-gap: var(--site-bars-gap--compact);
 }
 
 .site-header__nav a {
@@ -74,7 +75,7 @@
 .site-header__nav-link {
   display: inline-flex;
   align-items: center;
-  gap: var(--xsmall-spacing);
+  gap: var(--site-bars-link-gap);
 }
 
 .site-header__nav-text {
@@ -109,7 +110,7 @@
 main.panel {
   backdrop-filter: var(--panel-backdrop);
   box-shadow: var(--large-shadow);
-  padding: var(--card-padding);
+  padding: var(--panel-padding);
   -webkit-backdrop-filter: var(--backdrop-blur-strong);
   border-radius: var(--large-radius);
 }
@@ -117,25 +118,25 @@ main.panel {
 .panel__bar {
   display: grid;
   grid-auto-flow: column;
-  gap: var(--small-spacing);
-  padding-inline:  var(--medium-spacing);
+  gap: var(--panel-bar-gap);
+  padding-inline:  var(--panel-bar-padding-inline);
   text-shadow: var(--soft-text-shadow);
-  
+
 
 
 }
 
 .panel__bar--top {
-  margin-block: calc(-1 * var(--card-padding) + var(--tiny-spacing)) var(--card-spacing);
-  margin-inline: calc(-1 * var(--card-padding) + var(--tiny-spacing)) ;
-  padding-block: var(--xsmall-spacing) 0;
-  
+  margin-block: calc(-1 * var(--card-padding) + var(--panel-bar-offset)) var(--card-spacing);
+  margin-inline: calc(-1 * var(--card-padding) + var(--panel-bar-offset)) ;
+  padding-block: var(--panel-bar-padding-block-start) 0;
+
 }
 .panel__bar--bottom {
-  margin-block:  var(--card-padding) calc(-1 * var(--card-padding) + var(--tiny-spacing));
-  margin-inline: calc(-1 * var(--card-padding) + var(--tiny-spacing)) ;
+  margin-block:  var(--card-padding) calc(-1 * var(--card-padding) + var(--panel-bar-offset));
+  margin-inline: calc(-1 * var(--card-padding) + var(--panel-bar-offset)) ;
   justify-content: center;
-  padding-block: 0 var(--xsmall-spacing);
+  padding-block: 0 var(--panel-bar-padding-block-end);
 }
 .panel__bar--actions {
   margin-inline-start: auto;
@@ -151,7 +152,7 @@ main.panel {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: var(--xsmall-spacing);
+  gap: var(--panel-bar-gap);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -169,8 +170,8 @@ main.panel {
 .panel__bar--top,
 .panel__bar--top li {
   align-items: center;
-  gap: var(--tiny-spacing);
-  
+  gap: var(--panel-bar-gap--compact);
+
 }
 
 .panel__bar--top li .is-current {

@@ -1,35 +1,55 @@
-:root { 
+ :root {
  /* ====== Layout Structures ====== */
-  --tiny-spacing:               clamp(.25rem, .25rem + .1vw, .35rem);
-  --xsmall-spacing:             clamp(.65rem, .5rem + .3vw, .95rem);
-  --small-spacing:              clamp(.75rem, 1vw, 1.25rem);
-  --medium-spacing:             clamp(1rem, 2vw, 1.75rem);
-  --large-spacing:              clamp(1rem, 2.25vw, 3rem);
-  --xlarge-spacing:             clamp(1.75rem, 5.9vw, 6.75rem);
+  --spacing-tiny:               clamp(.25rem, .25rem + .15vw, .45rem);
+  --spacing-xsmall:             clamp(.5rem, .5rem + .35vw, .85rem);
+  --spacing-small:              clamp(.75rem, .75rem + .5vw, 1.2rem);
+  --spacing-medium:             clamp(1rem, 1rem + .85vw, 1.8rem);
+  --spacing-large:              clamp(1.5rem, 1.5rem + 1vw, 2.5rem);
+  --spacing-xlarge:             clamp(2rem, 2rem + 1.5vw, 3.5rem);
 
-  --small-padding:              clamp(.35rem, .3vw, .5rem);
-  --medium-padding:             clamp(.75rem, 1.2vw, 1rem);
-  --large-padding:              clamp(1rem, 2.25vw, 3.25rem);
+  --padding-xsmall:             clamp(.35rem, .35rem + .3vw, .65rem);
+  --padding-small:              clamp(.5rem, .5rem + .4vw, .85rem);
+  --padding-medium:             clamp(.75rem, .75rem + .6vw, 1.1rem);
+  --padding-large:              clamp(1rem, 1rem + .8vw, 1.6rem);
+  --padding-xlarge:             clamp(1.5rem, 1.5rem + 1.2vw, 2.4rem);
 
-  --container-max:              1280px;  
-  --container-spacing:          var(--large-spacing);
-  --container-padding:          max(var(--large-spacing), calc((100vw - var(--container-max)) / 2));
+  --container-max:              1280px;
+  --container-spacing:          var(--spacing-large);
+  --container-padding:          max(var(--padding-small), calc((100vw - var(--container-max)) / 2));
 
-  --site-bars-padding:          var(--medium-padding);
-  --site-bars-spacing:          var(--large-spacing);
-  --site-bars-gap:              var(--xlarge-spacing);
-  --site-bars-gap--compact:     var(--xsmall-spacing);
-  
-  --card-spacing:               var(--medium-spacing);
-  --card-padding:               var(--large-padding);
+  --site-bars-padding-block:    var(--padding-medium);
+  --site-bars-padding-inline:   var(--container-padding);
+  --site-bars-spacing:          var(--spacing-large);
+  --site-bars-gap:              var(--spacing-xlarge);
+  --site-bars-gap--compact:     var(--spacing-tiny);
+  --site-bars-link-gap:         var(--spacing-xsmall);
+
+  --card-spacing:               var(--spacing-medium);
+  --card-spacing--loose:        var(--spacing-large);
+  --card-spacing--tight:        var(--spacing-small);
+  --card-spacing--compact:      var(--spacing-xsmall);
+  --card-spacing--micro:        var(--spacing-tiny);
+  --card-padding:               var(--padding-large);
+  --card-padding--compact:      var(--padding-medium);
+  --card-padding--tight:        var(--padding-small);
+  --card-padding--micro:        var(--padding-xsmall);
+  --card-flow-gap:              var(--spacing-tiny);
+
+  --panel-padding:              var(--card-padding);
+  --panel-gap:                  var(--card-spacing);
+  --panel-bar-gap:              var(--spacing-small);
+  --panel-bar-gap--compact:     var(--spacing-tiny);
+  --panel-bar-padding-inline:   var(--spacing-medium);
+  --panel-bar-padding-block-start: var(--spacing-xsmall);
+  --panel-bar-padding-block-end:   var(--spacing-xsmall);
+  --panel-bar-offset:           var(--spacing-tiny);
+
   --card-size--compact:         calc(10rem + 6vw);
   --card-size:                  calc(11.5rem);
   --card-size--spacy:           20rem;
 
-  --prose-flow-spacing:         var(--tiny-spacing);  
-  
   --brand-size:                 clamp(320px, 45vw, 480px);
-  --brand-gap:                  var(--xsmall-spacing);
+  --brand-gap:                  var(--card-spacing--compact);
 
   /* ====== Main Colors =======*/
   --primary-text-color:         oklch(96% 0.03 290);
@@ -112,9 +132,9 @@
 
   --xsmall-font-size:           clamp(.82rem, .48rem + .35vw, 1rem);
   --small-font-size:            clamp(.98rem,  .7rem + .55vw, 1.22rem);
-  --medium-font-size:           clamp(1.22rem, .82rem + .75vw, 1.55rem);
-  --large-font-size:            clamp(1.4rem, 1rem + 1vw, 2rem);
-  --xlarge-font-size:           clamp(1.65rem, 1.35rem + 2vw, 3.75rem);
+  --medium-font-size:           clamp(1.12rem, .82rem + .75vw, 1.55rem);
+  --large-font-size:            clamp(1.24rem, 1rem + 1vw, 2rem);
+  --xlarge-font-size:           clamp(1.55rem, 1.35rem + 2vw, 3.75rem);
 
   --xsmall-line-height:         1;
   --small-line-height:          1.5;
@@ -123,8 +143,8 @@
   --xlarge-line-height:         1.2;
 
   --small-letter-spacing:       .0065em;
-  --medium-letter-spacing:      .0225em;
-  --large-letter-spacing:       .0525em;
+  --medium-letter-spacing:      clamp(.0195em, .0085em, + .4vw, .0225em);
+  --large-letter-spacing:       clamp(.035em, .0095em, + .6vw, .0525em);
 
   /* ====== Gallery ====== */
   --gallery-frame-size: calc(

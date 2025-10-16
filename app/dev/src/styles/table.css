@@ -40,7 +40,7 @@
 
 .table__th,
 .table__td {
-  padding-block: var(--xsmall-spacing);
+  padding-block: var(--card-padding--tight);
   padding-inline: calc(.5 * var(--card-padding));
 }
 
@@ -76,7 +76,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: var(--xsmall-spacing);
+  gap: var(--card-spacing--compact);
   white-space: nowrap;
 }
 

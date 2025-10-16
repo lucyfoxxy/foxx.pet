@@ -106,21 +106,21 @@ p :where(em, i) {
 }
 
 /* ====== PROSE & LISTEN ====== */
-.panel :where(p) {  
-  margin: 0 0 var(--prose-flow-spacing);  
+.panel :where(p) {
+  margin: 0 0 var(--card-flow-gap);
 }
 
 .panel :where(ul, ol) {
   padding-inline-start: 1.2rem;
-  margin: var(--prose-flow-spacing) 0;
+  margin: var(--card-flow-gap) 0;
 }
 .panel :where(li) {
-  margin: calc(var(--prose-flow-spacing) * .35) 0;
+  margin: calc(var(--card-flow-gap) * .35) 0;
 }
 
 .panel :where(blockquote) {
-  margin: var(--prose-flow-spacing) 0;
-  padding: calc(var(--prose-flow-spacing) * .75) var(--prose-flow-spacing);
+  margin: var(--card-flow-gap) 0;
+  padding: calc(var(--card-flow-gap) * .75) var(--card-flow-gap);
   border-left: 3px solid var(--accent-foreground);
   background: color-mix(in oklab, var(--content-background) 4%, transparent);
   border-radius: .5rem;
