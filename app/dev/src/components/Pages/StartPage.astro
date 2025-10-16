@@ -23,8 +23,8 @@ const intro = content.intro;
 const feature = content.feature;
 const links = content.contactLinks ?? [];
 const contact = content.contact;
-const albumSlug='bestof';
-const shareKey= "KEkdKYpvFNPFgS654sbWB28rHuXIohcLo5MtrD1BERFqwHOtrQjmDxMhsRTnRSsKRSw";
+const albumSlug = 'bestof';
+const shareKey = 'KEkdKYpvFNPFgS654sbWB28rHuXIohcLo5MtrD1BERFqwHOtrQjmDxMhsRTnRSsKRSw';
 const isExternalLink = (href: string) => href.startsWith('http');
 ---
 <Layout meta={meta}>
@@ -32,61 +32,35 @@ const isExternalLink = (href: string) => href.startsWith('http');
     <link rel="preload" href={ASSETS.logo_hero.src} as="image" type="image/webp" />
   </head>
 
-
-    <section class="content-head media-hero content-section">   
-      <div class="content__title">
-        <h1>{hero.heading}</h1>
-      </div>
-      <Picture
-        src={ASSETS.logo_hero}
-        formats={['webp']}
-        inferSize  
-        alt={hero.heading}
-        fetchpriority="high"
-        class="media-hero__logo"
-      />
-
-      <div class="content__subtitle">
-        <h3><em>...where cosmic foxes make...eeeeeeeeeeeek!</em></h3>
-      </div>
-    </section>
-
-    <div class="content-section">
-      <section class="content-card">
-        <h2>{intro.heading}</h2>
-        <div class="prose">
-          {intro.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
-        </div>
-        <h3><i>{intro.signature}</i></h3>
-      </section>
-
-      
-        
-        
-        
-          <section
-            class="media-gallery__hook content-card"
-            data-slug={albumSlug}
-            data-autoplay="true"
-            data-interval="8000"
-            data-random="true"
-            data-share-key={shareKey}
-          ><h2>{feature.heading}</h2>
-            <div class="media-gallery">
-      
-              <div class="media-gallery__frame" role="button" tabindex="0" aria-label="Open artwork in lightbox">
-                <img
-                  class="media-gallery__image compact"
-
-                />
-              </div>
-              <div class="media-gallery__progress" aria-hidden="true"></div>
-            </div>
-        
-        
-      </section>
+  <section class="content-head media-hero content-section">   
+    <div class="content__title">
+      <h1>{hero.heading}</h1>
     </div>
-    <section class="content-card content-section">
+
+    <Picture
+      src={ASSETS.logo_hero}
+      formats={['webp']}
+      inferSize  
+      alt={hero.heading}
+      fetchpriority="high"
+      class="media-hero__logo"
+    />
+
+    <div class="content__subtitle">
+      <h3>...where cosmic foxes make...eeeeeeeeeeeek!</h3>
+    </div>
+  </section>
+
+  <section class="content-grid">
+    <div class="intro-slot content-card">
+      <h2>{intro.heading}</h2>
+      <div class="prose">
+        {intro.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+      </div>
+      <h3><i>{intro.signature}</i></h3>
+    </div>
+
+    <div class="contact-slot content-card">
       <h2>{contact.heading}</h2>
       <div class="button--large--wrap">
         {links.map((link) => (
@@ -101,11 +75,29 @@ const isExternalLink = (href: string) => href.startsWith('http');
           </a>
         ))}
       </div>
-    </section>
+    </div>
+
+    <div
+      class="feature-slot media__hook content-card"
+      data-slug={albumSlug}
+      data-autoplay="true"
+      data-interval="8000"
+      data-random="true"
+      data-share-key={shareKey}
+    >
+      <h2>{feature.heading}</h2>
+      <div class="media__wrapper">
+        <div class="media__frame media__frame--compact" role="button" tabindex="0" aria-label="Open artwork in lightbox">
+          <img class="media__image" alt="" />
+          <div class="media__progress" aria-hidden="true"></div>
+        </div>
+      </div>
+    </div>
+  </section> 
+  
   <script>
     import initGalleryIntro from '@Scripts/galleryViewer_compact.js';
     import { runOnReady } from '@Scripts/utils/_runOnReady.js';
-
     runOnReady(initGalleryIntro);
   </script>
 </Layout>

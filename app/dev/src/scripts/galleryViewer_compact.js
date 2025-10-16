@@ -21,7 +21,7 @@ const buildRemoteUrl = (id, shareKey, kind) => {
 };
 
 export default function initGalleryIntro() {
-  const root = document.querySelector('.media-gallery__hook[data-slug]');
+  const root = document.querySelector('.media__hook[data-slug]');
   if (!root) return;
 
   const slug     = root.getAttribute('data-slug');
@@ -29,10 +29,10 @@ export default function initGalleryIntro() {
   const random   = root.getAttribute('data-random') === 'true';
   const interval = parseInt(root.getAttribute('data-interval') || '7000', 10);
 
-  const viewer    = root.querySelector('.media-gallery');
-  const frame     = viewer?.querySelector('.media-gallery__frame');
-  const imgEl     = frame?.querySelector('.media-gallery__image');
-  const progress  = frame?.querySelector('.media-gallery__progress');
+  const viewer    = root.querySelector('.media__wrapper');
+  const frame     = viewer?.querySelector('.media__frame');
+  const imgEl     = frame?.querySelector('.media__image');
+  const progress  = frame?.querySelector('.media__progress');
 
   if (!viewer || !frame || !imgEl || !progress) return;
 

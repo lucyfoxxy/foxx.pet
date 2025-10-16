@@ -28,7 +28,7 @@ const buildRemoteUrl = (id, shareKey, kind) => {
 };
 
 export default function initGalleryPage() {
-  const root = document.querySelector('.media-gallery__hook[data-slug]');
+  const root = document.querySelector('.media__hook[data-slug]');
   if (!root) return;
 
   const slug     = root.getAttribute('data-slug');
@@ -36,17 +36,17 @@ export default function initGalleryPage() {
   const random   = root.getAttribute('data-random') === 'true';
   const interval = parseInt(root.getAttribute('data-interval') || '8000', 10);
 
-  const viewer     = root.querySelector('.media-gallery');
-  const frame      = viewer?.querySelector('.media-gallery__frame');
-  const imgEl      = frame?.querySelector('.media-gallery__image');
-  const btnPrev    = frame?.querySelector('.media-gallery__prev');
-  const btnNext    = frame?.querySelector('.media-gallery__next');
-  const btnPlay    = frame?.querySelector('.media-gallery__playpause');
-  const progress   = frame?.querySelector('.media-gallery__progress');
-  const thumbs     = viewer?.querySelector('.media-gallery__thumbs');
-  const thumbsWrap = thumbs?.querySelector('.media-gallery__thumbs-wrap');
-  const thumbsPrev = thumbs?.querySelector('.media-gallery__thumbs-prev');
-  const thumbsNext = thumbs?.querySelector('.media-gallery__thumbs-next');
+  const viewer     = root.querySelector('.media__wrapper');
+  const frame      = viewer?.querySelector('.media__frame');
+  const imgEl      = frame?.querySelector('.media__image');
+  const btnPrev    = frame?.querySelector('.media__prev');
+  const btnNext    = frame?.querySelector('.media__next');
+  const btnPlay    = frame?.querySelector('.media__playpause');
+  const progress   = frame?.querySelector('.media__progress');
+  const thumbs     = viewer?.querySelector('.media__thumbs');
+  const thumbsWrap = thumbs?.querySelector('.media__thumbs-wrap');
+  const thumbsPrev = thumbs?.querySelector('.media__thumbs-prev');
+  const thumbsNext = thumbs?.querySelector('.media__thumbs-next');
 
   if (!viewer || !frame || !imgEl || !btnPrev || !btnNext || !btnPlay || !progress || !thumbsWrap || !thumbsPrev || !thumbsNext) return;
 
@@ -97,7 +97,7 @@ export default function initGalleryPage() {
     thumbsPrev.hidden = true;
     thumbsNext.hidden = true;
     const empty = document.createElement('p');
-    empty.className = 'media-gallery__empty';
+    empty.className = 'media__empty';
     empty.textContent = 'No artworks available yet.';
     thumbsWrap.removeAttribute('role');
     thumbsWrap.replaceChildren(empty);
@@ -132,7 +132,7 @@ export default function initGalleryPage() {
     if (!availableWidth) return configuredWindow;
 
     const styles = getComputedStyle(thumbsWrap);
-    const sampleThumb = thumbsWrap.querySelector('.media-gallery__thumb');
+    const sampleThumb = thumbsWrap.querySelector('.media__thumb');
     const sampleWidth = sampleThumb?.getBoundingClientRect().width;
     const thumbSize = (sampleWidth && sampleWidth > 0)
       ? sampleWidth
@@ -173,25 +173,25 @@ export default function initGalleryPage() {
   frame.style.setProperty('--gallery-interval', `${interval}ms`);
 
   const lightbox = (() => {
-    let overlay = document.querySelector('.media-gallery__lightbox');
+    let overlay = document.querySelector('.media__lightbox');
     let created = false;
     if (!(overlay instanceof HTMLElement)) {
       overlay = document.createElement('div');
-      overlay.className = 'media-gallery__lightbox';
+      overlay.className = 'media__lightbox';
       overlay.innerHTML = `
         <figure>
-          <img class="media-gallery__lightbox-image" alt="" />
+          <img class="media__lightbox-image" alt="" />
           
-          <button class="media-gallery__lightbox-close" type="button" aria-label="Close">×</button>
+          <button class="media__lightbox-close" type="button" aria-label="Close">×</button>
         </figure>
       `;
       document.body.appendChild(overlay);
       created = true;
     }
 
-    const img = overlay.querySelector('.media-gallery__lightbox-image');
+    const img = overlay.querySelector('.media__lightbox-image');
     
-    const btnClose = overlay.querySelector('.media-gallery__lightbox-close');
+    const btnClose = overlay.querySelector('.media__lightbox-close');
 
     if (!img || !btnClose) {
       if (created) overlay.remove();
@@ -200,7 +200,7 @@ export default function initGalleryPage() {
 
     const close = () => {
       overlay.classList.remove('is-open');
-      document.body.classList.remove('media-gallery__lightbox-open');
+      document.body.classList.remove('media__lightbox-open');
       document.removeEventListener('keydown', handleKey);
       if (resumeAfterLightbox) {
         playing = true;
@@ -235,7 +235,7 @@ export default function initGalleryPage() {
         img.src = item.full;
         img.alt = item.alt || '';
         overlay.classList.add('is-open');
-        document.body.classList.add('media-gallery__lightbox-open');
+        document.body.classList.add('media__lightbox-open');
         document.addEventListener('keydown', handleKey);
       },
       close,
@@ -253,7 +253,7 @@ export default function initGalleryPage() {
       const item = items[order[orderIdx]];
       if (!item) continue;
       const button = document.createElement('button');
-      button.className = 'media-gallery__thumb';
+      button.className = 'media__thumb';
       button.type = 'button';
       button.dataset.index = String(orderIdx);
       button.setAttribute('aria-label', item.alt || `Image ${orderIdx + 1}`);
@@ -279,7 +279,7 @@ export default function initGalleryPage() {
   };
 
   const highlightThumbs = () => {
-    thumbsWrap.querySelectorAll('.media-gallery__thumb').forEach((thumb) => {
+    thumbsWrap.querySelectorAll('.media__thumb').forEach((thumb) => {
       const thumbIndex = parseInt(thumb.dataset.index || '', 10);
       const isActive = thumbIndex === i;
       thumb.classList.toggle('active', isActive);

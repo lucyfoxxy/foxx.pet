@@ -34,8 +34,8 @@
 }
 .badge--large {
     background: var(--accent-background);
-  padding: var(--tiny-spacing) var(--xsmall-spacing);
-  border-radius: var(--medium-radius);
+  padding: var(--tiny-spacing) ;
+  border-radius: var(--large-radius);
   margin-block-start: var(--tiny-spacing);
 }
 
@@ -50,8 +50,8 @@
 }
 .button--large {
   gap: var(--small-spacing); 
-  padding: var(--medium-padding) var(--medium-padding);
-  border-radius: var(--large-radius);
+  padding: var(--small-padding) var(--medium-padding);
+  border-radius: var(--small-radius);
   background: var(--accent-background); 
   font-weight: var(--thick-font-weight);
 }
@@ -75,7 +75,7 @@
 .button--large--wrap {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: var(--medium-spacing);
+  gap: var(--xsmall-spacing);
   margin-block-start: var(--tiny-spacing);
 }
 
@@ -93,15 +93,15 @@
   display: inline-grid;
   
   place-items: center;
-  inline-size: 1.75rem;
-  block-size: 1.75rem;
+  inline-size: 1.5rem;
+  block-size: 1.5rem;
   border-radius: 999px;
   background: none;
 }
 
 .button--large--icon svg {
-  inline-size: 1.75rem;
-  block-size: 1.75rem;
+  inline-size: 1.5rem;
+  block-size: 1.5rem;
 }
 
 @media (max-width: 680px) {

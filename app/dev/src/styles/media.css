@@ -71,7 +71,7 @@
   object-fit: cover;
   background: inherit;
 }
-.media-gallery__thumb {
+.media__thumb {
   position: relative;
   display: block;
   inline-size: 100%;
@@ -87,7 +87,7 @@
   transition: var(--transition-soft);
 }
 
-.media-gallery__thumb img {
+.media__thumb img {
   display: block;
   inline-size: 100%;
   block-size: 100%;
@@ -97,36 +97,36 @@
   transition: transform .55s ease;
 }
 
-.media-gallery__thumb:hover,
-.media-gallery__thumb:focus-visible {
+.media__thumb:hover,
+.media__thumb:focus-visible {
   
   outline: var(--outline);
   box-shadow: var(--highlight-glow);
 }
 
-.media-gallery__thumb:hover img,
-.media-gallery__thumb:focus-visible img {
+.media__thumb:hover img,
+.media__thumb:focus-visible img {
   
   transform: scale(1.65);
 
 }
 
-.media-gallery__thumb[aria-current="true"],
-.media-gallery__thumb.active {
+.media__thumb[aria-current="true"],
+.media__thumb.active {
    outline: var(--outline);
 }
 /* ====== GALLERY VIEWER WRAPPER ====== */
-.media-gallery {
+.media__wrapper {
   position: relative;
   display: flex;
    max-block-size: 100%;
-  
+  margin-block: var(--prose-flow-spacing);
   flex-direction: column;
   gap: var(--medium-spacing);
   max-block-size: 100%;
 }
 
-.media-gallery__frame {
+.media__frame {
   position: relative;
   align-self: center;
   inline-size: calc(min(var(--gallery-frame-size),100%));
@@ -136,46 +136,47 @@
   object-fit: cover;
   border-radius: var(--large-radius);
   overflow: hidden;
-  background: oklch(12% 0.075 290 / 0.65);
+  box-shadow: var(--medium-shadow);
+  background: oklch(12% 0.075 290 / 0.15);
 }
 
 @media (max-width: 900px) {
-  .media-gallery__frame {
+  .media__frame {
     aspect-ratio: 1 / 1;
     max-block-size: 55vh;
   }
 }
 
-.media-gallery__frame[role="button"] {
+.media__frame[role="button"] {
   cursor: zoom-in;
 }
 
-.media-gallery__frame.compact {
+.media__frame--compact {
   inline-size: calc(min(var(--gallery-frame-size),100%));
-  max-block-size: 25vh;
-  block-size: calc(min(var(--gallery-frame-size) / 2,100%));
+  max-block-size: 45vh;
+  block-size: calc(min(var(--gallery-frame-size),100%));
   aspect-ratio: 1 / 1;
   object-fit: cover;
 }
 
-.media-gallery__frame.compact .media-gallery__image {
+.media__frame.compact .media__image {
   object-fit: cover;
 }
 
-.media-gallery__frame:not(.compact) .media-gallery__image.is-animating {
-  animation: media-gallery__kenburns var(--gallery-interval, 8000ms) ease-in-out forwards;
+.media__frame:not(.compact) .media__image.is-animating {
+  animation: media__kenburns var(--gallery-interval, 8000ms) ease-in-out forwards;
 }
 
-.media-gallery__frame.compact .media-gallery__image.is-animating {
-  animation: media-gallery__kenburns--compact var(--gallery-interval-compact, 7000ms) ease-in-out forwards;
+.media__frame.compact .media__image.is-animating {
+  animation: media__kenburns--compact var(--gallery-interval--compact, 7000ms) ease-in-out forwards;
 }
 
-.media-gallery__frame:focus-visible {
+.media__frame:focus-visible {
   outline: 2px solid color-mix(in oklab, var(--accent-foreground) 85%, white 15%);
   outline-offset: 4px;
 }
 
-@keyframes media-gallery__kenburns {
+@keyframes media__kenburns {
   0% {
     transform: scale(2.75);
     bottom: calc(-1 * var(--kenburns-offset));
@@ -205,12 +206,24 @@
   }
 }
 
-@keyframes media-gallery__kenburns--compact {
+@keyframes media__kenburns--compact {
   0% {
-    opacity: 0;
+    transform: scale(2.75);
+    bottom: calc(-1 * var(--kenburns-offset));
+    top: var(--kenburns-offset);
+    opacity: .7;
   }
 
   10% {
+    opacity: 1;
+    transform: scale(1.2);
+    bottom: 0;
+    top: 0;
+  }
+
+  75% {
+    bottom: 0;
+    top: 0;
     opacity: 1;
   }
 
@@ -219,11 +232,11 @@
   }
 
   100% {
-    opacity: 0;
+    opacity: .7;
   }
 }
 
-.media-gallery__image {
+.media__image {
   position: absolute;
   inset: 0;
   margin: auto;
@@ -236,13 +249,13 @@
   will-change: opacity, transform, top, bottom;
 }
 
-.media-gallery__image.is-transitioning {
+.media__image.is-transitioning {
   opacity: 0;
 }
 
 /* ====== VIEWER CONTROLS ====== */
-.media-gallery__nav,
-.media-gallery__playpause {
+.media__nav,
+.media__playpause {
   position: absolute;
   z-index: 2;
   inline-size: 2.5rem;
@@ -259,38 +272,38 @@
   transition: var(--transition-soft);
 }
 
-.media-gallery__nav:hover,
-.media-gallery__nav:focus-visible,
-.media-gallery__playpause:hover,
-.media-gallery__playpause:focus-visible {
+.media__nav:hover,
+.media__nav:focus-visible,
+.media__playpause:hover,
+.media__playpause:focus-visible {
   opacity: 1;
 }
 
-.media-gallery__nav:active,
-.media-gallery__playpause:active {
+.media__nav:active,
+.media__playpause:active {
   transform: scale(.95);
 }
 
-.media-gallery__nav[disabled],
-.media-gallery__playpause[disabled] {
+.media__nav[disabled],
+.media__playpause[disabled] {
   opacity: .35;
   cursor: default;
   pointer-events: none;
 }
 
-.media-gallery__prev {
+.media__prev {
   inset-inline-start: .65rem;
   top: 50%;
   transform: translateY(-50%);
 }
 
-.media-gallery__next {
+.media__next {
   inset-inline-end: .65rem;
   top: 50%;
   transform: translateY(-50%);
 }
 
-.media-gallery__playpause {
+.media__playpause {
   inset-block-start: .65rem;
   inset-inline-end: .65rem;
   inline-size: 2.25rem;
@@ -298,22 +311,22 @@
   font-size: 1rem;
 }
 
-.media-gallery__nav:hover,
-.media-gallery__nav:focus-visible {
+.media__nav:hover,
+.media__nav:focus-visible {
   transform: translateY(-50%) scale(1.05);
 }
 
-.media-gallery__nav:active {
+.media__nav:active {
   transform: translateY(-50%) scale(.92);
 }
 
-.media-gallery__playpause:hover,
-.media-gallery__playpause:focus-visible {
+.media__playpause:hover,
+.media__playpause:focus-visible {
   transform: scale(1.05);
 }
 
 /* ====== PROGRESS BAR ====== */
-.media-gallery__progress {
+.media__progress {
   position: absolute;
   inset: auto .9rem .9rem .9rem;
   block-size: .3rem;
@@ -325,7 +338,7 @@
   
 }
 
-.media-gallery__progress::before {
+.media__progress::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -336,13 +349,13 @@
   transition: transform .12s linear;
 }
 
-.media-gallery__progress.compact {
+.media__progress.compact {
   inset: auto .6rem .6rem .6rem;
   block-size: .24rem;
 }
 
 /* ====== THUMBNAIL STRIP ====== */
-.media-gallery__thumbs {
+.media__thumbs {
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
@@ -354,7 +367,7 @@
   transition: var(--transition-soft);
 }
 
-.media-gallery__thumbs-wrap {
+.media__thumbs-wrap {
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: var(--thumb-size);
@@ -363,7 +376,7 @@
   overflow: hidden;
 }
 
-.media-gallery__thumbs-nav {
+.media__thumbs-nav {
   inline-size: clamp(1.75rem, 4vw, 2.25rem);
   block-size: clamp(1.75rem, 4vw, 2.25rem);
   display: grid;
@@ -377,12 +390,12 @@
   transition: var(--transition-soft);
 }
 
-.media-gallery__thumbs-nav:hover,
-.media-gallery__thumbs-nav:focus-visible {
+.media__thumbs-nav:hover,
+.media__thumbs-nav:focus-visible {
   opacity: 1;
 }
 
-.media-gallery__thumbs-nav[disabled] {
+.media__thumbs-nav[disabled] {
   opacity: .25;
   pointer-events: none;
 }
@@ -391,7 +404,7 @@
 
 
 /* ====== LIGHTBOX OVERLAY ====== */
-.media-gallery__lightbox {
+.media__lightbox {
   position: fixed;
   inset: 0;
   display: grid;
@@ -404,12 +417,12 @@
   transition: opacity .3s ease;
 }
 
-.media-gallery__lightbox.is-open {
+.media__lightbox.is-open {
   opacity: 1;
   pointer-events: auto;
 }
 
-.media-gallery__lightbox figure {
+.media__lightbox figure {
   position: relative;
   display: block;
   inline-size: auto;
@@ -424,7 +437,7 @@
   transform: scale(.95);
 }
 
-.media-gallery__lightbox img {
+.media__lightbox img {
   inline-size: auto;
   block-size: auto;
   max-inline-size: inherit;
@@ -432,7 +445,7 @@
   background: color-mix(in oklab, var(--primary-background-color) 85%, black 15%);
 }
 
-.media-gallery__lightbox-close {
+.media__lightbox-close {
   position: absolute;
   inset-block-start: .75rem;
   inset-inline-end: .75rem;
@@ -449,18 +462,18 @@
   transition: var(--transition-soft);
 }
 
-.media-gallery__lightbox-close:hover,
-.media-gallery__lightbox-close:focus-visible {
+.media__lightbox-close:hover,
+.media__lightbox-close:focus-visible {
   transform: scale(1.05);
   opacity: 1;
 }
 
-body.media-gallery__lightbox-open {
+body.media__lightbox-open {
   overflow: hidden;
 }
 
 /* ====== FALLBACK ====== */
-.media-gallery__empty {
+.media__empty {
   margin: .5rem 0;
   text-align: center;
   opacity: .75;

@@ -68,18 +68,18 @@ const initialHeight = normalizedInitialItem?.height;
   </section>
   
   <section
-    class="content-section media-gallery__hook content-section"
+    class="content-section media__hook content-section"
     data-slug={albumSlug}
     data-autoplay="true"
     data-interval="8000"
     data-random="true"
     data-share-key={shareKey}
   >
-    <div class="media-gallery content-card content-section">
+    <div class="media__wrapper content-card content-section">
       
-      <div class="media-gallery__frame" role="button" tabindex="0" aria-label="Open artwork in lightbox">
+      <div class="media__frame" role="button" tabindex="0" aria-label="Open artwork in lightbox">
         <img
-          class="media-gallery__image"
+          class="media__image"
           src={initialThumbSrc}
           data-initial-full={initialFullSrc}
           width={initialWidth}
@@ -88,15 +88,15 @@ const initialHeight = normalizedInitialItem?.height;
           loading={initialThumbSrc ? 'eager' : undefined}
           decoding="async"
         />
-        <button class="media-gallery__nav media-gallery__prev" aria-label="Previous" type="button">❮</button>
-        <button class="media-gallery__nav media-gallery__next" aria-label="Next" type="button">❯</button>
-        <button class="media-gallery__playpause" aria-label="Pause autoplay" type="button">⏸</button>
-        <div class="media-gallery__progress" aria-hidden="true"></div>
+        <button class="media__nav media__prev" aria-label="Previous" type="button">❮</button>
+        <button class="media__nav media__next" aria-label="Next" type="button">❯</button>
+        <button class="media__playpause" aria-label="Pause autoplay" type="button">⏸</button>
+        <div class="media__progress" aria-hidden="true"></div>
       </div>
-      <div class="media-gallery__thumbs" data-window="10">
-        <button class="media-gallery__thumbs-nav media-gallery__thumbs-prev" aria-label="Previous thumbnails" type="button">❮</button>
-        <div class="media-gallery__thumbs-wrap" role="list"></div>
-        <button class="media-gallery__thumbs-nav media-gallery__thumbs-next" aria-label="Next thumbnails" type="button">❯</button>
+      <div class="media__thumbs" data-window="10">
+        <button class="media__thumbs-nav media__thumbs-prev" aria-label="Previous thumbnails" type="button">❮</button>
+        <div class="media__thumbs-wrap" role="list"></div>
+        <button class="media__thumbs-nav media__thumbs-next" aria-label="Next thumbnails" type="button">❯</button>
       </div>
     </div>
   </section>

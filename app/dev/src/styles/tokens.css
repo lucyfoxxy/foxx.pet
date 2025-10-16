@@ -4,12 +4,12 @@
   --xsmall-spacing:             clamp(.65rem, .5rem + .3vw, .95rem);
   --small-spacing:              clamp(.75rem, 1vw, 1.25rem);
   --medium-spacing:             clamp(1rem, 2vw, 1.75rem);
-  --large-spacing:              clamp(.75rem, 3.5vw, 3rem);
+  --large-spacing:              clamp(1rem, 2.25vw, 3rem);
   --xlarge-spacing:             clamp(1.75rem, 5.9vw, 6.75rem);
 
   --small-padding:              clamp(.35rem, .3vw, .5rem);
   --medium-padding:             clamp(.75rem, 1.2vw, 1rem);
-  --large-padding:              clamp(1rem, 2vw, 3rem);
+  --large-padding:              clamp(1rem, 2.25vw, 3.25rem);
 
   --container-max:              1280px;  
   --container-spacing:          var(--large-spacing);
@@ -133,9 +133,10 @@
       ) / 2
     );
   --thumb-size: clamp(64px, 9vw, 128px);
-  --kenburns-offset: clamp(8rem, 20vh, 25rem);                                  
+  --kenburns-offset: clamp(8rem, 20vh, 25rem);
+  --kenburns-offset--compact: clamp(8rem, 20vh, 25rem);                                  
   --gallery-interval: 8000ms;  
-  --gallery-interval-compact: 7000ms;
+  --gallery-interval--compact: 6000ms;
 
   /* ====== Motion ====== */
   --transition-interactive: color .2s ease, text-shadow .2s ease;

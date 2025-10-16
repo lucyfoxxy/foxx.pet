@@ -69,7 +69,7 @@ p :where(em, i) {
 }
 
 .button--large {
-  font-size: var(--medium-font-size);
+  font-size: var(--small-font-size);
   font-weight: var(--thick-font-weight);
   line-height: var(--xsmall-line-height);
 }
