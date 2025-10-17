@@ -58,6 +58,7 @@ const isExternalLink = (href: string) => href.startsWith('http');
         {intro.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
       </div>
       <h3><i>{intro.signature}</i></h3>
+      
     </div>
 
     <div class="contact-slot content-card">
@@ -71,7 +72,7 @@ const isExternalLink = (href: string) => href.startsWith('http');
             target={isExternalLink(link.href) ? '_blank' : undefined}
           >
             <span class="button__round--icon"><Icon kind={link.kind} /></span>
-            <span>{link.label}</span>
+            
           </a>
         ))}
       </div>
@@ -85,8 +86,11 @@ const isExternalLink = (href: string) => href.startsWith('http');
       data-random="true"
       data-share-key={shareKey}
     >
-      <h3>{feature.heading}</h3>
+      <div class="content-head">
+        <h2>{feature.heading}</h2>
+      </div>
       <div class="media__wrapper">
+        
         <div class="media__frame media__frame--compact" role="button" tabindex="0" aria-label="Open artwork in lightbox">
           <img class="media__image" alt="" />
           <div class="media__progress" aria-hidden="true"></div>

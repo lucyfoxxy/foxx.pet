@@ -10,9 +10,11 @@
   margin-block-start: var(--card-spacing);
 }
 
-.content-section :where(h2),
-.content-grid :where(h2) {
+.content-section :where(h1,h2,h3,h4),
+.content-grid :where(h1,h2,h3,h4) {
   margin: 0 0 .25rem 0;
+  margin-block:  0 .25rem;
+  margin-inline: 0;
 }
 
 /* ====== FULL-SIZE CONTENT HEAD ====== */

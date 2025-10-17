@@ -100,7 +100,8 @@ p :where(em, i) {
 
 .panel :where(h3) {
   font-weight: var(--normal-font-weight);
-  font-size: var(--large-font-size);
+  font-size: var(--medium-font-size);
+  line-height: var(--large-line-height);
   text-shadow: var(--strong-text-glow);
   letter-spacing: var(--large-letter-spacing);
 }

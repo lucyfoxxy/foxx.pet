@@ -1,10 +1,10 @@
 ---
 export interface Props {
-  kind: 'telegram' | 'mail' | 'facebook' | 'instagram' | 'furaffinity' | 'link';
+  kind: string;
   size?: number | string;
   stroke?: number;
 }
-const { kind, size = 32, stroke = 2 } = Astro.props;
+const { kind = ['telegram' , 'mail' , 'facebook' , 'instagram' , 'furaffinity' , 'link'], size = 32, stroke = 2 } = Astro.props;
 ---
 
 <svg

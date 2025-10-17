@@ -15,7 +15,7 @@
 
   --container-max:              1280px;
   --container-spacing:          var(--spacing-large);
-  --container-padding:          max(var(--padding-small), calc((100vw - var(--container-max)) / 2));
+  --container-padding:          max(var(--padding-xsmall), calc((100vw - var(--container-max)) / 2));
 
   --site-bars-padding-block:    var(--padding-medium);
   --site-bars-padding-inline:   var(--container-padding);
