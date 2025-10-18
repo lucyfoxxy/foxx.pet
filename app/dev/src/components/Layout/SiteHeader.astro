@@ -20,21 +20,40 @@ const { navLinks = [] } = (Astro.props ?? {}) as Props;
   <a class="site-header__logo" aria-label="Home" href="/">
     <img src={ASSETS.logo_header.src} alt="foxx.pet" />
   </a>
-  <nav class="site-header__nav">
+
+ 
+</header>
+  <nav class="site-nav">
     {navLinks
       .filter((link) => link.includeInHeader)
       .map((link) => (
         
-          <a class="site-header__nav-link" href={link.href}>
-            <span class="site-header__nav-text">{link.label}</span>
+          <a class="site-nav__link" href={link.href}>
+            <span class="site-nav__text">{link.label}</span>
             {link.emoji && (
-              <span class="site-header__nav-emoji">{link.emoji}</span>
+              <span class="site-nav__emoji">{link.emoji}</span>
             )}
           </a>
         
       ))
     }
   </nav>
- 
-</header>
+<script>
+  import initResponsiveSiteHeader from '@Scripts/siteHeaderSticky.js';
+  import { runOnReady } from '@Scripts/utils/_runOnReady.js';
+
+  runOnReady(() => {
+    const cleanup = initResponsiveSiteHeader();
+
+    if (typeof cleanup === 'function') {
+      const teardown = () => {
+        cleanup();
+        document.removeEventListener('astro:before-preparation', teardown);
+      };
+
+      document.addEventListener('astro:before-preparation', teardown);
+    }
+  });
+</script>
+
 

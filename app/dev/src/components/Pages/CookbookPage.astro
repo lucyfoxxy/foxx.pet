@@ -24,28 +24,27 @@ const hasRecipes = recipes.length > 0;
 ---
 
   <section class="content-section">
-    <div class="content-head ">
-    <div class="content-card__title">
+    <div class="card card--plain is-centered ">
+    
       <h1>{content.title}</h1>
     
       {introParagraphs.map((paragraph) => (
         <p class="prose">{paragraph}</p>
       ))}
-      </div>
+    
     </div>
   </section>
 
   {hasRecipes ? (
     <>
       <section class="content-section">
-        <div class="content-card" aria-labelledby="cookbook-facets">
-          <div class="content-card__title">
+        <div class="card" aria-labelledby="cookbook-facets">      
             <h2 id="cookbook-facets">Plan your feast</h2>
             <p>
               Categories and tags make it simple to build seasonal menus or filter by dietary needs. Hook them into client-side
               state or query parameters for an experience similar to the gallery overview.
             </p>
-          </div>
+          
           <div class="prose">
             {categoryFacets.length > 0 && (
               <p>
@@ -70,10 +69,9 @@ const hasRecipes = recipes.length > 0;
         </div>
       </section>
 
-      <section class="content-section">
+      <section class="content-section cols-2">
         {recipes.map((recipe: RecipeEntry) => (
-          <article class="content-card" key={recipe.id}>
-            <div class="content-card__title">
+          <article class="card">
               <h2>
                 <a href={`/cookbook/${recipe.slug}/`}>{recipe.data.title}</a>
               </h2>
@@ -92,7 +90,7 @@ const hasRecipes = recipes.length > 0;
                   </>
                 ) : null}
               </p>
-            </div>
+            
             <div class="prose">
               {recipe.data.description && <p>{recipe.data.description}</p>}
               <ul>
@@ -121,10 +119,9 @@ const hasRecipes = recipes.length > 0;
       </section>
     </>
   ) : (
-    <section class="content-card content-section">
-      <div class="content-card__title">
-        <h2>{overview.emptyState ?? 'Cakes are still baking...'}</h2>
-      </div>
+    <section class="cardcontent-section">
+      <h2>{overview.emptyState ?? 'Cakes are still baking...'}</h2>
+      
       <div class="prose">
         <p>{overview.cta ?? 'Add markdown recipes to populate this overview automatically.'}</p>
       </div>

@@ -32,11 +32,11 @@ const isExternalLink = (href: string) => href.startsWith('http');
     <link rel="preload" href={ASSETS.logo_hero.src} as="image" type="image/webp" />
   </head>
 
-  <section class="content-section content-section--1">
-    <div class="content-card content-card--plain is-centered media-hero">
-      <div class="content__title">
-        <h1>{hero.heading}</h1>
-      </div>
+  <section class="content-section">
+    <div class="card card--plain is-centered media-hero is-condensed">
+      
+      <h1>{hero.heading}</h1>
+      
 
       <Picture
         src={ASSETS.logo_hero}
@@ -47,36 +47,42 @@ const isExternalLink = (href: string) => href.startsWith('http');
         class="media-hero__logo"
       />
 
-      <div class="content__subtitle">
-        <h3>...where cosmic foxes make...eeeeeeeeeeeek!</h3>
-      </div>
+      
+      <h3 class="is-italic">...Eeeeeeeeeeeeeeeeeeeeek!</h3>
+      
     </div>   
   </section>
 
   <section class="content-section cols-2">
-    <div class="content-card">
-      <h2>{intro.heading}</h2>
-      <div class="prose">
-        {intro.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+    <section class="content-section">
+      <div class="card">
+        <h2>{intro.heading}</h2>
+        <div class="prose">
+          {intro.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+        </div>
+        <h3><i>{intro.signature}</i></h3>
+        
+
       </div>
-      <h3><i>{intro.signature}</i></h3>
-      
-          <div class="button--large--wrap">
-        {links.map((link) => (
-          <a
-            class={`button button--large button--large--${link.kind}`}
-            href={link.href}
-            rel={isExternalLink(link.href) ? 'noopener noreferrer' : undefined}
-            target={isExternalLink(link.href) ? '_blank' : undefined}
-          >
-            <span class="button--large--icon"><Icon kind={link.kind} /></span>
-            <span>{link.label}</span>
-          </a>
-        ))}
+      <div class="card">
+        <h3>Reach the Fops</h3>
+        <div class="button--large--wrap">
+          {links.map((link) => (
+            <a
+              class={`button button--large button--large--${link.kind}`}
+              href={link.href}
+              rel={isExternalLink(link.href) ? 'noopener noreferrer' : undefined}
+              target={isExternalLink(link.href) ? '_blank' : undefined}
+            >
+              <span class="button--large--icon"><Icon kind={link.kind} /></span>
+              <span>{link.label}</span>
+            </a>
+          ))}
+        </div>
       </div>
-    </div>
-    
-    <div class="content-card content-card--accent">
+    </section>
+    <div class="card card--accent">
+      <h2>{feature.heading}</h2>
       <div
         class="media__hook"
         data-slug={albumSlug}
@@ -85,7 +91,7 @@ const isExternalLink = (href: string) => href.startsWith('http');
         data-random="true"
         data-share-key={shareKey}
       >
-        <h2>{feature.heading}</h2>
+        
         <div class="media__wrapper">
           <div class="media__frame media__frame--compact" role="button" tabindex="0" aria-label="Open artwork in lightbox">
             <img class="media__image" alt="" />

@@ -5,20 +5,18 @@
 
 /* ====== HEADER / FOOTER ====== */
 .site-header,
-.site-footer {
-  
+.site-footer,
+.site-nav { 
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;  
   margin-inline: 0;
   padding-block: var(--bars-padding);
-  box-shadow: var(--large-shadow);
+
   background: var(--bars-background);
-  backdrop-filter: var(--bars-backdrop);
+
 }
 .site-footer { 
-  bottom: 0;
-  z-index: 5;
   display: inline-flex;
   flex-direction: row;
   border-radius: var(--medium-radius) var(--medium-radius) 0 0;
@@ -32,12 +30,12 @@
   text-shadow: var(--strong-text-shadow);
 }
 .site-header {
-  position: sticky;
+  position: relative;
   top: 0;
   z-index: 50;
   display: flex;
-  border-radius: 0 0 var(--medium-radius) var(--medium-radius);
-  margin-block-end: var(--bars-spacing);
+  
+  backdrop-filter: var(--bars-backdrop);
   padding-inline: var(--bars-padding);
   row-gap: var(--bars-gap--row);
   column-gap: var(--bars-gap--column)
@@ -57,47 +55,86 @@
   block-size: var(--site-logo--size);
   filter: var(--site-logo--filter);
 }
-.site-header__nav {
-  position: static;
+.site-nav {
+  position: sticky;
+  top: 0px;
+  z-index: 1001;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
   row-gap: var(--nav-gap--row);
-  column-gap: var(--nav-gap--column)
+  column-gap: var(--nav-gap--column);
+  margin-block-end: var(--bars-spacing);  
+  box-shadow: 0px 12px 18px -6px rgba(0,0,0,.5);
+  backdrop-filter: var(--bars-backdrop);
+  
+  border-radius: 0 0 var(--medium-radius) var(--medium-radius);
 }
 
-.site-header__nav a {
+.site-nav a {
   color: var(--accent-text);
   text-shadow: var(--strong-text-shadow);
   transition: var(--transition-nav);
 }
 
-.site-header__nav-link {
+.site-nav__link {
   display: inline-flex;
   align-items: center;
   gap: var(--nav-gap--row);
 }
 
-.site-header__nav-text {
+.site-nav__text {
   line-height: var(--xlarge-line-height);
 }
 
-.site-header__nav-emoji {
+.site-nav__emoji {
   font-size: .85em;
   line-height: var(--xsmall-line-height);
   transform: translateY(.02em);
 }
 
-.site-header__nav a:hover,
-.site-header__nav a:focus-visible {
+.site-nav a:hover,
+.site-nav a:focus-visible {
   transform: translateY(-1px) scale(1.05);
   text-shadow: var(--strong-text-glow);
-  color: var(--highlight-foreground); 
+  color: var(--highlight-foreground);
   transition: var(--transition-nav);
 }
 
+@media (max-width: 900px) {
+  html {
+    scroll-padding-top: var(--site-header--sticky-offset, 0px);
+  }
 
+  .site-header {
+    position: static;
+    top: auto;
+    z-index: auto;
+    align-items: stretch;
+    padding-inline: 0;
+
+  }
+
+  .site-header__logo {
+    justify-content: center;
+    padding-inline: var(--bars-padding);
+  }
+
+  .site-nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    inline-size: 100%;
+    margin-inline: 0;
+    padding-inline: var(--bars-padding);   
+    
+  }
+
+  .site-nav a {
+    text-shadow: var(--strong-text-shadow);
+  }
+}
 
 /* ====== CONTAINER / PANEL ====== */
 .container {
@@ -120,21 +157,21 @@ main.panel {
 .panel__bar {
   display: grid;
   grid-auto-flow: column;
-  gap: var(--cluster-gap);
+
   padding-inline: var(--panel-bar-padding);
   text-shadow: var(--soft-text-shadow);
 }
 
 .panel__bar--top {
-  margin-block: calc(-1 * var(--panel-padding) ) var(--card-gap);
-  margin-inline: calc(-1 * var(--panel-padding) + var(--control-padding));
+  margin-block: calc(-1 * var(--panel-padding)) var(--section-gap);
+  margin-inline: calc(-1 * var(--panel-padding) + var(--panel-bar-spacing));
   padding-block: var(--panel-bar-padding) 0;
 }
 
 .panel__bar--bottom {
-  margin-block: var(--card-padding) calc(-1 * var(--card-padding) + var(--control-padding));
-  margin-inline: calc(-1 * var(--card-padding) + var(--control-padding));
-  padding-block: 0 var(--cluster-gap);
+  margin-block: var(--section-gap) calc(-1 * var(--panel-padding));
+  margin-inline: calc(-1 * var(--panel-padding) + var(--panel-bar));
+  padding-block: 0 var(--panel-bar-padding);
   justify-content: center;
 }
 

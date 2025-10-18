@@ -50,12 +50,12 @@ p :where(em, i) {
 }
 
 .site-footer,
-.site-header__nav a,
+.site-nav a,
 .panel :where(h2) {
   letter-spacing: var(--large-letter-spacing);
 }
 
-.site-header__nav a {
+.site-nav a {
   font-weight: var(--bold-font-weight);
   font-size: var(--large-font-size);
 }
@@ -74,7 +74,7 @@ p :where(em, i) {
   line-height: var(--xsmall-line-height);
 }
 /* ====== HEADINGS ====== */
-:where(h1, h2, h3, .site-header__nav a) {
+:where(h1, h2, h3, .site-nav a) {
   font-family: var(--secondary-font-family);
   font-variant: small-caps;
 }
@@ -90,9 +90,8 @@ p :where(em, i) {
   letter-spacing: var(--large-letter-spacing);
   text-shadow: var(--strong-text-shadow);
 }
-
+.panel :where(h2,h3) {  font-size: var(--large-font-size); }
 .panel :where(h2) {
-  font-size: var(--large-font-size);
   line-height: var(--large-line-height);
   font-weight: var(--bold-font-weight);
   text-shadow: var(--soft-text-glow);
@@ -100,7 +99,6 @@ p :where(em, i) {
 
 .panel :where(h3) {
   font-weight: var(--normal-font-weight);
-  font-size: var(--large-font-size);
   text-shadow: var(--strong-text-glow);
   letter-spacing: var(--large-letter-spacing);
 }
@@ -132,6 +130,6 @@ p :where(em, i) {
 .table__price { font-weight: var(--normal-font-weight); }
 
 /* ====== MEDIA GALLERIES ====== */
-.content-card--softh3 {
+.card--soft h3 {
    font-size: var(--medium-font-size);
 }

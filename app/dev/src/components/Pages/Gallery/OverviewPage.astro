@@ -14,11 +14,11 @@ const introParagraphs = content.introParagraphs ?? [content.description];
 ---
 
   <section class="content-section">
-    <div class="content-head content-card__title">
+    <div class="card card--plain is-centered">
     <h1>{content.title}</h1>
     
       {introParagraphs.map((paragraph) => (
-        <p class="prose">{paragraph}</p>
+        <p>{paragraph}</p>
       ))}
     </div>
   </section>
@@ -26,20 +26,21 @@ const introParagraphs = content.introParagraphs ?? [content.description];
 <section class="content-section cols-3">
     
   {categories.map(({ slug, title, description, href }) => (
-    <div class="content-card content-card--soft is-animated is-centered">
+    
     <a href={href ?? `/galleries/${slug}`} aria-label={`Open ${title}`}>
-      <div class="content-card__title">
+      <div class="card card--soft is-animated is-centered">
+        
         <h3>{title}</h3>
-      </div>
-      <div class="content-card__subtitle">
+        
+        
         {description ? <p>{description}</p> : null}
-      </div>
-      <div class="card__spacer" aria-hidden="true"></div>
-      <div class="media-album__cover" data-slug={slug}>
-        <div class="media-album__cover-placeholder" aria-hidden="true"></div>
+        
+        <div class="card__spacer" aria-hidden="true"></div>
+        <div class="media-album__cover" data-slug={slug}>
+          <div class="media-album__cover-placeholder" aria-hidden="true"></div>
+        </div>
       </div>
     </a>
-    </div>
   ))}
 
 </section>

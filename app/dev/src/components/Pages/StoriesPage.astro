@@ -23,77 +23,77 @@ const formatDate = (date: Date) => new Intl.DateTimeFormat('en', { dateStyle: 'm
 const hasStories = stories.length > 0;
 ---
 
-  <section class="content-section">
-    <div class="content-head content-card__title">
+<section class="content-section">
+  <div class="card card--plain is-centered">
     <h1>{content.title}</h1>
     <div class="prose">
       {introParagraphs.map((paragraph) => (
         <p>{paragraph}</p>
       ))}
     </div>
-    </div>
-  </section>
+  </div>
+</section>
 
   {hasStories ? (
     <>
-      <section class="content-section">
-        <div class="content-card" aria-labelledby="stories-facets">
-          <div class="content-card__title">
-            <h2 id="stories-facets">Browse the archive</h2>
-            <p>
-              Use these collections to wire up dynamic filters. Grouping by category or tag mirrors how the gallery page
-              organises albums.
-            </p>
-          </div>
-          <div class="prose">
-            {categoryFacets.length > 0 && (
-              <p>
-                <strong>Categories:</strong>
-                {' '}
-                {categoryFacets.join(', ')}
-              </p>
-            )}
-            {tagFacets.length > 0 && (
-              <p>
-                <strong>Tags:</strong>
-                {' '}
-                {tagFacets.join(', ')}
-              </p>
-            )}
-            {categoryFacets.length === 0 && tagFacets.length === 0 && (
-              <p>
-                Add <code>categories</code> or <code>tags</code> frontmatter fields to expose richer filtering options.
-              </p>
-            )}
-          </div>
+    <section class="content-section">
+      <div class="card card--soft" aria-labelledby="stories-facets">
+        
+        <h2 id="stories-facets">Browse the archive</h2>
+        <div class="prose">
+          <p>
+            Use these collections to wire up dynamic filters. Grouping by category or tag mirrors how the gallery page
+            organises albums.
+          </p>
         </div>
-      </section>
+        
+        <div class="prose">
+          {categoryFacets.length > 0 && (
+            <p>
+              <strong>Categories:</strong>
+              {' '}
+              {categoryFacets.join(', ')}
+            </p>
+          )}
+          {tagFacets.length > 0 && (
+            <p>
+              <strong>Tags:</strong>
+              {' '}
+              {tagFacets.join(', ')}
+            </p>
+          )}
+          {categoryFacets.length === 0 && tagFacets.length === 0 && (
+            <p>
+              Add <code>categories</code> or <code>tags</code> frontmatter fields to expose richer filtering options.
+            </p>
+          )}
+        </div>
+      </div>
+    </section>
 
-      <section class="content-section">
+      <section class="content-section cols-2">
         {stories.map((story: StoryEntry) => {
           const excerpt = story.data.description ?? '';
           return (
-            <article class="content-card" key={story.id}>
-              <div class="content-card__title">
-                <h2>
-                  <a href={`/stories/${story.slug}/`}>{story.data.title}</a>
-                </h2>
-                <p>
-                  <strong>Published:</strong> {formatDate(story.data.publishDate)}
-                  {story.data.categories?.length ? (
-                    <>
-                      <br />
-                      <strong>Categories:</strong> {story.data.categories.join(', ')}
-                    </>
-                  ) : null}
-                  {story.data.tags?.length ? (
-                    <>
-                      <br />
-                      <strong>Tags:</strong> {story.data.tags.join(', ')}
-                    </>
-                  ) : null}
-                </p>
-              </div>
+            <article class="card">
+              
+              <h2><a href={`/stories/${story.slug}/`}>{story.data.title}</a></h2>
+              <p>
+                <strong>Published:</strong> {formatDate(story.data.publishDate)}
+                {story.data.categories?.length ? (
+                  <>
+                    <br />
+                    <strong>Categories:</strong> {story.data.categories.join(', ')}
+                  </>
+                ) : null}
+                {story.data.tags?.length ? (
+                  <>
+                    <br />
+                    <strong>Tags:</strong> {story.data.tags.join(', ')}
+                  </>
+                ) : null}
+              </p>
+              
               <div class="prose">
                 {excerpt && <p>{excerpt}</p>}
                 <p>
@@ -106,10 +106,10 @@ const hasStories = stories.length > 0;
       </section>
     </>
   ) : (
-    <section class="content-card content-section">
-      <div class="content-card__title">
+    <section class="content-section">
+      
         <h2>{overview.emptyState ?? 'Stories are still brewing'}</h2>
-      </div>
+      
       <div class="prose">
         <p>{overview.cta ?? 'Once tales launch, they will appear here automatically.'}</p>
       </div>

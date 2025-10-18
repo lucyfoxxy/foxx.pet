@@ -51,7 +51,7 @@
   gap: var(--control-gap); 
   padding: var(--button-padding);
   border-radius: var(--small-radius);
-  background: var(--accent-background);
+  background: var(--highlight-background);
    
   font-weight: var(--thick-font-weight);
 }

@@ -51,7 +51,7 @@ const initialWidth = normalizedInitialItem?.width;
 const initialHeight = normalizedInitialItem?.height;
 ---
 <section class="content-section">
-  <div class="content-card content-card--plain is-centered">
+  <div class="card card--plain is-centered">
     
 
   </div>
@@ -59,7 +59,7 @@ const initialHeight = normalizedInitialItem?.height;
   
   
   <div
-    class="media__hook content-card content-card--accent is-centered"
+    class="media__hook card card--accent is-centered"
     data-slug={albumSlug}
     data-autoplay="true"
     data-interval="8000"
@@ -67,9 +67,7 @@ const initialHeight = normalizedInitialItem?.height;
     data-share-key={shareKey}
   >
     <h1>{detailTitle}</h1>
-        <div class="content-card__subtitle">
-      *description goes here*
-    </div>
+    <p>*description goes here*</p>
     <div class="badge--wrapper">
         {normalizedCategory ? <p class="badge badge--large">{normalizedCategory}</p> : null}
         {formattedStartDate ? <p class="badge badge--large">{formattedStartDate}</p> : null}

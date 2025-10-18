@@ -5,7 +5,10 @@
 html:focus-within { scroll-behavior: smooth; }
 html, 
 body { min-height: 100dvh; }
-:root { color-scheme: dark; }
+:root {
+  color-scheme: dark;
+  scroll-padding-top: var(--site-header-scroll-offset, 0px);
+}
 
 /* ====== DEFAULT  ====== */
 body {

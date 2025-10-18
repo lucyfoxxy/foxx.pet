@@ -8,7 +8,7 @@ const disclaimer = content.disclaimer ?? [];
 ---
 
   <section class="content-section">
-    <div class="content-head content-card__title">
+    <div class="card card--plain is-centered">
     <h1>{content.title}</h1>
       <div class="prose">
         {introParagraphs.map((paragraph) => (
@@ -18,13 +18,13 @@ const disclaimer = content.disclaimer ?? [];
     </div>
   </section>
 
-  <section class="content-section">
+  <section class="content-section cols-2">
     {contacts.map((contact) => (
-      <div class="content-card" key={contact.title}>
-        <div class="content-card__title">
+      <div class="card">
+        
           <h2>{contact.title}</h2>
           {contact.subtitle && <p><em>{contact.subtitle}</em></p>}
-        </div>
+        
         <dl class="deflist">
           {contact.entries.flatMap((entry) => [
             <dt class="deflist__term">{entry.term}</dt>,
@@ -42,8 +42,8 @@ const disclaimer = content.disclaimer ?? [];
   
 
     {disclaimer.length > 0 && (
-      <div class="content-card">
-        <div class="content-card__title">
+      <div class="card">
+        
           <h2>Disclaimer</h2>
           
             {disclaimer.map((paragraph) => (
@@ -52,7 +52,7 @@ const disclaimer = content.disclaimer ?? [];
               </p>
             ))}
           
-        </div>
+        
       </div>
     )}
   </section>
