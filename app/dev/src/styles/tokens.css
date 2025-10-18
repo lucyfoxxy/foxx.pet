@@ -15,12 +15,13 @@
   --control-gap:     var(--space-xs);   /* Abstände in Buttons/Inputs */
   --control-padding: var(--space-xxs);  /* Innenabstand Buttons/Badges */
   --button-padding:  var(--space-s);
+  --bars-size:            calc(var(--container-max) * 1 );
   --bars-padding:          var(--space-m);
-  --bars-spacing:          clamp(var(--space-xxs),  calc(var(--space-xxs) + 2vw),    var(--space-xxl)); 
+  --bars-spacing:          clamp(var(--space-xs),  calc(var(--space-xs) + 3.75vw),    calc(10 * var(--space-xxl))); 
   --bars-gap--column:      var(--space-xxl);
   --bars-gap--row:         var(--space-xs); 
-  --nav-gap--column:      var(--space-m);
-  --nav-gap--row:         var(--space-xs);
+  --nav-gap--column:      var(--space-xxl);
+  --nav-gap--row:         var(--space-xxs);
 
   /* Responsiv nur in den Rollen-Tokens */
   --card-padding:        clamp(var(--space-s),  calc(var(--space-s) + 1.75vw),  var(--space-xl));   /* Innenabstand Card, leicht wachsend */
@@ -32,7 +33,8 @@
   
 
 
-  --container-max:              1280px;  
+  --container-max:              1280px;
+  
   
   --card-size--compact:         calc(10rem + 6vw);
   --card-size:                  calc(11.5rem);
@@ -59,8 +61,8 @@
   --card-background--soft:      color-mix(in oklab, var(--secondary-background-color) 15%, black 15%); 
   --card-background:            oklch(18.5% 0.075 300 / 0.7);
 
-  --bars-background:      oklch(20% 0.13 295 / 67%);
-  --bars-backdrop:         blur(var(--large-blur)) opacity(.95) brightness(1.95);
+  --bars-background:      var(--card-background), oklch(20% 0.13 295 / 67%);
+  --bars-backdrop:         blur(48px) opacity(.95) brightness(1.95);
 
   --panel-backdrop:       blur(var(--large-blur)) saturate(1.25) brightness(1.6);
   
@@ -108,6 +110,8 @@
   --small-radius:               10px;
   --medium-radius:              14px;
   --large-radius:               18px;
+  --xlarge-radius:              24px;
+  --xxlarge-radius:             32px;
 
   --outline-color:              color-mix(in oklch, var(--card-background) 15%, transparent);
   --outline:                    2px solid var(--outline-color);

@@ -21,7 +21,7 @@ const measure = (element) => (element ? element.getBoundingClientRect().height :
 export function initResponsiveSiteHeader() {
   const root = document.documentElement;
   const header = document.getElementById('site-header');
-  const nav = header?.querySelector('.site-nav');
+  const nav = document.querySelector('.site-nav');
 
   if (!root || !header || !nav) return undefined;
 

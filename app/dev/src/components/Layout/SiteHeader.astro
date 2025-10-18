@@ -17,27 +17,24 @@ const { navLinks = [] } = (Astro.props ?? {}) as Props;
 ---
 
 <header id="site-header" class="site-header">
-  <a class="site-header__logo" aria-label="Home" href="/">
-    <img src={ASSETS.logo_header.src} alt="foxx.pet" />
-  </a>
-
- 
+  <div class="site-header__inner">
+    <a class="site-header__logo" aria-label="Home" href="/">
+      <img src={ASSETS.logo_header.src} alt="foxx.pet" />
+    </a>
+  </div>
 </header>
-  <nav class="site-nav">
+<nav class="site-nav" aria-label="Primary navigation">
+  <div class="site-nav__inner">
     {navLinks
       .filter((link) => link.includeInHeader)
       .map((link) => (
-        
-          <a class="site-nav__link" href={link.href}>
-            <span class="site-nav__text">{link.label}</span>
-            {link.emoji && (
-              <span class="site-nav__emoji">{link.emoji}</span>
-            )}
-          </a>
-        
-      ))
-    }
-  </nav>
+        <a class="site-nav__link" href={link.href}>
+          <span class="site-nav__text">{link.label}</span>
+          {link.emoji && <span class="site-nav__emoji">{link.emoji}</span>}
+        </a>
+      ))}
+  </div>
+</nav>
 <script>
   import initResponsiveSiteHeader from '@Scripts/siteHeaderSticky.js';
   import { runOnReady } from '@Scripts/utils/_runOnReady.js';

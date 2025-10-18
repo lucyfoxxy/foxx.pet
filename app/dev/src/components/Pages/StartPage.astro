@@ -75,7 +75,7 @@ const isExternalLink = (href: string) => href.startsWith('http');
               target={isExternalLink(link.href) ? '_blank' : undefined}
             >
               <span class="button--large--icon"><Icon kind={link.kind} /></span>
-              <span>{link.label}</span>
+              
             </a>
           ))}
         </div>
