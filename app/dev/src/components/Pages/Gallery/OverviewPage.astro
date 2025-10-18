@@ -23,20 +23,23 @@ const introParagraphs = content.introParagraphs ?? [content.description];
     </div>
   </section>
 
-  <section class="content-section">
+<section class="content-section cols-3">
     
-        {categories.map(({ slug, title, description, href }) => (
-          <a class="content-card--soft" href={href ?? `/galleries/${slug}`} aria-label={`Open ${title}`}>
-            <div class="content-card__title">
-              <h3>{title}</h3>
-            </div>
-            <div class="content-card__subtitle">
-              {description ? <p>{description}</p> : null}
-            </div>
-            <div class="media-album__cover" data-slug={slug}>
-              <div class="media-album__cover-placeholder" aria-hidden="true"></div>
-            </div>
-          </a>
-        ))}
+  {categories.map(({ slug, title, description, href }) => (
+    <div class="content-card content-card--soft is-animated is-centered">
+    <a href={href ?? `/galleries/${slug}`} aria-label={`Open ${title}`}>
+      <div class="content-card__title">
+        <h3>{title}</h3>
+      </div>
+      <div class="content-card__subtitle">
+        {description ? <p>{description}</p> : null}
+      </div>
+      <div class="card__spacer" aria-hidden="true"></div>
+      <div class="media-album__cover" data-slug={slug}>
+        <div class="media-album__cover-placeholder" aria-hidden="true"></div>
+      </div>
+    </a>
+    </div>
+  ))}
 
-  </section>
+</section>

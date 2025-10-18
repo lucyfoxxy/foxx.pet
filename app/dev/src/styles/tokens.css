@@ -1,35 +1,44 @@
 :root { 
- /* ====== Layout Structures ====== */
-  --tiny-spacing:               clamp(.25rem, .25rem + .1vw, .35rem);
-  --xsmall-spacing:             clamp(.65rem, .5rem + .3vw, .95rem);
-  --small-spacing:              clamp(.75rem, 1vw, 1.25rem);
-  --medium-spacing:             clamp(1rem, 2vw, 1.75rem);
-  --large-spacing:              clamp(1rem, 2.25vw, 3rem);
-  --xlarge-spacing:             clamp(1.75rem, 5.9vw, 6.75rem);
+  /* === Spacing Scale (fix) ================================= */
+  --space-xxs: 0.25rem; /* Mikro: Icon-Padding, Badges */
+  --space-xs:  0.50rem; /* Klein: Chips, Breadcrumbs */
+  --space-s:   0.75rem; /* Flow: Prose-Abstände in Cards */
+  --space-m:   1.00rem; /* Anker: 1rem */
+  --space-l:   1.50rem; /* Groß: Grid/Container */
+  --space-xl:  2.00rem; /* Abschnittstrenner */
+  --space-xxl: 3.00rem; /* Hero/Großflächen */
 
-  --small-padding:              clamp(.35rem, .3vw, .5rem);
-  --medium-padding:             clamp(.75rem, 1.2vw, 1rem);
-  --large-padding:              clamp(1rem, 2.25vw, 3.25rem);
+  /* === Rollen-Tokens (Comfortable / Default) ============== */
+  --flow-gap:        var(--space-xxs);    /* Prose/Textfluss in Cards */
+  --card-gap:        var(--space-s);    /* Abstand zwischen Card-Elementen */
+  --cluster-gap:     var(--space-xs);   /* Inline-Gruppen: Chips, Breadcrumbs */
+  --control-gap:     var(--space-xs);   /* Abstände in Buttons/Inputs */
+  --control-padding: var(--space-xxs);  /* Innenabstand Buttons/Badges */
+  --button-padding:  var(--space-s);
+  --bars-padding:          var(--space-m);
+  --bars-spacing:          clamp(var(--space-xxs),  calc(var(--space-xxs) + 2vw),    var(--space-xxl)); 
+  --bars-gap--column:      var(--space-xxl);
+  --bars-gap--row:         var(--space-xs); 
+  --nav-gap--column:      var(--space-m);
+  --nav-gap--row:         var(--space-xs);
+
+  /* Responsiv nur in den Rollen-Tokens */
+  --card-padding:        clamp(var(--space-m),  calc(var(--space-m) + 0.6vw),  var(--space-l));   /* Innenabstand Card, leicht wachsend */
+  --section-gap:         clamp(var(--space-m),  calc(var(--space-m) + 1.5vw),    var(--space-xl));  /* Abstand zwischen Cards */
+  --panel-padding:       clamp(var(--space-m),  calc(var(--space-m) + 1.5vw),    var(--space-xl));  /* Abstand zwischen Cards */
+  --panel-bar-padding:   calc(var(--panel-padding) * .75);
+  --container-padding:   clamp(var(--space-xxs),  calc(var(--space-xxs) + 2vw),    var(--space-xxl)); /* Seiten-/Wrapper-Innenabstand */
+  
+
 
   --container-max:              1280px;  
-  --container-spacing:          var(--large-spacing);
-  --container-padding:          max(var(--large-spacing), calc((100vw - var(--container-max)) / 2));
-
-  --site-bars-padding:          var(--medium-padding);
-  --site-bars-spacing:          var(--large-spacing);
-  --site-bars-gap:              var(--xlarge-spacing);
-  --site-bars-gap--compact:     var(--xsmall-spacing);
   
-  --card-spacing:               var(--medium-spacing);
-  --card-padding:               var(--large-padding);
   --card-size--compact:         calc(10rem + 6vw);
   --card-size:                  calc(11.5rem);
   --card-size--spacy:           20rem;
-
-  --prose-flow-spacing:         var(--tiny-spacing);  
   
   --brand-size:                 clamp(320px, 45vw, 480px);
-  --brand-gap:                  var(--xsmall-spacing);
+  --brand-gap:                  var(--space-xs);
 
   /* ====== Main Colors =======*/
   --primary-text-color:         oklch(96% 0.03 290);
@@ -49,8 +58,8 @@
   --card-background--soft:      color-mix(in oklab, var(--secondary-background-color) 15%, black 15%); 
   --card-background:            oklch(18.5% 0.075 300 / 0.7);
 
-  --site-bars-background:      oklch(20% 0.13 295 / 67%);
-  --site-bars-backdrop:         blur(var(--large-blur)) opacity(.95) brightness(1.95);
+  --bars-background:      oklch(20% 0.13 295 / 67%);
+  --bars-backdrop:         blur(var(--large-blur)) opacity(.95) brightness(1.95);
 
   --panel-backdrop:       blur(var(--large-blur)) saturate(1.25) brightness(1.6);
   
@@ -129,7 +138,7 @@
   /* ====== Gallery ====== */
   --gallery-frame-size: calc(
       (var(--container-max) - 
-        (var(--container-spacing) + var(--card-padding)) * 2 + var(--card-spacing) * 4
+        (var(--container-padding) + var(--card-padding)) * 2 + var(--card-gap) * 4
       ) / 2
     );
   --thumb-size: clamp(64px, 9vw, 128px);

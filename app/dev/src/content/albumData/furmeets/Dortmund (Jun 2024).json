@@ -1,0 +1,63 @@
+{
+  "slug": "furmeets-dortmund-jun-2024",
+  "albumId": "1278e863-14ef-42da-bc70-2ec03e9062ae",
+  "shareKey": "frueS9Q8vS5kOWxy37XqWISA7Suhfvxt42TMEz9masHLkZJc6WlV2Kmz9tG6cyk-K0o",
+  "albumName": "Furmeet: Dortmund (Jun 2024)",
+  "title": "Dortmund",
+  "startDate": "2024-06-16T00:00:00.000Z",
+  "description": "",
+  "albumThumbnailAssetId": "7c7320d3-7b50-4206-9166-db1635c79859",
+  "category": {
+    "name": "Furmeets",
+    "slug": "furmeets"
+  },
+  "assetMode": "remote",
+  "count": 5,
+  "items": [
+    {
+      "id": "297876f5-b267-4c50-81e0-486fd88c485a",
+      "thumb": "https://img.foxx.pet/api/assets/297876f5-b267-4c50-81e0-486fd88c485a/thumbnail?key=frueS9Q8vS5kOWxy37XqWISA7Suhfvxt42TMEz9masHLkZJc6WlV2Kmz9tG6cyk-K0o",
+      "full": "https://img.foxx.pet/api/assets/297876f5-b267-4c50-81e0-486fd88c485a/original?key=frueS9Q8vS5kOWxy37XqWISA7Suhfvxt42TMEz9masHLkZJc6WlV2Kmz9tG6cyk-K0o",
+      "filename": "photo_2024-06-16_17-20-54.jpg",
+      "width": 1280,
+      "height": 964,
+      "shareKey": "frueS9Q8vS5kOWxy37XqWISA7Suhfvxt42TMEz9masHLkZJc6WlV2Kmz9tG6cyk-K0o"
+    },
+    {
+      "id": "a9f33a5e-14a4-45e7-a48d-72d1ec15a819",
+      "thumb": "https://img.foxx.pet/api/assets/a9f33a5e-14a4-45e7-a48d-72d1ec15a819/thumbnail?key=frueS9Q8vS5kOWxy37XqWISA7Suhfvxt42TMEz9masHLkZJc6WlV2Kmz9tG6cyk-K0o",
+      "full": "https://img.foxx.pet/api/assets/a9f33a5e-14a4-45e7-a48d-72d1ec15a819/original?key=frueS9Q8vS5kOWxy37XqWISA7Suhfvxt42TMEz9masHLkZJc6WlV2Kmz9tG6cyk-K0o",
+      "filename": "photo_2024-06-16_17-20-47.jpg",
+      "width": 1280,
+      "height": 673,
+      "shareKey": "frueS9Q8vS5kOWxy37XqWISA7Suhfvxt42TMEz9masHLkZJc6WlV2Kmz9tG6cyk-K0o"
+    },
+    {
+      "id": "b9eb2842-099a-4dce-860e-88b20d3d5e06",
+      "thumb": "https://img.foxx.pet/api/assets/b9eb2842-099a-4dce-860e-88b20d3d5e06/thumbnail?key=frueS9Q8vS5kOWxy37XqWISA7Suhfvxt42TMEz9masHLkZJc6WlV2Kmz9tG6cyk-K0o",
+      "full": "https://img.foxx.pet/api/assets/b9eb2842-099a-4dce-860e-88b20d3d5e06/original?key=frueS9Q8vS5kOWxy37XqWISA7Suhfvxt42TMEz9masHLkZJc6WlV2Kmz9tG6cyk-K0o",
+      "filename": "photo_2024-06-16_17-20-40.jpg",
+      "width": 1280,
+      "height": 853,
+      "shareKey": "frueS9Q8vS5kOWxy37XqWISA7Suhfvxt42TMEz9masHLkZJc6WlV2Kmz9tG6cyk-K0o"
+    },
+    {
+      "id": "943e6f7f-c910-4692-ab6b-2138ab6435f0",
+      "thumb": "https://img.foxx.pet/api/assets/943e6f7f-c910-4692-ab6b-2138ab6435f0/thumbnail?key=frueS9Q8vS5kOWxy37XqWISA7Suhfvxt42TMEz9masHLkZJc6WlV2Kmz9tG6cyk-K0o",
+      "full": "https://img.foxx.pet/api/assets/943e6f7f-c910-4692-ab6b-2138ab6435f0/original?key=frueS9Q8vS5kOWxy37XqWISA7Suhfvxt42TMEz9masHLkZJc6WlV2Kmz9tG6cyk-K0o",
+      "filename": "photo_2024-06-16_17-20-32.jpg",
+      "width": 1280,
+      "height": 853,
+      "shareKey": "frueS9Q8vS5kOWxy37XqWISA7Suhfvxt42TMEz9masHLkZJc6WlV2Kmz9tG6cyk-K0o"
+    },
+    {
+      "id": "7c7320d3-7b50-4206-9166-db1635c79859",
+      "thumb": "https://img.foxx.pet/api/assets/7c7320d3-7b50-4206-9166-db1635c79859/thumbnail?key=frueS9Q8vS5kOWxy37XqWISA7Suhfvxt42TMEz9masHLkZJc6WlV2Kmz9tG6cyk-K0o",
+      "full": "https://img.foxx.pet/api/assets/7c7320d3-7b50-4206-9166-db1635c79859/original?key=frueS9Q8vS5kOWxy37XqWISA7Suhfvxt42TMEz9masHLkZJc6WlV2Kmz9tG6cyk-K0o",
+      "filename": "photo_2024-06-16_17-19-42.jpg",
+      "width": 1280,
+      "height": 853,
+      "shareKey": "frueS9Q8vS5kOWxy37XqWISA7Suhfvxt42TMEz9masHLkZJc6WlV2Kmz9tG6cyk-K0o"
+    }
+  ]
+}

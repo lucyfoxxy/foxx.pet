@@ -40,7 +40,7 @@
 
 .table__th,
 .table__td {
-  padding-block: var(--xsmall-spacing);
+  padding-block: var(--control-padding);
   padding-inline: calc(.5 * var(--card-padding));
 }
 
@@ -76,7 +76,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: var(--xsmall-spacing);
+  gap: var(--cluster-gap);
   white-space: nowrap;
 }
 
@@ -92,7 +92,7 @@
   .table__td--right {
     flex-direction: column;
     align-items: flex-end;
-    gap: .25rem;
+    gap: var(--control-gap);
   }
 
   .table__price {

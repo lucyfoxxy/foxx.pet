@@ -26,17 +26,16 @@
 }
 .badge--small {
   background: var(--accent-background--soft);
-  padding: var(--tiny-spacing) var(--tiny-spacing);
+  padding: var(--control-padding) var(--control-padding);
   border-radius: var(--small-radius);
-  margin-block-start: var(--tiny-spacing);
-  
-  
+  margin-block-start: var(--control-gap);
 }
+
 .badge--large {
-    background: var(--accent-background);
-  padding: var(--tiny-spacing) ;
+  background: var(--accent-background);
+  padding: var(--control-padding);
   border-radius: var(--large-radius);
-  margin-block-start: var(--tiny-spacing);
+  margin-block-start: var(--control-gap);
 }
 
 .badge--wrapper{
@@ -46,13 +45,14 @@
   inline-size: auto;
   justify-content: stretch;
   flex-wrap: nowrap;
-  gap: var(--xsmall-spacing);
+  gap: var(--cluster-gap);
 }
 .button--large {
-  gap: var(--small-spacing); 
-  padding: var(--small-padding) var(--medium-padding);
+  gap: var(--control-gap); 
+  padding: var(--button-padding);
   border-radius: var(--small-radius);
-  background: var(--accent-background); 
+  background: var(--accent-background);
+   
   font-weight: var(--thick-font-weight);
 }
 
@@ -74,9 +74,10 @@
 
 .button--large--wrap {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: var(--xsmall-spacing);
-  margin-block-start: var(--tiny-spacing);
+  grid-template-rows: 1;
+  grid-template-columns: repeat(auto-fit,minmax(1rem,1fr));
+  gap: var(--control-gap);
+  margin-block-start: var(--control-gap);
 }
 
 .button--large:active {
@@ -109,11 +110,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: var(--small-spacing);
+    gap: var(--card-gap);
     flex-wrap: nowrap;
     overflow-x: auto;
     padding-block: .25rem;
   }
+
 
   .button--large {
     position: relative;

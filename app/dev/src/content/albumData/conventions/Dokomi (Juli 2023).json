@@ -1,0 +1,270 @@
+{
+  "slug": "conventions-dokomi-juli-2023",
+  "albumId": "dfb01ac9-46d5-41a5-b534-ded5e5a9593b",
+  "shareKey": "FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk",
+  "albumName": "Convention: Dokomi (Juli 2023)",
+  "title": "Dokomi",
+  "startDate": "2023-07-02T00:00:00.000Z",
+  "description": "",
+  "albumThumbnailAssetId": "d43e81a2-1df3-4917-a531-426e4e4dc616",
+  "category": {
+    "name": "Conventions",
+    "slug": "conventions"
+  },
+  "assetMode": "remote",
+  "count": 28,
+  "items": [
+    {
+      "id": "9155f6a4-c442-40f0-b6a1-2b36fbe639f6",
+      "thumb": "https://img.foxx.pet/api/assets/9155f6a4-c442-40f0-b6a1-2b36fbe639f6/thumbnail?key=FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk",
+      "full": "https://img.foxx.pet/api/assets/9155f6a4-c442-40f0-b6a1-2b36fbe639f6/original?key=FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk",
+      "filename": "IMG_20230902_161703.jpg",
+      "width": null,
+      "height": null,
+      "shareKey": "FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk"
+    },
+    {
+      "id": "fa10e52f-7921-4d66-8079-8871b8f208c8",
+      "thumb": "https://img.foxx.pet/api/assets/fa10e52f-7921-4d66-8079-8871b8f208c8/thumbnail?key=FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk",
+      "full": "https://img.foxx.pet/api/assets/fa10e52f-7921-4d66-8079-8871b8f208c8/original?key=FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk",
+      "filename": "IMG_20230702_174106.jpg",
+      "width": 1840,
+      "height": 3264,
+      "shareKey": "FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk"
+    },
+    {
+      "id": "209348a6-5cc9-42d2-a6e0-844a5df530ba",
+      "thumb": "https://img.foxx.pet/api/assets/209348a6-5cc9-42d2-a6e0-844a5df530ba/thumbnail?key=FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk",
+      "full": "https://img.foxx.pet/api/assets/209348a6-5cc9-42d2-a6e0-844a5df530ba/original?key=FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk",
+      "filename": "IMG_20230702_174105.jpg",
+      "width": 1840,
+      "height": 3264,
+      "shareKey": "FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk"
+    },
+    {
+      "id": "f24c287e-a21e-45b2-a31e-ab86a99b94d7",
+      "thumb": "https://img.foxx.pet/api/assets/f24c287e-a21e-45b2-a31e-ab86a99b94d7/thumbnail?key=FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk",
+      "full": "https://img.foxx.pet/api/assets/f24c287e-a21e-45b2-a31e-ab86a99b94d7/original?key=FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk",
+      "filename": "IMG_20230702_174103.jpg",
+      "width": 1840,
+      "height": 3264,
+      "shareKey": "FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk"
+    },
+    {
+      "id": "3a73d6a3-61cb-429e-a0a7-a8b1896d1c99",
+      "thumb": "https://img.foxx.pet/api/assets/3a73d6a3-61cb-429e-a0a7-a8b1896d1c99/thumbnail?key=FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk",
+      "full": "https://img.foxx.pet/api/assets/3a73d6a3-61cb-429e-a0a7-a8b1896d1c99/original?key=FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk",
+      "filename": "IMG_20230702_174101.jpg",
+      "width": 1840,
+      "height": 3264,
+      "shareKey": "FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk"
+    },
+    {
+      "id": "63ce0376-e0bb-44b2-a1f6-daf241c472dd",
+      "thumb": "https://img.foxx.pet/api/assets/63ce0376-e0bb-44b2-a1f6-daf241c472dd/thumbnail?key=FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk",
+      "full": "https://img.foxx.pet/api/assets/63ce0376-e0bb-44b2-a1f6-daf241c472dd/original?key=FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk",
+      "filename": "IMG_20230702_174022.jpg",
+      "width": 2256,
+      "height": 4000,
+      "shareKey": "FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk"
+    },
+    {
+      "id": "8fb40b60-e94e-49e6-b987-98cb2d42c8ac",
+      "thumb": "https://img.foxx.pet/api/assets/8fb40b60-e94e-49e6-b987-98cb2d42c8ac/thumbnail?key=FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk",
+      "full": "https://img.foxx.pet/api/assets/8fb40b60-e94e-49e6-b987-98cb2d42c8ac/original?key=FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk",
+      "filename": "IMG_20230702_174019.jpg",
+      "width": 2256,
+      "height": 4000,
+      "shareKey": "FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk"
+    },
+    {
+      "id": "6cc0fd10-5a62-4507-98b6-3f1048524d67",
+      "thumb": "https://img.foxx.pet/api/assets/6cc0fd10-5a62-4507-98b6-3f1048524d67/thumbnail?key=FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk",
+      "full": "https://img.foxx.pet/api/assets/6cc0fd10-5a62-4507-98b6-3f1048524d67/original?key=FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk",
+      "filename": "IMG_20230702_174017.jpg",
+      "width": 2256,
+      "height": 4000,
+      "shareKey": "FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk"
+    },
+    {
+      "id": "88ba279e-0204-4bbc-acaf-6e08a292f61b",
+      "thumb": "https://img.foxx.pet/api/assets/88ba279e-0204-4bbc-acaf-6e08a292f61b/thumbnail?key=FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk",
+      "full": "https://img.foxx.pet/api/assets/88ba279e-0204-4bbc-acaf-6e08a292f61b/original?key=FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk",
+      "filename": "IMG_20230702_155856.jpg",
+      "width": 2256,
+      "height": 4000,
+      "shareKey": "FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk"
+    },
+    {
+      "id": "45e87a16-ff01-41e1-9a76-7fdc9780a155",
+      "thumb": "https://img.foxx.pet/api/assets/45e87a16-ff01-41e1-9a76-7fdc9780a155/thumbnail?key=FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk",
+      "full": "https://img.foxx.pet/api/assets/45e87a16-ff01-41e1-9a76-7fdc9780a155/original?key=FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk",
+      "filename": "IMG_20230702_155855.jpg",
+      "width": 2256,
+      "height": 4000,
+      "shareKey": "FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk"
+    },
+    {
+      "id": "aaae0778-23bf-43c2-a45b-6e7120099d9a",
+      "thumb": "https://img.foxx.pet/api/assets/aaae0778-23bf-43c2-a45b-6e7120099d9a/thumbnail?key=FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk",
+      "full": "https://img.foxx.pet/api/assets/aaae0778-23bf-43c2-a45b-6e7120099d9a/original?key=FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk",
+      "filename": "IMG_20230702_155853.jpg",
+      "width": 2256,
+      "height": 4000,
+      "shareKey": "FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk"
+    },
+    {
+      "id": "d15316d3-dea7-49a1-9b2d-a71ac5148491",
+      "thumb": "https://img.foxx.pet/api/assets/d15316d3-dea7-49a1-9b2d-a71ac5148491/thumbnail?key=FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk",
+      "full": "https://img.foxx.pet/api/assets/d15316d3-dea7-49a1-9b2d-a71ac5148491/original?key=FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk",
+      "filename": "IMG_20230702_155837.jpg",
+      "width": 2256,
+      "height": 4000,
+      "shareKey": "FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk"
+    },
+    {
+      "id": "93ae8699-9709-4027-897e-7b293cd69e92",
+      "thumb": "https://img.foxx.pet/api/assets/93ae8699-9709-4027-897e-7b293cd69e92/thumbnail?key=FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk",
+      "full": "https://img.foxx.pet/api/assets/93ae8699-9709-4027-897e-7b293cd69e92/original?key=FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk",
+      "filename": "IMG_20230702_155812.jpg",
+      "width": 2256,
+      "height": 4000,
+      "shareKey": "FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk"
+    },
+    {
+      "id": "7c966a6b-6acc-40ca-883f-2fbc0f4614a5",
+      "thumb": "https://img.foxx.pet/api/assets/7c966a6b-6acc-40ca-883f-2fbc0f4614a5/thumbnail?key=FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk",
+      "full": "https://img.foxx.pet/api/assets/7c966a6b-6acc-40ca-883f-2fbc0f4614a5/original?key=FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk",
+      "filename": "IMG_20230702_155810.jpg",
+      "width": 2256,
+      "height": 4000,
+      "shareKey": "FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk"
+    },
+    {
+      "id": "040ba5e2-7f40-48b9-a170-cbcbb97febb6",
+      "thumb": "https://img.foxx.pet/api/assets/040ba5e2-7f40-48b9-a170-cbcbb97febb6/thumbnail?key=FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk",
+      "full": "https://img.foxx.pet/api/assets/040ba5e2-7f40-48b9-a170-cbcbb97febb6/original?key=FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk",
+      "filename": "IMG_20230702_155808.jpg",
+      "width": 2256,
+      "height": 4000,
+      "shareKey": "FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk"
+    },
+    {
+      "id": "babe4b7c-30c3-4d8f-9af7-551b04ea2da2",
+      "thumb": "https://img.foxx.pet/api/assets/babe4b7c-30c3-4d8f-9af7-551b04ea2da2/thumbnail?key=FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk",
+      "full": "https://img.foxx.pet/api/assets/babe4b7c-30c3-4d8f-9af7-551b04ea2da2/original?key=FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk",
+      "filename": "IMG_20230702_155748.jpg",
+      "width": 4000,
+      "height": 2256,
+      "shareKey": "FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk"
+    },
+    {
+      "id": "29dbc2e5-3523-4b8d-8e00-69c8ab5c42c7",
+      "thumb": "https://img.foxx.pet/api/assets/29dbc2e5-3523-4b8d-8e00-69c8ab5c42c7/thumbnail?key=FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk",
+      "full": "https://img.foxx.pet/api/assets/29dbc2e5-3523-4b8d-8e00-69c8ab5c42c7/original?key=FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk",
+      "filename": "IMG_20230702_155746.jpg",
+      "width": 4000,
+      "height": 2256,
+      "shareKey": "FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk"
+    },
+    {
+      "id": "3e5481d0-aed8-4aa3-ae32-3be6cea1b7de",
+      "thumb": "https://img.foxx.pet/api/assets/3e5481d0-aed8-4aa3-ae32-3be6cea1b7de/thumbnail?key=FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk",
+      "full": "https://img.foxx.pet/api/assets/3e5481d0-aed8-4aa3-ae32-3be6cea1b7de/original?key=FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk",
+      "filename": "IMG_20230702_155742.jpg",
+      "width": 2256,
+      "height": 4000,
+      "shareKey": "FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk"
+    },
+    {
+      "id": "0f1248c8-f51c-47a0-abc8-2068aa9795dc",
+      "thumb": "https://img.foxx.pet/api/assets/0f1248c8-f51c-47a0-abc8-2068aa9795dc/thumbnail?key=FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk",
+      "full": "https://img.foxx.pet/api/assets/0f1248c8-f51c-47a0-abc8-2068aa9795dc/original?key=FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk",
+      "filename": "IMG_20230702_155739.jpg",
+      "width": 2256,
+      "height": 4000,
+      "shareKey": "FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk"
+    },
+    {
+      "id": "07131615-7761-4809-af5b-028376e4be50",
+      "thumb": "https://img.foxx.pet/api/assets/07131615-7761-4809-af5b-028376e4be50/thumbnail?key=FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk",
+      "full": "https://img.foxx.pet/api/assets/07131615-7761-4809-af5b-028376e4be50/original?key=FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk",
+      "filename": "IMG_20230702_155734.jpg",
+      "width": 4000,
+      "height": 2256,
+      "shareKey": "FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk"
+    },
+    {
+      "id": "2b81fc1b-dbe5-4e4b-81c6-c902ccf89b46",
+      "thumb": "https://img.foxx.pet/api/assets/2b81fc1b-dbe5-4e4b-81c6-c902ccf89b46/thumbnail?key=FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk",
+      "full": "https://img.foxx.pet/api/assets/2b81fc1b-dbe5-4e4b-81c6-c902ccf89b46/original?key=FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk",
+      "filename": "IMG_20230702_155722.jpg",
+      "width": 2256,
+      "height": 4000,
+      "shareKey": "FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk"
+    },
+    {
+      "id": "f3c80192-bc43-4ef6-be9f-3ac29f7036a4",
+      "thumb": "https://img.foxx.pet/api/assets/f3c80192-bc43-4ef6-be9f-3ac29f7036a4/thumbnail?key=FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk",
+      "full": "https://img.foxx.pet/api/assets/f3c80192-bc43-4ef6-be9f-3ac29f7036a4/original?key=FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk",
+      "filename": "IMG_20230702_155720.jpg",
+      "width": 2256,
+      "height": 4000,
+      "shareKey": "FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk"
+    },
+    {
+      "id": "b6c0b1c9-0ae0-4d78-93c2-39d0a7d06eb1",
+      "thumb": "https://img.foxx.pet/api/assets/b6c0b1c9-0ae0-4d78-93c2-39d0a7d06eb1/thumbnail?key=FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk",
+      "full": "https://img.foxx.pet/api/assets/b6c0b1c9-0ae0-4d78-93c2-39d0a7d06eb1/original?key=FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk",
+      "filename": "IMG_20230702_155718.jpg",
+      "width": 2256,
+      "height": 4000,
+      "shareKey": "FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk"
+    },
+    {
+      "id": "148c9491-fe50-4578-a379-6252a928189f",
+      "thumb": "https://img.foxx.pet/api/assets/148c9491-fe50-4578-a379-6252a928189f/thumbnail?key=FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk",
+      "full": "https://img.foxx.pet/api/assets/148c9491-fe50-4578-a379-6252a928189f/original?key=FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk",
+      "filename": "IMG_20230702_155704.jpg",
+      "width": 4000,
+      "height": 2256,
+      "shareKey": "FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk"
+    },
+    {
+      "id": "1e587689-cf0c-40f3-aa5f-19f6f6a7a48e",
+      "thumb": "https://img.foxx.pet/api/assets/1e587689-cf0c-40f3-aa5f-19f6f6a7a48e/thumbnail?key=FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk",
+      "full": "https://img.foxx.pet/api/assets/1e587689-cf0c-40f3-aa5f-19f6f6a7a48e/original?key=FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk",
+      "filename": "IMG_20230702_142042.jpg",
+      "width": 2256,
+      "height": 4000,
+      "shareKey": "FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk"
+    },
+    {
+      "id": "807047b7-d1bb-40a4-b1f2-2a3802bc1c18",
+      "thumb": "https://img.foxx.pet/api/assets/807047b7-d1bb-40a4-b1f2-2a3802bc1c18/thumbnail?key=FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk",
+      "full": "https://img.foxx.pet/api/assets/807047b7-d1bb-40a4-b1f2-2a3802bc1c18/original?key=FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk",
+      "filename": "IMG_20230702_142041.jpg",
+      "width": 2256,
+      "height": 4000,
+      "shareKey": "FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk"
+    },
+    {
+      "id": "d43e81a2-1df3-4917-a531-426e4e4dc616",
+      "thumb": "https://img.foxx.pet/api/assets/d43e81a2-1df3-4917-a531-426e4e4dc616/thumbnail?key=FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk",
+      "full": "https://img.foxx.pet/api/assets/d43e81a2-1df3-4917-a531-426e4e4dc616/original?key=FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk",
+      "filename": "IMG_20230702_134340.jpg",
+      "width": 2256,
+      "height": 4000,
+      "shareKey": "FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk"
+    },
+    {
+      "id": "38cce96b-877c-4e12-9731-afe12c128d24",
+      "thumb": "https://img.foxx.pet/api/assets/38cce96b-877c-4e12-9731-afe12c128d24/thumbnail?key=FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk",
+      "full": "https://img.foxx.pet/api/assets/38cce96b-877c-4e12-9731-afe12c128d24/original?key=FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk",
+      "filename": "IMG_20230702_134338.jpg",
+      "width": 2256,
+      "height": 4000,
+      "shareKey": "FM7ETqoUe8QSgQAn1TvT6sqyK00rwqCXV_RZ7zB7ijusCQgttVo0q1N3Q5FGaM6b7gk"
+    }
+  ]
+}

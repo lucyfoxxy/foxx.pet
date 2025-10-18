@@ -90,7 +90,7 @@ Complementary rhythm tokens:
 
 - Line heights: `--small-line-height` (1.5), `--medium-line-height` (1.35), `--large-line-height` (1.2), `--xlarge-line-height` (1.15).
 - Letter spacing: `--small-letter-spacing` (.005em), `--medium-letter-spacing` (.02em), `--large-letter-spacing` (.04em).
-- Paragraph spacing inside panels: `--prose-flow-spacing` (`clamp(.65rem, .5rem + .3vw, .95rem)`).
+- Paragraph spacing inside panels: `--flow-gap` (`clamp(.65rem, .5rem + .3vw, .95rem)`).
 
 ### Application rules
 
@@ -99,7 +99,7 @@ Complementary rhythm tokens:
 - The footer inherits the medium letter spacing but scales text down via `--small-font-size` for visual hierarchy.
 - Panels scope most typography. Within `.panel` containers:
   - Headings reset margins, adopt the secondary family, and use the scale tokens above.
-  - Paragraphs and `.prose` blocks share consistent spacing governed by `--prose-flow-spacing`.
+  - Paragraphs and `.prose` blocks share consistent spacing governed by `--flow-gap`.
   - Inline links inherit the panel color palette and switch to the accent color on hover/focus.
   - Lists, blockquotes, and pricing tables reuse the same rhythm tokens to stay aligned with prose.
 - Table-specific styles promote key data: headers become bold, subtitle rows keep a medium line height, and note chips stay compact using the small font size token.

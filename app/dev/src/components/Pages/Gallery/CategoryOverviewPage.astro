@@ -48,13 +48,13 @@ const normalizedAlbums = albums.map((album) => {
 ---
 
   <section class="content-section">
-    <div class="content-head content-card__title">
+    <div class="content-card content-card__title">
     <h1>{category.title}</h1>
     {category.description ? <p class="prose">{category.description}</p> : null}
     </div>
   </section>
 
-  <section class="content-section">
+  <section class="content-section cols-3">
     
       {normalizedAlbums.map(({
         slug,
@@ -66,7 +66,7 @@ const normalizedAlbums = albums.map((album) => {
         coverUrl,
       }) => (
         <a
-          class="content-card--soft"
+          class="content-card content-card--soft"
           href={href ?? `/galleries/${category.slug}/${slug}`}
           aria-label={`Open ${title}`}
         >

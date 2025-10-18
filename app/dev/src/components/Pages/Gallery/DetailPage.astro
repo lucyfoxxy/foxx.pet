@@ -50,32 +50,31 @@ const initialFullSrc = normalizedInitialItem?.full;
 const initialWidth = normalizedInitialItem?.width;
 const initialHeight = normalizedInitialItem?.height;
 ---
-  <section class=" content-section">
-
-    <div class="content-card__title content-head">
-      <h1>{detailTitle}</h1>
-          <div class="content-card__subtitle">
-      *description goes here*
-    </div>
-      <div class="badge--wrapper">
-        {normalizedCategory ? <p class="badge badge--large">{normalizedCategory}</p> : null}
-        {formattedStartDate ? <p class="badge badge--large">{formattedStartDate}</p> : null}
-      </div>
+<section class="content-section">
+  <div class="content-card content-card--plain is-centered">
     
 
-</div>
+  </div>
     
-  </section>
   
-  <section
-    class="content-section media__hook content-section"
+  
+  <div
+    class="media__hook content-card content-card--accent is-centered"
     data-slug={albumSlug}
     data-autoplay="true"
     data-interval="8000"
     data-random="true"
     data-share-key={shareKey}
   >
-    <div class="media__wrapper content-card content-section">
+    <h1>{detailTitle}</h1>
+        <div class="content-card__subtitle">
+      *description goes here*
+    </div>
+    <div class="badge--wrapper">
+        {normalizedCategory ? <p class="badge badge--large">{normalizedCategory}</p> : null}
+        {formattedStartDate ? <p class="badge badge--large">{formattedStartDate}</p> : null}
+    </div>
+    <div class="media__wrapper">
       
       <div class="media__frame" role="button" tabindex="0" aria-label="Open artwork in lightbox">
         <img
@@ -99,8 +98,8 @@ const initialHeight = normalizedInitialItem?.height;
         <button class="media__thumbs-nav media__thumbs-next" aria-label="Next thumbnails" type="button">❯</button>
       </div>
     </div>
-  </section>
-
+  </div>
+</section>
   <script>
     import initGalleryPage from '@Scripts/galleryViewer.js';
     import { runOnReady } from '@Scripts/utils/_runOnReady.js';

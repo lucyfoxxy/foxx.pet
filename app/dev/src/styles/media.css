@@ -7,20 +7,13 @@
 .media-hero {
   display: flex;
   flex-direction: column;
-  flex-wrap: nowrap;
-  overflow: hidden;
   align-items: center;
   justify-content: center;
-  gap: var(--brand-gap);
+
   margin-block: 0;
   padding-inline: var(--card-padding);
-  isolation: isolate;
-  position: relative;
-  z-index: 0;
-  width: 100%;
-  padding-block: var(--small-spacing) var(--medium-spacing);
+  padding-block: calc(var(--card-padding) * .75) 0;
   text-align: center;
-  overflow: visible; 
 }
 .media-hero > .content-card__title {
   margin-block-end: 0;
@@ -61,6 +54,8 @@
   overflow: hidden;
   margin-block-start: auto;
   display: block;
+  margin-block-end: 0;
+  min-block-size: 0;
 }
 
 .media-album__cover img,
@@ -76,7 +71,7 @@
   display: block;
   inline-size: 100%;
   aspect-ratio: 1 / 1;
-  margin: calc(var(--card-spacing) * .25);
+  margin: calc(var(--card-gap) * .25);
   padding: 0;
   border: 0;
   border-radius: calc(var(--large-radius) - 2px);
@@ -119,10 +114,9 @@
 .media__wrapper {
   position: relative;
   display: flex;
-   max-block-size: 100%;
-  margin-block: var(--prose-flow-spacing);
   flex-direction: column;
-  gap: var(--medium-spacing);
+  margin-block: var(--flow-gap);
+  gap: var(--card-gap);
   max-block-size: 100%;
 }
 
@@ -153,9 +147,9 @@
 
 .media__frame--compact {
   inline-size: calc(min(var(--gallery-frame-size),100%));
-  max-block-size: 45vh;
+  max-block-size: 35vh;
   block-size: calc(min(var(--gallery-frame-size),100%));
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 4 / 3;
   object-fit: cover;
 }
 
@@ -359,10 +353,10 @@
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
-  gap: var(--xsmall-spacing);
+  gap: var(--cluster-gap);
   background: var(--accent-background);
   border-radius: var(--medium-radius);
-  padding: calc(var(--xsmall-spacing) * .6) var(--small-spacing);
+  padding: calc(var(--cluster-gap) * .6) var(--card-gap);
   box-shadow: var(--large-shadow);
   transition: var(--transition-soft);
 }
@@ -371,8 +365,8 @@
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: var(--thumb-size);
-  gap: var(--card-spacing);
-  margin-block: calc(var(--card-spacing) * .35);
+  gap: var(--card-gap);
+  margin-block: calc(var(--card-gap) * .35);
   overflow: hidden;
 }
 
