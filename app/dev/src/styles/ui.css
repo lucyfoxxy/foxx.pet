@@ -74,7 +74,7 @@
 
 .button--large--wrap {
   display: grid;
-  grid-template-rows: 1;
+  
   grid-template-columns: repeat(auto-fit,minmax(1rem,1fr));
   gap: var(--control-gap);
   margin-block-start: var(--control-gap);
@@ -105,13 +105,13 @@
   block-size: 1.5rem;
 }
 
-@media (max-width: 680px) {
+@media (max-width: 80px) {
   .button--large--wrap {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: var(--card-gap);
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     overflow-x: auto;
     padding-block: .25rem;
   }

@@ -18,16 +18,17 @@ const addMediaListener = (mediaQueryList, handler) => {
 
 const measure = (element) => (element ? element.getBoundingClientRect().height : 0);
 
-export function initResponsiveSiteHeader() {
-  const root = document.documentElement;
-  const header = document.getElementById('site-header');
-  const nav = document.querySelector('.site-nav');
+export function ResponsiveSiteHeader() {
 
-  if (!root || !header || !nav) return undefined;
+  const root = document.documentElement;
+
+  const nav = document.querySelector('.header');
+
+  if (!root || !nav) return undefined;
 
   const media = window.matchMedia(MOBILE_QUERY);
   const updateStickyOffset = () => {
-    const target = media.matches ? nav : header;
+    const target = media.matches ? nav : nav;
     const height = Math.round(measure(target));
     root.style.setProperty('--site-header--sticky-offset', `${height}px`);
     root.toggleAttribute('data-site-header-compact', media.matches);
@@ -38,7 +39,7 @@ export function initResponsiveSiteHeader() {
   const resizeObservers = [];
   if (typeof ResizeObserver === 'function') {
     const resizeObserver = new ResizeObserver(() => updateStickyOffset());
-    resizeObserver.observe(header);
+    
     resizeObserver.observe(nav);
     resizeObservers.push(resizeObserver);
   }
@@ -59,4 +60,22 @@ export function initResponsiveSiteHeader() {
   return cleanup;
 }
 
-export default initResponsiveSiteHeader;
+
+
+export function observer() {
+  const nav = document.querySelector('.header');
+  if (nav) {
+    const sentry = document.createElement('div');
+    sentry.style.position = 'absolute';
+    sentry.style.top = '0';
+    sentry.style.height = '1px';
+    nav.before(sentry); // direkt vor die Nav
+
+    const io = new IntersectionObserver(([e]) => {
+      nav.toggleAttribute('data-stuck', e.intersectionRatio === 0);
+    }, { rootMargin: `-${getComputedStyle(nav).top || 0} 0px 0px 0px`, threshold: [0,1] });
+
+    io.observe(sentry);
+  }
+}
+

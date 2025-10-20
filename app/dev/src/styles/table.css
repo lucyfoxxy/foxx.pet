@@ -45,7 +45,7 @@
 }
 
 .table__th {
-  background: color-mix(in oklab, var(--primary-background-color, #000) 65%, white 3%);
+  background: var(--surface-bg--soft);
   color: var(--primary-text-color);
 }
 
@@ -64,7 +64,7 @@
 }
 
 .table__tr.is-alt {
-  background: color-mix(in oklab, var(--primary-background-color, #000) 74%, white 6%);
+  background: var(--surface-bg--soft);
 }
 
 .table__td {

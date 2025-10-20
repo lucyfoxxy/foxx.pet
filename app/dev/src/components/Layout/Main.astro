@@ -123,43 +123,21 @@ const breadcrumbs = buildBreadcrumbs({
 <html lang="en">
   <Head title={title} description={description} url={url} />
   <body style={`--background-image: url(${ASSETS.bg.src});`}>
-    <SiteHeader meta={meta} navLinks={navLinks} />
+    
 
     <div class="container">
 
       <main class="panel">
 
-        <nav class="panel__bar panel__bar--top" aria-label="Breadcrumb">
-          <ol>
-            {breadcrumbs.map((crumb, index) => (
-              <li>
-                {crumb.isCurrent ? (
-                  <span class="is-current" aria-current="page">{crumb.label}</span>
-                ) : (
-                  <a href={crumb.href}>{crumb.label}</a>
-                )}
-
-              </li>
-            ))}
-          </ol>
-          <div class="panel__bar--actions">
-            <slot name="panel__bar--actions" />
-          </div>
-        </nav>
+        <SiteHeader meta={meta} navLinks={navLinks} breadcrumbs={breadcrumbs} />  
 
         <slot />
+        <SiteFooter />
 
-        <nav class="panel__bar panel__bar--bottom" aria-label="Page navigation">
-          <div class="panel__bar--actions">
-            <span class="button button--small">
-              <a href="#top">⇡ Scroll Up ⇡</a>
-            </span>
-          </div>
-        </nav>
       </main>
     </div>
 
-    <SiteFooter />
+    
 
     <Helpers />
   </body>

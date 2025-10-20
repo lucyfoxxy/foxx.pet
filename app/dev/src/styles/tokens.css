@@ -16,35 +16,27 @@
   --control-padding: var(--space-xxs);  /* Innenabstand Buttons/Badges */
   --button-padding:  var(--space-s);
   --bars-size:            calc(var(--container-max) * 1 );
-  --bars-padding:          var(--space-m);
+  --bars-padding:          var(--space-xs);
   --bars-spacing:          clamp(var(--space-xs),  calc(var(--space-xs) + 3.75vw),    calc(10 * var(--space-xxl))); 
   --bars-gap--column:      var(--space-xxl);
   --bars-gap--row:         var(--space-xs); 
-  --nav-gap--column:      var(--space-xxl);
+  --nav-gap--column:      clamp(var(--space-s),calc(var(--space-s) + 1.25vw),var(--space-xl));
   --nav-gap--row:         var(--space-xxs);
 
   /* Responsiv nur in den Rollen-Tokens */
   --card-padding:        clamp(var(--space-s),  calc(var(--space-s) + 1.75vw),  var(--space-xl));   /* Innenabstand Card, leicht wachsend */
-  --section-gap:         clamp(var(--space-s),  calc(var(--space-s) + 1.5vw),    var(--space-xl));  /* Abstand zwischen Cards */
-  --panel-padding:       clamp(var(--space-s),  calc(var(--space-s) + 1.25vw),    var(--space-xl));  /* Abstand zwischen Cards */
-  --panel-bar-padding:   calc(var(--panel-padding) * .75);
+  --section-gap:         clamp(var(--space-s),  calc(var(--space-s) + 1.5vw),    var(--space-xxl));  /* Abstand zwischen Cards */
+  --panel-padding:       clamp(var(--space-s),  calc(var(--space-s) + 1.5vw),    var(--space-xxl));  /* Abstand zwischen Cards */
+  --panel-bar-padding:   calc(var(--panel-padding) * .25);
   --panel-bar-spacing:   calc(var(--panel-bar-padding) * .25);
+ 
   --container-padding:   clamp(var(--space-xxs),  calc(var(--space-xxs) + 2vw),    var(--space-xxl)); /* Seiten-/Wrapper-Innenabstand */
-  
-
-
   --container-max:              1280px;
   
-  
-  --card-size--compact:         calc(10rem + 6vw);
-  --card-size:                  calc(11.5rem);
-  --card-size--spacy:           20rem;
-  
   --brand-size:                 clamp(320px, 45vw, 480px);
-  --brand-gap:                  var(--space-xs);
 
   /* ====== Main Colors =======*/
-  --primary-text-color:         oklch(96% 0.03 290);
+  --primary-text-color:         oklch(86% 0.09 300);
 
   --accent-background:          oklch(78% 0.22 285 / 43%);
   --accent-background--soft:    oklch(78% 0.22 285 / 12%);
@@ -58,35 +50,16 @@
   --highlight-text:             color-mix(in oklab, var(--primary-text-color) 25%, var(--highlight-foreground));
   --highlight-glow:             0 0 7px -1px var(--highlight-foreground);
 
-  --card-background--soft:      color-mix(in oklab, var(--secondary-background-color) 15%, black 15%); 
-  --card-background:            oklch(18.5% 0.075 300 / 0.7);
+  --surface-bg--soft:      oklch(28.5% 0.1 300 / 0.35);
+  --surface-bg:            oklch(18.5% 0.075 300 / 0.7);
+  --surface-bg--dark:      oklch(14.5% 0.065 300 / 0.9);
 
-  --bars-background:      var(--card-background), oklch(20% 0.13 295 / 67%);
-  --bars-backdrop:         blur(48px) opacity(.95) brightness(1.95);
-
-  --panel-backdrop:       blur(var(--large-blur)) saturate(1.25) brightness(1.6);
   
-  --site-logo--size:            clamp(24px, 10vw, 72px);
+  --site-logo--size:            calc(clamp(var(--space-xs), calc(var(--space-xs) + 5vw), var(--space-xxl)) * .75);
   --site-logo--filter:          drop-shadow(0 3px 2px color-mix(in oklab,var(--secondary-shadow-color) 75%,black 25%));
-  /* ====== bg Colors / FX ====== */
+  /* ====== bg Colors / FX ====== */       
 
-  --primary-background-color:   oklch(32% 0.075 290 / 0.65);
-  --secondary-background-color: oklch(24% 0.065 290 / 0.95);            
-
-  --background-overlay:         radial-gradient(
-                                  140% 80% at 15% 10%,
-                                  oklch(48% 0.11 290 / 15%) 28%,
-                                  oklch(74% 0.11 205 / 16%) 48%,
-                                  oklch(48% 0.11 295 / 15%) 65%
-                                ),
-                                radial-gradient(
-                                  circle at 50% 35%,
-                                  color-mix(in oklab, black 20%, transparent) 0%,
-                                  transparent 50%
-                                ),
-                                radial-gradient(
-                                  circle at center, 
-                                  transparent 60%, black 120%); 
+  --background-overlay: radial-gradient(circle at center, transparent 50%, black 120%); 
  
   --small-blur:                 10px;
   --medium-blur:                14px;
@@ -94,12 +67,12 @@
   --backdrop-blur-strong:       blur(var(--large-blur));
 
   /* ====== Shadow & Glow ====== */
-  --primary-shadow-color:       color-mix(in oklab, var(--primary-background-color) 70%, black 4%);
-  --secondary-shadow-color:     color-mix(in oklab, var(--secondary-background-color) 70%, black 4%);
+  --primary-shadow-color:       color-mix(in oklab, var(--surface-bg) 70%, black 14%);
+  --secondary-shadow-color:     color-mix(in oklab, var(--surface-bg--dark) 70%, black 14%);
 
-  --small-shadow:               2px 2px 10px -4px color-mix(in srgb, black 75%, transparent);
-  --medium-shadow:              12px 12px 18px -14px var(--primary-shadow-color),12px 12px 24px -18px var(--secondary-shadow-color);
-  --large-shadow:               0 0 20px -14px var(--primary-shadow-color),0 0 28px -18px var(--secondary-shadow-color),0 0 14px -4px color-mix(in srgb, black 95%, transparent);
+  --small-shadow:               0 0 16px -10px var(--primary-shadow-color),0 0 16px -6px var(--secondary-shadow-color);
+  --medium-shadow:              0 0 18px -10px var(--primary-shadow-color),0 0 24px -6px var(--secondary-shadow-color);
+  --large-shadow:               0 0 20px -10px var(--primary-shadow-color),0 0 28px -6px var(--secondary-shadow-color),0 0 14px 0 color-mix(in srgb, black 95%, transparent);
 
   --soft-text-shadow:           2px 2px 2px var(--primary-shadow-color);  
   --strong-text-shadow:         3px 3px 3px var(--secondary-shadow-color);
@@ -113,7 +86,7 @@
   --xlarge-radius:              24px;
   --xxlarge-radius:             32px;
 
-  --outline-color:              color-mix(in oklch, var(--card-background) 15%, transparent);
+  --outline-color:              color-mix(in oklch, var(--surface-bg--soft) 15%, transparent);
   --outline:                    2px solid var(--outline-color);
   /* ====== Font Styles ====== */
   --primary-font-family:        Grandstander, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;

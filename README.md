@@ -95,7 +95,7 @@ Complementary rhythm tokens:
 ### Application rules
 
 - The `body` element defaults to the primary family, medium size, and small line height for crisp reading on dark backgrounds.
-- Navigation links (`.site-nav a`) use the secondary family with bold weight, medium line height, and medium letter spacing for clearer scanability.
+- Navigation links (`.header a`) use the secondary family with bold weight, medium line height, and medium letter spacing for clearer scanability.
 - The footer inherits the medium letter spacing but scales text down via `--small-font-size` for visual hierarchy.
 - Panels scope most typography. Within `.panel` containers:
   - Headings reset margins, adopt the secondary family, and use the scale tokens above.

@@ -50,14 +50,14 @@ p :where(em, i) {
 }
 
 .site-footer,
-.site-nav a,
+
 .panel :where(h2) {
   letter-spacing: var(--large-letter-spacing);
 }
 
-.site-nav a {
+.header__nav a {
   font-weight: var(--bold-font-weight);
-  font-size: var(--large-font-size);
+  font-size: var(--medium-font-size);
 }
 
 .site-footer,
@@ -74,7 +74,7 @@ p :where(em, i) {
   line-height: var(--xsmall-line-height);
 }
 /* ====== HEADINGS ====== */
-:where(h1, h2, h3, .site-nav a) {
+:where(h1, h2, h3, .header__nav a) {
   font-family: var(--secondary-font-family);
   font-variant: small-caps;
 }

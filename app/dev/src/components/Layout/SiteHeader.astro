@@ -7,50 +7,55 @@ type NavLink = {
   emoji?: string;
   includeInHeader?: boolean;
 };
-
+type Breadcrumb = {
+  label: string;
+  href: string;
+  isCurrent: boolean;
+};
 type Props = {
   navLinks: NavLink[];
   meta?: { title?: string; description?: string; url?: string };
+  breadcrumbs: Breadcrumb[];
 };
 
-const { navLinks = [] } = (Astro.props ?? {}) as Props;
+const { navLinks = [],breadcrumbs=[] } = (Astro.props ?? {}) as Props;
 ---
 
-<header id="site-header" class="site-header">
-  <div class="site-header__inner">
-    <a class="site-header__logo" aria-label="Home" href="/">
-      <img src={ASSETS.logo_header.src} alt="foxx.pet" />
-    </a>
-  </div>
-</header>
-<nav class="site-nav" aria-label="Primary navigation">
-  <div class="site-nav__inner">
+
+<header class="header" aria-label="Primary navigation">
+  <a class="header__logo" aria-label="Home" href="/">
+    <img src={ASSETS.logo_header.src} alt="foxx.pet" />
+  </a>
+  <nav class="header__nav">
     {navLinks
       .filter((link) => link.includeInHeader)
       .map((link) => (
-        <a class="site-nav__link" href={link.href}>
-          <span class="site-nav__text">{link.label}</span>
-          {link.emoji && <span class="site-nav__emoji">{link.emoji}</span>}
+        <a class="header__nav-link" href={link.href}>
+          <span class="header__nav-text">{link.label}</span>
+          {link.emoji && <span class="header__nav-emoji">{link.emoji}</span>}
         </a>
       ))}
+  </nav>
+  <div class="header__crumbs" aria-label="Breadcrumb">
+    <ol>
+      {breadcrumbs.map((crumb, index) => (
+        <li>
+          {crumb.isCurrent ? (
+            <span class="is-current" aria-current="page">{crumb.label}</span>
+          ) : (
+            <a href={crumb.href}>{crumb.label}</a>
+          )}
+        </li>
+      ))}
+    </ol>
   </div>
-</nav>
+</header>
+
 <script>
-  import initResponsiveSiteHeader from '@Scripts/siteHeaderSticky.js';
+  import { ResponsiveSiteHeader , observer} from '@Scripts/siteHeaderSticky.js';
   import { runOnReady } from '@Scripts/utils/_runOnReady.js';
+  runOnReady(observer);
 
-  runOnReady(() => {
-    const cleanup = initResponsiveSiteHeader();
-
-    if (typeof cleanup === 'function') {
-      const teardown = () => {
-        cleanup();
-        document.removeEventListener('astro:before-preparation', teardown);
-      };
-
-      document.addEventListener('astro:before-preparation', teardown);
-    }
-  });
 </script>
 
 
