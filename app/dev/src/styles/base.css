@@ -25,11 +25,9 @@ body::before {
   inset: 0;
   z-index: -1;
   -webkit-backdrop-filter: var(--blur--soft);
-  backdrop-filter: var(--blur--soft);
-  background:    
-    var(--background-overlay),
-    var(--background-image, none) center / cover no-repeat;
-  background-blend-mode: multiply;
+  backdrop-filter: blur(999px);
+  background: var(--background-overlay),var(--panel-bg), var(--background-image) top / cover no-repeat;
+  background-blend-mode: darken,darken,color;
   will-change: transform;
   transform: translateZ(0);
 }
