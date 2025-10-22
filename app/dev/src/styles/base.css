@@ -24,14 +24,27 @@ body::before {
   position: fixed;
   inset: 0;
   z-index: -1;
-  -webkit-backdrop-filter: var(--blur--soft);
-  backdrop-filter: blur(999px);
-  background: var(--background-overlay),var(--panel-bg), var(--background-image) top / cover no-repeat;
-  background-blend-mode: darken,darken,color;
+  
+  filter: saturate(.35) var(--blur--soft) drop-shadow(0 0 -14px rgba(0,0,0,.1));
+  box-shadow: inset 0 0 164px 64px rgba(0,0,0,.5);
+    background: 
+    var(--background-overlay),
+    var(--bg--nebula),   
+    linear-gradient(205deg, #371173, #510868 ,rgb(40, 7, 112));
+  background-blend-mode:darken,overlay,color;
+  background-repeat: no-repeat,repeat,no-repeat;
+  background-size: cover,contain,cover;
+  background-position: center, top,center;
   will-change: transform;
   transform: translateZ(0);
 }
-
+@media(max-width: 900px){
+  body::before {
+    background: none;
+    box-shadow: none;
+    filter: none;
+  }
+}
 :where(h1, h2, h3, h4, a) {
   text-shadow: var(--text-shadow--soft);
   color: var(--text-accent);

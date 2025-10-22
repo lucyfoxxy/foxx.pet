@@ -18,7 +18,7 @@ type Props = {
   initialItem?: GalleryItem | null;
 };
 
-const { albumSlug, title, category, startDate, shareKey, initialItem } = Astro.props as Props;
+const { albumSlug, title, description, category, startDate, shareKey, initialItem } = Astro.props as Props;
 const detailTitle = title ?? 'Gallery';
 
 const trimmedCategory = typeof category === 'string' ? category.trim() : '';
@@ -51,49 +51,51 @@ const initialWidth = normalizedInitialItem?.width;
 const initialHeight = normalizedInitialItem?.height;
 ---
 <section class="content-section">
-  <div class="card card--plain is-centered">
-    
-
-  </div>
-    
-  
-  
   <div
-    class="media__hook card card--light is-centered"
+    class="card card--light is-centered media__hook"
     data-slug={albumSlug}
     data-autoplay="true"
     data-interval="8000"
     data-random="true"
     data-share-key={shareKey}
   >
-    <h1>{detailTitle}</h1>
-    <p>*description goes here*</p>
-    <div class="card__badges controls">
-        {normalizedCategory ? <p class="badge badge--large">{normalizedCategory}</p> : null}
-        {formattedStartDate ? <p class="badge badge--large">{formattedStartDate}</p> : null}
+    <div class="card__head card__head--column">
+      <h1 class="card__title">{detailTitle}</h1>
+      {(normalizedCategory || formattedStartDate) && (
+        <div class="card__badges controls controls--tight">
+          {normalizedCategory ? <span class="badge">{normalizedCategory}</span> : null}
+          {formattedStartDate ? <span class="badge">{formattedStartDate}</span> : null}
+        </div>
+      )}
     </div>
-    <div class="media__wrapper">
-      
-      <div class="media__frame" role="button" tabindex="0" aria-label="Open artwork in lightbox">
-        <img
-          class="media__image"
-          src={initialThumbSrc}
-          data-initial-full={initialFullSrc}
-          width={initialWidth}
-          height={initialHeight}
-          alt=""
-          loading={initialThumbSrc ? 'eager' : undefined}
-          decoding="async"
-        />
-        <button class="media__nav media__prev" aria-label="Previous" type="button">❮</button>
-        <button class="media__nav media__next" aria-label="Next" type="button">❯</button>
-        <button class="media__playpause" aria-label="Pause autoplay" type="button">⏸</button>
-        <div class="media__progress" aria-hidden="true"></div>
-      </div>
-      <div class="media__thumbs" data-window="10">
-        <button class="media__thumbs-nav media__thumbs-prev" aria-label="Previous thumbnails" type="button">❮</button>
-        <div class="media__thumbs-wrap" role="list"></div>
-        <button class="media__thumbs-nav media__thumbs-next" aria-label="Next thumbnails" type="button">❯</button>
+    <div class="card__body">
+      {description ? (
+        <div class="prose">
+          <p>{description}</p>
+        </div>
+      ) : null}
+      <div class="media__wrapper">
+        <div class="media__frame" role="button" tabindex="0" aria-label="Open artwork in lightbox">
+          <img
+            class="media__image"
+            src={initialThumbSrc}
+            data-initial-full={initialFullSrc}
+            width={initialWidth}
+            height={initialHeight}
+            alt=""
+            loading={initialThumbSrc ? 'eager' : undefined}
+            decoding="async"
+          />
+          <button class="media__nav media__prev" aria-label="Previous" type="button">❮</button>
+          <button class="media__nav media__next" aria-label="Next" type="button">❯</button>
+          <button class="media__playpause" aria-label="Pause autoplay" type="button">⏸</button>
+          <div class="media__progress" aria-hidden="true"></div>
+        </div>
+        <div class="media__thumbs" data-window="10">
+          <button class="media__thumbs-nav media__thumbs-prev" aria-label="Previous thumbnails" type="button">❮</button>
+          <div class="media__thumbs-wrap" role="list"></div>
+          <button class="media__thumbs-nav media__thumbs-next" aria-label="Next thumbnails" type="button">❯</button>
+        </div>
       </div>
     </div>
   </div>

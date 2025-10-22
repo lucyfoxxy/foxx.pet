@@ -9,11 +9,15 @@ const disclaimer = content.disclaimer ?? [];
 
   <section class="content-section">
     <div class="card card--plain is-centered">
-    <h1>{content.title}</h1>
-      <div class="prose">
-        {introParagraphs.map((paragraph) => (
-          <p>{paragraph}</p>
-        ))}
+      <div class="card__head">
+        <h1 class="card__title">{content.title}</h1>
+      </div>
+      <div class="card__body">
+        <div class="prose">
+          {introParagraphs.map((paragraph) => (
+            <p>{paragraph}</p>
+          ))}
+        </div>
       </div>
     </div>
   </section>
@@ -21,38 +25,44 @@ const disclaimer = content.disclaimer ?? [];
   <section class="content-section cols-2">
     {contacts.map((contact) => (
       <div class="card">
-        
-          <h2>{contact.title}</h2>
-          {contact.subtitle && <p><em>{contact.subtitle}</em></p>}
-        
-        <dl class="deflist">
-          {contact.entries.flatMap((entry) => [
-            <dt class="deflist__term">{entry.term}</dt>,
-            <dd class="deflist__desc">
-              {entry.kind === 'mail' ? (
-                <a href={`mailto:${entry.description}`}>{entry.description}</a>
-              ) : (
-                entry.description
-              )}
-            </dd>,
-          ])}
-        </dl>
+        <div class="card__head">
+          <h2 class="card__title">{contact.title}</h2>
+        </div>
+        <div class="card__body">
+          {contact.subtitle && (
+            <p><em>{contact.subtitle}</em></p>
+          )}
+          <dl class="deflist">
+            {contact.entries.flatMap((entry) => [
+              <dt class="deflist__term">{entry.term}</dt>,
+              <dd class="deflist__desc">
+                {entry.kind === 'mail' ? (
+                  <a href={`mailto:${entry.description}`}>{entry.description}</a>
+                ) : (
+                  entry.description
+                )}
+              </dd>,
+            ])}
+          </dl>
+        </div>
       </div>
     ))}
   
 
     {disclaimer.length > 0 && (
       <div class="card">
-        
-          <h2>Disclaimer</h2>
-          
+        <div class="card__head">
+          <h2 class="card__title">Disclaimer</h2>
+        </div>
+        <div class="card__body">
+          <div class="prose">
             {disclaimer.map((paragraph) => (
-              <p class="prose">
+              <p>
                 <em>{paragraph}</em>
               </p>
             ))}
-          
-        
+          </div>
+        </div>
       </div>
     )}
   </section>

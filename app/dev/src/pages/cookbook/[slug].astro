@@ -22,47 +22,59 @@ const meta = {
 };
 ---
 <Layout title={recipe.data.title} meta={meta}>
-  <article class="cardcontent-section">
-    
-      <h1>{recipe.data.title}</h1>
-      <p>
-        <strong>Published:</strong> {formatDate(recipe.data.publishDate)}
-        {recipe.data.categories?.length && (
-          <>
-            <br />
-            <strong>Categories:</strong> {recipe.data.categories.join(', ')}
-          </>
+  <article class="content-section">
+    <div class="card">
+      <div class="card__head card__head--column">
+        <h1 class="card__title">{recipe.data.title}</h1>
+        {(recipe.data.categories?.length || recipe.data.tags?.length) && (
+          <div class="card__badges controls controls--tight">
+            {recipe.data.categories?.map((category) => (
+              <span class="badge is-dark">{category}</span>
+            ))}
+            {recipe.data.tags?.map((tag) => (
+              <span class="badge">{tag}</span>
+            ))}
+          </div>
         )}
-        {recipe.data.tags?.length && (
-          <>
-            <br />
-            <strong>Tags:</strong> {recipe.data.tags.join(', ')}
-          </>
-        )}
-      </p>
-      <ul>
-        {recipe.data.prepTime && (
-          <li>
-            <strong>Prep:</strong> {recipe.data.prepTime}
-          </li>
-        )}
-        {recipe.data.cookTime && (
-          <li>
-            <strong>Cook:</strong> {recipe.data.cookTime}
-          </li>
-        )}
-        {recipe.data.servings && (
-          <li>
-            <strong>Serves:</strong> {recipe.data.servings}
-          </li>
-        )}
-      </ul>
+      </div>
+      <div class="card__body">
+        <p>
+          <strong>Published:</strong> {formatDate(recipe.data.publishDate)}
+          {recipe.data.updatedDate && (
+            <>
+              <br />
+              <strong>Updated:</strong> {formatDate(recipe.data.updatedDate)}
+            </>
+          )}
+        </p>
+        <div class="prose">
+          {(recipe.data.prepTime || recipe.data.cookTime || recipe.data.servings) && (
+            <ul>
+              {recipe.data.prepTime && (
+                <li>
+                  <strong>Prep:</strong> {recipe.data.prepTime}
+                </li>
+              )}
+              {recipe.data.cookTime && (
+                <li>
+                  <strong>Cook:</strong> {recipe.data.cookTime}
+                </li>
+              )}
+              {recipe.data.servings && (
+                <li>
+                  <strong>Serves:</strong> {recipe.data.servings}
+                </li>
+              )}
+            </ul>
+          )}
+          <Content />
+        </div>
+      </div>
+      <div class="card__foot">
+        <div class="controls controls--start">
+          <a class="button is-ghost" href="/cookbook">← Back to the cookbook</a>
+        </div>
+      </div>
     </div>
-    <div class="prose">
-      <Content />
-    </div>
-    <p>
-      <a href="/cookbook">← Back to the cookbook</a>
-    </p>
   </article>
 </Layout>

@@ -34,58 +34,66 @@ const isExternalLink = (href: string) => href.startsWith('http');
 
   <section class="content-section">
     <div class="card card--plain is-centered media-hero is-condensed">
-      
-      <h1>{hero.heading}</h1>
-      
+      <div class="card__head">
+        <h1 class="card__title">{hero.heading}</h1>
+      </div>
+      <div class="card__body">
+        <Picture
+          src={ASSETS.logo_hero}
+          formats={['webp']}
+          inferSize
+          alt={hero.heading}
+          fetchpriority="high"
+          class="media-hero__logo"
+        />
 
-      <Picture
-        src={ASSETS.logo_hero}
-        formats={['webp']}
-        inferSize  
-        alt={hero.heading}
-        fetchpriority="high"
-        class="media-hero__logo"
-      />
-
-      
-      <h3 class="is-italic">...Eeeeeeeeeeeeeeeeeeeeek!</h3>
-      
-    </div>   
+        <h3 class="is-italic">...Eeeeeeeeeeeeeeeeeeeeek!</h3>
+      </div>
+    </div>
   </section>
 
   <section class="content-section cols-2">
     <section class="content-section">
       <div class="card">
-        <h2>{intro.heading}</h2>
-        <div class="prose">
-          {intro.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+        <div class="card__head">
+          <h2 class="card__title">{intro.heading}</h2>
         </div>
-        <h3><i>{intro.signature}</i></h3>
-        
-
+        <div class="card__body">
+          <div class="prose">
+            {intro.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+            <p class="is-italic">{intro.signature}</p>
+          </div>
+        </div>
       </div>
       <div class="card">
-        <h3>Reach the Fops</h3>
-        <div class="button--large--wrap">
-          {links.map((link) => (
-            <a
-              class={`button button--large button--large--${link.kind}`}
-              href={link.href}
-              rel={isExternalLink(link.href) ? 'noopener noreferrer' : undefined}
-              target={isExternalLink(link.href) ? '_blank' : undefined}
-            >
-              <span class="button__icon"><Icon kind={link.kind} /></span>
-              
-            </a>
-          ))}
+        <div class="card__head">
+          <h3 class="card__title">Reach the Fops</h3>
+        </div>
+        <div class="card__foot">
+          <div class="controls controls--center">
+            {links.map((link) => (
+              <a
+                class={`button button--large button--large--${link.kind}`}
+                href={link.href}
+                rel={isExternalLink(link.href) ? 'noopener noreferrer' : undefined}
+                target={isExternalLink(link.href) ? '_blank' : undefined}
+              >
+                <span class="button__icon"><Icon kind={link.kind} /></span>
+
+              </a>
+            ))}
+          </div>
         </div>
       </div>
     </section>
     <div class="card">
-      <h2>{feature.heading}</h2>
-      <div
-        class="media__hook"
-        data-slug={albumSlug}
+      <div class="card__head">
+        <h2 class="card__title">{feature.heading}</h2>
+      </div>
+      <div class="card__body">
+        <div
+          class="media__hook"
+          data-slug={albumSlug}
         data-autoplay="true"
         data-interval="8000"
         data-random="true"
@@ -99,7 +107,8 @@ const isExternalLink = (href: string) => href.startsWith('http');
           </div>
         </div>
       </div>
-    </div>  
+      </div>
+    </div>
   </section>
 
 

@@ -59,7 +59,7 @@
 .is-centered { justify-items: center; text-align: center; }
 .is-centered :where(.prose) { margin-inline: auto; }
 
-.is-condensed { gap: var(--flow-gap); };
+.is-condensed { gap: var(--flow-gap); }
 .is-italic { font-style: italic; }
 .is-animated { transition: var(--transition-soft); }
 .is-animated:hover,

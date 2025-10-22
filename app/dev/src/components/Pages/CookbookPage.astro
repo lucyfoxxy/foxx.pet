@@ -25,105 +25,129 @@ const hasRecipes = recipes.length > 0;
 
   <section class="content-section">
     <div class="card card--plain is-centered ">
-    
-      <h1>{content.title}</h1>
-    
-      {introParagraphs.map((paragraph) => (
-        <p class="prose">{paragraph}</p>
-      ))}
-    
+      <div class="card__head">
+        <h1 class="card__title">{content.title}</h1>
+      </div>
+
+      <div class="card__body">
+        <div class="prose">
+          {introParagraphs.map((paragraph) => (
+            <p>{paragraph}</p>
+          ))}
+        </div>
+      </div>
     </div>
   </section>
 
   {hasRecipes ? (
     <>
       <section class="content-section">
-        <div class="card" aria-labelledby="cookbook-facets">      
-            <h2 id="cookbook-facets">Plan your feast</h2>
+        <div class="card" aria-labelledby="cookbook-facets">
+          <div class="card__head card__head--column">
+            <h2 class="card__title" id="cookbook-facets">Plan your feast</h2>
+          </div>
+          <div class="card__body">
             <p>
               Categories and tags make it simple to build seasonal menus or filter by dietary needs. Hook them into client-side
               state or query parameters for an experience similar to the gallery overview.
             </p>
-          
-          <div class="prose">
-            {categoryFacets.length > 0 && (
-              <p>
-                <strong>Categories:</strong>
-                {' '}
-                {categoryFacets.join(', ')}
-              </p>
-            )}
-            {tagFacets.length > 0 && (
-              <p>
-                <strong>Tags:</strong>
-                {' '}
-                {tagFacets.join(', ')}
-              </p>
-            )}
-            {categoryFacets.length === 0 && tagFacets.length === 0 && (
-              <p>
-                Start tagging recipes with flavour profiles, seasons, or difficulty to unlock richer filtering.
-              </p>
-            )}
+
+            <div class="prose">
+              {categoryFacets.length > 0 && (
+                <p>
+                  <strong>Categories:</strong>
+                  {' '}
+                  {categoryFacets.join(', ')}
+                </p>
+              )}
+              {tagFacets.length > 0 && (
+                <p>
+                  <strong>Tags:</strong>
+                  {' '}
+                  {tagFacets.join(', ')}
+                </p>
+              )}
+              {categoryFacets.length === 0 && tagFacets.length === 0 && (
+                <p>
+                  Start tagging recipes with flavour profiles, seasons, or difficulty to unlock richer filtering.
+                </p>
+              )}
+            </div>
           </div>
         </div>
       </section>
 
       <section class="content-section cols-2">
-        {recipes.map((recipe: RecipeEntry) => (
-          <article class="card">
-              <h2>
-                <a href={`/cookbook/${recipe.slug}/`}>{recipe.data.title}</a>
-              </h2>
-              <p>
-                <strong>Published:</strong> {formatDate(recipe.data.publishDate)}
-                {recipe.data.categories?.length ? (
-                  <>
-                    <br />
-                    <strong>Categories:</strong> {recipe.data.categories.join(', ')}
-                  </>
-                ) : null}
-                {recipe.data.tags?.length ? (
-                  <>
-                    <br />
-                    <strong>Tags:</strong> {recipe.data.tags.join(', ')}
-                  </>
-                ) : null}
-              </p>
-            
-            <div class="prose">
-              {recipe.data.description && <p>{recipe.data.description}</p>}
-              <ul>
-                {recipe.data.prepTime && (
-                  <li>
-                    <strong>Prep:</strong> {recipe.data.prepTime}
-                  </li>
+        {recipes.map((recipe: RecipeEntry) => {
+          const categories = recipe.data.categories ?? [];
+          const tags = recipe.data.tags ?? [];
+          const hasBadges = categories.length > 0 || tags.length > 0;
+          return (
+            <article class="card">
+              <div class="card__head card__head--column">
+                <h2 class="card__title">
+                  <a href={`/cookbook/${recipe.slug}/`}>{recipe.data.title}</a>
+                </h2>
+                {hasBadges && (
+                  <div class="card__badges controls controls--tight">
+                    {categories.map((category) => (
+                      <span class="badge is-dark">{category}</span>
+                    ))}
+                    {tags.map((tag) => (
+                      <span class="badge">{tag}</span>
+                    ))}
+                  </div>
                 )}
-                {recipe.data.cookTime && (
-                  <li>
-                    <strong>Cook:</strong> {recipe.data.cookTime}
-                  </li>
-                )}
-                {recipe.data.servings && (
-                  <li>
-                    <strong>Serves:</strong> {recipe.data.servings}
-                  </li>
-                )}
-              </ul>
-              <p>
-                <a href={`/cookbook/${recipe.slug}/`}>Open recipe →</a>
-              </p>
-            </div>
-          </article>
-        ))}
+              </div>
+              <div class="card__body">
+                <p>
+                  <strong>Published:</strong> {formatDate(recipe.data.publishDate)}
+                </p>
+                <div class="prose">
+                  {recipe.data.description && <p>{recipe.data.description}</p>}
+                  <ul>
+                    {recipe.data.prepTime && (
+                      <li>
+                        <strong>Prep:</strong> {recipe.data.prepTime}
+                      </li>
+                    )}
+                    {recipe.data.cookTime && (
+                      <li>
+                        <strong>Cook:</strong> {recipe.data.cookTime}
+                      </li>
+                    )}
+                    {recipe.data.servings && (
+                      <li>
+                        <strong>Serves:</strong> {recipe.data.servings}
+                      </li>
+                    )}
+                  </ul>
+                </div>
+              </div>
+              <div class="card__foot">
+                <div class="controls controls--start">
+                  <a class="button is-ghost" href={`/cookbook/${recipe.slug}/`}>
+                    Open recipe →
+                  </a>
+                </div>
+              </div>
+            </article>
+          );
+        })}
       </section>
     </>
   ) : (
-    <section class="cardcontent-section">
-      <h2>{overview.emptyState ?? 'Cakes are still baking...'}</h2>
-      
-      <div class="prose">
-        <p>{overview.cta ?? 'Add markdown recipes to populate this overview automatically.'}</p>
+    <section class="content-section">
+      <div class="card card--plain is-centered">
+        <div class="card__head">
+          <h2 class="card__title">{overview.emptyState ?? 'Cakes are still baking...'}</h2>
+        </div>
+
+        <div class="card__body">
+          <div class="prose">
+            <p>{overview.cta ?? 'Add markdown recipes to populate this overview automatically.'}</p>
+          </div>
+        </div>
       </div>
     </section>
   )}

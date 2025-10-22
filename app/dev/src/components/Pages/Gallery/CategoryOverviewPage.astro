@@ -49,8 +49,14 @@ const normalizedAlbums = albums.map((album) => {
 
   <section class="content-section">
     <div class="card card--plain is-centered">
-    <h1>{category.title}</h1>
-    {category.description ? <p>{category.description}</p> : null}
+      <div class="card__head">
+        <h1 class="card__title">{category.title}</h1>
+      </div>
+      {category.description ? (
+        <div class="card__body">
+          <p>{category.description}</p>
+        </div>
+      ) : null}
     </div>
   </section>
 
@@ -66,29 +72,28 @@ const normalizedAlbums = albums.map((album) => {
         coverUrl,
       }) => (
         <a href={href ?? `/galleries/${category.slug}/${slug}`} aria-label={`Open ${title}`}>
-          <div class="card card--soft is-centered is-animated">       
-            <h3>{title}</h3>
-            <div class="media-album__cover" data-slug={slug}>
-              {coverUrl ? (
-                <img src={coverUrl} alt="" loading="lazy" decoding="async" />
-              ) : (
-                <div class="media-album__cover-placeholder" aria-hidden="true"></div>
+          <div class="card card--soft is-centered is-animated">
+            <div class="card__head card__head--column">
+              <h3 class="card__title">{title}</h3>
+              {(formattedStartDate || typeof count === 'number') && (
+                <div class="card__badges controls">
+                  {formattedStartDate ? <span class="badge badge--small">{formattedStartDate}</span> : null}
+                  {typeof count === 'number' ? (
+                    <span class="badge badge--small">{count > 0 ? `${count} photos` : 'No photos yet'}</span>
+                  ) : null}
+                </div>
               )}
             </div>
-
-            <div class="card__badges controls">
-              {formattedStartDate ? ( 
-                <p class="badge badge--small"> 
-                  {formattedStartDate} 
-                </p> 
-              ): null}
-              {typeof count === 'number' ? 
-                <p class="badge badge--small">
-                  {count > 0 ? `${count} photos` : 'No photos yet'}
-                </p>
-              : null}
+            <div class="card__body">
+              <div class="media-album__cover" data-slug={slug}>
+                {coverUrl ? (
+                  <img src={coverUrl} alt="" loading="lazy" decoding="async" />
+                ) : (
+                  <div class="media-album__cover-placeholder" aria-hidden="true"></div>
+                )}
+              </div>
             </div>
-          </div>           
+          </div>
         </a>
       ))}
 

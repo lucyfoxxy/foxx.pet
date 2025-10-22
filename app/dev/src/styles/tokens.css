@@ -40,7 +40,7 @@
   --brand-size:              clamp(320px, 45vw, 420px);
 
   /* ====== Base Colors ========================= */
-  --color-dark:              oklch(18.5% 0.095 290);
+  --color-dark:              oklch(24% 0.11 290);
   --color-light:             oklch(92% 0.18 290);
   --color-control-light:     oklch(72% 0.18 295);
   --color-text:              oklch(90% 0.09 300);
@@ -83,8 +83,12 @@
   --outline:                 1px solid var(--surface-dark--soft); 
 
   /* ====== Overlays / Filter Presets ============ */   
-  --background-overlay:      radial-gradient(circle at bottom, transparent 30%, black 120%); 
-  --panel-bg:                radial-gradient(circle at center, transparent 30%, black 120%),linear-gradient(135deg,oklch(35% .19 285),oklch(43.474% 0.20015 317.691)53%,oklch(35% .19 300)60%);
+  --background-overlay:      radial-gradient(ellipse at center, transparent 30%, black 120%); 
+  --panel-bg:                radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,.65)120%),
+                             linear-gradient(135deg,oklch(35% .19 285/60%)33%,oklch(43.474% 0.20015 317.691/60%)53%,oklch(40.655% 0.23003 284.249 / 0.728)80%),
+                             radial-gradient(1200px 900px at top left, oklch(75% 0.20 285 / .36), transparent 74%),
+                             radial-gradient(1100px 800px at center right, oklch(42% 0.22 305 / .28), transparent 72%),
+                             linear-gradient(to top, oklch(60% 0.20 230 / .96), transparent 54%);
   --site-logo--filter:       drop-shadow(0 3px 2px color-mix(in oklab,var(--color-shadow-strong) 75%,white 25%)); 
 
   /* ====== Font Styles ====== */

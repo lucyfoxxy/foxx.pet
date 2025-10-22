@@ -1,5 +1,6 @@
 ---
 import '@Styles/tokens.css';
+import '@Styles/bg.css'
 import '@Styles/base.css';
 import '@Styles/typography.css';
 import '@Styles/site.css';
@@ -122,23 +123,24 @@ const breadcrumbs = buildBreadcrumbs({
 ---
 <html lang="en">
   <Head title={title} description={description} url={url} />
-  <body style={`--background-image: url(${ASSETS.bg.src});`}>
-    
+  <body style={`
+                --bg-image: url(${ASSETS.bg.src});
+                --bg-image--mobile: url(${ASSETS.container_bg.src});
+                --bg--nebula: url(${ASSETS.bg__nebula.src});
+                --bg--stars: url(${ASSETS.bg__stars.src});
+                --bg--twinkle: url(${ASSETS.bg__twinkle.src});
+              `}>
 
-    <div class="container">
-
+       
+<div class="container">
+  
       <main class="panel">
 
         <SiteHeader meta={meta} navLinks={navLinks} breadcrumbs={breadcrumbs} />  
-
         <slot />
         <SiteFooter />
-
       </main>
     </div>
-
-    
-
     <Helpers />
   </body>
 </html>
