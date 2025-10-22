@@ -24,8 +24,8 @@ body::before {
   position: fixed;
   inset: 0;
   z-index: -1;
-  -webkit-backdrop-filter: blur(var(--small-blur));
-  backdrop-filter: blur(var(--small-blur));
+  -webkit-backdrop-filter: var(--blur--soft);
+  backdrop-filter: var(--blur--soft);
   background:    
     var(--background-overlay),
     var(--background-image, none) center / cover no-repeat;
@@ -35,8 +35,8 @@ body::before {
 }
 
 :where(h1, h2, h3, h4, a) {
-  text-shadow: var(--soft-text-shadow);
-  color: var(--accent-text);
+  text-shadow: var(--text-shadow--soft);
+  color: var(--text-accent);
 }
 :where(a) {
   text-decoration: none;
@@ -44,8 +44,8 @@ body::before {
 }
 :where(a):hover,
 :where(a):focus-visible {
-  text-shadow: var(--strong-text-glow);
-  color: var(--highlight-text);
+  text-shadow: var(--text-glow--strong);
+  color: var(--text-highlight);
   opacity: 1;
 }
 
@@ -68,7 +68,7 @@ select {
 
 /* ====== ACCESSIBILITY ====== */
 :focus-visible {
-  outline: 2px solid var(--accent-foreground);
+  outline: 2px solid var(--color-accent);
   outline-offset: 2px;
 }
 

@@ -2,97 +2,68 @@
 /* ======== UI ELEMENTS: CHIPS & BUTTONS ===== */
 /* ====== Depends on: tokens, site, typography ====== */
 /* ============================================ */
-
-/* ====== BADGES & CHIPS ====== */
+.controls{
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--control-gap);
+  align-items: center;         /* vertikale Ausrichtung in der Reihe */
+}
+.controls--start  { justify-content: flex-start; }
+.controls--center { justify-content: center; }
+.controls--end    { justify-content: flex-end; }
+.controls--spread { justify-content: space-evenly; column-gap: var(--card-gap); }
+.controls--nowrap { flex-wrap: nowrap; }
+.controls--tight  { gap: calc(var(--control-gap) * 0.6); }
+* + .controls { margin-bottom: var(--card-gap); }
+.card__badges.controls{
+  vertical-align: text-bottom;
+}
 .button,.badge {
   display: inline-flex;
   align-items: center;
-  color: var(--accent-text);
-  transition: var(--transition-glow);
+  color: var(--text-accent);
+  transition: var(--transition-glow),var(--transition-raise);;
   vertical-align: middle;
-  text-shadow: var(--soft-text-glow),var(--soft-text-shadow);
-  box-shadow: var(--medium-shadow);
+  text-shadow: var(--text-glow--soft),var(--text-shadow--strong);
+  box-shadow: var(--surface-shadow--soft);
   justify-content: center;
-  line-height: var(--xsmall-line-height);
-  transition:
-    color .25s ease,
-    filter .25s ease,
-    transform .25s ease,
-    var(--transition-raise);
-}
-.button--small {
-  gap: 0;
-  padding-inline: 0; 
-}
-.badge--small {
-  background: var(--accent-background--soft);
-  padding: var(--control-padding) var(--control-padding);
-  border-radius: var(--small-radius);
-  margin-block-start: var(--control-gap);
-}
-
-.badge--large {
-  background: var(--accent-background);
-  padding: var(--control-padding);
-  border-radius: var(--large-radius);
-  margin-block-start: var(--control-gap);
-}
-
-.badge--wrapper{
-  display: inline-flex;
-  vertical-align: middle;
-  align-items: center;
-  inline-size: auto;
-  justify-content: stretch;
-  flex-wrap: nowrap;
-  gap: var(--cluster-gap);
-}
-.button--large {
   gap: var(--control-gap); 
-  padding: var(--button-padding);
-  border-radius: var(--small-radius);
-  background: var(--highlight-background);
-   
-  font-weight: var(--thick-font-weight);
+  padding: var(--control-padding);
+  background: var(--control-bg);
+  border-radius: var(--radius-s);
 }
-
-.button:hover,
-.button:focus-visible
-{
-  text-shadow: var(--strong-text-glow);
-  color: var(--highlight-text);
-  
-  transform: translateY(-1px) scale(1.01);
+.is-dark  { background: var(--surface-dark); }
+.is-ghost { background: transparent; box-shadow: none;}
+.button{
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  cursor: pointer;  
 }
+.button--small,.badge {  padding-block: calc(var(--control-padding) * .5) }
+.button--large { padding: calc(var(--control-padding) * 1.75);}
 
-
-.button--large:hover,
-.button--large:focus-visible {
-  background: var(--highlight-background);
-  box-shadow: var(--highlight-glow); 
+.badge {
+  border-radius: 999px; 
+  padding-block: calc(var(--control-padding) * .5);
 }
-
-.button--large--wrap {
-  display: grid;
-  
-  grid-template-columns: repeat(auto-fit,minmax(1rem,1fr));
-  gap: var(--control-gap);
-  margin-block-start: var(--control-gap);
+.button:hover {
+  text-shadow: var(--text-glow--strong);
+  color: var(--text-highlight);
+  transform: translateY(-2px);
 }
-
-.button--large:active {
-  background: color-mix(in oklch, var(--bg) 88%, black 12%);
-  transform: translateY(0);
+.button:not(.is-ghost):hover {
+  background: var(--control-bg--highlight);
+  box-shadow: var(--surface-shadow--soft),var(--surface-glow);
 }
 
 @supports not (color: oklch(50% 0 0)) {
-  .button--large:hover { filter: brightness(1.08); }
-  .button--large:active { filter: brightness(.92); }
+  .button:hover { filter: brightness(1.08); }
+  .button:active { filter: brightness(.92); }
 }
 
-.button--large--icon {
-  display: inline-grid;
-  
+.button__icon {
+  display: inline-grid; 
   place-items: center;
   inline-size: 1.5rem;
   block-size: 1.5rem;
@@ -100,51 +71,7 @@
   background: none;
 }
 
-.button--large--icon svg {
+.button__icon svg {
   inline-size: 1.5rem;
   block-size: 1.5rem;
-}
-
-@media (max-width: 80px) {
-  .button--large--wrap {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: var(--card-gap);
-    flex-wrap: wrap;
-    overflow-x: auto;
-    padding-block: .25rem;
-  }
-
-
-  .button--large {
-    position: relative;
-    inline-size: clamp(3rem, 16vw, 3.4rem);
-    block-size: clamp(3rem, 16vw, 3.4rem);
-    padding: 0;
-    border-radius: 999px;
-    gap: 0;
-  }
-
-  .button--large > span:last-child {
-    position: absolute;
-    inline-size: 1px;
-    block-size: 1px;
-    margin: -1px;
-    padding: 0;
-    border: 0;
-    overflow: hidden;
-    clip: rect(0 0 0 0);
-    white-space: nowrap;
-  }
-
-  .button--large--icon {
-    inline-size: 100%;
-    block-size: 100%;
-  }
-
-  .button--large--icon svg {
-    inline-size: clamp(1.45rem, 6vw, 1.65rem);
-    block-size: clamp(1.45rem, 6vw, 1.65rem);
-  }
 }

@@ -59,7 +59,7 @@ const initialHeight = normalizedInitialItem?.height;
   
   
   <div
-    class="media__hook card card--accent is-centered"
+    class="media__hook card card--light is-centered"
     data-slug={albumSlug}
     data-autoplay="true"
     data-interval="8000"
@@ -68,7 +68,7 @@ const initialHeight = normalizedInitialItem?.height;
   >
     <h1>{detailTitle}</h1>
     <p>*description goes here*</p>
-    <div class="badge--wrapper">
+    <div class="card__badges controls">
         {normalizedCategory ? <p class="badge badge--large">{normalizedCategory}</p> : null}
         {formattedStartDate ? <p class="badge badge--large">{formattedStartDate}</p> : null}
     </div>

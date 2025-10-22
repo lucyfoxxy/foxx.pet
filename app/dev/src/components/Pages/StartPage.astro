@@ -74,14 +74,14 @@ const isExternalLink = (href: string) => href.startsWith('http');
               rel={isExternalLink(link.href) ? 'noopener noreferrer' : undefined}
               target={isExternalLink(link.href) ? '_blank' : undefined}
             >
-              <span class="button--large--icon"><Icon kind={link.kind} /></span>
+              <span class="button__icon"><Icon kind={link.kind} /></span>
               
             </a>
           ))}
         </div>
       </div>
     </section>
-    <div class="card card--accent">
+    <div class="card">
       <h2>{feature.heading}</h2>
       <div
         class="media__hook"

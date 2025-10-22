@@ -26,7 +26,7 @@
 .table__wrap {
   overflow-x: clip;
   overflow-y: visible;
-  border-radius: var(--medium-radius);
+  border-radius: var(--radius-m);
   scrollbar-gutter: stable both-edges;
 }
 
@@ -45,17 +45,16 @@
 }
 
 .table__th {
-  background: var(--surface-bg--soft);
-  color: var(--primary-text-color);
+  background: var(--surface-dark--soft);
 }
 
 .table__th--left {
-  border-top-left-radius: var(--medium-radius);
+  border-top-left-radius: var(--radius-m);
   text-align: start;
 }
 
 .table__th--right {
-  border-top-right-radius: var(--medium-radius);
+  border-top-right-radius: var(--radius-m);
   text-align: end;
 }
 
@@ -64,7 +63,7 @@
 }
 
 .table__tr.is-alt {
-  background: var(--surface-bg--soft);
+  background: var(--surface-dark--soft);
 }
 
 .table__td {

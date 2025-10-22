@@ -1,134 +1,127 @@
 :root { 
-  /* === Spacing Scale (fix) ================================= */
-  --space-xxs: 0.25rem; /* Mikro: Icon-Padding, Badges */
-  --space-xs:  0.50rem; /* Klein: Chips, Breadcrumbs */
-  --space-s:   0.75rem; /* Flow: Prose-Abstände in Cards */
-  --space-m:   1.00rem; /* Anker: 1rem */
-  --space-l:   1.50rem; /* Groß: Grid/Container */
-  --space-xl:  2.00rem; /* Abschnittstrenner */
-  --space-xxl: 3.00rem; /* Hero/Großflächen */
+  /* ====== Base Spacings / Radius ============= */
+  --space-xxs:              0.25rem; 
+  --space-xs:               0.50rem; 
+  --space-s:                0.75rem; 
+  --space-m:                1.00rem; 
+  --space-l:                1.50rem; 
+  --space-xl:               2.00rem; 
+  --space-xxl:              3.00rem; 
 
-  /* === Rollen-Tokens (Comfortable / Default) ============== */
-  --flow-gap:        var(--space-xxs);    /* Prose/Textfluss in Cards */
-  --card-gap:        var(--space-s);    /* Abstand zwischen Card-Elementen */
-  --cluster-gap:     var(--space-xs);   /* Inline-Gruppen: Chips, Breadcrumbs */
-  --control-gap:     var(--space-xs);   /* Abstände in Buttons/Inputs */
-  --control-padding: var(--space-xxs);  /* Innenabstand Buttons/Badges */
-  --button-padding:  var(--space-s);
-  --bars-size:            calc(var(--container-max) * 1 );
-  --bars-padding:          var(--space-xs);
-  --bars-spacing:          clamp(var(--space-xs),  calc(var(--space-xs) + 3.75vw),    calc(10 * var(--space-xxl))); 
-  --bars-gap--column:      var(--space-xxl);
-  --bars-gap--row:         var(--space-xs); 
-  --nav-gap--column:      clamp(var(--space-s),calc(var(--space-s) + 1.25vw),var(--space-xl));
-  --nav-gap--row:         var(--space-xxs);
+  --radius-xxs:             6px;
+  --radius-xs:              8px;
+  --radius-s:               10px;
+  --radius-m:               14px;
+  --radius-l:               18px;
+  --radius-xl:              24px;
+  --radius-xxl:             32px;
 
-  /* Responsiv nur in den Rollen-Tokens */
-  --card-padding:        clamp(var(--space-s),  calc(var(--space-s) + 1.75vw),  var(--space-xl));   /* Innenabstand Card, leicht wachsend */
-  --section-gap:         clamp(var(--space-s),  calc(var(--space-s) + 1.5vw),    var(--space-xxl));  /* Abstand zwischen Cards */
-  --panel-padding:       clamp(var(--space-s),  calc(var(--space-s) + 1.5vw),    var(--space-xxl));  /* Abstand zwischen Cards */
-  --panel-bar-padding:   calc(var(--panel-padding) * .25);
-  --panel-bar-spacing:   calc(var(--panel-bar-padding) * .25);
- 
-  --container-padding:   clamp(var(--space-xxs),  calc(var(--space-xxs) + 2vw),    var(--space-xxl)); /* Seiten-/Wrapper-Innenabstand */
-  --container-max:              1280px;
+  /* ====== Role specific Spacings ============= */
+  --flow-gap:               var(--space-xxs);  
+  --card-gap:               var(--space-s);    
+  --cluster-gap:            var(--space-xs);   
+  --control-gap:            var(--space-xs);   
+  --control-padding:        var(--space-xs);  
+
+  --nav-gap--column:        clamp(var(--space-xs),calc(var(--space-xs) + 1.25vw),var(--space-xl));
+  --nav-gap--row:           var(--space-xs);
+
+  --card-padding:           clamp(var(--space-s),  calc(var(--space-s) + 1.75vw),  var(--space-xl));   
+  --section-gap:            clamp(var(--space-s),  calc(var(--space-s) + 1.5vw),    var(--space-xxl)); 
   
-  --brand-size:                 clamp(320px, 45vw, 480px);
-
-  /* ====== Main Colors =======*/
-  --primary-text-color:         oklch(86% 0.09 300);
-
-  --accent-background:          oklch(78% 0.22 285 / 43%);
-  --accent-background--soft:    oklch(78% 0.22 285 / 12%);
-  --accent-foreground:          oklch(86% 0.13 285); 
-  --accent-text:                color-mix(in oklab, var(--primary-text-color) 85%, var(--accent-foreground));
-  --accent-glow:                0 0 5px -2px var(--accent-foreground);
+  --panel-padding:           clamp(var(--space-s),  calc(var(--space-s) + 1.5vw),    var(--space-xxl)); 
+  --panel-bar-padding:       calc(var(--panel-padding) * .5);
  
-  --highlight-background:       oklch(92% 0.22 295 / 49%);
-  --highlight-background--soft: oklch(88% 0.13 295 / 29%); 
-  --highlight-foreground:       oklch(92% 0.15 300);  
-  --highlight-text:             color-mix(in oklab, var(--primary-text-color) 25%, var(--highlight-foreground));
-  --highlight-glow:             0 0 7px -1px var(--highlight-foreground);
-
-  --surface-bg--soft:      oklch(28.5% 0.1 300 / 0.35);
-  --surface-bg:            oklch(18.5% 0.075 300 / 0.7);
-  --surface-bg--dark:      oklch(14.5% 0.065 300 / 0.9);
-
+  --container-padding:       clamp(var(--space-xxs),  calc(var(--space-xxs) + 2vw),    var(--space-xxl)); 
+  --container-max:           1280px;
   
-  --site-logo--size:            calc(clamp(var(--space-xs), calc(var(--space-xs) + 5vw), var(--space-xxl)) * .75);
-  --site-logo--filter:          drop-shadow(0 3px 2px color-mix(in oklab,var(--secondary-shadow-color) 75%,black 25%));
-  /* ====== bg Colors / FX ====== */       
+  --site-logo--size:         calc(clamp(var(--space-xxs), calc(var(--space-xxs) + 5vw), var(--space-xxl)) * .75);
+  --thumb-size:              clamp(64px, 9vw, 128px);
+  --brand-size:              clamp(320px, 45vw, 420px);
 
-  --background-overlay: radial-gradient(circle at center, transparent 50%, black 120%); 
+  /* ====== Base Colors ========================= */
+  --color-dark:              oklch(18.5% 0.075 300);
+  --color-light:             oklch(92% 0.18 295);
+  --color-control-light:     oklch(72% 0.18 295);
+  --color-text:              oklch(90% 0.09 300);
+  --color-accent:            oklch(80% 0.23 285); 
+  --color-shadow-soft:       color-mix(in oklch, var(--color-dark) 55%, transparent);
+  --color-shadow-strong:     color-mix(in oklch, var(--color-dark) 75%, transparent);
+  --color-glow-soft:         color-mix(in oklch, var(--color-light) 55%, transparent);
+  --color-glow-strong:       color-mix(in oklch, var(--color-light) 75%, transparent);
+
+  /* ====== Text Colors & FX ==================== */
+  --text-accent:             color-mix(in oklab, var(--color-text) 45%, var(--color-accent));
+  --text-highlight:          color-mix(in oklab, var(--color-text) 25%, var(--color-light));
+
+  --text-shadow--soft:       3px 3px 2px var(--color-shadow-soft);  
+  --text-shadow--strong:     3px 3px 2px var(--color-shadow-strong);
+  
+  --text-glow--soft:         2px 2px 3px var(--color-glow-soft);
+  --text-glow--strong:       2px 2px 3px var(--color-glow-strong);
+
+  /* ====== Surface / Control Colors & FX ======= */  
+  
+  --control-bg:              color-mix(in oklch, var(--color-control-light) 69%, transparent);
+  --control-bg--highlight:   color-mix(in oklch, var(--control-bg) 94%, var(--color-light));
+  --surface-dark--soft:      color-mix(in oklab,var(--color-dark) 50%, transparent);
+  --surface-dark:            color-mix(in oklab,var(--color-dark) 70%, transparent);
+  --surface-dark--highlight: color-mix(in oklab,var(--surface-dark) 94%, var(--color-dark));
+  --surface-light:           color-mix(in oklab,var(--color-light) 29%, transparent);
+
+  --surface-shadow--soft:    0 0 8px -5px var(--color-shadow-soft),0 0 8px -3px var(--color-shadow-strong);
+  --surface-shadow--default: 0 0 18px -10px var(--color-shadow-soft),0 0 24px -6px var(--color-shadow-strong);
+  --surface-shadow--strong:  0 0 20px -10px var(--color-shadow-soft),0 0 28px -6px var(--color-shadow-strong),0 0 14px 0 color-mix(in srgb, black 95%, transparent);
+
+  --surface-glow:      0 0 4px 0 var(--color-glow-strong), inset 0 0 11px 0 var(--color-glow-soft);
+
  
-  --small-blur:                 10px;
-  --medium-blur:                14px;
-  --large-blur:                 18px;
-  --backdrop-blur-strong:       blur(var(--large-blur));
+  --blur--soft:              blur(var(--radius-s));
+  --blur--default:           blur(var(--radius-m));
+  --blur--strong:            blur(var(--radius-l));
 
-  /* ====== Shadow & Glow ====== */
-  --primary-shadow-color:       color-mix(in oklab, var(--surface-bg) 70%, black 14%);
-  --secondary-shadow-color:     color-mix(in oklab, var(--surface-bg--dark) 70%, black 14%);
+  --outline:                 1px solid var(--surface-dark--soft); 
 
-  --small-shadow:               0 0 16px -10px var(--primary-shadow-color),0 0 16px -6px var(--secondary-shadow-color);
-  --medium-shadow:              0 0 18px -10px var(--primary-shadow-color),0 0 24px -6px var(--secondary-shadow-color);
-  --large-shadow:               0 0 20px -10px var(--primary-shadow-color),0 0 28px -6px var(--secondary-shadow-color),0 0 14px 0 color-mix(in srgb, black 95%, transparent);
+  /* ====== Overlays / Filter Presets ============ */   
+  --background-overlay:      radial-gradient(circle at center, transparent 50%, black 120%); 
+  --panel-bg:                linear-gradient(135deg,purple,turquoise),var(--surface-dark--soft);
+  --site-logo--filter:       drop-shadow(0 3px 2px color-mix(in oklab,var(--color-shadow-strong) 75%,white 25%)); 
 
-  --soft-text-shadow:           2px 2px 2px var(--primary-shadow-color);  
-  --strong-text-shadow:         3px 3px 3px var(--secondary-shadow-color);
-  --soft-text-glow:             1px 1px 3px var(--accent-foreground);
-  --strong-text-glow:           1px 1px 6px var(--highlight-foreground); 
-
-  /* ====== Borders / Outlines ====== */
-  --small-radius:               10px;
-  --medium-radius:              14px;
-  --large-radius:               18px;
-  --xlarge-radius:              24px;
-  --xxlarge-radius:             32px;
-
-  --outline-color:              color-mix(in oklch, var(--surface-bg--soft) 15%, transparent);
-  --outline:                    2px solid var(--outline-color);
   /* ====== Font Styles ====== */
-  --primary-font-family:        Grandstander, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --secondary-font-family:      'Fuzzy Bubbles', var(--primary-font-family);
+  --primary-font-family:     Grandstander, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --secondary-font-family:   'Fuzzy Bubbles', var(--primary-font-family);
 
-  --thin-font-weight:           300;
-  --normal-font-weight:         400;
-  --thick-font-weight:          500;
-  --bold-font-weight:           700;
+  --thin-font-weight:        300;
+  --normal-font-weight:      400;
+  --thick-font-weight:       500;
+  --bold-font-weight:        700;
 
-  --xsmall-font-size:           clamp(.82rem, .48rem + .35vw, 1rem);
-  --small-font-size:            clamp(.98rem,  .7rem + .55vw, 1.22rem);
-  --medium-font-size:           clamp(1.22rem, .82rem + .75vw, 1.55rem);
-  --large-font-size:            clamp(1.4rem, 1rem + 1vw, 2rem);
-  --xlarge-font-size:           clamp(1.65rem, 1.35rem + 2vw, 3.75rem);
+  --xsmall-font-size:        clamp(.75rem, calc(.75rem + .025vw), .95rem);
+  --small-font-size:         clamp(.9rem,  calc(.9rem + .075vw), 1.05rem);
+  --medium-font-size:        clamp(1rem, calc(1rem + .35vw), 1.45rem);
+  --large-font-size:         clamp(1.4rem, calc(1.4rem + .4vw), 1.8rem);
+  --xlarge-font-size:        clamp(1.75rem, calc(1.75rem + 1.5vw), 3rem);
 
-  --xsmall-line-height:         1;
-  --small-line-height:          1.5;
-  --medium-line-height:         1.35;
-  --large-line-height:          1.225;
-  --xlarge-line-height:         1.2;
+  --xsmall-line-height:      1;
+  --small-line-height:       1.5;
+  --medium-line-height:      1.35;
+  --large-line-height:       1.225;
+  --xlarge-line-height:      1.2;
 
-  --small-letter-spacing:       .0065em;
-  --medium-letter-spacing:      .0225em;
-  --large-letter-spacing:       .0525em;
+  --small-letter-spacing:    .0065em;
+  --medium-letter-spacing:   clamp(.0065em, calc(0.225em + .01vw ), .0225em);
+  --large-letter-spacing:    clamp(.0225em, calc(0.225em + .03vw ), .0525em);
 
   /* ====== Gallery ====== */
-  --gallery-frame-size: calc(
-      (var(--container-max) - 
-        (var(--container-padding) + var(--card-padding)) * 2 + var(--card-gap) * 4
-      ) / 2
-    );
-  --thumb-size: clamp(64px, 9vw, 128px);
-  --kenburns-offset: clamp(8rem, 20vh, 25rem);
-  --kenburns-offset--compact: clamp(8rem, 20vh, 25rem);                                  
-  --gallery-interval: 8000ms;  
-  --gallery-interval--compact: 6000ms;
+  --kenburns-offset:            clamp(8rem, 20vh, 25rem);
+  --kenburns-offset--compact:   clamp(8rem, 20vh, 25rem);                                  
+  --gallery-interval:           8000ms;  
+  --gallery-interval--compact:  6000ms;
 
   /* ====== Motion ====== */
-  --transition-interactive: color .2s ease, text-shadow .2s ease;
-  --transition-raise: transform .12s ease, box-shadow .12s ease;
-  --transition-glow: color .12s ease, text-shadow .12s ease, transform .12s ease, box-shadow .12s ease;
-  --transition-soft: opacity .25s ease, transform .25s ease, background .25s ease, box-shadow .25s ease;
-  --transition-nav: transform .5s ease-in-out, text-shadow .5s ease-in-out;
+  --transition-interactive:     color .2s ease, text-shadow .2s ease;
+  --transition-raise:           transform .12s ease, box-shadow .12s ease;
+  --transition-glow:            color .12s ease, text-shadow .12s ease, transform .12s ease, box-shadow .12s ease;
+  --transition-soft:            opacity .25s ease, transform .25s ease, background .25s ease, box-shadow .25s ease;
+  --transition-nav:             transform .5s ease-in-out, text-shadow .5s ease-in-out;
 }

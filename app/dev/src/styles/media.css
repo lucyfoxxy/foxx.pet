@@ -13,33 +13,26 @@
     position: absolute; inset: -10% -12% 0%;
     pointer-events: none;
     z-index: -1;
-    background: radial-gradient(circle at 35% 90%,
-                 oklch(75% 0.3 285 / 0.15),
-                 oklch(18% 0.05 285 / 0) 25%,
+    background: radial-gradient(circle at 43% 55%,
+                 oklch(75% 0.3 305 / 0.45),
+                 oklch(18% 0.05 285 / 0) 24%,
                  transparent 100%),
-                 radial-gradient(circle at 50% 40%,
-                 oklch(75% 0.3 205 / 0.45),
-                 oklch(18% 0.05 295 / 0) 25%,
-                 transparent 100%),
-                 radial-gradient(circle at 65% 85%,
-                 oklch(75% 0.6 285 / 0.45),
-                 oklch(18% 0.05 285 / 0) 25%,
+
+                 radial-gradient(circle at center,
+                 oklch(75% 0.3 285 / 0.45),
+                 oklch(18% 0.05 285 / 0) 24%,
                  transparent 100%);
 
-    filter: blur(18px);
+    filter: var(--blur--soft);
   }
 
 @supports (color: oklch(50% 0 0)) {
 
   .media-hero {
-    filter: 
-            drop-shadow(10px 10px 3px color-mix(in oklab,var(--secondary-shadow-color) 25%,black 25%)) 
-            
-            ;           
+    filter: drop-shadow(6px 6px 3px var(--color-shadow-soft));
   }
   .media-hero__logo {
-    filter: 
-            drop-shadow(2px 2px 3px color-mix(in oklab,var(--secondary-shadow-color) 75%,black 25%)) 
+    filter: drop-shadow(2px 2px 3px var(--color-shadow-strong)) 
 
             ;           
   }
@@ -51,7 +44,7 @@
 .media-album__cover {
   aspect-ratio: 1 / 1;
   background: oklch(12% 0.075 290 / 0.65);
-  border-radius: var(--medium-radius);
+  border-radius: var(--radius-m);
   overflow: hidden;
   margin-block-start: auto;
   display: block;
@@ -75,10 +68,10 @@
   margin: calc(var(--card-gap) * .25);
   padding: 0;
   border: 0;
-  border-radius: calc(var(--large-radius) - 2px);
+  border-radius: calc(var(--radius-l) - 2px);
   overflow: hidden;
   
-  box-shadow: var(--small-shadow);
+  box-shadow: var(--surface-shadow--soft);
   cursor: pointer;
   transition: var(--transition-soft);
 }
@@ -97,7 +90,7 @@
 .media__thumb:focus-visible {
   
   outline: var(--outline);
-  box-shadow: var(--highlight-glow);
+  box-shadow: var(--surface-glow--strong);
 }
 
 .media__thumb:hover img,
@@ -124,23 +117,23 @@
 .media__frame {
   position: relative;
   align-self: center;
-  inline-size: calc(min(var(--gallery-frame-size),100%));
-  max-inline-size: 65vh;
+  inline-size: 100%;
+
   block-size: auto;
-  max-block-size: calc(min(var(--gallery-frame-size),100%));
+
   aspect-ratio: 4 / 3;
   object-fit: cover;
-  border-radius: var(--large-radius);
+  border-radius: var(--radius-l);
   overflow: hidden;
   
-  box-shadow: var(--small-shadow);
-  background: oklch(12% 0.075 290 / 0.15);
+  box-shadow: var(--surface-shadow--soft);
+  background: var(--surface-dark--soft);
 }
 
 @media (max-width: 900px) {
   .media__frame {
     aspect-ratio: 1 / 1;
-    max-block-size: 50vh;
+
   }
 }
 
@@ -149,16 +142,12 @@
 }
 
 .media__frame--compact {
-  inline-size: calc(100vw - 4* (var(--card-gap) + var(--panel-padding) + var(--section-gap)));
 
-  block-size: auto;
+
 
   aspect-ratio: 5 / 4;
 }
 
-.media__frame.compact .media__image {
-  object-fit: cover;
-}
 
 .media__frame:not(.compact) .media__image.is-animating {
   animation: media__kenburns var(--gallery-interval, 8000ms) ease-in-out forwards;
@@ -168,10 +157,7 @@
   animation: media__kenburns--compact var(--gallery-interval--compact, 7000ms) ease-in-out forwards;
 }
 
-.media__frame:focus-visible {
-  outline: 2px solid color-mix(in oklab, var(--accent-foreground) 85%, white 15%);
-  outline-offset: 4px;
-}
+
 
 @keyframes media__kenburns {
   0% {
@@ -261,11 +247,10 @@
   place-items: center;
   border: none;
   border-radius: 999px;
-  background: var(--surface-bg--dark);
-  color: var(--primary-text-color);
+  background: var(--surface-dark--soft);
   opacity: .65;
   cursor: pointer;
-  box-shadow: var(--medium-shadow);
+  box-shadow: var(--surface-shadow--default);
   transition: var(--transition-soft);
 }
 
@@ -328,7 +313,7 @@
   inset: auto .9rem .9rem .9rem;
   block-size: .3rem;
   border-radius: 999px;
-  background: color-mix(in oklab, var(--highlight-background) 70%, transparent);
+  background: var(--control-bg);
   overflow: hidden;
   z-index: 1;
   pointer-events: none;
@@ -341,8 +326,8 @@
   inset: 0;
   transform-origin: left center;
   transform: scaleX(var(--p, 0));
-  background: color-mix(in oklab, var(--highlight-foreground) 70%, transparent);
-  opacity: .95;
+  background: var(--highlight-foreground);
+  opacity: .75;
   transition: transform .12s linear;
 }
 
@@ -357,10 +342,10 @@
   grid-template-columns: auto 1fr auto;
   align-items: center;
   gap: var(--cluster-gap);
-  background: var(--accent-background);
-  border-radius: var(--medium-radius);
+  background: var(--surface-dark);
+  border-radius: var(--radius-m);
   padding: calc(var(--cluster-gap) * .6) var(--card-gap);
-  box-shadow: var(--large-shadow);
+  box-shadow: var(--surface-shadow--strong);
   transition: var(--transition-soft);
 }
 
@@ -380,8 +365,7 @@
   place-items: center;
   border: none;
   border-radius: 999px;
-  background: var(--surface-bg--dark);
-  color: var(--primary-text-color);
+  background: var(--surface-dark--soft);
   opacity: .6;
   cursor: pointer;
   transition: var(--transition-soft);
@@ -404,7 +388,7 @@
   display: grid;
   place-items: center;
   padding: clamp(1rem, 4vw, 3rem);
-  background: var(--surface-bg--dark);
+  background: var(--surface-dark);
   z-index: 999;
   opacity: 0;
   pointer-events: none;
@@ -425,9 +409,9 @@
   max-block-size: 100vh;
   object-fit: contain;
   margin: 0;
-  border-radius: var(--medium-radius);
+  border-radius: var(--radius-m);
   overflow: hidden;
-  box-shadow: var(--large-shadow);
+  box-shadow: var(--surface-shadow--strong);
   transform: scale(.95);
 }
 
@@ -436,7 +420,7 @@
   block-size: auto;
   max-inline-size: inherit;
   max-block-size: inherit;
-  background: var(--surface-bg);
+  background: var(--surface-dark);
 }
 
 .media__lightbox-close {
@@ -451,7 +435,6 @@
   border-radius: 999px;
   font-size: 1.35rem;
   background: rgba(17, 22, 28, .65);
-  color: var(--primary-text-color);
   cursor: pointer;
   transition: var(--transition-soft);
 }

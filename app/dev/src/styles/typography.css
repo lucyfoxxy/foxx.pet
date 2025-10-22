@@ -35,24 +35,17 @@ body {
   font-size: var(--small-font-size);
   line-height: var(--small-line-height);
   letter-spacing: var(--small-letter-spacing);
-  color: var(--primary-text-color);
+  color: var(--color-text);
 }
 
-p :where(em, i) {
-  font-style: italic;
-  font-weight: var(--thick-font-weight);
-}
 
 /* ====== LINKS & FOOTER ====== */
-.prose :where(a),
-.site-footer :where(a) {
+a {
   font-weight: var(--thick-font-weight);
 }
 
-.site-footer,
-
-.panel :where(h2) {
-  letter-spacing: var(--large-letter-spacing);
+.footer {
+  
 }
 
 .header__nav a {
@@ -60,7 +53,7 @@ p :where(em, i) {
   font-size: var(--medium-font-size);
 }
 
-.site-footer,
+.footer,
 .badge,
 .button--small {
   font-size: var(--xsmall-font-size);
@@ -68,10 +61,9 @@ p :where(em, i) {
   line-height: var(--xsmall-line-height);
 }
 
-.button--large {
-  font-size: var(--small-font-size);
+.button--large,
+ .is-current{
   font-weight: var(--thick-font-weight);
-  line-height: var(--xsmall-line-height);
 }
 /* ====== HEADINGS ====== */
 :where(h1, h2, h3, .header__nav a) {
@@ -79,7 +71,7 @@ p :where(em, i) {
   font-variant: small-caps;
 }
 
-.panel :where(h1, h2, h3, .prose p) {
+h1, h2, h3, .prose p {
   margin: 0;
 }
 
@@ -88,19 +80,22 @@ p :where(em, i) {
   font-size: var(--xlarge-font-size);
   line-height: var(--xlarge-line-height);
   letter-spacing: var(--large-letter-spacing);
-  text-shadow: var(--strong-text-shadow);
+  text-shadow: var(--text-shadow--strong);
 }
-.panel :where(h2,h3) {  font-size: var(--large-font-size); }
+
 .panel :where(h2) {
-  line-height: var(--large-line-height);
+  font-size: var(--large-font-size);
+  line-height: var(--xsmall-line-height);
   font-weight: var(--bold-font-weight);
-  text-shadow: var(--soft-text-glow);
+  text-shadow: var(--text-glow--soft);
+  letter-spacing: var(--large-letter-spacing);
 }
 
 .panel :where(h3) {
   font-weight: var(--normal-font-weight);
-  text-shadow: var(--strong-text-glow);
+  text-shadow: var(--text-glow--strong);
   letter-spacing: var(--large-letter-spacing);
+  font-size: var(--medium-font-size);
 }
 
 /* ====== PROSE & LISTEN ====== */
@@ -119,7 +114,7 @@ p :where(em, i) {
 .panel :where(blockquote) {
   margin: var(--flow-gap) 0;
   padding: calc(var(--flow-gap) * .75) var(--flow-gap);
-  border-left: 3px solid var(--accent-foreground);
+  border-left: 3px solid var(--color-accent);
   background: color-mix(in oklab, var(--content-background) 4%, transparent);
   border-radius: .5rem;
 }
@@ -129,7 +124,3 @@ p :where(em, i) {
 .table__th { font-weight: var(--thick-font-weight); }
 .table__price { font-weight: var(--normal-font-weight); }
 
-/* ====== MEDIA GALLERIES ====== */
-.card--soft h3 {
-   font-size: var(--medium-font-size);
-}
