@@ -5,13 +5,21 @@
 - [x] UI: button/badge + control-wrapper [ui]
 - [ ] Media: wrap/frame/img [media]
 - [x] site.css: header/footer/kinder schlank [site]
+- [ ] [CODEX] astro Layout Template für Card hierarchie (card_head etc) erstellen [foundation]
+
+## Bugs
+- [ ] [CODEX] Header / Footer raus aus Panel block [site]
+- [ ] [CODEX] sticky header nav verdeckt [mobile]
+- [ ] [CODEX] Gallery lightbox geht nicht [media]
 
 ## Visual
-- [ ] CSS/SVG-Pattern statt BG-Image [foundation]
+- [x] CSS/SVG-Pattern statt BG-Image [foundation]
 - [ ] Icons: Emoji → SVG + Icon-Partial [ui]
+- [ ] header logo glow verringern [site]
+- [ ] inset outline um panel [site]
 
 ## Features
-- [ ] Header/Nav aktiv + Buttons [site]
+- [ ] [CODEX] Header/Nav aktiv + Buttons [site]
 - [ ] Gallery: Detail-Layout [gallery]
 - [ ] Gallery: Category Covers (random + pin) [gallery]
 - [ ] Stories/Rezepte restrukturieren + Filter [stories]
