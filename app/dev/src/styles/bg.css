@@ -124,14 +124,14 @@
 .clouds{
 	width:10000px;
 	height: 100%;
-	background: oklch(42% .2 285 / 10%) var(--bg--nebula) repeat;
+	background: transparent var(--bg--nebula) repeat;
   background-blend-mode: soft-light,screen;
 	background-size: 1000px 1000px;
     position: absolute;
     right: 0;
     top: 0;
     bottom: 0;
-    z-index: 3;
+    z-index: 1;
 
    -moz-animation:move-background 150s linear infinite;
   -ms-animation:move-background 150s linear infinite;

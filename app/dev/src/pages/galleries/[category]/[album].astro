@@ -62,8 +62,8 @@ const backHref = category?.slug ? `/galleries/${category.slug}` : '/galleries';
 const backLabel = category?.title ? `← ${category.title}` : '← Overview';
 ---
 <Layout title={meta.title} meta={meta}>
-  <Fragment slot="panel__bar--actions">
-    <a class="button button--small" href={backHref}>{backLabel}</a>
+  <Fragment slot="header__actions">
+    <a class="button button--small is-dark" href={backHref}>{backLabel}</a>
   </Fragment>
   <GalleryDetailPage
     albumSlug={slug}

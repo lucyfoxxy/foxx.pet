@@ -3,7 +3,8 @@ import Layout from '@Layout/Main.astro';
 import Icon from '@Layout/SiteAssets/Icons.astro';
 import { ASSETS } from '@Assets/ui';
 import { getPageContent } from '@Content/siteContent';
-import { Image,Picture } from 'astro:assets';
+import Card from '@UI/Card.astro';
+import { Picture } from 'astro:assets';
 export const prerender = true;
 
 const content = await getPageContent('home');
@@ -33,11 +34,11 @@ const isExternalLink = (href: string) => href.startsWith('http');
   </head>
 
   <section class="content-section">
-    <div class="card card--plain is-centered media-hero is-condensed">
-      <div class="card__head">
+    <Card class="card--plain is-centered media-hero is-condensed">
+      <Fragment slot="head">
         <h1 class="card__title">{hero.heading}</h1>
-      </div>
-      <div class="card__body">
+      </Fragment>
+      <Fragment slot="body">
         <Picture
           src={ASSETS.logo_hero}
           formats={['webp']}
@@ -48,28 +49,28 @@ const isExternalLink = (href: string) => href.startsWith('http');
         />
 
         <h3 class="is-italic">...Eeeeeeeeeeeeeeeeeeeeek!</h3>
-      </div>
-    </div>
+      </Fragment>
+    </Card>
   </section>
 
   <section class="content-section cols-2">
     <section class="content-section">
-      <div class="card">
-        <div class="card__head">
+      <Card>
+        <Fragment slot="head">
           <h2 class="card__title">{intro.heading}</h2>
-        </div>
-        <div class="card__body">
+        </Fragment>
+        <Fragment slot="body">
           <div class="prose">
             {intro.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
             <p class="is-italic">{intro.signature}</p>
           </div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card__head">
+        </Fragment>
+      </Card>
+      <Card>
+        <Fragment slot="head">
           <h3 class="card__title">Reach the Fops</h3>
-        </div>
-        <div class="card__foot">
+        </Fragment>
+        <Fragment slot="foot">
           <div class="controls controls--center">
             {links.map((link) => (
               <a
@@ -83,32 +84,31 @@ const isExternalLink = (href: string) => href.startsWith('http');
               </a>
             ))}
           </div>
-        </div>
-      </div>
+        </Fragment>
+      </Card>
     </section>
-    <div class="card">
-      <div class="card__head">
+    <Card>
+      <Fragment slot="head">
         <h2 class="card__title">{feature.heading}</h2>
-      </div>
-      <div class="card__body">
+      </Fragment>
+      <Fragment slot="body">
         <div
           class="media__hook"
           data-slug={albumSlug}
-        data-autoplay="true"
-        data-interval="8000"
-        data-random="true"
-        data-share-key={shareKey}
-      >
-        
-        <div class="media__wrapper">
-          <div class="media__frame media__frame--compact" role="button" tabindex="0" aria-label="Open artwork in lightbox">
-            <img class="media__image" alt="" />
-            <div class="media__progress" aria-hidden="true"></div>
+          data-autoplay="true"
+          data-interval="8000"
+          data-random="true"
+          data-share-key={shareKey}
+        >
+          <div class="media__wrapper">
+            <div class="media__frame media__frame--compact" role="button" tabindex="0" aria-label="Open artwork in lightbox">
+              <img class="media__image" alt="" />
+              <div class="media__progress" aria-hidden="true"></div>
+            </div>
           </div>
         </div>
-      </div>
-      </div>
-    </div>
+      </Fragment>
+    </Card>
   </section>
 
 

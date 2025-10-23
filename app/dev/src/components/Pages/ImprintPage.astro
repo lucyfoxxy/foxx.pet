@@ -1,5 +1,6 @@
 ---
 import { getPageContent } from '@Content/siteContent';
+import Card from '@UI/Card.astro';
 
 const content = await getPageContent('imprint');
 const introParagraphs = content.introParagraphs ?? [];
@@ -8,27 +9,27 @@ const disclaimer = content.disclaimer ?? [];
 ---
 
   <section class="content-section">
-    <div class="card card--plain is-centered">
-      <div class="card__head">
+    <Card class="card--plain is-centered">
+      <Fragment slot="head">
         <h1 class="card__title">{content.title}</h1>
-      </div>
-      <div class="card__body">
+      </Fragment>
+      <Fragment slot="body">
         <div class="prose">
           {introParagraphs.map((paragraph) => (
             <p>{paragraph}</p>
           ))}
         </div>
-      </div>
-    </div>
+      </Fragment>
+    </Card>
   </section>
 
   <section class="content-section cols-2">
     {contacts.map((contact) => (
-      <div class="card">
-        <div class="card__head">
+      <Card>
+        <Fragment slot="head">
           <h2 class="card__title">{contact.title}</h2>
-        </div>
-        <div class="card__body">
+        </Fragment>
+        <Fragment slot="body">
           {contact.subtitle && (
             <p><em>{contact.subtitle}</em></p>
           )}
@@ -44,17 +45,17 @@ const disclaimer = content.disclaimer ?? [];
               </dd>,
             ])}
           </dl>
-        </div>
-      </div>
+        </Fragment>
+      </Card>
     ))}
   
 
     {disclaimer.length > 0 && (
-      <div class="card">
-        <div class="card__head">
+      <Card>
+        <Fragment slot="head">
           <h2 class="card__title">Disclaimer</h2>
-        </div>
-        <div class="card__body">
+        </Fragment>
+        <Fragment slot="body">
           <div class="prose">
             {disclaimer.map((paragraph) => (
               <p>
@@ -62,7 +63,7 @@ const disclaimer = content.disclaimer ?? [];
               </p>
             ))}
           </div>
-        </div>
-      </div>
+        </Fragment>
+      </Card>
     )}
   </section>

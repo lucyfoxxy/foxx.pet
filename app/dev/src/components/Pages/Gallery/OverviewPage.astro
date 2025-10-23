@@ -1,5 +1,6 @@
 ---
 import { getPageContent } from '@Content/siteContent';
+import Card from '@UI/Card.astro';
 
 interface CategoryEntry {
   slug: string;
@@ -14,17 +15,17 @@ const introParagraphs = content.introParagraphs ?? [content.description];
 ---
 
   <section class="content-section">
-    <div class="card card--plain is-centered">
-      <div class="card__head">
+    <Card class="card--plain is-centered">
+      <Fragment slot="head">
         <h1 class="card__title">{content.title}</h1>
-      </div>
+      </Fragment>
 
-      <div class="card__body">
+      <Fragment slot="body">
         {introParagraphs.map((paragraph) => (
           <p>{paragraph}</p>
         ))}
-      </div>
-    </div>
+      </Fragment>
+    </Card>
   </section>
 
 <section class="content-section cols-3">
@@ -32,19 +33,19 @@ const introParagraphs = content.introParagraphs ?? [content.description];
   {categories.map(({ slug, title, description, href }) => (
     
     <a href={href ?? `/galleries/${slug}`} aria-label={`Open ${title}`}>
-      <div class="card card--soft is-animated is-centered">
-        <div class="card__head card__head--column">
+      <Card class="card--soft is-animated is-centered" headClass="card__head--column">
+        <Fragment slot="head">
           <h3 class="card__title">{title}</h3>
-        </div>
-        <div class="card__body">
+        </Fragment>
+        <Fragment slot="body">
           {description ? <p>{description}</p> : null}
 
           <div class="card__spacer" aria-hidden="true"></div>
           <div class="media-album__cover" data-slug={slug}>
             <div class="media-album__cover-placeholder" aria-hidden="true"></div>
           </div>
-        </div>
-      </div>
+        </Fragment>
+      </Card>
     </a>
   ))}
 

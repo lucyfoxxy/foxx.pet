@@ -23,12 +23,13 @@ export function ResponsiveSiteHeader() {
   const root = document.documentElement;
 
   const nav = document.querySelector('.header');
+  const navBar = nav?.querySelector('.header__nav');
 
   if (!root || !nav) return undefined;
 
   const media = window.matchMedia(MOBILE_QUERY);
   const updateStickyOffset = () => {
-    const target = media.matches ? nav : nav;
+    const target = media.matches && navBar ? navBar : nav;
     const height = Math.round(measure(target));
     root.style.setProperty('--site-header--sticky-offset', `${height}px`);
     root.toggleAttribute('data-site-header-compact', media.matches);

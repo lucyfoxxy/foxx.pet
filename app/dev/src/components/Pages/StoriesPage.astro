@@ -1,6 +1,7 @@
 ---
 import { getCollection, type CollectionEntry } from 'astro:content';
 import { getPageContent } from '@Content/siteContent';
+import Card from '@UI/Card.astro';
 
 type StoryEntry = CollectionEntry<'stories'>;
 
@@ -24,28 +25,28 @@ const hasStories = stories.length > 0;
 ---
 
 <section class="content-section">
-  <div class="card card--plain is-centered">
-    <div class="card__head">
+  <Card class="card--plain is-centered">
+    <Fragment slot="head">
       <h1 class="card__title">{content.title}</h1>
-    </div>
-    <div class="card__body">
+    </Fragment>
+    <Fragment slot="body">
       <div class="prose">
         {introParagraphs.map((paragraph) => (
           <p>{paragraph}</p>
         ))}
       </div>
-    </div>
-  </div>
+    </Fragment>
+  </Card>
 </section>
 
   {hasStories ? (
     <>
     <section class="content-section">
-      <div class="card card--soft" aria-labelledby="stories-facets">
-        <div class="card__head card__head--column">
+      <Card class="card--soft" aria-labelledby="stories-facets" headClass="card__head--column">
+        <Fragment slot="head">
           <h2 class="card__title" id="stories-facets">Browse the archive</h2>
-        </div>
-        <div class="card__body">
+        </Fragment>
+        <Fragment slot="body">
           <div class="prose">
             <p>
               Use these collections to wire up dynamic filters. Grouping by category or tag mirrors how the gallery page
@@ -73,8 +74,8 @@ const hasStories = stories.length > 0;
               </p>
             )}
           </div>
-        </div>
-      </div>
+        </Fragment>
+      </Card>
     </section>
 
       <section class="content-section cols-2">
@@ -84,8 +85,8 @@ const hasStories = stories.length > 0;
           const tags = story.data.tags ?? [];
           const hasBadges = categories.length > 0 || tags.length > 0;
           return (
-            <article class="card">
-              <div class="card__head card__head--column">
+            <Card as="article" headClass="card__head--column">
+              <Fragment slot="head">
                 <h2 class="card__title">
                   <a href={`/stories/${story.slug}/`}>{story.data.title}</a>
                 </h2>
@@ -99,8 +100,8 @@ const hasStories = stories.length > 0;
                     ))}
                   </div>
                 )}
-              </div>
-              <div class="card__body">
+              </Fragment>
+              <Fragment slot="body">
                 <p>
                   <strong>Published:</strong> {formatDate(story.data.publishDate)}
                   {story.data.updatedDate && (
@@ -113,30 +114,30 @@ const hasStories = stories.length > 0;
                 <div class="prose">
                   {excerpt && <p>{excerpt}</p>}
                 </div>
-              </div>
-              <div class="card__foot">
+              </Fragment>
+              <Fragment slot="foot">
                 <div class="controls controls--start">
                   <a class="button is-ghost" href={`/stories/${story.slug}/`}>
                     Read full story →
                   </a>
                 </div>
-              </div>
-            </article>
+              </Fragment>
+            </Card>
           );
         })}
       </section>
     </>
   ) : (
     <section class="content-section">
-      <div class="card card--plain is-centered">
-        <div class="card__head">
+      <Card class="card--plain is-centered">
+        <Fragment slot="head">
           <h2 class="card__title">{overview.emptyState ?? 'Stories are still brewing'}</h2>
-        </div>
-        <div class="card__body">
+        </Fragment>
+        <Fragment slot="body">
           <div class="prose">
             <p>{overview.cta ?? 'Once tales launch, they will appear here automatically.'}</p>
           </div>
-        </div>
-      </div>
+        </Fragment>
+      </Card>
     </section>
   )}

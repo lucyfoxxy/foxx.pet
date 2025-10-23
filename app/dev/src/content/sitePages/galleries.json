@@ -1,13 +1,13 @@
 {
   "id": "galleries",
   "href": "/galleries",
-  "title": "Paw Prints 🐾",
+  "title": "🐾 Paw Prints 🐾",
   "navLabel": {
     "text": "Paw Prints",
     "emoji": "🐾"
   },
   "includeInHeader": true,
-  "description": "Here you gonna find a selection of my previous works.",
+  "description": "Fursuit photo collection.",
   "introParagraphs": [
     "See where Lucy has left their Paw Prints!"
   ]

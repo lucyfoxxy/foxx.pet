@@ -5,12 +5,12 @@
 - [x] UI: button/badge + control-wrapper [ui]
 - [ ] Media: wrap/frame/img [media]
 - [x] site.css: header/footer/kinder schlank [site]
-- [ ] [CODEX] astro Layout Template für Card hierarchie (card_head etc) erstellen [foundation]
+- [x]  astro Layout Template für Card hierarchie (card_head etc) erstellen [foundation]
 
 ## Bugs
-- [ ] [CODEX] Header / Footer raus aus Panel block [site]
-- [ ] [CODEX] sticky header nav verdeckt [mobile]
-- [ ] [CODEX] Gallery lightbox geht nicht [media]
+- [x]  Header / Footer raus aus Panel block [site]
+- [x]  sticky header nav verdeckt [mobile]
+- [x] Gallery lightbox geht nicht [media]
 
 ## Visual
 - [x] CSS/SVG-Pattern statt BG-Image [foundation]

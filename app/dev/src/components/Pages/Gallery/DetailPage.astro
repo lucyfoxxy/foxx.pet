@@ -1,4 +1,5 @@
 ---
+import Card from '@UI/Card.astro';
 
 type GalleryItem = {
   full?: string | null;
@@ -51,15 +52,16 @@ const initialWidth = normalizedInitialItem?.width;
 const initialHeight = normalizedInitialItem?.height;
 ---
 <section class="content-section">
-  <div
-    class="card card--light is-centered media__hook"
+  <Card
+    class="card--light is-centered media__hook"
     data-slug={albumSlug}
     data-autoplay="true"
     data-interval="8000"
     data-random="true"
     data-share-key={shareKey}
+    headClass="card__head--column"
   >
-    <div class="card__head card__head--column">
+    <Fragment slot="head">
       <h1 class="card__title">{detailTitle}</h1>
       {(normalizedCategory || formattedStartDate) && (
         <div class="card__badges controls controls--tight">
@@ -67,8 +69,8 @@ const initialHeight = normalizedInitialItem?.height;
           {formattedStartDate ? <span class="badge">{formattedStartDate}</span> : null}
         </div>
       )}
-    </div>
-    <div class="card__body">
+    </Fragment>
+    <Fragment slot="body">
       {description ? (
         <div class="prose">
           <p>{description}</p>
@@ -97,8 +99,8 @@ const initialHeight = normalizedInitialItem?.height;
           <button class="media__thumbs-nav media__thumbs-next" aria-label="Next thumbnails" type="button">❯</button>
         </div>
       </div>
-    </div>
-  </div>
+    </Fragment>
+  </Card>
 </section>
   <script>
     import initGalleryPage from '@Scripts/galleryViewer.js';

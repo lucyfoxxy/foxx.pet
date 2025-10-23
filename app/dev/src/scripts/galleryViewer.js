@@ -231,8 +231,15 @@ export default function initGalleryPage() {
     return {
       open(item) {
         if (!item) return;
-        
-        img.src = item.full;
+
+        const primarySrc = item.full || item.thumb || '';
+        const fallbackSrc = item.thumb && item.thumb !== primarySrc ? item.thumb : null;
+        img.onerror = () => {
+          if (fallbackSrc && img.src !== fallbackSrc) {
+            img.src = fallbackSrc;
+          }
+        };
+        img.src = primarySrc;
         img.alt = item.alt || '';
         overlay.classList.add('is-open');
         document.body.classList.add('media__lightbox-open');

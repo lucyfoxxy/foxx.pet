@@ -31,7 +31,7 @@ body::before {
     var(--background-overlay),
     var(--bg--nebula),   
     linear-gradient(205deg, #371173, #510868 ,rgb(40, 7, 112));
-  background-blend-mode:darken,overlay,color;
+  background-blend-mode:darken,overlay,hue;
   background-repeat: no-repeat,repeat,no-repeat;
   background-size: cover,contain,cover;
   background-position: center, top,center;
@@ -45,16 +45,16 @@ body::before {
     filter: none;
   }
 }
-:where(h1, h2, h3, h4, a) {
+.panel :where(h1, h2, h3, h4, a) {
   text-shadow: var(--text-shadow--soft);
   color: var(--text-accent);
 }
-:where(a) {
-  text-decoration: none;
+.panel :where(a) {
+  
   transition: var(--transition-interactive);
 }
-:where(a):hover,
-:where(a):focus-visible {
+.panel,.header__nav:where(a):hover,
+.panel,.header__nav:where(a):focus-visible {
   text-shadow: var(--text-glow--strong);
   color: var(--text-highlight);
   opacity: 1;

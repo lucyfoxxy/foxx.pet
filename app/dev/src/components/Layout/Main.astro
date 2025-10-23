@@ -114,7 +114,17 @@ const { title, description, url } = meta;
 // ---------------------------------------------------------------------------
 // Navigation & breadcrumbs
 // ---------------------------------------------------------------------------
-const navLinks = await getNavigationLinks();
+const rawNavLinks = await getNavigationLinks();
+const currentPath = normalizePath(Astro.url.pathname);
+const isLinkActive = (href: string) => {
+  const target = normalizePath(href);
+  if (target === '/') return currentPath === '/';
+  return currentPath === target || currentPath.startsWith(`${target}/`);
+};
+const navLinks = rawNavLinks.map((link) => ({
+  ...link,
+  isActive: isLinkActive(link.href),
+}));
 const breadcrumbs = buildBreadcrumbs({
   currentPath: Astro.url.pathname,
   navLinks,
@@ -132,14 +142,18 @@ const breadcrumbs = buildBreadcrumbs({
               `}>
 
        
-<div class="container">
-  
-      <main class="panel">
-
-        <SiteHeader meta={meta} navLinks={navLinks} breadcrumbs={breadcrumbs} />  
-        <slot />
+    <div class="container">
+      <div class="panel-shell">
+        <SiteHeader meta={meta} navLinks={navLinks} breadcrumbs={breadcrumbs}>
+          {Astro.slots.has('header__actions') ? (
+            <slot name="header__actions" slot="actions" />
+          ) : null}
+        </SiteHeader>
+        <main class="panel">
+          <slot />
+        </main>
         <SiteFooter />
-      </main>
+      </div>
     </div>
     <Helpers />
   </body>

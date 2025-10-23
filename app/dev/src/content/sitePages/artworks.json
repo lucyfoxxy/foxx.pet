@@ -1,0 +1,14 @@
+{
+  "id": "artworks",
+  "href": "/artworks",
+  "title": "🎨 Foxx Frames 🎨",
+  "navLabel": {
+    "text": "Foxx Frames",
+    "emoji": "🎨"
+  },
+  "includeInHeader": true,
+  "description": "Here you gonna find a selection of my previous works.",
+  "introParagraphs": [
+    "See where Lucy has left their Paw Prints!"
+  ]
+}

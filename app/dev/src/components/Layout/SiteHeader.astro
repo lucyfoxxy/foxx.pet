@@ -6,6 +6,7 @@ type NavLink = {
   label: string;
   emoji?: string;
   includeInHeader?: boolean;
+  isActive?: boolean;
 };
 type Breadcrumb = {
   label: string;
@@ -18,7 +19,8 @@ type Props = {
   breadcrumbs: Breadcrumb[];
 };
 
-const { navLinks = [],breadcrumbs=[] } = (Astro.props ?? {}) as Props;
+const { navLinks = [], breadcrumbs = [] } = (Astro.props ?? {}) as Props;
+const hasActions = Astro.slots.has('actions');
 ---
 
 
@@ -30,7 +32,15 @@ const { navLinks = [],breadcrumbs=[] } = (Astro.props ?? {}) as Props;
     {navLinks
       .filter((link) => link.includeInHeader)
       .map((link) => (
-        <a class="header__nav-link" href={link.href}>
+        <a
+          class:list={[
+            'header__nav-link',
+            link.isActive && 'is-active',
+          ]}
+          href={link.href}
+          data-active={link.isActive ? 'true' : undefined}
+          aria-current={link.isActive ? 'page' : undefined}
+        >
           <span class="header__nav-text">{link.label}</span>
           {link.emoji && <span class="header__nav-emoji">{link.emoji}</span>}
         </a>
@@ -48,13 +58,25 @@ const { navLinks = [],breadcrumbs=[] } = (Astro.props ?? {}) as Props;
         </li>
       ))}
     </ol>
+
   </div>
+  {hasActions ? (
+    <div class="header__actions controls">
+      <slot name="actions" />
+    </div>
+) : null}
 </header>
 
 <script>
-  import { ResponsiveSiteHeader , observer} from '@Scripts/siteHeaderSticky.js';
+  import { ResponsiveSiteHeader, observer } from '@Scripts/siteHeaderSticky.js';
   import { runOnReady } from '@Scripts/utils/_runOnReady.js';
-  runOnReady(observer);
+  runOnReady(() => {
+    const cleanup = ResponsiveSiteHeader();
+    observer();
+    if (typeof cleanup === 'function') {
+      window.addEventListener('astro:before-swap', cleanup, { once: true });
+    }
+  });
 
 </script>
 

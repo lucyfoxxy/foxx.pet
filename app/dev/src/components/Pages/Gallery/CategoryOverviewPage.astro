@@ -17,6 +17,8 @@ interface CategoryInfo {
   description?: string;
 }
 
+import Card from '@UI/Card.astro';
+
 const { category, albums } = Astro.props as {
   category: CategoryInfo;
   albums: AlbumEntry[];
@@ -48,16 +50,16 @@ const normalizedAlbums = albums.map((album) => {
 ---
 
   <section class="content-section">
-    <div class="card card--plain is-centered">
-      <div class="card__head">
+    <Card class="card--plain is-centered">
+      <Fragment slot="head">
         <h1 class="card__title">{category.title}</h1>
-      </div>
+      </Fragment>
       {category.description ? (
-        <div class="card__body">
+        <Fragment slot="body">
           <p>{category.description}</p>
-        </div>
+        </Fragment>
       ) : null}
-    </div>
+    </Card>
   </section>
 
   <section class="content-section cols-3">
@@ -72,8 +74,8 @@ const normalizedAlbums = albums.map((album) => {
         coverUrl,
       }) => (
         <a href={href ?? `/galleries/${category.slug}/${slug}`} aria-label={`Open ${title}`}>
-          <div class="card card--soft is-centered is-animated">
-            <div class="card__head card__head--column">
+          <Card class="card--soft is-centered is-animated" headClass="card__head--column">
+            <Fragment slot="head">
               <h3 class="card__title">{title}</h3>
               {(formattedStartDate || typeof count === 'number') && (
                 <div class="card__badges controls">
@@ -83,8 +85,8 @@ const normalizedAlbums = albums.map((album) => {
                   ) : null}
                 </div>
               )}
-            </div>
-            <div class="card__body">
+            </Fragment>
+            <Fragment slot="body">
               <div class="media-album__cover" data-slug={slug}>
                 {coverUrl ? (
                   <img src={coverUrl} alt="" loading="lazy" decoding="async" />
@@ -92,8 +94,8 @@ const normalizedAlbums = albums.map((album) => {
                   <div class="media-album__cover-placeholder" aria-hidden="true"></div>
                 )}
               </div>
-            </div>
-          </div>
+            </Fragment>
+          </Card>
         </a>
       ))}
 

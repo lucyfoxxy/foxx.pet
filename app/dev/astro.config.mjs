@@ -32,6 +32,7 @@ export default defineConfig({
         '@Content': fileURLToPath(new URL('./src/content', import.meta.url)),
         '@Assets': fileURLToPath(new URL('./src/assets', import.meta.url)),
         '@Scripts': fileURLToPath(new URL('./src/scripts', import.meta.url)),
+        '@UI': fileURLToPath(new URL('./src/components/UI', import.meta.url)),
       }
     }
   },

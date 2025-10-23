@@ -1,6 +1,7 @@
 ---
 import { getCollection, type CollectionEntry } from 'astro:content';
 import { getPageContent } from '@Content/siteContent';
+import Card from '@UI/Card.astro';
 
 type RecipeEntry = CollectionEntry<'recipes'>;
 
@@ -24,29 +25,29 @@ const hasRecipes = recipes.length > 0;
 ---
 
   <section class="content-section">
-    <div class="card card--plain is-centered ">
-      <div class="card__head">
+    <Card class="card--plain is-centered">
+      <Fragment slot="head">
         <h1 class="card__title">{content.title}</h1>
-      </div>
+      </Fragment>
 
-      <div class="card__body">
+      <Fragment slot="body">
         <div class="prose">
           {introParagraphs.map((paragraph) => (
             <p>{paragraph}</p>
           ))}
         </div>
-      </div>
-    </div>
+      </Fragment>
+    </Card>
   </section>
 
   {hasRecipes ? (
     <>
       <section class="content-section">
-        <div class="card" aria-labelledby="cookbook-facets">
-          <div class="card__head card__head--column">
+        <Card aria-labelledby="cookbook-facets" headClass="card__head--column">
+          <Fragment slot="head">
             <h2 class="card__title" id="cookbook-facets">Plan your feast</h2>
-          </div>
-          <div class="card__body">
+          </Fragment>
+          <Fragment slot="body">
             <p>
               Categories and tags make it simple to build seasonal menus or filter by dietary needs. Hook them into client-side
               state or query parameters for an experience similar to the gallery overview.
@@ -73,8 +74,8 @@ const hasRecipes = recipes.length > 0;
                 </p>
               )}
             </div>
-          </div>
-        </div>
+          </Fragment>
+        </Card>
       </section>
 
       <section class="content-section cols-2">
@@ -83,8 +84,8 @@ const hasRecipes = recipes.length > 0;
           const tags = recipe.data.tags ?? [];
           const hasBadges = categories.length > 0 || tags.length > 0;
           return (
-            <article class="card">
-              <div class="card__head card__head--column">
+            <Card as="article" headClass="card__head--column">
+              <Fragment slot="head">
                 <h2 class="card__title">
                   <a href={`/cookbook/${recipe.slug}/`}>{recipe.data.title}</a>
                 </h2>
@@ -98,8 +99,8 @@ const hasRecipes = recipes.length > 0;
                     ))}
                   </div>
                 )}
-              </div>
-              <div class="card__body">
+              </Fragment>
+              <Fragment slot="body">
                 <p>
                   <strong>Published:</strong> {formatDate(recipe.data.publishDate)}
                 </p>
@@ -123,31 +124,31 @@ const hasRecipes = recipes.length > 0;
                     )}
                   </ul>
                 </div>
-              </div>
-              <div class="card__foot">
+              </Fragment>
+              <Fragment slot="foot">
                 <div class="controls controls--start">
                   <a class="button is-ghost" href={`/cookbook/${recipe.slug}/`}>
                     Open recipe →
                   </a>
                 </div>
-              </div>
-            </article>
+              </Fragment>
+            </Card>
           );
         })}
       </section>
     </>
   ) : (
     <section class="content-section">
-      <div class="card card--plain is-centered">
-        <div class="card__head">
+      <Card class="card--plain is-centered">
+        <Fragment slot="head">
           <h2 class="card__title">{overview.emptyState ?? 'Cakes are still baking...'}</h2>
-        </div>
+        </Fragment>
 
-        <div class="card__body">
+        <Fragment slot="body">
           <div class="prose">
             <p>{overview.cta ?? 'Add markdown recipes to populate this overview automatically.'}</p>
           </div>
-        </div>
-      </div>
+        </Fragment>
+      </Card>
     </section>
   )}

@@ -1,0 +1,48 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+type TagName = keyof HTMLElementTagNameMap;
+
+type ElementAttributes<T extends TagName> = HTMLAttributes<HTMLElementTagNameMap[T]>;
+
+type SlotClass = HTMLAttributes<HTMLElement>['class'];
+
+export interface CardProps<T extends TagName = 'div'> extends ElementAttributes<T> {
+  as?: T;
+  headClass?: SlotClass;
+  bodyClass?: SlotClass;
+  footClass?: SlotClass;
+}
+
+const {
+  as = 'div',
+  class: className,
+  headClass,
+  bodyClass,
+  footClass,
+  ...rest
+} = Astro.props as CardProps;
+
+const Tag = as as TagName;
+const hasHead = Astro.slots.has('head');
+const hasBody = Astro.slots.has('body');
+const hasDefault = Astro.slots.has('default');
+const hasFoot = Astro.slots.has('foot');
+---
+<Tag class:list={['card', className]} {...rest}>
+  {hasHead && (
+    <div class:list={['card__head', headClass]}>
+      <slot name="head" />
+    </div>
+  )}
+  {(hasBody || hasDefault) && (
+    <div class:list={['card__body', bodyClass]}>
+      {hasBody ? <slot name="body" /> : <slot />}
+    </div>
+  )}
+  {hasFoot && (
+    <div class:list={['card__foot', footClass]}>
+      <slot name="foot" />
+    </div>
+  )}
+</Tag>

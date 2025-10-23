@@ -2,6 +2,7 @@
 import Layout from '@Layout/Main.astro';
 import { getCollection, type CollectionEntry } from 'astro:content';
 import { getPageContent } from '@Content/siteContent';
+import Card from '@UI/Card.astro';
 
 export async function getStaticPaths() {
   const recipes = await getCollection('recipes');
@@ -23,8 +24,8 @@ const meta = {
 ---
 <Layout title={recipe.data.title} meta={meta}>
   <article class="content-section">
-    <div class="card">
-      <div class="card__head card__head--column">
+    <Card headClass="card__head--column">
+      <Fragment slot="head">
         <h1 class="card__title">{recipe.data.title}</h1>
         {(recipe.data.categories?.length || recipe.data.tags?.length) && (
           <div class="card__badges controls controls--tight">
@@ -36,8 +37,8 @@ const meta = {
             ))}
           </div>
         )}
-      </div>
-      <div class="card__body">
+      </Fragment>
+      <Fragment slot="body">
         <p>
           <strong>Published:</strong> {formatDate(recipe.data.publishDate)}
           {recipe.data.updatedDate && (
@@ -69,12 +70,12 @@ const meta = {
           )}
           <Content />
         </div>
-      </div>
-      <div class="card__foot">
+      </Fragment>
+      <Fragment slot="foot">
         <div class="controls controls--start">
           <a class="button is-ghost" href="/cookbook">← Back to the cookbook</a>
         </div>
-      </div>
-    </div>
+      </Fragment>
+    </Card>
   </article>
 </Layout>

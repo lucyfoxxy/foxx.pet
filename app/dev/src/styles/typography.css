@@ -42,11 +42,9 @@ body {
 /* ====== LINKS & FOOTER ====== */
 a {
   font-weight: var(--thick-font-weight);
+  text-decoration: none;
 }
 
-.footer {
-  
-}
 
 .header__nav a {
   font-weight: var(--bold-font-weight);
