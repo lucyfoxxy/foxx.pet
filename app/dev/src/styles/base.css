@@ -29,7 +29,7 @@ body::before {
   box-shadow: inset 0 0 164px 64px rgba(0,0,0,.5);
     background: 
     var(--background-overlay),
-    var(--bg--nebula),   
+    var(--bg-overlay--nebula),   
     linear-gradient(205deg, #371173, #510868 ,rgb(40, 7, 112));
   background-blend-mode:darken,overlay,hue;
   background-repeat: no-repeat,repeat,no-repeat;

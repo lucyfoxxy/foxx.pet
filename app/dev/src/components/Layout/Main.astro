@@ -14,7 +14,6 @@ import { getNavigationLinks, getPageContent } from '@Content/siteContent';
 import Head from '@Layout/Head.astro';
 import SiteHeader from '@Layout/SiteHeader.astro';
 import SiteFooter from '@Layout/SiteFooter.astro';
-import Helpers from '@Layout/Helpers.astro';
 
 // ---------------------------------------------------------------------------
 // Types & helpers
@@ -134,11 +133,9 @@ const breadcrumbs = buildBreadcrumbs({
 <html lang="en">
   <Head title={title} description={description} url={url} />
   <body style={`
-                --bg-image: url(${ASSETS.bg.src});
-                --bg-image--mobile: url(${ASSETS.container_bg.src});
-                --bg--nebula: url(${ASSETS.bg__nebula.src});
-                --bg--stars: url(${ASSETS.bg__stars.src});
-                --bg--twinkle: url(${ASSETS.bg__twinkle.src});
+                --bg-image--panel: url(${ASSETS.bg__panel.src});
+                --bg-overlay--nebula: url(${ASSETS.overlay__nebula.src});
+                --bg-overlay--stars: url(${ASSETS.overlay__stars.src});
               `}>
 
        
@@ -155,7 +152,6 @@ const breadcrumbs = buildBreadcrumbs({
         <SiteFooter />
       </div>
     </div>
-    <Helpers />
   </body>
 </html>
 

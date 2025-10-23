@@ -117,7 +117,7 @@
   overflow: hidden;
   
   box-shadow: var(--surface-shadow--soft);
-  background: var(--surface-dark--soft);
+  background: var(--card-surface--dark);
 }
 
 @media (max-width: 900px) {
@@ -237,7 +237,7 @@
   place-items: center;
   border: none;
   border-radius: 999px;
-  background: var(--surface-dark--soft);
+  background: var(--card-surface--dark);
   opacity: .65;
   cursor: pointer;
   box-shadow: var(--surface-shadow--default);
@@ -303,7 +303,7 @@
   inset: auto .9rem .9rem .9rem;
   block-size: .3rem;
   border-radius: 999px;
-  background: var(--control-bg);
+  background: var(--control-surface--light);
   overflow: hidden;
   z-index: 1;
   pointer-events: none;
@@ -332,7 +332,7 @@
   grid-template-columns: auto 1fr auto;
   align-items: center;
   gap: var(--cluster-gap);
-  background: var(--surface-dark);
+  background: var(--control-surface--dark);
   border-radius: var(--radius-m);
   padding: calc(var(--cluster-gap) * .6) var(--card-gap);
   box-shadow: var(--surface-shadow--strong);
@@ -355,7 +355,7 @@
   place-items: center;
   border: none;
   border-radius: 999px;
-  background: var(--surface-dark--soft);
+  background: var(--card-surface--dark);
   opacity: .6;
   cursor: pointer;
   transition: var(--transition-soft);
@@ -378,7 +378,7 @@
   display: grid;
   place-items: center;
   padding: clamp(1rem, 4vw, 3rem);
-  background: var(--surface-dark);
+  background: var(--control-surface--dark);
   z-index: 999;
   opacity: 0;
   pointer-events: none;
@@ -410,7 +410,7 @@
   block-size: auto;
   max-inline-size: inherit;
   max-block-size: inherit;
-  background: var(--surface-dark);
+  background: var(--control-surface--dark);
 }
 
 .media__lightbox-close {

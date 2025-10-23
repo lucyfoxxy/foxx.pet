@@ -29,10 +29,10 @@
   justify-content: center;
   gap: var(--control-gap); 
   padding: var(--control-padding);
-  background: var(--control-bg);
+  background: var(--control-surface--light);
   border-radius: var(--radius-s);
 }
-.is-dark  { background: var(--surface-dark); }
+.is-dark  { background: var(--control-surface--dark); }
 .is-ghost { background: transparent; box-shadow: none;}
 .button{
   user-select: none;
@@ -53,7 +53,7 @@
   transform: translateY(-2px);
 }
 .button:not(.is-ghost):hover {
-  background: var(--control-bg--highlight);
+  background: var(--control-surface--light--highlight);
   box-shadow: var(--surface-shadow--soft),var(--surface-glow);
 }
 

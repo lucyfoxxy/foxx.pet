@@ -15,7 +15,7 @@
 ## Visual
 - [x] CSS/SVG-Pattern statt BG-Image [foundation]
 - [ ] Icons: Emoji → SVG + Icon-Partial [ui]
-- [ ] header logo glow verringern [site]
+- [x] header logo glow verringern [site]
 - [ ] inset outline um panel [site]
 - [ ] header nav zu klein [mobile]
 

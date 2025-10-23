@@ -74,7 +74,7 @@ const normalizedAlbums = albums.map((album) => {
         coverUrl,
       }) => (
         <a href={href ?? `/galleries/${category.slug}/${slug}`} aria-label={`Open ${title}`}>
-          <Card class="card--soft is-centered is-animated" headClass="card__head--column">
+          <Card class="card--lightis-centered is-animated" headClass="card__head--column">
             <Fragment slot="head">
               <h3 class="card__title">{title}</h3>
               {(formattedStartDate || typeof count === 'number') && (

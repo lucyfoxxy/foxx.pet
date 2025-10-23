@@ -40,36 +40,36 @@
   --brand-size:              clamp(320px, 45vw, 420px);
 
   /* ====== Base Colors ========================= */
-  --color-dark:              oklch(21% 0.11 295);
-  --color-light:             oklch(92% 0.18 290);
-  --color-control-light:     oklch(72% 0.18 295);
-  --color-text:              oklch(90% 0.09 300);
-  --color-accent:            oklch(80% 0.23 285); 
-  --color-shadow-soft:       color-mix(in oklch, var(--color-dark) 55%, transparent);
-  --color-shadow-strong:     color-mix(in oklch, var(--color-dark) 75%, transparent);
-  --color-glow-soft:         color-mix(in oklch, var(--color-light) 55%, transparent);
-  --color-glow-strong:       color-mix(in oklch, var(--color-light) 75%, transparent);
+  --color-dark:              oklch(20% 0.11 295);
+  --color-light:             oklch(92% 0.18 295); 
+  --color-accent:            oklch(80% 0.24 295); 
+  --color-shadow-soft:       color-mix(in oklch, var(--color-dark) 30%, transparent);
+  --color-shadow-strong:     color-mix(in oklch, var(--color-dark) 60%, transparent);
+  --color-glow-soft:         color-mix(in oklch, var(--color-light) 30%, transparent);
+  --color-glow-strong:       color-mix(in oklch, var(--color-light) 60%, transparent);
 
   /* ====== Text Colors & FX ==================== */
-  --text-accent:             color-mix(in oklab, var(--color-text) 45%, var(--color-accent));
-  --text-highlight:          color-mix(in oklab, var(--color-text) 25%, var(--color-light));
+  --text-color:              oklch(94% 0.09 300);
+  --text-accent:             color-mix(in oklab, var(--text-color) 45%, var(--color-accent));
+  --text-highlight:          color-mix(in oklab, var(--text-color) 25%, var(--color-light));
 
-  --text-shadow--soft:       3px 3px 2px var(--color-shadow-soft);  
-  --text-shadow--strong:     3px 3px 2px var(--color-shadow-strong);
+  --text-shadow--soft:       1px 1px 1px var(--color-shadow-soft);  
+  --text-shadow--strong:     2px 2px 2px var(--color-shadow-strong);
   
   --text-glow--soft:         1px 1px 1px var(--color-glow-soft);
-  --text-glow--strong:       2px 2px 3px var(--color-glow-strong);
+  --text-glow--strong:       2px 2px 2px var(--color-glow-strong);
 
   /* ====== Surface / Control Colors & FX ======= */  
-  
-  --control-bg:              color-mix(in oklch, var(--color-control-light) 69%, transparent);
-  --control-bg--highlight:   color-mix(in oklch, var(--control-bg) 94%, var(--color-light));
-  --surface-dark--soft:      color-mix(in oklab,var(--color-dark) 50%, transparent);
-  --surface-dark:            color-mix(in oklab,var(--color-dark) 90%, transparent);
-  --surface-dark--highlight: color-mix(in oklab,var(--surface-dark) 94%, var(--color-dark));
-  --surface-light:           color-mix(in oklab,var(--color-light) 29%, transparent);
+  --card-surface--dark:      color-mix(in oklab,var(--color-dark) 55%, transparent);
+  --card-surface--light:     color-mix(in oklab,var(--color-light) 10%, transparent);
 
-  --surface-shadow--soft:    0 0 8px -5px var(--color-shadow-soft),0 0 8px -3px var(--color-shadow-strong);
+  --control-surface--light:              color-mix(in oklch, oklch(72% 0.18 295) 69%, transparent);
+  --control-surface--light--highlight:   color-mix(in oklch, var(--control-surface-light) 94%, var(--color-light)); 
+  --control-surface--dark:            color-mix(in oklch,var(--color-dark)89%,transparent);
+  --control-surface--dark--highlight: color-mix(in oklab,var(--control-surface--dark) 94%, var(--color-dark));
+  
+
+  --surface-shadow--soft:    1px 2px 4px 0px var(--color-shadow-soft);
   --surface-shadow--default: 0 0 18px -10px var(--color-shadow-soft),0 0 24px -6px var(--color-shadow-strong);
   --surface-shadow--strong:  0 0 20px -10px var(--color-shadow-soft),0 0 28px -6px var(--color-shadow-strong),0 0 14px 0 color-mix(in srgb, black 95%, transparent);
 
@@ -80,7 +80,7 @@
   --blur--default:           blur(var(--radius-m));
   --blur--strong:            blur(var(--radius-l));
 
-  --outline:                 1px solid var(--surface-dark--soft); 
+  --outline:                 1px solid var(--card-surface--dark); 
 
   /* ====== Overlays / Filter Presets ============ */   
   --background-overlay:      radial-gradient(ellipse at center, transparent 30%, black 120%); 

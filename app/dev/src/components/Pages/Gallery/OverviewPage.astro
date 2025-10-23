@@ -33,7 +33,7 @@ const introParagraphs = content.introParagraphs ?? [content.description];
   {categories.map(({ slug, title, description, href }) => (
     
     <a href={href ?? `/galleries/${slug}`} aria-label={`Open ${title}`}>
-      <Card class="card--soft is-animated is-centered" headClass="card__head--column">
+      <Card class="card--light is-animated is-centered" headClass="card__head--column">
         <Fragment slot="head">
           <h3 class="card__title">{title}</h3>
         </Fragment>

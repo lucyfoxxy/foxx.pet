@@ -9,16 +9,13 @@
   margin-block-start: var(--section-gap);
 }
 
-
-
 .content-section :where(h1,h2,h3,h4) {
   margin: 0 0 calc(var(--flow-gap) * .5) 0;
 }
 
 .content-section {
   display: grid;
-  flex-wrap: wrap;
-  
+  flex-wrap: wrap; 
   gap: var(--section-gap);
   align-items: stretch; 
   max-inline-size: 100%;
@@ -48,14 +45,14 @@
   border-radius: var(--radius-l);
   padding: var(--card-padding);
   gap: var(--card-gap);
-  background: var(--surface-dark);
+  background: var(--card-surface--dark);
   box-shadow: var(--surface-shadow--default);
   backdrop-filter: var(--blur--default);
 }
-.card--soft     { background: var(--surface-dark--soft); }
+.card--ghost    { background: unset; }
 .card--plain    { background: transparent; box-shadow: none; backdrop-filter: none;}
-.card--light   { background: var(--surface-light); }
-
+.card--light   { background: var(--card-surface--light); }
+.card--plain > .prose{backdrop-filter: var(--blur--default);background: var(--card-surface--dark);}
 .is-centered { justify-items: center; text-align: center; }
 .is-centered :where(.prose) { margin-inline: auto; }
 

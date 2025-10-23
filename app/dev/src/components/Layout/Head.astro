@@ -12,6 +12,9 @@ const {
   description = '',
   url = 'https://foxx.pet',
 } = (Astro.props ?? {}) as Partial<LayoutMeta>;
+const    goatCounterBase = "https://stats.foxx.pet";
+const    enableAnalytics = true;
+const    goatCounterScriptSrc = "https://stats.foxx.pet/count.js";
 ---
 
 <head>
@@ -30,14 +33,24 @@ const {
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={title} />
   <meta name="twitter:description" content={description} />
-  <meta name="twitter:image" content={ASSETS.og} />
+  <meta name="twitter:image" content={ASSETS.og.src} />
 
   <link rel="icon" type="image/webp" href={ASSETS.favicon.src} />
-  <link rel="preload" href={ASSETS.bg.src} as="image" type="image/webp" />
-  <link rel="preload" href={ASSETS.container_bg.src} as="image" type="image/webp" />
+  <link rel="preload" href={ASSETS.overlay__stars.src} as="image" type="image/webp" />
+  <link rel="preload" href={ASSETS.overlay__nebula.src} as="image" type="image/webp" />
+  <link rel="preload" href={ASSETS.bg__panel.src} as="image" type="image/webp" />
   <link rel="preload" href={ASSETS.logo_header.src} as="image" type="image/webp" />
   <link rel="preload" href="/fonts/FuzzyBubbles_400.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="/fonts/FuzzyBubbles_700.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="/fonts/Grandstander_italic_100-900.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="/fonts/Grandstander_normal_100-900.woff2" as="font" type="font/woff2" crossorigin />
 </head>
+<script>
+  const yearEl = document.querySelector('[data-current-year]');
+  if (yearEl) {
+    yearEl.textContent = new Date().getFullYear().toString();
+  }
+</script>
+{enableAnalytics && (
+  <script data-goatcounter={`${goatCounterBase}/count`} async src={goatCounterScriptSrc}></script>
+)}
