@@ -17,6 +17,7 @@
 - [ ] Icons: Emoji → SVG + Icon-Partial [ui]
 - [ ] header logo glow verringern [site]
 - [ ] inset outline um panel [site]
+- [ ] header nav zu klein [mobile]
 
 ## Features
 - [ ] [CODEX] Header/Nav aktiv + Buttons [site]
