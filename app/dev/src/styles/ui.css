@@ -14,7 +14,7 @@
 .controls--spread { justify-content: space-evenly; column-gap: var(--card-gap); }
 .controls--nowrap { flex-wrap: nowrap; }
 .controls--tight  { gap: calc(var(--control-gap) * 0.6); }
-* + .controls { margin-bottom: var(--card-gap); }
+:not(.header__nav).controls { margin-bottom: var(--card-gap); }
 .card__badges.controls{
   vertical-align: text-bottom;
 }
@@ -40,7 +40,7 @@
   touch-action: manipulation;
   cursor: pointer;  
 }
-.button--small,.badge {  padding-block: calc(var(--control-padding) * .5) }
+.button--small {  padding-block: calc(var(--control-padding) * .5) }
 .button--large { padding: calc(var(--control-padding) * 1.75);}
 
 .badge {

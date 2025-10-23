@@ -28,14 +28,18 @@ const hasActions = Astro.slots.has('actions');
   <a class="header__logo" aria-label="Home" href="/">
     <img src={ASSETS.logo_header.src} alt="foxx.pet" />
   </a>
-  <nav class="header__nav">
+  <nav class="header__nav controls">
     {navLinks
       .filter((link) => link.includeInHeader)
       .map((link) => (
         <a
           class:list={[
-            'header__nav-link',
+            
             link.isActive && 'is-active',
+            'button',
+            'button--small',
+            'is-ghost'
+            
           ]}
           href={link.href}
           data-active={link.isActive ? 'true' : undefined}

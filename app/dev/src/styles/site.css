@@ -99,8 +99,8 @@ main.panel {
   border-radius:  0 ;
     box-shadow: var(--surface-shadow--strong);
 }
-.header a:hover,
-.header a:focus-visible {
+.header__nav a:hover,
+.header__nav a:focus-visible {
   transform: translateY(-1px) scale(1.05);
   text-shadow: var(--text-glow--strong);
   color: var(--text-highlight);
@@ -167,14 +167,7 @@ main.panel {
   column-gap: var(--nav-gap--column);
   grid-area: nav;
 }
-.header__nav-link {
-  color: var(--text-accent);
-  text-shadow: var(--text-shadow--strong);
-  transition: var(--transition-nav);
-  display: inline-flex;
-  align-items: stretch;
-  gap: var(--nav-gap--row);
-}
+
 
 .header__nav-text {
   line-height: var(--xlarge-line-height);
@@ -183,7 +176,7 @@ main.panel {
 .header__nav-emoji {
   font-size: .725em;
   line-height: var(--xsmall-line-height);
-  transform: translateY(.35em);
+  
 }
 @media (max-width: 900px) {
   .header__nav {

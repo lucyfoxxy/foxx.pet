@@ -24,7 +24,7 @@
   --control-padding:        var(--space-xs);  
 
   --nav-gap--column:        clamp(var(--space-xs),calc(var(--space-xs) + 1.25vw),var(--space-xl));
-  --nav-gap--row:           var(--space-xs);
+  --nav-gap--row:           var(--space-xxs);
 
   --card-padding:           clamp(var(--space-s),  calc(var(--space-s) + 1.75vw),  var(--space-xl));   
   --section-gap:            clamp(var(--space-s),  calc(var(--space-s) + 1.5vw),    var(--space-xxl)); 
@@ -57,7 +57,7 @@
   --text-shadow--soft:       3px 3px 2px var(--color-shadow-soft);  
   --text-shadow--strong:     3px 3px 2px var(--color-shadow-strong);
   
-  --text-glow--soft:         2px 2px 3px var(--color-glow-soft);
+  --text-glow--soft:         1px 1px 1px var(--color-glow-soft);
   --text-glow--strong:       2px 2px 3px var(--color-glow-strong);
 
   /* ====== Surface / Control Colors & FX ======= */  
@@ -65,7 +65,7 @@
   --control-bg:              color-mix(in oklch, var(--color-control-light) 69%, transparent);
   --control-bg--highlight:   color-mix(in oklch, var(--control-bg) 94%, var(--color-light));
   --surface-dark--soft:      color-mix(in oklab,var(--color-dark) 50%, transparent);
-  --surface-dark:            color-mix(in oklab,var(--color-dark) 80%, transparent);
+  --surface-dark:            color-mix(in oklab,var(--color-dark) 90%, transparent);
   --surface-dark--highlight: color-mix(in oklab,var(--surface-dark) 94%, var(--color-dark));
   --surface-light:           color-mix(in oklab,var(--color-light) 29%, transparent);
 
@@ -89,7 +89,7 @@
                              radial-gradient(1200px 900px at top left, oklch(75% 0.20 285 / .36), transparent 74%),
                              radial-gradient(1100px 800px at center right, oklch(42% 0.22 305 / .28), transparent 72%),
                              linear-gradient(to top, oklch(60% 0.20 230 / .96), transparent 54%);
-  --site-logo--filter:       drop-shadow(0 3px 2px color-mix(in oklab,var(--color-shadow-strong) 75%,white 25%)); 
+  --site-logo--filter:       drop-shadow(0 3px 2px var(--color-shadow-strong)); 
 
   /* ====== Font Styles ====== */
   --primary-font-family:     Grandstander, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
