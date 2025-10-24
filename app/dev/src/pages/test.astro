@@ -1,6 +1,7 @@
 ---
 import Layout from '@Layout/Main.astro';
-import Card from '@UI/Card.astro';
+import Card from '@Layout/Card.astro';
+import Icons from '@Assets/Icons.astro';
 ---
 <Layout>
 <section class="content-section">
@@ -16,7 +17,7 @@ import Card from '@UI/Card.astro';
   </Card>
 </section>
 <section class="content-section cols-3">
-  <Card headClass="card__head--column">
+  <Card headClass="card__head--column" class="is-animated">
     <Fragment slot="head">
       <h2 class="card__title">I am card title</h2>
       <div class="card__badges controls">
@@ -43,7 +44,7 @@ import Card from '@UI/Card.astro';
       </div>
     </Fragment>
   </Card>
-  <Card class="card--soft">
+  <Card class="card--ghost is-animated">
     <Fragment slot="head">
       <h2 class="card__title">I am card title</h2>
       <div class="card__badges controls controls--tight">
@@ -97,6 +98,21 @@ import Card from '@UI/Card.astro';
     </Fragment>
   </Card>
 </section>
-<section class="content-section cols-3">
+<section class="content-section cols-2">
+  <Card>
+    <Fragment slot="body">
+      <div class="controls">
+        <span class="button button--large"><span class="button__icon">wd<Icons kind="palette"></Icon></Icons></span></span>
+        <span class="button button--large is-dark"><span class="button__icon">wd<Icons kind="paw"></Icon></span></span>
+        <span class="button is-ghost">wd<Icons kind="cookie"></Icon></span>
+        <span class="button button--large"><span class="button__icon"><Icons kind="rocket"></Icon></Icons></span></span>
+        <span class="button button--large is-dark"><span class="button__icon"><Icons kind="sparkles"></Icon></span></span>
+        <span class="button is-ghost"><Icons kind="cookie"></Icon></span>    
+      </div>
+    </Fragment>
+  </Card>
+  <Card class="card--light">
+
+  </Card>
 </section>
 </Layout>

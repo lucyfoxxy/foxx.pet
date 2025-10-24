@@ -1,6 +1,6 @@
 ---
 import { getPageContent } from '@Content/siteContent';
-import Card from '@UI/Card.astro';
+import Card from '@Layout/Card.astro';
 
 const content = await getPageContent('imprint');
 const introParagraphs = content.introParagraphs ?? [];

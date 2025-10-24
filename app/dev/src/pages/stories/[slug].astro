@@ -2,7 +2,7 @@
 import Layout from '@Layout/Main.astro';
 import { getCollection, type CollectionEntry } from 'astro:content';
 import { getPageContent } from '@Content/siteContent';
-import Card from '@UI/Card.astro';
+import Card from '@Layout/Card.astro';
 
 export async function getStaticPaths() {
   const stories = await getCollection('stories');

@@ -43,6 +43,8 @@
 .button--small {  padding-block: calc(var(--control-padding) * .5) }
 .button--large { padding: calc(var(--control-padding) * 1.75);}
 
+
+
 .badge {
   border-radius: 999px; 
   padding-block: calc(var(--control-padding) * .5);
@@ -62,16 +64,13 @@
   .button:active { filter: brightness(.92); }
 }
 
-.button__icon {
-  display: inline-grid; 
-  place-items: center;
-  inline-size: 1.5rem;
-  block-size: 1.5rem;
-  border-radius: 999px;
-  background: none;
+.button__icon svg{
+  display:inline-flex;
+  vertical-align: middle;
+  
+  max-inline-size: 1.35em;
+  max-block-size: 1.35em;
+  filter: drop-shadow(var(--text-shadow--strong));
+  
 }
 
-.button__icon svg {
-  inline-size: 1.5rem;
-  block-size: 1.5rem;
-}

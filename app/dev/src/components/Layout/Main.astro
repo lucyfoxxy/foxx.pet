@@ -11,9 +11,9 @@ import '@Styles/table.css';
 
 import { ASSETS } from '@Assets/ui';
 import { getNavigationLinks, getPageContent } from '@Content/siteContent';
-import Head from '@Layout/Head.astro';
-import SiteHeader from '@Layout/SiteHeader.astro';
-import SiteFooter from '@Layout/SiteFooter.astro';
+import Meta from '@Layout/partials/Meta.astro';
+import Header from '@Layout/partials/Header.astro';
+import Footer from '@Layout/partials/Footer.astro';
 
 // ---------------------------------------------------------------------------
 // Types & helpers
@@ -131,17 +131,15 @@ const breadcrumbs = buildBreadcrumbs({
 });
 ---
 <html lang="en">
-  <Head title={title} description={description} url={url} />
+  <Meta title={title} description={description} url={url} />
   <body style={`
                 --bg-image--panel: url(${ASSETS.bg__panel.src});
                 --bg-overlay--nebula: url(${ASSETS.overlay__nebula.src});
                 --bg-overlay--stars: url(${ASSETS.overlay__stars.src});
               `}>
-
-       
     <div class="container">
       <div class="panel-shell">
-        <SiteHeader meta={meta} navLinks={navLinks} breadcrumbs={breadcrumbs}>
+        <Header meta={meta} navLinks={navLinks} breadcrumbs={breadcrumbs}>
           {Astro.slots.has('header__actions') ? (
             <slot name="header__actions" slot="actions" />
           ) : null}
@@ -149,7 +147,7 @@ const breadcrumbs = buildBreadcrumbs({
         <main class="panel">
           <slot />
         </main>
-        <SiteFooter />
+        <Footer />
       </div>
     </div>
   </body>

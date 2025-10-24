@@ -1,9 +1,9 @@
 ---
 import Layout from '@Layout/Main.astro';
-import Icon from '@Layout/SiteAssets/Icons.astro';
+import Icon from '@Assets/Icons.astro';
 import { ASSETS } from '@Assets/ui';
 import { getPageContent } from '@Content/siteContent';
-import Card from '@UI/Card.astro';
+import Card from '@Layout/Card.astro';
 import { Picture } from 'astro:assets';
 export const prerender = true;
 
@@ -16,7 +16,7 @@ const meta = {
 
 const hero = {
   ...content.hero,
-  logo: ASSETS.logo_hero.src,
+  logo: ASSETS.logo_hero,
   image: ASSETS.logo_hero.src,
 };
 
@@ -30,7 +30,7 @@ const isExternalLink = (href: string) => href.startsWith('http');
 ---
 <Layout meta={meta}>
   <head>
-    <link rel="preload" href={ASSETS.logo_hero.src} as="image" type="image/webp" />
+    <link rel="preload" href={hero.image} as="image" type="image/webp" />
   </head>
 
   <section class="content-section">
@@ -40,7 +40,7 @@ const isExternalLink = (href: string) => href.startsWith('http');
       </Fragment>
       <Fragment slot="body">
         <Picture
-          src={ASSETS.logo_hero}
+          src={hero.logo}
           formats={['webp']}
           inferSize
           alt={hero.heading}
@@ -48,7 +48,7 @@ const isExternalLink = (href: string) => href.startsWith('http');
           class="media-hero__logo"
         />
 
-        <h3 class="is-italic">...Eeeeeeeeeeeeeeeeeeeeek!</h3>
+        <h3><em>...Eeeeeeeeeeeeeeeeeeeeek!</em></h3>
       </Fragment>
     </Card>
   </section>
