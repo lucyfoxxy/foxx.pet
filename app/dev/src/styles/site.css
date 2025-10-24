@@ -66,6 +66,7 @@ main.panel {
   margin-inline: 0;
   margin-block: var(--section-gap) 0;
   gap: var(--flow-gap);
+  box-shadow: var(--surface-shadow--strong);
 }
 .footer :where(p){ opacity: .75; }
 .footer__left    { grid-area: footer-left;justify-self: start;}
@@ -94,11 +95,12 @@ main.panel {
   border-radius: var(--radius-l) var(--radius-l) 0 0 ;
   row-gap: var(--nav-gap--row);
   column-gap: var(--nav-gap--column);
+  box-shadow: var(--surface-shadow--strong);
 }
 .header[data-stuck]{
-  border-radius:  0 ;
-    box-shadow: var(--surface-shadow--strong);
+  border-radius:  0 ; 
 }
+
 .header__nav a:hover,
 .header__nav a:focus-visible {
   transform: translateY(-1px) scale(1.05);
@@ -124,7 +126,6 @@ main.panel {
     box-shadow: var(--surface-shadow--default);
   }
   .footer {
-    border-radius: var(--radius-m) var(--radius-m) 0 0 ;
     box-shadow: var(--surface-shadow--default);  
   }
   .header {

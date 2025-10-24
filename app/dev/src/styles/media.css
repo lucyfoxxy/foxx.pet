@@ -2,6 +2,30 @@
 /* ======== MEDIA: HERO & GALLERIES =========== */
 /* ====== Depends on: tokens, site, content ====== */
 /* ============================================ */
+
+.media-image {
+  display: block;
+  aspect-ratio: 1 / 1;
+  block-size: auto;
+  inline-size: auto;
+  object-fit: contain;
+  border-radius: var(--radius-l);
+  background: var(--card-surface--light);
+  box-shadow: var(--surface-shadow--default);
+  outline: var(--outline);
+}
+.media-image.is-thumb {
+  max-block-size: 128px;
+}
+.media-frame {
+  gap: var(--control-gap);
+  display: flex;
+  position: relative;
+  justify-content: center;
+  flex-direction: row;
+}
+
+
 .media-hero__logo {
   display: block;
   place-self: center;

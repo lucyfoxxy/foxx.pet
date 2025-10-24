@@ -6,10 +6,10 @@ import og from '@Assets/ui/default-og.webp';
 import overlay__stars from '@Assets/ui/stars.webp';
 import overlay__nebula from '@Assets/ui/nebula.webp';
 import bg__panel from '@Assets/ui/container-bg.webp';
-
+import space_fox from '@Assets/ui/space-fox.webp';
 export const ASSETS: Record<string, ImageMetadata> = {
   favicon, og,
   bg__panel, 
   overlay__stars, overlay__nebula, 
-  logo_header, logo_hero
+  logo_header, logo_hero,space_fox,
 };
