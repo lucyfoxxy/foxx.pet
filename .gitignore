@@ -29,4 +29,5 @@ package-lock.json
 **/*.*~
 **/app_dev_tree.txt
 **/*.txt
+**/*.diff
 **/thumbs.db

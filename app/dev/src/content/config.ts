@@ -125,16 +125,24 @@ const sitePages = defineCollection({
     .strict(),
 });
 
+const subCategorySchema = z.object({
+  title: z.string(),
+  slug: z.string(),
+  description: z.string().optional(),
+  nsfw: z.boolean().default(false).optional(),
+});
+
+const metaCategorySchema = z.object({
+  title: z.string(),
+  slug: z.string(),
+  description: z.string().optional(),
+  subCategories: z.array(subCategorySchema).min(1),
+});
+
 const galleryCatalog = defineCollection({
   type: "data",
   schema: z.object({
-    categories: z.array(
-      z.object({
-        title: z.string(),
-        slug: z.string(),
-        description: z.string().optional(),
-      })
-    ),
+    metaCategories: z.array(metaCategorySchema).min(1),
   }),
 });
 
