@@ -1,10 +1,11 @@
 {
   "id": "stories",
   "href": "/stories",
-  "title": "✨ Tail Trails ✨",
+  "title": "Tail Trails",
   "navLabel": {
     "text": "Tail\u202FTrails ",
-    "emoji": "✨"
+    "emoji": "✨",
+    "icon": "sparkles"
   },
   "includeInHeader": true,
   "description": "Narrative experiments and cosmic adventures — coming soon.",

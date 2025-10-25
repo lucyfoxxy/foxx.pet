@@ -1,10 +1,11 @@
 ---
 import { ASSETS } from '@Assets/ui';
-
+import  ICONS  from '@Assets/Icons.astro';
 type NavLink = {
   href: string;
   label: string;
   emoji?: string;
+  icon?: string;
   includeInHeader?: boolean;
   isActive?: boolean;
 };
@@ -28,7 +29,7 @@ const hasActions = Astro.slots.has('actions');
   <a class="header__logo" aria-label="Home" href="/">
     <img src={ASSETS.logo_header.src} alt="foxx.pet" />
   </a>
-  <nav class="header__nav controls controls--spread">
+  <nav class="header__nav controls controls--center">
     {navLinks
       .filter((link) => link.includeInHeader)
       .map((link) => (
@@ -37,9 +38,11 @@ const hasActions = Astro.slots.has('actions');
             
             link.isActive && 'is-active',
             'button',
-
+            
+            'button--small',
+            'button--plain',
             'button--round',
-            'button--ghost'
+            
             
           ]}
           href={link.href}
@@ -47,7 +50,7 @@ const hasActions = Astro.slots.has('actions');
           aria-current={link.isActive ? 'page' : undefined}
         > <div class="header__nav-link">
           <span class="header__nav-text">{link.label}</span>
-          {link.emoji && <span class="header__nav-emoji">{link.emoji}</span>}
+          {link.icon || link.emoji && <span class="header__nav-emoji">{link.emoji}<ICONS kind={link.icon}></ICONS></span>}
           </div>
         </a>
       ))}

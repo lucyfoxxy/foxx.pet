@@ -41,15 +41,16 @@
 .button--small { padding-block: calc(var(--control-padding) * .75);}
 .button--large { padding: calc(var(--control-padding) * 1.35);}
 .button--round {  border-radius: 999px; }
+.button--ghost {  backdrop-filter: var(--blur--strong);}
 .button:hover {
   text-shadow: var(--text-glow--strong);
   color: var(--text-highlight);
   transform: var(--transform-raise);
 }
-.button:not(.button--ghost):hover { 
+.button:not(.button--plain):hover { 
   box-shadow: var(--surface-shadow--default),var(--control-glow); 
 }
-.button--small:not(.button--ghost):hover { 
+.button--small:not(.button--plain):hover { 
   box-shadow: var(--surface-shadow--default),var(--control-glow--soft); 
   transform: var(--transform-raise--soft);
   text-shadow: var(--text-glow--soft);
@@ -64,9 +65,9 @@
 .badge--dark  { 
   background: var(--control-surface--dark); 
 }
-.badge--ghost,
-.button--ghost { 
-  background: transparent; box-shadow: none; padding: 0;
+.badge--plain,
+.button--plain { 
+  background: transparent; box-shadow: none;;
 }
 
 

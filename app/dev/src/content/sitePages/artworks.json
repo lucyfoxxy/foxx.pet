@@ -1,10 +1,11 @@
 {
   "id": "artworks",
   "href": "/artworks",
-  "title": "🎨 Foxx Frames 🎨",
+  "title": "Foxx Frames",
   "navLabel": {
     "text": "Foxx\u202FFrames",
-    "emoji": "🎨"
+    "emoji": "🎨",
+    "icon": "palette"
   },
   "includeInHeader": true,
   "description": "Here you gonna find a selection of my previous works.",

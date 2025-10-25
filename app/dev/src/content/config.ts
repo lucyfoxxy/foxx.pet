@@ -5,6 +5,7 @@ const navLabelSchema = z.union([
   z.object({
     text: z.string(),
     emoji: z.string().optional(),
+    icon: z.string().optional(),
   }),
 ]);
 
@@ -55,6 +56,7 @@ const sitePages = defineCollection({
       id: z.string(),
       href: z.string(),
       title: z.string(),
+      icon: z.string().optional(),
       navLabel: navLabelSchema.optional(),
       includeInHeader: z.boolean().optional(),
       description: z.string().optional(),

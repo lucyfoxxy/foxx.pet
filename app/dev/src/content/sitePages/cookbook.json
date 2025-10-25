@@ -1,10 +1,12 @@
 {
   "id": "cookbook",
   "href": "/cookbook",
-  "title": "Nom Noms 🍪",
+  "title": "Nom Noms",
+  "icon": "cookie",
   "navLabel": {
     "text": "Nom\u202FNoms",
-    "emoji": "🍪"
+    "emoji": "🍪",
+    "icon": "cookie"
   },
   "includeInHeader": true,
   "description": "Baking and Cooking recipes approved by the cosmic dinner foundation will soon be published here!",

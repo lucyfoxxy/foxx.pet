@@ -1,10 +1,11 @@
 {
   "id": "galleries",
   "href": "/galleries",
-  "title": "🐾 Paw Prints 🐾",
+  "title": "Paw Prints",
   "navLabel": {
     "text": "Paw\u202FPrints",
-    "emoji": "🐾"
+    "emoji": "🐾",
+    "icon": "paw"
   },
   "includeInHeader": true,
   "description": "Fursuit photo collection.",
