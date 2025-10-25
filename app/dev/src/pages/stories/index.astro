@@ -1,6 +1,6 @@
 ---
 import Layout from '@Layout/Main.astro';
-import StoriesPage from '@Pages/StoriesPage.astro';
+import CollectionContentPage from '@Pages/CollectionContentPage.astro';
 import { getPageContent } from '@Content/siteContent';
 
 export const prerender = true;
@@ -9,5 +9,5 @@ const content = await getPageContent('stories');
 const meta = { title: content.title, description: content.description };
 ---
 <Layout title={content.title} meta={meta}>
-  <StoriesPage />
+  <CollectionContentPage content={content} />
 </Layout>

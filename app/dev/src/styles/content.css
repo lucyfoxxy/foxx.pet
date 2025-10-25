@@ -35,7 +35,6 @@
   min-block-size: 100%;
   block-size: 100%;
 
-  /* 3 Bereiche: head / body / foot  (Body wächst) */
   grid-template-areas:
     "card-head"
     "card-body"
@@ -50,9 +49,9 @@
   backdrop-filter: var(--blur--default);
 }
 .card--ghost    { background: unset; }
-.card--plain    { background: transparent; box-shadow: none; backdrop-filter: none;}
+.card--plain    { background: transparent; box-shadow: none; backdrop-filter: none; filter: drop-shadow(6px 6px 3px var(--color-shadow-strong));}
 .card--light   { background: var(--card-surface--light); }
-.card--plain > .prose{backdrop-filter: var(--blur--default);background: var(--card-surface--dark);}
+.card--plain :where(.prose){font-weight: var(--thick-font-weight);}
 .is-centered { justify-items: center; text-align: center; }
 .is-centered :where(.prose) { margin-inline: auto; }
 
@@ -62,7 +61,7 @@
 .is-animated:hover,
 .is-animated:focus-visible {
   transform: scale(1.04);
-  box-shadow: var(--surface-glow--strong);
+  box-shadow: var(--surface-glow--soft);
 }
 
 .card__head { 

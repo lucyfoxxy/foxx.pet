@@ -19,20 +19,18 @@
     "signature": "Lucy Foxx"
   },
   "feature": {
-    "heading": "Recent Fuzz:",
-    "description": "My latest adventure:",
+    "heading": "Where did the Foxx...",
+    "description": "... fuzz around recently?",
     "placeholder": "<Most recent gallery images here>"
   },
   "contact": {
-    "heading": "Reach me across the Universe"
+    "heading": "Find the Foxx...",
+    "description":"... and give them a Boop!~"
   },
   "contactLinks": [
     { "href": "https://t.me/LucyFoxx", "label": "Telegram", "kind": "telegram" },
-    { "href": "https://bsky.app/profile/lucy.foxx.pet", "label": "BlueSky", "kind": "bluesky" },
-    { "href": "mailto:lucy@foxx.pet", "label": "E-Mail", "kind": "rocket" },
-    { "href": "mailto:lucy@foxx.pet", "label": "E-Mail", "kind": "cookie" },
-    { "href": "mailto:lucy@foxx.pet", "label": "E-Mail", "kind": "planet" },
-    { "href": "mailto:lucy@foxx.pet", "label": "E-Mail", "kind": "sparkles" },
-    { "href": "mailto:lucy@foxx.pet", "label": "E-Mail", "kind": "palette" }
+    { "href": "https://bsky.app/profile/lucy.foxx.pet", "label": "bluesky", "kind": "bluesky" },
+    { "href": "mailto:lucy@foxx.pet", "label": "E-Mail", "kind": "mail" },
+    { "href": "mailto:lucy@foxx.pet", "label": "Barq", "kind": "barq" }
   ]
 }

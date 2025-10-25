@@ -1,4 +1,6 @@
 ---
+import Card from '@Layout/Card.astro';
+import { Picture } from 'astro:assets';
 interface AlbumEntry {
   slug: string;
   title: string;
@@ -16,9 +18,6 @@ interface CategoryInfo {
   title: string;
   description?: string;
 }
-
-import Card from '@Layout/Card.astro';
-
 const { category, albums } = Astro.props as {
   category: CategoryInfo;
   albums: AlbumEntry[];
@@ -74,26 +73,36 @@ const normalizedAlbums = albums.map((album) => {
         coverUrl,
       }) => (
         <a href={href ?? `/galleries/${category.slug}/${slug}`} aria-label={`Open ${title}`}>
-          <Card class="card--lightis-centered is-animated" headClass="card__head--column">
+          <Card class="card--light is-centered is-animated" headClass="card__head--column">
             <Fragment slot="head">
               <h3 class="card__title">{title}</h3>
               {(formattedStartDate || typeof count === 'number') && (
-                <div class="card__badges controls">
-                  {formattedStartDate ? <span class="badge badge--small">{formattedStartDate}</span> : null}
+                <div class="card__badges controls controls--spread">
+                  {formattedStartDate ? <span class="badge badge--dark">{formattedStartDate}</span> : null}
                   {typeof count === 'number' ? (
-                    <span class="badge badge--small">{count > 0 ? `${count} photos` : 'No photos yet'}</span>
+                    <span class="badge badge--dark">{count > 0 ? `${count} photos` : 'No photos yet'}</span>
                   ) : null}
                 </div>
               )}
             </Fragment>
             <Fragment slot="body">
-              <div class="media-album__cover" data-slug={slug}>
+              
+              <div class="media-frame" data-slug={slug}>
                 {coverUrl ? (
-                  <img src={coverUrl} alt="" loading="lazy" decoding="async" />
+                  <Picture
+                    src={coverUrl}
+                    formats={['webp']}
+                    inferSize
+                    alt="Cover"
+                    fetchpriority="low"
+                    class="media-image"
+                  /> 
+                  <img class="media-image" src={coverUrl} alt="" loading="lazy" decoding="async" />
                 ) : (
-                  <div class="media-album__cover-placeholder" aria-hidden="true"></div>
+                  <div class="media-image placeholder" aria-hidden="true"></div>
                 )}
               </div>
+              
             </Fragment>
           </Card>
         </a>

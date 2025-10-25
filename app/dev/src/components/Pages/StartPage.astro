@@ -34,7 +34,7 @@ const isExternalLink = (href: string) => href.startsWith('http');
   </head>
 
   <section class="content-section">
-    <Card class="card--plain is-centered media-hero is-condensed">
+    <Card class="card--plain is-centered is-condensed">
       <Fragment slot="head">
         <h1 class="card__title">{hero.heading}</h1>
       </Fragment>
@@ -45,10 +45,11 @@ const isExternalLink = (href: string) => href.startsWith('http');
           inferSize
           alt={hero.heading}
           fetchpriority="high"
-          class="media-hero__logo"
-        />
-
-        <h3><em>...Eeeeeeeeeeeeeeeeeeeeek!</em></h3>
+          class="media-image hero"
+        />       
+      </Fragment>
+      <Fragment slot="foot">
+        <h2><em>...Eeeeeeeeeeeeeeeeeeeeek!</em></h2>
       </Fragment>
     </Card>
   </section>
@@ -62,19 +63,28 @@ const isExternalLink = (href: string) => href.startsWith('http');
         <Fragment slot="body">
           <div class="prose">
             {intro.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
-            <p class="is-italic">{intro.signature}</p>
+            
+          </div>
+        </Fragment>
+        <Fragment slot="foot">
+          <div class="prose">
+            <p>
+              - Always follow your heart -
+            </p>
+          
+          <h3 class="is-italic">{intro.signature}</h3>
           </div>
         </Fragment>
       </Card>
-      <Card>
+      <Card class="card--light" headClass="card__head--column">
         <Fragment slot="head">
-          <h3 class="card__title">Reach the Fops</h3>
-        </Fragment>
-        <Fragment slot="foot">
-          <div class="controls controls--center">
+          <h2 class="card__title">{contact.heading}</h2>
+          <p>{contact.description}</p>
+        </Fragment><Fragment slot="body">
+          <div class="controls controls--start">
             {links.map((link) => (
               <a
-                class={`button button--large button--large--${link.kind}`}
+                class={`button button--dark button--large button--large--${link.kind}`}
                 href={link.href}
                 rel={isExternalLink(link.href) ? 'noopener noreferrer' : undefined}
                 target={isExternalLink(link.href) ? '_blank' : undefined}
@@ -87,25 +97,27 @@ const isExternalLink = (href: string) => href.startsWith('http');
         </Fragment>
       </Card>
     </section>
-    <Card>
+    <Card class="card--light" headClass="card__head--column">
       <Fragment slot="head">
         <h2 class="card__title">{feature.heading}</h2>
+        <p>{feature.description}</p>
       </Fragment>
-      <Fragment slot="body">
+      <Fragment slot="foot">
+      <div class="media-wrapper">
         <div
-          class="media__hook"
+          class="media-frame compact"
           data-slug={albumSlug}
           data-autoplay="true"
           data-interval="8000"
           data-random="true"
           data-share-key={shareKey}
+          role="button" 
+          tabindex="0" 
+          aria-label="Open artwork in lightbox"
         >
-          <div class="media__wrapper">
-            <div class="media__frame media__frame--compact" role="button" tabindex="0" aria-label="Open artwork in lightbox">
-              <img class="media__image" alt="" />
-              <div class="media__progress" aria-hidden="true"></div>
-            </div>
-          </div>
+          <img class="media-image compact" alt="" />
+          <div class="media-progress" aria-hidden="true"></div>
+        </div>
         </div>
       </Fragment>
     </Card>

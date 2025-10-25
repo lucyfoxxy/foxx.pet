@@ -11,7 +11,7 @@
 .controls--start  { justify-content: flex-start; }
 .controls--center { justify-content: center; }
 .controls--end    { justify-content: flex-end; }
-.controls--spread { justify-content: space-evenly; column-gap: var(--card-gap); }
+.controls--spread { justify-content: space-between; column-gap: var(--card-gap); }
 .controls--nowrap { flex-wrap: nowrap; }
 .controls--tight  { gap: calc(var(--control-gap) * 0.6); }
 :not(.header__nav).controls { margin-bottom: var(--card-gap); }
@@ -32,32 +32,42 @@
   background: var(--control-surface--light);
   border-radius: var(--radius-s);
 }
-.is-dark  { background: var(--control-surface--dark); }
-.is-ghost { background: transparent; box-shadow: none;}
 .button{
   user-select: none;
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
   cursor: pointer;  
 }
-.button--small {  padding-block: calc(var(--control-padding) * .5) }
-.button--large { padding: calc(var(--control-padding) * 1.75);}
-
-
+.button--small { padding-block: calc(var(--control-padding) * .5); }
+.button--large { padding: calc(var(--control-padding) * 1.35);}
+.button:hover {
+  text-shadow: var(--text-glow--strong);
+  color: var(--text-highlight);
+  transform: var(--transform-raise);
+}
+.button:not(.button--ghost):hover { 
+  box-shadow: var(--surface-shadow--default),var(--control-glow); 
+}
+.button--small:not(.button--ghost):hover { 
+  box-shadow: var(--surface-shadow--default),var(--control-glow--soft); 
+  transform: var(--transform-raise--soft);
+  text-shadow: var(--text-glow--soft);
+}
 
 .badge {
   border-radius: 999px; 
   padding-block: calc(var(--control-padding) * .5);
 }
-.button:hover {
-  text-shadow: var(--text-glow--strong);
-  color: var(--text-highlight);
-  transform: translateY(-2px);
+
+.button--dark,
+.badge--dark  { 
+  background: var(--control-surface--dark); 
 }
-.button:not(.is-ghost):hover {
-  background: var(--control-surface--light--highlight);
-  box-shadow: var(--surface-shadow--soft),var(--surface-glow);
+.badge--ghost,
+.button--ghost { 
+  background: transparent; box-shadow: none;
 }
+
 
 @supports not (color: oklch(50% 0 0)) {
   .button:hover { filter: brightness(1.08); }
@@ -67,10 +77,9 @@
 .button__icon svg{
   display:inline-flex;
   vertical-align: middle;
-  
-  max-inline-size: 1.35em;
-  max-block-size: 1.35em;
-  filter: drop-shadow(var(--text-shadow--strong));
+  inline-size: var(--icon-size);
+  block-size: var(--icon-size);
+  filter: drop-shadow(var(--icon-shadow));
   
 }
 

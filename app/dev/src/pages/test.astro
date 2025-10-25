@@ -23,8 +23,8 @@ import { Picture } from 'astro:assets';
     <Fragment slot="head">
       <h2 class="card__title">I am card title</h2>
       <div class="card__badges controls">
-        <span class="badge">hint</span><span class="badge is-dark">hint</span>
-        <span class="badge">hint</span><span class="badge is-dark">hint</span><span class="badge badge--small">hint</span>
+        <span class="badge">hint</span><span class="badge badge--dark">hint</span>
+        <span class="badge">hint</span><span class="badge badge--dark">hint</span><span class="badge ">hint</span>
       </div>
     </Fragment>
     <Fragment slot="body">
@@ -36,7 +36,7 @@ import { Picture } from 'astro:assets';
     </Fragment>
     <Fragment slot="foot">
       <div class="controls controls--spread">
-      <span class="button button--small">click me</span><span class="button button--small is-dark">click me</span><span class="button button--small is-ghost">click me</span>
+      <span class="button button--small">click me</span><span class="button button--small button--dark">click me</span><span class="button button--small button--ghost">click me</span>
       </div>
     </Fragment>
   </Card>
@@ -44,7 +44,7 @@ import { Picture } from 'astro:assets';
     <Fragment slot="head">
       <h2 class="card__title">I am card title</h2>
       <div class="card__badges controls controls--tight">
-        <span class="badge">hint</span><span class="badge is-dark">hint</span>
+        <span class="badge">hint</span><span class="badge badge--dark">hint</span>
       </div>
     </Fragment>
     <Fragment slot="body">
@@ -57,7 +57,7 @@ import { Picture } from 'astro:assets';
     <Fragment slot="foot">
 
       <div class="controls controls--spread controls--nowrap">
-        <span class="button">click me</span><span class="button is-dark">click me</span><span class="button is-ghost">click me</span>
+        <span class="button">click me</span><span class="button button--dark">click me</span><span class="button button--ghost">click me</span>
       </div>
     </Fragment>
   </Card>
@@ -65,8 +65,8 @@ import { Picture } from 'astro:assets';
     <Fragment slot="head">
       <h2 class="card__title">I am card title</h2>
       <div class="card__badges controls">
-        <span class="badge">hint</span><span class="badge is-dark">hint</span>
-        <span class="badge">hint</span><span class="badge is-dark">hint</span><span class="badge badge--small is-ghost">hint</span>
+        <span class="badge">hint</span><span class="badge badge--dark">hint</span>
+        <span class="badge">hint</span><span class="badge badge--dark">hint</span><span class="badge badge--ghost">hint</span>
       </div>
     </Fragment>
     <Fragment slot="body">
@@ -79,7 +79,7 @@ import { Picture } from 'astro:assets';
     <Fragment slot="foot">
 
       <div class="controls controls--spread">
-        <span class="button button--large">click me</span><span class="button button--large is-dark">click me</span><span class="button button--large is-ghost">click me</span>
+        <span class="button button--large">click me</span><span class="button button--large button--dark">click me</span><span class="button button--large button--ghost">click me</span>
       </div>
     </Fragment>
   </Card>
@@ -89,11 +89,11 @@ import { Picture } from 'astro:assets';
     <Fragment slot="body">
       <div class="controls">
         <span class="button"><span class="button__icon"><Icons kind="palette"></Icons></span></span>
-        <span class="button is-dark"><span class="button__icon"><Icons kind="paw"></Icons></span></span>
-        <span class="button is-ghost"><Icons kind="cookie"></Icons></span>
+        <span class="button button--dark"><span class="button__icon"><Icons kind="paw"></Icons></span></span>
+        <span class="button button--ghost"><Icons kind="cookie"></Icons></span>
         <span class="button"><span class="button__icon"><Icons kind="rocket"></Icons></span></span>
-        <span class="button is-dark"><span class="button__icon"><Icons kind="sparkles"></Icons></span></span>
-        <span class="button is-ghost"><Icons kind="cookie"></Icons></span>    
+        <span class="button button--dark"><span class="button__icon"><Icons kind="sparkles"></Icons></span></span>
+        <span class="button button--ghost"><Icons kind="cookie"></Icons></span>    
       </div>
     </Fragment>
   </Card>
@@ -101,7 +101,7 @@ import { Picture } from 'astro:assets';
     <Fragment slot="head">
       <h2 class="card__title">Card Title</h2>
       <div class="card__badges controls">
-        <span class="badge">hint</span><span class="badge is-dark">hint</span>
+        <span class="badge">hint</span><span class="badge badge--dark">hint</span>
         
       </div>
     </Fragment>
@@ -109,6 +109,7 @@ import { Picture } from 'astro:assets';
 
     </Fragment>
     <Fragment slot="foot">
+      <div class="media-wrapper">
       <div class="media-frame">
         <Picture
           src={ASSETS.space_fox}
@@ -118,6 +119,7 @@ import { Picture } from 'astro:assets';
           fetchpriority="high"
           class="media-image"
         />
+      </div>
       </div>
     </Fragment>
   </Card>
@@ -125,7 +127,7 @@ import { Picture } from 'astro:assets';
     <Fragment slot="head">
       <h2 class="card__title">Card Tiiiiiiiiiiiiiiiiiiiiiiiiiiiii iiiitle</h2>
       <div class="card__badges controls">
-        <span class="badge">hint</span><span class="badge is-dark">hint</span>
+        <span class="badge">hint</span><span class="badge badge--dark">hint</span>
         
       </div>
     </Fragment>
@@ -133,6 +135,7 @@ import { Picture } from 'astro:assets';
 
     </Fragment>
     <Fragment slot="foot">
+            <div class="media-wrapper">
       <div class="media-frame">
         <Picture
           src={ASSETS.space_fox}
@@ -142,21 +145,37 @@ import { Picture } from 'astro:assets';
           fetchpriority="high"
           class="media-image"
         />
-      </div>
+      </div></div>
     </Fragment>
   </Card>
 </section>
 <section class="content-section">
-  <Card class="card--light" headClass="is-centered card__head--column" >
+  <Card class="card--plain" headClass="is-centered card__head--column" >
     <Fragment slot="head">
       <h2 class="card__title">Card Title</h2>
       <div class="card__badges controls">
-        <span class="badge">hint</span><span class="badge is-dark">hint</span>
+        <span class="badge">hint</span><span class="badge badge--dark">hint</span>
         
       </div>
     </Fragment>
     <Fragment slot="body">
-      <div class="media-frame is-centered">
+            <div class="media-wrapper">
+      <div class="media-frame">
+        <Picture
+          src={ASSETS.space_fox}
+          formats={['webp']}
+          inferSize
+          alt="space-fox"
+          fetchpriority="high"
+          class="media-image"
+        />
+      </div></div>
+    </Fragment>
+    </Card>    
+  <Card class="card--light is-condensed" headClass="is-centered card__head--column" >
+    <Fragment slot="body">
+            <div class="media-wrapper">
+      <div class="media-frame is-thumb">
         <Picture
           src={ASSETS.space_fox}
           formats={['webp']}
@@ -166,26 +185,27 @@ import { Picture } from 'astro:assets';
           class="media-image"
         />
       </div>
-    </Fragment>
-    <Fragment slot="foot">
-      <div class="media-frame is-centered">
+            <div class="media-frame is-thumb">
         <Picture
           src={ASSETS.space_fox}
           formats={['webp']}
           inferSize
           alt="space-fox"
           fetchpriority="high"
-          class="media-image is-thumb"
+          class="media-image"
         />
+      </div>
+            <div class="media-frame is-thumb">
         <Picture
           src={ASSETS.space_fox}
           formats={['webp']}
           inferSize
           alt="space-fox"
           fetchpriority="high"
-          class="media-image is-thumb"
-        />        
+          class="media-image"
+        />
       </div>
+    </div>
     </Fragment>
   </Card>
 </section>

@@ -30,7 +30,7 @@ const meta = {
         {(recipe.data.categories?.length || recipe.data.tags?.length) && (
           <div class="card__badges controls controls--tight">
             {recipe.data.categories?.map((category) => (
-              <span class="badge is-dark">{category}</span>
+              <span class="badge badge--dark">{category}</span>
             ))}
             {recipe.data.tags?.map((tag) => (
               <span class="badge">{tag}</span>
@@ -73,7 +73,7 @@ const meta = {
       </Fragment>
       <Fragment slot="foot">
         <div class="controls controls--start">
-          <a class="button is-ghost" href="/cookbook">← Back to the cookbook</a>
+          <a class="button button--ghost" href="/cookbook">← Back to the cookbook</a>
         </div>
       </Fragment>
     </Card>

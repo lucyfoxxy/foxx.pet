@@ -40,11 +40,10 @@ const introParagraphs = content.introParagraphs ?? [content.description];
         <Fragment slot="body">
           {description ? <p>{description}</p> : null}
 
-          <div class="card__spacer" aria-hidden="true"></div>
-          <div class="media-album__cover" data-slug={slug}>
-            <div class="media-album__cover-placeholder" aria-hidden="true"></div>
-          </div>
         </Fragment>
+        <Fragment slot="foot">
+          <div class="media-image placeholder" data-slug={slug}></div>
+        </Fragment>        
       </Card>
     </a>
   ))}

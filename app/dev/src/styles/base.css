@@ -55,8 +55,8 @@ body::before {
 }
 .panel,.header__nav:where(a):hover,
 .panel,.header__nav:where(a):focus-visible {
-  text-shadow: var(--text-glow--strong);
-  color: var(--text-highlight);
+  text-shadow: var(--text-shadow--strong);
+
   opacity: 1;
 }
 

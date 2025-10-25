@@ -21,23 +21,20 @@ const buildRemoteUrl = (id, shareKey, kind) => {
 };
 
 export default function initGalleryIntro() {
-  const root = document.querySelector('.media__hook[data-slug]');
-  if (!root) return;
+  const frame = document.querySelector('.media-frame[data-slug]');
+  if (!frame) return;
 
-  const slug     = root.getAttribute('data-slug');
-  const autoplay = root.getAttribute('data-autoplay') === 'true';
-  const random   = root.getAttribute('data-random') === 'true';
-  const interval = parseInt(root.getAttribute('data-interval') || '7000', 10);
+  const slug     = frame.getAttribute('data-slug');
+  const autoplay = frame.getAttribute('data-autoplay') === 'true';
+  const random   = frame.getAttribute('data-random') === 'true';
+  const interval = parseInt(frame.getAttribute('data-interval') || '7000', 10);
+  const imgEl     = frame?.querySelector('.media-image');
+  const progress  = frame?.querySelector('.media-progress');
 
-  const viewer    = root.querySelector('.media__wrapper');
-  const frame     = viewer?.querySelector('.media__frame');
-  const imgEl     = frame?.querySelector('.media__image');
-  const progress  = frame?.querySelector('.media__progress');
-
-  if (!viewer || !frame || !imgEl || !progress) return;
+  if (!frame || !imgEl || !progress) return;
 
   const albumEntry = itemsBySlug.get(slug);
-  const attrShareKey = root.getAttribute('data-share-key') || undefined;
+  const attrShareKey = frame.getAttribute('data-share-key') || undefined;
   const { items: rawItems = [], shareKey: albumShareKey } = Array.isArray(albumEntry)
     ? { items: albumEntry, shareKey: attrShareKey }
     : albumEntry ?? {};

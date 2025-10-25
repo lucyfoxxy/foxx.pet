@@ -37,7 +37,8 @@
   
   --site-logo--size:         calc(clamp(var(--space-xxs), calc(var(--space-xxs) + 5vw), var(--space-xxl)) * .75);
   --thumb-size:              clamp(64px, 9vw, 128px);
-  --brand-size:              clamp(320px, 45vw, 420px);
+  --hero-size:               clamp(320px, 45vw, 420px);
+  --icon-size:               2.5em;
 
   /* ====== Base Colors ========================= */
   --color-dark:              oklch(20% 0.11 295);
@@ -45,42 +46,45 @@
   --color-accent:            oklch(80% 0.24 295); 
   --color-shadow-soft:       color-mix(in oklch, var(--color-dark) 30%, transparent);
   --color-shadow-strong:     color-mix(in oklch, var(--color-dark) 60%, transparent);
-  --color-glow-soft:         color-mix(in oklch, var(--color-light) 30%, transparent);
-  --color-glow-strong:       color-mix(in oklch, var(--color-light) 60%, transparent);
+  --color-glow-soft:         color-mix(in oklch, var(--color-light) 40%, var(--color-accent));
+  --color-glow-strong:       color-mix(in oklch, var(--color-light) 80%, white);
 
   /* ====== Text Colors & FX ==================== */
-  --text-color:              oklch(94% 0.09 300);
-  --text-accent:             color-mix(in oklab, var(--text-color) 45%, var(--color-accent));
-  --text-highlight:          color-mix(in oklab, var(--text-color) 25%, var(--color-light));
+  --text-color:              color-mix(in oklch, var(--color-light) 85%, white);
+  --text-accent:             color-mix(in oklab, var(--color-light) 85%, var(--color-accent));
+  --text-highlight:          color-mix(in oklab, var(--color-light) 65%, var(--color-accent));
 
   --text-shadow--soft:       1px 1px 1px var(--color-shadow-soft);  
   --text-shadow--strong:     2px 2px 2px var(--color-shadow-strong);
-  
+  --icon-shadow:             3px 4px 3px var(--color-shadow-strong);
+
   --text-glow--soft:         1px 1px 1px var(--color-glow-soft);
-  --text-glow--strong:       2px 2px 2px var(--color-glow-strong);
+  --text-glow--strong:       1px 1px 2px var(--color-glow-strong);
 
   /* ====== Surface / Control Colors & FX ======= */  
-  --card-surface--dark:      color-mix(in oklab,var(--color-dark) 55%, transparent);
-  --card-surface--light:     color-mix(in oklab,var(--color-light) 10%, transparent);
+  --card-surface--dark:      color-mix(in oklab,var(--color-dark) 70%, transparent);
+  --card-surface--light:     color-mix(in oklab,var(--color-light) 29%, transparent);
 
   --control-surface--light:              color-mix(in oklch, oklch(72% 0.18 295) 69%, transparent);
   --control-surface--light--highlight:   color-mix(in oklch, var(--control-surface-light) 94%, var(--color-light)); 
   --control-surface--dark:            color-mix(in oklch,var(--color-dark)89%,transparent);
   --control-surface--dark--highlight: color-mix(in oklab,var(--control-surface--dark) 94%, var(--color-dark));
   
+  --control-glow:      0 0 8px 0 var(--color-glow-strong), inset 0 0 1px 2px var(--color-glow-strong);
+  --control-glow--soft:inset 0 0 8px 0 var(--color-glow-soft);
 
   --surface-shadow--soft:    1px 2px 4px 0px var(--color-shadow-soft);
   --surface-shadow--default: 0 0 18px -10px var(--color-shadow-soft),0 0 24px -6px var(--color-shadow-strong);
   --surface-shadow--strong:  0 0 20px -10px var(--color-shadow-soft),0 0 28px -6px var(--color-shadow-strong),0 0 14px 0 color-mix(in srgb, black 95%, transparent);
 
-  --surface-glow:      0 0 4px 0 var(--color-glow-strong), inset 0 0 11px 0 var(--color-glow-soft);
-
+  --surface-glow:      0 0 8px 0 var(--color-glow-strong), inset 0 0 1px 2px var(--color-glow-strong);
+  --surface-glow--soft:0 0 6px 0 var(--color-glow-soft);
  
   --blur--soft:              blur(var(--radius-s));
   --blur--default:           blur(var(--radius-m));
   --blur--strong:            blur(var(--radius-l));
 
-  --outline:                 1px solid var(--card-surface--dark); 
+  --outline:                 1px solid var(--card-surface--light); 
 
   /* ====== Overlays / Filter Presets ============ */   
   --background-overlay:      radial-gradient(ellipse at center, transparent 30%, black 120%); 
@@ -124,8 +128,11 @@
 
   /* ====== Motion ====== */
   --transition-interactive:     color .2s ease, text-shadow .2s ease;
-  --transition-raise:           transform .12s ease, box-shadow .12s ease;
-  --transition-glow:            color .12s ease, text-shadow .12s ease, transform .12s ease, box-shadow .12s ease;
+  --transition-raise:           transform .25s ease-in-out, box-shadow .2s ease;
+  --transition-glow:            color .2s ease, text-shadow .2s ease, transform .2s ease, box-shadow .2s ease;
   --transition-soft:            opacity .25s ease, transform .25s ease, background .25s ease, box-shadow .25s ease;
   --transition-nav:             transform .5s ease-in-out, text-shadow .5s ease-in-out;
+
+  --transform-raise:            translateY(-5px) scale(1.04);
+  --transform-raise--soft:      translateY(-1px) scale(1.01);
 }

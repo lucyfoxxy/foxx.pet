@@ -11,6 +11,32 @@
   "introParagraphs": [
     "This is the upcoming place where you gonna find all the foxx' recipes!"
   ],
+  "collectionPage": {
+    "collection": "recipes",
+    "baseHref": "/cookbook",
+    "facets": {
+      "heading": "Plan your feast",
+      "paragraphs": [
+        "Categories and tags make it simple to build seasonal menus or filter by dietary needs. Hook them into client-side state or query parameters for an experience similar to the gallery overview."
+      ],
+      "emptyFilters": "Start tagging recipes with flavour profiles, seasons, or difficulty to unlock richer filtering."
+    },
+    "item": {
+      "ctaLabel": "Open recipe →",
+      "details": [
+        {
+          "label": "Published",
+          "field": "publishDate",
+          "type": "date"
+        }
+      ],
+      "listDetails": [
+        { "label": "Prep", "field": "prepTime" },
+        { "label": "Cook", "field": "cookTime" },
+        { "label": "Serves", "field": "servings" }
+      ]
+    }
+  },
   "overview": {
     "emptyState": "Cakes are still baking...",
     "cta": "As soon as recipes launch they'll appear here with filters for flavours, effort, and more."

@@ -14,6 +14,40 @@ const contactEntrySchema = z.object({
   kind: z.string().optional(),
 });
 
+const collectionPageSchema = z.object({
+  collection: z.enum(["stories", "recipes"]),
+  baseHref: z.string(),
+  facets: z
+    .object({
+      heading: z.string(),
+      paragraphs: z.array(z.string()).optional(),
+      emptyFilters: z.string().optional(),
+      variant: z.enum(["default", "soft"]).optional(),
+    })
+    .optional(),
+  item: z.object({
+    ctaLabel: z.string(),
+    excerptField: z.string().optional(),
+    details: z
+      .array(
+        z.object({
+          label: z.string(),
+          field: z.string(),
+          type: z.enum(["date", "text"]).optional(),
+        })
+      )
+      .optional(),
+    listDetails: z
+      .array(
+        z.object({
+          label: z.string(),
+          field: z.string(),
+        })
+      )
+      .optional(),
+  }),
+});
+
 const sitePages = defineCollection({
   type: "data",
   schema: z
@@ -54,6 +88,7 @@ const sitePages = defineCollection({
       contact: z
         .object({
           heading: z.string(),
+          description: z.string().optional(),
         })
         .optional(),
       contactLinks: z
@@ -83,6 +118,7 @@ const sitePages = defineCollection({
         )
         .optional(),
       disclaimer: z.array(z.string()).optional(),
+      collectionPage: collectionPageSchema.optional(),
     })
     .strict(),
 });
