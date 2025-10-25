@@ -123,6 +123,7 @@ const isLinkActive = (href: string) => {
 const navLinks = rawNavLinks.map((link) => ({
   ...link,
   isActive: isLinkActive(link.href),
+  
 }));
 const breadcrumbs = buildBreadcrumbs({
   currentPath: Astro.url.pathname,
@@ -143,7 +144,7 @@ const breadcrumbs = buildBreadcrumbs({
           {Astro.slots.has('header__actions') ? (
             <slot name="header__actions" slot="actions" />
           ) : null}
-        </SiteHeader>
+        </Header>
         <main class="panel">
           <slot />
         </main>
