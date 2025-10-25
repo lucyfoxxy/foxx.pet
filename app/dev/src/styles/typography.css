@@ -47,10 +47,16 @@ a {
 
 
 .header__nav a {
-  font-weight: var(--bold-font-weight);
+    font-weight: var(--normal-font-weight);
   font-size: var(--medium-font-size);
+  letter-spacing: var(--medium-letter-spacing);
+  opacity: .9;
 }
-
+.header__nav a.is-active {
+    font-weight: var(--bold-font-weight);
+    text-shadow: var(--text-glow--strong);
+    opacity: 1;
+}
 .footer,
 .badge,
 .button--small {

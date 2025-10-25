@@ -23,8 +23,8 @@
   --control-gap:            var(--space-xs);   
   --control-padding:        var(--space-xs);  
 
-  --nav-gap--column:        clamp(var(--space-xs),calc(var(--space-xs) + 1.25vw),var(--space-xl));
-  --nav-gap--row:           var(--space-xxs);
+  --nav-gap--column:        clamp(var(--space-s),calc(var(--space-s) + 1.5vw),var(--space-xl));
+  --nav-gap--row:           var(--space-xs);
 
   --card-padding:           clamp(var(--space-s),  calc(var(--space-s) + 1.75vw),  var(--space-xl));   
   --section-gap:            clamp(var(--space-s),  calc(var(--space-s) + 1.5vw),    var(--space-xxl)); 
@@ -35,7 +35,7 @@
   --container-padding:       clamp(var(--space-xxs),  calc(var(--space-xxs) + 2vw),    var(--space-xxl)); 
   --container-max:           1280px;
   
-  --site-logo--size:         calc(clamp(var(--space-xxs), calc(var(--space-xxs) + 5vw), var(--space-xxl)) * .75);
+  --site-logo--size:         calc(clamp(var(--space-xxs), calc(var(--space-xxs) + 5vw), var(--space-xxl)));
   --thumb-size:              clamp(64px, 9vw, 128px);
   --hero-size:               clamp(320px, 45vw, 420px);
   --icon-size:               2.5em;

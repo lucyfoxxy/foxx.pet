@@ -14,7 +14,7 @@
 .controls--spread { justify-content: space-between; column-gap: var(--card-gap); }
 .controls--nowrap { flex-wrap: nowrap; }
 .controls--tight  { gap: calc(var(--control-gap) * 0.6); }
-:not(.header__nav).controls { margin-bottom: var(--card-gap); }
+:not(.header__nav,.header__actions).controls { margin-bottom: var(--card-gap); }
 .card__badges.controls{
   vertical-align: text-bottom;
 }
@@ -38,8 +38,9 @@
   touch-action: manipulation;
   cursor: pointer;  
 }
-.button--small { padding-block: calc(var(--control-padding) * .5); }
+.button--small { padding-block: calc(var(--control-padding) * .75);}
 .button--large { padding: calc(var(--control-padding) * 1.35);}
+.button--round {  border-radius: 999px; }
 .button:hover {
   text-shadow: var(--text-glow--strong);
   color: var(--text-highlight);
@@ -65,7 +66,7 @@
 }
 .badge--ghost,
 .button--ghost { 
-  background: transparent; box-shadow: none;
+  background: transparent; box-shadow: none; padding: 0;
 }
 
 

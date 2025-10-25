@@ -80,10 +80,10 @@ main.panel {
   top: 0;
   z-index: 1001;
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: 20% 60% auto;
   grid-template-areas:
-    "logo nav"
-    "crumbs actions";
+    "logo logo logo"
+    "crumbs nav actions";
   align-items: stretch;
   margin-block: 0 var(--section-gap);
   margin-inline: 0;
@@ -91,7 +91,7 @@ main.panel {
   border-bottom: 1px solid var(--outline-color);
   background: var(--control-surface--dark);
   padding-inline: var(--panel-bar-padding);
-  padding-block: var(--panel-bar-padding) 0;
+  padding-block: calc(.75 * var(--panel-bar-padding));
   border-radius: var(--radius-l) var(--radius-l) 0 0 ;
   row-gap: var(--nav-gap--row);
   column-gap: var(--nav-gap--column);
@@ -99,6 +99,9 @@ main.panel {
 }
 .header[data-stuck]{
   border-radius:  0 ; 
+    grid-template-areas:
+    
+    "crumbs nav actions";
 }
 
 .header__nav a:hover,
@@ -129,73 +132,93 @@ main.panel {
     box-shadow: var(--surface-shadow--default);  
   }
   .header {
-    grid-template-columns: auto 1fr;
+    grid-template-columns: 1fr auto;
     grid-template-areas: 
-      "logo logo"
-      "nav nav"
-      "crumbs actions";
-    justify-items: center;
-    column-gap: 0;
-     ; 
+      "logo crumbs"
+      "nav actions";
+    justify-items: stretch;
+    justify-content: stretch;
+    gap: 0;
   }
-    .header__nav {
-    align-self: center;
-    justify-content: space-around;
-    column-gap: var(--control-gap);
+
+    .header__nav,.header__nav.controls {
+    align-self: start;
+    justify-self: start;
+    justify-content: start;
+    align-items: start;
+    
+    
   }
   .header[data-stuck] {
     grid-template-columns: auto 1fr;
     grid-template-areas: 
-      "nav nav"
-      "crumbs actions";
+
+      "nav actions";
     justify-items: stretch;
+    justify-content: stretch;
   }
-  .header[data-stuck] .header__logo{
+  .header[data-stuck] .header__crumbs{
     display: none;
   }
+  .header__crumbs{
+    align-self: self-end;
+    justify-self: end;
+  }  
 }
 
 /* ====== HEADER - LOGO ================= */
 .header__logo {
   display: inline-flex;
-  align-items: start;
+  align-self:center;
+  align-items: center;
   justify-content: center;
+  justify-self: center;
   position: relative;
-  grid-area: logo;
-  
+  grid-area: logo; 
 }
 .header__logo img {
   display: block;
   inline-size: auto;
-  block-size: calc(min(var(--site-logo--size),calc(var(--nav-gap--row) + var(--medium-font-size))));;
+  block-size: calc(min(var(--site-logo--size),calc(var(--nav-gap--row) *2 + var(--medium-font-size))));
   filter: var(--site-logo--filter);
 }
-
+.header[data-stuck] .header__logo{
+  display: none;
+}
+@media (max-width: 900px) {
+  .header__logo { justify-self: start; }
+}
 /* ====== HEADER - NAV ================= */
 .header__nav {
   inline-size: 100%;
   margin: 0;
   display: flex;
+  align-self:center;
   align-items: center;
-  justify-content: end;
-  flex-wrap: wrap;
+  justify-content: center;
+  justify-self: center;
+  flex-wrap: nowrap;
   row-gap: var(--nav-gap--row);
   column-gap: var(--nav-gap--column);
   grid-area: nav;
   background: none;;
 }
 
-
+.header__nav-link {
+  display: inline-flex;
+  flex-wrap: nowrap;
+}
 .header__nav-text {
-  line-height: var(--xlarge-line-height);
+  line-height: var(--xsmall-line-height);
 }
 
 .header__nav-emoji {
   font-size: .725em;
   line-height: var(--xsmall-line-height);
-  
 }
-
+@media (max-width: 900px) {
+  .header__nav-emoji { display: none; }
+}
 
 /* ====== HEADER - CRUMBS ================= */
 .header__crumbs {
@@ -204,23 +227,21 @@ main.panel {
   margin-inline: 0;
   grid-area: crumbs;
   border-radius: 0;
+  align-self: center;
   justify-self: start;
-  align-content: center;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   gap: var(--cluster-gap);
 }
 .header__actions:empty {
   display: none;
 }
-.header__actions {  grid-area: actions; justify-self: end;}
-@media (max-width: 900px) {
-  .header__crumbs {
-    
-    align-items: flex-end;
-  }
+.header__actions {  
+  grid-area: actions; 
+  align-self: center;
+  justify-self: end;
 }
+
 
 .header__crumbs ol {
   display: flex;
