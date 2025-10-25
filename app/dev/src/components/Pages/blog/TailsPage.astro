@@ -1,0 +1,11 @@
+---
+import BlogPage from '@Templates/blogPage.astro';
+import type { PageContent } from '@Content/siteContent';
+
+interface Props {
+  content: PageContent;
+}
+
+const { content } = Astro.props as Props;
+---
+<BlogPage content={content} />

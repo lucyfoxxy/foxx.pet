@@ -8,7 +8,7 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
-      "@Layout/*": ["src/components/Layout/*"],
+      "@Templates/*": ["src/components/Templates/*"],
       "@Styles/*": ["src/styles/*"],
       "@Pages/*": ["src/components/Pages/*"],
       "@Content/*": ["src/content/*"],

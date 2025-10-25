@@ -1,15 +1,18 @@
 ---
 import { getCollection, getEntry } from 'astro:content';
-import Layout from '@Layout/Main.astro';
-import GalleryCategoryOverviewPage from '@Pages/Gallery/CategoryOverviewPage.astro';
+import Layout from '@Templates/baseLayout.astro';
+import FramesPage from '@Pages/album/FramesPage.astro';
 
 export async function getStaticPaths() {
-  const catalog = (await getEntry('galleryCatalog', 'categories')).data;
-  return catalog.categories
-    .filter((c) => c.slug)
+  const catalogEntry = await getEntry('galleryCatalog', 'categories');
+  const categories = Array.isArray(catalogEntry?.data?.categories)
+    ? catalogEntry.data.categories
+    : [];
+  return categories
+    .filter((c) => c?.slug)
     .map((c) => ({
       params: { slug: c.slug! },
-      props:  { title: c.title, description: c.description ?? '' },
+      props: { title: c.title, description: c.description ?? '' },
     }));
 }
 
@@ -77,5 +80,5 @@ const backLabel = '← Paw Prints';
   <Fragment slot="header__actions">
     <a class="button button--small button--dark" href={backHref}>{backLabel}</a>
   </Fragment>
-  <GalleryCategoryOverviewPage category={category} albums={albumEntries} />
+  <FramesPage category={category} albums={albumEntries} />
 </Layout>

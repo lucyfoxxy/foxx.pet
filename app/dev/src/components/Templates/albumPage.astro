@@ -1,0 +1,57 @@
+---
+import Card from '@Templates/Card.astro';
+import TitleWithIcon from '@Templates/TitleWithIcon.astro';
+
+interface AlbumPageHeader {
+  title: string;
+  icon?: string;
+  emoji?: string;
+  description?: string;
+  paragraphs?: string[];
+  headingLevel?: 'h1' | 'h2' | 'h3';
+  align?: 'center' | 'start';
+}
+
+interface Props {
+  header: AlbumPageHeader;
+  columns?: 'cols-2' | 'cols-3' | '';
+}
+
+const { header, columns = 'cols-3' } = Astro.props as Props;
+const introParagraphs = Array.isArray(header.paragraphs) && header.paragraphs.length > 0
+  ? header.paragraphs
+  : header.description
+  ? [header.description]
+  : [];
+const headingLevel = header.headingLevel ?? 'h1';
+const align = header.align ?? 'center';
+const shouldUseIconHeading = Boolean(header.icon || header.emoji);
+---
+<section class="content-section">
+  <Card class={`card--plain ${align === 'center' ? 'is-centered' : ''}`.trim()}>
+    <Fragment slot="head">
+      {shouldUseIconHeading ? (
+        <TitleWithIcon class="card__title" title={header.title} icon={header.icon} emoji={header.emoji} />
+      ) : headingLevel === 'h2' ? (
+        <h2 class="card__title">{header.title}</h2>
+      ) : headingLevel === 'h3' ? (
+        <h3 class="card__title">{header.title}</h3>
+      ) : (
+        <h1 class="card__title">{header.title}</h1>
+      )}
+    </Fragment>
+    {introParagraphs.length > 0 ? (
+      <Fragment slot="body">
+        <div class="prose">
+          {introParagraphs.map((paragraph) => (
+            <p>{paragraph}</p>
+          ))}
+        </div>
+      </Fragment>
+    ) : null}
+  </Card>
+</section>
+
+<section class={`content-section ${columns}`.trim()}>
+  <slot />
+</section>

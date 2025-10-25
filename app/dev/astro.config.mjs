@@ -28,7 +28,7 @@ export default defineConfig({
         '@': fileURLToPath(new URL('./src', import.meta.url)),
         '@Pages': fileURLToPath(new URL('./src/components/Pages', import.meta.url)),
         '@Styles': fileURLToPath(new URL('./src/styles', import.meta.url)),
-        '@Layout': fileURLToPath(new URL('./src/components/Layout', import.meta.url)),
+        '@Templates': fileURLToPath(new URL('./src/components/Templates', import.meta.url)),
         '@Content': fileURLToPath(new URL('./src/content', import.meta.url)),
         '@Assets': fileURLToPath(new URL('./src/assets', import.meta.url)),
         '@Scripts': fileURLToPath(new URL('./src/scripts', import.meta.url)),

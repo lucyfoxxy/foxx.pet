@@ -1,7 +1,7 @@
 ---
+import AlbumPage from '@Templates/albumPage.astro';
+import Card from '@Templates/Card.astro';
 import { getNavLabelParts, getPageContent } from '@Content/siteContent';
-import Card from '@Layout/Card.astro';
-import TitleWithIcon from '@Layout/TitleWithIcon.astro';
 
 interface CategoryEntry {
   slug: string;
@@ -12,42 +12,25 @@ interface CategoryEntry {
 
 const { categories } = Astro.props as { categories: CategoryEntry[] };
 const content = await getPageContent('galleries');
-const introParagraphs = content.introParagraphs ?? [content.description];
+const introParagraphs = content.introParagraphs ?? (content.description ? [content.description] : []);
 const { icon, emoji } = getNavLabelParts(content);
 ---
-
-  <section class="content-section">
-    <Card class="card--plain is-centered">
-      <Fragment slot="head">
-        <TitleWithIcon class="card__title" title={content.title} icon={icon} emoji={emoji} />
-      </Fragment>
-
-      <Fragment slot="body">
-        {introParagraphs.map((paragraph) => (
-          <p>{paragraph}</p>
-        ))}
-      </Fragment>
-    </Card>
-  </section>
-
-<section class="content-section cols-3">
-    
+<AlbumPage header={{ title: content.title, icon, emoji, paragraphs: introParagraphs }}>
   {categories.map(({ slug, title, description, href }) => (
-    
     <a href={href ?? `/galleries/${slug}`} aria-label={`Open ${title}`}>
       <Card class="card--light is-animated is-centered" headClass="card__head--column">
         <Fragment slot="head">
           <h3 class="card__title">{title}</h3>
         </Fragment>
-        <Fragment slot="body">
-          {description ? <p>{description}</p> : null}
-
-        </Fragment>
+        {description ? (
+          <Fragment slot="body">
+            <p>{description}</p>
+          </Fragment>
+        ) : null}
         <Fragment slot="foot">
           <div class="media-image placeholder" data-slug={slug}></div>
-        </Fragment>        
+        </Fragment>
       </Card>
     </a>
   ))}
-
-</section>
+</AlbumPage>

@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
-import Layout from '@Layout/Main.astro';
-import GalleryDetailPage from '@Pages/Gallery/DetailPage.astro';
+import Layout from '@Templates/baseLayout.astro';
+import GalleryDetailPage from '@Pages/album/DetailPage.astro';
 
 export async function getStaticPaths() {
   const albums = await getCollection('albumData');
