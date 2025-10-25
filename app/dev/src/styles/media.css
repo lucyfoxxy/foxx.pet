@@ -68,8 +68,8 @@
   100% { opacity:  .02; transform: scale(1.00); }
 }
 
-.media-frame is-thumb[aria-current="true"],
-.media-frame is-thumb.active {
+.media-frame.is-thumbs-frame[aria-current="true"],
+.media-frame.is-thumbs-frame.active {
    outline: var(--outline);
 }
 
@@ -110,17 +110,9 @@
   top: 50%;
   transform: translateY(-50%);
 }
-.media-prev {
-  inset-inline-start: .65rem;
-}
-.media-next {
-  inset-inline-end: .65rem;
-}
+.media-prev { inset-inline-start: .65rem; }
+.media-next { inset-inline-end:   .65rem; }
 
-
-
-
-/* ====== PROGRESS BAR ====== */
 .media-progress {
   position: absolute;
   inset: auto .9rem .9rem .9rem;
@@ -129,10 +121,8 @@
   background: var(--control-surface--light);
   overflow: hidden;
   z-index: 1;
-  pointer-events: none;
-  
+  pointer-events: none; 
 }
-
 .media-progress::before {
   content: "";
   position: absolute;
@@ -143,13 +133,10 @@
   opacity: .75;
   transition: transform .12s linear;
 }
-
 .media-progress.compact {
   inset: auto .6rem .6rem .6rem;
   block-size: .24rem;
 }
-
-
 
 /* ====== LIGHTBOX OVERLAY ====== */
 .media-lightbox {
