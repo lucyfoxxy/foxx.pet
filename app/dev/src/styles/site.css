@@ -216,17 +216,33 @@ main.panel {
 .header__nav-link {
   display: inline-flex;
   flex-wrap: nowrap;
+  align-items: center;
+  gap: 0.35em;
 }
 .header__nav-text {
   line-height: var(--xsmall-line-height);
 }
 
-.header__nav-emoji {
-  font-size: .725em;
-  line-height: var(--xsmall-line-height);
+.header__nav-symbol {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
 }
+
+.header__nav-symbol--icon svg {
+  inline-size: 1.125em;
+  block-size: 1.125em;
+}
+
+.header__nav-symbol--emoji {
+  font-size: 0.9em;
+}
+
 @media (max-width: 900px) {
-  .header__nav-emoji { display: none; }
+  .header__nav-symbol {
+    display: none;
+  }
 }
 
 /* ====== HEADER - CRUMBS ================= */

@@ -87,6 +87,26 @@
 .card__badges{ grid-area: badges; }
 .card__spacer { flex: 1 1 auto; }
 
+.title-with-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.title-with-icon__icon svg {
+  inline-size: 1.4em;
+  block-size: 1.4em;
+}
+
+.title-with-icon__emoji {
+  font-size: 1.1em;
+  line-height: 1;
+}
+
+.title-with-icon__text {
+  display: inline-block;
+}
+
 /* ====== PROSE CONTENT ====== */
 .prose {
   display: flex;

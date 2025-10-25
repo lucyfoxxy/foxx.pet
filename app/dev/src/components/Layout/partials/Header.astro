@@ -1,6 +1,6 @@
 ---
 import { ASSETS } from '@Assets/ui';
-import  ICONS  from '@Assets/Icons.astro';
+import ICONS from '@Assets/Icons.astro';
 type NavLink = {
   href: string;
   label: string;
@@ -48,9 +48,20 @@ const hasActions = Astro.slots.has('actions');
           href={link.href}
           data-active={link.isActive ? 'true' : undefined}
           aria-current={link.isActive ? 'page' : undefined}
-        > <div class="header__nav-link">
-          <span class="header__nav-text">{link.label}</span>
-          {link.icon || link.emoji && <span class="header__nav-emoji">{link.emoji}<ICONS kind={link.icon}></ICONS></span>}
+        >
+          <div class="header__nav-link">
+            {(link.icon || link.emoji) && (
+              <span
+                class:list={[
+                  'header__nav-symbol',
+                  link.icon ? 'header__nav-symbol--icon' : 'header__nav-symbol--emoji',
+                ]}
+                aria-hidden="true"
+              >
+                {link.icon ? <ICONS kind={link.icon} /> : link.emoji}
+              </span>
+            )}
+            <span class="header__nav-text">{link.label}</span>
           </div>
         </a>
       ))}

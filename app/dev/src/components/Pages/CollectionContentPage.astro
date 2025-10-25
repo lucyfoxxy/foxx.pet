@@ -1,7 +1,8 @@
 ---
 import { getCollection, type CollectionEntry } from 'astro:content';
 import Card from '@Layout/Card.astro';
-import type { PageContent } from '@Content/siteContent';
+import TitleWithIcon from '@Layout/TitleWithIcon.astro';
+import { getNavLabelParts, type PageContent } from '@Content/siteContent';
 
 interface CollectionDetailConfig {
   label: string;
@@ -30,6 +31,7 @@ const rawBaseHref = collectionConfig.baseHref.trim();
 const normalizedBaseHref = rawBaseHref.length === 0 ? '' : rawBaseHref.startsWith('/') ? rawBaseHref : `/${rawBaseHref}`;
 const baseHref = normalizedBaseHref.replace(/\/+$/, '');
 const introParagraphs = content.introParagraphs ?? (content.description ? [content.description] : []);
+const { icon, emoji } = getNavLabelParts(content);
 const overview = content.overview ?? {};
 const facets = collectionConfig.facets ?? {};
 const facetParagraphs = facets.paragraphs ?? [];
@@ -82,9 +84,9 @@ const getListValues = (entry: CollectionEntryMap) =>
 ---
 <section class="content-section">
   <Card class="card--plain is-centered">
-    <Fragment slot="head">
-      <h1 class="card__title">{content.title}</h1>
-    </Fragment>
+      <Fragment slot="head">
+        <TitleWithIcon class="card__title" title={content.title} icon={icon} emoji={emoji} />
+      </Fragment>
 
     <Fragment slot="body">
       <div class="prose">

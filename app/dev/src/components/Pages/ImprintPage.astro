@@ -1,17 +1,19 @@
 ---
-import { getPageContent } from '@Content/siteContent';
+import { getNavLabelParts, getPageContent } from '@Content/siteContent';
 import Card from '@Layout/Card.astro';
+import TitleWithIcon from '@Layout/TitleWithIcon.astro';
 
 const content = await getPageContent('imprint');
 const introParagraphs = content.introParagraphs ?? [];
 const contacts = content.contacts ?? [];
 const disclaimer = content.disclaimer ?? [];
+const { icon, emoji } = getNavLabelParts(content);
 ---
 
   <section class="content-section">
     <Card class="card--plain is-centered">
       <Fragment slot="head">
-        <h1 class="card__title">{content.title}</h1>
+        <TitleWithIcon class="card__title" title={content.title} icon={icon} emoji={emoji} />
       </Fragment>
       <Fragment slot="body">
         <div class="prose">

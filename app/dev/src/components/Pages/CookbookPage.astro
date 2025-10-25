@@ -1,13 +1,15 @@
 ---
 import { getCollection, type CollectionEntry } from 'astro:content';
-import { getPageContent } from '@Content/siteContent';
+import { getNavLabelParts, getPageContent } from '@Content/siteContent';
 import Card from '@Layout/Card.astro';
+import TitleWithIcon from '@Layout/TitleWithIcon.astro';
 
 type RecipeEntry = CollectionEntry<'recipes'>;
 
 const content = await getPageContent('cookbook');
 const introParagraphs = content.introParagraphs ?? (content.description ? [content.description] : []);
 const overview = content.overview ?? {};
+const { icon, emoji } = getNavLabelParts(content);
 const recipes = (await getCollection('recipes')).sort(
   (a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime(),
 );
@@ -27,7 +29,7 @@ const hasRecipes = recipes.length > 0;
   <section class="content-section">
     <Card class="card--plain is-centered">
       <Fragment slot="head">
-        <h1 class="card__title">{content.title}</h1>
+        <TitleWithIcon class="card__title" title={content.title} icon={icon} emoji={emoji} />
       </Fragment>
 
       <Fragment slot="body">

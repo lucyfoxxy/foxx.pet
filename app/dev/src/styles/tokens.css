@@ -37,9 +37,25 @@
   
   --site-logo--size:         calc(clamp(var(--space-xxs), calc(var(--space-xxs) + 5vw), var(--space-xxl)));
   --thumb-size:              clamp(64px, 9vw, 128px);
-  --hero-size:               clamp(320px, 45vw, 420px);
+  --hero-size:               calc(min(clamp(320px, 45vw, 420px),10vw));
   --icon-size:               2.5em;
-
+  --gallery-frame-size: calc(
+    (var(--container-max) -
+      (var(--card-padding) * 2 + var(--panel-padding) * 2 )
+    )
+  );
+  --gallery-frame-size--2-cols: calc(
+    (var(--container-max) -
+      (var(--card-padding) * 4 + var(--panel-padding) * 2 + var(--section-gap) )
+    ) / 2
+  );
+    --gallery-frame-size--3-cols: calc(
+    (var(--container-max) -
+      (var(--card-padding) * 6 + var(--panel-padding) * 2 + var(--section-gap) * 2)
+    ) / 3
+  );    
+  --media-frame-aspect: 1 / 1;
+  --media-frame-mobile-inline-limit: calc(50vh * (1 / 1));
   /* ====== Base Colors ========================= */
   --color-dark:              oklch(20% 0.11 295);
   --color-light:             oklch(92% 0.18 295); 

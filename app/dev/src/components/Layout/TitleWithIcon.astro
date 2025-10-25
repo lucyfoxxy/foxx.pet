@@ -1,0 +1,40 @@
+---
+import ICONS from '@Assets/Icons.astro';
+import type { HTMLAttributes } from 'astro/types';
+
+type HeadingTag = keyof HTMLElementTagNameMap;
+
+interface TitleWithIconProps extends HTMLAttributes<HTMLElement> {
+  as?: HeadingTag;
+  title: string;
+  icon?: string;
+  emoji?: string;
+}
+
+const {
+  as = 'h1',
+  title,
+  icon: rawIcon,
+  emoji: rawEmoji,
+  class: className,
+  ...rest
+} = Astro.props as TitleWithIconProps;
+
+const Tag = as as HeadingTag;
+const icon = rawIcon?.trim().length ? rawIcon : undefined;
+const emoji = !icon && rawEmoji?.trim().length ? rawEmoji : undefined;
+---
+
+<Tag class:list={['title-with-icon', className]} {...rest}>
+  {icon ? (
+    <span class="title-with-icon__icon" aria-hidden="true">
+      <ICONS kind={icon} />
+    </span>
+  ) : null}
+
+  {emoji ? (
+    <span class="title-with-icon__emoji" aria-hidden="true">{emoji}</span>
+  ) : null}
+
+  <span class="title-with-icon__text">{title}</span>
+</Tag>
