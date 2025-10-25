@@ -31,22 +31,37 @@ export default function initGalleryPage() {
   const frame = document.querySelector('.media-frame[data-slug]');
   if (!frame) return;
 
-  const slug     = frame.getAttribute('data-slug');
+  const slug = frame.getAttribute('data-slug');
   const autoplay = frame.getAttribute('data-autoplay') === 'true';
-  const random   = frame.getAttribute('data-random') === 'true';
+  const random = frame.getAttribute('data-random') === 'true';
   const interval = parseInt(frame.getAttribute('data-interval') || '7000', 10);
-  const imgEl     = frame?.querySelector('.media-image');
-  const btnPrev    = frame?.querySelector('.media-prev');
-  const btnNext    = frame?.querySelector('.media-next');
-  const btnPlay    = frame?.querySelector('.media-playpause');
-  const progress   = frame?.querySelector('.media-progress');
-  const thumbsWrap = document.querySelector('.media-wrapper is-thumbs-wrap');  
-  const thumbs     = thumbsWrap?.querySelector('.media-frame is-thumbs-frame');
+  const imageRoot = frame?.querySelector('.media-image');
+  const imgEl = imageRoot instanceof HTMLImageElement
+    ? imageRoot
+    : imageRoot?.querySelector('img');
+  const btnPrev = frame?.querySelector('.media-prev');
+  const btnNext = frame?.querySelector('.media-next');
+  const btnPlay = frame?.querySelector('.media-playpause');
+  const progress = frame?.querySelector('.media-progress');
+  const thumbsWrap = document.querySelector('.media-wrapper.is-thumbs-wrap');
+  const thumbs = thumbsWrap?.querySelector('.media-frame.is-thumbs-frame');
+  const thumbsPrev = thumbsWrap?.querySelector('.media-prev.is-thumbs-prev');
+  const thumbsNext = thumbsWrap?.querySelector('.media-next.is-thumbs-next');
 
-  const thumbsPrev = thumbs?.querySelector('.media-frame is-thumbs-prev');
-  const thumbsNext = thumbs?.querySelector('.media-frame is-thumbs-next');
-
-  /*if (!frame || !imgEl || !btnPrev || !btnNext || !btnPlay || !progress || !thumbsWrap || !thumbsPrev || !thumbsNext) return;*/
+  if (
+    !frame ||
+    !(imgEl instanceof HTMLImageElement) ||
+    !(btnPrev instanceof HTMLButtonElement) ||
+    !(btnNext instanceof HTMLButtonElement) ||
+    !(btnPlay instanceof HTMLButtonElement) ||
+    !(progress instanceof HTMLElement) ||
+    !(thumbsWrap instanceof HTMLElement) ||
+    !(thumbs instanceof HTMLElement) ||
+    !(thumbsPrev instanceof HTMLButtonElement) ||
+    !(thumbsNext instanceof HTMLButtonElement)
+  ) {
+    return;
+  }
 
   const albumEntry = itemsBySlug.get(slug);
   const attrShareKey = frame.getAttribute('data-share-key') || undefined;
@@ -130,7 +145,7 @@ export default function initGalleryPage() {
     if (!availableWidth) return configuredWindow;
 
     const styles = getComputedStyle(thumbsWrap);
-    const sampleThumb = thumbsWrap.querySelector('.media-frame is-thumb');
+    const sampleThumb = thumbs.querySelector('.media-frame.is-thumb');
     const sampleWidth = sampleThumb?.getBoundingClientRect().width;
     const thumbSize = (sampleWidth && sampleWidth > 0)
       ? sampleWidth
@@ -278,13 +293,13 @@ export default function initGalleryPage() {
       fragment.appendChild(button);
     }
 
-    thumbsWrap.replaceChildren(fragment);
+    thumbs.replaceChildren(fragment);
     highlightThumbs();
     updateThumbNav();
   };
 
   const highlightThumbs = () => {
-    thumbsWrap.querySelectorAll('.media-frame is-thumb').forEach((thumb) => {
+    thumbs.querySelectorAll('.media-frame.is-thumb').forEach((thumb) => {
       const thumbIndex = parseInt(thumb.dataset.index || '', 10);
       const isActive = thumbIndex === i;
       thumb.classList.toggle('active', isActive);

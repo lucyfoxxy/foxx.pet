@@ -1,6 +1,5 @@
 ---
 import Card from '@Layout/Card.astro';
-import { Picture } from 'astro:assets';
 type GalleryItem = {
   full?: string | null;
   thumb?: string | null;
@@ -43,6 +42,7 @@ const normalizedInitialItem = initialItem && (initialItem.full || initialItem.th
       height: typeof initialItem.height === 'number' && Number.isFinite(initialItem.height)
         ? initialItem.height
         : undefined,
+      alt: typeof initialItem.alt === 'string' ? initialItem.alt : undefined,
     }
   : null;
 
@@ -82,14 +82,16 @@ const initialHeight = normalizedInitialItem?.height;
           aria-label="Open artwork in lightbox"
         >
         
-          <Picture
-            src={initialThumbSrc}
-            formats={['webp','jpeg','jpg']}
+          <img
+            src={initialThumbSrc ?? initialFullSrc ?? ''}
             width={initialWidth}
             height={initialHeight}
-            alt=""           
+            alt={normalizedInitialItem?.alt ?? ''}
             class="media-image"
-          />       
+            loading="eager"
+            decoding="async"
+            data-initial-full={initialFullSrc ?? undefined}
+          />
         
           <button class="media-prev" aria-label="Previous" type="button">❮</button>
           <button class="media-next" aria-label="Next" type="button">❯</button>
