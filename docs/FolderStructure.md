@@ -6,6 +6,7 @@
 app/dev/src
 ├── assets
 │   ├── Icons.astro
+│   ├── ui (--> containing the webp images imported in ui.ts)
 │   └── ui.ts
 ├── components
 │   ├── Templates
@@ -15,7 +16,7 @@ app/dev/src
 |   |   ├── CategoriesPage.astro
 |   |   ├── SubcategoriesPage.astro
 |   |   ├── Card.astro
-│   │   └── partials (for use inside other Templates)
+│   │   └── partials (for use inside other Templates such as Header or TitleWithIcon)
 │   └── Pages (containing Startpage, Imprint)
 |       ├── album (containing PawsPage & FramesPage)
 │       └── blog (containing TailsPage & NomsPage)
@@ -40,6 +41,7 @@ app/dev/src
 │   │   └── categories.json (Containing all Categories & Subcategories for all 4 areas)
 │   └── sitePages (keep for meta & stuff, just adjust names accordingly)
 ├── pages
+│   ├── index.astro, test,astro, imprint.astro
 │   ├── blog
 │   │   ├── tails (-> current "/stories")
 |   |   |   ├── [category] (--> "Lucy's Journeys", "Lucy & Friends", "Cosmic Foxes")
@@ -61,8 +63,8 @@ app/dev/src
 |           ├── [slug].astro   
 │           └── index.astro
 |
-├── scripts
+├── scripts (containing scripts)
 │   └── utils
-├── styles
-└── types
+├── styles (containing styles)
+└── types (containing types)
 
