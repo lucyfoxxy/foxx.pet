@@ -47,6 +47,14 @@ const normalizeIcon = (icon?: string) => (icon?.trim().length ? icon : undefined
 export const getNavLabelParts = (page: PageContent) =>
   normalizeNavLabel(page.navLabel, page.title, normalizeIcon(page.icon));
 
+export const getIntroParagraphs = (page: PageContent) =>
+  page.introParagraphs ?? (page.description ? [page.description] : []);
+
+export const getCategories = (page: PageContent) => page.categories ?? [];
+
+export const findCategory = (page: PageContent, slug: string) =>
+  getCategories(page).find((category) => category.slug === slug);
+
 export const getNavigationLinks = async () => {
   const pages = await loadPages();
 

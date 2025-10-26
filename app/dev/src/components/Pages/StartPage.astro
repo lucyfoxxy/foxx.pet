@@ -1,5 +1,5 @@
 ---
-import BaseLayout from '@Templates/BaseLayout.astro';
+import BaseTemplate from '@Templates/BaseTemplate.astro';
 import Icon from '@Assets/Icons.astro';
 import { ASSETS } from '@Assets/ui';
 import { getPageContent } from '@Content/siteContent';
@@ -28,7 +28,7 @@ const albumSlug = 'bestof';
 const shareKey = 'KEkdKYpvFNPFgS654sbWB28rHuXIohcLo5MtrD1BERFqwHOtrQjmDxMhsRTnRSsKRSw';
 const isExternalLink = (href: string) => href.startsWith('http');
 ---
-<BaseLayout meta={meta}>
+<BaseTemplate meta={meta}>
   <head>
     <link rel="preload" href={hero.image} as="image" type="image/webp" />
   </head>
@@ -130,4 +130,4 @@ const isExternalLink = (href: string) => href.startsWith('http');
     import { runOnReady } from '@Scripts/utils/_runOnReady.js';
     runOnReady(initGalleryIntro);
   </script>
-</BaseLayout>
+</BaseTemplate>

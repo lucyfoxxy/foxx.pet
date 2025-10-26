@@ -11,10 +11,10 @@ const {
   title = 'foxx.pet',
   description = '',
   url = 'https://foxx.pet',
-} = (Astro.props ?? {}) as Partial<BaseLayoutMeta>;
-const    goatCounterBase = "https://stats.foxx.pet";
-const    enableAnalytics = true;
-const    goatCounterScriptSrc = "https://stats.foxx.pet/count.js";
+} = (Astro.props ?? {}) as Partial<LayoutMeta>;
+const goatCounterBase = 'https://stats.foxx.pet';
+const enableAnalytics = true;
+const goatCounterScriptSrc = 'https://stats.foxx.pet/count.js';
 ---
 
 <head>

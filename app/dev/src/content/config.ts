@@ -15,6 +15,52 @@ const contactEntrySchema = z.object({
   kind: z.string().optional(),
 });
 
+const heroSchema = z.object({
+  heading: z.string(),
+  subheading: z.string().optional(),
+  subtitle: z.string().optional(),
+});
+
+const introSchema = z.object({
+  heading: z.string(),
+  paragraphs: z.array(z.string()),
+  signature: z.string().optional(),
+});
+
+const featureSchema = z.object({
+  heading: z.string(),
+  description: z.string().optional(),
+  placeholder: z.string().optional(),
+});
+
+const overviewSchema = z.object({
+  emptyState: z.string().optional(),
+  cta: z.string().optional(),
+});
+
+const contactSchema = z.object({
+  heading: z.string(),
+  description: z.string().optional(),
+});
+
+const sectionSchema = z.object({
+  title: z.string(),
+  paragraphs: z.array(z.string()),
+});
+
+const contactBlockSchema = z.object({
+  title: z.string(),
+  subtitle: z.string().optional(),
+  entries: z.array(contactEntrySchema),
+});
+
+const categorySchema = z.object({
+  title: z.string(),
+  slug: z.string(),
+  description: z.string().optional(),
+  href: z.string().optional(),
+});
+
 const collectionPageSchema = z.object({
   collection: z.enum(["blog"]),
   section: z.enum(["tails", "noms"]).optional(),
@@ -54,46 +100,20 @@ const sitePages = defineCollection({
   type: "data",
   schema: z
     .object({
-      id: z.string(),
+      id: z.string().optional(),
+      slug: z.string().optional(),
       href: z.string(),
       title: z.string(),
       icon: z.string().optional(),
       navLabel: navLabelSchema.optional(),
       includeInHeader: z.boolean().optional(),
       description: z.string().optional(),
-      hero: z
-        .object({
-          heading: z.string(),
-          subheading: z.string().optional(),
-        })
-        .optional(),
-      intro: z
-        .object({
-          heading: z.string(),
-          paragraphs: z.array(z.string()),
-          signature: z.string().optional(),
-        })
-        .optional(),
+      hero: heroSchema.optional(),
+      intro: introSchema.optional(),
       introParagraphs: z.array(z.string()).optional(),
-      feature: z
-        .object({
-          heading: z.string(),
-          description: z.string().optional(),
-          placeholder: z.string().optional(),
-        })
-        .optional(),
-      overview: z
-        .object({
-          emptyState: z.string().optional(),
-          cta: z.string().optional(),
-        })
-        .optional(),
-      contact: z
-        .object({
-          heading: z.string(),
-          description: z.string().optional(),
-        })
-        .optional(),
+      feature: featureSchema.optional(),
+      overview: overviewSchema.optional(),
+      contact: contactSchema.optional(),
       contactLinks: z
         .array(
           z.object({
@@ -103,24 +123,10 @@ const sitePages = defineCollection({
           })
         )
         .optional(),
-      sections: z
-        .array(
-          z.object({
-            title: z.string(),
-            paragraphs: z.array(z.string()),
-          })
-        )
-        .optional(),
-      contacts: z
-        .array(
-          z.object({
-            title: z.string(),
-            subtitle: z.string().optional(),
-            entries: z.array(contactEntrySchema),
-          })
-        )
-        .optional(),
+      sections: z.array(sectionSchema).optional(),
+      contacts: z.array(contactBlockSchema).optional(),
       disclaimer: z.array(z.string()).optional(),
+      categories: z.array(categorySchema).optional(),
       collectionPage: collectionPageSchema.optional(),
     })
     .strict(),

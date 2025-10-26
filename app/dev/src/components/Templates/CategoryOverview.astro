@@ -1,0 +1,107 @@
+---
+import BaseTemplate from '@Templates/BaseTemplate.astro';
+import Card from '@Templates/Card.astro';
+import TitleWithIcon from '@Templates/partials/TitleWithIcon.astro';
+import { COVERS } from '@Assets/covers';
+import { Picture } from 'astro:assets';
+import {
+  getPageContent,
+  getNavLabelParts,
+  getIntroParagraphs,
+  getCategories,
+  type PageContent,
+} from '@Content/siteContent';
+
+interface Props {
+  slug: string;
+}
+
+const { slug } = Astro.props as Props;
+const content = await getPageContent(slug);
+const categories = getCategories(content);
+
+if (categories.length === 0) {
+  throw new Error(`Page "${slug}" does not define any categories for the overview.`);
+}
+
+const meta = {
+  title: content.title,
+  description: content.description ?? '',
+};
+
+const introParagraphs = getIntroParagraphs(content);
+const { icon, emoji } = getNavLabelParts(content);
+const placeholderCover = COVERS.placeholder;
+
+const resolveHref = (page: PageContent, categorySlug: string, href?: string) => {
+  if (href) {
+    return href;
+  }
+
+  const normalized = page.href.replace(/\/+$/, '');
+  if (!normalized) {
+    return `/${categorySlug}/`;
+  }
+
+  const candidate = `${normalized}/${categorySlug}`.replace(/\/+/, '/');
+  return candidate.endsWith('/') ? candidate : `${candidate}/`;
+};
+
+const normalizedCategories = categories.map((category) => {
+  const cover = COVERS[category.slug] ?? placeholderCover;
+  return {
+    ...category,
+    cover,
+    href: resolveHref(content, category.slug, category.href),
+  };
+});
+---
+<BaseTemplate title={content.title} meta={meta}>
+  <section class="content-section">
+    <Card class="card--plain is-centered">
+      <Fragment slot="head">
+        <TitleWithIcon class="card__title" title={content.title} icon={icon} emoji={emoji} />
+      </Fragment>
+      {introParagraphs.length > 0 && (
+        <Fragment slot="body">
+          <div class="prose">
+            {introParagraphs.map((paragraph) => (
+              <p>{paragraph}</p>
+            ))}
+          </div>
+        </Fragment>
+      )}
+    </Card>
+  </section>
+
+  <section class="content-section cols-3">
+    {normalizedCategories.map(({ slug: categorySlug, title, description, href, cover }) => (
+      <a href={href} aria-label={`Open ${title}`}>
+        <Card class="card--light is-animated is-centered" headClass="card__head--column">
+          <Fragment slot="head">
+            <h3 class="card__title">{title}</h3>
+          </Fragment>
+
+          {description ? (
+            <Fragment slot="body">
+              <p>{description}</p>
+            </Fragment>
+          ) : null}
+
+          <Fragment slot="foot">
+            <div class="media-frame" data-slug={categorySlug}>
+              <Picture
+                src={cover}
+                formats={['avif', 'webp']}
+                alt={title}
+                class="media-image"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+          </Fragment>
+        </Card>
+      </a>
+    ))}
+  </section>
+</BaseTemplate>

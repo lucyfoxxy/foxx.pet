@@ -1,16 +1,7 @@
 ---
-import FramesCategoryPage from '@Pages/album/FramesCategoryPage.astro';
-import { getEntry } from 'astro:content';
+import SubcategoryOverview from '@Templates/SubcategoryOverview.astro';
 
-export async function getStaticPaths() {
-  const catalog = (await getEntry('catalog', 'categories')).data;
-  const framesArea = catalog.album.frames;
-  const subCategories = framesArea.categories.flatMap((category) => category.subCategories ?? [category]);
-
-  return subCategories.map((subCategory) => ({
-    params: { slug: subCategory.slug },
-  }));
-}
+export const prerender = true;
 
 const { slug } = Astro.params;
 
@@ -18,4 +9,4 @@ if (!slug) {
   throw new Error('Missing frames category slug');
 }
 ---
-<FramesCategoryPage categorySlug={slug} />
+<SubcategoryOverview slug={slug} />

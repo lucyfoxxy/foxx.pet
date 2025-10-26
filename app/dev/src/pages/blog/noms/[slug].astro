@@ -1,81 +1,18 @@
 ---
-import BaseLayout from '@Templates/BaseLayout.astro';
-import { getCollection, type CollectionEntry } from 'astro:content';
-import { getPageContent } from '@Content/siteContent';
-import Card from '@Layout/Card.astro';
+import ContentView from '@Templates/ContentView.astro';
+import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
-  const recipes = await getCollection('recipes');
-  return recipes.map((recipe) => ({
-    params: { slug: recipe.slug },
-    props: { recipe },
+  const entries = await getCollection('blog', ({ data }) => data.section === 'noms');
+  return entries.map((entry) => ({
+    params: { slug: entry.slug },
   }));
 }
 
-const { recipe } = Astro.props as { recipe: CollectionEntry<'recipes'> };
-const parentPage = await getPageContent('cookbook');
-const { Content } = await recipe.render();
+const { slug } = Astro.params;
 
-const formatDate = (date: Date) => new Intl.DateTimeFormat('en', { dateStyle: 'medium' }).format(date);
-const meta = {
-  title: `${recipe.data.title} | ${parentPage.title}`,
-  description: recipe.data.description ?? parentPage.description,
-};
+if (!slug) {
+  throw new Error('Missing blog article slug');
+}
 ---
-<BaseLayout title={recipe.data.title} meta={meta}>
-  <article class="content-section">
-    <Card headClass="card__head--column">
-      <Fragment slot="head">
-        <h1 class="card__title">{recipe.data.title}</h1>
-        {(recipe.data.categories?.length || recipe.data.tags?.length) && (
-          <div class="card__badges controls controls--tight">
-            {recipe.data.categories?.map((category) => (
-              <span class="badge badge--dark">{category}</span>
-            ))}
-            {recipe.data.tags?.map((tag) => (
-              <span class="badge">{tag}</span>
-            ))}
-          </div>
-        )}
-      </Fragment>
-      <Fragment slot="body">
-        <p>
-          <strong>Published:</strong> {formatDate(recipe.data.publishDate)}
-          {recipe.data.updatedDate && (
-            <>
-              <br />
-              <strong>Updated:</strong> {formatDate(recipe.data.updatedDate)}
-            </>
-          )}
-        </p>
-        <div class="prose">
-          {(recipe.data.prepTime || recipe.data.cookTime || recipe.data.servings) && (
-            <ul>
-              {recipe.data.prepTime && (
-                <li>
-                  <strong>Prep:</strong> {recipe.data.prepTime}
-                </li>
-              )}
-              {recipe.data.cookTime && (
-                <li>
-                  <strong>Cook:</strong> {recipe.data.cookTime}
-                </li>
-              )}
-              {recipe.data.servings && (
-                <li>
-                  <strong>Serves:</strong> {recipe.data.servings}
-                </li>
-              )}
-            </ul>
-          )}
-          <Content />
-        </div>
-      </Fragment>
-      <Fragment slot="foot">
-        <div class="controls controls--start">
-          <a class="button button--plain" href="/cookbook">← Back to the cookbook</a>
-        </div>
-      </Fragment>
-    </Card>
-  </article>
-</BaseLayout>
+<ContentView slug={slug} />

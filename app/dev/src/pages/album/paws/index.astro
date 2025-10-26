@@ -1,24 +1,6 @@
 ---
-import { getEntry } from 'astro:content';
-import AlbumPage from '@Templates/albumPage.astro';
-import CategoriesPage from '@Templates/CategoriesPage.astro';
-import { getPageContent } from '@Content/siteContent';
+import CategoryOverview from '@Templates/CategoryOverview.astro';
 
 export const prerender = true;
-
-const content = await getPageContent('album-paws');
-const catalog = (await getEntry('catalog', 'categories')).data;
-const pawsArea = catalog.album.paws;
-const baseHref = content.href;
-
-const categories = pawsArea.categories.flatMap((category) =>
-  (category.subCategories ?? []).map((subCategory) => ({
-    slug: subCategory.slug,
-    title: subCategory.title,
-    description: subCategory.description ?? category.description ?? '',
-  })),
-);
 ---
-<AlbumPage content={content}>
-  <CategoriesPage content={content} categories={categories} baseHref={baseHref} />
-</AlbumPage>
+<CategoryOverview slug="paws" />

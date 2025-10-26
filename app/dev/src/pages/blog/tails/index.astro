@@ -1,9 +1,6 @@
 ---
-import BlogPage from '@Templates/blogPage.astro';
-import { getPageContent } from '@Content/siteContent';
+import CategoryOverview from '@Templates/CategoryOverview.astro';
 
 export const prerender = true;
-
-const content = await getPageContent('blog-tails');
 ---
-<BlogPage content={content} />
+<CategoryOverview slug="tails" />
