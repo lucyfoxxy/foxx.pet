@@ -1,0 +1,33 @@
+{
+  "id": "noms",
+  "href": "/blog/noms",
+  "title": "Nom Noms",
+  "icon": "cookie",
+  "navLabel": {
+    "text": "Nom\u2009Noms",
+    "emoji": "🍪",
+    "icon": "cookie"
+  },
+  "includeInHeader": true,
+  "description": "Baking and Cooking recipes approved by the cosmic dinner foundation will soon be published here!",
+  "introParagraphs": [
+    "This is the upcoming place where you gonna find all the foxx' recipes!"
+  ],
+  "categories": [
+    {
+      "title": "Lucy's Journeys",
+      "slug": "lucys-journeys",
+      "description": "Travel notes and diary-style stories."
+    },
+    {
+      "title": "Lucy & Friends",
+      "slug": "lucy-and-friends",
+      "description": "Collaborations and spotlights on the crew."
+    },
+    {
+      "title": "Cosmic Foxes",
+      "slug": "cosmic-foxes",
+      "description": "Sci-fi experiments and illustrated tales."
+    }
+  ]
+}

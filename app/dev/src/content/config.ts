@@ -16,7 +16,8 @@ const contactEntrySchema = z.object({
 });
 
 const collectionPageSchema = z.object({
-  collection: z.enum(["stories", "recipes"]),
+  collection: z.enum(["blog"]),
+  section: z.enum(["tails", "noms"]).optional(),
   baseHref: z.string(),
   facets: z
     .object({
@@ -125,28 +126,45 @@ const sitePages = defineCollection({
     .strict(),
 });
 
-const subCategorySchema = z.object({
+const catalogCategorySchema = z.object({
   title: z.string(),
   slug: z.string(),
   description: z.string().optional(),
-  nsfw: z.boolean().default(false).optional(),
+  nsfw: z.boolean().optional(),
+  subCategories: z
+    .array(
+      z.object({
+        title: z.string(),
+        slug: z.string(),
+        description: z.string().optional(),
+        nsfw: z.boolean().optional(),
+      }),
+    )
+    .optional(),
 });
 
-const metaCategorySchema = z.object({
+const catalogAreaSchema = z.object({
   title: z.string(),
   slug: z.string(),
   description: z.string().optional(),
-  subCategories: z.array(subCategorySchema).min(1),
+  categories: z.array(catalogCategorySchema).min(1),
 });
 
-const galleryCatalog = defineCollection({
+const catalog = defineCollection({
   type: "data",
   schema: z.object({
-    metaCategories: z.array(metaCategorySchema).min(1),
+    album: z.object({
+      paws: catalogAreaSchema,
+      frames: catalogAreaSchema,
+    }),
+    blog: z.object({
+      tails: catalogAreaSchema,
+      noms: catalogAreaSchema,
+    }),
   }),
 });
 
-const albumData = defineCollection({
+const album = defineCollection({
   type: "data",
   schema: z.object({
     slug: z.string(),
@@ -156,6 +174,7 @@ const albumData = defineCollection({
     title: z.string().optional(),
     startDate: z.string(),
     description: z.string().optional(),
+    coverUrl: z.string().optional(),
     albumThumbnailAssetId: z.string(),
     category: z
       .object({
@@ -189,26 +208,30 @@ const basePostSchema = z.object({
   tags: z.array(z.string()).default([]),
 });
 
-const stories = defineCollection({
-  type: "content",
-  schema: basePostSchema.extend({
-    featured: z.boolean().default(false),
-  }),
+const baseBlogEntrySchema = basePostSchema.extend({
+  section: z.enum(["tails", "noms"]),
+  primaryCategory: z.string(),
+  featured: z.boolean().default(false),
 });
 
-const recipes = defineCollection({
+const blog = defineCollection({
   type: "content",
-  schema: basePostSchema.extend({
-    prepTime: z.string().optional(),
-    cookTime: z.string().optional(),
-    servings: z.string().optional(),
-  }),
+  schema: z.discriminatedUnion("section", [
+    baseBlogEntrySchema.extend({
+      section: z.literal("tails"),
+    }),
+    baseBlogEntrySchema.extend({
+      section: z.literal("noms"),
+      prepTime: z.string().optional(),
+      cookTime: z.string().optional(),
+      servings: z.string().optional(),
+    }),
+  ]),
 });
 
 export const collections = {
   sitePages,
-  galleryCatalog,
-  albumData,
-  stories,
-  recipes,
+  catalog,
+  album,
+  blog,
 };

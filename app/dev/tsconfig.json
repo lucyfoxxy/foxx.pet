@@ -8,13 +8,12 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
-      "@Layout/*": ["src/components/Layout/*"],
       "@Styles/*": ["src/styles/*"],
       "@Pages/*": ["src/components/Pages/*"],
       "@Content/*": ["src/content/*"],
       "@Assets/*": ["src/assets/*"],
       "@Scripts/*": ["src/scripts/*"],
-      "@UI/*": ["src/components/UI/*"]
+      "@Templates/*": ["src/components/Templates/*"]
     },
     "types": ["astro/client"],
     "jsx": "react-jsx",

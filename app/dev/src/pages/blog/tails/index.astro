@@ -1,6 +1,9 @@
 ---
-import TailsPage from '@Pages/blog/TailsPage.astro';
+import BlogPage from '@Templates/blogPage.astro';
+import { getPageContent } from '@Content/siteContent';
 
 export const prerender = true;
+
+const content = await getPageContent('blog-tails');
 ---
-<TailsPage />
+<BlogPage content={content} />

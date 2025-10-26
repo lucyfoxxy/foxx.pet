@@ -1,0 +1,27 @@
+{
+  "slug": "frames",
+  "href": "/album/frames",
+  "title": "Foxx Frames",
+  "navLabel": {
+    "text": "Foxx\u2009Frames",
+    "emoji": "🎨",
+    "icon": "palette"
+  },
+  "includeInHeader": true,
+  "description": "Here you gonna find a selection of my previous works.",
+  "introParagraphs": [
+    "See where Lucy has left their Paw Prints!"
+  ],
+  "categories": [
+    {
+      "title": "SFW",
+      "slug": "sfw",
+      "description": "Safe-for-work artworks."
+    },
+    {
+      "title": "NSFW",
+      "slug": "nsfw",
+      "description": "Not-safe-for-work artworks."
+    }
+  ]  
+}

@@ -1,7 +1,7 @@
 ---
 import { getNavLabelParts, getPageContent } from '@Content/siteContent';
-import Card from '@Layout/Card.astro';
-import TitleWithIcon from '@Layout/TitleWithIcon.astro';
+import Card from '@Templates/Card.astro';
+import TitleWithIcon from '@Templates/partials/TitleWithIcon.astro';
 
 const content = await getPageContent('imprint');
 const introParagraphs = content.introParagraphs ?? [];

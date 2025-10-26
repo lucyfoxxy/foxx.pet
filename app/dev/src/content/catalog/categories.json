@@ -33,27 +33,7 @@
       "title": "Foxx Frames",
       "slug": "frames",
       "description": "Illustrations and finished pieces.",
-      "categories": [
-        {
-          "title": "Artwork Collections",
-          "slug": "artworks",
-          "description": "Browse completed illustrations by tone.",
-          "subCategories": [
-            {
-              "title": "SFW",
-              "slug": "sfw",
-              "description": "Safe-for-work artworks.",
-              "nsfw": false
-            },
-            {
-              "title": "NSFW",
-              "slug": "nsfw",
-              "description": "Not-safe-for-work artworks.",
-              "nsfw": true
-            }
-          ]
-        }
-      ]
+
     }
   },
   "blog": {
@@ -61,40 +41,13 @@
       "title": "Tail Trails",
       "slug": "tails",
       "description": "Narrative updates following Lucy's adventures.",
-      "categories": [
-        {
-          "title": "Lucy's Journeys",
-          "slug": "lucys-journeys",
-          "description": "Travel notes and diary-style stories."
-        },
-        {
-          "title": "Lucy & Friends",
-          "slug": "lucy-and-friends",
-          "description": "Collaborations and spotlights on the crew."
-        },
-        {
-          "title": "Cosmic Foxes",
-          "slug": "cosmic-foxes",
-          "description": "Sci-fi experiments and illustrated tales."
-        }
-      ]
+
     },
     "noms": {
       "title": "Cosmic Noms",
       "slug": "noms",
       "description": "Kitchen experiments, bakes, and savoury space fuel.",
-      "categories": [
-        {
-          "title": "Baking",
-          "slug": "baking",
-          "description": "Sweet treats and oven-warmed comforts."
-        },
-        {
-          "title": "Cooking",
-          "slug": "cooking",
-          "description": "Hearty meals perfect for post-flight feasts."
-        }
-      ]
+
     }
   }
 }

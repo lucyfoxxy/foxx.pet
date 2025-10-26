@@ -1,0 +1,62 @@
+---
+import BaseLayout from '@Templates/BaseLayout.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+import { getPageContent } from '@Content/siteContent';
+import Card from '@Layout/Card.astro';
+
+export async function getStaticPaths() {
+  const stories = await getCollection('stories');
+  return stories.map((story) => ({
+    params: { slug: story.slug },
+    props: { story },
+  }));
+}
+
+const { story } = Astro.props as { story: CollectionEntry<'stories'> };
+const parentPage = await getPageContent('stories');
+const { Content } = await story.render();
+
+const formatDate = (date: Date) => new Intl.DateTimeFormat('en', { dateStyle: 'medium' }).format(date);
+const meta = {
+  title: `${story.data.title} | ${parentPage.title}`,
+  description: story.data.description ?? parentPage.description,
+};
+---
+<BaseLayout title={story.data.title} meta={meta}>
+  <article class="content-section">
+    <Card headClass="card__head--column">
+      <Fragment slot="head">
+        <h1 class="card__title">{story.data.title}</h1>
+        {(story.data.categories?.length || story.data.tags?.length) && (
+          <div class="card__badges controls controls--tight">
+            {story.data.categories?.map((category) => (
+              <span class="badge badge--dark">{category}</span>
+            ))}
+            {story.data.tags?.map((tag) => (
+              <span class="badge">{tag}</span>
+            ))}
+          </div>
+        )}
+      </Fragment>
+      <Fragment slot="body">
+        <p>
+          <strong>Published:</strong> {formatDate(story.data.publishDate)}
+          {story.data.updatedDate && (
+            <>
+              <br />
+              <strong>Updated:</strong> {formatDate(story.data.updatedDate)}
+            </>
+          )}
+        </p>
+        <div class="prose">
+          <Content />
+        </div>
+      </Fragment>
+      <Fragment slot="foot">
+        <div class="controls controls--start">
+          <a class="button button--plain" href="/stories">← Back to all stories</a>
+        </div>
+      </Fragment>
+    </Card>
+  </article>
+</BaseLayout>

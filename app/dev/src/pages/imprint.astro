@@ -1,5 +1,5 @@
 ---
-import Layout from '@Layout/Main.astro';
+import BaseLayout from '@Templates/BaseLayout.astro';
 import ImprintPage from '@Pages/ImprintPage.astro';
 import { getPageContent } from '@Content/siteContent';
 export const prerender = true;
@@ -7,6 +7,6 @@ export const prerender = true;
 const content = await getPageContent('imprint');
 const meta = { title: content.title, description: content.description };
 ---
-<Layout title={content.title} meta={meta}>
+<BaseLayout title={content.title} meta={meta}>
   <ImprintPage />
-</Layout>
+</BaseLayout>

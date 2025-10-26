@@ -1,9 +1,9 @@
 ---
-import Layout from '@Layout/Main.astro';
+import BaseLayout from '@Templates/BaseLayout.astro';
 import Icon from '@Assets/Icons.astro';
 import { ASSETS } from '@Assets/ui';
 import { getPageContent } from '@Content/siteContent';
-import Card from '@Layout/Card.astro';
+import Card from '@Templates/Card.astro';
 import { Picture } from 'astro:assets';
 export const prerender = true;
 
@@ -28,7 +28,7 @@ const albumSlug = 'bestof';
 const shareKey = 'KEkdKYpvFNPFgS654sbWB28rHuXIohcLo5MtrD1BERFqwHOtrQjmDxMhsRTnRSsKRSw';
 const isExternalLink = (href: string) => href.startsWith('http');
 ---
-<Layout meta={meta}>
+<BaseLayout meta={meta}>
   <head>
     <link rel="preload" href={hero.image} as="image" type="image/webp" />
   </head>
@@ -130,4 +130,4 @@ const isExternalLink = (href: string) => href.startsWith('http');
     import { runOnReady } from '@Scripts/utils/_runOnReady.js';
     runOnReady(initGalleryIntro);
   </script>
-</Layout>
+</BaseLayout>

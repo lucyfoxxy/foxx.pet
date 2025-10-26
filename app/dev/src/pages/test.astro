@@ -1,11 +1,11 @@
 ---
-import Layout from '@Layout/Main.astro';
+import BaseLayout from '@Templates/BaseLayout.astro';
 import Card from '@Layout/Card.astro';
 import Icons from '@Assets/Icons.astro';
 import { ASSETS } from '@Assets/ui';
 import { Picture } from 'astro:assets';
 ---
-<Layout>
+<BaseLayout>
 <section class="content-section">
   <Card class="card--plain is-centered">
     <Fragment slot="head">
@@ -209,4 +209,4 @@ import { Picture } from 'astro:assets';
     </Fragment>
   </Card>
 </section>
-</Layout>
+</BaseLayout>

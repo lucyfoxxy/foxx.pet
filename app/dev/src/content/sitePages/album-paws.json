@@ -1,0 +1,32 @@
+{
+  "slug": "paws",
+  "href": "/album/paws",
+  "title": "Paw Prints",
+  "navLabel": {
+    "text": "Paw\u2009Prints",
+    "emoji": "🐾",
+    "icon": "paw"
+  },
+  "includeInHeader": true,
+  "description": "Fursuit photo collection.",
+  "introParagraphs": [
+    "See where Lucy has left their Paw Prints!"
+  ],
+  "categories": [
+    {
+      "title": "Suitwalks",
+      "slug": "suitwalks",
+      "description": "See me floating around the world."
+    },
+    {
+      "title": "Furmeets",
+      "slug": "furmeets",
+      "description": "See me hanging around with others."
+    },
+    {
+      "title": "Conventions",
+      "slug": "conventions",
+      "description": "Explore the world of me and other furballs."
+    }
+  ]
+}

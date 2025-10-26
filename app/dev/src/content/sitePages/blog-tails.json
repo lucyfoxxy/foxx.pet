@@ -1,0 +1,28 @@
+{
+  "slug": "tails",
+  "href": "/blog/tails",
+  "title": "Tail Trails",
+  "navLabel": {
+    "text": "Tail\u2009Trails ",
+    "emoji": "✨",
+    "icon": "star"
+  },
+  "includeInHeader": true,
+  "description": "Narrative experiments and cosmic adventures — coming soon.",
+  "introParagraphs": [
+    "This is the new home for short tales and blog-style updates about Lucy's travels.",
+    "Expect cosy updates, creative experiments, and behind-the-scenes looks once the first entries launch."
+  ],
+  "categories": [
+    {
+      "title": "Baking",
+      "slug": "baking",
+      "description": "Sweet treats and oven-warmed comforts."
+    },
+    {
+      "title": "Cooking",
+      "slug": "cooking",
+      "description": "Hearty meals perfect for post-flight feasts."
+    }
+  ]
+}

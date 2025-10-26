@@ -1,0 +1,121 @@
+---
+import Card from '@Templates/Card.astro';
+import { Picture } from 'astro:assets';
+interface AlbumEntry {
+  slug: string;
+  title: string;
+  description?: string;
+  href?: string;
+  count?: number;
+  startDate?: string;
+  shareKey?: string;
+  albumThumbnailAssetId?: string;
+  coverUrl?: string;
+}
+
+interface CategoryInfo {
+  slug: string;
+  title: string;
+  description?: string;
+}
+interface Props {
+  category: CategoryInfo;
+  albums: AlbumEntry[];
+  baseHref?: string;
+}
+
+const { category, albums, baseHref } = Astro.props as Props;
+const normalizedBaseHref = baseHref ? baseHref.replace(/\/+$/, '') : '';
+const buildHref = (slug: string, href?: string) => {
+  if (href) return href;
+  const prefix = normalizedBaseHref ? `${normalizedBaseHref}/${category.slug}` : `/${category.slug}`;
+  const path = `${prefix}/${slug}`.replace(/\/+/g, '/');
+  return path.endsWith('/') ? path : `${path}/`;
+};
+
+const dateFormatter = new Intl.DateTimeFormat('en', { month: 'short', year: 'numeric' });
+
+const normalizedAlbums = albums.map((album) => {
+  const trimmedTitle = album.title.trim();
+  const parsedStartDate = album.startDate ? Date.parse(album.startDate) : Number.NaN;
+  const hasValidStartDate = Number.isFinite(parsedStartDate);
+  const formattedStartDate = hasValidStartDate
+    ? dateFormatter.format(new Date(parsedStartDate))
+    : undefined;
+
+  const coverUrl =
+    album.coverUrl ??
+    (album.shareKey && album.albumThumbnailAssetId
+      ? `https://img.foxx.pet/api/assets/${album.albumThumbnailAssetId}/thumbnail?key=${album.shareKey}`
+      : undefined);
+
+  return {
+    ...album,
+    title: trimmedTitle,
+    formattedStartDate,
+    coverUrl,
+  };
+});
+---
+
+  <section class="content-section">
+    <Card class="card--plain is-centered">
+      <Fragment slot="head">
+        <h1 class="card__title">{category.title}</h1>
+      </Fragment>
+      {category.description ? (
+        <Fragment slot="body">
+          <p>{category.description}</p>
+        </Fragment>
+      ) : null}
+    </Card>
+  </section>
+
+  <section class="content-section cols-3">
+    
+      {normalizedAlbums.map(({
+        slug,
+        title,
+        description,
+        href,
+        count,
+        formattedStartDate,
+        coverUrl,
+      }) => (
+        <a href={buildHref(slug, href)} aria-label={`Open ${title}`}>
+          <Card class="card--light is-centered is-animated" headClass="card__head--column">
+            <Fragment slot="head">
+              <h3 class="card__title">{title}</h3>
+              {(formattedStartDate || typeof count === 'number') && (
+                <div class="card__badges controls controls--spread">
+                  {formattedStartDate ? <span class="badge badge--dark">{formattedStartDate}</span> : null}
+                  {typeof count === 'number' ? (
+                    <span class="badge badge--dark">{count > 0 ? `${count} photos` : 'No photos yet'}</span>
+                  ) : null}
+                </div>
+              )}
+            </Fragment>
+            <Fragment slot="body">
+              
+              <div class="media-frame" data-slug={slug}>
+                {coverUrl ? (
+                  <Picture
+                    src={coverUrl}
+                    formats={['webp']}
+                    inferSize
+                    alt="Cover"
+                    fetchpriority="low"
+                    class="media-image"
+                  /> 
+                  <img class="media-image" src={coverUrl} alt="" loading="lazy" decoding="async" />
+                ) : (
+                  <div class="media-image placeholder" aria-hidden="true"></div>
+                )}
+              </div>
+              
+            </Fragment>
+          </Card>
+        </a>
+      ))}
+
+  </section>

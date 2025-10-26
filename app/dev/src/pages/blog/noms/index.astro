@@ -1,6 +1,9 @@
 ---
-import NomsPage from '@Pages/blog/NomsPage.astro';
+import BlogPage from '@Templates/blogPage.astro';
+import { getPageContent } from '@Content/siteContent';
 
 export const prerender = true;
+
+const content = await getPageContent('blog-noms');
 ---
-<NomsPage />
+<BlogPage content={content} />

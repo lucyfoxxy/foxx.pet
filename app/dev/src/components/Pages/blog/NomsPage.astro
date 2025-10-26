@@ -1,9 +1,0 @@
----
-import BlogPage from '@Templates/blogPage.astro';
-import { getPageContent } from '@Content/siteContent';
-
-export const prerender = true;
-
-const content = await getPageContent('blog-noms');
----
-<BlogPage content={content} />

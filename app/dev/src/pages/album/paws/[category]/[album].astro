@@ -1,0 +1,77 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@Templates/BaseLayout.astro';
+import GalleryDetailPage from '@Pages/Gallery/DetailPage.astro';
+
+export async function getStaticPaths() {
+  const albums = await getCollection('albumData');
+  return albums
+    .filter(({ data }) => data.slug && data.category?.slug)
+    .map(({ data }) => ({
+      params: {
+        category: data.category!.slug,
+        album: data.slug,
+      },
+      props: {
+        slug: data.slug,
+        title: data.title ?? data.albumName ?? data.slug,
+        description: data.albumName ?? undefined,
+        category: {
+          title: data.category?.name ?? data.category?.slug ?? '',
+          slug: data.category?.slug ?? '',
+        },
+      },
+    }));
+}
+
+const { slug, title, description, category } = Astro.props as {
+  slug: string;
+  title?: string;
+  description?: string;
+  category?: { title: string; slug: string };
+};
+
+const meta = {
+  title: title ?? 'Gallery',
+  description: description ?? '',
+};
+
+const [albumEntry] = await getCollection('albumData', ({ data }) => data.slug === slug);
+const albumData = albumEntry?.data;
+
+const categoryTitle = category?.title?.trim() || category?.slug?.trim() || undefined;
+
+const startDateRaw = albumData?.startDate ?? undefined;
+const normalizedStartDate =
+  typeof startDateRaw === 'string' && startDateRaw.trim().length > 0 ? startDateRaw : undefined;
+
+const shareKey = albumData?.shareKey ?? undefined;
+const albumItems = Array.isArray(albumData?.items) ? albumData?.items : [];
+const primaryItem = albumItems.find((item) => item && (item.full || item.thumb));
+const initialItem = primaryItem
+  ? {
+      full: primaryItem.full,
+      thumb: primaryItem.thumb,
+      alt: primaryItem.filename ?? undefined,
+      width: typeof primaryItem.width === 'number' ? primaryItem.width : undefined,
+      height: typeof primaryItem.height === 'number' ? primaryItem.height : undefined,
+    }
+  : undefined;
+
+const backHref = category?.slug ? `/galleries/${category.slug}` : '/galleries';
+const backLabel = category?.title ? `← ${category.title}` : '← Overview';
+---
+<BaseLayout title={meta.title} meta={meta}>
+  <Fragment slot="header__actions">
+    <a class="button button--small button--dark" href={backHref}>{backLabel}</a>
+  </Fragment>
+  <GalleryDetailPage
+    albumSlug={slug}
+    title={title ?? meta.title}
+    description={description}
+    category={categoryTitle}
+    startDate={normalizedStartDate}
+    shareKey={shareKey}
+    initialItem={initialItem}
+  />
+</BaseLayout>
