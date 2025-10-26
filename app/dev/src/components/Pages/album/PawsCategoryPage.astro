@@ -1,0 +1,85 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+import AlbumPage from '@Templates/albumPage.astro';
+import SubcategoriesPage from '@Templates/SubcategoriesPage.astro';
+import { getPageContent, type PageContent } from '@Content/siteContent';
+
+interface Props {
+  categorySlug: string;
+}
+
+const { categorySlug } = Astro.props as Props;
+const content = await getPageContent('album-paws');
+const catalog = (await getEntry('catalog', 'categories')).data;
+const pawsArea = catalog.album.paws;
+
+const parentWithSubcategory = pawsArea.categories
+  .map((category) => ({
+    category,
+    subCategory: category.subCategories?.find((sub) => sub.slug === categorySlug),
+  }))
+  .find((entry) => entry.subCategory);
+
+if (!parentWithSubcategory?.subCategory) {
+  throw new Error(`Unknown album category "${categorySlug}"`);
+}
+
+const { category: parentCategory, subCategory } = parentWithSubcategory;
+
+const derivedContent: PageContent = {
+  ...content,
+  title: subCategory.title,
+  introParagraphs: subCategory.description ? [subCategory.description] : content.introParagraphs,
+};
+
+const rawAlbums = await getCollection('album', ({ data }) => (data.category?.slug ?? '') === categorySlug);
+
+const albums = rawAlbums
+  .map(({ data }, index) => {
+    const startDateRaw = data.startDate ?? undefined;
+    const parsedStartDate = startDateRaw ? Date.parse(startDateRaw) : Number.NaN;
+    const hasValidStartDate = Number.isFinite(parsedStartDate);
+    const normalizedStartDate = hasValidStartDate ? new Date(parsedStartDate).toISOString() : undefined;
+    const shareKey = data.shareKey ?? undefined;
+    const albumThumbnailAssetId = data.albumThumbnailAssetId ?? undefined;
+    const coverUrl =
+      data.coverUrl ??
+      (shareKey && albumThumbnailAssetId
+        ? `https://img.foxx.pet/api/assets/${albumThumbnailAssetId}/thumbnail?key=${shareKey}`
+        : undefined);
+
+    return {
+      slug: data.slug,
+      title: data.title ?? data.albumName ?? data.slug,
+      description: data.description ?? data.albumName ?? '',
+      count: data.count,
+      startDate: normalizedStartDate,
+      shareKey,
+      albumThumbnailAssetId,
+      coverUrl,
+      _sortValue: hasValidStartDate ? parsedStartDate : undefined,
+      _originalIndex: index,
+    };
+  })
+  .sort((a, b) => {
+    const aHasDate = typeof a._sortValue === 'number';
+    const bHasDate = typeof b._sortValue === 'number';
+    if (aHasDate && bHasDate) {
+      return (b._sortValue as number) - (a._sortValue as number);
+    }
+    if (aHasDate) return -1;
+    if (bHasDate) return 1;
+    return a._originalIndex - b._originalIndex;
+  })
+  .map(({ _sortValue, _originalIndex, ...entry }) => entry);
+
+const baseHref = '/album/paws';
+const categoryInfo = {
+  slug: subCategory.slug,
+  title: subCategory.title,
+  description: subCategory.description ?? parentCategory.description ?? '',
+};
+---
+<AlbumPage content={derivedContent} backHref="/album/paws" backLabel="← Paw Prints">
+  <SubcategoriesPage category={categoryInfo} albums={albums} baseHref={baseHref} />
+</AlbumPage>

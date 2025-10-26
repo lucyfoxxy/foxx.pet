@@ -1,0 +1,24 @@
+---
+import { getEntry } from 'astro:content';
+import AlbumPage from '@Templates/albumPage.astro';
+import CategoriesPage from '@Templates/CategoriesPage.astro';
+import { getPageContent } from '@Content/siteContent';
+
+export const prerender = true;
+
+const content = await getPageContent('album-frames');
+const catalog = (await getEntry('catalog', 'categories')).data;
+const framesArea = catalog.album.frames;
+const baseHref = '/album/frames';
+
+const categories = framesArea.categories.flatMap((category) =>
+  (category.subCategories ?? []).map((subCategory) => ({
+    slug: subCategory.slug,
+    title: subCategory.title,
+    description: subCategory.description ?? category.description ?? '',
+  }))
+);
+---
+<AlbumPage content={content} backHref="/album/paws" backLabel="← Paw Prints">
+  <CategoriesPage content={content} categories={categories} baseHref={baseHref} />
+</AlbumPage>

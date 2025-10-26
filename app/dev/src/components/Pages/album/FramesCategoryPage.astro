@@ -1,0 +1,47 @@
+---
+import AlbumPage from '@Templates/albumPage.astro';
+import Card from '@Templates/Card.astro';
+import { getEntry } from 'astro:content';
+import { getPageContent, type PageContent } from '@Content/siteContent';
+
+interface Props {
+  categorySlug: string;
+}
+
+const { categorySlug } = Astro.props as Props;
+const content = await getPageContent('album-frames');
+const catalog = (await getEntry('catalog', 'categories')).data;
+const framesArea = catalog.album.frames;
+
+const match = framesArea.categories
+  .map((category) => ({
+    category,
+    subCategory: category.subCategories?.find((sub) => sub.slug === categorySlug) ??
+      (category.slug === categorySlug ? category : undefined),
+  }))
+  .find((entry) => entry.subCategory);
+
+const displayCategory = match?.subCategory;
+
+if (!displayCategory) {
+  throw new Error(`Unknown frames category "${categorySlug}"`);
+}
+
+const derivedContent: PageContent = {
+  ...content,
+  title: displayCategory.title,
+  introParagraphs: displayCategory.description ? [displayCategory.description] : content.introParagraphs,
+};
+---
+<AlbumPage content={derivedContent} backHref="/album/frames" backLabel="← Foxx Frames">
+  <section class="content-section">
+    <Card class="card--plain is-centered">
+      <Fragment slot="head">
+        <h2 class="card__title">Gallery coming soon</h2>
+      </Fragment>
+      <Fragment slot="body">
+        <p>Artwork uploads for {displayCategory.title} are still being curated. Check back shortly!</p>
+      </Fragment>
+    </Card>
+  </section>
+</AlbumPage>

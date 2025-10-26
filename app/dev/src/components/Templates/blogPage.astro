@@ -1,0 +1,29 @@
+---
+import BaseLayout from './baseLayout.astro';
+import BlogCollection from './partials/BlogCollection.astro';
+import type { PageContent } from '@Content/siteContent';
+
+interface BlogPageProps {
+  content: PageContent;
+  backHref?: string;
+  backLabel?: string;
+  meta?: Partial<{ title: string; description: string; url: string }>;
+}
+
+const { content, backHref, backLabel, meta: metaOverride } = Astro.props as BlogPageProps;
+const meta = {
+  title: content.title,
+  description: content.description,
+  ...(metaOverride ?? {}),
+};
+---
+<BaseLayout title={content.title} meta={meta}>
+  {backHref ? (
+    <Fragment slot="header__actions">
+      <a class="button button--small button--dark" href={backHref}>
+        {backLabel ?? '← Back'}
+      </a>
+    </Fragment>
+  ) : null}
+  <BlogCollection content={content as PageContent} />
+</BaseLayout>

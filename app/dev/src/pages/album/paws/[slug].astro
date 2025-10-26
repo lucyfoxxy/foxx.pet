@@ -1,0 +1,21 @@
+---
+import PawsCategoryPage from '@Pages/album/PawsCategoryPage.astro';
+import { getEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const catalog = (await getEntry('catalog', 'categories')).data;
+  const pawsArea = catalog.album.paws;
+  const subCategories = pawsArea.categories.flatMap((category) => category.subCategories ?? []);
+
+  return subCategories.map((subCategory) => ({
+    params: { slug: subCategory.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+
+if (!slug) {
+  throw new Error('Missing album category slug');
+}
+---
+<PawsCategoryPage categorySlug={slug} />
