@@ -218,6 +218,7 @@ const baseBlogEntrySchema = basePostSchema.extend({
   section: z.enum(["tails", "noms"]),
   primaryCategory: z.string(),
   featured: z.boolean().default(false),
+  slug: z.string().optional(),
 });
 
 const blog = defineCollection({
@@ -233,6 +234,21 @@ const blog = defineCollection({
       servings: z.string().optional(),
     }),
   ]),
+  slug: ({ data, defaultSlug }) => {
+    const rawSlug = typeof (data as { slug?: string }).slug === "string" ? data.slug : undefined;
+
+    if (!rawSlug) {
+      return defaultSlug;
+    }
+
+    const normalized = rawSlug
+      .split("/")
+      .map((segment) => segment.trim())
+      .filter((segment) => segment.length > 0)
+      .join("/");
+
+    return normalized.length > 0 ? normalized : defaultSlug;
+  },
 });
 
 export const collections = {

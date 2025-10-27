@@ -1,6 +1,7 @@
 ---
 section: tails
 primaryCategory: lucys-journeys
+slug: tails/lucys-journeys/starlit-liftoff
 title: "Starlit Lift-Off"
 description: "Lucy Foxx recounts the night the homemade rocket finally leapt beyond the clouds."
 publishDate: 2024-04-19

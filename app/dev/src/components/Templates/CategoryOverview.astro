@@ -2,7 +2,7 @@
 import BaseTemplate from '@Templates/BaseTemplate.astro';
 import Card from '@Templates/Card.astro';
 import TitleWithIcon from '@Templates/partials/TitleWithIcon.astro';
-import { COVERS } from '@Assets/covers';
+import { PLACEHOLDER_COVER, findCoverImage } from '@Assets/covers';
 import { Picture } from 'astro:assets';
 import {
   getPageContent,
@@ -37,7 +37,7 @@ const meta = {
 
 const introParagraphs = content ? getIntroParagraphs(content) : [];
 const { icon, emoji } = content ? getNavLabelParts(content) : { icon: undefined, emoji: undefined };
-const placeholderCover = COVERS.placeholder;
+const placeholderCover = PLACEHOLDER_COVER;
 
 const resolveHref = (page: PageContent | undefined, categorySlug: string, href?: string) => {
   if (href) {
@@ -59,7 +59,7 @@ const resolveHref = (page: PageContent | undefined, categorySlug: string, href?:
 
 const normalizedCategories = !loadError && content
   ? categories.map((category) => {
-      const cover = COVERS[category.slug] ?? placeholderCover;
+      const cover = findCoverImage(category.slug, category.title) ?? placeholderCover;
       return {
         ...category,
         cover,

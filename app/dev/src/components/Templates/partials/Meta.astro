@@ -5,13 +5,16 @@ type LayoutMeta = {
   title: string;
   description: string;
   url: string;
+  image?: string;
 };
 
 const {
   title = 'foxx.pet',
   description = '',
   url = 'https://foxx.pet',
+  image,
 } = (Astro.props ?? {}) as Partial<LayoutMeta>;
+const imageSrc = image ?? ASSETS.og.src;
 const goatCounterBase = 'https://stats.foxx.pet';
 const enableAnalytics = true;
 const goatCounterScriptSrc = 'https://stats.foxx.pet/count.js';
@@ -27,13 +30,13 @@ const goatCounterScriptSrc = 'https://stats.foxx.pet/count.js';
   <meta property="og:type" content="website" />
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
-  <meta property="og:image" content={ASSETS.og.src} />
+  <meta property="og:image" content={imageSrc} />
   <meta property="og:url" content={url} />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={title} />
   <meta name="twitter:description" content={description} />
-  <meta name="twitter:image" content={ASSETS.og.src} />
+  <meta name="twitter:image" content={imageSrc} />
 
   <link rel="icon" type="image/webp" href={ASSETS.favicon.src} />
   <link rel="preload" href={ASSETS.overlay__stars.src} as="image" type="image/webp" />
