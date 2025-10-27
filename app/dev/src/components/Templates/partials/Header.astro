@@ -49,19 +49,24 @@ const hasActions = Astro.slots.has('actions');
           data-active={link.isActive ? 'true' : undefined}
           aria-current={link.isActive ? 'page' : undefined}
         >
-          <div class="header__nav-link">
-            {(link.icon || link.emoji) && (
-              <span
-                class:list={[
-                  'header__nav-symbol',
-                  link.icon ? 'header__nav-symbol--icon' : 'header__nav-symbol--emoji',
-                ]}
-                aria-hidden="true"
-              >
-                {link.icon ? <ICONS kind={link.icon} /> : link.emoji}
-              </span>
+          <div class:list={['header__nav-link', link.icon && 'header__nav-link--with-icon']}>
+            {link.icon ? (
+              <>
+                <span class="header__nav-text">{link.label}</span>
+                <span class:list={['header__nav-symbol', 'header__nav-symbol--icon']} aria-hidden="true">
+                  <ICONS kind={link.icon} />
+                </span>
+              </>
+            ) : (
+              <>
+                {link.emoji ? (
+                  <span class:list={['header__nav-symbol', 'header__nav-symbol--emoji']} aria-hidden="true">
+                    {link.emoji}
+                  </span>
+                ) : null}
+                <span class="header__nav-text">{link.label}</span>
+              </>
             )}
-            <span class="header__nav-text">{link.label}</span>
           </div>
         </a>
       ))}

@@ -26,6 +26,7 @@ const emoji = !icon && rawEmoji?.trim().length ? rawEmoji : undefined;
 ---
 
 <Tag class:list={['title-with-icon', className]} {...rest}>
+  <span class="title-with-icon__text">{title}</span>
   {icon ? (
     <span class="title-with-icon__icon" aria-hidden="true">
       <ICONS kind={icon} />
@@ -36,5 +37,5 @@ const emoji = !icon && rawEmoji?.trim().length ? rawEmoji : undefined;
     <span class="title-with-icon__emoji" aria-hidden="true">{emoji}</span>
   ) : null}
 
-  <span class="title-with-icon__text">{title}</span>
+  
 </Tag>

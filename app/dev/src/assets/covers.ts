@@ -5,3 +5,4 @@ export const COVERS: Record<string, ImageMetadata> = {
   placeholder,
   lucys_journeys
 };
+ 

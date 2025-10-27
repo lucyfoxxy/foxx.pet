@@ -18,14 +18,47 @@ const PATHS = createPathConfig(REPO_ROOT, TARGET);
 const BASE = process.env.IMMICH_BASE_URL || process.env.IMMICH_URL;
 const KEY = process.env.IMMICH_API_KEY;
 const OWNER_ID = 'd3e4dd84-d590-4c98-b2d1-07ed6811a693';
-const KEYWORDS = ['suitwalk', 'furmeet', 'convention'];
+const KEYWORDS = ['suitwalk', 'furmeet', 'convention', 'artworks'];
 const DISPLAY_KEYWORDS = KEYWORDS.map((kw) =>
   kw.replace(/^./, (c) => c.toUpperCase())
 );
-const CATEGORY_MAP = new Map([
-  ['suitwalk', { name: 'Suitwalks', slug: 'suitwalks' }],
-  ['furmeet', { name: 'Furmeets', slug: 'furmeets' }],
-  ['convention', { name: 'Conventions', slug: 'conventions' }]
+const CATEGORY_CONFIG = new Map([
+  [
+    'suitwalk',
+    {
+      areaSlug: 'paws',
+      category: { name: 'Suitwalks', slug: 'suitwalks' },
+      slugPrefix: 'suitwalks'
+    }
+  ],
+  [
+    'furmeet',
+    {
+      areaSlug: 'paws',
+      category: { name: 'Furmeets', slug: 'furmeets' },
+      slugPrefix: 'furmeets'
+    }
+  ],
+  [
+    'convention',
+    {
+      areaSlug: 'paws',
+      category: { name: 'Conventions', slug: 'conventions' },
+      slugPrefix: 'conventions'
+    }
+  ],
+  [
+    'artworks',
+    {
+      areaSlug: 'frames',
+      categoryResolver: ({ rawTitle, displayTitle }) => {
+        const name = displayTitle || rawTitle || 'Artworks';
+        const slug = slugify(name) || 'artworks';
+        return { name, slug };
+      },
+      slugPrefix: 'frames'
+    }
+  ]
 ]);
 const BESTOF_LINK_ID = (process.env.IMMICH_BESTOF_SHARED_LINK || '').trim();
 
@@ -98,7 +131,8 @@ async function main() {
   if (!QUIET) {
     console.log(`→ fetch-immich target: ${TARGET}`);
     console.log(`   assets:   ${PATHS.assetsPath}`);
-    console.log(`   entries: ${PATHS.albumData}`);
+    const albumTargets = PATHS.albumDataRoots?.join(', ') ?? '';
+    console.log(`   entries: ${albumTargets}`);
   }
 
   const { map: sharedLinkMap, links: sharedLinks } = await listRelevantSharedLinks();
@@ -228,8 +262,15 @@ async function processAlbum({
 
   const assetDir = path.join(paths.assetsPath, ...meta.assetDirSegments);
   const assetPrefix = joinPosix('albums', ...meta.assetDirSegments);
-  const albumDataDir = path.join(paths.albumData, ...meta.dataDirSegments);
-  const albumDataFile = path.join(albumDataDir, `${meta.dataFileName}.json`);
+  const albumDataRoots = Array.isArray(paths.albumDataRoots) && paths.albumDataRoots.length > 0
+    ? paths.albumDataRoots
+    : paths.albumData
+    ? [paths.albumData]
+    : [];
+  const albumDataTargets = albumDataRoots.map((root) => ({
+    dir: path.join(root, ...meta.dataDirSegments),
+    file: path.join(root, ...meta.dataDirSegments, `${meta.dataFileName}.json`)
+  }));
 
   let mode = await assetStrategy.resolve(albumAssets[0]?.id ?? null, shareKey);
   if (!mode) mode = 'download';
@@ -292,15 +333,17 @@ async function processAlbum({
     });
   }
 
-  await fs.mkdir(albumDataDir, { recursive: true });
-  await writeAlbumIndex({
-    filePath: albumDataFile,
-    meta,
-    mode,
-    items,
-    shareKey,
-    album
-  });
+  for (const target of albumDataTargets) {
+    await fs.mkdir(target.dir, { recursive: true });
+    await writeAlbumIndex({
+      filePath: target.file,
+      meta,
+      mode,
+      items,
+      shareKey,
+      album
+    });
+  }
 
   if (!QUIET) {
     console.log(`\n\n✓ ${meta.slug}: ${items.length}/${totalAlbum} assets processed (${mode})`);
@@ -609,13 +652,15 @@ function parseCliArgs(argv) {
 function createPathConfig(repoRoot, target) {
   const appRoot = path.join(repoRoot, 'app', target);
   const srcRoot = path.join(appRoot, 'src');
+  const contentRoot = path.join(srcRoot, 'content');
   return {
     repoRoot,
     appRoot,
     srcRoot,
     assetsPath: path.join(srcRoot, 'assets', 'albums'),
-    
-    albumData: path.join(srcRoot, 'content', 'albumData'),
+    albumDataRoots: Array.from(
+      new Set([path.join(contentRoot, 'album'), path.join(contentRoot, 'albums')])
+    ),
     envFile: path.join(appRoot, '.env')
   };
 }
@@ -661,10 +706,8 @@ function deriveAlbumMeta(album) {
   const lower = album.albumName.toLowerCase();
   const keyword = KEYWORDS.find((kw) => lower.includes(kw));
   if (!keyword) return null;
-  const category = CATEGORY_MAP.get(keyword) ?? {
-    name: keyword.replace(/^./, (c) => c.toUpperCase()) + 's',
-    slug: slugify(keyword)
-  };
+  const config = CATEGORY_CONFIG.get(keyword);
+  if (!config) return null;
 
   const nameParts = album.albumName.split(':');
   const rawTitle =
@@ -672,23 +715,50 @@ function deriveAlbumMeta(album) {
       ? nameParts.slice(1).join(':').trim()
       : album.albumName.trim();
   const displayTitle = createDisplayTitle(rawTitle);
+  const normalizedTitleRaw = displayTitle || rawTitle || album.albumName.trim();
+  const normalizedTitle =
+    normalizedTitleRaw && normalizedTitleRaw.trim().length
+      ? normalizedTitleRaw.trim()
+      : album.albumName.trim() || 'Untitled';
 
-  const cleanCategory = sanitizeSegment(category.name) || 'Galleries';
-  const cleanTitle =
-    sanitizeSegment(rawTitle) || sanitizeSegment(album.albumName) || album.id;
+  const resolvedCategory =
+    typeof config.categoryResolver === 'function'
+      ? config.categoryResolver({ album, rawTitle, displayTitle: normalizedTitle })
+      : config.category;
+
+  const candidateCategoryName =
+    resolvedCategory?.name ??
+    config.category?.name ??
+    keyword.replace(/^./, (c) => c.toUpperCase()) + 's';
+  const categoryName =
+    candidateCategoryName && candidateCategoryName.trim().length
+      ? candidateCategoryName.trim()
+      : 'Galleries';
+  const fallbackCategorySlug = slugify(categoryName) || slugify(keyword) || 'album';
+  const categorySlug =
+    (resolvedCategory?.slug && resolvedCategory.slug.trim()) ||
+    (config.category?.slug && config.category.slug.trim()) ||
+    fallbackCategorySlug;
+
+  const areaSlug = config.areaSlug ?? 'albums';
+  const slugParts = [config.slugPrefix ?? categorySlug ?? slugify(keyword), rawTitle]
+    .filter((part) => typeof part === 'string' && part.trim().length > 0)
+    .map((part) => part.trim());
   const slug =
-    slugify(`${category.slug}-${rawTitle}`) || slugify(`${category.slug}-${album.id}`);
+    slugify(slugParts.join(' ')) ||
+    slugify(`${categorySlug}-${album.id}`) ||
+    album.id;
 
   return {
     slug,
     albumId: album.id,
     albumName: album.albumName,
-    title: displayTitle,
+    title: normalizedTitle,
     rawTitle,
-    category: { name: category.name, slug: category.slug },
-    dataDirSegments: [category.slug],
+    category: { name: categoryName, slug: categorySlug },
+    dataDirSegments: [areaSlug, categorySlug].filter(Boolean),
     dataFileName: slug,
-    assetDirSegments: [category.slug, slug]
+    assetDirSegments: [areaSlug, categorySlug, slug].filter(Boolean)
   };
 }
 
