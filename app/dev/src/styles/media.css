@@ -67,7 +67,7 @@
   opacity: 1;
   will-change: opacity, transform, top, bottom;
 }
-.media-image.placeholder { inline-size: 100%; min-block-size: 0;}
+.media-image--placeholder { background: var(--card-surface--dark);}
 .media-image.hero {
   max-inline-size: var(--hero-size);
   inline-size: auto;
