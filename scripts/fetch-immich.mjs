@@ -354,9 +354,9 @@ async function processAlbum({
 
 async function writeAlbumIndex({ filePath, meta, mode, items, shareKey,album }) {
   const albumInfo = {
-    startDate: toIsoString(album?.startDate ?? null),
+    startDate: toIsoString(album?.startDate ?? '1970-01-01T00:00:00.000Z'),
     description: album?.description ?? null,
-    albumThumbnailAssetId: album?.albumThumbnailAssetId ?? null
+    albumThumbnailAssetId: album?.albumThumbnailAssetId ?? '0000-0000-0000-0000-00000000'
   };
   const index = {
     slug: meta.slug,

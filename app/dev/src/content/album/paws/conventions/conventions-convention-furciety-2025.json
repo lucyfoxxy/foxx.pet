@@ -4,9 +4,9 @@
   "shareKey": "r2m3QP39QFlxnkk-rtJdDlHE9ipHJqYVkguGxRSmWsdDHkMS-xyY3tOnllI8sFp0kBs",
   "albumName": "Convention - Furciety (2025)",
   "title": "Furciety (2025)",
-  "startDate": null,
+  "startDate": "1970-01-01T00:00:00.000Z",
   "description": "",
-  "albumThumbnailAssetId": null,
+  "albumThumbnailAssetId": "0000-0000-0000-0000-00000000",
   "category": {
     "name": "Conventions",
     "slug": "conventions"
