@@ -174,38 +174,40 @@ import { Picture } from 'astro:assets';
  </Card>      
   <Card class="card--light is-condensed" headClass="is-centered card__head--column" >
     <Fragment slot="body">
-            <div class="media-wrapper is-thumbs-wrap">
-      <div class="media-frame is-thumb">
-        <Picture
-          src={COVERS.lucys_journeys}
-          formats={['webp']}
-          inferSize
-          alt="space-fox"
-          fetchpriority="high"
-          class="media-image is-thumb"
-        />
+      <div class="media-wrapper is-thumbs-wrap">
+        <div class="media-frame is-thumbs-frame">
+          <div class="media-frame is-thumb">
+            <Picture
+              src={COVERS.lucys_journeys}
+              formats={['webp']}
+              inferSize
+              alt="space-fox"
+              fetchpriority="high"
+              class="media-image is-thumb"
+            />
+          </div>
+          <div class="media-frame is-thumb">
+            <Picture
+              src={COVERS.lucys_journeys}
+              formats={['webp']}
+              inferSize
+              alt="space-fox"
+              fetchpriority="high"
+              class="media-image is-thumb"
+            />
+          </div>
+          <div class="media-frame is-thumb">
+            <Picture
+              src={COVERS.lucys_journeys}
+              formats={['webp']}
+              inferSize
+              alt="space-fox"
+              fetchpriority="high"
+              class="media-image is-thumb"
+            />
+          </div>
+        </div>
       </div>
-            <div class="media-frame is-thumb">
-        <Picture
-          src={COVERS.lucys_journeys}
-          formats={['webp']}
-          inferSize
-          alt="space-fox"
-          fetchpriority="high"
-          class="media-image is-thumb"
-        />
-      </div>
-            <div class="media-frame is-thumb">
-        <Picture
-          src={COVERS.lucys_journeys}
-          formats={['webp']}
-          inferSize
-          alt="space-fox"
-          fetchpriority="high"
-          class="media-image is-thumb"
-        />
-      </div>
-    </div>
     </Fragment>
   </Card> 
 </section>

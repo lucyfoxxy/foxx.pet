@@ -13,8 +13,8 @@ const assetModules = import.meta.glob('@Assets/albums/**/*', {
 });
 
 const itemsBySlug = createGalleryItemsBySlug(metas, assetModules);
-const MAX_VISIBLE_THUMBS = 10;
-const EXTRA_VISIBLE_THUMBS = 1;
+const MAX_VISIBLE_THUMBS = 7;
+const EXTRA_VISIBLE_THUMBS = 0;
 
 const parseLength = (value) => {
   const length = parseFloat(value);
@@ -41,12 +41,12 @@ export default function initGalleryPage() {
   const btnNext = frame?.querySelector('.media-next');
   const btnPlay = frame?.querySelector('.media-playpause');
   const progress = frame?.querySelector('.media-progress');
-  const thumbsWrap = document.querySelector('.media-frame.is-thumbs-wrap');
-  const thumbs = thumbsWrap?.querySelector('.media-frame.is-thumbs-frame');
+  const thumbsWrap = document.querySelector('.media-wrapper--thumbs');
+  const thumbs = thumbsWrap?.querySelector('.media-wrapper--frames');
   const thumbsPrev = thumbsWrap?.querySelector('.media-prev.is-thumbs-prev');
   const thumbsNext = thumbsWrap?.querySelector('.media-next.is-thumbs-next');
-
-
+  const imgClass = 'media-image media-image--thumb'
+  const buttonClass = 'media-frame media-frame--thumb';
 
   const albumEntry = itemsBySlug.get(slug);
   const attrShareKey = frame.getAttribute('data-share-key') || undefined;
@@ -97,7 +97,7 @@ export default function initGalleryPage() {
     const empty = document.createElement('p');
     empty.className = 'media-empty';
     empty.textContent = 'No artworks available yet.';
-    thumbsWrap.removeAttribute('role');
+    thumbs?.removeAttribute('role');
     thumbsWrap.replaceChildren(empty);
     return;
   }
@@ -258,13 +258,14 @@ export default function initGalleryPage() {
       const item = items[order[orderIdx]];
       if (!item) continue;
       const button = document.createElement('button');
-      button.className = 'media-frame is-thumb';
+      button.className = buttonClass;
       button.type = 'button';
       button.dataset.index = String(orderIdx);
       button.setAttribute('aria-label', item.alt || `Image ${orderIdx + 1}`);
       button.setAttribute('role', 'listitem');
 
       const img = document.createElement('img');
+      img.className = imgClass;
       img.src = item.thumb || item.full;
       img.alt = '';
       img.loading = 'lazy';

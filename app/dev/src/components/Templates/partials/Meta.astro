@@ -1,6 +1,6 @@
 ---
 import { ASSETS } from '@Assets/ui';
-
+import { COVERS } from '@Assets/covers';
 type LayoutMeta = {
   title: string;
   description: string;
@@ -37,6 +37,7 @@ const goatCounterScriptSrc = 'https://stats.foxx.pet/count.js';
 
   <link rel="icon" type="image/webp" href={ASSETS.favicon.src} />
   <link rel="preload" href={ASSETS.overlay__stars.src} as="image" type="image/webp" />
+  <link rel="preload" href={COVERS.placeholder.src} as="image" type="image/webp" />
   <link rel="preload" href={ASSETS.overlay__nebula.src} as="image" type="image/webp" />
   <link rel="preload" href={ASSETS.bg__panel.src} as="image" type="image/webp" />
   <link rel="preload" href={ASSETS.logo_header.src} as="image" type="image/webp" />

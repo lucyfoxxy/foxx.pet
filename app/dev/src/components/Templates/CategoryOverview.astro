@@ -102,7 +102,7 @@ const hasCategories = normalizedCategories.length > 0;
         <a href={href} aria-label={`Open ${title}`}>
           <Card class="card--light is-animated is-centered" headClass="card__head--column">
             <Fragment slot="head">
-              <h3 class="card__title">{title}</h3>
+              <h2 class="card__title">{title}</h2>
             </Fragment>
 
             {description ? (
@@ -118,7 +118,7 @@ const hasCategories = normalizedCategories.length > 0;
                   formats={['avif', 'webp']}
                   alt={title}
                   class="media-image"
-                  loading="lazy"
+                  fetchpriority="high"
                   decoding="async"
                 />
               </div>

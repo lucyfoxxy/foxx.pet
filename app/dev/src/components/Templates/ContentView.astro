@@ -245,6 +245,7 @@ const meta = {
                   data-initial-full={albumView.initialThumb?.full ?? undefined}
                 />
 
+
                 <button class="media-prev" aria-label="Previous" type="button">❮</button>
                 <button class="media-next" aria-label="Next" type="button">❯</button>
                 <button class="media-playpause" aria-label="Pause autoplay" type="button">⏸</button>
@@ -258,11 +259,11 @@ const meta = {
       <section class="content-section">
         <Card class="card--ghost">
           <Fragment slot="body">
-            <div class="media-wrapper is-thumbs-wrap" role="list" data-window="10">
+            <div class="media-wrapper media-wrapper--thumbs" role="list">
               <button class="media-prev is-thumbs-prev" aria-label="Previous thumbnails" type="button">❮</button>
-              
-                <div class="media-frame is-thumb"></div>
-              
+              <div class="media-wrapper media-wrapper--frames" role="list" data-window="10">
+                
+              </div>
               <button class="media-next is-thumbs-next" aria-label="Next thumbnails" type="button">❯</button>
             </div>
           </Fragment>

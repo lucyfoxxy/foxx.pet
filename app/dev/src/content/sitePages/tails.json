@@ -15,14 +15,19 @@
   ],
   "categories": [
     {
-      "title": "Baking",
-      "slug": "baking",
-      "description": "Sweet treats and oven-warmed comforts."
+      "title": "Lucy's Journeys",
+      "slug": "lucys-journeys",
+      "description": "Travel notes and diary-style stories."
     },
     {
-      "title": "Cooking",
-      "slug": "cooking",
-      "description": "Hearty meals perfect for post-flight feasts."
+      "title": "Lucy & Friends",
+      "slug": "lucy-and-friends",
+      "description": "Collaborations and spotlights on the crew."
+    },
+    {
+      "title": "Cosmic Foxes",
+      "slug": "cosmic-foxes",
+      "description": "Sci-fi experiments and illustrated tales."
     }
   ]
 }
