@@ -18,33 +18,50 @@ interface Props {
 
 const { slug } = Astro.props as Props;
 const pathSegments = Astro.url.pathname.replace(/\/+$/, '').split('/').filter(Boolean);
-const areaSegment = pathSegments[0];
-const parentSlug = pathSegments[1];
+const areaSegment = pathSegments[0] ?? '';
+const parentSlug = pathSegments[1] ?? '';
+
+let errorMessage: string | undefined;
+let area: 'album' | 'blog' | null = null;
 
 if (!areaSegment || !parentSlug) {
-  throw new Error('Unable to resolve subcategory context from the current URL.');
+  errorMessage = 'We could not resolve the requested collection.';
+} else if (areaSegment === 'album' || areaSegment === 'blog') {
+  area = areaSegment;
+} else {
+  errorMessage = `Unsupported content area "${areaSegment}" for subcategory overview.`;
 }
 
-const area = areaSegment === 'album' ? 'album' : areaSegment === 'blog' ? 'blog' : null;
+let parentPage = undefined as Awaited<ReturnType<typeof getPageContent>> | undefined;
+let subCategory = undefined as ReturnType<typeof findCategory> | undefined;
 
-if (!area) {
-  throw new Error(`Unsupported content area "${areaSegment}" for subcategory overview.`);
+if (!errorMessage && parentSlug) {
+  try {
+    parentPage = await getPageContent(parentSlug);
+  } catch (unknownError) {
+    const message =
+      unknownError instanceof Error ? unknownError.message : 'Unable to load page details.';
+    errorMessage = message;
+  }
 }
 
-const parentPage = await getPageContent(parentSlug);
-const subCategory = findCategory(parentPage, slug);
+if (!errorMessage && parentPage) {
+  subCategory = findCategory(parentPage, slug);
 
-if (!subCategory) {
-  throw new Error(`Unknown subcategory "${slug}" for page "${parentSlug}".`);
+  if (!subCategory) {
+    errorMessage = 'There is nothing in this section yet — please check back later!';
+  }
 }
 
-const { icon, emoji } = getNavLabelParts(parentPage);
-const introParagraphs = subCategory.description
+const { icon, emoji } = parentPage ? getNavLabelParts(parentPage) : { icon: undefined, emoji: undefined };
+const introParagraphs = subCategory?.description
   ? [subCategory.description]
-  : getIntroParagraphs(parentPage);
+  : parentPage
+  ? getIntroParagraphs(parentPage)
+  : [];
 
-const backHref = `${parentPage.href.replace(/\/+$/, '')}/`;
-const backLabel = `← ${parentPage.title}`;
+const backHref = parentPage ? `${parentPage.href.replace(/\/+$/, '')}/` : undefined;
+const backLabel = parentPage ? `← ${parentPage.title}` : undefined;
 
 const placeholderCover = COVERS.placeholder;
 
@@ -65,7 +82,7 @@ type ArticleEntry = {
   cover: typeof placeholderCover;
 };
 
-const albumEntries = area === 'album'
+const albumEntries = !errorMessage && area === 'album'
   ? (await getCollection('album', ({ data }) => (data.category?.slug ?? '') === slug)).map(({ data }, index) => {
       const title = data.title ?? data.albumName ?? data.slug;
       const description = data.description ?? data.albumName ?? '';
@@ -106,34 +123,57 @@ const albumEntries = area === 'album'
       .map(({ _sort, _index, ...entry }) => entry)
   : [];
 
-const articleEntries = area === 'blog'
+type ArticleWithHref = ArticleEntry & { href: string };
+
+const articleEntries: ArticleWithHref[] = !errorMessage && area === 'blog'
   ? (await getCollection('blog', ({ data }) => data.primaryCategory === slug))
-      .map((entry) => ({
-        slug: entry.slug,
-        title: entry.data.title,
-        description: entry.data.description ?? '',
-        publishDate: entry.data.publishDate,
-        cover: COVERS[entry.slug] ?? placeholderCover,
-      }))
-      .sort((a, b) => b.publishDate.getTime() - a.publishDate.getTime())
+      .map((entry) => {
+        const segments = entry.slug.split('/').filter(Boolean);
+        const [sectionSegment, firstRest, ...additionalRest] = segments;
+        const entrySegment =
+          additionalRest.length > 0
+            ? additionalRest[additionalRest.length - 1]
+            : firstRest ?? entry.slug;
+        const categorySegment = additionalRest.length > 0 ? firstRest ?? slug : slug;
+        const href = `/${areaSegment}/${sectionSegment ?? parentSlug}/${categorySegment}/${entrySegment}/`;
+
+        return {
+          slug: entry.slug,
+          title: entry.data.title,
+          description: entry.data.description ?? '',
+          publishDate: entry.data.publishDate,
+          cover: COVERS[entry.slug] ?? placeholderCover,
+          href,
+        };
+      })
+      .sort((a, b) => {
+        const aTime = a.publishDate ? a.publishDate.getTime() : 0;
+        const bTime = b.publishDate ? b.publishDate.getTime() : 0;
+        return bTime - aTime;
+      })
   : [];
 
-const hasEntries = area === 'album' ? albumEntries.length > 0 : articleEntries.length > 0;
+const hasEntries = !errorMessage && (area === 'album' ? albumEntries.length > 0 : articleEntries.length > 0);
+
+const pageTitle = subCategory?.title ?? parentPage?.title ?? 'Coming soon';
+const pageDescription = subCategory?.description ?? parentPage?.description ?? '';
 
 const meta = {
-  title: subCategory.title,
-  description: subCategory.description ?? parentPage.description ?? '',
+  title: pageTitle,
+  description: pageDescription,
 };
 ---
-<BaseTemplate title={subCategory.title} meta={meta}>
-  <Fragment slot="header__actions">
-    <a class="button button--small button--dark" href={backHref}>{backLabel}</a>
-  </Fragment>
+<BaseTemplate title={pageTitle} meta={meta}>
+  {backHref && backLabel ? (
+    <Fragment slot="header__actions">
+      <a class="button button--small button--dark" href={backHref}>{backLabel}</a>
+    </Fragment>
+  ) : null}
 
   <section class="content-section">
     <Card class="card--plain is-centered">
       <Fragment slot="head">
-        <TitleWithIcon class="card__title" title={subCategory.title} icon={icon} emoji={emoji} />
+        <TitleWithIcon class="card__title" title={pageTitle} icon={icon} emoji={emoji} />
       </Fragment>
       {introParagraphs.length > 0 && (
         <Fragment slot="body">
@@ -147,7 +187,15 @@ const meta = {
     </Card>
   </section>
 
-  {hasEntries ? (
+  {errorMessage ? (
+    <section class="content-section">
+      <Card class="card--ghost is-centered">
+        <Fragment slot="body">
+          <p>{errorMessage}</p>
+        </Fragment>
+      </Card>
+    </section>
+  ) : hasEntries ? (
     <section class="content-section cols-3">
       {area === 'album'
         ? albumEntries.map(({ slug: albumSlug, title, description, count, formattedStartDate, coverUrl }) => {
@@ -181,14 +229,13 @@ const meta = {
               </a>
             );
           })
-        : articleEntries.map(({ slug: articleSlug, title, description, publishDate, cover }) => {
-            const itemHref = `/${areaSegment}/${parentSlug}/${articleSlug}/`;
+        : articleEntries.map(({ slug: articleSlug, title, description, publishDate, cover, href }) => {
             const formattedDate = publishDate
               ? new Intl.DateTimeFormat('en', { dateStyle: 'medium' }).format(publishDate)
               : undefined;
 
             return (
-              <a href={itemHref} aria-label={`Read ${title}`}>
+              <a href={href} aria-label={`Read ${title}`}>
                 <Card class="card--light is-animated" headClass="card__head--column">
                   <Fragment slot="head">
                     <h3 class="card__title">{title}</h3>

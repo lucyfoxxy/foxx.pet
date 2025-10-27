@@ -1,0 +1,36 @@
+---
+import ContentView from '@Templates/ContentView.astro';
+import { getCollection } from 'astro:content';
+
+interface StaticProps {
+  slug: string;
+}
+
+export async function getStaticPaths() {
+  const entries = await getCollection('blog', ({ data }) => data.section === 'noms');
+
+  return entries
+    .map((entry) => ({
+      segments: entry.slug.split('/').filter(Boolean),
+      slug: entry.slug,
+    }))
+    .filter(({ segments }) => segments.length >= 2)
+    .map(({ segments, slug }) => {
+      const [, category, ...rest] = segments;
+      const entrySegment = (rest.length > 0 ? rest[rest.length - 1] : category) ?? segments[segments.length - 1];
+      const categorySegment = category ?? 'general';
+
+      return {
+        params: { category: categorySegment, entry: entrySegment },
+        props: { slug },
+      };
+    });
+}
+
+const { slug } = Astro.props as StaticProps;
+
+if (!slug) {
+  throw new Error('Missing blog article slug');
+}
+---
+<ContentView slug={slug} />

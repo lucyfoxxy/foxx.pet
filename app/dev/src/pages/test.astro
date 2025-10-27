@@ -2,7 +2,7 @@
 import BaseTemplate from '@Templates/BaseTemplate.astro';
 import Card from '@Templates/Card.astro';
 import Icons from '@Assets/Icons.astro';
-import { ASSETS } from '@Assets/ui';
+import { COVERS } from '@Assets/covers';
 import { Picture } from 'astro:assets';
 ---
 <BaseTemplate>
@@ -112,7 +112,7 @@ import { Picture } from 'astro:assets';
       <div class="media-wrapper">
       <div class="media-frame">
         <Picture
-          src={ASSETS.space_fox}
+          src={COVERS.placeholder}
           formats={['webp']}
           inferSize
           alt="space-fox"
@@ -138,7 +138,7 @@ import { Picture } from 'astro:assets';
             <div class="media-wrapper">
       <div class="media-frame">
         <Picture
-          src={ASSETS.space_fox}
+          src={COVERS.lucys_journeys}
           formats={['webp']}
           inferSize
           alt="space-fox"
@@ -150,7 +150,7 @@ import { Picture } from 'astro:assets';
   </Card>
 </section>
 <section class="content-section">
-  <Card class="card--plain" headClass="is-centered card__head--column" >
+  <Card class="card--ghost" headClass="is-centered card__head--column" >
     <Fragment slot="head">
       <h2 class="card__title">Card Title</h2>
       <div class="card__badges controls">
@@ -162,7 +162,7 @@ import { Picture } from 'astro:assets';
             <div class="media-wrapper">
       <div class="media-frame">
         <Picture
-          src={ASSETS.space_fox}
+          src={COVERS.lucys_journeys}
           formats={['webp']}
           inferSize
           alt="space-fox"
@@ -171,42 +171,42 @@ import { Picture } from 'astro:assets';
         />
       </div></div>
     </Fragment>
-    </Card>    
+ </Card>      
   <Card class="card--light is-condensed" headClass="is-centered card__head--column" >
     <Fragment slot="body">
-            <div class="media-wrapper">
+            <div class="media-wrapper is-thumbs-wrap">
       <div class="media-frame is-thumb">
         <Picture
-          src={ASSETS.space_fox}
+          src={COVERS.lucys_journeys}
           formats={['webp']}
           inferSize
           alt="space-fox"
           fetchpriority="high"
-          class="media-image"
+          class="media-image is-thumb"
         />
       </div>
             <div class="media-frame is-thumb">
         <Picture
-          src={ASSETS.space_fox}
+          src={COVERS.lucys_journeys}
           formats={['webp']}
           inferSize
           alt="space-fox"
           fetchpriority="high"
-          class="media-image"
+          class="media-image is-thumb"
         />
       </div>
             <div class="media-frame is-thumb">
         <Picture
-          src={ASSETS.space_fox}
+          src={COVERS.lucys_journeys}
           formats={['webp']}
           inferSize
           alt="space-fox"
           fetchpriority="high"
-          class="media-image"
+          class="media-image is-thumb"
         />
       </div>
     </div>
     </Fragment>
-  </Card>
+  </Card> 
 </section>
-</BaseTemplate>
+</BaseTemplate>

@@ -1,18 +1,25 @@
 ---
-import ContentView from '@Templates/ContentView.astro';
-import { getCollection } from 'astro:content';
+import SubcategoryOverview from '@Templates/SubcategoryOverview.astro';
+import { getPageContent } from '@Content/siteContent';
+
+export const prerender = true;
 
 export async function getStaticPaths() {
-  const entries = await getCollection('blog', ({ data }) => data.section === 'tails');
-  return entries.map((entry) => ({
-    params: { slug: entry.slug },
-  }));
+  const page = await getPageContent('tails');
+  const categories = page.categories ?? [];
+
+  return categories
+    .map((category) => category.slug?.trim())
+    .filter((slug): slug is string => Boolean(slug?.length))
+    .map((slug) => ({
+      params: { slug },
+    }));
 }
 
 const { slug } = Astro.params;
 
 if (!slug) {
-  throw new Error('Missing blog article slug');
+  throw new Error('Missing blog category slug');
 }
 ---
-<ContentView slug={slug} />
+<SubcategoryOverview slug={slug} />

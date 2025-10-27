@@ -1,7 +1,7 @@
 import type { ImageMetadata } from 'astro';
 import placeholder from '@Assets/covers/placeholder.webp';
-import lucys_adventures from '@Assets/covers/lucys-adventures.webp';
+import lucys_journeys from '@Assets/covers/lucys-journeys.webp';
 export const COVERS: Record<string, ImageMetadata> = {
   placeholder,
-  lucys_adventures
+  lucys_journeys
 };

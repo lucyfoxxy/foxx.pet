@@ -1,7 +1,7 @@
 import { createGalleryItemsBySlug } from './utils/_slugLoader.js';
 import { loadImageWithTransition } from './utils/_transitionLoader.js';
 
-const metas = import.meta.glob('@Content/albumData/**/*.json', {
+const metas = import.meta.glob('@Content/album/paws/**/*.json', {
   query: '?json',
   eager: true,
 });
@@ -28,40 +28,25 @@ const buildRemoteUrl = (id, shareKey, kind) => {
 };
 
 export default function initGalleryPage() {
-  const frame = document.querySelector('.media-frame[data-slug]');
+
+    const frame = document.querySelector('.media-frame[data-slug]');
   if (!frame) return;
 
-  const slug = frame.getAttribute('data-slug');
+  const slug     = frame.getAttribute('data-slug');
   const autoplay = frame.getAttribute('data-autoplay') === 'true';
-  const random = frame.getAttribute('data-random') === 'true';
+  const random   = frame.getAttribute('data-random') === 'true';
   const interval = parseInt(frame.getAttribute('data-interval') || '7000', 10);
-  const imageRoot = frame?.querySelector('.media-image');
-  const imgEl = imageRoot instanceof HTMLImageElement
-    ? imageRoot
-    : imageRoot?.querySelector('img');
+  const imgEl     = frame?.querySelector('.media-image');
   const btnPrev = frame?.querySelector('.media-prev');
   const btnNext = frame?.querySelector('.media-next');
   const btnPlay = frame?.querySelector('.media-playpause');
   const progress = frame?.querySelector('.media-progress');
-  const thumbsWrap = document.querySelector('.media-wrapper.is-thumbs-wrap');
+  const thumbsWrap = document.querySelector('.media-frame.is-thumbs-wrap');
   const thumbs = thumbsWrap?.querySelector('.media-frame.is-thumbs-frame');
   const thumbsPrev = thumbsWrap?.querySelector('.media-prev.is-thumbs-prev');
   const thumbsNext = thumbsWrap?.querySelector('.media-next.is-thumbs-next');
 
-  if (
-    !frame ||
-    !(imgEl instanceof HTMLImageElement) ||
-    !(btnPrev instanceof HTMLButtonElement) ||
-    !(btnNext instanceof HTMLButtonElement) ||
-    !(btnPlay instanceof HTMLButtonElement) ||
-    !(progress instanceof HTMLElement) ||
-    !(thumbsWrap instanceof HTMLElement) ||
-    !(thumbs instanceof HTMLElement) ||
-    !(thumbsPrev instanceof HTMLButtonElement) ||
-    !(thumbsNext instanceof HTMLButtonElement)
-  ) {
-    return;
-  }
+
 
   const albumEntry = itemsBySlug.get(slug);
   const attrShareKey = frame.getAttribute('data-share-key') || undefined;

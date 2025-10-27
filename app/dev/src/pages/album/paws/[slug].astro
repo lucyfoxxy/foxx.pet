@@ -1,7 +1,20 @@
 ---
 import SubcategoryOverview from '@Templates/SubcategoryOverview.astro';
+import { getPageContent } from '@Content/siteContent';
 
 export const prerender = true;
+
+export async function getStaticPaths() {
+  const page = await getPageContent('paws');
+  const categories = page.categories ?? [];
+
+  return categories
+    .map((category) => category.slug?.trim())
+    .filter((slug): slug is string => Boolean(slug?.length))
+    .map((slug) => ({
+      params: { slug },
+    }));
+}
 
 const { slug } = Astro.params;
 
