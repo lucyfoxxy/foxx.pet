@@ -97,12 +97,6 @@ main.panel {
   column-gap: var(--nav-gap--column);
   box-shadow: var(--surface-shadow--strong);
 }
-.header[data-stuck]{
-  border-radius:  0 ; 
-    grid-template-areas:
-    
-    "crumbs nav actions";
-}
 
 .header__nav a:hover,
 .header__nav a:focus-visible {
@@ -157,7 +151,8 @@ main.panel {
     justify-items: stretch;
     justify-content: stretch;
   }
-  .header[data-stuck] .header__crumbs{
+  .header[data-stuck] .header__crumbs,
+  .header[data-stuck] .header__logo{
     display: none;
   }
   .header__crumbs{
