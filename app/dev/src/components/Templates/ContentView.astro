@@ -9,6 +9,7 @@ import { getCollection, getEntry } from 'astro:content';
 
 interface Props {
   slug: string;
+  backToParentCategory?: boolean;
 }
 
 interface AlbumViewData {
@@ -37,7 +38,7 @@ interface BlogViewData {
   backLabel: string;
 }
 
-const { slug } = Astro.props as Props;
+const { slug, backToParentCategory = false } = Astro.props as Props;
 const pathSegments = Astro.url.pathname.replace(/\/+$/, '').split('/').filter(Boolean);
 const areaSegment = pathSegments[0] ?? '';
 const categorySlug = pathSegments[1] ?? '';
@@ -107,10 +108,15 @@ if (!errorMessage && area === 'album') {
       const categoryTitle =
         subCategory?.title ?? albumData.category?.name ?? albumData.category?.slug ?? '';
 
-      const backHref = subcategorySlug
-        ? `/${areaSegment}/${categorySlug}/${subcategorySlug}/`
-        : `/${areaSegment}/${categorySlug}/`;
-      const backLabel = subCategory ? `← ${subCategory.title}` : `← ${parentPage?.title ?? 'Back'}`;
+      const backHref =
+        backToParentCategory || !subcategorySlug
+          ? `/${areaSegment}/${categorySlug}/`
+          : `/${areaSegment}/${categorySlug}/${subcategorySlug}/`;
+      const backLabel = backToParentCategory
+        ? `← ${parentPage?.title ?? 'Back'}`
+        : subCategory
+        ? `← ${subCategory.title}`
+        : `← ${parentPage?.title ?? 'Back'}`;
 
       albumView = {
         title,

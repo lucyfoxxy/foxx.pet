@@ -1,19 +1,49 @@
 ---
+import ContentView from '@Templates/ContentView.astro';
 import SubcategoryOverview from '@Templates/SubcategoryOverview.astro';
 import { getPageContent } from '@Content/siteContent';
+import { getCollection } from 'astro:content';
 
 export const prerender = true;
+
+type StaticProps = {
+  albumSlug?: string;
+  backToParentCategory?: boolean;
+};
 
 export async function getStaticPaths() {
   const page = await getPageContent('frames');
   const categories = page.categories ?? [];
+  const frameAlbums = await getCollection('album', ({ id }) => id.startsWith('frames/'));
 
-  return categories
-    .map((category) => category.slug?.trim())
-    .filter((slug): slug is string => Boolean(slug?.length))
-    .map((slug) => ({
-      params: { slug },
-    }));
+  const paths = categories
+    .map((category) => {
+      const slug = category.slug?.trim();
+      if (!slug) {
+        return undefined;
+      }
+
+      const matchingAlbums = frameAlbums.filter(
+        ({ data }) => (data.category?.slug ?? '').trim() === slug,
+      );
+
+      const albumSlug =
+        matchingAlbums.length === 1 && matchingAlbums[0].data.slug
+          ? matchingAlbums[0].data.slug.trim()
+          : undefined;
+
+      const props: StaticProps = albumSlug
+        ? { albumSlug, backToParentCategory: true }
+        : {};
+
+      return {
+        params: { slug },
+        props,
+      };
+    })
+    .filter((entry): entry is { params: { slug: string }; props: StaticProps } => Boolean(entry));
+
+  return paths;
 }
 
 const { slug } = Astro.params;
@@ -21,5 +51,11 @@ const { slug } = Astro.params;
 if (!slug) {
   throw new Error('Missing frames category slug');
 }
+
+const { albumSlug, backToParentCategory = false } = Astro.props as StaticProps;
 ---
-<SubcategoryOverview slug={slug} />
+{albumSlug ? (
+  <ContentView slug={albumSlug} backToParentCategory={backToParentCategory} />
+) : (
+  <SubcategoryOverview slug={slug} />
+)}
