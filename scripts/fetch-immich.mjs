@@ -268,6 +268,7 @@ async function processAlbum({
     ? [paths.albumData]
     : [];
   const albumDataTargets = albumDataRoots.map((root) => ({
+    root,
     dir: path.join(root, ...meta.dataDirSegments),
     file: path.join(root, ...meta.dataDirSegments, `${meta.dataFileName}.json`)
   }));
@@ -345,6 +346,11 @@ async function processAlbum({
     });
   }
 
+  await cleanupLegacyAlbumData({
+    meta,
+    targets: albumDataTargets
+  });
+
   if (!QUIET) {
     console.log(`\n\n✓ ${meta.slug}: ${items.length}/${totalAlbum} assets processed (${mode})`);
   }
@@ -352,7 +358,7 @@ async function processAlbum({
   return { slug: meta.slug, mode };
 }
 
-async function writeAlbumIndex({ filePath, meta, mode, items, shareKey,album }) {
+async function writeAlbumIndex({ filePath, meta, mode, items, shareKey, album }) {
   const albumInfo = {
     startDate: toIsoString(album?.startDate ?? '1970-01-01T00:00:00.000Z'),
     description: album?.description ?? null,
@@ -374,6 +380,27 @@ async function writeAlbumIndex({ filePath, meta, mode, items, shareKey,album }) 
     items
   };
   await fs.writeFile(filePath, JSON.stringify(index, null, 2), 'utf-8');
+}
+
+async function cleanupLegacyAlbumData({ meta, targets }) {
+  if (!meta || !Array.isArray(targets) || targets.length === 0) return;
+
+  const keep = new Set();
+  for (const target of targets) {
+    if (!target || !target.file) continue;
+    keep.add(path.normalize(target.file));
+  }
+
+  for (const target of targets) {
+    if (!target || !target.root) continue;
+    const candidates = createLegacyAlbumDataCandidates(target.root, meta);
+    for (const candidate of candidates) {
+      if (!candidate) continue;
+      const normalized = path.normalize(candidate);
+      if (keep.has(normalized)) continue;
+      await removeFileIfExists(normalized);
+    }
+  }
 }
 
 async function listRelevantAlbums() {
@@ -699,6 +726,36 @@ async function removeDirectory(dirPath) {
   } catch {
     // ignore
   }
+}
+
+async function removeFileIfExists(filePath) {
+  try {
+    await fs.unlink(filePath);
+  } catch (error) {
+    if (error && typeof error === 'object' && 'code' in error && error.code === 'ENOENT') {
+      return;
+    }
+    throw error;
+  }
+}
+
+function createLegacyAlbumDataCandidates(root, meta) {
+  const candidates = new Set();
+  if (!root || !meta) return candidates;
+
+  const segments = Array.isArray(meta.dataDirSegments) ? meta.dataDirSegments.filter(Boolean) : [];
+  const fileName = `${meta.dataFileName}.json`;
+
+  if (segments.length > 0) {
+    const withoutLast = segments.slice(0, -1);
+    if (withoutLast.length > 0) {
+      candidates.add(path.join(root, ...withoutLast, fileName));
+    }
+  }
+
+  candidates.add(path.join(root, fileName));
+
+  return Array.from(candidates);
 }
 
 function deriveAlbumMeta(album) {

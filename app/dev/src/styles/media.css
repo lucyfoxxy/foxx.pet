@@ -11,6 +11,7 @@
   align-items: center;
   justify-content: center;
   gap: var(--control-gap); 
+
 }
 
 
@@ -19,11 +20,7 @@
 .media-image {
   display: block;
   aspect-ratio: 16 / 9; 
-  inline-size: auto;
-  block-size: auto;
-  max-width: max(100%, calc(100vh / 2));
   overflow: hidden;
-  max-height: calc(100vw / 2 );
   object-fit: cover;
   border-radius: var(--radius-l);
   border: hidden;
@@ -32,22 +29,46 @@
 @media (max-width: 800px) { .media-frame,.media-image { 
   aspect-ratio: 1 / 1; }
 }
-.content-section.cols-2 :where(.media-image,.media-frame) { 
+@media (max-width: 1100px) {
+.content-section.cols-3 :where(.media-frame,.media-image){
+  aspect-ratio: 1 / 1; 
+  inline-size: 100%;
+  max-width: min(100%, calc(100vw / 4));
+  max-height: min(100%, calc(100vw / 4));
+  min-width: 192px;
+  min-height: 192px;
+}
+}
+.content-section.cols-2 :where(.media-frame) { 
+  max-width: max(100%, calc(100vh / 4));
+  max-height: calc(100vw / 2 );
+  min-width: 25vw;
   aspect-ratio: 4 / 3; 
   inline-size: 100%; 
 }
-.content-section.cols-3 :where(.media-image,.media-frame){
+.content-section.cols-3 :where(.media-frame,.media-image){
   aspect-ratio: 1 / 1; 
   inline-size: 100%;
+  max-width: min(100%, calc(100vw / 5));
+  max-height: min(100%, calc(100vw / 5));
+  min-width: 192px;
 }
 
 
 /* ==========<[      FRAME      ]>================= */
 .media-frame  { 
   box-shadow: 1px 1px 12px -2px var(--color-shadow-strong); 
+  max-height: calc(100vw / 2 );
+  height: auto;
+  width: auto;
+  min-width: 45vw;
+  max-width: max(100%, calc(100vh / 2));
 }
 .media-frame[role="button"] { cursor: zoom-in; }
 .media-frame--thumb {
+  min-width: 0;
+  width: var(--thumb-size);
+  height: var(--thumb-size);
   max-width: var(--thumb-size);
   max-height: var(--thumb-size);
   aspect-ratio: 1 / 1;
@@ -62,6 +83,8 @@
 
 /* ==========<[      IMAGE      ]>================= */
 .media-image{
+  width: 100%;
+  height: 100%;
   transform-origin: center;
   transition: opacity .7s ease;
   opacity: 1;
@@ -102,7 +125,6 @@
 .media-image--thumb.active {
    outline: 4px solid black;
 }
-
 
 /* ==========<[      CONTROLS      ]>============== */
 .media-playpause {
