@@ -9,6 +9,11 @@ body { min-height: 100dvh; }
   color-scheme: dark;
   scroll-padding-top: var(--site-header-scroll-offset, 0px);
 }
+@media (max-width: 900px) {
+  html {
+    scroll-padding-top: var(--site-header--sticky-offset, 0px);
+  }
+}
 
 /* ====== DEFAULT  ====== */
 body {
@@ -24,7 +29,6 @@ body::before {
   position: fixed;
   inset: 0;
   z-index: -1;
-  
   filter: saturate(.35) var(--blur--soft) drop-shadow(0 0 -14px rgba(0,0,0,.1));
   box-shadow: inset 0 0 164px 64px rgba(0,0,0,.5);
     background: 

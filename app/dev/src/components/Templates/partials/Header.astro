@@ -23,37 +23,31 @@ type Props = {
 const { navLinks = [], breadcrumbs = [] } = (Astro.props ?? {}) as Props;
 const hasActions = Astro.slots.has('actions');
 ---
-
-
 <header class="header" aria-label="Primary navigation">
   <a class="header__logo" aria-label="Home" href="/">
     <img src={ASSETS.logo_header.src} alt="foxx.pet" />
   </a>
-  <nav class="header__nav controls controls--center">
+  <nav class="header__nav">
     {navLinks
       .filter((link) => link.includeInHeader)
       .map((link) => (
         <a
           class:list={[
-            
             link.isActive && 'is-active',
             'button',
-            
             'button--small',
             'button--plain',
             'button--round',
-            
-            
           ]}
           href={link.href}
           data-active={link.isActive ? 'true' : undefined}
           aria-current={link.isActive ? 'page' : undefined}
         >
-          <div class:list={['header__nav-link', link.icon && 'header__nav-link--with-icon']}>
+          <div class="header__nav-link">
             {link.icon ? (
               <>
                 <span class="header__nav-text">{link.label}</span>
-                <span class:list={['header__nav-symbol', 'header__nav-symbol--icon']} aria-hidden="true">
+                <span class="header__nav-symbol" aria-hidden="true">
                   <ICONS kind={link.icon} />
                 </span>
               </>

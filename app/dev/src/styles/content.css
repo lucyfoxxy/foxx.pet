@@ -84,7 +84,7 @@
 .card__foot { grid-area: card-foot; display: contents; }
 
 .card__title { grid-area: title; min-width: 0;  }  /* min-width 0 gegen Overflow */
-.card__badges{ grid-area: badges; }
+.card__head > .card__badges{ grid-area: badges; }
 .card__spacer { flex: 1 1 auto; }
 
 .title-with-icon {

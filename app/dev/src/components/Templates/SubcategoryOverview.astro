@@ -174,7 +174,7 @@ const meta = {
 <BaseTemplate title={pageTitle} meta={meta}>
   {backHref && backLabel ? (
     <Fragment slot="header__actions">
-      <a class="button button--small button--dark" href={backHref}>{backLabel}</a>
+      <a class="button button--small button--round" href={backHref}>{backLabel}</a>
     </Fragment>
   ) : null}
 
@@ -213,17 +213,13 @@ const meta = {
 
             return (
               <a href={itemHref} aria-label={`Open ${title}`}>
-                <Card class="card--light is-centered is-animated" headClass="card__head--column">
+                <Card class="is-centered is-animated" headClass="card__head--column">
                   <Fragment slot="head">
-                    <h3 class="card__title">{title}</h3>
-                    {(formattedStartDate || badgeLabel) && (
-                      <div class="card__badges controls controls--tight">
-                        {formattedStartDate ? <span class="badge badge--dark">{formattedStartDate}</span> : null}
-                        {badgeLabel ? <span class="badge badge--dark">{badgeLabel}</span> : null}
-                      </div>
-                    )}
+                    <h2 class="card__title">{title}</h2>
+
                   </Fragment>
                   <Fragment slot="body">
+                    <div class="media-wrapper">
                     <div class="media-frame" data-slug={albumSlug}>
                       {coverUrl ? (
                         <img class="media-image" src={coverUrl} alt="" loading="lazy" decoding="async" />
@@ -231,7 +227,16 @@ const meta = {
                         <div class="media-image placeholder" aria-hidden="true"></div>
                       )}
                     </div>
+                    </div>
                     {description ? <p>{description}</p> : null}
+                  </Fragment>
+                  <Fragment slot="foot">
+                    {(formattedStartDate || badgeLabel) && (
+                      <div class="card__badges controls controls--tight">
+                        {formattedStartDate ? <span class="badge">{formattedStartDate}</span> : null}
+                        {badgeLabel ? <span class="badge">{badgeLabel}</span> : null}
+                      </div>
+                    )}
                   </Fragment>
                 </Card>
               </a>

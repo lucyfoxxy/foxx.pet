@@ -35,7 +35,7 @@
   --container-padding:       clamp(var(--space-xxs),  calc(var(--space-xxs) + 2vw),    var(--space-xxl)); 
   --container-max:           1280px;
   
-  --site-logo--size:         calc(clamp(var(--space-xxs), calc(var(--space-xxs) + 5vw), var(--space-xxl)));
+  --site-logo--size:         calc(var(--nav-gap--row) * 2 + var(--medium-font-size));
   --thumb-size:              clamp(64px, 9vw, 128px);
   --hero-size:               clamp(320px,42vw,calc(var(--container-max) * .45));
   --icon-size:               2.5em;

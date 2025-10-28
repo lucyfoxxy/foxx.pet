@@ -12,6 +12,12 @@
   padding-inline: var(--container-padding);
   padding-block: var(--section-gap);
 }
+@media (max-width: 900px) {
+  .container {
+    padding-inline: 0;
+    padding-block: 0;
+  }
+}
 
 .panel-shell {
   display: flex;
@@ -35,19 +41,24 @@
   background-position:
     center,       center,       center,       center,       center,       center,       bottom,       top;
 }
+.container > .panel-shell {
+  max-inline-size: var(--container-max);
+  margin-inline: auto;
+}
+@media (max-width: 900px) { 
+  .container > .panel-shell {
+    max-inline-size: 100%;
+    margin-block: 0;
+    margin-inline: 0;
+  }
+}
 
 main.panel {
   padding: var(--panel-padding);
   padding-block-start: 0;
 }
-.panel :where(p, .prose) {
-  hyphens: auto;
-}
+.panel :where(p, .prose) { hyphens: auto; }
 
-.container > .panel-shell {
-  max-inline-size: var(--container-max);
-  margin-inline: auto;
-}
 
 /* ====== FOOTER ================= */
 .footer {
@@ -68,11 +79,14 @@ main.panel {
   gap: var(--flow-gap);
   box-shadow: var(--surface-shadow--strong);
 }
+@media (max-width: 900px) { 
+  .footer { box-shadow: var(--surface-shadow--default); }
+}
 .footer :where(p){ opacity: .75; }
-.footer__left    { grid-area: footer-left;justify-self: start;}
-.footer__center  { grid-area: footer-center;justify-self: center;}
+.footer__left    { grid-area: footer-left;justify-self: start; }
+.footer__center  { grid-area: footer-center;justify-self: center; }
 .footer__right   { grid-area: footer-right;justify-self: end;}
-.footer__top     { grid-area: footer-top;}
+.footer__top     { grid-area: footer-top; }
 
 /* ====== HEADER ================= */
 .header {
@@ -97,6 +111,31 @@ main.panel {
   column-gap: var(--nav-gap--column);
   box-shadow: var(--surface-shadow--strong);
 }
+@media (max-width: 900px) {
+  .header {
+    border-radius: 0 0 var(--radius-m) var(--radius-m);
+    box-shadow: var(--surface-shadow--default);
+    grid-template-columns: 1fr auto;
+    grid-template-areas: 
+      "crumbs logo"
+      "nav actions";
+    justify-items: stretch;
+    justify-content: stretch;
+    gap: 0;
+  }
+}
+.header[data-stuck] {
+  grid-template-areas:
+  "logo nav actions"
+  "crumbs nav actions";
+}
+@media (max-width: 900px) {
+  .header[data-stuck] { grid-template-areas: "nav actions"; }
+  .header[data-stuck] > .header__crumbs,
+  .header[data-stuck] > .header__logo{
+    display: none;
+  }
+}
 
 .header__nav a:hover,
 .header__nav a:focus-visible {
@@ -105,61 +144,7 @@ main.panel {
   color: var(--text-highlight);
   transition: var(--transition-nav);
 }
-@media (max-width: 900px) {
-  html {
-    scroll-padding-top: var(--site-header--sticky-offset, 0px);
-  }
-  .container > .panel-shell {
-    max-inline-size: 100%;
-    margin-block: 0;
-    margin-inline: 0;
-  }
-  .container {
-    padding-inline: 0;
-    padding-block: 0;
-  }
-  .header,.header[data-stuck] {
-    border-radius: 0 0 var(--radius-m) var(--radius-m);
-    box-shadow: var(--surface-shadow--default);
-  }
-  .footer {
-    box-shadow: var(--surface-shadow--default);  
-  }
-  .header {
-    grid-template-columns: 1fr auto;
-    grid-template-areas: 
-      "logo crumbs"
-      "nav actions";
-    justify-items: stretch;
-    justify-content: stretch;
-    gap: 0;
-  }
 
-    .header__nav,.header__nav.controls {
-    align-self: start;
-    justify-self: start;
-    justify-content: start;
-    align-items: start;
-    
-    
-  }
-  .header[data-stuck] {
-    grid-template-columns: auto 1fr;
-    grid-template-areas: 
-
-      "nav actions";
-    justify-items: stretch;
-    justify-content: stretch;
-  }
-  .header[data-stuck] .header__crumbs,
-  .header[data-stuck] .header__logo{
-    display: none;
-  }
-  .header__crumbs{
-    align-self: self-end;
-    justify-self: end;
-  }  
-}
 
 /* ====== HEADER - LOGO ================= */
 .header__logo {
@@ -172,26 +157,26 @@ main.panel {
   place-self: start;
   grid-area: logo; 
 }
-.header__logo img {
-  display: block;
-  inline-size: auto;
-  block-size: calc(min(var(--site-logo--size),calc(var(--nav-gap--row) *2 + var(--medium-font-size))));
-  filter: var(--site-logo--filter);
-}
-.header[data-stuck] {
-    grid-template-areas:
-    "logo nav actions"
-    "crumbs nav actions";
-}
-.header[data-stuck] .header__logo img {
-  block-size: calc(min(var(--site-logo--size),calc(var(--medium-font-size))));
-}
-.header[data-stuck] .header__logo {
-  
-}
 @media (max-width: 900px) {
   .header__logo { justify-self: start; }
 }
+
+.header__logo img {
+  display: block;
+  inline-size: auto;
+  block-size: var(--site-logo--size);
+  filter: var(--site-logo--filter);
+}
+@media (max-width: 900px) {
+  .header__logo img { 
+    block-size: calc(var(--site-logo--size) * .6); 
+  }
+}
+.header[data-stuck] > .header__logo img {
+   block-size: calc(var(--site-logo--size) * .6); 
+}
+
+
 /* ====== HEADER - NAV ================= */
 .header__nav {
   inline-size: 100%;
@@ -207,38 +192,50 @@ main.panel {
   grid-area: nav;
   background: none;;
 }
-
+@media (max-width: 900px) {
+  .header__nav {
+    align-self: start;
+    justify-self: start;
+    justify-content: start;
+    align-items: start;
+    column-gap: calc(.1 * var(--nav-gap--column));   
+  }
+}
 .header__nav-link {
-  display: inline-flex;
-  flex-wrap: nowrap;
+  display: flex;
+  grid-template-columns: 1fr auto;
+  gap: .25em;
+  margin: 0;
   align-items: center;
-  gap: 0.35em;
+
 }
 .header__nav-text {
+  display: inline-flex;
+flex-wrap: wrap;
   line-height: var(--xsmall-line-height);
+  text-align: center;
+  place-self: right;
 }
 
 .header__nav-symbol {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  position: relative;
+  display: flex;
+  
+  left: -10%;
   line-height: 1;
-}
 
-.header__nav-symbol--icon svg {
-  inline-size: 1.125em;
-  block-size: 1.125em;
+  opacity: .6;
+}
+.header__nav-symbol svg {
+  inline-size: 1.75em;
+  block-size: 1.75em;
 }
 
 .header__nav-symbol--emoji {
   font-size: 0.9em;
 }
 
-@media (max-width: 900px) {
-  .header__nav-symbol {
-    display: none;
-  }
-}
+
 
 /* ====== HEADER - CRUMBS ================= */
 .header__crumbs {
@@ -253,6 +250,7 @@ main.panel {
   flex-direction: column;
   gap: var(--cluster-gap);
 }
+
 .header__actions:empty {
   display: none;
 }

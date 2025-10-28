@@ -71,6 +71,9 @@ const normalizedCategories = !loadError && content
 const hasCategories = normalizedCategories.length > 0;
 ---
 <BaseTemplate title={pageTitle} meta={meta}>
+  <Fragment slot="header__actions">
+      <a class="button button--small button--round" href="/">← Home</a>
+  </Fragment>
   <section class="content-section">
     <Card class="card--plain is-centered">
       <Fragment slot="head">
