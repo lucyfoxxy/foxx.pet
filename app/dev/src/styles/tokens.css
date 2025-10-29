@@ -35,7 +35,7 @@
   --container-padding:       clamp(var(--space-xxs),  calc(var(--space-xxs) + 2vw),    var(--space-xxl)); 
   --container-max:           1280px;
   
-  --site-logo--size:         calc(var(--nav-gap--row) * 2 + var(--medium-font-size));
+  --site-logo--size:         calc(var(--nav-gap--row) * 2 + var(--font-size-m));
   --thumb-size:              clamp(64px, 9vw, 128px);
   --hero-size:               clamp(320px,42vw,calc(var(--container-max) * .45));
   --icon-size:               2.5em;
@@ -61,8 +61,8 @@
   --color-dark:              oklch(20% 0.11 295);
   --color-light:             oklch(92% 0.18 295); 
   --color-accent:            oklch(80% 0.24 295); 
-  --color-shadow-soft:       color-mix(in oklch, var(--color-dark) 30%, transparent);
-  --color-shadow-strong:     color-mix(in oklch, var(--color-dark) 60%, transparent);
+  --color-shadow--soft:       color-mix(in oklch, var(--color-dark) 30%, transparent);
+  --color-shadow--strong:     color-mix(in oklch, var(--color-dark) 60%, transparent);
   --color-glow-soft:         color-mix(in oklch, var(--color-light) 40%, var(--color-accent));
   --color-glow-strong:       color-mix(in oklch, var(--color-light) 80%, white);
 
@@ -71,9 +71,9 @@
   --text-accent:             color-mix(in oklab, var(--color-light) 85%, var(--color-accent));
   --text-highlight:          color-mix(in oklab, var(--color-light) 65%, var(--color-accent));
 
-  --text-shadow--soft:       1px 1px 1px var(--color-shadow-soft);  
-  --text-shadow--strong:     2px 2px 2px var(--color-shadow-strong);
-  --icon-shadow:             3px 4px 3px var(--color-shadow-strong);
+  --text-shadow--soft:       1px 1px 1px var(--color-shadow--soft);  
+  --text-shadow--strong:     2px 2px 2px var(--color-shadow--strong);
+  --icon-shadow:             3px 4px 3px var(--color-shadow--strong);
 
   --text-glow--soft:         1px 1px 1px var(--color-glow-soft);
   --text-glow--strong:       1px 1px 2px var(--color-glow-strong);
@@ -87,19 +87,21 @@
   --control-surface--dark:            color-mix(in oklch,var(--color-dark)89%,transparent);
   --control-surface--dark--highlight: color-mix(in oklab,var(--control-surface--dark) 94%, var(--color-dark));
   
-  --control-glow:      0 0 8px 0 var(--color-glow-strong), inset 0 0 1px 2px var(--color-glow-strong);
-  --control-glow--soft:inset 0 0 8px 0 var(--color-glow-soft);
+  --control-glow:  inset    0 0 1px 2px var(--color-glow-soft);
+  --control-glow--soft:inset 0 0 2px 1px var(--color-glow-soft);
 
-  --surface-shadow--soft:    1px 2px 4px 0px var(--color-shadow-soft);
-  --surface-shadow--default: 0 0 18px -10px var(--color-shadow-soft),0 0 24px -6px var(--color-shadow-strong);
-  --surface-shadow--strong:  0 0 20px -10px var(--color-shadow-soft),0 0 28px -6px var(--color-shadow-strong),0 0 14px 0 color-mix(in srgb, black 95%, transparent);
+  --surface-shadow--soft:    1px 2px 4px 0px var(--color-shadow--soft);
+  --surface-shadow--default: 0 0 18px -10px var(--color-shadow--soft),0 0 24px -6px var(--color-shadow--strong);
+  --surface-shadow--strong:  0 0 20px -10px var(--color-shadow--soft),0 0 28px -6px var(--color-shadow--strong),0 0 14px 0 color-mix(in srgb, black 95%, transparent);
+
+  --control-shadow--inset: inset 0 0 16px 0 var(--control-surface--dark);
 
   --surface-glow:      0 0 8px 0 var(--color-glow-strong), inset 0 0 1px 2px var(--color-glow-strong);
   --surface-glow--soft:0 0 6px 0 var(--color-glow-soft);
  
-  --blur--soft:              blur(var(--radius-s));
-  --blur--default:           blur(var(--radius-m));
-  --blur--strong:            blur(var(--radius-l));
+  --blur-s:              blur(var(--radius-s));
+  --blur-m:           blur(var(--radius-m));
+  --blur-l:            blur(var(--radius-l));
 
   --outline:                 1px solid var(--card-surface--light); 
 
@@ -110,7 +112,7 @@
                              radial-gradient(1200px 900px at top left, oklch(75% 0.20 285 / .36), transparent 74%),
                              radial-gradient(1100px 800px at center right, oklch(42% 0.22 305 / .28), transparent 72%),
                              linear-gradient(to top, oklch(60% 0.20 230 / .96), transparent 54%);
-  --site-logo--filter:       drop-shadow(0 3px 2px var(--color-shadow-strong)); 
+  --site-logo--filter:       drop-shadow(0 3px 2px var(--color-shadow--strong)); 
 
   /* ====== Font Styles ====== */
   --primary-font-family:     Grandstander, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -121,21 +123,22 @@
   --thick-font-weight:       500;
   --bold-font-weight:        700;
 
-  --xsmall-font-size:        clamp(.75rem, calc(.75rem + .025vw), .95rem);
-  --small-font-size:         clamp(.9rem,  calc(.9rem + .075vw), 1.05rem);
-  --medium-font-size:        clamp(1rem, calc(1rem + .35vw), 1.45rem);
-  --large-font-size:         clamp(1.4rem, calc(1.4rem + .4vw), 1.8rem);
-  --xlarge-font-size:        clamp(1.75rem, calc(1.75rem + 1.5vw), 3rem);
+  --font-size-xs:        clamp(.75rem, calc(.75rem + .025vw), .95rem);
+  --font-size-s:         clamp(.9rem,  calc(.9rem + .075vw), 1.05rem);
+  --font-size-m:        clamp(1rem, calc(1rem + .35vw), 1.45rem);
+  --font-size-l:         clamp(1.4rem, calc(1.4rem + .4vw), 1.8rem);
+  --font-size-xl:        clamp(1.75rem, calc(1.75rem + 1.5vw), 3rem);
 
-  --xsmall-line-height:      1;
-  --small-line-height:       1.5;
-  --medium-line-height:      1.35;
-  --large-line-height:       1.225;
-  --xlarge-line-height:      1.2;
+  --line-height-xs:      1;
+  --line-height-s:       1.5;
+  --line-height-m:      1.35;
+  --line-height-l:       1.225;
+  --line-height-xl:      1.2;
 
-  --small-letter-spacing:    .0065em;
-  --medium-letter-spacing:   clamp(.0065em, calc(0.225em + .01vw ), .0225em);
-  --large-letter-spacing:    clamp(.0225em, calc(0.225em + .03vw ), .0525em);
+  --letter-spacing-s:    .0065em;
+  --letter-spacing-m:   clamp(.0065em, calc(0.225em + .01vw ), .0225em);
+  --letter-spacing-l:    clamp(.0225em, calc(0.225em + .03vw ), .0525em);
+  --letter-spacing-xl:    clamp(.0525em, calc(0.525em + .05vw ), .0650em);
 
   /* ====== Gallery ====== */
   --kenburns-offset:            clamp(8rem, 20vh, 25rem);
@@ -148,9 +151,11 @@
   --transition-raise:           transform .25s ease-in-out, box-shadow .2s ease;
   --transition-glow:            color .2s ease, text-shadow .2s ease, transform .2s ease, box-shadow .2s ease;
   --transition-soft:            opacity .25s ease, transform .25s ease, background .25s ease, box-shadow .25s ease;
-  --transition-nav:             transform .5s ease-in-out, text-shadow .5s ease-in-out;
+  --transition-nav:             transform .5s ease-in-out, text-shadow .5s ease-in-out, opacity .5s ease-in-out, filter .5s ease-in-out;
+  --transition-scale:           transform .3s ease-in-out;
 
   --transform-raise:            translateY(-5px) scale(1.04);
   --transform-raise--soft:      translateY(-1px) scale(1.01);
+  --transform-scale:            scale(1.02);
 }
 @media (max-width: 800px) { :root {} }

@@ -31,3 +31,4 @@ package-lock.json
 **/*.txt
 **/*.diff
 **/thumbs.db
+svgs.list

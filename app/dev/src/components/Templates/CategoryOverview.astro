@@ -2,6 +2,7 @@
 import BaseTemplate from '@Templates/BaseTemplate.astro';
 import Card from '@Templates/Card.astro';
 import TitleWithIcon from '@Templates/partials/TitleWithIcon.astro';
+import HeaderActions from '@Templates/partials/HeaderActions.astro';
 import { PLACEHOLDER_COVER, findCoverImage } from '@Assets/covers';
 import { Picture } from 'astro:assets';
 import {
@@ -71,9 +72,7 @@ const normalizedCategories = !loadError && content
 const hasCategories = normalizedCategories.length > 0;
 ---
 <BaseTemplate title={pageTitle} meta={meta}>
-  <Fragment slot="header__actions">
-      <a class="button button--small button--round" href="/">← Home</a>
-  </Fragment>
+  <HeaderActions slot="header__actions" href="/" label="← Home" />
   <section class="content-section">
     <Card class="card--plain is-centered">
       <Fragment slot="head">

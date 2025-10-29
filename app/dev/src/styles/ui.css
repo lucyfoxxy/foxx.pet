@@ -11,7 +11,7 @@
 .controls--start  { justify-content: flex-start; }
 .controls--center { justify-content: center; }
 .controls--end    { justify-content: flex-end; }
-.controls--spread { justify-content: space-between; column-gap: var(--card-gap); }
+.controls--spread { justify-content: space-between; }
 .controls--nowrap { flex-wrap: nowrap; }
 .controls--tight  { gap: calc(var(--control-gap) * 0.6); }
 :not(.header__nav,.header__actions).controls { margin-bottom: var(--card-gap); }
@@ -25,12 +25,12 @@
   transition: var(--transition-glow),var(--transition-raise);;
   vertical-align: middle;
   text-shadow: var(--text-glow--soft),var(--text-shadow--strong);
-  box-shadow: var(--surface-shadow--soft);
+  box-shadow: var(--surface-shadow--soft),;
   justify-content: center;
   gap: var(--control-gap); 
   padding: var(--control-padding);
   background: var(--control-surface--light);
-  border-radius: var(--radius-s);
+  border-radius: var(--radius-m);
 }
 .button{
   user-select: none;
@@ -39,20 +39,31 @@
   cursor: pointer;  
 }
 .button--small { padding-block: calc(var(--control-padding) * .75);}
-.button--large { padding: calc(var(--control-padding) * 1.35);}
-.button--round {  border-radius: 999px; }
-.button--ghost {  backdrop-filter: var(--blur--strong);}
-.button:hover {
-  text-shadow: var(--text-glow--strong);
-  color: var(--text-highlight);
-  transform: var(--transform-raise);
+.button--large { padding-inline: calc(var(--control-padding) * 1.35);}
+.button--round { border-radius: 999px; }
+.button--stretch {inline-size: 100%}
+.button--ghost { 
+  background: none; 
+  text-shadow: var(--text-glow--soft); 
+  backdrop-filter: var(--blur-m);
 }
-.button:not(.button--plain):hover { 
+.button--inset {background: none; box-shadow: var(--control-shadow--inset)}
+.button[data-active="true"] { backdrop-filter: brightness(.75);
+}
+.button[data-active="true"] > *,
+.button:hover > * {
+  filter: drop-shadow(0 0 1px var(--color-accent));
+}
+
+.button--large:hover { 
+  text-shadow: var(--text-glow--soft);
+  color: var(--color-glow--strong);
+  transform: var(--transform-raise);
   box-shadow: var(--surface-shadow--default),var(--control-glow); 
 }
-.button--small:not(.button--plain):hover { 
-  box-shadow: var(--surface-shadow--default),var(--control-glow--soft); 
-  transform: var(--transform-raise--soft);
+.button--small:hover { 
+  backdrop-filter: brightness(.75);
+  transform: var(--transform-scale--soft);
   text-shadow: var(--text-glow--soft);
 }
 

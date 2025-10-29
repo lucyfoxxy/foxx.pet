@@ -81,22 +81,22 @@ Fonts are preloaded in the shared layout (`@Layout/Main.astro`) to avoid layout 
 
 | Token | Clamp range | Typical usage |
 | --- | --- | --- |
-| `--small-font-size` | `clamp(.95rem, .54rem + .4vw, 1.05rem)` | Captions, footer text, chips. |
-| `--medium-font-size` | `clamp(1.08rem, .66rem + .55vw, 1.2rem)` | Default body text. |
-| `--large-font-size` | `clamp(1.38rem, .85rem + .9vw, 1.65rem)` | Secondary headings (`h2`). |
-| `--xlarge-font-size` | `clamp(1.78rem, 1.1rem + 1.3vw, 2.2rem)` | Primary headings (`h1`). |
+| `--font-size-s` | `clamp(.95rem, .54rem + .4vw, 1.05rem)` | Captions, footer text, chips. |
+| `--font-size-m` | `clamp(1.08rem, .66rem + .55vw, 1.2rem)` | Default body text. |
+| `--font-size-l` | `clamp(1.38rem, .85rem + .9vw, 1.65rem)` | Secondary headings (`h2`). |
+| `--font-size-xl` | `clamp(1.78rem, 1.1rem + 1.3vw, 2.2rem)` | Primary headings (`h1`). |
 
 Complementary rhythm tokens:
 
-- Line heights: `--small-line-height` (1.5), `--medium-line-height` (1.35), `--large-line-height` (1.2), `--xlarge-line-height` (1.15).
-- Letter spacing: `--small-letter-spacing` (.005em), `--medium-letter-spacing` (.02em), `--large-letter-spacing` (.04em).
+- Line heights: `--line-height-s` (1.5), `--line-height-m` (1.35), `--line-height-l` (1.2), `--line-height-xl` (1.15).
+- Letter spacing: `--letter-spacing-s` (.005em), `--letter-spacing-m` (.02em), `--letter-spacing-l` (.04em).
 - Paragraph spacing inside panels: `--flow-gap` (`clamp(.65rem, .5rem + .3vw, .95rem)`).
 
 ### Application rules
 
 - The `body` element defaults to the primary family, medium size, and small line height for crisp reading on dark backgrounds.
 - Navigation links (`.header a`) use the secondary family with bold weight, medium line height, and medium letter spacing for clearer scanability.
-- The footer inherits the medium letter spacing but scales text down via `--small-font-size` for visual hierarchy.
+- The footer inherits the medium letter spacing but scales text down via `--font-size-s` for visual hierarchy.
 - Panels scope most typography. Within `.panel` containers:
   - Headings reset margins, adopt the secondary family, and use the scale tokens above.
   - Paragraphs and `.prose` blocks share consistent spacing governed by `--flow-gap`.

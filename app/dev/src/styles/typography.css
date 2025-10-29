@@ -32,9 +32,9 @@
 body {
   font-family: var(--primary-font-family);
   font-weight: var(--thin-font-weight);
-  font-size: var(--small-font-size);
-  line-height: var(--small-line-height);
-  letter-spacing: var(--small-letter-spacing);
+  font-size: var(--font-size-s);
+  line-height: var(--line-height-s);
+  letter-spacing: var(--letter-spacing-s);
   color: var(--text-color);
 }
 
@@ -46,23 +46,21 @@ a {
 }
 
 
-.header__nav a {
-    font-weight: var(--normal-font-weight);
-  font-size: var(--medium-font-size);
-  letter-spacing: var(--medium-letter-spacing);
-  opacity: .9;
+.header__nav-text {
+  font-weight: var(--normal-font-weight);
+  font-size: var(--font-size-m);
+  letter-spacing: var(--letter-spacing-xl);
+  text-align: left;
 }
-.header__nav a.is-active {
-    font-weight: var(--bold-font-weight);
-    text-shadow: var(--text-glow--strong);
-    opacity: 1;
+.header__nav-link.is-active > .header__nav-text {
+  font-weight: var(--bold-font-weight);  
 }
 .footer,
 .badge,
 .button--small {
-  font-size: var(--xsmall-font-size);
+  font-size: var(--font-size-xs);
   font-weight: var(--thin-font-weight);
-  line-height: var(--xsmall-line-height);
+  line-height: var(--line-height-xs);
 }
 
 .button--large,
@@ -83,24 +81,24 @@ h1, h2, h3, p {
 
 .panel :where(h1) {
   font-weight: var(--bold-font-weight);
-  font-size: var(--xlarge-font-size);
-  line-height: var(--xlarge-line-height);
-  letter-spacing: var(--large-letter-spacing);
+  font-size: var(--font-size-xl);
+  line-height: var(--line-height-xl);
+  letter-spacing: var(--letter-spacing-l);
   text-shadow: var(--text-shadow--strong);
 }
 
 .panel :where(h2) {
-  font-size: var(--large-font-size);
-  line-height: var(--xsmall-line-height);
+  font-size: var(--font-size-l);
+  line-height: var(--line-height-xs);
   text-shadow: var(--text-glow--soft),var(--text-shadow--strong);
-  letter-spacing: var(--large-letter-spacing);
+  letter-spacing: var(--letter-spacing-l);
 }
 
 .panel :where(h3) {
   font-weight: var(--normal-font-weight);
   text-shadow: var(--text-glow--soft),var(--text-shadow--strong);
-  letter-spacing: var(--large-letter-spacing);
-  font-size: var(--medium-font-size);
+  letter-spacing: var(--letter-spacing-l);
+  font-size: var(--font-size-m);
 }
 
 /* ====== PROSE & LISTEN ====== */
@@ -125,7 +123,7 @@ h1, h2, h3, p {
 }
 
 /* ====== TABLES ====== */
-.table__subtitle { line-height: var(--medium-line-height); }
+.table__subtitle { line-height: var(--line-height-m); }
 .table__th { font-weight: var(--thick-font-weight); }
 .table__price { font-weight: var(--normal-font-weight); }
 

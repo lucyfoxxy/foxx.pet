@@ -1,0 +1,65 @@
+---
+// src/templates/partials/HeaderActions.astro (Pfad nach Wunsch)
+import type { HTMLAttributes } from 'astro/types';
+
+type AnchorAttrs = HTMLAttributes<HTMLAnchorElement>;
+type DivAttrs = HTMLAttributes<HTMLDivElement>;
+type SlotClass = HTMLAttributes<HTMLElement>['class'];
+
+export interface ActionItem extends AnchorAttrs {
+  href: string;
+  label: string;
+  class?: SlotClass; // pro-Link-Klassen
+}
+
+export interface HeaderActionsProps extends DivAttrs {
+  /** Ein einzelner Link (simple case) */
+  href?: string;
+  label?: string;
+
+  /** Mehrere Links (überschreibt href/label, falls gesetzt) */
+  items?: ActionItem[];
+
+  /** Zusätzliche Klassen, die auf JEDEN Link angewendet werden */
+  linkClass?: SlotClass;
+
+  /** Standard-Klassen vollständig ersetzen statt nur ergänzen */
+  replaceDefaultLinkClass?: boolean;
+}
+
+const {
+  href,
+  label,
+  items,
+  class: wrapperClass,
+  linkClass,
+  replaceDefaultLinkClass = false,
+  ...restWrapper
+} = Astro.props as HeaderActionsProps;
+
+const defaultLinkClass = 'button button--small button--ghost';
+
+const normalized: ActionItem[] = Array.isArray(items) && items.length > 0
+  ? items
+  : (href && label) ? [{ href, label }] : [];
+
+const renderClass = (perLink?: SlotClass) => {
+  if (replaceDefaultLinkClass) {
+    // Nur explizit gesetzte Klassen verwenden
+    return [linkClass, perLink].filter(Boolean);
+  }
+  // Default + global + per-link
+  return [defaultLinkClass, linkClass, perLink].filter(Boolean);
+};
+---
+
+{/* Kein zusätzlicher Wrapper nötig – aber falls du doch Hooks/ARIA willst, ist der hier neutral */}
+<div class:list={wrapperClass} {...restWrapper}>
+  {normalized.map(({ label: linkLabel, class: perLinkClass, ...linkRest }) => (
+    <a class:list={renderClass(perLinkClass)} {...linkRest}>
+      {linkLabel}
+    </a>
+  ))}
+  {/* Optionaler Slot für absolute Freiheit (Icons o.ä.) */}
+  <slot />
+</div>

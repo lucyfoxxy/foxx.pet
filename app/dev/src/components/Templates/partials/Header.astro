@@ -27,29 +27,28 @@ const hasActions = Astro.slots.has('actions');
   <a class="header__logo" aria-label="Home" href="/">
     <img src={ASSETS.logo_header.src} alt="foxx.pet" />
   </a>
-  <nav class="header__nav">
+  <nav class="header__nav controls controls--spread controls--nowrap">
     {navLinks
       .filter((link) => link.includeInHeader)
       .map((link) => (
-        <a
+        <a class="button button--small button--inset button--stretch" href={link.href} data-active={link.isActive ? 'true' : undefined}>
+         <span
           class:list={[
-            link.isActive && 'is-active',
-            'button',
-            'button--small',
-            'button--plain',
-            'button--round',
+            'header__nav-link',
+            link.isActive && 'is-active'
           ]}
-          href={link.href}
           data-active={link.isActive ? 'true' : undefined}
           aria-current={link.isActive ? 'page' : undefined}
-        >
-          <div class="header__nav-link">
+        >         
             {link.icon ? (
               <>
-                <span class="header__nav-text">{link.label}</span>
                 <span class="header__nav-symbol" aria-hidden="true">
                   <ICONS kind={link.icon} />
+                </span>              
+                <span class="header__nav-text">
+                  {link.label}
                 </span>
+
               </>
             ) : (
               <>
@@ -61,29 +60,31 @@ const hasActions = Astro.slots.has('actions');
                 <span class="header__nav-text">{link.label}</span>
               </>
             )}
-          </div>
+         </span>  
         </a>
       ))}
   </nav>
-  <div class="header__crumbs" aria-label="Breadcrumb">
-    <ol>
-      {breadcrumbs.map((crumb, index) => (
-        <li>
-          {crumb.isCurrent ? (
-            <span class="is-current" aria-current="page">{crumb.label}</span>
-          ) : (
-            <a href={crumb.href}>{crumb.label}</a>
-          )}
-        </li>
-      ))}
-    </ol>
+  <div class="header__bar">
+    <div class="header__crumbs" aria-label="Breadcrumb">
+      <ol>
+        {breadcrumbs.map((crumb, index) => (
+          <li>
+            {crumb.isCurrent ? (
+              <span class="is-current" aria-current="page">{crumb.label}</span>
+            ) : (
+              <a href={crumb.href}>{crumb.label}</a>
+            )}
+          </li>
+        ))}
+      </ol>
 
-  </div>
-  {hasActions ? (
-    <div class="header__actions controls">
-      <slot name="actions" />
     </div>
-) : null}
+    {hasActions ? (
+      <div class="header__actions controls controls--end">
+        <slot name="actions" />
+      </div>
+  ) : null}
+  </div>
 </header>
 
 <script>

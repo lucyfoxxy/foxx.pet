@@ -2,6 +2,7 @@
 import BaseTemplate from '@Templates/BaseTemplate.astro';
 import Card from '@Templates/Card.astro';
 import TitleWithIcon from '@Templates/partials/TitleWithIcon.astro';
+import HeaderActions from '@Templates/partials/HeaderActions.astro';
 import { Picture } from 'astro:assets';
 import { PLACEHOLDER_COVER, findCoverImage } from '@Assets/covers';
 import {
@@ -172,11 +173,10 @@ const meta = {
 };
 ---
 <BaseTemplate title={pageTitle} meta={meta}>
-  {backHref && backLabel ? (
-    <Fragment slot="header__actions">
-      <a class="button button--small button--round" href={backHref}>{backLabel}</a>
-    </Fragment>
-  ) : null}
+{backHref && backLabel ? (
+  <HeaderActions slot="header__actions" href={backHref} label={backLabel} />
+) : null}
+
 
   <section class="content-section">
     <Card class="card--plain is-centered">
