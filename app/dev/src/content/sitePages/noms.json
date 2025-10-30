@@ -2,6 +2,7 @@
   "id": "noms",
   "href": "/blog/noms",
   "title": "Nom Noms",
+  "subtitle" : "Recipes",
   "icon": "cookie",
   "navLabel": {
     "text": "Nom\nNoms",

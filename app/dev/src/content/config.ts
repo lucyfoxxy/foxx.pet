@@ -104,6 +104,7 @@ const sitePages = defineCollection({
       slug: z.string().optional(),
       href: z.string(),
       title: z.string(),
+      subtitle: z.string().optional(),
       icon: z.string().optional(),
       navLabel: navLabelSchema.optional(),
       includeInHeader: z.boolean().optional(),

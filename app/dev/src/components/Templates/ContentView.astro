@@ -159,6 +159,7 @@ if (!errorMessage && area === 'album') {
 
       blogView = {
         title: entry.data.title,
+        desc: entry.data.description,
         introParagraphs,
         cover,
         backHref,
@@ -285,31 +286,58 @@ const meta = {
   ) : blogView ? (
     <>
       <section class="content-section">
-        <Card class="card--plain is-centered">
+        <Card class="card--ghost is-centered">
           <Fragment slot="head">
             <h1 class="card__title">{blogView.title}</h1>
           </Fragment>
-          {blogView.introParagraphs.length > 0 && (
-            <Fragment slot="body">
-              <div class="prose">
-                {blogView.introParagraphs.map((paragraph) => (
-                  <p>{paragraph}</p>
-                ))}
-              </div>
-            </Fragment>
-          )}
+
+          <Fragment slot="foot">
+            <div class="media-wrapper">
+                <Picture src={blogView.cover} formats={['avif', 'webp']} alt={blogView.title} class="media-image media-image--hero" />
+  
+            </div>              
+          </Fragment>   
         </Card>
       </section>
-
-      <section class="content-section">
-        <Card class="card--light" headClass="card__head--column">
+      <section class="content-section cols-2">
+        <Card class="card--light">
           <Fragment slot="head">
-            <Picture src={blogView.cover} formats={['avif', 'webp']} alt={blogView.title} class="media-image" />
+            <h3 class="card__title">Table of Contents</h3>
           </Fragment>
           <Fragment slot="body">
+            <ol>
+              <li>Chapter 1</li>
+            </ol>
+          </Fragment>
+          <Fragment slot="foot">
+          </Fragment>                    
+        </Card>
+        <Card class="card--light">
+          <Fragment slot="head">
+            <h3 class="card__title">Summary</h3>
+          </Fragment>
+            <Fragment slot="body">
+              <div class="prose">
+                  <p>{blogView.desc}</p>
+              </div>
+            </Fragment>
+          <Fragment slot="foot">
+          </Fragment>                    
+        </Card>
+      </section>
+      <section class="content-section">
+        <Card class="" headClass="card__head--column">
+          <Fragment slot="head">
+            <h2 class="card__title">Chapter 1</h2>
+          </Fragment>
+          <Fragment slot="body" class="is-centered">
             <article class="prose">
               {BlogContent ? <BlogContent /> : <p>There is no article content to show just yet.</p>}
             </article>
+          </Fragment>
+          <Fragment slot="foot" class="controls controls--spread">
+            <a href="/link/to/prev/chapter"><span class="button button--dark">⇠ Previous Chapter</span></a>
+            <a href="/link/to/prev/chapter"><span class="button button--dark">Next Chapter ⇢</span></a>
           </Fragment>
         </Card>
       </section>

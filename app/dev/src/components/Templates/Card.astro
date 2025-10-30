@@ -1,11 +1,11 @@
 ---
-import type { HTMLAttributes } from 'astro/types';
+import type { HTMLAttributes, HTMLTag } from 'astro/types';
 
-type TagName = keyof HTMLElementTagNameMap;
+type TagName = Extract<HTMLTag, keyof HTMLElementTagNameMap>;
 
-type ElementAttributes<T extends TagName> = HTMLAttributes<HTMLElementTagNameMap[T]>;
+type ElementAttributes<T extends TagName> = HTMLAttributes<T>;
 
-type SlotClass = HTMLAttributes<HTMLElement>['class'];
+type SlotClass = HTMLAttributes<'div'>['class'];
 
 export interface CardProps<T extends TagName = 'div'> extends ElementAttributes<T> {
   as?: T;

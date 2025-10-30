@@ -2,9 +2,9 @@
 // src/templates/partials/HeaderActions.astro (Pfad nach Wunsch)
 import type { HTMLAttributes } from 'astro/types';
 
-type AnchorAttrs = HTMLAttributes<HTMLAnchorElement>;
-type DivAttrs = HTMLAttributes<HTMLDivElement>;
-type SlotClass = HTMLAttributes<HTMLElement>['class'];
+type AnchorAttrs = HTMLAttributes<'a'>;
+type DivAttrs = HTMLAttributes<'div'>;
+type SlotClass = HTMLAttributes<'div'>['class'];
 
 export interface ActionItem extends AnchorAttrs {
   href: string;

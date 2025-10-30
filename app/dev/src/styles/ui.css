@@ -65,6 +65,7 @@
   backdrop-filter: brightness(.75);
   transform: var(--transform-scale--soft);
   text-shadow: var(--text-glow--soft);
+  box-shadow: var(--surface-shadow--default),var(--control-glow); 
 }
 
 .badge {

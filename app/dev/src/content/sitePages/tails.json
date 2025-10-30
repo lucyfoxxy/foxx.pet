@@ -2,6 +2,7 @@
   "slug": "tails",
   "href": "/blog/tails",
   "title": "Tail Trails",
+  "subtitle":"Stories",
   "navLabel": {
     "text": "Tail\nTrails ",
     "emoji": "✨",
@@ -22,12 +23,12 @@
     {
       "title": "Lucy & Friends",
       "slug": "lucy-and-friends",
-      "description": "Collaborations and spotlights on the crew."
+      "description": "This is about those special ones, who will forever have a special place in my heart! ~💜"
     },
     {
       "title": "Cosmic Foxes",
       "slug": "cosmic-foxes",
-      "description": "Sci-fi experiments and illustrated tales."
+      "description": "What is a 'Cosmic Fox'? Can I become one myself? Here you gonna find everything related to the species! ~ 🦊🚀"
     }
   ]
 }

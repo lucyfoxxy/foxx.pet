@@ -1,10 +1,10 @@
 ---
 import ICONS from '@Assets/Icons.astro';
-import type { HTMLAttributes } from 'astro/types';
+import type { HTMLAttributes, HTMLTag } from 'astro/types';
 
-type HeadingTag = keyof HTMLElementTagNameMap;
+type HeadingTag = Extract<HTMLTag, keyof HTMLElementTagNameMap>;
 
-interface TitleWithIconProps extends HTMLAttributes<HTMLElement> {
+interface TitleWithIconProps extends HTMLAttributes<'h1'> {
   as?: HeadingTag;
   title: string;
   icon?: string;
