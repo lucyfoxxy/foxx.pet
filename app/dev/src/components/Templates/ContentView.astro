@@ -348,19 +348,19 @@ const lastChapter = hasBlogChapters ? blogChapters[blogChapters.length - 1] : un
     </>
   ) : blogView ? (
     <>
-      <section class="content-section article-hero-section" id="article-top">
-        <Card class="card--ghost article-hero-card">
+      <section class="content-section" id="article-top">
+        <Card class="card--ghost card--flush">
           <Fragment slot="body">
-            <div class="article-hero__banner">
+            <div class="card__hero-banner">
               <Picture
                 src={blogView.cover}
                 formats={['avif', 'webp']}
                 alt={blogView.title}
-                class="article-hero__image"
+                class="media-image media-image--hero"
               />
-              <div class="article-hero__overlay">
-                <h1 class="article-hero__title">{blogView.title}</h1>
-                {blogDescription ? <p class="article-hero__summary">{blogDescription}</p> : null}
+              <div class="card__hero-overlay">
+                <h1 class="card__title">{blogView.title}</h1>
+                {blogDescription ? <p>{blogDescription}</p> : null}
               </div>
             </div>
           </Fragment>
@@ -369,22 +369,20 @@ const lastChapter = hasBlogChapters ? blogChapters[blogChapters.length - 1] : un
       {hasBlogChapters || hasBlogSummary ? (
         <section class:list={['content-section', hasBlogChapters && hasBlogSummary ? 'cols-2' : undefined]}>
           {hasBlogChapters ? (
-            <Card class="card--ghost chapters-card" bodyClass="chapters-card__body">
+            <Card class="card--ghost">
               <Fragment slot="head">
                 <h2 class="card__title">Table of Contents</h2>
               </Fragment>
               <Fragment slot="body">
-                <ol class="chapter-list">
+                <ol>
                   {blogChapters.map((chapter, index) => (
-                    <li class="chapter-list__item">
-                      <a class="chapter-list__link" href={`#${chapter.id}`}>
-                        <span class="chapter-list__index">{String(index + 1).padStart(2, '0')}</span>
-                        <span class="chapter-list__details">
-                          <span class="chapter-list__title">{chapter.title}</span>
-                          {chapter.summary ? (
-                            <span class="chapter-list__summary">{chapter.summary}</span>
-                          ) : null}
-                        </span>
+                    <li>
+                      <a href={`#${chapter.id}`}>
+                        <span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+                        <div>
+                          <strong>{chapter.title}</strong>
+                          {chapter.summary ? <span>{chapter.summary}</span> : null}
+                        </div>
                       </a>
                     </li>
                   ))}
@@ -393,7 +391,7 @@ const lastChapter = hasBlogChapters ? blogChapters[blogChapters.length - 1] : un
             </Card>
           ) : null}
           {hasBlogSummary ? (
-            <Card class="card--ghost article-summary" bodyClass="article-summary__body">
+            <Card class="card--ghost">
               <Fragment slot="head">
                 <h2 class="card__title">Summary</h2>
               </Fragment>
@@ -410,7 +408,7 @@ const lastChapter = hasBlogChapters ? blogChapters[blogChapters.length - 1] : un
         </section>
       ) : null}
       <section class="content-section">
-        <Card class="article-content-card" headClass={hasBlogChapters ? 'card__head--column' : undefined}>
+        <Card class="card--light" headClass={hasBlogChapters ? 'card__head--column' : undefined}>
           {hasBlogChapters ? (
             <Fragment slot="head">
               <h2 class="card__title">Chapters</h2>
@@ -426,7 +424,7 @@ const lastChapter = hasBlogChapters ? blogChapters[blogChapters.length - 1] : un
           </Fragment>
           {hasBlogChapters ? (
             <Fragment slot="foot">
-              <nav class="chapter-nav controls controls--spread">
+              <nav class="controls controls--spread">
                 {firstChapter ? (
                   <a href={`#${firstChapter.id}`}><span class="button button--dark">Start at {firstChapter.title}</span></a>
                 ) : null}

@@ -76,14 +76,13 @@
   box-shadow: var(--surface-glow--soft);
 }
 
-.media-image--hero {
-   block-size: auto;
+.media-image--hero,
+.media-image--hero img {
+  display: block;
   inline-size: 100%;
-
-  max-block-size: 20vh;
-
-  border-radius: var(--radius-l); 
-  box-shadow: var(--control-shadow--inset);
+  block-size: clamp(14rem, 35vh, 22rem);
+  object-fit: cover;
+  transform: translateY(-10%);
 }
 
 
