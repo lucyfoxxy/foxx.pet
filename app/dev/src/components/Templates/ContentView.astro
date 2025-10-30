@@ -31,13 +31,34 @@ interface AlbumViewData {
   backLabel: string;
 }
 
+interface BlogChapterView {
+  id: string;
+  title: string;
+  summary?: string;
+}
+
 interface BlogViewData {
   title: string;
+  description?: string;
   introParagraphs: string[];
   cover: ImageMetadata;
   backHref: string;
   backLabel: string;
+  chapters?: BlogChapterView[];
 }
+
+const slugify = (value: string) =>
+  value
+    .toLowerCase()
+    .normalize('NFKD')
+    .replace(/[^\p{Letter}\p{Number}]+/gu, '-')
+    .replace(/^-+|-+$/g, '');
+
+const createChapterId = (title: string, slug: string | undefined, index: number) => {
+  const base = slug?.trim().length ? slug.trim() : title;
+  const normalized = slugify(base);
+  return normalized.length > 0 ? normalized : `chapter-${index + 1}`;
+};
 
 const { slug, backToParentCategory = false } = Astro.props as Props;
 const pathSegments = Astro.url.pathname.replace(/\/+$/, '').split('/').filter(Boolean);
@@ -156,20 +177,54 @@ if (!errorMessage && area === 'album') {
         : parentPage
         ? getIntroParagraphs(parentPage)
         : [];
+      const seenChapterIds = new Set<string>();
+      const normalizedChapters: BlogChapterView[] = [];
+
+      if (Array.isArray(entry.data.chapters)) {
+        entry.data.chapters.forEach((chapter, index) => {
+          const title = chapter.title.trim();
+
+          if (!title) {
+            return;
+          }
+
+          const baseId = createChapterId(title, chapter.slug, index);
+          let candidateId = baseId;
+          let collisionIndex = 1;
+
+          while (seenChapterIds.has(candidateId)) {
+            collisionIndex += 1;
+            candidateId = `${baseId}-${collisionIndex}`;
+          }
+
+          seenChapterIds.add(candidateId);
+
+          const summary = chapter.summary?.trim();
+
+          normalizedChapters.push({
+            id: candidateId,
+            title,
+            summary: summary && summary.length > 0 ? summary : undefined,
+          });
+        });
+      }
+
+      const articleDescription = entry.data.description?.trim();
 
       blogView = {
         title: entry.data.title,
-        desc: entry.data.description,
+        description: articleDescription && articleDescription.length > 0 ? articleDescription : undefined,
         introParagraphs,
         cover,
         backHref,
         backLabel,
+        chapters: normalizedChapters.length > 0 ? normalizedChapters : undefined,
       };
 
       BlogContent = rendered.Content;
 
       pageTitle = entry.data.title;
-      pageDescription = entry.data.description ?? parentPage?.description ?? '';
+      pageDescription = articleDescription ?? parentPage?.description ?? '';
       metaImage = cover.src;
     }
   } catch (unknownError) {
@@ -197,6 +252,14 @@ const meta = {
   description: pageDescription,
   ...(metaImage ? { image: metaImage } : {}),
 };
+
+const blogChapters = blogView?.chapters ?? [];
+const hasBlogChapters = blogChapters.length > 0;
+const blogSummaryParagraphs = blogView?.introParagraphs ?? [];
+const blogDescription = blogView?.description ?? '';
+const hasBlogSummary = blogDescription.length > 0 || blogSummaryParagraphs.length > 0;
+const firstChapter = hasBlogChapters ? blogChapters[0] : undefined;
+const lastChapter = hasBlogChapters ? blogChapters[blogChapters.length - 1] : undefined;
 ---
 <BaseTemplate title={pageTitle} meta={meta}>
   {headerBackHref && headerBackLabel ? (
@@ -285,60 +348,95 @@ const meta = {
     </>
   ) : blogView ? (
     <>
-      <section class="content-section">
-        <Card class="card--ghost is-centered">
-          <Fragment slot="head">
-            <h1 class="card__title">{blogView.title}</h1>
+      <section class="content-section article-hero-section" id="article-top">
+        <Card class="card--ghost article-hero-card">
+          <Fragment slot="body">
+            <div class="article-hero__banner">
+              <Picture
+                src={blogView.cover}
+                formats={['avif', 'webp']}
+                alt={blogView.title}
+                class="article-hero__image"
+              />
+              <div class="article-hero__overlay">
+                <h1 class="article-hero__title">{blogView.title}</h1>
+                {blogDescription ? <p class="article-hero__summary">{blogDescription}</p> : null}
+              </div>
+            </div>
           </Fragment>
-
-          <Fragment slot="foot">
-            <div class="media-wrapper">
-                <Picture src={blogView.cover} formats={['avif', 'webp']} alt={blogView.title} class="media-image media-image--hero" />
-  
-            </div>              
-          </Fragment>   
         </Card>
       </section>
-      <section class="content-section cols-2">
-        <Card class="card--light">
-          <Fragment slot="head">
-            <h3 class="card__title">Table of Contents</h3>
-          </Fragment>
-          <Fragment slot="body">
-            <ol>
-              <li>Chapter 1</li>
-            </ol>
-          </Fragment>
-          <Fragment slot="foot">
-          </Fragment>                    
-        </Card>
-        <Card class="card--light">
-          <Fragment slot="head">
-            <h3 class="card__title">Summary</h3>
-          </Fragment>
-            <Fragment slot="body">
-              <div class="prose">
-                  <p>{blogView.desc}</p>
+      {hasBlogChapters || hasBlogSummary ? (
+        <section class:list={['content-section', hasBlogChapters && hasBlogSummary ? 'cols-2' : undefined]}>
+          {hasBlogChapters ? (
+            <Card class="card--light chapters-card" bodyClass="chapters-card__body">
+              <Fragment slot="head">
+                <h2 class="card__title">Table of Contents</h2>
+              </Fragment>
+              <Fragment slot="body">
+                <ol class="chapter-list">
+                  {blogChapters.map((chapter, index) => (
+                    <li class="chapter-list__item">
+                      <a class="chapter-list__link" href={`#${chapter.id}`}>
+                        <span class="chapter-list__index">{String(index + 1).padStart(2, '0')}</span>
+                        <span class="chapter-list__details">
+                          <span class="chapter-list__title">{chapter.title}</span>
+                          {chapter.summary ? (
+                            <span class="chapter-list__summary">{chapter.summary}</span>
+                          ) : null}
+                        </span>
+                      </a>
+                    </li>
+                  ))}
+                </ol>
+              </Fragment>
+            </Card>
+          ) : null}
+          {hasBlogSummary ? (
+            <Card class="card--light article-summary" bodyClass="article-summary__body">
+              <Fragment slot="head">
+                <h2 class="card__title">Summary</h2>
+              </Fragment>
+              <Fragment slot="body">
+                <div class="prose">
+                  {blogDescription ? <p>{blogDescription}</p> : null}
+                  {blogSummaryParagraphs.map((paragraph) => (
+                    <p>{paragraph}</p>
+                  ))}
+                </div>
+              </Fragment>
+            </Card>
+          ) : null}
+        </section>
+      ) : null}
+      <section class="content-section">
+        <Card class="card--light article-content-card" headClass={hasBlogChapters ? 'card__head--column' : undefined}>
+          {hasBlogChapters ? (
+            <Fragment slot="head">
+              <h2 class="card__title">Chapters</h2>
+              <div class="card__badges controls controls--tight">
+                <span class="badge badge--dark">{blogChapters.length} total</span>
               </div>
             </Fragment>
-          <Fragment slot="foot">
-          </Fragment>                    
-        </Card>
-      </section>
-      <section class="content-section">
-        <Card class="" headClass="card__head--column">
-          <Fragment slot="head">
-            <h2 class="card__title">Chapter 1</h2>
-          </Fragment>
-          <Fragment slot="body" class="is-centered">
+          ) : null}
+          <Fragment slot="body">
             <article class="prose">
               {BlogContent ? <BlogContent /> : <p>There is no article content to show just yet.</p>}
             </article>
           </Fragment>
-          <Fragment slot="foot" class="controls controls--spread">
-            <a href="/link/to/prev/chapter"><span class="button button--dark">⇠ Previous Chapter</span></a>
-            <a href="/link/to/prev/chapter"><span class="button button--dark">Next Chapter ⇢</span></a>
-          </Fragment>
+          {hasBlogChapters ? (
+            <Fragment slot="foot">
+              <nav class="chapter-nav controls controls--spread">
+                {firstChapter ? (
+                  <a href={`#${firstChapter.id}`}><span class="button button--dark">Start at {firstChapter.title}</span></a>
+                ) : null}
+                <a href="#article-top"><span class="button button--plain">Back to top</span></a>
+                {lastChapter && firstChapter && lastChapter.id !== firstChapter.id ? (
+                  <a href={`#${lastChapter.id}`}><span class="button button--dark">Jump to {lastChapter.title}</span></a>
+                ) : null}
+              </nav>
+            </Fragment>
+          ) : null}
         </Card>
       </section>
     </>

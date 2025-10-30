@@ -215,11 +215,18 @@ const basePostSchema = z.object({
   tags: z.array(z.string()).default([]),
 });
 
+const chapterSchema = z.object({
+  title: z.string(),
+  slug: z.string().optional(),
+  summary: z.string().optional(),
+});
+
 const baseBlogEntrySchema = basePostSchema.extend({
   section: z.enum(["tails", "noms"]),
   primaryCategory: z.string(),
   featured: z.boolean().default(false),
   slug: z.string().optional(),
+  chapters: z.array(chapterSchema).optional(),
 });
 
 const blog = defineCollection({
