@@ -369,7 +369,7 @@ const lastChapter = hasBlogChapters ? blogChapters[blogChapters.length - 1] : un
       {hasBlogChapters || hasBlogSummary ? (
         <section class:list={['content-section', hasBlogChapters && hasBlogSummary ? 'cols-2' : undefined]}>
           {hasBlogChapters ? (
-            <Card class="card--light chapters-card" bodyClass="chapters-card__body">
+            <Card class="card--ghost chapters-card" bodyClass="chapters-card__body">
               <Fragment slot="head">
                 <h2 class="card__title">Table of Contents</h2>
               </Fragment>
@@ -393,7 +393,7 @@ const lastChapter = hasBlogChapters ? blogChapters[blogChapters.length - 1] : un
             </Card>
           ) : null}
           {hasBlogSummary ? (
-            <Card class="card--light article-summary" bodyClass="article-summary__body">
+            <Card class="card--ghost article-summary" bodyClass="article-summary__body">
               <Fragment slot="head">
                 <h2 class="card__title">Summary</h2>
               </Fragment>
@@ -410,7 +410,7 @@ const lastChapter = hasBlogChapters ? blogChapters[blogChapters.length - 1] : un
         </section>
       ) : null}
       <section class="content-section">
-        <Card class="card--light article-content-card" headClass={hasBlogChapters ? 'card__head--column' : undefined}>
+        <Card class="article-content-card" headClass={hasBlogChapters ? 'card__head--column' : undefined}>
           {hasBlogChapters ? (
             <Fragment slot="head">
               <h2 class="card__title">Chapters</h2>
