@@ -408,12 +408,12 @@ const lastChapter = hasBlogChapters ? blogChapters[blogChapters.length - 1] : un
         </section>
       ) : null}
       <section class="content-section">
-        <Card class="card--light" headClass={hasBlogChapters ? 'card__head--column' : undefined}>
+        <Card headClass={hasBlogChapters ? 'card__head--column' : undefined}>
           {hasBlogChapters ? (
             <Fragment slot="head">
               <h2 class="card__title">Chapters</h2>
               <div class="card__badges controls controls--tight">
-                <span class="badge badge--dark">{blogChapters.length} total</span>
+                <span class="badge">{blogChapters.length} total</span>
               </div>
             </Fragment>
           ) : null}
@@ -426,11 +426,11 @@ const lastChapter = hasBlogChapters ? blogChapters[blogChapters.length - 1] : un
             <Fragment slot="foot">
               <nav class="controls controls--spread">
                 {firstChapter ? (
-                  <a href={`#${firstChapter.id}`}><span class="button button--dark">Start at {firstChapter.title}</span></a>
+                  <a href={`#${firstChapter.id}`}><span class="button button--round button--small">Start at {firstChapter.title}</span></a>
                 ) : null}
                 <a href="#article-top"><span class="button button--plain">Back to top</span></a>
                 {lastChapter && firstChapter && lastChapter.id !== firstChapter.id ? (
-                  <a href={`#${lastChapter.id}`}><span class="button button--dark">Jump to {lastChapter.title}</span></a>
+                  <a href={`#${lastChapter.id}`}><span class="button button--round button--small">Jump to {lastChapter.title}</span></a>
                 ) : null}
               </nav>
             </Fragment>
