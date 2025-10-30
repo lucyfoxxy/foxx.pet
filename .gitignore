@@ -32,3 +32,4 @@ package-lock.json
 **/*.diff
 **/thumbs.db
 svgs.list
+**/.Trash-1000
