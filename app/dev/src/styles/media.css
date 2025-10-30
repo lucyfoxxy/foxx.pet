@@ -11,7 +11,7 @@
   align-items: center;
   justify-content: center;
   gap: var(--control-gap);
-
+  
 }
 .media-wrapper--frames {
   display: inline-grid;
@@ -25,6 +25,7 @@
   background: var(--control-surface--light);
   border-radius: var(--radius-l);
   padding: var(--card-gap);
+  box-shadow: var(--control-shadow--inset);
 }
 
 /* ==========<[   FRAME  /  IMAGE    ]>=========== */
@@ -69,6 +70,7 @@
   aspect-ratio: 1 / 1;
   transition: var(--transition-raise);
   background: transparent;
+  box-shadow: var(--control-shadow--inset);
 }
 .media-frame--thumb:hover,
 .media-frame--thumb:focus-visible {
@@ -87,6 +89,7 @@
   opacity: 1;
   will-change: opacity, transform, top, bottom;
   object-fit: cover;
+  
 }
 .media-image--placeholder { background: var(--card-surface--dark);}
 .media-image.hero {

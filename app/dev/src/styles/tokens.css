@@ -61,6 +61,7 @@
   --color-dark:              oklch(20% 0.11 295);
   --color-light:             oklch(92% 0.18 295); 
   --color-accent:            oklch(80% 0.24 295); 
+  --color-outline:            color-mix(in oklab, var(--color-dark)60%,transparent);
   --color-shadow--soft:       color-mix(in oklch, var(--color-dark) 30%, transparent);
   --color-shadow--strong:     color-mix(in oklch, var(--color-dark) 60%, transparent);
   --color-glow-soft:         color-mix(in oklch, var(--color-light) 40%, var(--color-accent));
@@ -79,7 +80,7 @@
   --text-glow--strong:       1px 1px 2px var(--color-glow-strong);
 
   /* ====== Surface / Control Colors & FX ======= */  
-  --card-surface--dark:      color-mix(in oklab,var(--color-dark) 70%, transparent);
+  --card-surface--dark:      color-mix(in oklab,var(--color-dark) 60%, transparent);
   --card-surface--light:     color-mix(in oklab,var(--color-light) 29%, transparent);
 
   --control-surface--light:              color-mix(in oklch, oklch(72% 0.18 295) 69%, transparent);
@@ -94,7 +95,7 @@
   --surface-shadow--default: 0 0 18px -10px var(--color-shadow--soft),0 0 24px -6px var(--color-shadow--strong);
   --surface-shadow--strong:  0 0 20px -10px var(--color-shadow--soft),0 0 28px -6px var(--color-shadow--strong),0 0 14px 0 color-mix(in srgb, black 95%, transparent);
 
-  --control-shadow--inset: inset 0 0 16px 0 var(--control-surface--dark);
+  --control-shadow--inset: inset 0 0 24px 0 var(--color-shadow--soft),inset 0 0 0 1px var(--color-shadow--strong);
 
   --surface-glow:      0 0 8px 0 var(--color-glow-strong), inset 0 0 1px 2px var(--color-glow-strong);
   --surface-glow--soft:0 0 6px 0 var(--color-glow-soft);
@@ -103,7 +104,7 @@
   --blur-m:           blur(var(--radius-m));
   --blur-l:            blur(var(--radius-l));
 
-  --outline:                 1px solid var(--card-surface--light); 
+  --outline:                 2px solid var(--color-outline); 
 
   /* ====== Overlays / Filter Presets ============ */   
   --background-overlay:      radial-gradient(ellipse at center, transparent 30%, black 120%); 

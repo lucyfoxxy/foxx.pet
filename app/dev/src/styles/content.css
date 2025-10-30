@@ -45,10 +45,10 @@
   padding: var(--card-padding);
   gap: var(--card-gap);
   background: var(--card-surface--dark);
-  box-shadow: var(--surface-shadow--default);
+  box-shadow: var(--surface-shadow--default),var(--control-shadow--inset);
   backdrop-filter: var(--blur-m);
 }
-.card--ghost    { background: unset; }
+.card--ghost    { background: unset;}
 .card--plain    { background: transparent; box-shadow: none; backdrop-filter: none; filter: drop-shadow(6px 6px 3px var(--color-shadow--strong));}
 .card--light   { background: var(--card-surface--light); }
 .card--plain :where(.prose){font-weight: var(--thick-font-weight);}

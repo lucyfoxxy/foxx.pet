@@ -25,7 +25,7 @@
   transition: var(--transition-glow),var(--transition-raise);;
   vertical-align: middle;
   text-shadow: var(--text-glow--soft),var(--text-shadow--strong);
-  box-shadow: var(--surface-shadow--soft),;
+  box-shadow: var(--surface-shadow--soft),var(--control-shadow--inset);
   justify-content: center;
   gap: var(--control-gap); 
   padding: var(--control-padding);

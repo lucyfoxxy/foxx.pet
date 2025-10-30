@@ -21,9 +21,10 @@
 
 .panel-shell {
   display: flex;
+  outline: var(--outline);
   flex-direction: column;
   backdrop-filter: var(--blur-l);
-  box-shadow: var(--surface-shadow--strong), inset 0 0 36px -10px var(--color-accent);
+  box-shadow: var(--surface-shadow--strong), inset 0 0 36px -10px var(--color-accent),var(--control-shadow--inset);
   -webkit-backdrop-filter: var(--blur-l);
   border-radius: var(--radius-xl);
   background-image:
@@ -79,7 +80,7 @@ main.panel {
   margin-inline: 0;
   margin-block: var(--section-gap) 0;
   gap: var(--flow-gap);
-  box-shadow: var(--surface-shadow--strong);
+  box-shadow: 0 -10px 16px -4px var(--color-dark), var(--control-shadow--inset);
 }
 @media (max-width: 900px) { 
   .footer { box-shadow: var(--surface-shadow--default); border-radius: var(--radius-m) var(--radius-m) 0 0;}
@@ -92,6 +93,7 @@ main.panel {
 
 /* ====== HEADER ================= */
 .header {
+  box-shadow: var(--control-shadow--inset);
   position: sticky;
   top: 0;
   z-index: 1001;
@@ -248,7 +250,8 @@ main.panel {
   padding-block: calc(.25 * var(--panel-bar-padding));
   grid-template-areas: "crumbs actions";
   background: var(--control-surface--dark);
-  box-shadow: 0 10px 16px -4px var(--color-dark);
+  box-shadow: 0 10px 16px -4px var(--color-dark), var(--control-shadow--inset);
+  
   align-items: center;
 }
 @media (max-width: 900px) {

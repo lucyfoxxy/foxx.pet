@@ -3,6 +3,7 @@ import BaseTemplate from '@Templates/BaseTemplate.astro';
 import Card from '@Templates/Card.astro';
 import TitleWithIcon from '@Templates/partials/TitleWithIcon.astro';
 import HeaderActions from '@Templates/partials/HeaderActions.astro';
+import { TEMPLATES } from '@Templates/templates';
 import { Picture } from 'astro:assets';
 import { PLACEHOLDER_COVER, findCoverImage } from '@Assets/covers';
 import {
@@ -205,77 +206,40 @@ const meta = {
     </section>
   ) : hasEntries ? (
     <section class="content-section cols-3">
-      {area === 'album'
+      {area === 'album' 
         ? albumEntries.map(({ slug: albumSlug, title, description, count, formattedStartDate, coverUrl }) => {
             const itemHref = `/${areaSegment}/${parentSlug}/${slug}/${albumSlug}/`;
-            const badgeLabel =
-              typeof count === 'number' ? (count > 0 ? `${count} photos` : 'No photos yet') : undefined;
-
             return (
-              <a href={itemHref} aria-label={`Open ${title}`}>
-                <Card class="is-centered is-animated" headClass="card__head--column">
-                  <Fragment slot="head">
-                    <h2 class="card__title">{title}</h2>
+              
+              <TEMPLATES.TileView
+                variant="album"
+                href={itemHref}
+                title={title}
+                description={description}
+                dataSlug={albumSlug}
+                coverUrl={coverUrl}
+                formattedStartDate={formattedStartDate}
+                count={count}
+              />
 
-                  </Fragment>
-                  <Fragment slot="body">
-                    <div class="media-wrapper">
-                    <div class="media-frame" data-slug={albumSlug}>
-                      {coverUrl ? (
-                        <img class="media-image" src={coverUrl} alt="" loading="lazy" decoding="async" />
-                      ) : (
-                        <div class="media-image placeholder" aria-hidden="true"></div>
-                      )}
-                    </div>
-                    </div>
-                    {description ? <p>{description}</p> : null}
-                  </Fragment>
-                  <Fragment slot="foot">
-                    {(formattedStartDate || badgeLabel) && (
-                      <div class="card__badges controls controls--tight">
-                        {formattedStartDate ? <span class="badge">{formattedStartDate}</span> : null}
-                        {badgeLabel ? <span class="badge">{badgeLabel}</span> : null}
-                      </div>
-                    )}
-                  </Fragment>
-                </Card>
-              </a>
             );
           })
         : articleEntries.map(({ slug: articleSlug, title, description, publishDate, cover, href }) => {
-            const formattedDate = publishDate
-              ? new Intl.DateTimeFormat('en', { dateStyle: 'medium' }).format(publishDate)
-              : undefined;
-
             return (
-              <a href={href} aria-label={`Read ${title}`}>
-                <Card class="card--light is-animated" headClass="card__head--column">
-                  <Fragment slot="head">
-                    <h3 class="card__title">{title}</h3>
-                    {formattedDate ? (
-                      <div class="card__badges controls controls--tight">
-                        <span class="badge badge--dark">{formattedDate}</span>
-                      </div>
-                    ) : null}
-                  </Fragment>
-                  <Fragment slot="body">
-                    <div class="media-frame" data-slug={articleSlug}>
-                      <Picture
-                        src={cover}
-                        formats={['avif', 'webp']}
-                        alt=""
-                        class="media-image"
-                        loading="lazy"
-                        decoding="async"
-                      />
-                    </div>
-                    {description ? <p>{description}</p> : null}
-                  </Fragment>
-                </Card>
-              </a>
+
+              <TEMPLATES.TileView
+                variant="article"
+                href={href}
+                title={title}
+                description={description}
+                dataSlug={articleSlug}
+                cover={cover}
+                publishDate={publishDate}
+              />
+
             );
           })}
-    </section>
+        </section>
   ) : (
     <section class="content-section">
       <Card class="card--ghost is-centered">
