@@ -83,7 +83,7 @@
   --card-surface--dark:      color-mix(in oklab,var(--color-dark) 60%, transparent);
   --card-surface--light:     color-mix(in oklab,var(--color-light) 29%, transparent);
 
-  --control-surface--light:              color-mix(in oklch, oklch(72% 0.18 295) 99%, transparent);
+  --control-surface--light:              color-mix(in oklch, oklch(78% 0.18 295) 99%, transparent);
   --control-surface--light--highlight:   color-mix(in oklch, var(--control-surface-light) 94%, var(--color-light)); 
   --control-surface--dark:            color-mix(in oklch,var(--color-dark)99%,transparent);
   --control-surface--dark--highlight: color-mix(in oklab,var(--control-surface--dark) 94%, var(--color-dark));
@@ -159,4 +159,3 @@
   --transform-raise--soft:      translateY(-1px) scale(1.01);
   --transform-scale:            scale(1.02);
 }
-@media (max-width: 800px) { :root {} }

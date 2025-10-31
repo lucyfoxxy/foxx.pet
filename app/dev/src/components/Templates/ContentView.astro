@@ -278,7 +278,7 @@ const lastChapter = hasBlogChapters ? blogChapters[blogChapters.length - 1] : un
   ) : albumView ? (
     <>
       <section class="content-section">
-        <Card class="is-centered" headClass="card__head--column">
+        <Card class="card--ghost card--flush is-centered" headClass="card__head--column">
 
           {albumView.description ? (
             <Fragment slot="body">
@@ -289,7 +289,7 @@ const lastChapter = hasBlogChapters ? blogChapters[blogChapters.length - 1] : un
           ) : null}
           <Fragment slot="body">
             
-              <div class="media-wrapper">
+              <div class="media-wrapper media-wrapper--controls">
                 <div
                   class="media-frame"
                   data-slug={albumView.albumSlug}
@@ -313,15 +313,15 @@ const lastChapter = hasBlogChapters ? blogChapters[blogChapters.length - 1] : un
                     data-initial-full={albumView.initialThumb?.full ?? undefined}
                   />
 
-                  <div class="card__overlay card__overlay--controls">
+
+                </div>
+                  <div class="card__overlay card__overlay--controls card__overlay--bottom">
                     <button class="media-prev" aria-label="Previous" type="button">❮</button>
                     <button class="media-playpause" aria-label="Pause autoplay" type="button"><ICONS kind="pause"/></button>
                     <button class="media-next" aria-label="Next" type="button">❯</button>
                     <div class="media-progress" aria-hidden="true"></div>
-                  </div>
-                </div>
-              
-              <div class="card__overlay card__overlay--title">
+                  </div>           
+              <div class="card__overlay card__overlay--title card__overlay--top">
                 <h1 class="card__title">{albumView.title}</h1>
                 {(albumView.categoryBadge || albumView.dateBadge) && (
                   <div class="card__badges controls controls--end">
@@ -332,7 +332,11 @@ const lastChapter = hasBlogChapters ? blogChapters[blogChapters.length - 1] : un
               </div>
             </div>
           </Fragment>
-          <Fragment slot="foot">
+        </Card>
+      </section>
+      <section class="content-section">
+        <Card class="card--flush card--ghost is-centered">
+          <Fragment slot="body">
             <div class="media-wrapper media-wrapper--thumbs" role="list">
               <button class="media-prev is-thumbs-prev" aria-label="Previous thumbnails" type="button">❮</button>
               <div class="media-wrapper media-wrapper--frames" role="list" data-window="10"></div>
@@ -353,8 +357,8 @@ const lastChapter = hasBlogChapters ? blogChapters[blogChapters.length - 1] : un
   ) : blogView ? (
     <>
       <section class="content-section" id="article-top">
-        <Card class="card--ghost card--flush">
-          <Fragment slot="body">
+        <Card class="card--ghost card--flush" headClass="card__head--column">
+          <Fragment slot="head">
             <div class="card__hero-banner">
               <Picture
                 src={blogView.cover}
@@ -362,7 +366,7 @@ const lastChapter = hasBlogChapters ? blogChapters[blogChapters.length - 1] : un
                 alt={blogView.title}
                 class="media-image media-image--hero"
               />
-              <div class="card__hero-overlay">
+              <div class="card__overlay card__overlay--title card__overlay--column card__overlay--bottom">
                 <h1 class="card__title">{blogView.title}</h1>
                 {blogDescription ? <p>{blogDescription}</p> : null}
               </div>

@@ -37,10 +37,11 @@ export default function initGalleryPage() {
   const random   = frame.getAttribute('data-random') === 'true';
   const interval = parseInt(frame.getAttribute('data-interval') || '7000', 10);
   const imgEl     = frame?.querySelector('.media-image');
-  const btnPrev = frame?.querySelector('.media-prev');
-  const btnNext = frame?.querySelector('.media-next');
-  const btnPlay = frame?.querySelector('.media-playpause');
-  const progress = frame?.querySelector('.media-progress');
+  const controls = document.querySelector('.card__overlay--controls');
+  const btnPrev = controls?.querySelector('.media-prev');
+  const btnNext = controls?.querySelector('.media-next');
+  const btnPlay = controls?.querySelector('.media-playpause');
+  const progress = controls?.querySelector('.media-progress');
   const thumbsWrap = document.querySelector('.media-wrapper--thumbs');
   const thumbs = thumbsWrap?.querySelector('.media-wrapper--frames');
   const thumbsPrev = thumbsWrap?.querySelector('.media-prev.is-thumbs-prev');

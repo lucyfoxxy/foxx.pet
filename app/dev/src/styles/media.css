@@ -13,6 +13,13 @@
   gap: var(--control-gap);
   
 }
+.media-wrapper--controls {
+  
+  outline: 1px solid var(--card-surface--dark);
+  border-radius: var(--radius-l);
+  box-shadow: var(--surface-shadow--default);
+}
+
 .media-wrapper--frames {
   display: inline-grid;
   grid-template-columns: repeat(auto-fit, minmax(var(--thumb-size),1fr));
@@ -22,7 +29,7 @@
 .media-wrapper--thumbs {
   backdrop-filter: var(--blur-m);
   box-shadow: var(--control-shadow--inset), 1px 1px 12px -2px var(--color-shadow--strong), inset 0 0 0 1px var(--control-surface--dark);
-  background: var(--control-surface--light);
+  background: var(--card-surface--light);
   border-radius: var(--radius-l);
   padding: var(--card-gap);
 
@@ -36,9 +43,9 @@
   aspect-ratio: 16 / 9;
   border-radius: var(--radius-l);
   border-style: hidden;
-  background: var(--card-surface--light);
+  background: var(--card-surface--dark);
   overflow: hidden;
-  box-shadow: 1px 1px 12px -2px var(--color-shadow--strong);
+ 
   max-block-size: 55vh;
 }
 
@@ -67,8 +74,8 @@
   max-block-size: var(--thumb-size);
   aspect-ratio: 1 / 1;
   transition: var(--transition-raise);
-  background: transparent;
-  box-shadow: var(--control-shadow--inset);
+
+  box-shadow: var(--surface-shadow--soft);
 }
 .media-frame--thumb:hover,
 .media-frame--thumb:focus-visible {
@@ -176,7 +183,6 @@
   color: inherit;
   box-shadow: var(--surface-shadow--default);
   cursor: pointer;
-  transform: translateY(-50%);
   transition: var(--transition-soft);
   z-index: 2;
 }
