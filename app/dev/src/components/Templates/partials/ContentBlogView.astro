@@ -1,0 +1,138 @@
+---
+import Card from '@Templates/Card.astro';
+import { Picture } from 'astro:assets';
+
+interface BlogChapterView {
+  id: string;
+  title: string;
+  summary?: string;
+}
+
+interface BlogViewData {
+  title: string;
+  description?: string;
+  introParagraphs: string[];
+  cover: any; // ImageMetadata
+  chapters?: BlogChapterView[];
+}
+
+interface Props {
+  blog: BlogViewData;
+  BlogContent?: any;
+}
+
+const { blog, BlogContent } = Astro.props;
+
+const blogChapters = blog.chapters ?? [];
+const hasBlogChapters = blogChapters.length > 0;
+const blogSummaryParagraphs = blog.introParagraphs ?? [];
+const blogDescription = blog.description ?? '';
+const hasBlogSummary = blogDescription.length > 0 || blogSummaryParagraphs.length > 0;
+const firstChapter = hasBlogChapters ? blogChapters[0] : undefined;
+const lastChapter = hasBlogChapters ? blogChapters[blogChapters.length - 1] : undefined;
+---
+
+<section class="content-section" id="article-top">
+  <Card class="card--ghost card--flush" headClass="card__head--column">
+    <Fragment slot="head">
+      <div class="card__hero-banner">
+        <Picture
+          src={blog.cover}
+          formats={['avif', 'webp']}
+          alt={blog.title}
+          class="media-image media-image--hero"
+        />
+        <div class="card__overlay card__overlay--title card__overlay--column card__overlay--bottom">
+          <h1 class="card__title">{blog.title}</h1>
+          {blogDescription ? <p>{blogDescription}</p> : null}
+        </div>
+      </div>
+    </Fragment>
+  </Card>
+</section>
+
+{hasBlogChapters || hasBlogSummary ? (
+  <section class:list={['content-section', hasBlogChapters && hasBlogSummary ? 'cols-2' : undefined]}>
+    {hasBlogChapters ? (
+      <Card class="card--ghost">
+        <Fragment slot="head">
+          <h2 class="card__title">Table of Contents</h2>
+        </Fragment>
+        <Fragment slot="body">
+          <ol>
+            {blogChapters.map((chapter, index) => (
+              <li>
+                <a
+                  href={`#${chapter.id}`}
+                  data-chapter={chapter.id}
+                >
+                  <span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+                  <div>
+                    <strong>{chapter.title}</strong>
+                    {chapter.summary ? <span>{chapter.summary}</span> : null}
+                  </div>
+                </a>
+              </li>
+            ))}
+          </ol>
+
+        </Fragment>
+      </Card>
+    ) : null}
+
+    <Card headClass={hasBlogChapters ? 'card__head--column' : undefined}>
+      {hasBlogChapters ? (
+        <Fragment slot="head">
+          <h2 class="card__title">Chapters</h2>
+          <div class="card__badges controls controls--tight">
+            <span class="badge">{blogChapters.length} total</span>
+          </div>
+        </Fragment>
+      ) : null}
+
+      <Fragment slot="body">
+        <article class="prose" id="blog-chapter-target">
+          {BlogContent ? <BlogContent /> : <p>There is no article content to show just yet.</p>}
+        </article>
+      </Fragment>
+
+      {hasBlogChapters ? (
+        <Fragment slot="foot">
+          <nav class="controls controls--spread">
+            {firstChapter ? (
+              <a href={`#${firstChapter.id}`} data-chapter={firstChapter.id}>
+                <span class="button button--round button--small">
+                  Start at {firstChapter.title}
+                </span>
+              </a>
+            ) : null}
+            <a href="#article-top"><span class="button button--plain">Back to top</span></a>
+            {lastChapter && firstChapter && lastChapter.id !== firstChapter.id ? (
+              <a href={`#${lastChapter.id}`} data-chapter={lastChapter.id}>
+                <span class="button button--round button--small">
+                  Jump to {lastChapter.title}
+                </span>
+              </a>
+            ) : null}
+          </nav>
+        </Fragment>
+      ) : null}
+    </Card>
+
+  </section>
+) : null}
+
+  <script>
+  import initBlogChapters from '@Scripts/initBlogChapters.js';
+  import { runOnReady } from '@Scripts/utils/_runOnReady.js';
+
+  runOnReady(() =>
+    initBlogChapters({
+      chapters: {JSON.stringify(blogChapters)},
+      targetSelector: '#blog-chapter-target',
+    })
+  );
+  </script>
+) 
+
+<section class="content-section">{/* Platz für Related / Comments / whatever */}</section>

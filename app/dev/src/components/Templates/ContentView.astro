@@ -2,6 +2,8 @@
 import BaseTemplate from '@Templates/BaseTemplate.astro';
 import Card from '@Templates/Card.astro';
 import HeaderActions from '@Templates/partials/HeaderActions.astro';
+import ContentAlbumView from '@Templates/partials/ContentAlbumView.astro';
+import ContentBlogView from '@Templates/partials/ContentBlogView.astro';
 import { Picture } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 import { PLACEHOLDER_COVER, findCoverImage } from '@Assets/covers';
@@ -276,163 +278,9 @@ const lastChapter = hasBlogChapters ? blogChapters[blogChapters.length - 1] : un
       </Card>
     </section>
   ) : albumView ? (
-    <>
-      <section class="content-section">
-        <Card class="card--ghost card--flush is-centered" headClass="card__head--column">
-
-          {albumView.description ? (
-            <Fragment slot="body">
-              <div class="prose">
-                <p>{albumView.description}</p>
-              </div>
-            </Fragment>
-          ) : null}
-          <Fragment slot="body">
-            
-              <div class="media-wrapper media-wrapper--controls">
-                <div
-                  class="media-frame"
-                  data-slug={albumView.albumSlug}
-                  data-autoplay="true"
-                  data-interval="8000"
-                  data-random="true"
-                  data-share-key={albumView.shareKey}
-                  role="button" 
-                  tabindex="0" 
-                  aria-label="Open artwork in lightbox"
-                >
-            
-                  <img
-                    src={albumView.initialThumb?.src ?? ''}
-                    width={albumView.initialThumb?.width}
-                    height={albumView.initialThumb?.height}
-                    alt={albumView.initialThumb?.alt ?? ''}
-                    class="media-image"
-                    loading="eager"
-                    decoding="async"
-                    data-initial-full={albumView.initialThumb?.full ?? undefined}
-                  />
-
-
-                </div>
-                  <div class="card__overlay card__overlay--controls card__overlay--bottom">
-                    <button class="media-prev" aria-label="Previous" type="button">❮</button>
-                    <button class="media-playpause" aria-label="Pause autoplay" type="button"><ICONS kind="pause"/></button>
-                    <button class="media-next" aria-label="Next" type="button">❯</button>
-                    <div class="media-progress" aria-hidden="true"></div>
-                  </div>           
-              <div class="card__overlay card__overlay--title card__overlay--top">
-                <h1 class="card__title">{albumView.title}</h1>
-                {(albumView.categoryBadge || albumView.dateBadge) && (
-                  <div class="card__badges controls controls--end">
-                    {albumView.categoryBadge ? <span class="badge badge--dark">{albumView.categoryBadge}</span> : null}
-                    {albumView.dateBadge ? <span class="badge badge--dark">{albumView.dateBadge}</span> : null}
-                  </div>
-                )}
-              </div>
-            </div>
-          </Fragment>
-        </Card>
-      </section>
-      <section class="content-section">
-        <Card class="card--flush card--ghost is-centered">
-          <Fragment slot="body">
-            <div class="media-wrapper media-wrapper--thumbs" role="list">
-              <button class="media-prev is-thumbs-prev" aria-label="Previous thumbnails" type="button">❮</button>
-              <div class="media-wrapper media-wrapper--frames" role="list" data-window="10"></div>
-              <button class="media-next is-thumbs-next" aria-label="Next thumbnails" type="button">❯</button>
-            </div>
-          </Fragment>
-        </Card>
-      </section>
-
-
-      <script>
-        import initGalleryPage from '@Scripts/galleryViewer.js';
-        import { runOnReady } from '@Scripts/utils/_runOnReady.js';
-
-        runOnReady(initGalleryPage);
-      </script>
-    </>
+    <ContentAlbumView album={albumView} />
   ) : blogView ? (
-    <>
-      <section class="content-section" id="article-top">
-        <Card class="card--ghost card--flush" headClass="card__head--column">
-          <Fragment slot="head">
-            <div class="card__hero-banner">
-              <Picture
-                src={blogView.cover}
-                formats={['avif', 'webp']}
-                alt={blogView.title}
-                class="media-image media-image--hero"
-              />
-              <div class="card__overlay card__overlay--title card__overlay--column card__overlay--bottom">
-                <h1 class="card__title">{blogView.title}</h1>
-                {blogDescription ? <p>{blogDescription}</p> : null}
-              </div>
-            </div>
-          </Fragment>
-        </Card>
-      </section>
-      {hasBlogChapters || hasBlogSummary ? (
-        <section class:list={['content-section', hasBlogChapters && hasBlogSummary ? 'cols-2' : undefined]}>
-          {hasBlogChapters ? (
-            <Card class="card--ghost">
-              <Fragment slot="head">
-                <h2 class="card__title">Table of Contents</h2>
-              </Fragment>
-              <Fragment slot="body">
-                <ol>
-                  {blogChapters.map((chapter, index) => (
-                    <li>
-                      <a href={`#${chapter.id}`}>
-                        <span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
-                        <div>
-                          <strong>{chapter.title}</strong>
-                          {chapter.summary ? <span>{chapter.summary}</span> : null}
-                        </div>
-                      </a>
-                    </li>
-                  ))}
-                </ol>
-              </Fragment>
-            </Card>
-          ) : null}
-
-          <Card headClass={hasBlogChapters ? 'card__head--column' : undefined}>
-          {hasBlogChapters ? (
-            <Fragment slot="head">
-              <h2 class="card__title">Chapters</h2>
-              <div class="card__badges controls controls--tight">
-                <span class="badge">{blogChapters.length} total</span>
-              </div>
-            </Fragment>
-          ) : null}
-          <Fragment slot="body">
-            <article class="prose">
-              {BlogContent ? <BlogContent /> : <p>There is no article content to show just yet.</p>}
-            </article>
-          </Fragment>
-          {hasBlogChapters ? (
-            <Fragment slot="foot">
-              <nav class="controls controls--spread">
-                {firstChapter ? (
-                  <a href={`#${firstChapter.id}`}><span class="button button--round button--small">Start at {firstChapter.title}</span></a>
-                ) : null}
-                <a href="#article-top"><span class="button button--plain">Back to top</span></a>
-                {lastChapter && firstChapter && lastChapter.id !== firstChapter.id ? (
-                  <a href={`#${lastChapter.id}`}><span class="button button--round button--small">Jump to {lastChapter.title}</span></a>
-                ) : null}
-              </nav>
-            </Fragment>
-          ) : null}
-        </Card>
-        </section>
-      ) : null}
-      <section class="content-section">
-
-      </section>
-    </>
+    <ContentBlogView blog={blogView} BlogContent={BlogContent} />
   ) : (
     <section class="content-section">
       <Card class="card--ghost is-centered">
