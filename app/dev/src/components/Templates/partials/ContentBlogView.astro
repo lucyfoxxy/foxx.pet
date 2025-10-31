@@ -123,15 +123,19 @@ const lastChapter = hasBlogChapters ? blogChapters[blogChapters.length - 1] : un
 ) : null}
 
   <script>
-  import initBlogChapters from '@Scripts/initBlogChapters.js';
-  import { runOnReady } from '@Scripts/utils/_runOnReady.js';
+    import initBlogChapters from '@Scripts/initBlogChapters.js';
+    import { runOnReady } from '@Scripts/utils/_runOnReady.js';
 
-  runOnReady(() =>
-    initBlogChapters({
-      chapters: {JSON.stringify(blogChapters)},
-      targetSelector: '#blog-chapter-target',
-    })
-  );
+    const blogChapters = JSON.parse(
+      decodeURIComponent('${encodeURIComponent(JSON.stringify(blogChapters))}')
+    );
+
+    runOnReady(() => {
+      initBlogChapters({
+        chapters: blogChapters,
+        targetSelector: '#blog-chapter-target',
+      });
+    });
   </script>
 ) 
 
