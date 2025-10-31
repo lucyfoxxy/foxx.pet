@@ -121,22 +121,43 @@ const lastChapter = hasBlogChapters ? blogChapters[blogChapters.length - 1] : un
 
   </section>
 ) : null}
+{hasBlogChapters && blogChapters ? (
+  <>
+    {/* Daten-Container */}
+    <div
+      id="blog-chapters-data"
+      data-chapters={JSON.stringify(blogChapters)}
+      hidden
+    ></div>
 
-  <script>
-    import initBlogChapters from '@Scripts/initBlogChapters.js';
-    import { runOnReady } from '@Scripts/utils/_runOnReady.js';
+    {/* echtes Script */}
+    <script>
+      import initBlogChapters from '@Scripts/initBlogChapters.js';
+      import { runOnReady } from '@Scripts/utils/_runOnReady.js';
 
-    const blogChapters = JSON.parse(
-      decodeURIComponent('${encodeURIComponent(JSON.stringify(blogChapters))}')
-    );
+      runOnReady(() => {
+        const dataEl = document.getElementById('blog-chapters-data');
+        if (!dataEl) return;
 
-    runOnReady(() => {
-      initBlogChapters({
-        chapters: blogChapters,
-        targetSelector: '#blog-chapter-target',
+        const raw = dataEl.dataset.chapters || '[]';
+        let chapters = [];
+        try {
+          chapters = JSON.parse(raw);
+        } catch (err) {
+          console.warn('Blog chapters JSON broken:', err, raw);
+          return;
+        }
+
+        initBlogChapters({
+          chapters,
+          targetSelector: '#blog-chapter-target',
+        });
       });
-    });
-  </script>
-) 
+    </script>
+  </>
+) : null}
+
+
+ 
 
 <section class="content-section">{/* Platz für Related / Comments / whatever */}</section>
