@@ -137,30 +137,39 @@
     block-size: clamp(14rem, 38vh, 24rem);
 }
 
-.card__hero-overlay {
+.card__overlay {
   position: absolute;
-  inset-block-end: clamp(var(--card-padding), 4vw, 4rem);
-  inset-inline: clamp(var(--card-padding), 4vw, 5rem);
+  inset-inline: 0; 
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: calc(var(--flow-gap) * 2);
-  padding: var(--card-padding);
-  border-radius: var(--radius-l);
-  background: color-mix(in oklab, var(--card-surface--dark) 78%, transparent);
+  padding: var(--card-gap);
+  background: var(--card-surface--light);
   backdrop-filter: var(--blur-l);
-  color: var(--text-color);
-  box-shadow: var(--surface-shadow--strong);
-  max-inline-size: min(48rem, 70%);
+
+  box-shadow: var(--surface-shadow--soft);
 }
 
-.card__hero-overlay :where(h1,h2,h3) {
+.card__overlay--controls {
+  justify-content: center;
+  align-items: center;
+  inset-block-end: 0; 
+  border-radius:  0 0 var(--radius-l) var(--radius-l);
+}
+
+.card__overlay--title {
+  justify-content: space-between;
+  inset-block-start: 0;
+  border-radius: var(--radius-l) var(--radius-l) 0 0;
+}
+.card__overlay--title :where(h1,h2,h3) {
   margin: 0;
-  font-size: clamp(2.25rem, 2.5rem + 1vw, 3.25rem);
+  font-size: var(--font-size-l);
   line-height: var(--line-height-l);
   text-wrap: balance;
+  text-shadow: var(--text-shadow--strong);
 }
-
-.card__hero-overlay :where(p) {
+.card__overlay--title :where(p) {
   margin: 0;
   font-size: var(--font-size-m);
   line-height: var(--line-height-m);

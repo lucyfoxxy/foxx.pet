@@ -279,15 +279,7 @@ const lastChapter = hasBlogChapters ? blogChapters[blogChapters.length - 1] : un
     <>
       <section class="content-section">
         <Card class="is-centered" headClass="card__head--column">
-          <Fragment slot="head">
-            <h1 class="card__title">{albumView.title}</h1>
-            {(albumView.categoryBadge || albumView.dateBadge) && (
-              <div class="card__badges controls controls--tight">
-                {albumView.categoryBadge ? <span class="badge badge--dark">{albumView.categoryBadge}</span> : null}
-                {albumView.dateBadge ? <span class="badge badge--dark">{albumView.dateBadge}</span> : null}
-              </div>
-            )}
-          </Fragment>
+
           {albumView.description ? (
             <Fragment slot="body">
               <div class="prose">
@@ -296,35 +288,47 @@ const lastChapter = hasBlogChapters ? blogChapters[blogChapters.length - 1] : un
             </Fragment>
           ) : null}
           <Fragment slot="body">
-            <div class="media-wrapper">
-              <div
-                class="media-frame"
-                data-slug={albumView.albumSlug}
-                data-autoplay="true"
-                data-interval="8000"
-                data-random="true"
-                data-share-key={albumView.shareKey}
-                role="button" 
-                tabindex="0" 
-                aria-label="Open artwork in lightbox"
-              >
-          
-                <img
-                  src={albumView.initialThumb?.src ?? ''}
-                  width={albumView.initialThumb?.width}
-                  height={albumView.initialThumb?.height}
-                  alt={albumView.initialThumb?.alt ?? ''}
-                  class="media-image"
-                  loading="eager"
-                  decoding="async"
-                  data-initial-full={albumView.initialThumb?.full ?? undefined}
-                />
+            
+              <div class="media-wrapper">
+                <div
+                  class="media-frame"
+                  data-slug={albumView.albumSlug}
+                  data-autoplay="true"
+                  data-interval="8000"
+                  data-random="true"
+                  data-share-key={albumView.shareKey}
+                  role="button" 
+                  tabindex="0" 
+                  aria-label="Open artwork in lightbox"
+                >
+            
+                  <img
+                    src={albumView.initialThumb?.src ?? ''}
+                    width={albumView.initialThumb?.width}
+                    height={albumView.initialThumb?.height}
+                    alt={albumView.initialThumb?.alt ?? ''}
+                    class="media-image"
+                    loading="eager"
+                    decoding="async"
+                    data-initial-full={albumView.initialThumb?.full ?? undefined}
+                  />
 
-
-                <button class="media-prev" aria-label="Previous" type="button">❮</button>
-                <button class="media-next" aria-label="Next" type="button">❯</button>
-                <button class="media-playpause" aria-label="Pause autoplay" type="button">⏸</button>
-                <div class="media-progress" aria-hidden="true"></div>
+                  <div class="card__overlay card__overlay--controls">
+                    <button class="media-prev" aria-label="Previous" type="button">❮</button>
+                    <button class="media-playpause" aria-label="Pause autoplay" type="button">⏸</button>
+                    <button class="media-next" aria-label="Next" type="button">❯</button>
+                    <div class="media-progress" aria-hidden="true"></div>
+                  </div>
+                </div>
+              
+              <div class="card__overlay card__overlay--title">
+                <h1 class="card__title">{albumView.title}</h1>
+                {(albumView.categoryBadge || albumView.dateBadge) && (
+                  <div class="card__badges controls controls--end">
+                    {albumView.categoryBadge ? <span class="badge badge--dark">{albumView.categoryBadge}</span> : null}
+                    {albumView.dateBadge ? <span class="badge badge--dark">{albumView.dateBadge}</span> : null}
+                  </div>
+                )}
               </div>
             </div>
           </Fragment>
@@ -390,25 +394,8 @@ const lastChapter = hasBlogChapters ? blogChapters[blogChapters.length - 1] : un
               </Fragment>
             </Card>
           ) : null}
-          {hasBlogSummary ? (
-            <Card class="card--ghost">
-              <Fragment slot="head">
-                <h2 class="card__title">Summary</h2>
-              </Fragment>
-              <Fragment slot="body">
-                <div class="prose">
-                  {blogDescription ? <p>{blogDescription}</p> : null}
-                  {blogSummaryParagraphs.map((paragraph) => (
-                    <p>{paragraph}</p>
-                  ))}
-                </div>
-              </Fragment>
-            </Card>
-          ) : null}
-        </section>
-      ) : null}
-      <section class="content-section">
-        <Card headClass={hasBlogChapters ? 'card__head--column' : undefined}>
+
+          <Card headClass={hasBlogChapters ? 'card__head--column' : undefined}>
           {hasBlogChapters ? (
             <Fragment slot="head">
               <h2 class="card__title">Chapters</h2>
@@ -436,6 +423,10 @@ const lastChapter = hasBlogChapters ? blogChapters[blogChapters.length - 1] : un
             </Fragment>
           ) : null}
         </Card>
+        </section>
+      ) : null}
+      <section class="content-section">
+
       </section>
     </>
   ) : (

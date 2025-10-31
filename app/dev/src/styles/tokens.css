@@ -83,9 +83,9 @@
   --card-surface--dark:      color-mix(in oklab,var(--color-dark) 60%, transparent);
   --card-surface--light:     color-mix(in oklab,var(--color-light) 29%, transparent);
 
-  --control-surface--light:              color-mix(in oklch, oklch(72% 0.18 295) 69%, transparent);
+  --control-surface--light:              color-mix(in oklch, oklch(72% 0.18 295) 99%, transparent);
   --control-surface--light--highlight:   color-mix(in oklch, var(--control-surface-light) 94%, var(--color-light)); 
-  --control-surface--dark:            color-mix(in oklch,var(--color-dark)89%,transparent);
+  --control-surface--dark:            color-mix(in oklch,var(--color-dark)99%,transparent);
   --control-surface--dark--highlight: color-mix(in oklab,var(--control-surface--dark) 94%, var(--color-dark));
   
   --control-glow:  inset    0 0 1px 2px var(--color-glow-soft);

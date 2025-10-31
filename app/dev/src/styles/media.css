@@ -39,7 +39,7 @@
   background: var(--card-surface--light);
   overflow: hidden;
   box-shadow: 1px 1px 12px -2px var(--color-shadow--strong);
-  max-block-size: 50vh;
+  max-block-size: 55vh;
 }
 
 .content-section.cols-2 :where(.media-frame) {
@@ -136,18 +136,16 @@
 
 /* ==========<[      CONTROLS      ]>============== */
 .media-playpause {
-  position: absolute;
+  position: relative;
   z-index: 2;
-  inset-block-start: .65rem;
-  inset-inline-end: .65rem;
-  inline-size: 2.5rem;
-  block-size: 2.5rem;
+  inline-size: 2.75rem;
+  block-size: 2.75rem;
   display: grid;
   place-items: center;
   border: none;
   border-radius: 999px;
-  background: var(--card-surface--dark);
-  opacity: .65;
+  background: var(--control-surface--dark);
+  grid-area: play;
   cursor: pointer;
   box-shadow: var(--surface-shadow--default);
   transition: var(--transition-soft);
@@ -167,8 +165,7 @@
 }
 .media-prev,
 .media-next {
-  position: absolute;
-  inset-block-start: 50%;
+  position: relative;
   display: grid;
   place-items: center;
   inline-size: 2.75rem;
@@ -178,14 +175,13 @@
   background: var(--control-surface--dark);
   color: inherit;
   box-shadow: var(--surface-shadow--default);
-  opacity: .65;
   cursor: pointer;
   transform: translateY(-50%);
   transition: var(--transition-soft);
   z-index: 2;
 }
-.media-prev { inset-inline-start: .65rem; }
-.media-next { inset-inline-end:   .65rem; }
+
+
 .media-prev:hover,
 .media-prev:focus-visible,
 .media-next:hover,
