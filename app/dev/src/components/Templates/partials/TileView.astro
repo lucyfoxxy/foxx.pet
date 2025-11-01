@@ -18,7 +18,6 @@ type Common = {
   ariaLabel?: string;
 };
 
-/** Album: Cover via URL, Badges: Startdatum + Count im Foot, H2 in Head. */
 type AlbumVariant = Common & {
   variant: 'album';
   coverUrl?: string;
@@ -28,7 +27,6 @@ type AlbumVariant = Common & {
   count?: number;
 };
 
-/** Article: Cover als ImageMetadata, Badge: Datum im Head, H3 in Head. */
 type ArticleVariant = Common & {
   variant: 'article';
   cover: ImageMetadata;
@@ -70,13 +68,14 @@ const date =
 
     <Fragment slot="head">
         <h2 class="card__title">{props.title}</h2>
-       <div class="card__badges controls controls--tight">
-        { date ? (<span class="badge">{date}</span>) : null }
-        { albumBadge ? (<span class="badge">{albumBadge}</span>) : null }
-      </div>       
+     
     </Fragment>
 
     <Fragment slot="body">
+      {props.description ? <p>{props.description}</p> : null}
+    </Fragment>
+    
+    <Fragment slot="foot">
       <div class="media-wrapper">
         <div class="media-frame" data-slug={props.dataSlug}>
             {props.variant === 'article' && (props as ArticleVariant).cover ? (    
@@ -101,11 +100,11 @@ const date =
                 />) :( <div class="media-image placeholder" aria-hidden="true"></div> )
             }
         </div>
-      </div>     
-    </Fragment>
-    
-    <Fragment slot="foot">
-        {props.description ? <p>{props.description}</p> : null}
+      </div>        
+       <div class="card__badges controls controls--tight">
+        { date ? (<span class="badge badge--dark">{date}</span>) : null }
+        { albumBadge ? (<span class="badge badge--dark">{albumBadge}</span>) : null }
+      </div>          
 
     </Fragment>
 

@@ -56,13 +56,16 @@ a {
   font-weight: var(--bold-font-weight);  
 }
 .footer,
-.badge,
-.button--small {
+.badge {
   font-size: var(--font-size-xs);
   font-weight: var(--thin-font-weight);
   line-height: var(--line-height-xs);
 }
-
+.button {
+  font-size: var(--font-size-s);
+  font-weight: var(--normal-font-weight);
+  line-height: var(--line-height-xs);
+}
 .button--large,
  .is-current{
   font-weight: var(--thick-font-weight);

@@ -57,6 +57,9 @@ const lastChapter = hasBlogChapters ? blogChapters[blogChapters.length - 1] : un
       <Card class="card--ghost">
         <Fragment slot="head">
           <h2 class="card__title">Table of Contents</h2>
+          <div class="card__badges controls controls--tight">
+            <span class="badge badge--dark">{blogChapters.length} total</span>
+          </div>
         </Fragment>
         <Fragment slot="body">
           <ol>
@@ -80,13 +83,12 @@ const lastChapter = hasBlogChapters ? blogChapters[blogChapters.length - 1] : un
       </Card>
     ) : null}
 
-    <Card headClass={hasBlogChapters ? 'card__head--column' : undefined}>
+    <Card headClass={hasBlogChapters ? '' : undefined}>
       {hasBlogChapters ? (
         <Fragment slot="head">
-          <h2 class="card__title">Chapters</h2>
-          <div class="card__badges controls controls--tight">
-            <span class="badge badge--dark">{blogChapters.length} total</span>
-          </div>
+    <h2 class="card__title" data-chapter-title>
+      {hasBlogChapters ? blogChapters[0].title : 'Chapter'}
+    </h2>
         </Fragment>
       ) : null}
 
@@ -99,21 +101,21 @@ const lastChapter = hasBlogChapters ? blogChapters[blogChapters.length - 1] : un
       {hasBlogChapters ? (
         <Fragment slot="foot">
           <nav class="controls controls--spread">
-            {firstChapter ? (
-              <a href={`#${firstChapter.id}`} data-chapter={firstChapter.id}>
-                <span class="button button--round button--small">
-                  Start at {firstChapter.title}
-                </span>
-              </a>
-            ) : null}
-            <a href="#article-top"><span class="button button--plain">Back to top</span></a>
-            {lastChapter && firstChapter && lastChapter.id !== firstChapter.id ? (
-              <a href={`#${lastChapter.id}`} data-chapter={lastChapter.id}>
-                <span class="button button--round button--small">
-                  Jump to {lastChapter.title}
-                </span>
-              </a>
-            ) : null}
+            <button
+              class="button button--small button--dark button--round"
+              type="button"
+              data-chapter-prev
+            >
+              ← Prev
+            </button>
+
+            <button
+              class="button button--small button--dark button--round"
+              type="button"
+              data-chapter-next
+            >
+              Next →
+            </button>
           </nav>
         </Fragment>
       ) : null}
@@ -151,6 +153,9 @@ const lastChapter = hasBlogChapters ? blogChapters[blogChapters.length - 1] : un
         initBlogChapters({
           chapters,
           targetSelector: '#blog-chapter-target',
+          titleSelector: '[data-chapter-title]',
+          prevSelector: '[data-chapter-prev]',
+          nextSelector: '[data-chapter-next]',
         });
       });
     </script>

@@ -21,7 +21,7 @@
 .button,.badge {
   display: inline-flex;
   align-items: center;
-  color: var(--text-accent);
+  color: var(--text-color);
   transition: var(--transition-glow),var(--transition-raise);;
   vertical-align: middle;
   text-shadow: var(--text-glow--soft),var(--text-shadow--strong);
@@ -29,6 +29,7 @@
   justify-content: center;
   gap: var(--control-gap); 
   padding: var(--control-padding);
+  padding-inline: calc(var(--control-padding) * 1.35);
   background: var(--control-surface--light);
   border-radius: var(--radius-m);
 }
@@ -61,21 +62,26 @@
   transform: var(--transform-raise);
   box-shadow: var(--surface-shadow--default),var(--control-glow); 
 }
+.button:hover {
+  backdrop-filter: brightness(.75); 
+}
 .button--small:hover { 
-  backdrop-filter: brightness(.75);
-  transform: var(--transform-scale--soft);
+  backdrop-filter: brightness(1.5);
+  transform: var(--transform-raise--soft);
   text-shadow: var(--text-glow--soft);
-  box-shadow: var(--surface-shadow--default),var(--control-glow); 
+  box-shadow: var(--surface-shadow--default); 
 }
 
 .badge {
   border-radius: 999px; 
-  padding-block: calc(var(--control-padding) * .5);
+  padding-block: calc(var(--control-padding) * .75);
 }
 
 .button--dark,
 .badge--dark  { 
-  background: var(--control-surface--dark); 
+  
+  background: var(--control-surface--dark);
+  
 }
 .badge--plain,
 .button--plain { 

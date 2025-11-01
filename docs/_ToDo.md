@@ -29,6 +29,7 @@
 - [x] inset outline um panel [site]
 - [x] header nav zu klein [mobile]
 - [ ] hover / active effekte [nav]
+- [ ] einheitlicher, dynamischer button / badge style
 - [ ] Back Button style [nav]
 - [ ] Tile Views: einheitlicher Card/Badge Style [Overviews]
 - [ ] Overlay: hell oder dunkel?

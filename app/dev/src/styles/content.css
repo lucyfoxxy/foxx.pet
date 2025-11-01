@@ -217,6 +217,12 @@
 .card__body > ol > li > [data-chapter][data-active] {
   box-shadow: var(--surface-glow);
 }
+[data-blog-chapter] {
+  transition: opacity 0.25s ease;
+}
+#blog-chapter-target [data-blog-chapter] > :is(h1, h2, h3):first-child {
+  display: none;
+}
 
 .card__body > ol > li > a > span:first-child {
   font-weight: var(--bold-font-weight);

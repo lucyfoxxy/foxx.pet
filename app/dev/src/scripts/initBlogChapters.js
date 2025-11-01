@@ -1,6 +1,15 @@
+// src/scripts/initBlogChapters.js
 export function initBlogChapters(options) {
   if (!options) return;
-  const { chapters, targetSelector = '#blog-chapter-target' } = options;
+
+  const {
+    chapters,
+    targetSelector = '#blog-chapter-target',
+    titleSelector = '[data-chapter-title]',
+    prevSelector = '[data-chapter-prev]',
+    nextSelector = '[data-chapter-next]',
+  } = options;
+
   if (!Array.isArray(chapters) || chapters.length === 0) return;
 
   const run = () => {
@@ -8,10 +17,19 @@ export function initBlogChapters(options) {
     if (!host) return;
 
     const blocks = {};
+    let currentIndex = 0;
 
-    // --- Kapitel wrappen ---
+    // Headline & Buttons
+    const titleEl = document.querySelector(titleSelector);
+    const prevBtn = document.querySelector(prevSelector);
+    const nextBtn = document.querySelector(nextSelector);
+    const tocLinks = document.querySelectorAll('[data-chapter]');
+
+    // --- Kapitel in Wrapper packen ---
     chapters.forEach((ch) => {
-      const el = host.querySelector('#' + ch.id);
+      const el =
+        host.querySelector('#' + ch.id) ||
+        host.querySelector(`[id="${ch.id}"]`);
       if (!el) return;
 
       const wrapper = document.createElement('div');
@@ -36,9 +54,14 @@ export function initBlogChapters(options) {
     });
 
     const allWrappers = host.querySelectorAll('[data-blog-chapter]');
-    const tocLinks = document.querySelectorAll('[data-chapter]');
 
-    const show = (id) => {
+    const showByIndex = (idx) => {
+      if (idx < 0 || idx >= chapters.length) return;
+      const chapter = chapters[idx];
+      currentIndex = idx;
+      const id = chapter.id;
+
+      // Inhalt umschalten
       allWrappers.forEach((w) => {
         const active = w.dataset.blogChapter === id;
         w.style.display = active ? '' : 'none';
@@ -47,34 +70,77 @@ export function initBlogChapters(options) {
         });
       });
 
-      // reset scroll (nur, wenn Nutzer nicht gerade mitten im Text ist)
-      host.scrollTo?.({ top: 0, behavior: 'smooth' });
-
-      // aktiven TOC-Link markieren
+      // TOC-Active
       tocLinks.forEach((a) => {
         a.toggleAttribute('data-active', a.dataset.chapter === id);
       });
+
+      // Titel setzen
+      if (titleEl) {
+        titleEl.textContent = chapter.title ?? 'Chapter';
+      }
+
+      // Buttons en/disable
+      if (prevBtn) {
+        prevBtn.disabled = idx === 0;
+        prevBtn.classList.toggle('is-disabled', idx === 0);
+      }
+      if (nextBtn) {
+        nextBtn.disabled = idx === chapters.length - 1;
+        nextBtn.classList.toggle('is-disabled', idx === chapters.length - 1);
+      }
+
+      // nach oben
+      host.scrollTo?.({ top: 0, behavior: 'smooth' });
+
+      // URL aktualisieren
+      history.replaceState?.(null, '', '#' + id);
     };
 
+    // Clicks im TOC
     document.addEventListener('click', (ev) => {
       const a = ev.target.closest('[data-chapter]');
       if (!a) return;
       const id = a.dataset.chapter;
-      if (!id || !blocks[id]) return;
+      if (!id) return;
+
+      const idx = chapters.findIndex((c) => c.id === id);
+      if (idx === -1) return;
+
       ev.preventDefault();
-      history.replaceState(null, '', '#' + id);
-      show(id);
+      showByIndex(idx);
     });
 
+    // Prev / Next Buttons
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        const nextIdx = currentIndex - 1;
+        if (nextIdx >= 0) showByIndex(nextIdx);
+      });
+    }
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        const nextIdx = currentIndex + 1;
+        if (nextIdx < chapters.length) showByIndex(nextIdx);
+      });
+    }
+
+    // Initial: Hash oder erstes Kapitel
     const initialHash = window.location.hash.replace('#', '');
-    const first = chapters[0]?.id;
-    show(initialHash && blocks[initialHash] ? initialHash : first);
+    const initialIdx = initialHash
+      ? chapters.findIndex((c) => c.id === initialHash)
+      : 0;
+
+    showByIndex(initialIdx >= 0 ? initialIdx : 0);
   };
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', run, { once: true });
-  } else run();
+  } else {
+    run();
+  }
 }
+
 
 
 export default initBlogChapters;

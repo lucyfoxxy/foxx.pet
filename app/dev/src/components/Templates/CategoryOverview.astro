@@ -104,7 +104,7 @@ const hasCategories = normalizedCategories.length > 0;
       {normalizedCategories.map(({ slug: categorySlug, title, description, href, cover }) => (
 
         <a href={href} aria-label={`Open ${title}`}>
-          <Card class="is-animated is-centered card--light" headClass="card__head--column">
+          <Card class="is-animated is-centered" headClass="card__head--column">
             <Fragment slot="head">
               <h2 class="card__title">{title}</h2>
             </Fragment>
