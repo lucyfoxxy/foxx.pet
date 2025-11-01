@@ -1,5 +1,6 @@
 ---
 import BaseTemplate from '@Templates/BaseTemplate.astro';
+import { TEMPLATES } from '@Templates/templates';
 import Card from '@Templates/Card.astro';
 import TitleWithIcon from '@Templates/partials/TitleWithIcon.astro';
 import HeaderActions from '@Templates/partials/HeaderActions.astro';
@@ -101,7 +102,7 @@ const hasCategories = normalizedCategories.length > 0;
   ) : hasCategories ? (
     <section class="content-section cols-3">
       {normalizedCategories.map(({ slug: categorySlug, title, description, href, cover }) => (
-        
+
         <a href={href} aria-label={`Open ${title}`}>
           <Card class="is-animated is-centered card--light" headClass="card__head--column">
             <Fragment slot="head">

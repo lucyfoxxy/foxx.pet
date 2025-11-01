@@ -49,7 +49,7 @@ body::before {
     filter: none;
   }
 }
-.panel :where(h1, h2, h3, h4, a) {
+:where(h1, h2, h3, h4, a) {
   text-shadow: var(--text-shadow--soft);
   color: var(--text-accent);
 }

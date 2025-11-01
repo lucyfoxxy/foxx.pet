@@ -1,199 +1,80 @@
-const hasHeadingTag = (element) =>
-  typeof element?.tagName === 'string' && /^H[1-6]$/.test(element.tagName);
+export function initBlogChapters(options) {
+  if (!options) return;
+  const { chapters, targetSelector = '#blog-chapter-target' } = options;
+  if (!Array.isArray(chapters) || chapters.length === 0) return;
 
-const escapeId = (value) => {
-  if (typeof value !== 'string') return '';
-  if (typeof CSS !== 'undefined' && typeof CSS.escape === 'function') {
-    return CSS.escape(value);
-  }
-  return value.replace(/"/g, '\\"').replace(/\s/g, '\\ ');
-};
+  const run = () => {
+    const host = document.querySelector(targetSelector);
+    if (!host) return;
 
-const normalizeChapters = (chapters) =>
-  Array.isArray(chapters)
-    ? chapters
-        .map((chapter) => ({
-          ...chapter,
-          id: typeof chapter?.id === 'string' ? chapter.id.trim() : '',
-        }))
-        .filter((chapter) => chapter.id.length > 0)
-    : [];
+    const blocks = {};
 
-const isChapterHeading = (node, chapterIds) => {
-  if (!node || node.nodeType !== Node.ELEMENT_NODE) return false;
+    // --- Kapitel wrappen ---
+    chapters.forEach((ch) => {
+      const el = host.querySelector('#' + ch.id);
+      if (!el) return;
 
-  const element = node;
-  if (!hasHeadingTag(element)) return false;
+      const wrapper = document.createElement('div');
+      wrapper.dataset.blogChapter = ch.id;
+      wrapper.style.opacity = '0';
+      wrapper.style.transition = 'opacity 0.25s ease';
 
-  const id = element.getAttribute('id');
-  return typeof id === 'string' && chapterIds.has(id);
-};
+      host.insertBefore(wrapper, el);
+      wrapper.appendChild(el);
 
-const createChapterHtmlMap = (target, chapters) => {
-  const chapterIds = new Set(chapters.map((chapter) => chapter.id));
-  const firstChapterId = chapters[0]?.id ?? null;
-  const chapterMap = new Map();
-
-  chapters.forEach((chapter) => {
-    const heading = target.querySelector(`#${escapeId(chapter.id)}`);
-
-    if (!heading) return;
-
-    const wrapper = document.createElement('div');
-
-    if (firstChapterId && chapter.id === firstChapterId) {
-      const leadingNodes = [];
-      let previous = heading.previousSibling;
-
-      while (previous) {
-        leadingNodes.push(previous.cloneNode(true));
-        previous = previous.previousSibling;
+      let next = wrapper.nextSibling;
+      while (
+        next &&
+        !(next.nodeType === 1 && next.id && chapters.some((c) => c.id === next.id))
+      ) {
+        const move = next;
+        next = next.nextSibling;
+        wrapper.appendChild(move);
       }
 
-      for (let index = leadingNodes.length - 1; index >= 0; index -= 1) {
-        wrapper.appendChild(leadingNodes[index]);
-      }
-    }
-
-    let current = heading;
-
-    while (current) {
-      if (current !== heading && isChapterHeading(current, chapterIds)) {
-        break;
-      }
-
-      wrapper.appendChild(current.cloneNode(true));
-      current = current.nextSibling;
-    }
-
-    const html = wrapper.innerHTML.trim();
-
-    if (html.length > 0) {
-      chapterMap.set(chapter.id, html);
-    }
-  });
-
-  return chapterMap;
-};
-
-const setActiveChapterLink = (chapterId) => {
-  const links = document.querySelectorAll('[data-chapter]');
-
-  links.forEach((link) => {
-    if (!(link instanceof HTMLElement)) return;
-
-    const isActive = link.dataset.chapter === chapterId;
-    link.classList.toggle('is-active', isActive);
-
-    if (isActive) {
-      link.setAttribute('aria-current', 'true');
-    } else {
-      link.removeAttribute('aria-current');
-    }
-  });
-};
-
-const updateHash = (chapterId) => {
-  try {
-    const url = new URL(window.location.href);
-    url.hash = chapterId;
-    window.history.replaceState(null, '', url);
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.error('Unable to update chapter hash', error);
-  }
-};
-
-const renderChapter = (target, chapterMap, chapterId, { scrollIntoView = false } = {}) => {
-  const html = chapterMap.get(chapterId);
-
-  if (typeof html !== 'string') return false;
-
-  target.innerHTML = html;
-
-  if (scrollIntoView) {
-    requestAnimationFrame(() => {
-      try {
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      } catch (error) {
-        target.scrollIntoView();
-      }
+      blocks[ch.id] = wrapper;
     });
-  }
 
-  return true;
-};
+    const allWrappers = host.querySelectorAll('[data-blog-chapter]');
+    const tocLinks = document.querySelectorAll('[data-chapter]');
 
-const attachLinkListeners = (chapterMap, onSelect) => {
-  const links = document.querySelectorAll('[data-chapter]');
+    const show = (id) => {
+      allWrappers.forEach((w) => {
+        const active = w.dataset.blogChapter === id;
+        w.style.display = active ? '' : 'none';
+        requestAnimationFrame(() => {
+          w.style.opacity = active ? '1' : '0';
+        });
+      });
 
-  links.forEach((link) => {
-    link.addEventListener('click', (event) => {
-      if (!(event.currentTarget instanceof HTMLElement)) return;
+      // reset scroll (nur, wenn Nutzer nicht gerade mitten im Text ist)
+      host.scrollTo?.({ top: 0, behavior: 'smooth' });
 
-      const chapterId = event.currentTarget.dataset.chapter ?? '';
+      // aktiven TOC-Link markieren
+      tocLinks.forEach((a) => {
+        a.toggleAttribute('data-active', a.dataset.chapter === id);
+      });
+    };
 
-      if (!chapterMap.has(chapterId)) return;
-
-      event.preventDefault();
-      onSelect(chapterId, { scrollIntoView: true, updateHash: true });
+    document.addEventListener('click', (ev) => {
+      const a = ev.target.closest('[data-chapter]');
+      if (!a) return;
+      const id = a.dataset.chapter;
+      if (!id || !blocks[id]) return;
+      ev.preventDefault();
+      history.replaceState(null, '', '#' + id);
+      show(id);
     });
-  });
-};
 
-const initHashListener = (chapterMap, onSelect) => {
-  window.addEventListener('hashchange', () => {
-    const hash = window.location.hash.replace(/^#/, '');
-
-    if (!chapterMap.has(hash)) return;
-
-    onSelect(hash, { scrollIntoView: true, updateHash: false });
-  });
-};
-
-const initBlogChapters = (options = {}) => {
-  const { chapters: rawChapters, targetSelector } = options;
-
-  const target =
-    typeof targetSelector === 'string' && targetSelector.length > 0
-      ? document.querySelector(targetSelector)
-      : null;
-
-  if (!(target instanceof HTMLElement)) return;
-  if (target.dataset.blogChaptersInitialized === 'true') return;
-
-  const chapters = normalizeChapters(rawChapters);
-
-  if (chapters.length === 0) return;
-
-  const chapterMap = createChapterHtmlMap(target, chapters);
-
-  if (chapterMap.size === 0) return;
-
-  const initialHash = window.location.hash.replace(/^#/, '');
-  const defaultChapterId = chapterMap.has(initialHash)
-    ? initialHash
-    : chapters[0]?.id;
-
-  if (!defaultChapterId) return;
-
-  const selectChapter = (chapterId, { scrollIntoView = false, updateHash: shouldUpdateHash = false } = {}) => {
-    if (!chapterMap.has(chapterId)) return;
-
-    renderChapter(target, chapterMap, chapterId, { scrollIntoView });
-    setActiveChapterLink(chapterId);
-
-    if (shouldUpdateHash) {
-      updateHash(chapterId);
-    }
+    const initialHash = window.location.hash.replace('#', '');
+    const first = chapters[0]?.id;
+    show(initialHash && blocks[initialHash] ? initialHash : first);
   };
 
-  target.dataset.blogChaptersInitialized = 'true';
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', run, { once: true });
+  } else run();
+}
 
-  selectChapter(defaultChapterId, { updateHash: initialHash.length > 0 });
-
-  attachLinkListeners(chapterMap, selectChapter);
-  initHashListener(chapterMap, selectChapter);
-};
 
 export default initBlogChapters;

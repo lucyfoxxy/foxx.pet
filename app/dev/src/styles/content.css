@@ -214,6 +214,10 @@
   box-shadow: var(--surface-glow--soft);
 }
 
+.card__body > ol > li > [data-chapter][data-active] {
+  box-shadow: var(--surface-glow);
+}
+
 .card__body > ol > li > a > span:first-child {
   font-weight: var(--bold-font-weight);
   font-size: var(--font-size-m);

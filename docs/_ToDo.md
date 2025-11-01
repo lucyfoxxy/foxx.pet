@@ -11,25 +11,33 @@
     - [x] blog-like: Cover Bild in .md Post definieren
     - [x] album-like: zieht Bild automatisch
 - [x] Folder Structure Overhaul (see [FolderStructure.md]) [foundation]
+- [ ] Images dynamisch verschiedene Auflösungen für Cover / Hero
+- [ ] TileView vereinfachen und auch für CategoryOverview verwenden
+- [ ] Templates.ts import
 
 ## Bugs
 - [x]  Header / Footer raus aus Panel block [site]
 - [x]  sticky header nav verdeckt [mobile]
 - [x] Gallery lightbox geht nicht [media]
+- [ ] Back Button geht vom Content zurück zum Main Overview [ui]
 
 ## Visual
 - [x] CSS/SVG-Pattern statt BG-Image [foundation]
 - [x] Icons: Emoji → SVG + Icon-Partial [ui]
 - [x] header logo glow verringern [site]
-- [ ] optimize image responsiveness formula [media]
-- [ ] inset outline um panel [site]
-- [ ] header nav zu klein [mobile]
-- [ ] hover effekte [ui]
+- [x] optimize image responsiveness formula [media]
+- [x] inset outline um panel [site]
+- [x] header nav zu klein [mobile]
+- [ ] hover / active effekte [nav]
+- [ ] Back Button style [nav]
+- [ ] Tile Views: einheitlicher Card/Badge Style [Overviews]
+- [ ] Overlay: hell oder dunkel?
 
 ## Features
 - [x] Header/Nav aktiv + Buttons [site]
-- [ ] Gallery: Detail-Layout [gallery]
-- [ ] Gallery: Category Covers (random + pin) [gallery]
-- [ ] Stories/Rezepte restrukturieren + Filter [stories]
+- [X] Gallery: Detail-Layout [gallery]
+- [ ] Gallery: Category Covers [gallery]
+- [x] Stories/Rezepte restrukturieren + Filter [stories]
 - [ ] Publish 1 Story + 1 Rezept (E2E) [release]
-- [ ] Artworks (+SFW/NSFW) [content]
+- [X] Artworks (+SFW/NSFW) [content]
+- [ ] Remove placeholders
