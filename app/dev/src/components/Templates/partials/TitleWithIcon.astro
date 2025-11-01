@@ -25,10 +25,10 @@ const icon = rawIcon?.trim().length ? rawIcon : undefined;
 const emoji = !icon && rawEmoji?.trim().length ? rawEmoji : undefined;
 ---
 
-<Tag class:list={['title-with-icon', className]} {...rest}>
+<Tag class:list={['card__title', className]} {...rest}>
   <span class="title-with-icon__text">{title}</span>
   {icon ? (
-    <span class="title-with-icon__icon" aria-hidden="true">
+    <span class="media-icon" aria-hidden="true">
       <ICONS kind={icon} />
     </span>
   ) : null}

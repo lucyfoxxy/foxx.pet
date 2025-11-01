@@ -38,7 +38,7 @@
   --site-logo--size:         calc(var(--nav-gap--row) * 2 + var(--font-size-m));
   --thumb-size:              clamp(64px, 9vw, 128px);
   --hero-size:               clamp(320px,42vw,calc(var(--container-max) * .45));
-  --icon-size:               2.5em;
+  --icon-size:               1.75em;
   --gallery-frame-size: calc(
     (var(--container-max) -
       (var(--card-padding) * 2 + var(--panel-padding) * 2 )

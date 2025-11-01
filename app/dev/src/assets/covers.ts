@@ -101,3 +101,4 @@ export const findCoverImage = (...slugs: NullableSlug[]): ImageMetadata | undefi
 
   return undefined;
 };
+

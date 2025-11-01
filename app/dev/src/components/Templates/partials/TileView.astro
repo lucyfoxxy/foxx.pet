@@ -4,108 +4,93 @@
  * Kapselt Card-Layout, Headline, Cover-Darstellung und Badges.
  */
 import Card from '@Templates/Card.astro';
-import { Picture } from 'astro:assets';
-import type { HTMLAttributes } from 'astro/types';
-import type { ImageMetadata } from 'astro:assets';
+import type { HTMLAttributes,HTMLTag } from 'astro/types';
 
-type Common = {
+type Props = {
   href: string;
   title: string;
   description?: string;
   dataSlug?: string;
-  class?: HTMLAttributes<HTMLElement>['class'];
-  headClass?: HTMLAttributes<HTMLElement>['class'];
+  class?: HTMLAttributes<HTMLTag>['class'];
+  headClass?: HTMLAttributes<HTMLTag>['class'];
   ariaLabel?: string;
-};
-
-type AlbumVariant = Common & {
-  variant: 'album';
-  coverUrl?: string;
-  /** Bereits formatiert, z.B. 'Oct 2025' */
-  formattedStartDate?: string;
-  /** Fotoanzahl */
+  cover?:  string;
+  coverAlt?: string;
+  date?: Date | string;
   count?: number;
+  countLabel?: string;
 };
-
-type ArticleVariant = Common & {
-  variant: 'article';
-  cover: ImageMetadata;
-  publishDate?: Date;
-};
-
-type Props = AlbumVariant | ArticleVariant;
 
 const props = Astro.props as Props;
 
-// Defaults per Variant
+// Default styling helpers
 const defaultCardClass = 'is-centered is-animated';
 
 const headColumnClass = 'card__head--column';
 
-const aria = props.ariaLabel ??
-  (props.variant === 'album' ? `Open ${props.title}` : `Read ${props.title}`);
+const aria = props.ariaLabel ?? `View ${props.title}`;
 
-// Helper für Badges
-const albumBadge =
-  typeof (props as AlbumVariant).count === 'number'
-    ? (props as AlbumVariant).count! > 0
-      ? `${(props as AlbumVariant).count} photos`
-      : 'No photos yet'
+const formattedDate =
+  props.date instanceof Date
+    ? new Intl.DateTimeFormat('en', { dateStyle: 'medium' }).format(props.date)
+    : typeof props.date === 'string' && props.date.trim().length
+    ? props.date
     : undefined;
 
-const articleFormattedDate =
-  props.variant === 'article' && props.publishDate
-    ? new Intl.DateTimeFormat('en', { dateStyle: 'medium' }).format(props.publishDate)
-    : undefined;
-const date = 
-    props.variant === 'article' && articleFormattedDate ? ( articleFormattedDate ) 
-    : props.variant === 'album' && props.formattedStartDate ? (props.formattedStartDate) 
-    : undefined;
+const hasCount = typeof props.count === 'number';
+const normalizedCountLabel = props.countLabel?.trim().length
+  ? props.countLabel!.trim()
+  : undefined;
+const formattedCount = hasCount
+  ? normalizedCountLabel
+    ? `${normalizedCountLabel}: ${props.count ?? 0}`
+    : props.count! > 0
+    ? `${props.count} photos`
+    : 'No photos yet'
+  : undefined;
+
+const imageLoading = 'lazy';
+const imageDecoding = 'async';
+const imageFetchPriority = 'auto';
+const coverAlt = props.coverAlt ?? '';
+
 ---
 
 <a href={props.href} aria-label={aria}>
   <Card class={[defaultCardClass, props.class]} headClass={[headColumnClass, props.headClass]}>
 
     <Fragment slot="head">
-        <h2 class="card__title">{props.title}</h2>
-     
+      <h2 class="card__title">{props.title}</h2>
     </Fragment>
 
     <Fragment slot="body">
+
       {props.description ? <p>{props.description}</p> : null}
     </Fragment>
-    
+
     <Fragment slot="foot">
       <div class="media-wrapper">
         <div class="media-frame" data-slug={props.dataSlug}>
-            {props.variant === 'article' && (props as ArticleVariant).cover ? (    
-                <Picture
-                    src={(props as ArticleVariant).cover}
-                    formats={['avif', 'webp']}
-                    alt=""
-                    widths={[128,196]}
-                    
-                    class="media-image"
-                    loading="eager"
-                    decoding="async"
-                />) :
-             props.variant === 'album' &&  props.coverUrl ? ( 
-                <img
-                    src={props.coverUrl}
-                    
-                    alt=""
-                    class="media-image"
-                    loading="eager"
-                    decoding="async"
-                />) :( <div class="media-image placeholder" aria-hidden="true"></div> )
-            }
+          {props.cover ? (
+            <img
+              src={props.cover}
+              alt={coverAlt}
+              class="media-image"
+              loading={imageLoading}
+              decoding={imageDecoding}
+              fetchpriority={imageFetchPriority ?? undefined}
+            />
+          ) : (
+            <div class="media-image placeholder" aria-hidden="true"></div>
+          )}
         </div>
-      </div>        
-       <div class="card__badges controls controls--tight">
-        { date ? (<span class="badge badge--dark">{date}</span>) : null }
-        { albumBadge ? (<span class="badge badge--dark">{albumBadge}</span>) : null }
-      </div>          
-
+      </div>
+    {formattedDate || formattedCount ? (
+      <div class="card__badges controls controls--tight">
+        {formattedDate ? <span class="badge badge--dark">{formattedDate}</span> : null}
+        {formattedCount ? <span class="badge badge--dark">{formattedCount}</span> : null}
+      </div>
+      ) : null }
     </Fragment>
 
   </Card>

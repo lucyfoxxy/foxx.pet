@@ -4,7 +4,6 @@ import Card from '@Templates/Card.astro';
 import TitleWithIcon from '@Templates/partials/TitleWithIcon.astro';
 import HeaderActions from '@Templates/partials/HeaderActions.astro';
 import { TEMPLATES } from '@Templates/templates';
-import { Picture } from 'astro:assets';
 import { PLACEHOLDER_COVER, findCoverImage } from '@Assets/covers';
 import {
   findCategory,
@@ -67,103 +66,121 @@ const backLabel = parentPage ? `← ${parentPage.title}` : undefined;
 
 const placeholderCover = PLACEHOLDER_COVER;
 
-type AlbumEntry = {
-  slug: string;
-  title: string;
-  description: string;
-  count?: number;
-  formattedStartDate?: string;
-  coverUrl?: string;
-};
+// ==================
+// 1) Rohdaten holen
+// ==================
+const albumEntriesRaw =
+  !errorMessage && area === 'album'
+    ? (await getCollection('album', ({ data }) => (data.category?.slug ?? '') === slug))
+        .map(({ data }, index) => {
+          const title = data.title ?? data.albumName ?? data.slug;
+          const description = data.description ?? data.albumName ?? '';
+          const startDateValue = data.startDate ? Date.parse(data.startDate) : Number.NaN;
+          const hasStartDate = Number.isFinite(startDateValue);
+          const formattedStartDate = hasStartDate
+            ? new Intl.DateTimeFormat('en', { month: 'short', year: 'numeric' }).format(
+                new Date(startDateValue),
+              )
+            : undefined;
+          const shareKey = data.shareKey ?? undefined;
+          const albumThumbnailAssetId = data.albumThumbnailAssetId ?? undefined;
+          const coverUrl =
+            data.coverUrl ??
+            (shareKey && albumThumbnailAssetId
+              ? `https://img.foxx.pet/api/assets/${albumThumbnailAssetId}/thumbnail?key=${shareKey}`
+              : undefined);
 
-type ArticleEntry = {
-  slug: string;
-  title: string;
-  description: string;
-  publishDate?: Date;
-  cover: typeof placeholderCover;
-};
+          return {
+            slug: data.slug,
+            title,
+            description,
+            count: data.count,
+            formattedStartDate,
+            coverUrl,
+            _sort: hasStartDate ? startDateValue : undefined,
+            _index: index,
+          };
+        })
+        .sort((a, b) => {
+          const aHas = typeof a._sort === 'number';
+          const bHas = typeof b._sort === 'number';
+          if (aHas && bHas) {
+            return (b._sort as number) - (a._sort as number);
+          }
+          if (aHas) return -1;
+          if (bHas) return 1;
+          return a._index - b._index;
+        })
+        .map(({ _sort, _index, ...entry }) => entry)
+    : [];
 
-const albumEntries = !errorMessage && area === 'album'
-  ? (await getCollection('album', ({ data }) => (data.category?.slug ?? '') === slug)).map(({ data }, index) => {
-      const title = data.title ?? data.albumName ?? data.slug;
-      const description = data.description ?? data.albumName ?? '';
-      const startDateValue = data.startDate ? Date.parse(data.startDate) : Number.NaN;
-      const hasStartDate = Number.isFinite(startDateValue);
-      const formattedStartDate = hasStartDate
-        ? new Intl.DateTimeFormat('en', { month: 'short', year: 'numeric' }).format(new Date(startDateValue))
-        : undefined;
-      const shareKey = data.shareKey ?? undefined;
-      const albumThumbnailAssetId = data.albumThumbnailAssetId ?? undefined;
-      const coverUrl =
-        data.coverUrl ??
-        (shareKey && albumThumbnailAssetId
-          ? `https://img.foxx.pet/api/assets/${albumThumbnailAssetId}/thumbnail?key=${shareKey}`
-          : undefined);
+const articleEntriesRaw =
+  !errorMessage && area === 'blog'
+    ? (await getCollection('blog', ({ data }) => data.primaryCategory === slug))
+        .map((entry) => {
+          const segments = entry.slug.split('/').filter(Boolean);
+          const [sectionSegment, firstRest, ...additionalRest] = segments;
+          const entrySegment =
+            additionalRest.length > 0
+              ? additionalRest[additionalRest.length - 1]
+              : firstRest ?? entry.slug;
+          const categorySegment = additionalRest.length > 0 ? firstRest ?? slug : slug;
+          const href = `/${areaSegment}/${sectionSegment ?? parentSlug}/${categorySegment}/${entrySegment}/`;
+          const cover =
+            findCoverImage(
+              entry.data.heroImage,
+              entry.data.slug,
+              entry.slug,
+              entry.data.primaryCategory,
+              entrySegment,
+            ) ?? placeholderCover;
 
-      return {
-        slug: data.slug,
+          return {
+            slug: entry.slug,
+            title: entry.data.title,
+            description: entry.data.description ?? '',
+            publishDate: entry.data.publishDate,
+            cover,
+            href,
+          };
+        })
+        .sort((a, b) => {
+          const aTime = a.publishDate ? a.publishDate.getTime() : 0;
+          const bTime = b.publishDate ? b.publishDate.getTime() : 0;
+          return bTime - aTime;
+        })
+    : [];
+
+// ========================================
+// 2) Normalisieren auf EIN gemeinsames Array
+// ========================================
+const entries =
+  area === 'album'
+    ? albumEntriesRaw.map(({ slug: albumSlug, title, description, count, formattedStartDate, coverUrl }) => ({
+        href: `/${areaSegment}/${parentSlug}/${slug}/${albumSlug}/`,
         title,
         description,
-        count: data.count,
-        formattedStartDate,
-        coverUrl,
-        _sort: hasStartDate ? startDateValue : undefined,
-        _index: index,
-      };
-    })
-      .sort((a, b) => {
-        const aHas = typeof a._sort === 'number';
-        const bHas = typeof b._sort === 'number';
-        if (aHas && bHas) {
-          return (b._sort as number) - (a._sort as number);
-        }
-        if (aHas) return -1;
-        if (bHas) return 1;
-        return a._index - b._index;
-      })
-      .map(({ _sort, _index, ...entry }) => entry)
-  : [];
+        dataSlug: albumSlug,
+        cover: coverUrl,
+        date: formattedStartDate,
+        count,
+        countLabel: 'Photos',
+      }))
+    : area === 'blog'
+    ? articleEntriesRaw.map(({ slug: articleSlug, title, description, publishDate, cover, href }) => ({
+        href,
+        title,
+        description,
+        dataSlug: articleSlug,
+        cover: cover.src,
+        date: publishDate,
+        // hier: Anzahl der Artikel in dieser Subcategory als Count
+        count: undefined,
+        countLabel: undefined,
+      }))
+    : [];
 
-type ArticleWithHref = ArticleEntry & { href: string };
-
-const articleEntries: ArticleWithHref[] = !errorMessage && area === 'blog'
-  ? (await getCollection('blog', ({ data }) => data.primaryCategory === slug))
-      .map((entry) => {
-        const segments = entry.slug.split('/').filter(Boolean);
-        const [sectionSegment, firstRest, ...additionalRest] = segments;
-        const entrySegment =
-          additionalRest.length > 0
-            ? additionalRest[additionalRest.length - 1]
-            : firstRest ?? entry.slug;
-        const categorySegment = additionalRest.length > 0 ? firstRest ?? slug : slug;
-        const href = `/${areaSegment}/${sectionSegment ?? parentSlug}/${categorySegment}/${entrySegment}/`;
-        const cover =
-          findCoverImage(
-            entry.data.heroImage,
-            entry.data.slug,
-            entry.slug,
-            entry.data.primaryCategory,
-            entrySegment,
-          ) ?? placeholderCover;
-
-        return {
-          slug: entry.slug,
-          title: entry.data.title,
-          description: entry.data.description ?? '',
-          publishDate: entry.data.publishDate,
-          cover,
-          href,
-        };
-      })
-      .sort((a, b) => {
-        const aTime = a.publishDate ? a.publishDate.getTime() : 0;
-        const bTime = b.publishDate ? b.publishDate.getTime() : 0;
-        return bTime - aTime;
-      })
-  : [];
-
-const hasEntries = !errorMessage && (area === 'album' ? albumEntries.length > 0 : articleEntries.length > 0);
+const hasEntries = !errorMessage && entries.length > 0;
 
 const pageTitle = subCategory?.title ?? parentPage?.title ?? 'Coming soon';
 const pageDescription = subCategory?.description ?? parentPage?.description ?? '';
@@ -173,11 +190,11 @@ const meta = {
   description: pageDescription,
 };
 ---
-<BaseTemplate title={pageTitle} meta={meta}>
-{backHref && backLabel ? (
-  <HeaderActions slot="header__actions" href={backHref} label={backLabel} />
-) : null}
 
+<BaseTemplate title={pageTitle} meta={meta}>
+  {backHref && backLabel ? (
+    <HeaderActions slot="header__actions" href={backHref} label={backLabel} />
+  ) : null}
 
   <section class="content-section">
     <Card class="card--plain is-centered">
@@ -206,40 +223,19 @@ const meta = {
     </section>
   ) : hasEntries ? (
     <section class="content-section cols-3">
-      {area === 'album' 
-        ? albumEntries.map(({ slug: albumSlug, title, description, count, formattedStartDate, coverUrl }) => {
-            const itemHref = `/${areaSegment}/${parentSlug}/${slug}/${albumSlug}/`;
-            return (
-              
-              <TEMPLATES.TileView
-                variant="album"
-                href={itemHref}
-                title={title}
-                description={description}
-                dataSlug={albumSlug}
-                coverUrl={coverUrl}
-                formattedStartDate={formattedStartDate}
-                count={count}
-              />
-
-            );
-          })
-        : articleEntries.map(({ slug: articleSlug, title, description, publishDate, cover, href }) => {
-            return (
-
-              <TEMPLATES.TileView
-                variant="article"
-                href={href}
-                title={title}
-                description={description}
-                dataSlug={articleSlug}
-                cover={cover}
-                publishDate={publishDate}
-              />
-
-            );
-          })}
-        </section>
+      {entries.map((entry) => (
+        <TEMPLATES.TileView
+          href={entry.href}
+          title={entry.title}
+          description={entry.description}
+          dataSlug={entry.dataSlug}
+          cover={entry.cover}
+          date={entry.date}
+          count={entry.count}
+          countLabel={entry.countLabel}
+        />
+      ))}
+    </section>
   ) : (
     <section class="content-section">
       <Card class="card--ghost is-centered">

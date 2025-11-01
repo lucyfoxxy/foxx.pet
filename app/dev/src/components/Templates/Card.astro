@@ -9,6 +9,7 @@ type SlotClass = HTMLAttributes<'div'>['class'];
 
 export interface CardProps<T extends TagName = 'div'> extends ElementAttributes<T> {
   as?: T;
+  class?: HTMLAttributes<HTMLTag>['class'];
   headClass?: SlotClass;
   bodyClass?: SlotClass;
   footClass?: SlotClass;

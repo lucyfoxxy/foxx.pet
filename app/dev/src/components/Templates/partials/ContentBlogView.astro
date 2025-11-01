@@ -36,9 +36,9 @@ const lastChapter = hasBlogChapters ? blogChapters[blogChapters.length - 1] : un
   <Card class="card--ghost card--flush" headClass="card__head--column">
     <Fragment slot="head">
       <div class="card__hero-banner">
-        <Picture
-          src={blog.cover}
-          formats={['avif', 'webp']}
+
+        <img
+          src={blog.cover.src}
           alt={blog.title}
           class="media-image media-image--hero"
         />

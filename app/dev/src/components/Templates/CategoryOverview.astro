@@ -5,7 +5,6 @@ import Card from '@Templates/Card.astro';
 import TitleWithIcon from '@Templates/partials/TitleWithIcon.astro';
 import HeaderActions from '@Templates/partials/HeaderActions.astro';
 import { PLACEHOLDER_COVER, findCoverImage } from '@Assets/covers';
-import { Picture } from 'astro:assets';
 import {
   getPageContent,
   getNavLabelParts,
@@ -14,6 +13,7 @@ import {
   type PageContent,
 } from '@Content/siteContent';
 
+import { getCollection } from 'astro:content';
 interface Props {
   slug: string;
 }
@@ -23,7 +23,24 @@ const { slug } = Astro.props as Props;
 let content = undefined as Awaited<ReturnType<typeof getPageContent>> | undefined;
 let categories: ReturnType<typeof getCategories> = [];
 let loadError: string | undefined;
-
+const categoryCounts = new Map<string, number>();
+const pathSegments = Astro.url.pathname.replace(/\/+$/, '').split('/').filter(Boolean);
+const areaSegment = pathSegments[0] ?? ''; // 'album' | 'blog' | ...
+if (!loadError && areaSegment === 'album') {
+  const allAlbums = await getCollection('album');
+  for (const entry of allAlbums) {
+    const catSlug = entry.data.category?.slug;
+    if (!catSlug) continue;
+    categoryCounts.set(catSlug, (categoryCounts.get(catSlug) ?? 0) + 1);
+  }
+} else if (!loadError && areaSegment === 'blog') {
+  const allPosts = await getCollection('blog');
+  for (const entry of allPosts) {
+    const catSlug = entry.data.primaryCategory;
+    if (!catSlug) continue;
+    categoryCounts.set(catSlug, (categoryCounts.get(catSlug) ?? 0) + 1);
+  }
+}
 try {
   content = await getPageContent(slug);
   categories = getCategories(content);
@@ -62,10 +79,19 @@ const resolveHref = (page: PageContent | undefined, categorySlug: string, href?:
 const normalizedCategories = !loadError && content
   ? categories.map((category) => {
       const cover = findCoverImage(category.slug, category.title) ?? placeholderCover;
+      const count = categoryCounts.get(category.slug) ?? 0;
+      const countLabel =
+        areaSegment === 'album'
+          ? 'Albums'
+          : areaSegment === 'blog'
+          ? 'Articles'
+          : undefined;
       return {
         ...category,
         cover,
         href: resolveHref(content, category.slug, category.href),
+        count,
+        countLabel,
       };
     })
   : [];
@@ -101,34 +127,18 @@ const hasCategories = normalizedCategories.length > 0;
     </section>
   ) : hasCategories ? (
     <section class="content-section cols-3">
-      {normalizedCategories.map(({ slug: categorySlug, title, description, href, cover }) => (
-
-        <a href={href} aria-label={`Open ${title}`}>
-          <Card class="is-animated is-centered" headClass="card__head--column">
-            <Fragment slot="head">
-              <h2 class="card__title">{title}</h2>
-            </Fragment>
-
-            {description ? (
-              <Fragment slot="body">
-                <p>{description}</p>
-              </Fragment>
-            ) : null}
-
-            <Fragment slot="foot">
-              <div class="media-frame" data-slug={categorySlug}>
-                <Picture
-                  src={cover}
-                  formats={['avif', 'webp']}
-                  alt={title}
-                  class="media-image"
-                  fetchpriority="high"
-                  decoding="async"
-                />
-              </div>
-            </Fragment>
-          </Card>
-        </a>
+      {normalizedCategories.map(({ slug: categorySlug, title, description, href, cover, count, countLabel}) => (
+        <TEMPLATES.TileView
+          href={href}
+          title={title}
+          description={description}
+          dataSlug={categorySlug}
+          cover={cover.src}
+          coverAlt={title}
+          
+          count={count}
+          countLabel={countLabel}
+        />
       ))}
     </section>
   ) : (
