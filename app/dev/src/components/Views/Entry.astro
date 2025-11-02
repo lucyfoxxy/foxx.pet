@@ -171,7 +171,7 @@ if (!errorMessage && area === 'album') {
     } else {
       const rendered = await entry.render();
       const cover =
-        findCoverImage(entry.data.heroImage, entry.data.slug, slug, entry.data.primaryCategory) ?? placeholderCover;
+        findCoverImage(entry.data.heroImage, entry.data.slug, slug, entry.data.category) ?? placeholderCover;
       const backHref = `/${areaSegment}/${categorySlug}/`;
       const backLabel = parentPage ? `← ${parentPage.title}` : '← Back';
       const introParagraphs = subCategory?.description

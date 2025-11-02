@@ -1,19 +1,27 @@
 ---
 section: noms
-primaryCategory: baking
+category: baking
 title: "Cosmic Cinnamon Rolls"
+slug: noms/baking/cosmic-cinamon-rolls
 description: "Fluffy spirals drizzled with a nebula glaze, perfect for zero-g breakfast trays."
-publishDate: 2024-03-02
-categories:
-  - baking
-  - breakfast
+date: 2024-03-02
 tags:
   - sweet
   - comfort
-prepTime: "25 minutes"
-cookTime: "15 minutes"
-servings: "Serves 6 kitsune-sized appetites"
+chapters:
+  - slug: overview
+    title: "Prerequisites"
+  - slug: preparation
+    title: "Preparations"
 ---
+
+## Prerequisites
+
+prepTime: "15 minutes"
+cookTime: "45 minutes"
+servings: "Feeds 4 hungry adventurers"
+
+## Preparations
 
 1. Warm the oat milk until steamy (not boiling) and whisk with stardust sugar.
 2. Fold in flour with a wooden spoon while humming a launch countdown; the dough listens better that way.

@@ -1,19 +1,15 @@
 ---
 section: tails
-primaryCategory: lucys-journeys
+category: lucys-journeys
 slug: tails/lucys-journeys/starlit-liftoff
 title: "Starlit Lift-Off"
 description: "Lucy Foxx recounts the night the homemade rocket finally leapt beyond the clouds."
-publishDate: 2024-04-19
+date: 2024-04-19
 updatedDate: 2024-04-25
-categories:
-  - travelogue
-  - season-one
 tags:
   - launch
   - diary
   - illustration
-featured: true
 chapters:
   - slug: launchpad-mornings
     title: "Launchpad Mornings"

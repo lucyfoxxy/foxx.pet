@@ -1,13 +1,12 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import sharp from 'sharp';
 import { Agent } from 'undici';
 import 'dotenv/config';
 // ──────────────────────────────────────────────────────────────────────────────
 // Configuration ----------------------------------------------------------------
 
-const { target: TARGET, quiet: QUIET, mode: REQUESTED_MODE } = parseCliArgs(
+const { target: TARGET, quiet: QUIET } = parseCliArgs(
   process.argv.slice(2)
 );
 const __filename = fileURLToPath(import.meta.url);
@@ -18,7 +17,7 @@ const PATHS = createPathConfig(REPO_ROOT, TARGET);
 const BASE = process.env.IMMICH_BASE_URL || process.env.IMMICH_URL;
 const KEY = process.env.IMMICH_API_KEY;
 const OWNER_ID = 'd3e4dd84-d590-4c98-b2d1-07ed6811a693';
-const KEYWORDS = ['suitwalk', 'furmeet', 'convention', 'sfw','nsfw'];
+const KEYWORDS = ['suitwalk', 'furmeet', 'convention', 'sfw', 'nsfw'];
 const DISPLAY_KEYWORDS = KEYWORDS.map((kw) =>
   kw.replace(/^./, (c) => c.toUpperCase())
 );
@@ -73,8 +72,6 @@ if (!BASE || !KEY) {
   process.exit(1);
 }
 
-const PREFERRED_MODE =
-  (process.env.IMMICH_FETCH_MODE || '').trim().toLowerCase() || REQUESTED_MODE;
 const FETCH_AGENT = new Agent({ connect: { family: 4 } });
 const CLR = '\x1b[2K';
 const UP1 = '\x1b[1A';
@@ -129,9 +126,7 @@ async function main() {
   await fs.mkdir(PATHS.srcRoot, { recursive: true });
   if (!QUIET) {
     console.log(`→ fetch-immich target: ${TARGET}`);
-    console.log(`   assets:   ${PATHS.assetsPath}`);
-    const albumTargets = PATHS.albumDataRoots?.join(', ') ?? '';
-    console.log(`   entries: ${albumTargets}`);
+    console.log(`   entries: ${PATHS.albumDataRoot}`);
   }
 
   const { map: sharedLinkMap, links: sharedLinks } = await listRelevantSharedLinks();
@@ -191,23 +186,16 @@ async function main() {
   }
 
   const counters = { processedAll: 0, grandTotal };
-  const assetStrategy = createAssetStrategy({
-    baseUrl: BASE,
-    preferredMode: PREFERRED_MODE,
-    quiet: QUIET
-  });
-
   for (const entry of albumEntries) {
-    
-    
+
+
     await processAlbum({
       album: entry.album,
       assets: entry.assets,
       shareKey: entry.shareKey,
       counters,
       paths: PATHS,
-      baseUrl: BASE,
-      assetStrategy
+      baseUrl: BASE
     });
     if (QUIET) await new Promise((resolve) => setTimeout(resolve, 1500));
   }
@@ -220,7 +208,6 @@ async function main() {
       counters,
       paths: PATHS,
       baseUrl: BASE,
-      assetStrategy,
       metaOverride: bestOfEntry.metaOverride
     });
   }
@@ -247,7 +234,6 @@ async function processAlbum({
   counters,
   paths,
   baseUrl,
-  assetStrategy,
   metaOverride = null
 }) {
   const meta = metaOverride ?? deriveAlbumMeta(album);
@@ -259,30 +245,14 @@ async function processAlbum({
   const albumAssets = assets ?? (await listAssets(album.id));
   const totalAlbum = albumAssets.length;
 
-  const assetDir = path.join(paths.assetsPath, ...meta.assetDirSegments);
-  const assetPrefix = joinPosix('albums', ...meta.assetDirSegments);
-
-  // NEU: nur EIN Zielpfad
   const albumRoot = path.join(paths.srcRoot, 'content', 'album');
-const section = meta.section ?? 'albums';
-const category = meta.category ?? 'misc';
-const dataDir = path.join(albumRoot, section, category);
-const dataFile = path.join(dataDir, `${meta.dataFileName ?? meta.slug}.json`);
+  const dataSegments = Array.isArray(meta.dataDirSegments)
+    ? meta.dataDirSegments.filter(Boolean)
+    : [meta.section ?? 'albums', meta.category ?? 'misc'];
+  const dataDir = path.join(albumRoot, ...dataSegments);
+  const dataFile = path.join(dataDir, `${meta.dataFileName ?? meta.slug}.json`);
 
-
-  let mode = await assetStrategy.resolve(albumAssets[0]?.id ?? null, shareKey);
-  if (!mode) mode = 'download';
-
-  if (mode === 'remote') {
-    await removeDirectory(assetDir);
-  } else {
-    await fs.mkdir(assetDir, { recursive: true });
-    const removed = await pruneRemovedFiles(
-      assetDir,
-      albumAssets.map((asset) => asset.id)
-    );
-    if (removed && !QUIET) console.log(`• ${meta.slug}: removed ${removed} stale file(s)`);
-  }
+  const mode = 'remote';
 
   barsUpdate({
     slug: meta.slug,
@@ -297,23 +267,7 @@ const dataFile = path.join(dataDir, `${meta.dataFileName ?? meta.slug}.json`);
   for (let i = 0; i < totalAlbum; i++) {
     const asset = albumAssets[i];
     try {
-      if (mode === 'remote') {
-        items.push(createRemoteAssetItem({ asset, baseUrl, shareKey }));
-      } else {
-        const { thumbName, fullName } = await ensureAssetVariants({
-          asset,
-          outDir: assetDir,
-          baseUrl
-        });
-        items.push({
-          id: asset.id,
-          thumb: joinPosix(assetPrefix, thumbName),
-          full: joinPosix(assetPrefix, fullName),
-          filename: asset.originalFileName,
-          width: asset.exifInfo?.exifImageWidth ?? null,
-          height: asset.exifInfo?.exifImageHeight ?? null
-        });
-      }
+      items.push(createRemoteAssetItem({ asset, baseUrl, shareKey }));
     } catch (error) {
       console.warn(`[asset fail] ${meta.slug}/${asset.id}:`, error.message);
     }
@@ -328,9 +282,8 @@ const dataFile = path.join(dataDir, `${meta.dataFileName ?? meta.slug}.json`);
     });
   }
 
-  // NUR EIN WRITE, kein Array mehr
   await fs.mkdir(dataDir, { recursive: true });
-  
+
   await writeAlbumIndex({
     filePath: dataFile,
     meta,
@@ -343,7 +296,6 @@ const dataFile = path.join(dataDir, `${meta.dataFileName ?? meta.slug}.json`);
 
 
 async function writeAlbumIndex({ filePath, meta, mode, items, shareKey, album }) {
-  // Verzeichnis aus dem Zielpfad ableiten
   const dir = path.dirname(filePath);
 
   const cover =
@@ -369,36 +321,12 @@ async function writeAlbumIndex({ filePath, meta, mode, items, shareKey, album })
     shareKey,
     items,
   };
-
-
-  // jetzt gibt es dir wirklich
   await fs.mkdir(dir, { recursive: true });
   await fs.writeFile(filePath, JSON.stringify(index, null, 2), 'utf-8');
 }
 
 
 
-
-async function cleanupLegacyAlbumData({ meta, targets }) {
-  if (!meta || !Array.isArray(targets) || targets.length === 0) return;
-
-  const keep = new Set();
-  for (const target of targets) {
-    if (!target || !target.file) continue;
-    keep.add(path.normalize(target.file));
-  }
-
-  for (const target of targets) {
-    if (!target || !target.root) continue;
-    const candidates = createLegacyAlbumDataCandidates(target.root, meta);
-    for (const candidate of candidates) {
-      if (!candidate) continue;
-      const normalized = path.normalize(candidate);
-      if (keep.has(normalized)) continue;
-      await removeFileIfExists(normalized);
-    }
-  }
-}
 
 async function listRelevantAlbums() {
   const response = await fetch(`${BASE}/api/albums`, {
@@ -480,39 +408,6 @@ function resolveBestOfShareLink({ linkId, sharedLinks }) {
   return { albumId, key, linkId: linkUuid };
 }
 
-function createAssetStrategy({ baseUrl, preferredMode, quiet }) {
-  const normalized = normalizeMode(preferredMode);
-  let resolved = normalized ?? null;
-  let tested = Boolean(normalized);
-  let noticeShown = Boolean(normalized);
-
-  return {
-    async resolve(sampleAssetId, shareKey) {
-      if (resolved) return resolved;
-      if (!tested && sampleAssetId) {
-        tested = true;
-        const accessible = await checkRemoteAccess(baseUrl, sampleAssetId, shareKey);
-        resolved = accessible ? 'remote' : 'download';
-        if (!noticeShown && !quiet) {
-          const message = accessible
-            ? 'ℹ️ Remote Immich assets are publicly accessible. Using live URLs.'
-            : 'ℹ️ Remote Immich assets require authentication. Falling back to downloading 1920x1080 variants.';
-          console.log(message);
-        }
-        noticeShown = true;
-        return resolved;
-      }
-      if (!tested && !sampleAssetId) {
-        return resolved ?? 'download';
-      }
-      return resolved ?? normalized ?? 'download';
-    },
-    getMode() {
-      return resolved ?? normalized ?? null;
-    }
-  };
-}
-
 function createRemoteAssetItem({ asset, baseUrl, shareKey }) {
   if (!shareKey) {
     throw new Error('Missing share key for remote asset item');
@@ -557,112 +452,15 @@ async function listAssets(albumId) {
   return all;
 }
 
-async function downloadBuffer(url) {
-  const response = await fetch(url, {
-    headers: { 'x-api-key': KEY },
-    dispatcher: FETCH_AGENT
-  });
-  if (!response.ok) throw new Error(`GET ${url} -> ${response.status}`);
-  return Buffer.from(await response.arrayBuffer());
-}
-
-// ──────────────────────────────────────────────────────────────────────────────
-// File helpers -----------------------------------------------------------------
-
-async function ensureAssetVariants({ asset, outDir, baseUrl }) {
-  const baseId = asset.id;
-  const thumbName = `thumb-${baseId}.webp`;
-  const fullName = `full-${baseId}.webp`;
-  const thumbPath = path.join(outDir, thumbName);
-  const fullPath = path.join(outDir, fullName);
-
-  const needThumb = !(await exists(thumbPath));
-  const needFull = !(await exists(fullPath));
-
-  if (needThumb || needFull) {
-    const buffer = await downloadBuffer(
-      `${baseUrl}/api/assets/${asset.id}/original`
-    );
-    await renderVariants({
-      buffer,
-      thumbPath,
-      fullPath,
-      needThumb,
-      needFull
-    });
-  }
-
-  return { thumbName, fullName };
-}
-
-async function renderVariants({ buffer, thumbPath, fullPath, needThumb, needFull }) {
-  if (needThumb) {
-    await sharp(buffer)
-      .rotate()
-      .resize({
-        width: 196,
-        height: 196,
-        fit: 'contain',
-        background: { r: 0, g: 0, b: 0, alpha: 0 }
-      })
-      .webp({ lossless: true })
-      .toFile(thumbPath);
-  }
-
-  if (needFull) {
-    await sharp(buffer)
-      .rotate()
-      .resize({
-        width: 1920,
-        height: 1080,
-        fit: 'inside',
-        withoutEnlargement: true
-      })
-      .webp({ quality: 90 })
-      .toFile(fullPath);
-  }
-}
-
-async function pruneRemovedFiles(outDir, validIds) {
-  const keep = new Set(validIds.map((id) => String(id)));
-  let removed = 0;
-  try {
-    const files = await fs.readdir(outDir);
-    for (const file of files) {
-      const match = file.match(/^(?:thumb|full)-(.+?)\.webp$/);
-      if (!match) continue;
-      const id = match[1];
-      if (!keep.has(id)) {
-        await fs.unlink(path.join(outDir, file));
-        removed += 1;
-      }
-    }
-  } catch {
-    // Directory may not exist yet.
-  }
-  return removed;
-}
-
-async function exists(filePath) {
-  try {
-    await fs.stat(filePath);
-    return true;
-  } catch {
-    return false;
-  }
-}
-
 // ──────────────────────────────────────────────────────────────────────────────
 // CLI / utility helpers --------------------------------------------------------
 
 function parseCliArgs(argv) {
-  const args = { target: 'dev', quiet: false, mode: null };
+  const args = { target: 'dev', quiet: false };
   for (const entry of argv) {
     if (entry === '--quiet') args.quiet = true;
     else if (entry.startsWith('--target=')) {
       args.target = entry.split('=')[1]?.toLowerCase() ?? args.target;
-    } else if (entry.startsWith('--mode=')) {
-      args.mode = entry.split('=')[1]?.toLowerCase() ?? null;
     }
   }
 
@@ -682,78 +480,9 @@ function createPathConfig(repoRoot, target) {
     repoRoot,
     appRoot,
     srcRoot,
-    assetsPath: path.join(srcRoot, 'assets', 'albums'),
-    // nur noch ein Zielordner
     albumDataRoot: path.join(contentRoot, 'album'),
     envFile: path.join(appRoot, '.env'),
   };
-}
-
-
-
-function normalizeMode(value) {
-  if (!value) return null;
-  const normalized = value.toLowerCase();
-  if (normalized === 'remote' || normalized === 'download') return normalized;
-  return null;
-}
-
-async function checkRemoteAccess(baseUrl, assetId, shareKey) {
-  if (!assetId || !shareKey) return false;
-  const url = `${baseUrl}/api/assets/${assetId}/thumbnail?key=${encodeURIComponent(
-    shareKey
-  )}`;
-  try {
-    const response = await fetch(url, { method: 'HEAD', dispatcher: FETCH_AGENT });
-    return response.ok;
-  } catch {
-    return false;
-  }
-}
-
-function joinPosix(...segments) {
-  return segments
-    .filter((segment) => typeof segment === 'string' && segment.length > 0)
-    .join('/')
-    .replace(/\/+/g, '/');
-}
-
-async function removeDirectory(dirPath) {
-  try {
-    await fs.rm(dirPath, { recursive: true, force: true });
-  } catch {
-    // ignore
-  }
-}
-
-async function removeFileIfExists(filePath) {
-  try {
-    await fs.unlink(filePath);
-  } catch (error) {
-    if (error && typeof error === 'object' && 'code' in error && error.code === 'ENOENT') {
-      return;
-    }
-    throw error;
-  }
-}
-
-function createLegacyAlbumDataCandidates(root, meta) {
-  const candidates = new Set();
-  if (!root || !meta) return candidates;
-
-  const segments = Array.isArray(meta.dataDirSegments) ? meta.dataDirSegments.filter(Boolean) : [];
-  const fileName = `${meta.dataFileName}.json`;
-
-  if (segments.length > 0) {
-    const withoutLast = segments.slice(0, -1);
-    if (withoutLast.length > 0) {
-      candidates.add(path.join(root, ...withoutLast, fileName));
-    }
-  }
-
-  candidates.add(path.join(root, fileName));
-
-  return Array.from(candidates);
 }
 
 function deriveAlbumMeta(album) {
@@ -761,12 +490,25 @@ function deriveAlbumMeta(album) {
   const name = album.albumName.trim();
   const lower = name.toLowerCase();
 
-  // 1️⃣ Sonderfall: Frames – kein echtes Keyword-Mapping
+  if (lower.includes("frame")) {
+    const category = lower.includes("nsfw") ? "nsfw" : "sfw";
+    const section = "frames";
+    const slug = `frames-${category}`;
+    const title = category.toUpperCase();
 
+    return {
+      slug,
+      albumId: album.id,
+      albumName: name,
+      title,
+      section,
+      category,
+      dataDirSegments: ["albums", section, category],
+      dataFileName: category,
+    };
+  }
 
-
-  // 2️⃣ Standard-Flow (paws, tails, noms …)
-  const keyword = KEYWORDS.find((kw) => lower.includes(kw));
+  const keyword = findKeywordMatch(lower);
   if (!keyword) return null;
   const config = CATEGORY_CONFIG.get(keyword);
   if (!config) return null;
@@ -788,33 +530,7 @@ function deriveAlbumMeta(album) {
     slugify(slugParts.join(" ")) ||
     slugify(`${config.category}-${album.id}`) ||
     album.id;
-  
-if (lower.startsWith("frames") || lower.includes("frame")) {
-  const category = lower.includes("nsfw")
-    ? "nsfw"
-    : lower.includes("sfw")
-    ? "sfw"
-    : "misc";
 
-  // Slug klarer machen (z. B. "frames-sfw")
-  const slug =
-    slugify(name.replace(/^frames\s*/i, "").trim()) ||
-    `${category}-${album.id.slice(0, 8)}`;
-
-  const section = "frames"; // hier wirklich definieren
-  
-  return {
-    slug,
-    albumId: album.id,
-    albumName: name,
-    title: name,
-    section,
-    category,
-    dataDirSegments: [section, category],
-    dataFileName: slug,
-    assetDirSegments: [section, category, slug],
-  };
-}
   return {
     slug,
     albumId: album.id,
@@ -825,7 +541,6 @@ if (lower.startsWith("frames") || lower.includes("frame")) {
     category: config.category,
     dataDirSegments: [section, config.category],
     dataFileName: slug,
-    assetDirSegments: [section, config.category, slug],
   };
 }
 
@@ -840,11 +555,10 @@ function createBestOfMeta(album) {
     albumName: album?.albumName ?? 'Best Of',
     title,
     rawTitle: title,
-    section: 'paws',      // oder 'paws', je nach Wunsch
+    section: 'paws',
     category: 'bestof',
-    dataDirSegments: ['paws', 'bestof'],
+    dataDirSegments: ['albums', 'paws', 'bestof'],
     dataFileName: 'bestof',
-    assetDirSegments: ['paws', 'bestof'],
   };
 }
 
@@ -875,16 +589,6 @@ function createDisplayTitle(value) {
   return result;
 }
 
-function sanitizeSegment(value) {
-  if (!value || typeof value !== 'string') return '';
-  return value
-    .normalize('NFKC')
-    .replace(/[\/:*?"<>|]/g, ' ')
-    .replace(/\s+/g, ' ')
-    .replace(/\.+$/, '')
-    .trim();
-}
-
 function slugify(value) {
   if (!value) return '';
   return value
@@ -902,4 +606,15 @@ function toIsoString(value) {
   const date = new Date(value);
   if (Number.isNaN(date.getTime())) return null;
   return date.toISOString();
+}
+
+function findKeywordMatch(lowerName) {
+  let bestMatch = null;
+  for (const keyword of KEYWORDS) {
+    if (!lowerName.includes(keyword)) continue;
+    if (!bestMatch || keyword.length > bestMatch.length) {
+      bestMatch = keyword;
+    }
+  }
+  return bestMatch;
 }

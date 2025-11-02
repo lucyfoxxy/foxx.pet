@@ -36,7 +36,7 @@ if (!loadError && areaSegment === 'album') {
 } else if (!loadError && areaSegment === 'blog') {
   const allPosts = await getCollection('blog');
   for (const entry of allPosts) {
-    const catSlug = entry.data.primaryCategory;
+    const catSlug = entry.data.category;
     if (!catSlug) continue;
     categoryCounts.set(catSlug, (categoryCounts.get(catSlug) ?? 0) + 1);
   }

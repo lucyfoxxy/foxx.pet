@@ -116,7 +116,7 @@ const albumEntriesRaw =
 
 const articleEntriesRaw =
   !errorMessage && area === 'blog'
-    ? (await getCollection('blog', ({ data }) => data.primaryCategory === slug))
+    ? (await getCollection('blog', ({ data }) => data.category === slug))
         .map((entry) => {
           const segments = entry.slug.split('/').filter(Boolean);
           const [sectionSegment, firstRest, ...additionalRest] = segments;
@@ -131,7 +131,7 @@ const articleEntriesRaw =
               entry.data.heroImage,
               entry.data.slug,
               entry.slug,
-              entry.data.primaryCategory,
+              entry.data.category,
               entrySegment,
             ) ?? placeholderCover;
 
@@ -139,14 +139,14 @@ const articleEntriesRaw =
             slug: entry.slug,
             title: entry.data.title,
             description: entry.data.description ?? '',
-            publishDate: entry.data.publishDate,
+            date: entry.data.date,
             cover,
             href,
           };
         })
         .sort((a, b) => {
-          const aTime = a.publishDate ? a.publishDate.getTime() : 0;
-          const bTime = b.publishDate ? b.publishDate.getTime() : 0;
+          const aTime = a.date ? a.date.getTime() : 0;
+          const bTime = b.date ? b.date.getTime() : 0;
           return bTime - aTime;
         })
     : [];
@@ -167,13 +167,13 @@ const entries =
         countLabel: 'Photos',
       }))
     : area === 'blog'
-    ? articleEntriesRaw.map(({ slug: articleSlug, title, description, publishDate, cover, href }) => ({
+    ? articleEntriesRaw.map(({ slug: articleSlug, title, description, date, cover, href }) => ({
         href,
         title,
         description,
         dataSlug: articleSlug,
         cover: cover.src,
-        date: publishDate,
+        date: date,
         // hier: Anzahl der Artikel in dieser Subcategory als Count
         count: undefined,
         countLabel: undefined,
