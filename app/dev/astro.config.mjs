@@ -26,12 +26,14 @@ export default defineConfig({
     resolve: {
       alias: {
         '@': fileURLToPath(new URL('./src', import.meta.url)),
-        '@Pages': fileURLToPath(new URL('./src/components/Pages', import.meta.url)),
+        '@StaticPages': fileURLToPath(new URL('./src/components/StaticPages', import.meta.url)),
         '@Styles': fileURLToPath(new URL('./src/styles', import.meta.url)),
         '@Content': fileURLToPath(new URL('./src/content', import.meta.url)),
         '@Assets': fileURLToPath(new URL('./src/assets', import.meta.url)),
         '@Scripts': fileURLToPath(new URL('./src/scripts', import.meta.url)),
         '@Templates': fileURLToPath(new URL('./src/components/Templates', import.meta.url)),
+        '@Views': fileURLToPath(new URL('./src/components/Views', import.meta.url)),
+        '@utils': fileURLToPath(new URL('./src/components/utils', import.meta.url)),
       }
     }
   },
