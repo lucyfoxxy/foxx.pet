@@ -1,6 +1,5 @@
 ---
-import Card from '@Templates/Card.astro';
-import { Picture } from 'astro:assets';
+import { Template } from '@Frontend';
 
 interface BlogChapterView {
   id: string;
@@ -28,12 +27,11 @@ const hasBlogChapters = blogChapters.length > 0;
 const blogSummaryParagraphs = blog.introParagraphs ?? [];
 const blogDescription = blog.description ?? '';
 const hasBlogSummary = blogDescription.length > 0 || blogSummaryParagraphs.length > 0;
-const firstChapter = hasBlogChapters ? blogChapters[0] : undefined;
-const lastChapter = hasBlogChapters ? blogChapters[blogChapters.length - 1] : undefined;
+
 ---
 
 <section class="content-section" id="article-top">
-  <Card class="card--ghost card--flush" headClass="card__head--column">
+  <Template.Card class="card--ghost card--flush" headClass="card__head--column">
     <Fragment slot="head">
       <div class="card__hero-banner">
 
@@ -54,7 +52,7 @@ const lastChapter = hasBlogChapters ? blogChapters[blogChapters.length - 1] : un
 {hasBlogChapters || hasBlogSummary ? (
   <section class:list={['content-section', hasBlogChapters && hasBlogSummary ? 'cols-2' : undefined]}>
     {hasBlogChapters ? (
-      <Card class="card--ghost">
+      <Template.Card class="card--ghost">
         <Fragment slot="head">
           <h2 class="card__title">Table of Contents</h2>
           <div class="card__badges controls controls--tight">
@@ -83,7 +81,7 @@ const lastChapter = hasBlogChapters ? blogChapters[blogChapters.length - 1] : un
       </Card>
     ) : null}
 
-    <Card headClass={hasBlogChapters ? '' : undefined}>
+    <Template.Card headClass={hasBlogChapters ? '' : undefined}>
       {hasBlogChapters ? (
         <Fragment slot="head">
     <h2 class="card__title" data-chapter-title>

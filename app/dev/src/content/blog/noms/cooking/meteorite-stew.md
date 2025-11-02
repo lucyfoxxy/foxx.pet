@@ -2,7 +2,7 @@
 section: noms
 category: cooking
 title: "Meteorite Stew"
-slug: noms/cooking/meteorite-stew
+slug: "noms-cooking-meteorite-stew"
 description: "A hearty vegetable stew slow-simmered with roasted root clusters from the outer belt."
 date: 2024-06-11
 tags:

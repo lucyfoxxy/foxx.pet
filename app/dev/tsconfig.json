@@ -15,7 +15,8 @@
       "@Scripts/*": ["src/scripts/*"],
       "@Templates/*": ["src/components/Templates/*"],
       "@utils/*": ["src/components/utils/*"],
-      "@Views/*": ["src/components/Views/*"]
+      "@Views/*": ["src/components/Views/*"],
+      "@Frontend": ["src/components/frontend.ts"]
     },
     "types": ["astro/client"],
     "jsx": "react-jsx",

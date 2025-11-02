@@ -1,7 +1,7 @@
 ---
 section: tails
 category: lucys-journeys
-slug: tails/lucys-journeys/starlit-liftoff
+slug: "tails-lucys-journeys-starlit-liftoff"
 title: "Starlit Lift-Off"
 description: "Lucy Foxx recounts the night the homemade rocket finally leapt beyond the clouds."
 date: 2024-04-19

@@ -1,9 +1,5 @@
 ---
-import BaseTemplate from '@Templates/BaseTemplate.astro';
-import { TEMPLATES } from '@Templates/templates';
-import Card from '@Templates/Card.astro';
-import TitleWithIcon from '@Templates/partials/TitleWithIcon.astro';
-import HeaderActions from '@Templates/partials/HeaderActions.astro';
+import { Template } from '@Frontend';
 import { PLACEHOLDER_COVER, findCoverImage } from '@Assets/covers';
 import {
   getPageContent,
@@ -98,12 +94,12 @@ const normalizedCategories = !loadError && content
 
 const hasCategories = normalizedCategories.length > 0;
 ---
-<BaseTemplate title={pageTitle} meta={meta}>
-  <HeaderActions slot="header__actions" href="/" label="← Home" />
+<Template.Base title={pageTitle} meta={meta}>
+  <Template.HeaderActions slot="header__actions" href="/" label="← Home" />
   <section class="content-section">
-    <Card class="card--plain is-centered">
+    <Template.Card class="card--plain is-centered">
       <Fragment slot="head">
-        <TitleWithIcon class="card__title" title={pageTitle} icon={icon} emoji={emoji} />
+        <Template.TitleWithIcon class="card__title" title={pageTitle} icon={icon} emoji={emoji} />
       </Fragment>
       {introParagraphs.length > 0 && (
         <Fragment slot="body">
@@ -119,7 +115,7 @@ const hasCategories = normalizedCategories.length > 0;
 
   {loadError ? (
     <section class="content-section">
-      <Card class="card--ghost is-centered">
+      <Template.Card class="card--ghost is-centered">
         <Fragment slot="body">
           <p>{loadError}</p>
         </Fragment>
@@ -128,7 +124,7 @@ const hasCategories = normalizedCategories.length > 0;
   ) : hasCategories ? (
     <section class="content-section cols-3">
       {normalizedCategories.map(({ slug: categorySlug, title, description, href, cover, count, countLabel}) => (
-        <TEMPLATES.TileView
+        <Template.TileView
           href={href}
           title={title}
           description={description}
@@ -143,7 +139,7 @@ const hasCategories = normalizedCategories.length > 0;
     </section>
   ) : (
     <section class="content-section">
-      <Card class="card--ghost is-centered">
+      <Template.Card class="card--ghost is-centered">
         <Fragment slot="body">
           <p>No categories to explore just yet — please check back soon!</p>
         </Fragment>

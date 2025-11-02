@@ -34,6 +34,7 @@ export default defineConfig({
         '@Templates': fileURLToPath(new URL('./src/components/Templates', import.meta.url)),
         '@Views': fileURLToPath(new URL('./src/components/Views', import.meta.url)),
         '@utils': fileURLToPath(new URL('./src/components/utils', import.meta.url)),
+        '@Frontend': fileURLToPath(new URL('./src/components/frontend.ts', import.meta.url)),
       }
     }
   },

@@ -1,9 +1,5 @@
 ---
-import BaseTemplate from '@Templates/BaseTemplate.astro';
-import Card from '@Templates/Card.astro';
-import HeaderActions from '@Templates/partials/HeaderActions.astro';
-import ContentAlbumView from '@Templates/partials/ContentAlbumView.astro';
-import ContentBlogView from '@Templates/partials/ContentBlogView.astro';
+import { Template, View } from '@Frontend';
 import { Picture } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 import { PLACEHOLDER_COVER, findCoverImage } from '@Assets/covers';
@@ -255,35 +251,30 @@ const meta = {
   ...(metaImage ? { image: metaImage } : {}),
 };
 
-const blogChapters = blogView?.chapters ?? [];
-const hasBlogChapters = blogChapters.length > 0;
-const blogSummaryParagraphs = blogView?.introParagraphs ?? [];
-const blogDescription = blogView?.description ?? '';
-const hasBlogSummary = blogDescription.length > 0 || blogSummaryParagraphs.length > 0;
-const firstChapter = hasBlogChapters ? blogChapters[0] : undefined;
-const lastChapter = hasBlogChapters ? blogChapters[blogChapters.length - 1] : undefined;
+
+
 ---
-<BaseTemplate title={pageTitle} meta={meta}>
+<Template.Base title={pageTitle} meta={meta}>
   {headerBackHref && headerBackLabel ? (
-    <HeaderActions slot="header__actions" href={headerBackHref} label={headerBackLabel} />
+    <Template.HeaderActions slot="header__actions" href={headerBackHref} label={headerBackLabel} />
   ) : null}
 
 
   {errorMessage ? (
     <section class="content-section">
-      <Card class="card--ghost is-centered">
+      <Template.Card class="card--ghost is-centered">
         <Fragment slot="body">
           <p>{errorMessage}</p>
         </Fragment>
       </Card>
     </section>
   ) : albumView ? (
-    <ContentAlbumView album={albumView} />
+    <View.EntryAlbum album={albumView} />
   ) : blogView ? (
-    <ContentBlogView blog={blogView} BlogContent={BlogContent} />
+    <View.EntryBlog blog={blogView} BlogContent={BlogContent} />
   ) : (
     <section class="content-section">
-      <Card class="card--ghost is-centered">
+      <Template.Card class="card--ghost is-centered">
         <Fragment slot="body">
           <p>There is nothing to display right now — please check back soon!</p>
         </Fragment>

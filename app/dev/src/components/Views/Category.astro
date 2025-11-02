@@ -1,9 +1,5 @@
 ---
-import BaseTemplate from '@Templates/BaseTemplate.astro';
-import Card from '@Templates/Card.astro';
-import TitleWithIcon from '@Templates/partials/TitleWithIcon.astro';
-import HeaderActions from '@Templates/partials/HeaderActions.astro';
-import { TEMPLATES } from '@Templates/templates';
+import { Template } from '@Frontend';
 import { PLACEHOLDER_COVER, findCoverImage } from '@Assets/covers';
 import {
   findCategory,
@@ -191,15 +187,15 @@ const meta = {
 };
 ---
 
-<BaseTemplate title={pageTitle} meta={meta}>
+<Template.Base title={pageTitle} meta={meta}>
   {backHref && backLabel ? (
-    <HeaderActions slot="header__actions" href={backHref} label={backLabel} />
+    <Template.HeaderActions slot="header__actions" href={backHref} label={backLabel} />
   ) : null}
 
   <section class="content-section">
-    <Card class="card--plain is-centered">
+    <Template.Card class="card--plain is-centered">
       <Fragment slot="head">
-        <TitleWithIcon class="card__title" title={pageTitle} icon={icon} emoji={emoji} />
+        <Template.TitleWithIcon class="card__title" title={pageTitle} icon={icon} emoji={emoji} />
       </Fragment>
       {introParagraphs.length > 0 && (
         <Fragment slot="body">
@@ -215,7 +211,7 @@ const meta = {
 
   {errorMessage ? (
     <section class="content-section">
-      <Card class="card--ghost is-centered">
+      <Template.Card class="card--ghost is-centered">
         <Fragment slot="body">
           <p>{errorMessage}</p>
         </Fragment>
@@ -224,7 +220,7 @@ const meta = {
   ) : hasEntries ? (
     <section class="content-section cols-3">
       {entries.map((entry) => (
-        <TEMPLATES.TileView
+        <Template.TileView
           href={entry.href}
           title={entry.title}
           description={entry.description}
@@ -238,7 +234,7 @@ const meta = {
     </section>
   ) : (
     <section class="content-section">
-      <Card class="card--ghost is-centered">
+      <Template.Card class="card--ghost is-centered">
         <Fragment slot="body">
           <p>No entries yet — check back soon!</p>
         </Fragment>

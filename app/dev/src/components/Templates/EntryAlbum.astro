@@ -1,5 +1,5 @@
 ---
-import Card from '@Templates/Card.astro';
+import { Template } from '@Frontend';
 import ICONS from '@Assets/Icons.astro';
 
 interface AlbumViewData {
@@ -26,7 +26,7 @@ const { album } = Astro.props;
 ---
 
 <section class="content-section">
-  <Card class="card--ghost card--flush is-centered" headClass="card__head--column">
+  <Template.Card class="card--ghost card--flush is-centered" headClass="card__head--column">
     {album.description ? (
       <Fragment slot="body">
         <div class="prose">
@@ -84,7 +84,7 @@ const { album } = Astro.props;
 </section>
 
 <section class="content-section">
-  <Card class="card--flush card--ghost is-centered">
+  <Template.Card class="card--flush card--ghost is-centered">
     <Fragment slot="body">
       <div class="media-wrapper media-wrapper--thumbs" role="list">
         <button class="media-prev is-thumbs-prev" aria-label="Previous thumbnails" type="button">❮</button>

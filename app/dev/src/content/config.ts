@@ -186,17 +186,6 @@ const blog = defineCollection({
     chapters: z.array(chapterSchema).default([]),
     // count bleibt optional – füllen wir später
   }),
-  // @ts-ignore – Astro slug type inference bug
-  slug: ({ data, defaultSlug }) => {
-    const raw = (data as { slug?: string }).slug;
-    if (!raw) return defaultSlug;
-    const normalized = raw
-      .split("/")
-      .map((p) => p.trim())
-      .filter(Boolean)
-      .join("/");
-    return normalized.length > 0 ? normalized : defaultSlug;
-  },
 });
 
 

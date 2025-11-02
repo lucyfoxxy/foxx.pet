@@ -3,7 +3,7 @@
  * Reusable tile for SubcategoryOverview lists (albums & articles).
  * Kapselt Card-Layout, Headline, Cover-Darstellung und Badges.
  */
-import Card from '@Templates/Card.astro';
+import { Template } from '@Frontend';
 import type { HTMLAttributes,HTMLTag } from 'astro/types';
 
 type Props = {
@@ -57,7 +57,7 @@ const coverAlt = props.coverAlt ?? '';
 ---
 
 <a href={props.href} aria-label={aria}>
-  <Card class={[defaultCardClass, props.class]} headClass={[headColumnClass, props.headClass]}>
+  <Template.Card class={[defaultCardClass, props.class]} headClass={[headColumnClass, props.headClass]}>
 
     <Fragment slot="head">
       <h2 class="card__title">{props.title}</h2>

@@ -2,7 +2,7 @@
 section: tails
 category: lucy-and-friends
 title: "Asteroid Tea Party"
-slug: tails/lucy-and-friends/starlit-liftoff
+slug: "tails-lucy-and-friends-starlit-liftoff"
 description: "A cosy gathering with space miners leads to an impromptu tea ceremony in low gravity."
 date: 2024-05-27
 tags:
