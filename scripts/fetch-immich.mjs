@@ -18,7 +18,7 @@ const PATHS = createPathConfig(REPO_ROOT, TARGET);
 const BASE = process.env.IMMICH_BASE_URL || process.env.IMMICH_URL;
 const KEY = process.env.IMMICH_API_KEY;
 const OWNER_ID = 'd3e4dd84-d590-4c98-b2d1-07ed6811a693';
-const KEYWORDS = ['suitwalk', 'furmeet', 'convention', 'artworks'];
+const KEYWORDS = ['suitwalk', 'furmeet', 'convention', 'sfw','nsfw'];
 const DISPLAY_KEYWORDS = KEYWORDS.map((kw) =>
   kw.replace(/^./, (c) => c.toUpperCase())
 );
@@ -26,38 +26,37 @@ const CATEGORY_CONFIG = new Map([
   [
     'suitwalk',
     {
-      areaSlug: 'paws',
-      category: { name: 'Suitwalks', slug: 'suitwalks' },
-      slugPrefix: 'suitwalks'
+      section: 'paws',
+      category: 'suitwalks'
     }
   ],
   [
     'furmeet',
     {
-      areaSlug: 'paws',
-      category: { name: 'Furmeets', slug: 'furmeets' },
-      slugPrefix: 'furmeets'
+      section: 'paws',
+      category: 'furmeets',
     }
   ],
   [
     'convention',
     {
-      areaSlug: 'paws',
-      category: { name: 'Conventions', slug: 'conventions' },
-      slugPrefix: 'conventions'
+      section: 'paws',
+      category: 'conventions',
     }
   ],
   [
-    'artworks',
+    'sfw',
     {
-      areaSlug: 'frames',
-      categoryResolver: ({ rawTitle, displayTitle }) => {
-        const name = displayTitle || rawTitle || 'Artworks';
-        const slug = slugify(name) || 'artworks';
-        return { name, slug };
-      },
-      slugPrefix: 'frames'
+      section: 'frames',
+      category: 'sfw',
     }
+  ],
+  [
+    'nsfw',
+    {
+      section: 'frames',
+      category: 'nsfw',
+    }    
   ]
 ]);
 const BESTOF_LINK_ID = (process.env.IMMICH_BESTOF_SHARED_LINK || '').trim();
@@ -199,6 +198,8 @@ async function main() {
   });
 
   for (const entry of albumEntries) {
+    
+    
     await processAlbum({
       album: entry.album,
       assets: entry.assets,
@@ -251,9 +252,7 @@ async function processAlbum({
 }) {
   const meta = metaOverride ?? deriveAlbumMeta(album);
   if (!meta) {
-    if (!QUIET) {
-      console.log(`⏭  Skipping album without matching keyword: ${album.albumName}`);
-    }
+    if (!QUIET) console.log(`⏭  Skipping album without matching keyword: ${album.albumName}`);
     return null;
   }
 
@@ -262,16 +261,14 @@ async function processAlbum({
 
   const assetDir = path.join(paths.assetsPath, ...meta.assetDirSegments);
   const assetPrefix = joinPosix('albums', ...meta.assetDirSegments);
-  const albumDataRoots = Array.isArray(paths.albumDataRoots) && paths.albumDataRoots.length > 0
-    ? paths.albumDataRoots
-    : paths.albumData
-    ? [paths.albumData]
-    : [];
-  const albumDataTargets = albumDataRoots.map((root) => ({
-    root,
-    dir: path.join(root, ...meta.dataDirSegments),
-    file: path.join(root, ...meta.dataDirSegments, `${meta.dataFileName}.json`)
-  }));
+
+  // NEU: nur EIN Zielpfad
+  const albumRoot = path.join(paths.srcRoot, 'content', 'album');
+const section = meta.section ?? 'albums';
+const category = meta.category ?? 'misc';
+const dataDir = path.join(albumRoot, section, category);
+const dataFile = path.join(dataDir, `${meta.dataFileName ?? meta.slug}.json`);
+
 
   let mode = await assetStrategy.resolve(albumAssets[0]?.id ?? null, shareKey);
   if (!mode) mode = 'download';
@@ -284,9 +281,7 @@ async function processAlbum({
       assetDir,
       albumAssets.map((asset) => asset.id)
     );
-    if (removed && !QUIET) {
-      console.log(`• ${meta.slug}: removed ${removed} stale file(s)`);
-    }
+    if (removed && !QUIET) console.log(`• ${meta.slug}: removed ${removed} stale file(s)`);
   }
 
   barsUpdate({
@@ -299,7 +294,7 @@ async function processAlbum({
 
   const items = [];
 
-  for (let i = 0; i < totalAlbum; i += 1) {
+  for (let i = 0; i < totalAlbum; i++) {
     const asset = albumAssets[i];
     try {
       if (mode === 'remote') {
@@ -324,7 +319,6 @@ async function processAlbum({
     }
 
     counters.processedAll += 1;
-
     barsUpdate({
       slug: meta.slug,
       albumCurrent: i + 1,
@@ -334,53 +328,56 @@ async function processAlbum({
     });
   }
 
-  for (const target of albumDataTargets) {
-    await fs.mkdir(target.dir, { recursive: true });
-    await writeAlbumIndex({
-      filePath: target.file,
-      meta,
-      mode,
-      items,
-      shareKey,
-      album
-    });
-  }
-
-  await cleanupLegacyAlbumData({
+  // NUR EIN WRITE, kein Array mehr
+  await fs.mkdir(dataDir, { recursive: true });
+  
+  await writeAlbumIndex({
+    filePath: dataFile,
     meta,
-    targets: albumDataTargets
+    mode,
+    items,
+    shareKey,
+    album
   });
-
-  if (!QUIET) {
-    console.log(`\n\n✓ ${meta.slug}: ${items.length}/${totalAlbum} assets processed (${mode})`);
-  }
-
-  return { slug: meta.slug, mode };
 }
+
 
 async function writeAlbumIndex({ filePath, meta, mode, items, shareKey, album }) {
-  const albumInfo = {
-    startDate: toIsoString(album?.startDate ?? '1970-01-01T00:00:00.000Z'),
-    description: album?.description ?? null,
-    albumThumbnailAssetId: album?.albumThumbnailAssetId ?? '0000-0000-0000-0000-00000000'
-  };
+  // Verzeichnis aus dem Zielpfad ableiten
+  const dir = path.dirname(filePath);
+
+  const cover =
+    album?.albumThumbnailAssetId && shareKey
+      ? `${BASE}/api/assets/${album.albumThumbnailAssetId}/thumbnail?key=${encodeURIComponent(
+          shareKey
+        )}`
+      : undefined;
+  
   const index = {
-    slug: meta.slug,
-    albumId: meta.albumId,
-    shareKey: shareKey,
-    albumName: meta.albumName,
-    title: meta.title,
-    startDate: albumInfo.startDate,
-    description: albumInfo.description,
-    albumThumbnailAssetId: albumInfo.albumThumbnailAssetId,
+    type: 'album',
+    section: meta.section,
     category: meta.category,
-    assetMode: mode,
+    slug: meta.slug,
+    title: meta.title,
+    description: album?.description ?? '',
+    date: toIsoString(album?.startDate ?? album?.createdAt ?? '1970-01-01T00:00:00.000Z'),
+    cover,
     count: items.length,
-    
-    items
+    assetMode: mode,
+    albumId: meta.albumId,
+    albumName: meta.albumName,
+    shareKey,
+    items,
   };
+
+
+  // jetzt gibt es dir wirklich
+  await fs.mkdir(dir, { recursive: true });
   await fs.writeFile(filePath, JSON.stringify(index, null, 2), 'utf-8');
 }
+
+
+
 
 async function cleanupLegacyAlbumData({ meta, targets }) {
   if (!meta || !Array.isArray(targets) || targets.length === 0) return;
@@ -680,17 +677,18 @@ function createPathConfig(repoRoot, target) {
   const appRoot = path.join(repoRoot, 'app', target);
   const srcRoot = path.join(appRoot, 'src');
   const contentRoot = path.join(srcRoot, 'content');
+
   return {
     repoRoot,
     appRoot,
     srcRoot,
     assetsPath: path.join(srcRoot, 'assets', 'albums'),
-    albumDataRoots: Array.from(
-      new Set([path.join(contentRoot, 'album'), path.join(contentRoot, 'albums')])
-    ),
-    envFile: path.join(appRoot, '.env')
+    // nur noch ein Zielordner
+    albumDataRoot: path.join(contentRoot, 'album'),
+    envFile: path.join(appRoot, '.env'),
   };
 }
+
 
 
 function normalizeMode(value) {
@@ -759,65 +757,78 @@ function createLegacyAlbumDataCandidates(root, meta) {
 }
 
 function deriveAlbumMeta(album) {
-  if (!album || typeof album.albumName !== 'string') return null;
-  const lower = album.albumName.toLowerCase();
+  if (!album || typeof album.albumName !== "string") return null;
+  const name = album.albumName.trim();
+  const lower = name.toLowerCase();
+
+  // 1️⃣ Sonderfall: Frames – kein echtes Keyword-Mapping
+
+
+
+  // 2️⃣ Standard-Flow (paws, tails, noms …)
   const keyword = KEYWORDS.find((kw) => lower.includes(kw));
   if (!keyword) return null;
   const config = CATEGORY_CONFIG.get(keyword);
   if (!config) return null;
 
-  const nameParts = album.albumName.split(':');
+  const nameParts = name.split(":");
   const rawTitle =
-    nameParts.length > 1
-      ? nameParts.slice(1).join(':').trim()
-      : album.albumName.trim();
+    nameParts.length > 1 ? nameParts.slice(1).join(":").trim() : name;
   const displayTitle = createDisplayTitle(rawTitle);
-  const normalizedTitleRaw = displayTitle || rawTitle || album.albumName.trim();
+  const normalizedTitleRaw = displayTitle || rawTitle || name;
   const normalizedTitle =
-    normalizedTitleRaw && normalizedTitleRaw.trim().length
-      ? normalizedTitleRaw.trim()
-      : album.albumName.trim() || 'Untitled';
+    normalizedTitleRaw.trim().length > 0 ? normalizedTitleRaw.trim() : name;
 
-  const resolvedCategory =
-    typeof config.categoryResolver === 'function'
-      ? config.categoryResolver({ album, rawTitle, displayTitle: normalizedTitle })
-      : config.category;
+  const section = config.section ?? "albums";
+  const slugParts = [section ?? config.category ?? slugify(keyword), rawTitle]
+    .filter((p) => typeof p === "string" && p.trim().length > 0)
+    .map((p) => p.trim());
 
-  const candidateCategoryName =
-    resolvedCategory?.name ??
-    config.category?.name ??
-    keyword.replace(/^./, (c) => c.toUpperCase()) + 's';
-  const categoryName =
-    candidateCategoryName && candidateCategoryName.trim().length
-      ? candidateCategoryName.trim()
-      : 'Galleries';
-  const fallbackCategorySlug = slugify(categoryName) || slugify(keyword) || 'album';
-  const categorySlug =
-    (resolvedCategory?.slug && resolvedCategory.slug.trim()) ||
-    (config.category?.slug && config.category.slug.trim()) ||
-    fallbackCategorySlug;
-
-  const areaSlug = config.areaSlug ?? 'albums';
-  const slugParts = [config.slugPrefix ?? categorySlug ?? slugify(keyword), rawTitle]
-    .filter((part) => typeof part === 'string' && part.trim().length > 0)
-    .map((part) => part.trim());
   const slug =
-    slugify(slugParts.join(' ')) ||
-    slugify(`${categorySlug}-${album.id}`) ||
+    slugify(slugParts.join(" ")) ||
+    slugify(`${config.category}-${album.id}`) ||
     album.id;
+  
+if (lower.startsWith("frames") || lower.includes("frame")) {
+  const category = lower.includes("nsfw")
+    ? "nsfw"
+    : lower.includes("sfw")
+    ? "sfw"
+    : "misc";
 
+  // Slug klarer machen (z. B. "frames-sfw")
+  const slug =
+    slugify(name.replace(/^frames\s*/i, "").trim()) ||
+    `${category}-${album.id.slice(0, 8)}`;
+
+  const section = "frames"; // hier wirklich definieren
+  
   return {
     slug,
     albumId: album.id,
-    albumName: album.albumName,
-    title: normalizedTitle,
-    rawTitle,
-    category: { name: categoryName, slug: categorySlug },
-    dataDirSegments: [areaSlug, categorySlug].filter(Boolean),
+    albumName: name,
+    title: name,
+    section,
+    category,
+    dataDirSegments: [section, category],
     dataFileName: slug,
-    assetDirSegments: [areaSlug, categorySlug, slug].filter(Boolean)
+    assetDirSegments: [section, category, slug],
   };
 }
+  return {
+    slug,
+    albumId: album.id,
+    albumName: name,
+    title: normalizedTitle,
+    section,
+    rawTitle,
+    category: config.category,
+    dataDirSegments: [section, config.category],
+    dataFileName: slug,
+    assetDirSegments: [section, config.category, slug],
+  };
+}
+
 
 
 
@@ -829,12 +840,14 @@ function createBestOfMeta(album) {
     albumName: album?.albumName ?? 'Best Of',
     title,
     rawTitle: title,
-    category: { name: 'Highlights', slug: 'bestof' },
-    dataDirSegments: [],
+    section: 'paws',      // oder 'paws', je nach Wunsch
+    category: 'bestof',
+    dataDirSegments: ['paws', 'bestof'],
     dataFileName: 'bestof',
-    assetDirSegments: ['bestof']
+    assetDirSegments: ['paws', 'bestof'],
   };
 }
+
 
 function createDisplayTitle(value) {
   if (!value || typeof value !== 'string') return value;
