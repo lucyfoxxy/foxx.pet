@@ -38,14 +38,16 @@ export default function initGalleryPage() {
   const interval = parseInt(frame.getAttribute('data-interval') || '7000', 10);
   const imgEl     = frame?.querySelector('.media-image');
   const controls = document.querySelector('.card__overlay--controls');
-  const btnPrev = controls?.querySelector('.media-prev');
-  const btnNext = controls?.querySelector('.media-next');
-  const btnPlay = controls?.querySelector('.media-playpause');
+  const btnPrev = controls?.querySelector('.media-controls.media-prev');
+  const btnNext = controls?.querySelector('.media-controls.media-next');
+  const btnPlay = controls?.querySelector('.media-controls.media-play');
+  const btnPause = controls?.querySelector('.media-controls.media-pause');
+  const btnFullscreen = controls?.querySelector('.media-controls.media-fullscreen');
   const progress = controls?.querySelector('.media-progress');
   const thumbsWrap = document.querySelector('.media-wrapper--thumbs');
   const thumbs = thumbsWrap?.querySelector('.media-wrapper--frames');
-  const thumbsPrev = thumbsWrap?.querySelector('.media-prev.is-thumbs-prev');
-  const thumbsNext = thumbsWrap?.querySelector('.media-next.is-thumbs-next');
+  const thumbsPrev = thumbsWrap?.querySelector('.media-controls.media-prev.is-thumbs-prev');
+  const thumbsNext = thumbsWrap?.querySelector('.media-controls.media-next.is-thumbs-next');
   const imgClass = 'media-image media-image--thumb'
   const buttonClass = 'media-frame media-frame--thumb';
 
@@ -165,7 +167,8 @@ export default function initGalleryPage() {
 
   const setProgress = (p) => progress.style.setProperty('--p', String(p));
   const updatePlayButton = () => {
-    btnPlay.textContent = playing ? '⏸' : '▶';
+    btnPause.setAttribute('data-active', playing ? true : false);
+    btnPlay.setAttribute('data-active', playing ? false : true);
     btnPlay.setAttribute('aria-label', playing ? 'Pause autoplay' : 'Resume autoplay');
   };
 
@@ -441,6 +444,8 @@ export default function initGalleryPage() {
     const wasPlaying = playing;
     playing = !playing;
     updatePlayButton();
+    document.querySelectorAll('.card__overlay--hover').forEach((overlay) => {
+      overlay.setAttribute('data-show',false) });    
     if (wasPlaying && !playing) {
       captureElapsed();
       pauseKenBurns();
@@ -449,7 +454,21 @@ export default function initGalleryPage() {
       run({ resetProgress: false });
     }
   });
-
+  btnPause.addEventListener('click', (event) => {
+    event.stopPropagation();
+    const wasPlaying = playing;
+    playing = !playing;
+    updatePlayButton();
+    document.querySelectorAll('.card__overlay--hover').forEach((overlay) => {
+      overlay.setAttribute('data-show',true) });
+    if (wasPlaying && !playing) {
+      captureElapsed();
+      pauseKenBurns();
+    } else if (!wasPlaying && playing) {
+      resumeKenBurns();
+      run({ resetProgress: false });
+    }
+  });
   window.addEventListener('resize', handleResize);
 
   thumbsPrev.addEventListener('click', () => {
@@ -464,7 +483,7 @@ export default function initGalleryPage() {
     }
   });
 
-  frame.addEventListener('click', (event) => {
+  btnFullscreen.addEventListener('click', (event) => {
     const target = event.target;
     if (target instanceof HTMLElement && target.closest('button')) return;
     if (lightbox) {

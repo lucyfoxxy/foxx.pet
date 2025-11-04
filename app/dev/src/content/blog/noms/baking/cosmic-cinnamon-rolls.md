@@ -2,7 +2,7 @@
 section: noms
 category: baking
 title: "Cosmic Cinnamon Rolls"
-slug: "noms-baking-cosmic-cinamon-rolls"
+slug: "noms-baking-cosmic-cinnamon-rolls"
 description: "Fluffy spirals drizzled with a nebula glaze, perfect for zero-g breakfast trays."
 date: 2024-03-02
 tags:

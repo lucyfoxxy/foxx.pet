@@ -4,7 +4,7 @@
  * Kapselt Card-Layout, Headline, Cover-Darstellung und Badges.
  */
 import { Template } from '@Frontend';
-import type { HTMLAttributes,HTMLTag } from 'astro/types';
+import type { HTMLAttributes, HTMLTag } from 'astro/types';
 
 type Props = {
   href: string;
@@ -14,7 +14,7 @@ type Props = {
   class?: HTMLAttributes<HTMLTag>['class'];
   headClass?: HTMLAttributes<HTMLTag>['class'];
   ariaLabel?: string;
-  cover?:  string;
+  cover?: string;
   coverAlt?: string;
   date?: Date | string;
   count?: number;
@@ -93,5 +93,5 @@ const coverAlt = props.coverAlt ?? '';
       ) : null }
     </Fragment>
 
-  </Card>
+  </Template.Card>
 </a>

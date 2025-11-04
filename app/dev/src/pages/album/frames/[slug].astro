@@ -1,8 +1,7 @@
 ---
-import ContentView from '@Templates/ContentView.astro';
-import SubcategoryOverview from '@Templates/SubcategoryOverview.astro';
+import { View } from '@Frontend';
 import { getPageContent } from '@Content/siteContent';
-import { getCollection } from 'astro:content';
+import { getEntriesBySectionAndCategory, isAlbumEntry } from '@utils/getEntries';
 
 export const prerender = true;
 
@@ -14,36 +13,28 @@ type StaticProps = {
 export async function getStaticPaths() {
   const page = await getPageContent('frames');
   const categories = page.categories ?? [];
-  const frameAlbums = await getCollection('album', ({ id }) => id.startsWith('frames/'));
 
-  const paths = categories
-    .map((category) => {
+  const paths = await Promise.all(
+    categories.map(async (category) => {
       const slug = category.slug?.trim();
-      if (!slug) {
-        return undefined;
-      }
+      if (!slug) return undefined;
 
-      const matchingAlbums = frameAlbums.filter(
-        ({ data }) => (data.category?.slug ?? '').trim() === slug,
-      );
+      const entries = await getEntriesBySectionAndCategory('frames', slug);
+      const albumEntries = entries.filter(isAlbumEntry);
+      const onlyAlbum = albumEntries.length === 1 ? albumEntries[0] : undefined;
 
-      const albumSlug =
-        matchingAlbums.length === 1 && matchingAlbums[0].data.slug
-          ? matchingAlbums[0].data.slug.trim()
-          : undefined;
-
-      const props: StaticProps = albumSlug
-        ? { albumSlug, backToParentCategory: true }
+      const props: StaticProps = onlyAlbum
+        ? { albumSlug: onlyAlbum.data.slug, backToParentCategory: true }
         : {};
 
       return {
         params: { slug },
         props,
       };
-    })
-    .filter((entry): entry is { params: { slug: string }; props: StaticProps } => Boolean(entry));
+    }),
+  );
 
-  return paths;
+  return paths.filter((value): value is { params: { slug: string }; props: StaticProps } => Boolean(value));
 }
 
 const { slug } = Astro.params;
@@ -55,7 +46,7 @@ if (!slug) {
 const { albumSlug, backToParentCategory = false } = Astro.props as StaticProps;
 ---
 {albumSlug ? (
-  <ContentView slug={albumSlug} backToParentCategory={backToParentCategory} />
+  <View.Entry slug={albumSlug} backToParentCategory={backToParentCategory} />
 ) : (
-  <SubcategoryOverview slug={slug} />
+  <View.Category slug={slug} />
 )}

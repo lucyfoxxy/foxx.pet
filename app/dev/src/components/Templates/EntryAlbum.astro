@@ -23,6 +23,7 @@ interface Props {
 }
 
 const { album } = Astro.props;
+
 ---
 
 <section class="content-section">
@@ -60,39 +61,54 @@ const { album } = Astro.props;
           />
         </div>
 
-        <div class="card__overlay card__overlay--controls card__overlay--bottom">
-          <button class="media-prev" aria-label="Previous" type="button">❮</button>
-          <button class="media-playpause" aria-label="Pause autoplay" type="button">
-            <ICONS kind="pause" />
-          </button>
-          <button class="media-next" aria-label="Next" type="button">❯</button>
+        <div class="card__overlay card__overlay--controls card__overlay--bottom card__overlay--hover">
+          <div class="controls controls--center controls--tight">
+            <button class="media-controls media-controls media-prev" aria-label="Previous" type="button">❮</button>
+            <button class="media-controls media-pause" aria-label="Pause autoplay" type="button">
+              <span class="media-icon"><ICONS kind="pause" /></span>
+            </button>
+            <button class="media-controls media-play" aria-label="Start autoplay" type="button">
+              <span class="media-icon"><ICONS kind="play" /></span>
+            </button>          
+            <button class="media-controls media-next" aria-label="Next" type="button">❯</button>
+          </div>
+          <div class="controls controls--end">
+            <button class="media-controls media-fullscreen" aria-label="Open Lightbox" type="button">
+              <span class="media-icon"><ICONS kind="fullscreen" /></span>
+            </button>            
+          </div>
           <div class="media-progress" aria-hidden="true"></div>
         </div>
 
-        <div class="card__overlay card__overlay--title card__overlay--top">
-          <h1 class="card__title">{album.title}</h1>
+        <div class="card__overlay card__overlay--title card__overlay--top card__overlay--hover">
+          <h1 class="card__title">
+            {album.title && (album.title.includes('SFW') || album.title.includes('NSFW'))
+            ? `Artworks: ${album.title}`  
+            : album.title} 
+          </h1>
           {(album.categoryBadge || album.dateBadge) && (
             <div class="card__badges controls controls--end">
               {album.categoryBadge ? <span class="badge badge--dark">{album.categoryBadge}</span> : null}
               {album.dateBadge ? <span class="badge badge--dark">{album.dateBadge}</span> : null}
+
             </div>
           )}
         </div>
       </div>
     </Fragment>
-  </Card>
+  </Template.Card>
 </section>
 
 <section class="content-section">
   <Template.Card class="card--flush card--ghost is-centered">
     <Fragment slot="body">
       <div class="media-wrapper media-wrapper--thumbs" role="list">
-        <button class="media-prev is-thumbs-prev" aria-label="Previous thumbnails" type="button">❮</button>
+        <button class="media-controls media-prev is-thumbs-prev" aria-label="Previous thumbnails" type="button">❮</button>
         <div class="media-wrapper media-wrapper--frames" role="list" data-window="10"></div>
-        <button class="media-next is-thumbs-next" aria-label="Next thumbnails" type="button">❯</button>
+        <button class="media-controls media-next is-thumbs-next" aria-label="Next thumbnails" type="button">❯</button>
       </div>
     </Fragment>
-  </Card>
+  </Template.Card>
 </section>
 
 <script>

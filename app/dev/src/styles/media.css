@@ -63,7 +63,7 @@
   }
 }
 
-.media-frame[role="button"] { cursor: zoom-in; }
+
 .media-frame--thumb {
   min-inline-size: 0;
   inline-size: var(--thumb-size);
@@ -154,14 +154,16 @@
   align-items: center;
   gap: 0.5em;
 }
-.media-icon svg{
-  inline-size: 1em;
-  block-size: 1em;
+.media-icon svg,
+.media-icon > svg{
+  inline-size: 1.1em;
+  block-size: 1.1em;
+  margin-inline-start: calc(var(--control-gap * .75));
 }
 
 
 /* ==========<[      CONTROLS      ]>============== */
-.media-playpause {
+.media-controls {
   position: relative;
   z-index: 2;
   inline-size: 2.75rem;
@@ -171,55 +173,34 @@
   border: none;
   border-radius: 999px;
   background: var(--control-surface--dark);
-  grid-area: play;
   cursor: pointer;
   box-shadow: var(--surface-shadow--default);
-  transition: var(--transition-soft);
+  transition: var(--transition-raise), var(--transition-brightness), var(--transition-scale);
 }
-.media-playpause:active {
-  transform: translateY(-50%) scale(.92);
+.media-controls:active {
+  transform: var(--transform-scale);
+  filter: brightness(1.95);
+  backdrop-filter: var(--control-glow);
 }
-.media-playpause[disabled] {
+.media-controls[disabled] {
   opacity: .35;
   cursor: default;
   pointer-events: none;
 }
-.media-playpause:hover,
-.media-playpause:focus-visible {
+.media-controls:hover,
+.media-controls:focus-visible {
   opacity: 1;
-  transform: translateY(-50%) scale(1.05);
-}
-.media-prev,
-.media-next {
-  position: relative;
-  display: grid;
-  place-items: center;
-  inline-size: 2.75rem;
-  block-size: 2.75rem;
-  border: none;
-  border-radius: 999px;
-  background: var(--control-surface--dark);
-  color: inherit;
-  box-shadow: var(--surface-shadow--default);
-  cursor: pointer;
-  transition: var(--transition-soft);
-  z-index: 2;
+  transform: var(--transform-scale);
+  filter: brightness(1.95);
+  backdrop-filter: var(--control-glow);
 }
 
+.media-play[data-active="false"],
+.media-pause[data-active="false"] {
+  display: none;
+}
 
-.media-prev:hover,
-.media-prev:focus-visible,
-.media-next:hover,
-.media-next:focus-visible {
-  opacity: 1;
-  transform: var(--transform-scale--soft)
-}
-.media-prev:active,
-.media-next:active {
-  transform: translateY(-50%) scale(.92);
-}
-.media-prev[disabled],
-.media-next[disabled] {
+.media-controls[disabled] {
   opacity: .35;
   cursor: default;
   pointer-events: none;

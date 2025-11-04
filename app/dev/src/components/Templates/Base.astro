@@ -1,6 +1,6 @@
 ---
 import '@Styles/tokens.css';
-import '@Styles/bg.css'
+import '@Styles/bg.css';
 import '@Styles/base.css';
 import '@Styles/typography.css';
 import '@Styles/site.css';
@@ -145,7 +145,7 @@ const breadcrumbs = buildBreadcrumbs({
           {Astro.slots.has('header__actions') ? (
             <slot name="header__actions" slot="actions" />
           ) : null}
-        </Header>
+        </BaseParts.Header>
         <main class="panel">
           <slot />
         </main>

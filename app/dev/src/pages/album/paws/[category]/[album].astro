@@ -1,15 +1,16 @@
 ---
-import ContentView from '@Templates/ContentView.astro';
-import { getCollection } from 'astro:content';
+import { View } from '@Frontend';
+import { getEntriesBySection, isAlbumEntry } from '@utils/getEntries';
 
 export async function getStaticPaths() {
-  const albums = await getCollection('album');
-  return albums
-    .filter(({ data }) => data.slug && data.category?.slug)
-    .map(({ data }) => ({
+  const entries = await getEntriesBySection('paws');
+
+  return entries
+    .filter(isAlbumEntry)
+    .map((entry) => ({
       params: {
-        category: data.category!.slug,
-        album: data.slug,
+        category: entry.data.category ?? 'general',
+        album: entry.data.slug,
       },
     }));
 }
@@ -20,4 +21,4 @@ if (!album) {
   throw new Error('Missing album slug');
 }
 ---
-<ContentView slug={album} />
+<View.Entry slug={album} />

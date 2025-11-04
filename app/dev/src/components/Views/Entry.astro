@@ -1,264 +1,215 @@
 ---
-import { Template, View } from '@Frontend';
-import { Picture } from 'astro:assets';
-import type { ImageMetadata } from 'astro';
+import { Template } from '@Frontend';
 import { PLACEHOLDER_COVER, findCoverImage } from '@Assets/covers';
 import { findCategory, getIntroParagraphs, getPageContent } from '@Content/siteContent';
-import { getCollection, getEntry } from 'astro:content';
-import  ICONS  from '@Assets/Icons.astro'
+import { getEntriesBySectionAndCategory, isAlbumEntry, type Entry } from '@utils/getEntries';
+import type { CollectionEntry } from 'astro:content';
+
 interface Props {
   slug: string;
   backToParentCategory?: boolean;
 }
 
-interface AlbumViewData {
-  title: string;
-  description: string;
-  shareKey?: string;
-  albumSlug: string;
-  categoryBadge?: string;
-  dateBadge?: string;
-  initialThumb?: {
-    src?: string;
-    width?: number;
-    height?: number;
-    alt?: string;
-    full?: string;
-  };
-  backHref: string;
-  backLabel: string;
-}
-
-interface BlogChapterView {
-  id: string;
-  title: string;
-  summary?: string;
-}
-
-interface BlogViewData {
-  title: string;
-  description?: string;
-  introParagraphs: string[];
-  cover: ImageMetadata;
-  backHref: string;
-  backLabel: string;
-  chapters?: BlogChapterView[];
-}
-
-const slugify = (value: string) =>
-  value
-    .toLowerCase()
-    .normalize('NFKD')
-    .replace(/[^\p{Letter}\p{Number}]+/gu, '-')
-    .replace(/^-+|-+$/g, '');
-
-const createChapterId = (title: string, slug: string | undefined, index: number) => {
-  const base = slug?.trim().length ? slug.trim() : title;
-  const normalized = slugify(base);
-  return normalized.length > 0 ? normalized : `chapter-${index + 1}`;
-};
-
 const { slug, backToParentCategory = false } = Astro.props as Props;
+
 const pathSegments = Astro.url.pathname.replace(/\/+$/, '').split('/').filter(Boolean);
 const areaSegment = pathSegments[0] ?? '';
-const categorySlug = pathSegments[1] ?? '';
-const subcategorySlug = pathSegments[2];
+const sectionSlug = pathSegments[1] ?? '';
+const categorySlug = pathSegments[2];
 
 let errorMessage: string | undefined;
-let area: 'album' | 'blog' | null = null;
 
-if (!areaSegment || !categorySlug) {
+if (!areaSegment || !sectionSlug) {
   errorMessage = 'We could not resolve this page — please try again later.';
-} else if (areaSegment === 'album' || areaSegment === 'blog') {
-  area = areaSegment;
-} else {
-  errorMessage = `Unsupported content area "${areaSegment}" for content view.`;
 }
 
 let parentPage = undefined as Awaited<ReturnType<typeof getPageContent>> | undefined;
 
-if (!errorMessage && categorySlug) {
+if (!errorMessage) {
   try {
-    parentPage = await getPageContent(categorySlug);
+    parentPage = await getPageContent(sectionSlug);
   } catch (unknownError) {
-    errorMessage =
+    const message =
       unknownError instanceof Error ? unknownError.message : 'Unable to load page details.';
+    errorMessage = message;
   }
 }
 
-const subCategory = parentPage && subcategorySlug ? findCategory(parentPage, subcategorySlug) : undefined;
-const placeholderCover = PLACEHOLDER_COVER;
+const category = parentPage && categorySlug ? findCategory(parentPage, categorySlug) : undefined;
 
-let albumView: AlbumViewData | undefined;
-let blogView: BlogViewData | undefined;
-let BlogContent: Awaited<ReturnType<(typeof getEntry)['prototype']['render']>>['Content'] | undefined;
+const targetCategory = categorySlug ?? slug;
+
+const entries = !errorMessage
+  ? await getEntriesBySectionAndCategory(sectionSlug, targetCategory)
+  : [];
+
+const matchesEntrySlug = (entry: Entry, value: string) => {
+  const normalized = value.trim();
+  if (!normalized) return false;
+
+  if (isAlbumEntry(entry)) {
+    return (entry.data.slug ?? entry.slug) === normalized;
+  }
+
+  const segments = entry.slug.split('/').filter(Boolean);
+  return segments[segments.length - 1] === normalized || entry.data.slug === normalized;
+};
+
+const entry = entries.find((candidate) => matchesEntrySlug(candidate, slug));
+
+const placeholderCover = PLACEHOLDER_COVER.src;
+
 let pageTitle = parentPage?.title ?? 'Coming soon';
 let pageDescription = parentPage?.description ?? '';
 let metaImage: string | undefined;
 
-if (!errorMessage && area === 'album') {
-  try {
-    const [albumEntry] = await getCollection('album', ({ data }) => data.slug === slug);
+let headerBackHref = parentPage ? `${parentPage.href.replace(/\/+$/, '')}/` : undefined;
+let headerBackLabel = parentPage ? `← ${parentPage.title}` : undefined;
 
-    if (!albumEntry) {
-      errorMessage = 'We could not find that album yet. Please check back soon!';
-    } else {
-      const albumData = albumEntry.data;
-      const title = albumData.title ?? albumData.albumName ?? albumData.slug;
-      const description = albumData.description ?? albumData.albumName ?? '';
-      const shareKey = albumData.shareKey ?? undefined;
-      const initialItem = Array.isArray(albumData.items)
-        ? albumData.items.find((item) => item && (item.full || item.thumb))
-        : undefined;
-      const normalizedInitialItem = initialItem
-        ? {
-            src: initialItem.thumb ?? initialItem.full ?? undefined,
-            width: typeof initialItem.width === 'number' ? initialItem.width : undefined,
-            height: typeof initialItem.height === 'number' ? initialItem.height : undefined,
-            alt: initialItem.filename ?? undefined,
-            full: initialItem.full ?? undefined,
-          }
-        : undefined;
-      const parsedStartDate = albumData.startDate ? Date.parse(albumData.startDate) : Number.NaN;
-      const formattedStartDate = Number.isFinite(parsedStartDate)
-        ? new Intl.DateTimeFormat('en', { month: 'long', year: 'numeric' }).format(
-            new Date(parsedStartDate)
-          )
-        : undefined;
-      const categoryTitle =
-        subCategory?.title ?? albumData.category?.name ?? albumData.category?.slug ?? '';
-
-      const backHref =
-        backToParentCategory || !subcategorySlug
-          ? `/${areaSegment}/${categorySlug}/`
-          : `/${areaSegment}/${categorySlug}/${subcategorySlug}/`;
-      const backLabel = backToParentCategory
-        ? `← ${parentPage?.title ?? 'Back'}`
-        : subCategory
-        ? `← ${subCategory.title}`
-        : `← ${parentPage?.title ?? 'Back'}`;
-
-      albumView = {
-        title,
-        description,
-        shareKey,
-        albumSlug: albumData.slug,
-        categoryBadge: categoryTitle || undefined,
-        dateBadge: formattedStartDate,
-        initialThumb: normalizedInitialItem,
-        backHref,
-        backLabel,
-      };
-
-      pageTitle = title;
-      pageDescription = description;
-      metaImage = albumData.coverUrl ?? normalizedInitialItem?.full ?? normalizedInitialItem?.src ?? metaImage;
+let albumView:
+  | {
+      title: string;
+      description: string;
+      shareKey?: string;
+      albumSlug: string;
+      categoryBadge?: string;
+      dateBadge?: string;
+      initialThumb?: { src?: string; width?: number; height?: number; alt?: string; full?: string };
     }
-  } catch (unknownError) {
-    errorMessage =
-      unknownError instanceof Error ? unknownError.message : 'Unable to load the selected album.';
-  }
-} else if (!errorMessage && area === 'blog') {
-  try {
-    const entry = await getEntry('blog', slug);
+  | undefined;
 
-    if (!entry) {
-      errorMessage = 'We could not find that article yet. Please check back soon!';
-    } else {
-      const rendered = await entry.render();
-      const cover =
-        findCoverImage(entry.data.heroImage, entry.data.slug, slug, entry.data.category) ?? placeholderCover;
-      const backHref = `/${areaSegment}/${categorySlug}/`;
-      const backLabel = parentPage ? `← ${parentPage.title}` : '← Back';
-      const introParagraphs = subCategory?.description
-        ? [subCategory.description]
-        : parentPage
-        ? getIntroParagraphs(parentPage)
-        : [];
-      const seenChapterIds = new Set<string>();
-      const normalizedChapters: BlogChapterView[] = [];
-
-      if (Array.isArray(entry.data.chapters)) {
-        entry.data.chapters.forEach((chapter, index) => {
-          const title = chapter.title.trim();
-
-          if (!title) {
-            return;
-          }
-
-          const baseId = createChapterId(title, chapter.slug, index);
-          let candidateId = baseId;
-          let collisionIndex = 1;
-
-          while (seenChapterIds.has(candidateId)) {
-            collisionIndex += 1;
-            candidateId = `${baseId}-${collisionIndex}`;
-          }
-
-          seenChapterIds.add(candidateId);
-
-          const summary = chapter.summary?.trim();
-
-          normalizedChapters.push({
-            id: candidateId,
-            title,
-            summary: summary && summary.length > 0 ? summary : undefined,
-          });
-        });
-      }
-
-      const articleDescription = entry.data.description?.trim();
-
-      blogView = {
-        title: entry.data.title,
-        description: articleDescription && articleDescription.length > 0 ? articleDescription : undefined,
-        introParagraphs,
-        cover,
-        backHref,
-        backLabel,
-        chapters: normalizedChapters.length > 0 ? normalizedChapters : undefined,
-      };
-
-      BlogContent = rendered.Content;
-
-      pageTitle = entry.data.title;
-      pageDescription = articleDescription ?? parentPage?.description ?? '';
-      metaImage = cover.src;
+let blogView:
+  | {
+      title: string;
+      description?: string;
+      introParagraphs: string[];
+      cover: { src: string; alt: string };
+      chapters?: { id: string; title: string; summary?: string }[];
     }
-  } catch (unknownError) {
-    errorMessage =
-      unknownError instanceof Error ? unknownError.message : 'Unable to load this article right now.';
-  }
-  }
+  | undefined;
 
-  if (errorMessage) {
-    pageTitle = parentPage?.title ?? 'Content unavailable';
-    pageDescription = parentPage?.description ?? '';
-  }
+let BlogContent: Awaited<
+  ReturnType<CollectionEntry<'blog'>['render']>
+>['Content'] | undefined;
 
-  const headerBackHref =
-  albumView?.backHref ??
-  blogView?.backHref ??
-  (parentPage ? `${parentPage.href.replace(/\/+$/, '')}/` : undefined);
-const headerBackLabel =
-  albumView?.backLabel ??
-  blogView?.backLabel ??
-  (parentPage ? `← ${parentPage.title}` : undefined);
+if (!entry && !errorMessage) {
+  errorMessage = 'We could not find that entry yet. Please check back soon!';
+}
+
+if (!errorMessage && entry) {
+  if (isAlbumEntry(entry)) {
+    const initialItem = entry.data.items?.find((item) => item?.thumb || item?.full);
+    const albumThumb = initialItem
+      ? {
+          src: initialItem.thumb ?? initialItem.full ?? undefined,
+          width: typeof initialItem.width === 'number' ? initialItem.width : undefined,
+          height: typeof initialItem.height === 'number' ? initialItem.height : undefined,
+          alt: initialItem.filename ?? undefined,
+          full: initialItem.full ?? undefined,
+        }
+      : entry.data.cover
+      ? { src: entry.data.cover, alt: entry.data.title ?? entry.data.slug }
+      : undefined;
+
+    const parsedDate = entry.data.date instanceof Date ? entry.data.date : undefined;
+    const formattedDate = parsedDate
+      ? new Intl.DateTimeFormat('en', { month: 'long', year: 'numeric' }).format(parsedDate)
+      : undefined;
+
+    const baseHref = `/${areaSegment}/${sectionSlug}`.replace(/\/+$/, '');
+    const categorySegment = categorySlug ?? entry.data.category ?? '';
+    headerBackHref = backToParentCategory || !categorySegment
+      ? `${baseHref}/`
+      : `${baseHref}/${categorySegment}/`;
+
+    headerBackLabel = backToParentCategory
+      ? `← ${parentPage?.title ?? 'Back'}`
+      : category
+      ? `← ${category.title}`
+      : `← ${parentPage?.title ?? 'Back'}`;
+
+    albumView = {
+      title: entry.data.title ?? entry.data.albumName ?? entry.data.slug ?? entry.slug,
+      description: entry.data.description ?? entry.data.albumName ?? '',
+      shareKey: entry.data.shareKey ?? undefined,
+      albumSlug: entry.data.slug ?? entry.slug,
+      categoryBadge: category?.title ?? entry.data.category ?? undefined,
+      dateBadge: formattedDate,
+      initialThumb: albumThumb,
+    };
+
+    pageTitle = albumView.title;
+    pageDescription = albumView.description;
+    metaImage =
+      entry.data.cover ?? albumThumb?.full ?? (typeof albumThumb?.src === 'string' ? albumThumb.src : undefined);
+  } else {
+    const rendered = await entry.render();
+    BlogContent = rendered.Content;
+
+    const coverImage =
+      entry.data.cover?.trim().length
+        ? entry.data.cover.trim()
+        : findCoverImage(entry.data.slug, entry.slug, entry.data.category)?.src ?? placeholderCover;
+
+    const introParagraphs = category?.description
+      ? [category.description]
+      : parentPage
+      ? getIntroParagraphs(parentPage)
+      : [];
+
+    const backHrefBase = `/${areaSegment}/${sectionSlug}`.replace(/\/+$/, '');
+    const categorySegment = entry.data.category?.trim() || categorySlug || '';
+    headerBackHref = categorySegment ? `${backHrefBase}/${categorySegment}/` : `${backHrefBase}/`;
+    headerBackLabel = parentPage ? `← ${parentPage.title}` : '← Back';
+
+    const chapters = Array.isArray(entry.data.chapters)
+      ? entry.data.chapters
+          .map((chapter, index) => {
+            const title = chapter.title.trim();
+            if (!title) return undefined;
+            const baseId = (chapter.slug?.trim().length ? chapter.slug.trim() : title)
+              .toLowerCase()
+              .replace(/[^\p{Letter}\p{Number}]+/gu, '-');
+            const id = baseId.length > 0 ? baseId : `chapter-${index + 1}`;
+            const summary = chapter.summary?.trim();
+            return {
+              id,
+              title,
+              summary: summary && summary.length > 0 ? summary : undefined,
+            };
+          })
+          .filter((value): value is NonNullable<typeof value> => Boolean(value))
+      : [];
+
+    blogView = {
+      title: entry.data.title,
+      description: entry.data.description ?? undefined,
+      introParagraphs,
+      cover: { src: coverImage, alt: entry.data.title },
+      chapters: chapters.length > 0 ? chapters : undefined,
+    };
+
+    pageTitle = entry.data.title;
+    pageDescription = entry.data.description ?? parentPage?.description ?? '';
+    metaImage = coverImage;
+  }
+}
+
+if (errorMessage) {
+  pageTitle = parentPage?.title ?? 'Content unavailable';
+  pageDescription = parentPage?.description ?? '';
+}
 
 const meta = {
   title: pageTitle,
   description: pageDescription,
   ...(metaImage ? { image: metaImage } : {}),
 };
-
-
-
 ---
 <Template.Base title={pageTitle} meta={meta}>
   {headerBackHref && headerBackLabel ? (
     <Template.HeaderActions slot="header__actions" href={headerBackHref} label={headerBackLabel} />
   ) : null}
-
 
   {errorMessage ? (
     <section class="content-section">
@@ -266,19 +217,25 @@ const meta = {
         <Fragment slot="body">
           <p>{errorMessage}</p>
         </Fragment>
-      </Card>
+      </Template.Card>
     </section>
   ) : albumView ? (
-    <View.EntryAlbum album={albumView} />
+    <Template.EntryAlbum album={albumView} />
   ) : blogView ? (
-    <View.EntryBlog blog={blogView} BlogContent={BlogContent} />
+    <Template.EntryBlog blog={{
+      title: blogView.title,
+      description: blogView.description,
+      introParagraphs: blogView.introParagraphs,
+      cover: blogView.cover,
+      chapters: blogView.chapters,
+    }} BlogContent={BlogContent} />
   ) : (
     <section class="content-section">
       <Template.Card class="card--ghost is-centered">
         <Fragment slot="body">
           <p>There is nothing to display right now — please check back soon!</p>
         </Fragment>
-      </Card>
+      </Template.Card>
     </section>
   )}
-</BaseTemplate>
+</Template.Base>

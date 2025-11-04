@@ -46,7 +46,7 @@ const hasBlogSummary = blogDescription.length > 0 || blogSummaryParagraphs.lengt
         </div>
       </div>
     </Fragment>
-  </Card>
+  </Template.Card>
 </section>
 
 {hasBlogChapters || hasBlogSummary ? (
@@ -78,7 +78,7 @@ const hasBlogSummary = blogDescription.length > 0 || blogSummaryParagraphs.lengt
           </ol>
 
         </Fragment>
-      </Card>
+      </Template.Card>
     ) : null}
 
     <Template.Card headClass={hasBlogChapters ? '' : undefined}>
@@ -117,7 +117,7 @@ const hasBlogSummary = blogDescription.length > 0 || blogSummaryParagraphs.lengt
           </nav>
         </Fragment>
       ) : null}
-    </Card>
+    </Template.Card>
 
   </section>
 ) : null}

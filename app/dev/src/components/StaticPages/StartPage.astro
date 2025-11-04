@@ -1,9 +1,8 @@
 ---
-import BaseTemplate from '@Templates/BaseTemplate.astro';
+import { Template } from '@Frontend';
 import Icon from '@Assets/Icons.astro';
 import { ASSETS } from '@Assets/ui';
 import { getPageContent } from '@Content/siteContent';
-import Card from '@Templates/Card.astro';
 import { Picture } from 'astro:assets';
 export const prerender = true;
 
@@ -28,13 +27,13 @@ const albumSlug = 'bestof';
 const shareKey = 'KEkdKYpvFNPFgS654sbWB28rHuXIohcLo5MtrD1BERFqwHOtrQjmDxMhsRTnRSsKRSw';
 const isExternalLink = (href: string) => href.startsWith('http');
 ---
-<BaseTemplate meta={meta}>
+<Template.Base meta={meta}>
   <head>
     <link rel="preload" href={hero.image} as="image" type="image/webp" />
   </head>
 
   <section class="content-section">
-    <Card class="card--plain is-centered is-condensed">
+    <Template.Card class="card--plain is-centered is-condensed">
       <Fragment slot="head">
         <h1 class="card__title">{hero.heading}</h1>
       </Fragment>
@@ -51,19 +50,19 @@ const isExternalLink = (href: string) => href.startsWith('http');
       <Fragment slot="foot">
         <h2><em>...Eeeeeeeeeeeeeeeeeeeeek!</em></h2>
       </Fragment>
-    </Card>
+    </Template.Card>
   </section>
 
   <section class="content-section cols-2">
     <section class="content-section">
-      <Card>
+      <Template.Card>
         <Fragment slot="head">
           <h2 class="card__title">{intro.heading}</h2>
         </Fragment>
         <Fragment slot="body">
           <div class="prose">
             {intro.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
-            
+
           </div>
         </Fragment>
         <Fragment slot="foot">
@@ -71,16 +70,17 @@ const isExternalLink = (href: string) => href.startsWith('http');
             <p>
               - Always follow your heart -
             </p>
-          
+
           <h3 class="is-italic">{intro.signature}</h3>
           </div>
         </Fragment>
-      </Card>
-      <Card class="card--light" headClass="card__head--column">
+      </Template.Card>
+      <Template.Card class="card--light" headClass="card__head--column">
         <Fragment slot="head">
           <h2 class="card__title">{contact.heading}</h2>
           <p>{contact.description}</p>
-        </Fragment><Fragment slot="body">
+        </Fragment>
+        <Fragment slot="body">
           <div class="controls controls--start">
             {links.map((link) => (
               <a
@@ -95,9 +95,9 @@ const isExternalLink = (href: string) => href.startsWith('http');
             ))}
           </div>
         </Fragment>
-      </Card>
+      </Template.Card>
     </section>
-    <Card class="card--light" headClass="card__head--column">
+    <Template.Card class="card--light" headClass="card__head--column">
       <Fragment slot="head">
         <h2 class="card__title">{feature.heading}</h2>
         <p>{feature.description}</p>
@@ -121,7 +121,7 @@ const isExternalLink = (href: string) => href.startsWith('http');
         </div>
         </div>
       </Fragment>
-    </Card>
+    </Template.Card>
   </section>
 
 
@@ -130,4 +130,4 @@ const isExternalLink = (href: string) => href.startsWith('http');
     import { runOnReady } from '@Scripts/utils/_runOnReady.js';
     runOnReady(initGalleryIntro);
   </script>
-</BaseTemplate>
+</Template.Base>

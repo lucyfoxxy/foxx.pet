@@ -2,68 +2,62 @@
 import { Template } from '@Frontend';
 import { PLACEHOLDER_COVER, findCoverImage } from '@Assets/covers';
 import {
-  getPageContent,
-  getNavLabelParts,
-  getIntroParagraphs,
   getCategories,
+  getIntroParagraphs,
+  getNavLabelParts,
+  getPageContent,
   type PageContent,
 } from '@Content/siteContent';
+import { getEntriesBySection } from '@utils/getEntries';
 
-import { getCollection } from 'astro:content';
 interface Props {
   slug: string;
 }
 
 const { slug } = Astro.props as Props;
 
-let content = undefined as Awaited<ReturnType<typeof getPageContent>> | undefined;
-let categories: ReturnType<typeof getCategories> = [];
+let page: PageContent | undefined;
 let loadError: string | undefined;
-const categoryCounts = new Map<string, number>();
-const pathSegments = Astro.url.pathname.replace(/\/+$/, '').split('/').filter(Boolean);
-const areaSegment = pathSegments[0] ?? ''; // 'album' | 'blog' | ...
-if (!loadError && areaSegment === 'album') {
-  const allAlbums = await getCollection('album');
-  for (const entry of allAlbums) {
-    const catSlug = entry.data.category?.slug;
-    if (!catSlug) continue;
-    categoryCounts.set(catSlug, (categoryCounts.get(catSlug) ?? 0) + 1);
-  }
-} else if (!loadError && areaSegment === 'blog') {
-  const allPosts = await getCollection('blog');
-  for (const entry of allPosts) {
-    const catSlug = entry.data.category;
-    if (!catSlug) continue;
-    categoryCounts.set(catSlug, (categoryCounts.get(catSlug) ?? 0) + 1);
-  }
-}
+
 try {
-  content = await getPageContent(slug);
-  categories = getCategories(content);
+  page = await getPageContent(slug);
 } catch (unknownError) {
-  loadError = unknownError instanceof Error ? unknownError.message : 'Unable to load page data.';
+  const message =
+    unknownError instanceof Error ? unknownError.message : 'Unable to load page data.';
+  loadError = message;
 }
 
-const pageTitle = content?.title ?? 'Coming soon';
-const meta = {
-  title: pageTitle,
-  description: content?.description ?? '',
-};
+const entries = !loadError ? await getEntriesBySection(slug) : [];
+const categoryCounts = new Map<string, number>();
+entries.forEach((entry) => {
+  const category = typeof entry.data.category === 'string' ? entry.data.category.trim() : '';
+  if (!category) return;
+  categoryCounts.set(category, (categoryCounts.get(category) ?? 0) + 1);
+});
 
-const introParagraphs = content ? getIntroParagraphs(content) : [];
-const { icon, emoji } = content ? getNavLabelParts(content) : { icon: undefined, emoji: undefined };
-const placeholderCover = PLACEHOLDER_COVER;
+const pageTitle = page?.title ?? 'Coming soon';
+const pageDescription = page?.description ?? '';
+const meta = { title: pageTitle, description: pageDescription };
 
-const resolveHref = (page: PageContent | undefined, categorySlug: string, href?: string) => {
-  if (href) {
+const introParagraphs = page ? getIntroParagraphs(page) : [];
+const { icon, emoji } = page ? getNavLabelParts(page) : { icon: undefined, emoji: undefined };
+
+const categories = page ? getCategories(page) : [];
+
+const pathSegments = Astro.url.pathname.replace(/\/+$/, '').split('/').filter(Boolean);
+const areaSegment = pathSegments[0] ?? '';
+const countLabel = areaSegment === 'album' ? 'Albums' : areaSegment === 'blog' ? 'Articles' : 'Entries';
+
+const resolveHref = (pageContent: PageContent | undefined, categorySlug: string, href?: string) => {
+  if (href?.trim().length) {
     return href;
   }
 
-  if (!page) {
+  if (!pageContent) {
     return `/${categorySlug}/`;
   }
 
-  const normalized = page.href.replace(/\/+$/, '');
+  const normalized = pageContent.href.replace(/\/+$/, '');
   if (!normalized) {
     return `/${categorySlug}/`;
   }
@@ -72,36 +66,46 @@ const resolveHref = (page: PageContent | undefined, categorySlug: string, href?:
   return candidate.endsWith('/') ? candidate : `${candidate}/`;
 };
 
-const normalizedCategories = !loadError && content
-  ? categories.map((category) => {
-      const cover = findCoverImage(category.slug, category.title) ?? placeholderCover;
-      const count = categoryCounts.get(category.slug) ?? 0;
-      const countLabel =
-        areaSegment === 'album'
-          ? 'Albums'
-          : areaSegment === 'blog'
-          ? 'Articles'
-          : undefined;
-      return {
-        ...category,
-        cover,
-        href: resolveHref(content, category.slug, category.href),
-        count,
-        countLabel,
-      };
-    })
+const placeholderCover = PLACEHOLDER_COVER.src;
+
+const normalizedCategories = !loadError
+  ? categories
+      .map((category) => {
+        const categorySlug = category.slug?.trim();
+        if (!categorySlug) return undefined;
+
+        const cover =
+          findCoverImage(categorySlug, category.title)?.src ?? placeholderCover;
+        const href = resolveHref(page, categorySlug, category.href);
+        const count = categoryCounts.get(categorySlug) ?? 0;
+
+        return {
+          ...category,
+          slug: categorySlug,
+          cover,
+          href,
+          count,
+        };
+      })
+      .filter((value): value is NonNullable<typeof value> => Boolean(value))
   : [];
 
 const hasCategories = normalizedCategories.length > 0;
 ---
 <Template.Base title={pageTitle} meta={meta}>
   <Template.HeaderActions slot="header__actions" href="/" label="← Home" />
+
   <section class="content-section">
     <Template.Card class="card--plain is-centered">
       <Fragment slot="head">
-        <Template.TitleWithIcon class="card__title" title={pageTitle} icon={icon} emoji={emoji} />
+        <Template.TitleWithIcon
+          class="card__title"
+          title={pageTitle}
+          icon={icon}
+          emoji={emoji}
+        />
       </Fragment>
-      {introParagraphs.length > 0 && (
+      {introParagraphs.length > 0 ? (
         <Fragment slot="body">
           <div class="prose">
             {introParagraphs.map((paragraph) => (
@@ -109,8 +113,8 @@ const hasCategories = normalizedCategories.length > 0;
             ))}
           </div>
         </Fragment>
-      )}
-    </Card>
+      ) : null}
+    </Template.Card>
   </section>
 
   {loadError ? (
@@ -119,19 +123,18 @@ const hasCategories = normalizedCategories.length > 0;
         <Fragment slot="body">
           <p>{loadError}</p>
         </Fragment>
-      </Card>
+      </Template.Card>
     </section>
   ) : hasCategories ? (
     <section class="content-section cols-3">
-      {normalizedCategories.map(({ slug: categorySlug, title, description, href, cover, count, countLabel}) => (
+      {normalizedCategories.map(({ slug: categorySlug, title, description, href, cover, count }) => (
         <Template.TileView
           href={href}
           title={title}
           description={description}
           dataSlug={categorySlug}
-          cover={cover.src}
+          cover={cover}
           coverAlt={title}
-          
           count={count}
           countLabel={countLabel}
         />
@@ -143,7 +146,7 @@ const hasCategories = normalizedCategories.length > 0;
         <Fragment slot="body">
           <p>No categories to explore just yet — please check back soon!</p>
         </Fragment>
-      </Card>
+      </Template.Card>
     </section>
   )}
-</BaseTemplate>
+</Template.Base>

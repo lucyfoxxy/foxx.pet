@@ -56,7 +56,7 @@ const contactBlockSchema = z.object({
 
 const categorySchema = z.object({
   title: z.string(),
-  slug: z.string(),
+  slug: z.string().optional(),
   description: z.string().optional(),
   href: z.string().optional(),
 });
@@ -138,7 +138,7 @@ const baseEntrySchema = z.object({
   type: z.enum(["album", "article"]),
   section: z.string(),
   category: z.string(),
-  slug: z.string(),
+  slug: z.string().optional(),
   title: z.string(),
   description: z.string().optional(),
   date: z.coerce.date().optional(),

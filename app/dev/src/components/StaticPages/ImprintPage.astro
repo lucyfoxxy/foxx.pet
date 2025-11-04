@@ -1,7 +1,6 @@
 ---
+import { Template } from '@Frontend';
 import { getNavLabelParts, getPageContent } from '@Content/siteContent';
-import Card from '@Templates/Card.astro';
-import TitleWithIcon from '@Templates/partials/TitleWithIcon.astro';
 
 const content = await getPageContent('imprint');
 const introParagraphs = content.introParagraphs ?? [];
@@ -11,9 +10,9 @@ const { icon, emoji } = getNavLabelParts(content);
 ---
 
   <section class="content-section">
-    <Card class="card--plain is-centered">
+    <Template.Card class="card--plain is-centered">
       <Fragment slot="head">
-        <TitleWithIcon class="card__title" title={content.title} icon={icon} emoji={emoji} />
+        <Template.TitleWithIcon class="card__title" title={content.title} icon={icon} emoji={emoji} />
       </Fragment>
       <Fragment slot="body">
         <div class="prose">
@@ -22,12 +21,12 @@ const { icon, emoji } = getNavLabelParts(content);
           ))}
         </div>
       </Fragment>
-    </Card>
+    </Template.Card>
   </section>
 
   <section class="content-section cols-2">
     {contacts.map((contact) => (
-      <Card>
+      <Template.Card>
         <Fragment slot="head">
           <h2 class="card__title">{contact.title}</h2>
         </Fragment>
@@ -48,12 +47,12 @@ const { icon, emoji } = getNavLabelParts(content);
             ])}
           </dl>
         </Fragment>
-      </Card>
+      </Template.Card>
     ))}
-  
+
 
     {disclaimer.length > 0 && (
-      <Card>
+      <Template.Card>
         <Fragment slot="head">
           <h2 class="card__title">Disclaimer</h2>
         </Fragment>
@@ -66,6 +65,6 @@ const { icon, emoji } = getNavLabelParts(content);
             ))}
           </div>
         </Fragment>
-      </Card>
+      </Template.Card>
     )}
   </section>

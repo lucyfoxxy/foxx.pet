@@ -304,13 +304,14 @@ async function writeAlbumIndex({ filePath, meta, mode, items, shareKey, album })
           shareKey
         )}`
       : undefined;
-  
+  let title = meta.title;
+  if(title==='SFW'||title==='NSFW') {let title=`Artworks: ${title}`}
   const index = {
     type: 'album',
     section: meta.section,
     category: meta.category,
     slug: meta.slug,
-    title: meta.title,
+    title: title,
     description: album?.description ?? '',
     date: toIsoString(album?.startDate ?? album?.createdAt ?? '1970-01-01T00:00:00.000Z'),
     cover,
@@ -565,6 +566,7 @@ function createBestOfMeta(album) {
 
 function createDisplayTitle(value) {
   if (!value || typeof value !== 'string') return value;
+  if(value==='nsfw'||value==='sfw') return `Artworks: ${value}`;
   let result = value.trim();
 
   if (result) {

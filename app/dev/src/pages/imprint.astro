@@ -1,12 +1,12 @@
 ---
-import BaseTemplate from '@Templates/BaseTemplate.astro';
-import ImprintPage from '@Pages/ImprintPage.astro';
+import { Template,StaticPages } from '@Frontend';
+
 import { getPageContent } from '@Content/siteContent';
 export const prerender = true;
 
 const content = await getPageContent('imprint');
 const meta = { title: content.title, description: content.description };
 ---
-<BaseTemplate title={content.title} meta={meta}>
-  <ImprintPage />
-</BaseTemplate>
+<Template.Base title={content.title} meta={meta}>
+  <StaticPages.ImprintPage />
+</Template.Base>

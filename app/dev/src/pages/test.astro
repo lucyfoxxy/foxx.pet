@@ -1,13 +1,12 @@
 ---
-import BaseTemplate from '@Templates/BaseTemplate.astro';
-import Card from '@Templates/Card.astro';
+import { Template } from '@Frontend';
 import Icons from '@Assets/Icons.astro';
 import { COVERS } from '@Assets/covers';
 import { Picture } from 'astro:assets';
 ---
-<BaseTemplate>
+<Template.Base>
 <section class="content-section">
-  <Card class="card--plain is-centered">
+  <Template.Card class="card--plain is-centered">
     <Fragment slot="head">
       <h1 class="card__title">I am site title</h1>
     </Fragment>
@@ -16,10 +15,10 @@ import { Picture } from 'astro:assets';
         <p>Im some description text and I have a maximum size so I will wrap at some point!</p>
       </div>
     </Fragment>
-  </Card>
+  </Template.Card>
 </section>
 <section class="content-section cols-3">
-  <Card headClass="card__head--column" class="is-animated">
+  <Template.Card headClass="card__head--column" class="is-animated">
     <Fragment slot="head">
       <h2 class="card__title">I am card title</h2>
       <div class="card__badges controls">
@@ -39,8 +38,8 @@ import { Picture } from 'astro:assets';
       <span class="button button--small">click me</span><span class="button button--small button--dark">click me</span><span class="button button--small button--plain">click me</span>
       </div>
     </Fragment>
-  </Card>
-  <Card class="card--ghost is-animated">
+  </Template.Card>
+  <Template.Card class="card--ghost is-animated">
     <Fragment slot="head">
       <h2 class="card__title">I am card title</h2>
       <div class="card__badges controls controls--tight">
@@ -60,8 +59,8 @@ import { Picture } from 'astro:assets';
         <span class="button">click me</span><span class="button button--dark">click me</span><span class="button button--plain">click me</span>
       </div>
     </Fragment>
-  </Card>
-  <Card class="card--light" headClass="card__head--column">
+  </Template.Card>
+  <Template.Card class="card--light" headClass="card__head--column">
     <Fragment slot="head">
       <h2 class="card__title">I am card title</h2>
       <div class="card__badges controls">
@@ -82,10 +81,10 @@ import { Picture } from 'astro:assets';
         <span class="button button--large">click me</span><span class="button button--large button--dark">click me</span><span class="button button--large button--plain">click me</span>
       </div>
     </Fragment>
-  </Card>
+  </Template.Card>
 </section>
 <section class="content-section cols-3">
-  <Card>
+  <Template.Card>
     <Fragment slot="body">
       <div class="controls">
         <span class="button"><span class="button__icon"><Icons kind="palette"></Icons></span></span>
@@ -96,8 +95,8 @@ import { Picture } from 'astro:assets';
         <span class="button button--plain"><Icons kind="star"></Icons></span>    
       </div>
     </Fragment>
-  </Card>
-  <Card class="card--ghost" headClass="card__head--column is-centered">
+  </Template.Card>
+  <Template.Card class="card--ghost" headClass="card__head--column is-centered">
     <Fragment slot="head">
       <h2 class="card__title">Card Title</h2>
       <div class="card__badges controls">
@@ -122,8 +121,8 @@ import { Picture } from 'astro:assets';
       </div>
       </div>
     </Fragment>
-  </Card>
-  <Card headClass="card__head--column is-centered">
+  </Template.Card>
+  <Template.Card headClass="card__head--column is-centered">
     <Fragment slot="head">
       <h2 class="card__title">Card Tiiiiiiiiiiiiiiiiiiiiiiiiiiiii iiiitle</h2>
       <div class="card__badges controls">
@@ -147,10 +146,10 @@ import { Picture } from 'astro:assets';
         />
       </div></div>
     </Fragment>
-  </Card>
+  </Template.Card>
 </section>
 <section class="content-section">
-  <Card class="card--ghost" headClass="is-centered card__head--column" >
+  <Template.Card class="card--ghost" headClass="is-centered card__head--column" >
     <Fragment slot="head">
       <h2 class="card__title">Card Title</h2>
       <div class="card__badges controls">
@@ -171,8 +170,8 @@ import { Picture } from 'astro:assets';
         />
       </div></div>
     </Fragment>
- </Card>      
-  <Card class="card--light is-condensed" headClass="is-centered card__head--column" >
+ </Template.Card>      
+  <Template.Card class="card--light is-condensed" headClass="is-centered card__head--column" >
     <Fragment slot="body">
       <div class="media-wrapper is-thumbs-wrap">
         <div class="media-frame is-thumbs-frame">
@@ -209,6 +208,6 @@ import { Picture } from 'astro:assets';
         </div>
       </div>
     </Fragment>
-  </Card> 
+  </Template.Card> 
 </section>
-</BaseTemplate>
+</Template.Base>

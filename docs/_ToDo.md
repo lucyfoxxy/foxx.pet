@@ -11,15 +11,15 @@
     - [x] blog-like: Cover Bild in .md Post definieren
     - [x] album-like: zieht Bild automatisch
 - [x] Folder Structure Overhaul (see [FolderStructure.md]) [foundation]
-- [ ] Images dynamisch verschiedene Auflösungen für Cover / Hero
-- [ ] TileView vereinfachen und auch für CategoryOverview verwenden
-- [ ] Templates.ts import
+- [x] Images laden langsam
+- [x] TileView vereinfachen und auch für CategoryOverview verwenden
+- [x] Templates.ts import
 
 ## Bugs
 - [x]  Header / Footer raus aus Panel block [site]
 - [x]  sticky header nav verdeckt [mobile]
 - [x] Gallery lightbox geht nicht [media]
-- [ ] Back Button geht vom Content zurück zum Main Overview [ui]
+- [ ] Back Button hat falsches label im EntryView (href aber korrekt) [ui]
 
 ## Visual
 - [x] CSS/SVG-Pattern statt BG-Image [foundation]
@@ -30,9 +30,9 @@
 - [x] header nav zu klein [mobile]
 - [ ] hover / active effekte [nav]
 - [ ] einheitlicher, dynamischer button / badge style
-- [ ] Back Button style [nav]
-- [ ] Tile Views: einheitlicher Card/Badge Style [Overviews]
-- [ ] Overlay: hell oder dunkel?
+    - [ ] Back Button style [nav]
+- [x] Tile Views: einheitlicher Card/Badge Style [Overviews]
+- [x] Overlay: hell oder dunkel?
 
 ## Features
 - [x] Header/Nav aktiv + Buttons [site]
@@ -40,5 +40,6 @@
 - [ ] Gallery: Category Covers [gallery]
 - [x] Stories/Rezepte restrukturieren + Filter [stories]
 - [ ] Publish 1 Story + 1 Rezept (E2E) [release]
+- [ ] fehlende Section Covers
 - [X] Artworks (+SFW/NSFW) [content]
 - [ ] Remove placeholders
