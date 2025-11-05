@@ -1,45 +1,34 @@
-# R1 Roadmap
+# ✅ Erledigt
+- [x] Frames schreiben korrekt nach `album/frames/{sfw,nsfw}/`
+- [x] Vereinheitlichtes Schema (`section`, `category`, `slug`, `title`, `date`, …) in `config.ts`
+- [x] Blog-Chapters: rechter Content zeigt ausgewähltes Kapitel
+- [x] `initBlogChapters` als separate JS + sauberes Inline-Bootstrapping
+- [x] Overlay-Logik: Mobile fix (kein klebendes `:hover`, `data-show` Steuerung)
+- [x] Logo auf Mobile ausgeblendet → Sticky-Header-Sprung behoben
+- [x] Back-Button falsches Label im EntryView
+- [x] Navigation: Hover/Active-Zustände konsistent (Desktop & Mobile „aktueller Tab“)
+- [x] Footer-Layout vereinheitlicht (Mobile 1 Spalte, Desktop 3 Spalten)
+  - [ ] Ausnahme-Regel für unsichtbaren Button-Padding wieder entfernen (Teil des Button-Style-Refactors)
 
-## Foundation
-- [x] Tokens konsolidieren [foundation]
-- [x] UI: button/badge + control-wrapper [ui]
-- [x] Media: wrap/frame/img [media]
-- [x] site.css: header/footer/kinder schlank [site]
-- [x] astro Layout Template für Card hierarchie (card_head etc) erstellen [foundation]
-- [x] General Page Flow: Category Overview -> Category Content Overview -> Detail Page
-- [x] Category Content Overview Subtypes: "blog-like" & "album-like"
-    - [x] blog-like: Cover Bild in .md Post definieren
-    - [x] album-like: zieht Bild automatisch
-- [x] Folder Structure Overhaul (see [FolderStructure.md]) [foundation]
-- [x] Images laden langsam
-- [x] TileView vereinfachen und auch für CategoryOverview verwenden
-- [x] Templates.ts import
+# 🐞 Offene Bugs
 
-## Bugs
-- [x]  Header / Footer raus aus Panel block [site]
-- [x]  sticky header nav verdeckt [mobile]
-- [x] Gallery lightbox geht nicht [media]
-- [ ] Back Button hat falsches label im EntryView (href aber korrekt) [ui]
 
-## Visual
-- [x] CSS/SVG-Pattern statt BG-Image [foundation]
-- [x] Icons: Emoji → SVG + Icon-Partial [ui]
-- [x] header logo glow verringern [site]
-- [x] optimize image responsiveness formula [media]
-- [x] inset outline um panel [site]
-- [x] header nav zu klein [mobile]
-- [ ] hover / active effekte [nav]
-- [ ] einheitlicher, dynamischer button / badge style
-    - [ ] Back Button style [nav]
-- [x] Tile Views: einheitlicher Card/Badge Style [Overviews]
-- [x] Overlay: hell oder dunkel?
+# 🎨 UX / Polish
+- [ ] Buttons/Badges vereinheitlichen (inkl. Back-Button-Style)
 
-## Features
-- [x] Header/Nav aktiv + Buttons [site]
-- [X] Gallery: Detail-Layout [gallery]
-- [ ] Gallery: Category Covers [gallery]
-- [x] Stories/Rezepte restrukturieren + Filter [stories]
-- [ ] Publish 1 Story + 1 Rezept (E2E) [release]
-- [ ] fehlende Section Covers
-- [X] Artworks (+SFW/NSFW) [content]
-- [ ] Remove placeholders
+# 🖼️ Gallery / Home Intro (neu)
+- [ ] Mini-Intro-Gallery auf Startseite auf Basis der Album-Entry-Ansicht (Overlay-Stil, **ohne** Thumbs-Bar)
+- [ ] JS vereinheitlichen: EntryAlbum-Viewer und Intro-Gallery nutzen **eine** gemeinsame Logik (Feature-Flags: `withThumbs` etc.)
+- [ ] Best-Of entfernen → stattdessen zufälliges Album (z. B. aus `frames/{sfw,nsfw}` oder konfigurierbarer Pool)
+- [ ] Direktlink: Klick auf Intro-Gallery öffnet die gewählte Galerie (kein modaler Viewer)
+- [ ] Overlay-Auto-Hide auch für Intro-Gallery übernehmen (Touch kurz ein/aus)
+
+# 📦 Content / Assets
+- [ ] Gallery: Category-Covers (jetzt, wo Kategorien stabil sind)
+- [ ] Fehlende Section-Covers ergänzen
+- [ ] Platzhalter entfernen
+- [ ] E2E-Test: 1 Story + 1 Rezept wirklich veröffentlichen (mit neuer Pipeline)
+
+# 🧱 Tech-Schulden (klein, optional)
+- [ ] `slug` in alten MD-Files ggf. harmonisieren (falls noch Pfad-Slugs liegen)
+- [ ] Entry-Overlays: `no-hover`-Klassenschalter global setzen (robust

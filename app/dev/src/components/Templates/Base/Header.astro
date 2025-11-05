@@ -31,15 +31,8 @@ const hasActions = Astro.slots.has('actions');
     {navLinks
       .filter((link) => link.includeInHeader)
       .map((link) => (
-        <a class="button button--inset button--stretch" href={link.href} data-active={link.isActive ? 'true' : undefined}>
-         <span
-          class:list={[
-            'header__nav-link',
-            link.isActive && 'is-active'
-          ]}
-          data-active={link.isActive ? 'true' : undefined}
-          aria-current={link.isActive ? 'page' : undefined}
-        >         
+        <a class="header__nav-item button button--inset button--stretch" href={link.href} data-active={link.isActive ? 'true' : undefined}>
+      
             {link.icon ? (
               <>
                 <span class="header__nav-symbol" aria-hidden="true">
@@ -60,7 +53,7 @@ const hasActions = Astro.slots.has('actions');
                 <span class="header__nav-text">{link.label}</span>
               </>
             )}
-         </span>  
+          
         </a>
       ))}
   </nav>

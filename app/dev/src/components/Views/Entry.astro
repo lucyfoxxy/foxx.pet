@@ -48,6 +48,7 @@ const matchesEntrySlug = (entry: Entry, value: string) => {
   if (!normalized) return false;
 
   if (isAlbumEntry(entry)) {
+    
     return (entry.data.slug ?? entry.slug) === normalized;
   }
 
@@ -63,8 +64,8 @@ let pageTitle = parentPage?.title ?? 'Coming soon';
 let pageDescription = parentPage?.description ?? '';
 let metaImage: string | undefined;
 
-let headerBackHref = parentPage ? `${parentPage.href.replace(/\/+$/, '')}/` : undefined;
-let headerBackLabel = parentPage ? `← ${parentPage.title}` : undefined;
+let headerBackHref = parentPage ? `${parentPage.href.replace(/\/+$/, '')}/` : '/';
+let headerBackLabel = category?.title ? `← ${category?.title}` : '← Back';
 
 let albumView:
   | {
@@ -122,12 +123,6 @@ if (!errorMessage && entry) {
       ? `${baseHref}/`
       : `${baseHref}/${categorySegment}/`;
 
-    headerBackLabel = backToParentCategory
-      ? `← ${parentPage?.title ?? 'Back'}`
-      : category
-      ? `← ${category.title}`
-      : `← ${parentPage?.title ?? 'Back'}`;
-
     albumView = {
       title: entry.data.title ?? entry.data.albumName ?? entry.data.slug ?? entry.slug,
       description: entry.data.description ?? entry.data.albumName ?? '',
@@ -160,7 +155,7 @@ if (!errorMessage && entry) {
     const backHrefBase = `/${areaSegment}/${sectionSlug}`.replace(/\/+$/, '');
     const categorySegment = entry.data.category?.trim() || categorySlug || '';
     headerBackHref = categorySegment ? `${backHrefBase}/${categorySegment}/` : `${backHrefBase}/`;
-    headerBackLabel = parentPage ? `← ${parentPage.title}` : '← Back';
+
 
     const chapters = Array.isArray(entry.data.chapters)
       ? entry.data.chapters

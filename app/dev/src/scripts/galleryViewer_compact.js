@@ -1,7 +1,7 @@
 import { createGalleryItemsBySlug } from './utils/_slugLoader.js';
 import { loadImageWithTransition } from './utils/_transitionLoader.js';
 
-const metas = import.meta.glob('@Content/album/paws/bestof.json', {
+const metas = import.meta.glob('@Content/album/paws/bestof/bestof.json', {
   query: '?json',
   eager: true,
 });
@@ -12,6 +12,7 @@ const assetModules = import.meta.glob('@Assets/albums/bestof/*', {
   eager: true,
 });
 
+
 const itemsBySlug = createGalleryItemsBySlug(metas, assetModules);
 
 const buildRemoteUrl = (id, shareKey, kind) => {
@@ -21,14 +22,16 @@ const buildRemoteUrl = (id, shareKey, kind) => {
 };
 
 export default function initGalleryIntro() {
-  const frame = document.querySelector('.media-frame[data-slug]');
-  if (!frame) return;
+  const wrapper = document.querySelector('.media-wrapper.compact');
 
+  if (!wrapper) return;
+  const overlay = wrapper.querySelectorAll('.card__overlay--hover')
+  const frame = wrapper.querySelector('.media-frame.compact');
   const slug     = frame.getAttribute('data-slug');
   const autoplay = frame.getAttribute('data-autoplay') === 'true';
   const random   = frame.getAttribute('data-random') === 'true';
   const interval = parseInt(frame.getAttribute('data-interval') || '7000', 10);
-  const imgEl     = frame?.querySelector('.media-image');
+  const imgEl     = frame?.querySelector('.media-image.compact');
   const progress  = frame?.querySelector('.media-progress');
 
   if (!frame || !imgEl || !progress) return;
@@ -69,7 +72,7 @@ export default function initGalleryIntro() {
   if (random) order.sort(() => Math.random() - 0.5);
 
   if (order.length === 0) {
-    viewer.remove();
+   // viewer.remove();
     return;
   }
 

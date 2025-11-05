@@ -258,14 +258,3 @@
   line-height: var(--line-height-m);
   opacity: 0.85;
 }
-
-@media (max-width: 720px) {
-  .card__hero-overlay {
-    inset-inline: clamp(var(--card-padding), 4vw, 6vw);
-  }
-
-  .card__hero-overlay :where(h1,h2,h3) {
-    font-size: clamp(1.75rem, 1.4rem + 4vw, 2.5rem);
-  }
-}
-
