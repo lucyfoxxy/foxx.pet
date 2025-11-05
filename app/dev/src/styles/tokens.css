@@ -64,8 +64,8 @@
   --color-outline:            color-mix(in oklab, var(--color-dark)60%,transparent);
   --color-shadow--soft:       color-mix(in oklch, var(--color-dark) 30%, transparent);
   --color-shadow--strong:     color-mix(in oklch, var(--color-dark) 60%, transparent);
-  --color-glow-soft:         color-mix(in oklch, var(--color-light) 40%, var(--color-accent));
-  --color-glow-strong:       color-mix(in oklch, var(--color-accent) 80%, white);
+  --color-glow--soft:         color-mix(in oklch, var(--color-light) 40%, var(--color-accent));
+  --color-glow--strong:       color-mix(in oklch, var(--color-accent) 80%, black);
 
   /* ====== Text Colors & FX ==================== */
   --text-color:              color-mix(in oklch, var(--color-light) 85%, white);
@@ -76,8 +76,8 @@
   --text-shadow--strong:     2px 2px 2px var(--color-shadow--strong);
   --icon-shadow:             3px 4px 3px var(--color-shadow--strong);
 
-  --text-glow--soft:         1px 1px 1px var(--color-glow-soft);
-  --text-glow--strong:       1px 1px 2px var(--color-glow-strong);
+  --text-glow--soft:         1px 1px 1px var(--color-glow--soft);
+  --text-glow--strong:       1px 1px 2px var(--color-glow--strong);
 
   /* ====== Surface / Control Colors & FX ======= */  
   --card-surface--dark:      color-mix(in oklab,var(--color-dark) 60%, transparent);
@@ -88,10 +88,10 @@
   --control-surface--dark:            color-mix(in oklch,var(--color-dark)99%,transparent);
   --control-surface--dark--highlight: color-mix(in oklab,var(--control-surface--dark) 94%, var(--color-dark));
   
-  --control-glow:  inset 0 0 1px 2px var(--color-glow-soft);
-  --control-glow--soft:inset 0 0 2px 1px var(--color-glow-soft);
-  --control-glow--active: 0 0 4px 2px var(--control-surface--dark);
-  --control-glow--hover:  0 0 4px 2px var(--color-accent);
+  --control-glow:  inset 0 0 1px 2px var(--color-glow--soft);
+  --control-glow--soft:inset 0 0 2px 1px var(--color-glow--soft);
+  --control-glow--active: 0 0 4px 2px var(--color-glow--soft);
+  --control-glow--hover:  0 0 4px 2px var(--color-glow--strong);
 
   --surface-shadow--soft:    1px 2px 4px 0px var(--color-shadow--soft);
   --surface-shadow--default: 0 0 18px -10px var(--color-shadow--soft),0 0 24px -6px var(--color-shadow--strong);
@@ -99,8 +99,8 @@
 
   --control-shadow--inset: inset 0 0 24px 0 var(--color-shadow--soft),inset 0 0 0 1px var(--color-shadow--strong);
 
-  --surface-glow:      0 0 8px 0 var(--color-glow-strong), inset 0 0 1px 2px var(--color-glow-strong);
-  --surface-glow--soft:0 0 6px 0 var(--color-glow-soft);
+  --surface-glow:      0 0 8px 0 var(--color-glow--strong), inset 0 0 1px 2px var(--color-glow--strong);
+  --surface-glow--soft:0 0 6px 0 var(--color-glow--soft);
  
   --blur-s:              blur(var(--radius-s));
   --blur-m:           blur(var(--radius-m));
