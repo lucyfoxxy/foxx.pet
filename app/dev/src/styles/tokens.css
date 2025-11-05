@@ -65,7 +65,7 @@
   --color-shadow--soft:       color-mix(in oklch, var(--color-dark) 30%, transparent);
   --color-shadow--strong:     color-mix(in oklch, var(--color-dark) 60%, transparent);
   --color-glow-soft:         color-mix(in oklch, var(--color-light) 40%, var(--color-accent));
-  --color-glow-strong:       color-mix(in oklch, var(--color-light) 80%, white);
+  --color-glow-strong:       color-mix(in oklch, var(--color-accent) 80%, white);
 
   /* ====== Text Colors & FX ==================== */
   --text-color:              color-mix(in oklch, var(--color-light) 85%, white);
@@ -88,8 +88,10 @@
   --control-surface--dark:            color-mix(in oklch,var(--color-dark)99%,transparent);
   --control-surface--dark--highlight: color-mix(in oklab,var(--control-surface--dark) 94%, var(--color-dark));
   
-  --control-glow:  inset    0 0 1px 2px var(--color-glow-soft);
+  --control-glow:  inset 0 0 1px 2px var(--color-glow-soft);
   --control-glow--soft:inset 0 0 2px 1px var(--color-glow-soft);
+  --control-glow--active: 0 0 4px 2px var(--control-surface--dark);
+  --control-glow--hover:  0 0 4px 2px var(--color-accent);
 
   --surface-shadow--soft:    1px 2px 4px 0px var(--color-shadow--soft);
   --surface-shadow--default: 0 0 18px -10px var(--color-shadow--soft),0 0 24px -6px var(--color-shadow--strong);

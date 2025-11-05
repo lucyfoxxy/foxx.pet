@@ -176,20 +176,20 @@
   opacity: 0.9;
 }
 
-.card__overlay--hover {
-  background: transparent;
+:where(.card__overlay[data-show="false"]) {
   opacity: 0;
   transition: opacity .5s ease;
 }
-
-*:hover > .card__overlay--hover,
-.card__overlay--hover[data-show="true"] {
-  opacity: 1;
+@media (max-width: 1100px) {
+  .card__overlay[data-show="false"] {
+    opacity: 0;
+    transition: opacity .5s ease;
+  }
 }
-
-:where(.media-pause[data-active="true"]) .card__overlay--hover {opacity: 1;}
-@media(max-width:1100px) {
-
+*:hover > .card__overlay,
+.card__overlay[data-show="true"] {
+  opacity: 1;
+  transition: opacity .5s ease;
 }
 
 

@@ -28,10 +28,11 @@ const buildRemoteUrl = (id, shareKey, kind) => {
 };
 
 export default function initGalleryPage() {
+  const wrapper = document.querySelector('.media-wrapper.media-wrapper--controls');
 
-    const frame = document.querySelector('.media-frame[data-slug]');
-  if (!frame) return;
-
+  if (!wrapper) return;
+  const overlay = wrapper.querySelectorAll('.card__overlay--hover')
+  const frame = wrapper.querySelector('.media-frame[data-slug]');
   const slug     = frame.getAttribute('data-slug');
   const autoplay = frame.getAttribute('data-autoplay') === 'true';
   const random   = frame.getAttribute('data-random') === 'true';
@@ -169,8 +170,17 @@ export default function initGalleryPage() {
   const updatePlayButton = () => {
     btnPause.setAttribute('data-active', playing ? true : false);
     btnPlay.setAttribute('data-active', playing ? false : true);
+    
+    btnPlay.setAttribute('data-active', playing ? false : true);    
     btnPlay.setAttribute('aria-label', playing ? 'Pause autoplay' : 'Resume autoplay');
   };
+
+const updateOverlayState = () => {
+  overlay.forEach(o => {
+    o.setAttribute('data-show', playing ? 'false' : 'true');
+  });
+};
+
 
   frame.style.setProperty('--gallery-interval', `${interval}ms`);
 
@@ -289,11 +299,13 @@ export default function initGalleryPage() {
   };
 
   const highlightThumbs = () => {
-    thumbs.querySelectorAll('.media-frame.is-thumb').forEach((thumb) => {
+    thumbs.querySelectorAll('.media-frame--thumb').forEach((thumb) => {
       const thumbIndex = parseInt(thumb.dataset.index || '', 10);
       const isActive = thumbIndex === i;
       thumb.classList.toggle('active', isActive);
       thumb.setAttribute('aria-current', isActive ? 'true' : 'false');
+      const thumbImg = thumb.querySelector('.media-image.media-image--thumb');
+      thumbImg.setAttribute('aria-current', isActive ? 'true' : 'false');
     });
   };
 
@@ -404,7 +416,7 @@ export default function initGalleryPage() {
     imgEl.style.animationPlayState = '';
     imgEl.style.opacity = '';
   };
-
+  
   const run = ({ resetProgress = true } = {}) => {
     if (timer) cancelAnimationFrame(timer);
     timer = null;
@@ -417,6 +429,7 @@ export default function initGalleryPage() {
     if (playing) {
       resumeKenBurns();
       tick();
+      updateOverlayState();
     }
   };
 
@@ -439,13 +452,26 @@ export default function initGalleryPage() {
     next();
     run();
   });
+   frame.addEventListener('click', (event) => {
+    event.stopPropagation();
+    const wasPlaying = playing;
+    playing = !playing;
+    updatePlayButton();
+    updateOverlayState();
+    if (wasPlaying && !playing) {
+      captureElapsed();
+      pauseKenBurns();
+    } else if (!wasPlaying && playing) {
+      resumeKenBurns();
+      run({ resetProgress: false });
+    }
+  });    
   btnPlay.addEventListener('click', (event) => {
     event.stopPropagation();
     const wasPlaying = playing;
     playing = !playing;
     updatePlayButton();
-    document.querySelectorAll('.card__overlay--hover').forEach((overlay) => {
-      overlay.setAttribute('data-show',false) });    
+    updateOverlayState();
     if (wasPlaying && !playing) {
       captureElapsed();
       pauseKenBurns();
@@ -459,8 +485,7 @@ export default function initGalleryPage() {
     const wasPlaying = playing;
     playing = !playing;
     updatePlayButton();
-    document.querySelectorAll('.card__overlay--hover').forEach((overlay) => {
-      overlay.setAttribute('data-show',true) });
+    updateOverlayState();
     if (wasPlaying && !playing) {
       captureElapsed();
       pauseKenBurns();
@@ -508,6 +533,7 @@ export default function initGalleryPage() {
   // Thumbnails rendern
   renderThumbs();
   updatePlayButton();
+  updateOverlayState();
   show(0, 0);
   requestAnimationFrame(handleResize);
   if (autoplay && hasMultiple) run();
