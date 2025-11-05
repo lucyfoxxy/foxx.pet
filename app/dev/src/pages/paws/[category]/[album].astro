@@ -1,0 +1,24 @@
+---
+import { View } from '@Frontend';
+import { getEntriesBySection, isAlbumEntry } from '@utils/getEntries';
+
+export async function getStaticPaths() {
+  const entries = await getEntriesBySection('paws');
+
+  return entries
+    .filter(isAlbumEntry)
+    .map((entry) => ({
+      params: {
+        category: entry.data.category ?? 'general',
+        album: entry.data.slug,
+      },
+    }));
+}
+
+const { album } = Astro.params;
+
+if (!album) {
+  throw new Error('Missing album slug');
+}
+---
+<View.Entry slug={album} />
