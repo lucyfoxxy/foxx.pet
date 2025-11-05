@@ -24,7 +24,7 @@
   color: var(--text-color);
   transition: var(--transition-glow),var(--transition-raise);;
   vertical-align: middle;
-  text-shadow: var(--text-glow--soft),var(--text-shadow--strong);
+  text-shadow: var(--text-shadow--strong),var(--text-glow--soft);
   box-shadow: var(--surface-shadow--soft),var(--control-shadow--inset);
   justify-content: center;
   gap: var(--control-gap); 
@@ -39,7 +39,7 @@
   touch-action: manipulation;
   cursor: pointer;  
 }
-.button--small { padding-block: calc(var(--control-padding) * .75);}
+.button--small { padding-block: calc(var(--control-padding) * .5); border-radius: var(--radius-s);}
 .button--large { padding-inline: calc(var(--control-padding) * 1.35);}
 .button--round { border-radius: 999px; }
 .button--stretch {inline-size: 100%}
@@ -48,8 +48,16 @@
   text-shadow: var(--text-glow--soft); 
   backdrop-filter: var(--blur-m);
 }
-.button--inset {background: none; box-shadow: var(--control-shadow--inset)}
-.button[data-active="true"] { backdrop-filter: brightness(.75);
+
+.button--inset { 
+  background: var(--control-surface--dark);
+  box-shadow: var(--control-shadow--inset);
+  filter: drop-shadow(2px 4px 6px var(--color-shadow--strong));
+}
+
+.button[data-active="true"] { 
+  background: var(--control-surface--light);
+  backdrop-filter: brightness(.75);
 }
 .button[data-active="true"] > *,
 .button:hover > * {
@@ -63,12 +71,10 @@
   box-shadow: var(--surface-shadow--default),var(--control-glow); 
 }
 .button:hover {
-  backdrop-filter: brightness(.75); 
+  backdrop-filter: brightness(1.25); 
 }
 .button--small:hover { 
-  backdrop-filter: brightness(1.5);
-  transform: var(--transform-raise--soft);
-  text-shadow: var(--text-glow--soft);
+
   box-shadow: var(--surface-shadow--default); 
 }
 

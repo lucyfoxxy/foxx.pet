@@ -77,7 +77,7 @@
 }
 .media-frame--thumb:hover,
 .media-frame--thumb:focus-visible {
-  transform: var(--transform-raise);  
+  transform: var(--transform-scale);  
 }
 .media-frame--thumb[aria-current="true"],
 .media-frame--thumb:hover,

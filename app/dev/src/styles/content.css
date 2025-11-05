@@ -5,9 +5,7 @@
 
 /* ====== GENERAL CONTENT LAYOUT ======================= */
 
-.content-section + .content-section {
-  margin-block-start: var(--section-gap);
-}
+
 
 .content-section :where(h1,h2,h3,h4) {
   margin: 0 0 calc(var(--flow-gap) * .5) 0;
@@ -21,7 +19,7 @@
   max-inline-size: 100%;
   grid-template-columns: 1fr;
 }
-
+.content-section--head { margin-block: var(--section-gap); }
 .content-section.cols-2 { grid-template-columns: repeat(2, 1fr); }
 .content-section.cols-3 { grid-template-columns: repeat(3, 1fr); }
 
@@ -40,7 +38,7 @@
     "card-body"
     "card-foot";
   grid-template-rows: auto 1fr auto;
-
+  filter: drop-shadow(6px 6px 4px var(--color-shadow--strong));
   border-radius: var(--radius-l);
   padding: var(--card-padding);
   gap: var(--card-gap);
@@ -49,7 +47,7 @@
   backdrop-filter: var(--blur-m);
 }
 .card--ghost    { background: unset;}
-.card--plain    { background: transparent; box-shadow: none; backdrop-filter: none; filter: drop-shadow(6px 6px 3px var(--color-shadow--strong));}
+.card--plain    { background: transparent; box-shadow: none; backdrop-filter: none;}
 .card--light   { background: var(--card-surface--light); }
 .card--flush   { padding: 0;  gap: 0;}
 .card--flush > .card__head {row-gap: 0; column-gap: 0;}

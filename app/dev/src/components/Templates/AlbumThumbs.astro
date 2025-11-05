@@ -1,0 +1,13 @@
+---
+import { Template } from '@Frontend';
+---
+
+<Template.Card class="card--flush card--ghost is-centered">
+  <Fragment slot="body">
+    <div class="media-wrapper media-wrapper--thumbs" role="list">
+      <button class="media-controls media-prev is-thumbs-prev" aria-label="Previous thumbnails" type="button">❮</button>
+      <div class="media-wrapper media-wrapper--frames" role="list" data-window="10"></div>
+      <button class="media-controls media-next is-thumbs-next" aria-label="Next thumbnails" type="button">❯</button>
+    </div>
+  </Fragment>
+</Template.Card>

@@ -46,7 +46,7 @@ if (!slug) {
 const { albumSlug, backToParentCategory = false } = Astro.props as StaticProps;
 ---
 {albumSlug ? (
-  <View.Entry slug={albumSlug} backToParentCategory={backToParentCategory} />
+  <View.Entry section="frames" slug={albumSlug} backToParentCategory={backToParentCategory} />
 ) : (
-  <View.Category slug={slug} />
+  <View.Category section="frames" slug={slug} />
 )}

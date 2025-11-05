@@ -17,17 +17,23 @@ import {
 
 interface Props {
   slug: string;
+  section?: string;
 }
 
-const { slug } = Astro.props as Props;
+const { slug, section } = Astro.props as Props;
 
 const pathSegments = Astro.url.pathname.replace(/\/+$/, '').split('/').filter(Boolean);
-const areaSegment = pathSegments[0] ?? '';
-const sectionSlug = pathSegments[1] ?? '';
+const sectionSlug =
+  section?.trim() ??
+  (pathSegments.length >= 3
+    ? pathSegments[1]
+    : pathSegments.length >= 1
+    ? pathSegments[0]
+    : '');
 
 let errorMessage: string | undefined;
 
-if (!areaSegment || !sectionSlug) {
+if (!sectionSlug) {
   errorMessage = 'We could not resolve the requested collection.';
 }
 
@@ -56,18 +62,21 @@ const entries = !errorMessage
 const placeholderCover = PLACEHOLDER_COVER.src;
 
 const toEntryHref = (entry: Entry) => {
+  const parentHref = parentPage?.href?.replace(/\/+$/, '') ?? (sectionSlug ? `/${sectionSlug}` : '');
   if (isAlbumEntry(entry)) {
     const entrySlug = entry.data.slug?.trim() || entry.slug;
     const categorySegment = entry.data.category?.trim() || slug;
-    const base = `/${areaSegment}/${sectionSlug}/${categorySegment}`.replace(/\/+$/, '');
-    return `${base}/${entrySlug}/`;
+    const base = `${parentHref}/${categorySegment}`.replace(/\/{2,}/g, '/');
+    const href = `${base}/${entrySlug}`.replace(/\/{2,}/g, '/');
+    return href.endsWith('/') ? href : `${href}/`;
   }
 
   const segments = entry.slug.split('/').filter(Boolean);
   const entrySlug = segments[segments.length - 1] ?? entry.data.slug ?? slug;
   const categorySegment = entry.data.category?.trim() || slug;
-  const base = `/${areaSegment}/${sectionSlug}/${categorySegment}`.replace(/\/+$/, '');
-  return `${base}/${entrySlug}/`;
+  const base = `${parentHref}/${categorySegment}`.replace(/\/{2,}/g, '/');
+  const href = `${base}/${entrySlug}`.replace(/\/{2,}/g, '/');
+  return href.endsWith('/') ? href : `${href}/`;
 };
 
 const normalizedEntries = sortEntriesByDateDesc(entries)
@@ -99,7 +108,7 @@ const normalizedEntries = sortEntriesByDateDesc(entries)
         countLabel: count !== undefined ? 'Photos' : undefined,
       };
     }
-
+    
     const coverImage =
       entry.data.cover?.trim().length
         ? entry.data.cover.trim()
@@ -141,7 +150,7 @@ const backLabel = parentPage ? `← ${parentPage.title}` : undefined;
     <Template.HeaderActions slot="header__actions" href={backHref} label={backLabel} />
   ) : null}
 
-  <section class="content-section">
+  <section class="content-section content-section--head">
     <Template.Card class="card--plain is-centered">
       <Fragment slot="head">
         <Template.TitleWithIcon

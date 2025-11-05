@@ -56,7 +56,8 @@ a {
   font-weight: var(--bold-font-weight);  
 }
 .footer,
-.badge {
+.badge,
+.button--small {
   font-size: var(--font-size-xs);
   font-weight: var(--thin-font-weight);
   line-height: var(--line-height-xs);

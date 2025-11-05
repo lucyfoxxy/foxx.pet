@@ -107,7 +107,7 @@ main.panel {
     "logo nav"
     "bar bar";
   align-items: stretch;
-  margin-block: 0 var(--section-gap);
+  margin-block: 0;
   margin-inline: 0;
   backdrop-filter: var(--blur-l);
   border: 0px hidden;
@@ -159,7 +159,7 @@ main.panel {
     display: block;
     inline-size: auto;
     block-size: var(--site-logo--size);
-    filter: var(--site-logo--filter);
+    filter: drop-shadow(2px 4px 6px var(--color-shadow--strong));
   }
 }
 
@@ -201,6 +201,7 @@ main.panel {
   align-items: center;
 }
 
+
 .header__nav-text {
   display: inline;
   opacity: .8;
@@ -211,16 +212,17 @@ main.panel {
     white-space: pre-line;
   }
 }
+
 .header__nav-symbol {
   display: inline;
   position: relative;
   opacity: .6;
   grid-area: symbol;
 }
-
 .header__nav-symbol svg {
   inline-size: var(--icon-size);
   block-size: var(--icon-size);
+  filter: drop-shadow(2px 2px 2px var(--color-shadow--strong));
 }
 
 .header__nav-symbol--emoji {
@@ -237,7 +239,6 @@ main.panel {
   grid-template-areas: "crumbs actions";
   background: var(--control-surface--dark);
   box-shadow: 0 10px 16px -4px var(--color-dark), var(--control-shadow--inset);
-  
   align-items: center;
 }
 @media (max-width: 900px) {

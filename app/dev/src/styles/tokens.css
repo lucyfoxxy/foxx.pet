@@ -132,13 +132,12 @@
   --transition-brightness:      filter .5s ease-in-out;
   --transition-glow:            color .2s ease, text-shadow .2s ease, transform .2s ease, box-shadow .2s ease;
   --transition-soft:            opacity .25s ease, transform .25s ease, background .25s ease, box-shadow .25s ease;
-  --transition-scale:           transform .5s ease-in-out;
+  --transition-scale:           transform .25s ease-in-out;
   --transition-opacity:          opacity .5s ease-in-out;
-
   
   --backdrop-brightness:        brightness(1.5);
   --transform-raise:            translateY(-5px) scale(1.04);
   --transform-raise--soft:      translateY(-1px) scale(1.01);
   --transform-raise--strong:      translateY(-10%);
-  --transform-scale:            scale(1.07);
+  --transform-scale:            scale(1.05);
 }

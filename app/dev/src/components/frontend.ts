@@ -4,7 +4,8 @@ import Header from '@Templates/Base/Header.astro';
 import Meta from '@Templates/Base/Meta.astro';
 
 import Card from '@Templates/Card.astro';
-import EntryAlbum from '@Templates/EntryAlbum.astro';
+import AlbumFrame from '@Templates/AlbumFrame.astro';
+import AlbumThumbs from '@Templates/AlbumThumbs.astro';
 import EntryBlog from '@Templates/EntryBlog.astro';
 import HeaderActions from '@Templates/HeaderActions.astro';
 import TileView from '@Templates/TileView.astro';
@@ -16,6 +17,7 @@ import Section from '@Views/Section.astro';
 
 import StartPage from '@StaticPages/StartPage.astro';
 import ImprintPage from '@StaticPages/ImprintPage.astro';
+
 
 export const View = {
   Section,
@@ -29,7 +31,8 @@ export const Template = {
   TitleWithIcon,
   TileView,
   HeaderActions,
-  EntryAlbum,
+  AlbumFrame,
+  AlbumThumbs,
   EntryBlog,
 };
 

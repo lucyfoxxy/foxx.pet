@@ -7,19 +7,25 @@ import type { CollectionEntry } from 'astro:content';
 
 interface Props {
   slug: string;
+  section?: string;
   backToParentCategory?: boolean;
 }
 
-const { slug, backToParentCategory = false } = Astro.props as Props;
+const { slug, section, backToParentCategory = false } = Astro.props as Props;
 
 const pathSegments = Astro.url.pathname.replace(/\/+$/, '').split('/').filter(Boolean);
-const areaSegment = pathSegments[0] ?? '';
-const sectionSlug = pathSegments[1] ?? '';
-const categorySlug = pathSegments[2];
+const sectionSlug =
+  section?.trim() ??
+  (pathSegments.length >= 4
+    ? pathSegments[1]
+    : pathSegments.length >= 1
+    ? pathSegments[0]
+    : '');
+const categorySlug = pathSegments.length >= 2 ? pathSegments[pathSegments.length - 2] : undefined;
 
 let errorMessage: string | undefined;
 
-if (!areaSegment || !sectionSlug) {
+if (!sectionSlug) {
   errorMessage = 'We could not resolve this page — please try again later.';
 }
 
@@ -64,7 +70,8 @@ let pageTitle = parentPage?.title ?? 'Coming soon';
 let pageDescription = parentPage?.description ?? '';
 let metaImage: string | undefined;
 
-let headerBackHref = parentPage ? `${parentPage.href.replace(/\/+$/, '')}/` : '/';
+const parentHref = parentPage?.href?.replace(/\/+$/, '') ?? (sectionSlug ? `/${sectionSlug}` : '');
+let headerBackHref = parentHref ? `${parentHref}/` : '/';
 let headerBackLabel = category?.title ? `← ${category?.title}` : '← Back';
 
 let albumView:
@@ -117,11 +124,11 @@ if (!errorMessage && entry) {
       ? new Intl.DateTimeFormat('en', { month: 'long', year: 'numeric' }).format(parsedDate)
       : undefined;
 
-    const baseHref = `/${areaSegment}/${sectionSlug}`.replace(/\/+$/, '');
+    const baseHref = parentHref;
     const categorySegment = categorySlug ?? entry.data.category ?? '';
     headerBackHref = backToParentCategory || !categorySegment
       ? `${baseHref}/`
-      : `${baseHref}/${categorySegment}/`;
+      : `${baseHref}/${categorySegment}/`.replace(/\/{2,}/g, '/');
 
     albumView = {
       title: entry.data.title ?? entry.data.albumName ?? entry.data.slug ?? entry.slug,
@@ -152,9 +159,11 @@ if (!errorMessage && entry) {
       ? getIntroParagraphs(parentPage)
       : [];
 
-    const backHrefBase = `/${areaSegment}/${sectionSlug}`.replace(/\/+$/, '');
+    const backHrefBase = parentHref;
     const categorySegment = entry.data.category?.trim() || categorySlug || '';
-    headerBackHref = categorySegment ? `${backHrefBase}/${categorySegment}/` : `${backHrefBase}/`;
+    headerBackHref = categorySegment
+      ? `${backHrefBase}/${categorySegment}/`.replace(/\/{2,}/g, '/')
+      : `${backHrefBase}/`;
 
 
     const chapters = Array.isArray(entry.data.chapters)
@@ -215,7 +224,12 @@ const meta = {
       </Template.Card>
     </section>
   ) : albumView ? (
-    <Template.EntryAlbum album={albumView} />
+    <section class="content-section content-section--head">
+      <Template.AlbumFrame album={albumView} />
+    </section>
+    <section class="content-section">
+      <Template.AlbumThumbs />
+    </section>
   ) : blogView ? (
     <Template.EntryBlog blog={{
       title: blogView.title,
@@ -234,3 +248,12 @@ const meta = {
     </section>
   )}
 </Template.Base>
+<script>
+  import {initGalleryFrame,initGalleryThumbs} from '@Scripts/galleryViewer.js';
+  import { runOnReady } from '@Scripts/utils/_runOnReady.js';
+
+  runOnReady(() => {
+    const api = initGalleryFrame();   // Frame + Controls
+    initGalleryThumbs(api);           // Thumbs-Bar (optional)
+  });
+</script>
