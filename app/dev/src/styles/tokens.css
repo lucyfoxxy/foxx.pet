@@ -65,7 +65,7 @@
   --color-shadow--soft:       color-mix(in oklch, var(--color-dark) 30%, transparent);
   --color-shadow--strong:     color-mix(in oklch, var(--color-dark) 60%, transparent);
   --color-glow--soft:         color-mix(in oklch, var(--color-light) 40%, var(--color-accent));
-  --color-glow--strong:       color-mix(in oklch, var(--color-accent) 80%, black);
+  --color-glow--strong:        color-mix(in oklch, var(--color-light) 60%, var(--color-accent));
 
   /* ====== Text Colors & FX ==================== */
   --text-color:              color-mix(in oklch, var(--color-light) 85%, white);
