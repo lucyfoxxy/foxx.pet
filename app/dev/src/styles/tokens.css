@@ -61,7 +61,7 @@
   --color-dark:              oklch(20% 0.11 295);
   --color-light:             oklch(92% 0.18 295); 
   --color-accent:            oklch(80% 0.24 295); 
-  --color-outline:            color-mix(in oklab, var(--color-dark)60%,transparent);
+  --color-outline:            color-mix(in oklab, var(--color-dark) 60%,transparent);
   --color-shadow--soft:       color-mix(in oklch, var(--color-dark) 30%, transparent);
   --color-shadow--strong:     color-mix(in oklch, var(--color-dark) 60%, transparent);
   --color-glow--soft:         color-mix(in oklch, var(--color-light) 40%, var(--color-accent));
@@ -69,7 +69,7 @@
 
   /* ====== Text Colors & FX ==================== */
   --text-color:              color-mix(in oklch, var(--color-light) 85%, white);
-  --text-accent:             color-mix(in oklab, var(--color-light) 85%, var(--color-accent));
+  --text-accent:             color-mix(in oklab, var(--color-accent) 85%, white);
   --text-highlight:          color-mix(in oklab, var(--color-light) 65%, var(--color-accent));
 
   --text-shadow--soft:       1px 1px 1px var(--color-shadow--soft);  
@@ -157,6 +157,7 @@
   --transition-soft:            opacity .25s ease, transform .25s ease, background .25s ease, box-shadow .25s ease;
   --transition-nav:             transform .5s ease-in-out, text-shadow .5s ease-in-out, opacity .5s ease-in-out, filter .5s ease-in-out;
   --transition-scale:           transform .5s ease-in-out;
+  --transition-opacity:          opacity .5s ease-in-out;
 
   
   --backdrop-brightness:        brightness(1.5);
