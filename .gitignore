@@ -34,3 +34,4 @@ package-lock.json
 svgs.list
 **/.Trash-1000
 sync.ffs_db
+sync.ffs_lock
