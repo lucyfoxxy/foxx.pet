@@ -189,6 +189,12 @@ main.panel {
     padding-inline: 0;
     padding-block-start: 0;
   }
+  .header[data-stuck] :where(.header__nav):last-child {
+    border-bottom-right-radius: var(--radius-m);
+  }
+  .header[data-stuck] :where(.header__nav):first-child {
+    border-bottom-left-radius: var(--radius-m);
+  }  
   .header__nav.controls { 
     gap: 0;
   }
@@ -237,6 +243,7 @@ main.panel {
   opacity: .6;
   grid-area: symbol;
   justify-self: center;
+  vertical-align: middle;
 }
 .header__nav-symbol svg {
   inline-size: var(--icon-size);

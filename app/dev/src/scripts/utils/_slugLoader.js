@@ -29,7 +29,7 @@ export function createGalleryItemsBySlug(metaModules, assetModules) {
       ? (rawData.default && typeof rawData.default === 'object' ? rawData.default : rawData)
       : undefined;
     const slug = pickString(data?.slug)
-      || path.match(/\/(?:albumData|album)\/(.+?)\.json$/)?.[1];
+      || path.match(/\/(?:album)\/(.+?)\.json$/)?.[1];
     if (!slug) continue;
 
     const albumItems = Array.isArray(data?.items) ? data.items : [];
