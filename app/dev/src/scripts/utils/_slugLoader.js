@@ -25,9 +25,11 @@ export function createGalleryItemsBySlug(metaModules, assetModules) {
 
   const itemsBySlug = new Map();
   for (const [path, rawData] of Object.entries(metaModules)) {
-    const data = rawData && typeof rawData === 'object' ? rawData : undefined;
+    const data = rawData && typeof rawData === 'object'
+      ? (rawData.default && typeof rawData.default === 'object' ? rawData.default : rawData)
+      : undefined;
     const slug = pickString(data?.slug)
-      || path.match(/\/albumData\/(.+?)\.json$/)?.[1];
+      || path.match(/\/(?:albumData|album)\/(.+?)\.json$/)?.[1];
     if (!slug) continue;
 
     const albumItems = Array.isArray(data?.items) ? data.items : [];

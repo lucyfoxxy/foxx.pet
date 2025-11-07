@@ -48,7 +48,7 @@ a {
 
 .header__nav-text {
   font-weight: var(--normal-font-weight);
-  font-size: clamp(var(--font-size-xs),var(--font-size-s),var(--font-size-m));
+  font-size: clamp(var(--font-size-xxs),var(--font-size-xs),var(--font-size-m));
   letter-spacing: var(--letter-spacing-xl);
   text-align: left;
 }

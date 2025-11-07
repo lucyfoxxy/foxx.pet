@@ -37,7 +37,7 @@ const {
   ...restWrapper
 } = Astro.props as HeaderActionsProps;
 
-const defaultLinkClass = 'button control--ghost control--small';
+const defaultLinkClass = 'button control--plain control--small';
 
 const normalized: ActionItem[] = Array.isArray(items) && items.length > 0
   ? items
@@ -52,7 +52,7 @@ const renderClass = (perLink?: SlotClass) => {
   return [defaultLinkClass, linkClass, perLink].filter(Boolean);
 };
 ---
-
+<!-- 
 {/* Kein zusätzlicher Wrapper nötig – aber falls du doch Hooks/ARIA willst, ist der hier neutral */}
 <div class:list={wrapperClass} {...restWrapper}>
   {normalized.map(({ label: linkLabel, class: perLinkClass, ...linkRest }) => (
@@ -63,3 +63,4 @@ const renderClass = (perLink?: SlotClass) => {
   {/* Optionaler Slot für absolute Freiheit (Icons o.ä.) */}
   <slot />
 </div>
+-->

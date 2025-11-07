@@ -205,10 +205,15 @@
   display: inline-grid;
   grid-auto-flow: column;
   list-style: none;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(10vw, 1fr));
   gap: var(--card-gap);
 }
-
+@media (max-width: 900px) {
+  .card__body > ol {
+    grid-auto-flow: row;
+    grid-template-columns: auto;
+  }
+}
 .card__body > ol > li { margin: 0; }
 
 .card__body > ol > li > a {

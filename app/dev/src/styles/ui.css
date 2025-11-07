@@ -35,7 +35,7 @@
   outline-offset: -1px;
   outline-width: 1px;
   outline-color: color-mix(in srgb, var(--color-dark) 5%, transparent);
-  background: var(--card-surface--dark);
+  background: var(--control-surface--dark);
 }
 
 .button{
@@ -48,12 +48,14 @@
 .button[data-active="true"] > *,
 .button:hover > * {
   filter: drop-shadow(0 0 1px var(--color-accent));
+  text-shadow: var(--text-shadow--strong);
 }
 :not(.button[data-active="true"]).button:hover {
-  backdrop-filter:brightness(1.25);
+  filter:brightness(1.25);
 }
 .button[data-active="true"] { 
-  background: var(--card-surface--light);
+  background: var(--control-surface--light);
+  
 }
 
 .control--small { padding-block: calc(var(--control-padding) * .5); border-radius: var(--radius-s); }
