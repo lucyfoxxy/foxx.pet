@@ -25,7 +25,7 @@
   },
   "feature": {
     "heading": "Featured Posts",
-    "description": "... <coming soon>?",
+    "description": "... <coming soon> ...",
     "placeholder": "<Most recent gallery images here>"
   },
   "contact": {
@@ -36,6 +36,6 @@
     { "href": "https://t.me/LucyFoxx", "label": "Telegram", "kind": "telegram" },
     { "href": "https://bsky.app/profile/lucy.foxx.pet", "label": "bluesky", "kind": "bluesky" },
     { "href": "mailto:lucy@foxx.pet", "label": "E-Mail", "kind": "mail" },
-    { "href": "mailto:lucy@foxx.pet", "label": "Barq", "kind": "barq" }
+    { "href": "https://barq.app/@lucyfoxx", "label": "Barq", "kind": "barq" }
   ]
 }
