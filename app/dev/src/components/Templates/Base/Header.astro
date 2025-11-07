@@ -31,7 +31,7 @@ const hasActions = Astro.slots.has('actions');
     {navLinks
       .filter((link) => link.includeInHeader)
       .map((link) => (
-        <a class="header__nav-item button button--inset button--stretch" href={link.href} data-active={link.isActive ? 'true' : undefined}>
+        <a class="header__nav-item button control--stretch" href={link.href} data-active={link.isActive ? 'true' : undefined}>
       
             {link.icon ? (
               <>

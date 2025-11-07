@@ -37,7 +37,7 @@ const {
   ...restWrapper
 } = Astro.props as HeaderActionsProps;
 
-const defaultLinkClass = 'button button--small button--round';
+const defaultLinkClass = 'button control--ghost control--small';
 
 const normalized: ActionItem[] = Array.isArray(items) && items.length > 0
   ? items

@@ -23,9 +23,9 @@
 # 🖼️ Gallery / Home Intro (neu)
 - [x] Mini-Intro-Gallery auf Startseite auf Basis der Album-Entry-Ansicht (Overlay-Stil, **ohne** Thumbs-Bar)
 - [x] JS vereinheitlichen: EntryAlbum-Viewer und Intro-Gallery nutzen **eine** gemeinsame Logik (Feature-Flags: `withThumbs` etc.)
-- [ ] Best-Of entfernen → stattdessen zufälliges Album (z. B. aus `frames/{sfw,nsfw}` oder konfigurierbarer Pool)
-- [ ] Direktlink: Klick auf Intro-Gallery öffnet die gewählte Galerie (kein modaler Viewer)
-- [ ] Overlay-Auto-Hide auch für Intro-Gallery übernehmen (Touch kurz ein/aus)
+- [x] Best-Of entfernen → stattdessen zufälliges Album (z. B. aus `frames/{sfw,nsfw}` oder konfigurierbarer Pool)
+- [ ] Direktlink: Klick auf Badge in Intro-Gallery öffnet die gewählte Galerie (kein modaler Viewer)
+- [x] Overlay-Auto-Hide auch für Intro-Gallery übernehmen (Touch kurz ein/aus)
 
 # 📦 Content / Assets
 - [ ] Platzhalter entfernen

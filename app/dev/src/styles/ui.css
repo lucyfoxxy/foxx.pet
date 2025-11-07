@@ -14,7 +14,7 @@
 .controls--spread { justify-content: space-between; }
 .controls--nowrap { flex-wrap: nowrap; }
 .controls--tight  { gap: calc(var(--control-gap) * 0.6); }
-:not(.header__nav,.header__actions).controls { margin-bottom: var(--card-gap); }
+
 .card__badges.controls{
   vertical-align: text-bottom;
 }
@@ -23,77 +23,55 @@
   align-items: center;
   color: var(--text-color);
   transition: var(--transition-glow),var(--transition-raise);;
-  vertical-align: middle;
-  text-shadow: var(--text-shadow--strong),var(--text-glow--soft);
+  vertical-align: middle; 
   box-shadow: var(--surface-shadow--soft),var(--control-shadow--inset);
   justify-content: center;
   gap: var(--control-gap); 
-  padding: var(--control-padding);
+  padding-block: calc(var(--control-padding) * .5);
   padding-inline: calc(var(--control-padding) * 1.35);
-  background: var(--control-surface--light);
-  border-radius: var(--radius-m);
+  border-radius: var(--radius-l);
+  outline-style: solid;
+  outline-offset: -1px;
+  outline-width: 1px;
+  outline-color: color-mix(in srgb, var(--color-dark) 5%, transparent);
 }
+
 .button{
   user-select: none;
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
   cursor: pointer;  
-}
-.button--small { padding-block: calc(var(--control-padding) * .5); border-radius: var(--radius-s);}
-.button--large { padding-inline: calc(var(--control-padding) * 1.35);}
-.button--round { border-radius: 999px; }
-.button--stretch {inline-size: 100%}
-.button--ghost { 
-  background: none; 
-  text-shadow: var(--text-glow--soft); 
-  backdrop-filter: var(--blur-m);
-}
-
-.button--inset { 
-  background: var(--control-surface--dark);
-  box-shadow: var(--control-shadow--inset);
-  filter: drop-shadow(2px 4px 6px var(--color-shadow--strong));
-}
-
-.button[data-active="true"] { 
-  background: var(--control-surface--light);
-  backdrop-filter: brightness(.75);
+  text-shadow: var(--text-glow--soft);
 }
 .button[data-active="true"] > *,
 .button:hover > * {
   filter: drop-shadow(0 0 1px var(--color-accent));
 }
-
-.button--large:hover { 
-  text-shadow: var(--text-glow--soft);
-  color: var(--color-glow--strong);
-  transform: var(--transform-raise);
-  box-shadow: var(--surface-shadow--default),var(--control-glow); 
-}
 .button:hover {
-  backdrop-filter: brightness(1.25); 
+  background: var(--card-surface--light);
 }
-.button--small:hover { 
+.button[data-active="true"] { 
+  background: var(--card-surface--dark);
+}
 
-  box-shadow: var(--surface-shadow--default); 
+.control--small { padding-block: calc(var(--control-padding) * .5); border-radius: var(--radius-s);}
+.control--large { padding-inline: calc(var(--control-padding) * 1.5);}
+.control--round { border-radius: 999px; }
+.control--stretch { inline-size: 100%; }
+.control--plain { background: transparent; box-shadow: none; }
+.control--ghost { 
+  background: none; 
+  text-shadow: var(--text-glow--soft); 
+  backdrop-filter: var(--blur-m);
+  padding: 0;
 }
 
 .badge {
   border-radius: 999px; 
-  padding-block: calc(var(--control-padding) * .75);
+  padding-block: calc(var(--control-padding) * .5);
+  padding-inline: calc(var(--control-padding) * .75);
+  background: var(--control-surface--light);  
 }
-
-.button--dark,
-.badge--dark  { 
-  
-  background: var(--control-surface--dark);
-  
-}
-.badge--plain,
-.button--plain { 
-  background: transparent; box-shadow: none;;
-}
-
 
 @supports not (color: oklch(50% 0 0)) {
   .button:hover { filter: brightness(1.08); }
@@ -106,6 +84,5 @@
   inline-size: var(--icon-size);
   block-size: var(--icon-size);
   filter: drop-shadow(var(--icon-shadow));
-  
 }
 
