@@ -17,6 +17,7 @@
 
 .card__badges.controls{
   vertical-align: text-bottom;
+  
 }
 .button,.badge {
   display: inline-flex;
@@ -27,13 +28,14 @@
   box-shadow: var(--surface-shadow--soft),var(--control-shadow--inset);
   justify-content: center;
   gap: var(--control-gap); 
-  padding-block: calc(var(--control-padding) * .5);
-  padding-inline: calc(var(--control-padding) * 1.35);
-  border-radius: var(--radius-l);
+  padding-block: calc(var(--control-padding) * .75);
+  padding-inline: calc(var(--control-padding) );
+  border-radius: var(--radius-m);
   outline-style: solid;
   outline-offset: -1px;
   outline-width: 1px;
   outline-color: color-mix(in srgb, var(--color-dark) 5%, transparent);
+  background: var(--card-surface--dark);
 }
 
 .button{
@@ -47,25 +49,28 @@
 .button:hover > * {
   filter: drop-shadow(0 0 1px var(--color-accent));
 }
-.button:hover {
-  background: var(--card-surface--light);
+:not(.button[data-active="true"]).button:hover {
+  backdrop-filter:brightness(1.25);
 }
 .button[data-active="true"] { 
-  background: var(--card-surface--dark);
+  background: var(--card-surface--light);
 }
 
-.control--small { padding-block: calc(var(--control-padding) * .5); border-radius: var(--radius-s);}
-.control--large { padding-inline: calc(var(--control-padding) * 1.5);}
-.control--round { border-radius: 999px; }
+.control--small { padding-block: calc(var(--control-padding) * .5); border-radius: var(--radius-s); }
+.control--large { inline-size: 3.25rem; block-size: 3.25rem;  padding: calc(var(--control-padding) * .5); }
+.control--circle { border-radius: 999px; }
 .control--stretch { inline-size: 100%; }
 .control--plain { background: transparent; box-shadow: none; }
 .control--ghost { 
   background: none; 
   text-shadow: var(--text-glow--soft); 
   backdrop-filter: var(--blur-m);
-  padding: 0;
 }
-
+.control--dark { background: var(--control-surface--dark); }
+.control--glow { transition: var(--transition-glow); }
+.control--glow:hover { box-shadow: var(--surface-glow--soft); }
+.control--animated { transition: var(--transition-raise); }
+.control--animated:hover { transform: var(--transform-raise); }
 .badge {
   border-radius: 999px; 
   padding-block: calc(var(--control-padding) * .5);

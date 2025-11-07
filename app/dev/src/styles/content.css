@@ -19,6 +19,7 @@
   max-inline-size: 100%;
   grid-template-columns: 1fr;
 }
+:not(.content-section) + .content-section {{ margin-block-start: var(--section-gap);}
 .content-section--head { margin-block: var(--section-gap); }
 .content-section.cols-2 { grid-template-columns: repeat(2, 1fr); }
 .content-section.cols-3 { grid-template-columns: repeat(3, 1fr); }
@@ -70,6 +71,13 @@
   grid-template-columns: minmax(0,1fr) auto;
   align-items: flex-start;             /* vertikal mittig */
   column-gap: var(--card-gap);
+}
+@media (max-width: 900px) {
+  .card__head{
+    grid-template-areas:
+      "title"
+      "badges"; 
+  } 
 }
 .card__head--column {
   grid-template-areas:

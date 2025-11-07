@@ -30,7 +30,7 @@
   --section-gap:            clamp(var(--space-s),  calc(var(--space-s) + 1.5vw),    var(--space-xxl)); 
   
   --panel-padding:           clamp(var(--space-s),  calc(var(--space-s) + 1.5vw),    var(--space-xxl)); 
-  --panel-bar-padding:       calc(var(--panel-padding) * .5);
+  --panel-bar-padding:       calc(var(--panel-padding) * .55);
  
   --container-padding:       clamp(var(--space-xxs),  calc(var(--space-xxs) + 2vw),    var(--space-xxl)); 
   --container-max:           1280px;

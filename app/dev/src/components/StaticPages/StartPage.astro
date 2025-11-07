@@ -115,7 +115,7 @@ const isExternalLink = (href: string) => href.startsWith('http');
           </div>
         </Fragment>
       </Template.Card>
-      <Template.Card class="card--light" headClass="card__head--column">
+      <Template.Card class="card--ghost" headClass="card__head--column">
         <Fragment slot="head">
           <h2 class="card__title">{contact.heading}</h2>
           <p>{contact.description}</p>
@@ -124,13 +124,12 @@ const isExternalLink = (href: string) => href.startsWith('http');
           <div class="controls controls--start">
             {links.map((link) => (
               <a
-                class={`button button--dark button--large button--large--${link.kind}`}
+                class="button control--dark control--large control--glow control--animated"
                 href={link.href}
                 rel={isExternalLink(link.href) ? 'noopener noreferrer' : undefined}
                 target={isExternalLink(link.href) ? '_blank' : undefined}
               >
                 <span class="button__icon"><Icon kind={link.kind} /></span>
-
               </a>
             ))}
           </div>
@@ -139,7 +138,7 @@ const isExternalLink = (href: string) => href.startsWith('http');
     </section>
     
     <section class="content-section">
-      <Template.Card class="card--light" headClass="card__head--column">
+      <Template.Card class="card--ghost" headClass="card__head--column">
         <Fragment slot="head">
           <h2 class="card__title">{feature.heading}</h2>
           <p>{feature.description}</p>

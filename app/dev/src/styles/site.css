@@ -152,9 +152,9 @@ main.panel {
     grid-area: logo; 
     inline-size: 100%;
     block-size: 100%;
-    padding-inline: var(--panel-bar-padding);
-    padding-block: calc(.75 * var(--panel-bar-padding));
-
+    padding-inline: var(--panel-bar-padding) 0;
+    padding-block: var(--panel-bar-padding) 0;
+    filter: drop-shadow(6px 6px 4px var(--color-shadow--strong));
     border-top-left-radius: var(--radius-xl);
   }
   .header__logo img {
@@ -169,16 +169,16 @@ main.panel {
 .header__nav {
   inline-size: 100%;
   block-size: 100%;
-  border-top-right-radius: var(--radius-xl);
+  border-top-right-radius: var(--radius-l);
   padding-inline: var(--panel-bar-padding);
-  padding-block: calc(.75 * var(--panel-bar-padding));
+  padding-block:  var(--panel-bar-padding) 0;
   margin: 0;
   display: inline-flex;
   row-gap: var(--nav-gap--row);
   column-gap: var(--nav-gap--column);
   grid-area: nav;
   transition: var(--transition--nav);
-
+  filter: drop-shadow(6px 6px 4px var(--color-shadow--strong));
 }
 .header[data-stuck] > .header__nav {
   border-top-right-radius: 0;
@@ -235,9 +235,9 @@ main.panel {
   grid-template-columns: 1fr auto;
   grid-area: bar;
   padding-inline: var(--panel-bar-padding);
-  padding-block: calc(.25 * var(--panel-bar-padding));
+  padding-block: var(--panel-bar-padding);
   grid-template-areas: "crumbs actions";
-  
+  filter: drop-shadow(6px 6px 4px var(--color-shadow--strong));
   box-shadow: 0 10px 16px -4px var(--color-shadow--strong);
   align-items: center;
 }

@@ -20,6 +20,7 @@
       "My name is Lucy Foxx and I welcome you to my personal space!",
       "Hop on my rocket to — watch me fuzzing around, learn to make delicious Nom Noms, and catch up on how my journey’s been so far!"
     ],
+    "greeting": "- Always follow your heart -",
     "signature": "Lucy Foxx"
   },
   "feature": {
@@ -28,8 +29,8 @@
     "placeholder": "<Most recent gallery images here>"
   },
   "contact": {
-    "heading": "Find the Foxx...",
-    "description":"... and give them a Boop!~"
+    "heading": "Give me a boop~",
+    "description":"... foxxy doesn't bite ... promised! UwU"
   },
   "contactLinks": [
     { "href": "https://t.me/LucyFoxx", "label": "Telegram", "kind": "telegram" },

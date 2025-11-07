@@ -48,7 +48,7 @@
 }
 
 .content-section.cols-2 :where(.media-frame) {
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 16 / 10;
 }
 
 .content-section.cols-3 :where(.media-frame) {
@@ -160,15 +160,15 @@
 .media-icon {
   display: inline-flex;
   align-items: center;
-  gap: 0.5em;
+  vertical-align: middle;
 }
 .media-icon svg,
 .media-icon > svg{
-  inline-size: 1.1em;
-  block-size: 1.1em;
+  inline-size: var(--icon-size);
+  block-size: var(--icon-size);
+  filter: drop-shadow(var(--icon-shadow));
   margin-inline-start: calc(var(--control-gap * .75));
 }
-
 
 /* ==========<[      CONTROLS      ]>============== */
 .media-controls {
@@ -190,11 +190,7 @@
   filter: brightness(1.95);
   backdrop-filter: var(--control-glow);
 }
-.media-controls[disabled] {
-  opacity: .35;
-  cursor: default;
-  pointer-events: none;
-}
+
 .media-controls:hover,
 .media-controls:focus-visible {
   opacity: 1;

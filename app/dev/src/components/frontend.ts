@@ -45,4 +45,4 @@ export const BaseParts = {
 export const StaticPages = {
     StartPage,
     ImprintPage,
-}
+};

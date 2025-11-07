@@ -24,6 +24,7 @@ const heroSchema = z.object({
 const introSchema = z.object({
   heading: z.string(),
   paragraphs: z.array(z.string()),
+  greeting: z.string().optional(),
   signature: z.string().optional(),
 });
 
