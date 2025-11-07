@@ -19,8 +19,8 @@
   max-inline-size: 100%;
   grid-template-columns: 1fr;
 }
-:not(.content-section) + .content-section {{ margin-block-start: var(--section-gap);}
-.content-section--head { margin-block: var(--section-gap); }
+.panel > .content-section { margin-block-start: var(--section-gap);}
+.content-section--head { margin-block-end: var(--section-gap); }
 .content-section.cols-2 { grid-template-columns: repeat(2, 1fr); }
 .content-section.cols-3 { grid-template-columns: repeat(3, 1fr); }
 
