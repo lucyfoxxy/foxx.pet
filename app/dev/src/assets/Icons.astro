@@ -1,21 +1,47 @@
 ---
 import { registry  } from '@Assets/icons.registry';
+
+type IconName = keyof typeof registry;
+
 export interface Props {
-  name: keyof typeof registry
+  /**
+   * Preferred property for selecting an icon. Use `kind` for backwards compatibility.
+   */
+  name?: IconName;
+  /**
+   * Legacy property retained so older usages keep working.
+   */
+  kind?: IconName;
   class?: string
-  size?: string   
+  size?: string
   title?: string
   stroke?: boolean
   strokeWidth?: number
 }
 
+const fallbackIcon = (missing: string) => ({
+  vb: '0 0 24 24',
+  body: '<path fill="currentColor" d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2Zm0 15.25a1.25 1.25 0 1 1 1.25-1.25A1.25 1.25 0 0 1 12 17.25Zm1.22-6.22-.82.74v1.48h-1.52V11.2l1.4-1.26a1.87 1.87 0 0 0 .66-1.42c0-.98-.77-1.77-1.72-1.77s-1.71.79-1.71 1.77H8.6a3.4 3.4 0 0 1 3.62-3.32c1.91 0 3.47 1.42 3.47 3.3a3.12 3.12 0 0 1-1.47 2.44Z"/>',
+  attrs: { 'data-icon-missing': missing },
+});
+
 const {
-  name, class: cls = '', size = '1em', title,
+  name: propName,
+  kind,
+  class: cls = '', size = '1em', title,
   stroke = false, strokeWidth = 1.5,
 } = Astro.props;
 
-const icon = registry[name];
-if (!icon) throw new Error(`Unknown icon: ${name}`);
+const iconName = propName ?? kind;
+if (!iconName) {
+  throw new Error('Missing icon identifier. Provide a `name` (preferred) or `kind` prop.');
+}
+
+let icon = registry[iconName];
+if (!icon) {
+  console.warn(`Unknown icon: ${iconName}`);
+  icon = fallbackIcon(iconName);
+}
 
 const { vb, body, attrs = {} } = icon;
 const labelled = !!title;

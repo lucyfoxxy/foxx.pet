@@ -161,7 +161,10 @@
   display: inline-flex;
   align-items: center;
   vertical-align: middle;
+  font-size: var(--font-size-l);
+  filter: drop-shadow(var(--icon-shadow));
 }
+.media-icon--large {font-size: var(--font-size-xl);}
 .media-icon svg,
 .media-icon > svg{
   inline-size: var(--icon-size);

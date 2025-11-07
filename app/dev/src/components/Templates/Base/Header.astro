@@ -34,7 +34,7 @@ const hasActions = Astro.slots.has('actions');
         <a class="button control--round control--stretch" href={link.href} data-active={link.isActive ? 'true' : undefined}>
               <div class="header__nav-item">
                 <span class="header__nav-symbol" aria-hidden="true">
-                  <ICONS kind={link.icon} />
+                  <ICONS class="media-icon" kind={link.icon} />
                 </span>              
                 <span class="header__nav-text">
                   {link.label}

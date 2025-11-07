@@ -129,7 +129,7 @@ const isExternalLink = (href: string) => href.startsWith('http');
                 rel={isExternalLink(link.href) ? 'noopener noreferrer' : undefined}
                 target={isExternalLink(link.href) ? '_blank' : undefined}
               >
-                <span class="button__icon"><Icon kind={link.kind} /></span>
+                <Icon class="media-icon" kind={link.kind} />
               </a>
             ))}
           </div>
