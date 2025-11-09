@@ -24,22 +24,24 @@
   outline: var(--outline);
   flex-direction: column;
   backdrop-filter: var(--blur-l);
-  box-shadow: var(--surface-shadow--strong), inset 0 0 36px -10px var(--color-accent),var(--control-shadow--inset);
+  box-shadow: var(--surface-shadow--strong), inset 0 0 36px -10px var(--color-glow--soft),var(--control-shadow--inset);
   -webkit-backdrop-filter: var(--blur-l);
   border-radius: var(--radius-xl);
   background-image:
     var(--bg-overlay--nebula),
     var(--bg-overlay--stars),
-    var(--panel-bg),
-    var(--bg-image--panel);
+    var(--background-overlay),
+    linear-gradient(165deg, oklch(55% 0.23 290) 13%, oklch(55% 0.23 315) 33%, oklch(55% 0.23 300) 46%),
+    var(--bg-image--panel),
+        linear-gradient(205deg, #7735e1, #6e26cb ,rgb(40, 7, 112));
   background-repeat:
-    no-repeat,    no-repeat,    no-repeat,    no-repeat,    no-repeat,    no-repeat,    no-repeat,    no-repeat;
+    no-repeat,    no-repeat,   no-repeat, repeat,    repeat,no-repeat;
   background-size:
-    cover,        cover,        auto,         auto,         auto,         auto,         auto,         cover;
+    cover,        cover,        auto,auto,         1280px 1290px,auto;
   background-blend-mode:
-    overlay,      overlay,      darken,       color,        color,        color,        color,        normal;
+    overlay,      overlay,     darken, hue,       normal,normal;
   background-position:
-    center,       center,       center,       center,       center,       center,       bottom,       top;
+    center,       center,       center,       top;
 }
 .container > .panel-shell {
   max-inline-size: var(--container-max);
@@ -113,7 +115,13 @@ main.panel {
   border: 0px hidden;
   border-radius: var(--radius-xl) var(--radius-xl) 0 0 ;
   gap: 0;
+<<<<<<< HEAD
   box-shadow: 0 8px 14px -4px var(--color-shadow--strong);
+=======
+  background: var(--control-surface--dark);
+  box-shadow: 0 8px 14px -4px var(--color-shadow--strong);
+
+>>>>>>> f0833fd (.)
 }
 @media (max-width: 900px) {
   .header {
@@ -152,7 +160,11 @@ main.panel {
     grid-area: logo; 
     inline-size: 100%;
     block-size: 100%;
+<<<<<<< HEAD
     padding-inline: var(--panel-bar-padding) 0;
+=======
+    padding-inline: var(--panel-bar-padding);
+>>>>>>> f0833fd (.)
     padding-block: var(--panel-bar-padding) 0;
     filter: drop-shadow(6px 6px 4px var(--color-shadow--strong));
     border-top-left-radius: var(--radius-xl);
@@ -171,7 +183,11 @@ main.panel {
   block-size: 100%;
   border-top-right-radius: var(--radius-l);
   padding-inline: var(--panel-bar-padding);
+<<<<<<< HEAD
   padding-block:  var(--panel-bar-padding) 0;
+=======
+  padding-block: var(--panel-bar-padding) 0;
+>>>>>>> f0833fd (.)
   margin: 0;
   display: inline-flex;
   row-gap: var(--nav-gap--row);
@@ -180,6 +196,32 @@ main.panel {
   transition: var(--transition--nav);
   filter: drop-shadow(6px 6px 4px var(--color-shadow--strong));
 }
+<<<<<<< HEAD
+=======
+.header__nav.controls { 
+  gap: 0;
+}
+.header__nav > .button { 
+  border-radius: 0 ;
+  inline-size: 100%;
+}
+@media (min-width: 900px) {
+  .header__nav > .button { 
+ 
+  background: var(--control-surface--dark);
+  
+
+}
+  .header__nav > .button:first-child {
+    border-top-left-radius: var(--radius-xxl);
+    border-bottom-left-radius: var(--radius-xxl);
+  }
+  .header__nav > .button:last-child {
+    border-top-right-radius: var(--radius-xxl);
+    border-bottom-right-radius: var(--radius-xxl);
+  }
+}
+>>>>>>> f0833fd (.)
 .header__nav > .button:hover,
 .header__nav > .button[data-active="true"],
 .header__nav > .button:hover > *,
@@ -201,8 +243,13 @@ main.panel {
   .header[data-stuck] :where(.header__nav):first-child {
     border-bottom-left-radius: var(--radius-m);
   }  
+<<<<<<< HEAD
   .header__nav.controls { 
     gap: 0;
+=======
+  .header__nav > .button { 
+    inline-size: 100%;
+>>>>>>> f0833fd (.)
   }
 }
 
@@ -218,13 +265,18 @@ main.panel {
 @media (max-width: 900px) {
   .header__nav-item {
     grid-template-areas: "symbol" "label";
+<<<<<<< HEAD
   }
   .header[data-stuck] :where(.header__nav-item) {gap: 0;}
   .header__nav > .button { 
     border-radius: 0 ;
     background: var(--control-surface--dark);
     padding: calc(var(--control-padding * .75));
+=======
+>>>>>>> f0833fd (.)
   }
+  .header[data-stuck] :where(.header__nav-item) {gap: 0;}
+
 }
 
 .header__nav-text,
@@ -246,7 +298,11 @@ main.panel {
     grid-template-columns: 1fr;
     grid-area: bar;
     padding-inline: var(--panel-bar-padding);
+<<<<<<< HEAD
     padding-block: calc(.5 * var(--panel-bar-padding)) calc(.25 * var(--panel-bar-padding));
+=======
+    padding-block: 0 var(--panel-bar-padding);
+>>>>>>> f0833fd (.)
     grid-template-areas: "crumbs";
     filter: drop-shadow(6px 6px 4px var(--color-shadow--strong));
   align-items: center;
@@ -321,4 +377,3 @@ main.panel {
   content: "›"; 
   opacity: .65;
 }
-

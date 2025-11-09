@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",   // oder "NodeNext", beides geht mit Astro 4+
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@Styles/*": ["src/styles/*"],
+      "@StaticPages/*": ["src/components/StaticPages/*"],
+      "@Content/*": ["src/content/*"],
+      "@Assets/*": ["src/assets/*"],
+      "@Scripts/*": ["src/scripts/*"],
+      "@Templates/*": ["src/components/Templates/*"],
+      "@utils/*": ["src/components/utils/*"],
+      "@Views/*": ["src/components/Views/*"],
+      "@Frontend": ["src/components/frontend.ts"]
+    },
+    "types": ["astro/client"],
+    "jsx": "react-jsx",
+    "jsxImportSource": "astro"
+  }
+}

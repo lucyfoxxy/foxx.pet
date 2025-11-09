@@ -161,6 +161,7 @@
   display: inline-flex;
   align-items: center;
   vertical-align: middle;
+<<<<<<< HEAD
   font-size: var(--font-size-l);
   filter: drop-shadow(var(--icon-shadow));
 }
@@ -171,7 +172,12 @@
   block-size: var(--icon-size);
   filter: drop-shadow(var(--icon-shadow));
   margin-inline-start: calc(var(--control-gap * .75));
+=======
+  font-size: var(--font-size-m);
+  filter: drop-shadow(var(--icon-shadow));
+>>>>>>> f0833fd (.)
 }
+.media-icon--large {font-size: var(--font-size-l);}
 
 /* ==========<[      CONTROLS      ]>============== */
 .media-controls {

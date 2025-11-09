@@ -45,10 +45,16 @@ a {
   text-decoration: none;
 }
 
-
+.header__nav-item :where(.media-icon),
+.header__nav-text {
+  font-size: clamp(var(--font-size-xxs),var(--font-size-xs),var(--font-size-m));
+}
 .header__nav-text {
   font-weight: var(--normal-font-weight);
+<<<<<<< HEAD
   font-size: clamp(var(--font-size-xxs),var(--font-size-xs),var(--font-size-m));
+=======
+>>>>>>> f0833fd (.)
   letter-spacing: var(--letter-spacing-xl);
   text-align: left;
 }

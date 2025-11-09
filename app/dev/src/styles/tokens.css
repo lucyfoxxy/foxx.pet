@@ -30,12 +30,20 @@
   --section-gap:            clamp(var(--space-s),  calc(var(--space-s) + 1.5vw),    var(--space-xxl)); 
   
   --panel-padding:           clamp(var(--space-s),  calc(var(--space-s) + 1.5vw),    var(--space-xxl)); 
+<<<<<<< HEAD
   --panel-bar-padding:       calc(var(--panel-padding) * .55);
+=======
+  --panel-bar-padding:       calc(var(--panel-padding) * .75);
+>>>>>>> f0833fd (.)
  
   --container-padding:       clamp(var(--space-xxs),  calc(var(--space-xxs) + 2vw),    var(--space-xxl)); 
   --container-max:           1280px;
   
+<<<<<<< HEAD
   --site-logo--size:         calc(var(--control-gap) + 15vw);
+=======
+  --site-logo--size:         calc(var(--font-size-l) + 10vw);
+>>>>>>> f0833fd (.)
   --thumb-size:              clamp(64px, 9vw, 128px);
   --hero-size:               clamp(320px,40vw,calc(var(--container-max) * .4));
   --icon-size:               1.5em;   
@@ -94,12 +102,26 @@
   --outline:                 1px solid color-mix(in oklab, var(--color-light) 10%,transparent);; 
 
   /* ====== Overlays / Filter Presets ============ */   
-  --background-overlay:      radial-gradient(ellipse at center, transparent 30%, black 120%); 
-  --panel-bg:                radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,.65)120%),
-                             linear-gradient(135deg,oklch(35% .19 285/60%)33%,oklch(43.474% 0.20015 317.691/60%)53%,oklch(40.655% 0.23003 284.249 / 0.728)80%),
-                             radial-gradient(1200px 900px at top left, oklch(75% 0.20 285 / .36), transparent 74%),
-                             radial-gradient(1100px 800px at center right, oklch(42% 0.22 305 / .28), transparent 72%),
-                             linear-gradient(to top, oklch(60% 0.20 230 / .96), transparent 54%);
+  --background-overlay:      radial-gradient(ellipse at center, transparent 50%, black 120%); 
+  --bg-stars:  var(--bg-overlay--stars);
+  --bg-nebula: var(--bg-overlay--nebula);
+
+  /* Dim-Layer separat steuerbar */
+  --bg-dim-alpha: .55; /* dunkler/heller machen */
+  --bg-dim: linear-gradient(0deg, rgba(0,0,0,var(--bg-dim-alpha)) 0 100%);
+
+  /* Deine Farbfläche (bereinigt) */
+  --bg-field:
+    radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,.65) 120%),
+    linear-gradient(135deg,
+      oklch(45% .19 285 / 60%) 33%,
+      oklch(43.474% 0.20015 317.691 / 60%) 53%,
+      oklch(40.655% 0.23003 284.249 / 0.728) 80%
+    ),
+    radial-gradient(1200px 900px at top left,    oklch(75% 0.20 285 / .36), transparent 74%),
+    radial-gradient(1100px 800px at center right, oklch(42% 0.22 305 / .28), transparent 72%),
+    linear-gradient(to top, oklch(60% 0.20 230 / .96), transparent 54%);
+
   --site-logo--filter:       drop-shadow(0 3px 2px var(--color-shadow--strong)); 
 
   /* ====== Font Styles ====== */
