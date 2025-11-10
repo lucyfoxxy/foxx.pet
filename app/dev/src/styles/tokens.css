@@ -68,10 +68,7 @@
   --control-surface--light:           color-mix(in oklab,var(--color-accent) 90%, transparent);
   --control-surface--dark:            color-mix(in oklch, var(--color-dark)90%,transparent);
   
-  --control-glow:  inset 0 0 1px 2px var(--color-glow--soft);
-  --control-glow--soft:inset 0 0 4px 1px var(--color-glow--soft);
-  --control-glow--active: 0 0 4px 2px var(--color-glow--soft);
-  --control-glow--hover:  0 0 4px 2px var(--color-glow--strong);
+  --control-glow:            inset 0 0 1px 2px var(--color-glow--soft);
 
   --surface-shadow--soft:    1px 2px 4px 0px var(--color-shadow--soft);
   --surface-shadow--default: 0 0 18px -10px var(--color-shadow--soft),0 0 24px -6px var(--color-shadow--strong);

@@ -1,0 +1,56 @@
+/* ============================================ */
+/* ======== SITE: LAYOUT & STRUCTURE ========== */
+/* ====== Depends on: tokens, base, typography ====== */
+/* ============================================ */
+
+/* ====== FOOTER ================= */
+.footer {
+  background: var(--control-surface--dark);
+  display: grid;
+  grid-template-columns: 33% auto 33%;
+  border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+  backdrop-filter: var(--blur-m);
+  grid-template-areas:
+    "footer-left footer-center footer-right";
+  padding-inline: var(--panel-padding);
+  justify-content: stretch;
+  align-items: end;
+  vertical-align: middle;
+  padding-block: var(--panel-bar-padding);
+  margin-inline: 0;
+  margin-block: var(--section-gap) 0;
+  gap: var(--flow-gap);
+  box-shadow: 0 -10px 16px -4px var(--color-dark), var(--control-shadow--inset);
+}
+
+@media (max-width: 900px) {
+  .footer {
+    box-shadow: var(--surface-shadow--default);
+    border-radius: var(--radius-m) var(--radius-m) 0 0;
+  }
+}
+
+.footer :where(p) {
+  opacity: 0.75;
+}
+
+.footer__left {
+  grid-area: footer-left;
+  justify-self: start;
+}
+
+.footer__center {
+  grid-area: footer-center;
+  justify-self: center;
+}
+
+.footer__right {
+  grid-area: footer-right;
+  justify-self: end;
+}
+
+.footer__center > .button.control--small {
+  font-size: var(--font-size-xxs);
+  padding-block: 0;
+  vertical-align: bottom;
+}
