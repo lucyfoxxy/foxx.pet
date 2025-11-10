@@ -6,7 +6,7 @@
 /* ====== HEADER ================= */
 .header {
   position: sticky;
-      
+  
   top: 0;
   z-index: 1001;
   display: grid;
@@ -52,8 +52,7 @@
 
   .header__logo {
     display: inline-flex;
-    backdrop-filter: blur(18px) saturate(1.15) brightness(1.25);
-    background: var(--card-surface--light);
+
     align-items: center;
     justify-content: center;
     position: relative;
@@ -63,6 +62,8 @@
     padding-inline: var(--panel-bar-padding);
     padding-block: var(--panel-bar-padding);
     border-top-left-radius: var(--radius-xl);
+  backdrop-filter: blur(18px) saturate(1.5) brightness(1.5);
+  background: var(--control-surface--dark);
   }
 
   .header__logo img {
@@ -79,13 +80,16 @@
   block-size: 100%;
   border-top-right-radius: var(--radius-xl);
   padding-inline: var(--panel-bar-padding);
-  padding-block: var(--panel-bar-padding); 
+  padding-block:  0; 
   margin: 0;
   display: inline-flex;
   grid-area: nav;
-  backdrop-filter: blur(18px) saturate(1.15) brightness(1.25);
+  align-self: center;
   transition: var(--transition--nav);
-  background: var(--card-surface--light);
+      border-top-right-radius: var(--radius-xl);
+          
+  backdrop-filter: blur(18px) saturate(1.5) brightness(1.5);
+  background: var(--control-surface--dark);
 }
 
 .header__nav.controls {
@@ -93,17 +97,23 @@
 }
 
 .header__nav > .button {
-  border-radius: 0;
-  padding-inline: var(--panel-padding);
+
+  padding: var(--panel-bar-padding) var(--panel-padding);
 
 }
 
 @media (min-width: 900px) {
 
   .header__nav > .button {
-    background: var(--card-surface--dark);
+    background: transparent;
+    box-shadow: none;
   }
-
+  .header__nav > .button[data-active="true"] > * {
+    text-shadow: var(--text-glow--strong);
+  }
+  .header__nav > .button[data-active="true"]{
+     background: transparent;   
+  }  
   .header__nav > .button:first-child {
     border-top-left-radius: var(--radius-xxl);
     border-bottom-left-radius: var(--radius-xxl);
@@ -122,10 +132,11 @@
   opacity: inherit;
 }
 
-.header[data-stuck] > .header__nav {
-  border-top-right-radius: 0;
-}
 
+:not(.header[data-stuck]) > .header__nav {
+      border-top-right-radius: var(--radius-xl);
+
+}
 @media (max-width: 900px) {
   .header__nav {
     padding-block: 0; 
@@ -145,6 +156,7 @@
 
   .header__nav > .button {
     inline-size: 100%;
+    background: var(--control-surface--dark);
   }
 }
 
@@ -173,7 +185,7 @@
 .header__nav-text,
 .header__nav-symbol {
   display: inline;
-  white-space: nowrap;
+  white-space: no-wrap;
   opacity: 0.8;
   justify-self: center;
 }
@@ -252,7 +264,8 @@
   gap: var(--control-gap);
   margin: 0;
   padding: 0;
-  background: var(--control-surface--dark);
+  backdrop-filter: blur(18px) saturate(1.5) brightness(1.5);
+  background: var(--card-surface--light);
   border-radius: 999px;
   padding: var(--control-gap) var(--control-padding);  
   list-style: none;
