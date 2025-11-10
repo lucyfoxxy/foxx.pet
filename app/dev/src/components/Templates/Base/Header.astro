@@ -1,6 +1,7 @@
 ---
 import { ASSETS } from '@Assets/ui';
 import ICONS from '@Assets/Icons.astro';
+
 type NavLink = {
   href: string;
   label: string;
@@ -9,11 +10,13 @@ type NavLink = {
   includeInHeader?: boolean;
   isActive?: boolean;
 };
+
 type Breadcrumb = {
   label: string;
   href: string;
   isCurrent: boolean;
 };
+
 type Props = {
   navLinks: NavLink[];
   meta?: { title?: string; description?: string; url?: string };
@@ -31,28 +34,24 @@ const hasActions = Astro.slots.has('actions');
     {navLinks
       .filter((link) => link.includeInHeader)
       .map((link) => (
-<<<<<<< HEAD
-        <a class="button control--round control--stretch" href={link.href} data-active={link.isActive ? 'true' : undefined}>
-=======
-        <a class="button control--round" href={link.href} data-active={link.isActive ? 'true' : undefined}>
->>>>>>> f0833fd (.)
-              <div class="header__nav-item">
-                <span class="header__nav-symbol" aria-hidden="true">
-                  <ICONS class="media-icon" kind={link.icon} />
-                </span>              
-                <span class="header__nav-text">
-                  {link.label}
-                </span>
-
-              </div>
-          
+        <a
+          class="button control--round control--stretch"
+          href={link.href}
+          data-active={link.isActive ? 'true' : undefined}
+        >
+          <div class="header__nav-item">
+            <span class="header__nav-symbol" aria-hidden="true">
+              <ICONS class="media-icon" kind={link.icon} />
+            </span>
+            <span class="header__nav-text">{link.label}</span>
+          </div>
         </a>
       ))}
   </nav>
   <div class="header__bar">
     <div class="header__crumbs" aria-label="Breadcrumb">
       <ol>
-        {breadcrumbs.map((crumb, index) => (
+        {breadcrumbs.map((crumb) => (
           <li>
             {crumb.isCurrent ? (
               <span class="is-current" aria-current="page">{crumb.label}</span>
@@ -62,13 +61,12 @@ const hasActions = Astro.slots.has('actions');
           </li>
         ))}
       </ol>
-
     </div>
     {hasActions ? (
       <div class="header__actions controls controls--end">
         <slot name="actions" />
       </div>
-  ) : null}
+    ) : null}
   </div>
 </header>
 
@@ -82,7 +80,4 @@ const hasActions = Astro.slots.has('actions');
       window.addEventListener('astro:before-swap', cleanup, { once: true });
     }
   });
-
 </script>
-
-

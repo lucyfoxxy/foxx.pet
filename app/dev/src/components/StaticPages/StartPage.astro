@@ -1,11 +1,12 @@
-<<<<<<< HEAD
 ---
 import { Template } from '@Frontend';
 import Icon from '@Assets/Icons.astro';
 import { ASSETS } from '@Assets/ui';
 import { getPageContent } from '@Content/siteContent';
 import { Picture } from 'astro:assets';
+
 export const prerender = true;
+
 const content = await getPageContent('home');
 
 const meta = {
@@ -46,7 +47,7 @@ const albumData =
         title: withPrefix(chosen.title) ?? '',
         description: chosen.description ?? '',
         shareKey: chosen.shareKey,
-        albumSlug: chosen.slug,                 // z.B. "frames-sfw"
+        albumSlug: chosen.slug, // z.B. "frames-sfw"
         categoryBadge: chosen.category?.toUpperCase(),
         dateBadge: fmtDate(chosen.date),
         initialThumb: (() => {
@@ -65,6 +66,7 @@ const albumData =
         href: `/frames/${chosen.category}/${chosen.slug}/`,
       }
     : null;
+
 const shareKey = 'KEkdKYpvFNPFgS654sbWB28rHuXIohcLo5MtrD1BERFqwHOtrQjmDxMhsRTnRSsKRSw';
 const isExternalLink = (href: string) => href.startsWith('http');
 ---
@@ -86,10 +88,12 @@ const isExternalLink = (href: string) => href.startsWith('http');
           alt={hero.heading}
           fetchpriority="high"
           class="media-image hero"
-        />       
+        />
       </Fragment>
       <Fragment slot="foot">
-        <h2><em>...Eeeeeeeeeeeeeeeeeeeeek!</em></h2>
+        <h2>
+          <em>...Eeeeeeeeeeeeeeeeeeeeek!</em>
+        </h2>
       </Fragment>
     </Template.Card>
   </section>
@@ -102,17 +106,15 @@ const isExternalLink = (href: string) => href.startsWith('http');
         </Fragment>
         <Fragment slot="body">
           <div class="prose">
-            {intro.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
-
+            {intro.paragraphs.map((paragraph) => (
+              <p>{paragraph}</p>
+            ))}
           </div>
         </Fragment>
         <Fragment slot="foot">
           <div class="prose">
-            <p>
-              - Always follow your heart -
-            </p>
-
-          <h3 class="is-italic">{intro.signature}</h3>
+            <p>- Always follow your heart -</p>
+            <h3 class="is-italic">{intro.signature}</h3>
           </div>
         </Fragment>
       </Template.Card>
@@ -137,7 +139,7 @@ const isExternalLink = (href: string) => href.startsWith('http');
         </Fragment>
       </Template.Card>
     </section>
-    
+
     <section class="content-section">
       <Template.Card class="card--ghost" headClass="card__head--column">
         <Fragment slot="head">
@@ -149,169 +151,9 @@ const isExternalLink = (href: string) => href.startsWith('http');
     </section>
   </section>
 
-
   <script>
     import initGalleryFrame from '@Scripts/galleryViewer.js';
     import { runOnReady } from '@Scripts/utils/_runOnReady.js';
     runOnReady(initGalleryFrame);
   </script>
 </Template.Base>
-=======
----
-import { Template } from '@Frontend';
-import Icon from '@Assets/Icons.astro';
-import { ASSETS } from '@Assets/ui';
-import { getPageContent } from '@Content/siteContent';
-import { Picture } from 'astro:assets';
-export const prerender = true;
-const content = await getPageContent('home');
-
-const meta = {
-  title: content.title,
-  description: content.description,
-};
-
-const hero = {
-  ...content.hero,
-  logo: ASSETS.logo_hero,
-  image: ASSETS.logo_hero.src,
-};
-
-const intro = content.intro;
-const feature = content.feature;
-const links = content.contactLinks ?? [];
-const contact = content.contact;
-
-// 👉 Random-Picker aus frames/{sfw,nsfw}
-const albums = import.meta.glob('@Content/album/*/*/*.json', { eager: true, import: 'default' });
-const pool = Object.values(albums)
-  .filter((a: any) => a && Array.isArray(a.items) && a.items.length > 0) as any[];
-
-function pick<T>(arr: T[]): T | null {
-  return arr.length ? arr[Math.floor(Math.random() * arr.length)] : null;
-}
-
-const chosen = pick(pool);
-
-// Hilfsformatierungen
-const fmtDate = (iso?: string) => (iso ? iso.slice(0, 10) : undefined);
-const withPrefix = (t?: string) => (t && (t.includes('SFW') || t.includes('NSFW')) ? `Artworks: ${t}` : t);
-
-// AlbumFrame-Props
-const albumData =
-  chosen
-    ? {
-        title: withPrefix(chosen.title) ?? '',
-        description: chosen.description ?? '',
-        shareKey: chosen.shareKey,
-        albumSlug: chosen.slug,                 // z.B. "frames-sfw"
-        categoryBadge: chosen.category?.toUpperCase(),
-        dateBadge: fmtDate(chosen.date),
-        initialThumb: (() => {
-          const f = chosen.items[0];
-          return f
-            ? {
-                src: f.thumb || f.full,
-                width: f.width ?? undefined,
-                height: f.height ?? undefined,
-                alt: f.filename ?? '',
-                full: f.full,
-              }
-            : undefined;
-        })(),
-        // Für späteren Direktlink:
-        href: `/frames/${chosen.category}/${chosen.slug}/`,
-      }
-    : null;
-const shareKey = 'KEkdKYpvFNPFgS654sbWB28rHuXIohcLo5MtrD1BERFqwHOtrQjmDxMhsRTnRSsKRSw';
-const isExternalLink = (href: string) => href.startsWith('http');
----
-<Template.Base meta={meta}>
-  <head>
-    <link rel="preload" href={hero.image} as="image" type="image/webp" />
-  </head>
-
-  <section class="content-section content-section--head">
-    <Template.Card class="card--plain is-centered is-condensed">
-      <Fragment slot="head">
-        <h1 class="card__title">{hero.heading}</h1>
-      </Fragment>
-      <Fragment slot="body">
-        <Picture
-          src={hero.logo}
-          formats={['webp']}
-          inferSize
-          alt={hero.heading}
-          fetchpriority="high"
-          class="media-image hero"
-        />       
-      </Fragment>
-      <Fragment slot="foot">
-        <h2><em>...Eeeeeeeeeeeeeeeeeeeeek!</em></h2>
-      </Fragment>
-    </Template.Card>
-  </section>
-
-  <section class="content-section cols-2">
-    <section class="content-section">
-      <Template.Card>
-        <Fragment slot="head">
-          <h2 class="card__title">{intro.heading}</h2>
-        </Fragment>
-        <Fragment slot="body">
-          <div class="prose">
-            {intro.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
-
-          </div>
-        </Fragment>
-        <Fragment slot="foot">
-          <div class="prose">
-            <p>
-              - Always follow your heart -
-            </p>
-
-          <h3 class="is-italic">{intro.signature}</h3>
-          </div>
-        </Fragment>
-      </Template.Card>
-      <Template.Card class="card--ghost" headClass="card__head--column">
-        <Fragment slot="head">
-          <h2 class="card__title">{contact.heading}</h2>
-          <p>{contact.description}</p>
-        </Fragment>
-        <Fragment slot="body">
-          <div class="controls controls--start">
-            {links.map((link) => (
-              <a
-                class="button control--dark control--large control--glow control--animated"
-                href={link.href}
-                rel={isExternalLink(link.href) ? 'noopener noreferrer' : undefined}
-                target={isExternalLink(link.href) ? '_blank' : undefined}
-              >
-                <Icon class="media-icon" kind={link.kind} />
-              </a>
-            ))}
-          </div>
-        </Fragment>
-      </Template.Card>
-    </section>
-    
-    <section class="content-section">
-      <Template.Card class="card--ghost" headClass="card__head--column">
-        <Fragment slot="head">
-          <h2 class="card__title">{feature.heading}</h2>
-          <p>{feature.description}</p>
-        </Fragment>
-      </Template.Card>
-      <Template.AlbumFrame album={albumData} />
-    </section>
-  </section>
-
-
-  <script>
-    import initGalleryFrame from '@Scripts/galleryViewer.js';
-    import { runOnReady } from '@Scripts/utils/_runOnReady.js';
-    runOnReady(initGalleryFrame);
-  </script>
-</Template.Base>
->>>>>>> f0833fd (.)
