@@ -1,13 +1,13 @@
 {
-  "id": "home",
+  "id": "cosmos",
   "href": "/",
-  "title": "Lucy's Cosmos",
-  "includeInHeader": false,
+  "title": "Cosmos",
+  "includeInHeader": true,
   "description": "A small cosmic fox on their big journey across the universe!",
   "navLabel": {
-    "text": "Home",
+    "text": "Cosmos",
     "emoji": "🪐",
-    "icon": "planet" 
+    "icon": "starfall" 
   },
   "hero": {
     "heading": "Welcome to",
