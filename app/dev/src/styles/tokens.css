@@ -35,7 +35,7 @@
   --container-padding:       clamp(var(--space-xxs),  calc(var(--space-xxs) + 2vw),    var(--space-xxl)); 
   --container-max:           1280px;
   
-  --site-logo--size:         calc(var(--control-gap) + 15vw);
+  --site-logo--size:         calc(var(--control-gap) + 12vw);
   --thumb-size:              clamp(64px, 9vw, 128px);
   --hero-size:               clamp(320px,40vw,calc(var(--container-max) * .4));
   --icon-size:               1.5em;   
@@ -47,7 +47,7 @@
   --color-shadow--soft:       color-mix(in oklch, var(--color-dark) 30%, transparent);
   --color-shadow--strong:     color-mix(in oklch, var(--color-dark) 50%, transparent);
   --color-glow--soft:         color-mix(in oklch, var(--color-light) 65%, transparent);
-  --color-glow--strong:        color-mix(in oklch, var(--color-light) 80%, var(--color-accent));
+  --color-glow--strong:        color-mix(in oklch, var(--color-light) 80%, transparent);
 
   /* ====== Text Colors & FX ==================== */
   --text-color:              color-mix(in oklch, var(--color-light) 85%, white);
@@ -58,8 +58,8 @@
   --text-shadow--strong:     2px 2px 3px var(--color-shadow--strong);
   --icon-shadow:             3px 4px 3px var(--color-shadow--strong);
 
-  --text-glow--soft:         1px 1px 2px var(--color-glow--strong);
-  --text-glow--strong:       1px 1px 2px var(--color-glow--strong);
+  --text-glow--soft:         1px 1px 3px var(--color-glow--soft);
+  --text-glow--strong:       1px 1px 3px var(--color-glow--strong);
 
   /* ====== Surface / Control Colors & FX ======= */  
   --card-surface--dark:      color-mix(in oklab,var(--color-dark) 51%, transparent);
@@ -75,7 +75,7 @@
 
   --surface-shadow--soft:    1px 2px 4px 0px var(--color-shadow--soft);
   --surface-shadow--default: 0 0 18px -10px var(--color-shadow--soft),0 0 24px -6px var(--color-shadow--strong);
-  --surface-shadow--strong:  0 0 20px -10px var(--color-shadow--soft),0 0 28px -6px var(--color-shadow--strong),0 0 14px 0 color-mix(in srgb, black 95%, transparent);
+  --surface-shadow--strong:  0 0 20px -10px var(--color-shadow--soft),0 0 28px -6px var(--color-shadow--strong),0 0 28px 0 var(--color-shadow--strong);
 
   --control-shadow--inset: inset 0 0 24px 2px var(--color-shadow--strong);
   --card-shadow--inset: inset 0 0 24px 2px var(--color-shadow--soft),inset 0 0 0 1px var(--color-shadow--strong);

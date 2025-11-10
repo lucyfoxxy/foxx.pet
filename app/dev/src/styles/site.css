@@ -21,11 +21,9 @@
 
 .panel-shell {
   display: flex;
-  outline: var(--outline);
   flex-direction: column;
-  backdrop-filter: var(--blur-l);
   box-shadow: var(--surface-shadow--strong), inset 0 0 36px -10px var(--color-glow--soft),var(--control-shadow--inset);
-  -webkit-backdrop-filter: var(--blur-l);
+  
   border-radius: var(--radius-xl);
   background-image:
     var(--bg-overlay--nebula),
