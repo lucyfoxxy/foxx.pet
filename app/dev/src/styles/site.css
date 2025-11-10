@@ -161,6 +161,7 @@ main.panel {
     padding-inline: var(--panel-bar-padding);
     padding-block: var(--panel-bar-padding);
     border-top-left-radius: var(--radius-xl);
+
   }
   .header__logo img {
     display: block;
@@ -174,7 +175,8 @@ main.panel {
 .header__nav {
   inline-size: 100%;
   block-size: 100%;
-  border-top-right-radius: var(--radius-l);
+  border-top-right-radius: var(--radius-xl);
+
   padding-inline: var(--panel-bar-padding) ;
   padding-block: var(--panel-bar-padding);
   backdrop-filter: blur(18px) saturate(1.15) brightness(1.25) ;  
