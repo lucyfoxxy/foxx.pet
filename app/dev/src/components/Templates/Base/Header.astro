@@ -35,13 +35,13 @@ const hasActions = Astro.slots.has('actions');
       .filter((link) => link.includeInHeader)
       .map((link) => (
         <a
-          class="button control--round control--stretch"
+          class="button control--round"
           href={link.href}
           data-active={link.isActive ? 'true' : undefined}
         >
           <div class="header__nav-item">
             <span class="header__nav-symbol" aria-hidden="true">
-              <ICONS class="media-icon" kind={link.icon} />
+              <ICONS class="media-icon" name={link.icon} />
             </span>
             <span class="header__nav-text">{link.label}</span>
           </div>

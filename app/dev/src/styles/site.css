@@ -112,15 +112,16 @@ main.panel {
   align-items: stretch;
   margin-block: 0;
   margin-inline: 0;
-  backdrop-filter: blur(18px) saturate(1.15) brightness(1.25) ;
+  
+  
   border: 0px hidden;
   border-radius: var(--radius-xl) var(--radius-xl) 0 0 ;
   gap: 0; 
-  box-shadow: 0 8px 14px -4px var(--color-shadow--strong);
+
 }
 @media (max-width: 900px) {
   .header {
-    border-radius: 0;
+
     grid-template-columns: 1fr;
     grid-template-areas: "nav" "bar";
     justify-items: stretch;
@@ -149,6 +150,8 @@ main.panel {
   }
   .header__logo {
     display: inline-flex;
+    backdrop-filter: blur(18px) saturate(1.15) brightness(1.25) ;
+    background: var(--card-surface--dark);
     align-items: center;
     justify-content: center; 
     position: relative;
@@ -156,7 +159,7 @@ main.panel {
     inline-size: 100%;
     block-size: 100%;
     padding-inline: var(--panel-bar-padding);
-    padding-block: var(--panel-bar-padding) 0;
+    padding-block: var(--panel-bar-padding);
     border-top-left-radius: var(--radius-xl);
   }
   .header__logo img {
@@ -172,25 +175,30 @@ main.panel {
   inline-size: 100%;
   block-size: 100%;
   border-top-right-radius: var(--radius-l);
-  padding-inline: var(--panel-bar-padding);
-  padding-block: var(--panel-bar-padding) 0;
+  padding-inline: var(--panel-bar-padding) ;
+  padding-block: var(--panel-bar-padding);
+  backdrop-filter: blur(18px) saturate(1.15) brightness(1.25) ;  
+  background: var(--card-surface--dark);
   margin: 0;
   display: inline-flex;
   grid-area: nav;
   transition: var(--transition--nav);
-  filter: drop-shadow(6px 6px 4px var(--color-shadow--strong));
+
+
 }
 .header__nav.controls { 
   gap: 0;
+
 }
 .header__nav > .button { 
   border-radius: 0 ;
-  inline-size: 100%;
+  padding-inline: var(--panel-padding);
+  
 }
 @media (min-width: 900px) {
   .header__nav > .button { 
  
-  background: var(--control-surface--dark);
+  background: transparent;
   
 
 }
@@ -252,6 +260,7 @@ main.panel {
 .header__nav-text,
 .header__nav-symbol {
   display: inline;
+  white-space: pre-line; 
   opacity: .8;
   justify-self: center;
 }

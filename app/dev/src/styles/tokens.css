@@ -58,8 +58,8 @@
   --text-shadow--strong:     2px 2px 3px var(--color-shadow--strong);
   --icon-shadow:             3px 4px 3px var(--color-shadow--strong);
 
-  --text-glow--soft:         1px 1px 2px var(--color-glow--soft);
-  --text-glow--strong:       1px 1px 2px var(--color-glow--soft);
+  --text-glow--soft:         1px 1px 2px var(--color-glow--strong);
+  --text-glow--strong:       1px 1px 2px var(--color-glow--strong);
 
   /* ====== Surface / Control Colors & FX ======= */  
   --card-surface--dark:      color-mix(in oklab,var(--color-dark) 51%, transparent);
@@ -94,7 +94,7 @@
   --outline:                 1px solid color-mix(in oklab, var(--color-light) 10%,transparent);; 
 
   /* ====== Overlays / Filter Presets ============ */   
-  --background-overlay:      radial-gradient(ellipse at center, transparent 50%, black 120%); 
+  --background-overlay:      radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,.7) 120%); 
   --bg-stars:  var(--bg-overlay--stars);
   --bg-nebula: var(--bg-overlay--nebula);
 
