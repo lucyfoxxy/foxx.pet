@@ -30,20 +30,12 @@
   --section-gap:            clamp(var(--space-s),  calc(var(--space-s) + 1.5vw),    var(--space-xxl)); 
   
   --panel-padding:           clamp(var(--space-s),  calc(var(--space-s) + 1.5vw),    var(--space-xxl)); 
-<<<<<<< HEAD
   --panel-bar-padding:       calc(var(--panel-padding) * .55);
-=======
-  --panel-bar-padding:       calc(var(--panel-padding) * .75);
->>>>>>> f0833fd (.)
  
   --container-padding:       clamp(var(--space-xxs),  calc(var(--space-xxs) + 2vw),    var(--space-xxl)); 
   --container-max:           1280px;
   
-<<<<<<< HEAD
   --site-logo--size:         calc(var(--control-gap) + 15vw);
-=======
-  --site-logo--size:         calc(var(--font-size-l) + 10vw);
->>>>>>> f0833fd (.)
   --thumb-size:              clamp(64px, 9vw, 128px);
   --hero-size:               clamp(320px,40vw,calc(var(--container-max) * .4));
   --icon-size:               1.5em;   
