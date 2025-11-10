@@ -54,12 +54,12 @@
     display: inline-flex;
 
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
     position: relative;
     grid-area: logo;
     inline-size: 100%;
     block-size: 100%;
-    padding-inline: var(--panel-bar-padding);
+    padding-inline: var(--panel-padding);
     padding-block: var(--panel-bar-padding);
     border-top-left-radius: var(--radius-xl);
   backdrop-filter: blur(18px) saturate(1.5) brightness(1.5);
@@ -87,7 +87,7 @@
   align-self: center;
   transition: var(--transition--nav);
       border-top-right-radius: var(--radius-xl);
-          
+             
   backdrop-filter: blur(18px) saturate(1.5) brightness(1.5);
   background: var(--control-surface--dark);
 }
@@ -98,7 +98,8 @@
 
 .header__nav > .button {
 
-  padding: var(--panel-bar-padding) var(--panel-padding);
+  padding-inline: var(--panel-padding);
+  
 
 }
 
@@ -106,22 +107,24 @@
 
   .header__nav > .button {
     background: transparent;
-    box-shadow: none;
+    
+    border-radius: 0;
   }
   .header__nav > .button[data-active="true"] > * {
     text-shadow: var(--text-glow--strong);
   }
   .header__nav > .button[data-active="true"]{
-     background: transparent;   
+     background: var(--control-surface--light); 
+
   }  
   .header__nav > .button:first-child {
-    border-top-left-radius: var(--radius-xxl);
-    border-bottom-left-radius: var(--radius-xxl);
+    border-top-left-radius: var(--radius-xl);
+    border-bottom-left-radius: var(--radius-xl);
   }
 
   .header__nav > .button:last-child {
-    border-top-right-radius: var(--radius-xxl);
-    border-bottom-right-radius: var(--radius-xxl);
+    border-top-right-radius: var(--radius-xl);
+    border-bottom-right-radius: var(--radius-xl);
   }
 }
 
@@ -157,6 +160,7 @@
   .header__nav > .button {
     inline-size: 100%;
     background: var(--control-surface--dark);
+    border-radius: 0;
   }
 }
 
@@ -265,7 +269,7 @@
   margin: 0;
   padding: 0;
   backdrop-filter: blur(18px) saturate(1.5) brightness(1.5);
-  background: var(--card-surface--light);
+
   border-radius: 999px;
   padding: var(--control-gap) var(--control-padding);  
   list-style: none;
