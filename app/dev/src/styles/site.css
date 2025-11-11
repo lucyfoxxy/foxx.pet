@@ -36,9 +36,7 @@
     var(--bg-overlay--nebula),
     var(--bg-overlay--stars),
     var(--background-overlay),
-    linear-gradient(165deg, oklch(5.444% 0.20 300.658) 23%, oklch(55% 0.2 300) 53%, oklch(55% 0.23 305) 76%),
-    var(--bg-image--panel),
-    var(--color-dark);
+    linear-gradient(145deg, oklch(35% 0.11 290 / 100%) 33%, oklch(35% 0.11 305) 53%, oklch(35% 0.1 310) 76%);
 
   background-repeat:
     repeat,
@@ -49,7 +47,7 @@
     no-repeat;
 
   background-size:
-    640px 640px,
+    1280px 1280px,
     640px 640px,
     auto,
     auto,
@@ -58,11 +56,12 @@
 
   background-blend-mode:
     overlay,
-    screen,
+    soft-light,
     multiply,
     hue,
-    normal,
-    hue;
+
+
+    normal;
 
   background-position:
     top,

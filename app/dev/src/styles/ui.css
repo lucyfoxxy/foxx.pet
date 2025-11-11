@@ -85,11 +85,4 @@
   .button:active { filter: brightness(.92); }
 }
 
-.button__icon svg{
-  display:inline-flex;
-  vertical-align: middle;
-  inline-size: var(--icon-size);
-  block-size: var(--icon-size);
-  filter: drop-shadow(var(--icon-shadow));
-}
 
