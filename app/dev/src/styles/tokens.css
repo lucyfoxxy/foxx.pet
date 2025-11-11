@@ -41,9 +41,9 @@
   --icon-size:               1.5em;   
 
   /* ====== Base Colors ========================= */
-  --color-dark:              oklch(21% 0.10 295);
-  --color-light:             oklch(92% 0.18 295); 
-  --color-accent:            oklch(74% 0.20 295);          
+  --color-dark:              oklch(21% 0.08 295);
+  --color-light:             oklch(92% 0.11 295); 
+  --color-accent:            oklch(74% 0.13 295);          
   --color-shadow--soft:       color-mix(in oklch, var(--color-dark) 30%, transparent);
   --color-shadow--strong:     color-mix(in oklch, var(--color-dark) 50%, transparent);
   --color-glow--soft:         color-mix(in oklch, var(--color-light) 65%, transparent);
@@ -91,7 +91,7 @@
   --outline:                 1px solid color-mix(in oklab, var(--color-light) 10%,transparent);; 
 
   /* ====== Overlays / Filter Presets ============ */   
-  --background-overlay:      radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,.7) 120%); 
+  --background-overlay:      radial-gradient(ellipse at center, transparent 0%, var(--color-shadow--strong) 120%); 
   --bg-stars:  var(--bg-overlay--stars);
   --bg-nebula: var(--bg-overlay--nebula);
 

@@ -26,47 +26,49 @@
 
   box-shadow:
     var(--surface-shadow--strong),
-    inset 0 0 36px -10px var(--color-glow--soft),
-    var(--control-shadow--inset);
-
+    inset 0 0 36px -10px var(--color-glow--soft);
+  outline: 2px solid var(--color-dark);
+  outline-offset: -1px;
   border-radius: var(--radius-xl);
 
-  background-image:
+  background:
+    
     var(--bg-overlay--nebula),
     var(--bg-overlay--stars),
     var(--background-overlay),
-    linear-gradient(165deg, oklch(55% 0.23 290) 13%, oklch(55% 0.23 315) 33%, oklch(55% 0.23 300) 46%),
+    linear-gradient(165deg, oklch(5.444% 0.20 300.658) 23%, oklch(55% 0.2 300) 53%, oklch(55% 0.23 305) 76%),
     var(--bg-image--panel),
-    linear-gradient(205deg, #7735e1, #6e26cb, rgb(40, 7, 112));
+    var(--color-dark);
 
   background-repeat:
-    no-repeat,
-    no-repeat,
+    repeat,
+    repeat,
     no-repeat,
     repeat,
     repeat,
     no-repeat;
 
   background-size:
-    cover,
-    cover,
+    640px 640px,
+    640px 640px,
     auto,
     auto,
-    1280px 1290px,
+    1280px 1280px,
     auto;
 
   background-blend-mode:
     overlay,
-    overlay,
-    darken,
+    screen,
+    multiply,
     hue,
     normal,
-    normal;
+    hue;
 
   background-position:
-    center,
-    center,
-    center,
+    top,
+    top,
+    top,
+    top,
     top;
 }
 

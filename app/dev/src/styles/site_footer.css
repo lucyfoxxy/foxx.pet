@@ -9,7 +9,7 @@
   display: grid;
   grid-template-columns: 33% auto 33%;
   border-radius: 0 0 var(--radius-xl) var(--radius-xl);
-  backdrop-filter: var(--blur-m);
+  backdrop-filter: var(--blur-s);
   grid-template-areas:
     "footer-left footer-center footer-right";
   padding-inline: var(--panel-padding);
@@ -21,6 +21,8 @@
   margin-block: var(--section-gap) 0;
   gap: var(--flow-gap);
   box-shadow: 0 -10px 16px -4px var(--color-dark), var(--control-shadow--inset);
+  outline: 2px solid var(--color-dark);
+  outline-offset: -1px;
 }
 
 @media (max-width: 900px) {
