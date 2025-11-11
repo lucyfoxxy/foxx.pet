@@ -141,10 +141,8 @@ const breadcrumbs = buildBreadcrumbs({
                 --bg-overlay--nebula: url(${ASSETS.overlay__nebula.src});
                 --bg-overlay--stars: url(${ASSETS.overlay__stars.src});
               `}>
-              <Template-ShootingStars count={64} color="oklch(82% .19 310)" z={-2} />
     <div class="container">
       <div class="panel-shell">
-        
         <BaseParts.Header meta={meta} navLinks={navLinks} breadcrumbs={breadcrumbs}>
           {Astro.slots.has('header__actions') ? (
             <slot name="header__actions" slot="actions" />
