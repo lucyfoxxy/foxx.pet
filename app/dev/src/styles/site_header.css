@@ -22,7 +22,7 @@
   background: 
     var(--bg-overlay--stars),
     var(--bg-overlay--nebula),
-    radial-gradient(ellipse at 80% 50%,color-mix(in oklab,transparent 30%,var(--color-accent)) 30%,transparent),
+    radial-gradient(ellipse at 80% 50%,color-mix(in oklab,transparent 90%,var(--color-accent)) 30%,transparent),
     var(--control-surface--dark);
   background-repeat:
     repeat,
@@ -85,8 +85,7 @@
     inline-size: 100%;
     block-size: 100%;
     padding-inline: var(--panel-padding) 0;
-    padding-block: var(--panel-bar-padding) 0;
-    
+    padding-block: var(--panel-bar-padding) 0;   
     border-top-left-radius: var(--radius-xl);
   }
   .header__logo img {
@@ -101,18 +100,13 @@
 .header__nav {
     inline-size: 100%;
     block-size: 100%;
-    /* border-top-right-radius: var(--radius-l); */
     padding-inline: var(--panel-padding);
     padding-block: var(--panel-bar-padding) 0; 
     margin: 0;
     display: inline-flex;
-    /* row-gap: var(--nav-gap--row); */
-    /* column-gap: var(--nav-gap--column); */
     grid-area: nav;
     transition: var(--transition--nav);
     filter: drop-shadow(6px 6px 4px var(--color-shadow--strong));
-    
-    /* background: var(--bg-overlay--stars),var(--control-surface--dark); */
 }
 .header__nav > .button:hover,
 .header__nav > .button[data-active="true"],
@@ -189,21 +183,15 @@
     padding-block: calc(.5 * var(--panel-bar-padding)) calc(.25 * var(--panel-bar-padding));
     grid-template-areas: "crumbs";
     filter: drop-shadow(6px 6px 4px var(--color-shadow--strong));
-    /* align-items: baseline; */
-    /* justify-items: end; */
-    /* justify-content: space-evenly; */
-    /* align-content: stretch; */
 }
 @media (max-width: 900px) {
   .header__bar {
       border-radius: 0 0 var(--radius-xs) var(--radius-xs);
-      background: var(--control-surface--dark);
     }
   .header[data-stuck] :where(.header__bar) {
     display: none;
   }
-
-  
+ 
 }
 
 /* ====== HEADER - CRUMBS ================= */
@@ -243,28 +231,32 @@
   min-width: 0;
 }
 
-.header__crumbs li {
+.header__crumbs li,
+.header__crumbs li .is-current {
   display: inline-flex;
-  opacity: .7;
-  background: var(--control-surface--dark);
   border-radius: 999px;
-  padding-inline: var(--card-gap);
+  padding-inline: var(--control-gap);
 }
 
 .header__crumbs,
 .header__crumbs li {
   align-items: center;
-  gap: var(--control-gap);
-}
 
+}
+.header__crumbs li :not(.is-current){
+  opacity: .7;
+  background: var(--control-surface--dark);
+}
 .header__crumbs li .is-current {
   color: var(--text-color);
   text-shadow: var(--text-glow--strong);
+  background: var(--card-surface--light);
   opacity: 1;
 }
 .header__crumbs ol > li + li::before { 
   margin-inline: -.25rem;
   content: "›"; 
   opacity: .65;
+    padding-inline: 0;
 }
 
