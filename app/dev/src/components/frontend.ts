@@ -10,6 +10,7 @@ import EntryBlog from '@Templates/EntryBlog.astro';
 import HeaderActions from '@Templates/HeaderActions.astro';
 import TileView from '@Templates/TileView.astro';
 import TitleWithIcon from '@Templates/TitleWithIcon.astro';
+import ShootingStars from '@Templates/ShootingStars.astro';
 
 import Category from '@Views/Category.astro';
 import Entry from '@Views/Entry.astro';
@@ -33,6 +34,7 @@ export const Template = {
   AlbumFrame,
   AlbumThumbs,
   EntryBlog,
+  ShootingStars,
 };
 
 export const BaseParts = {

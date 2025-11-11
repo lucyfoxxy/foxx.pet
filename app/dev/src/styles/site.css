@@ -26,46 +26,32 @@
 
   box-shadow:
     var(--surface-shadow--strong),
-    inset 0 0 36px -10px var(--color-glow--soft);
+    inset 0 0 26px 0px var(--color-shadow--strong);
   outline: 2px solid var(--color-dark);
   outline-offset: -1px;
   border-radius: var(--radius-xl);
 
   background:
-    
     var(--bg-overlay--nebula),
     var(--bg-overlay--stars),
-    var(--background-overlay),
-    linear-gradient(145deg, oklch(35% 0.11 290 / 100%) 33%, oklch(35% 0.11 305) 53%, oklch(35% 0.1 310) 76%);
-
+    radial-gradient(ellipse at top, oklch(24% 0.125 290),oklch(34% 0.135 295),oklch(29% 0.125 300),var(--color-dark));
+    
   background-repeat:
     repeat,
     repeat,
-    no-repeat,
-    repeat,
-    repeat,
-    no-repeat;
+    no-repeat; 
 
   background-size:
     1280px 1280px,
-    640px 640px,
-    auto,
-    auto,
     1280px 1280px,
     auto;
 
   background-blend-mode:
     overlay,
-    soft-light,
-    multiply,
-    hue,
-
-
+    screen,
     normal;
 
   background-position:
-    top,
-    top,
     top,
     top,
     top;

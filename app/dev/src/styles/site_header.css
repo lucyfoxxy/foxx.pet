@@ -12,7 +12,7 @@
   align-items: stretch;
   margin-block: 0;
   margin-inline: 0;
-  backdrop-filter: blur(8px) saturate(1.5) brightness(1.5);
+
   outline: 2px solid var(--color-dark);
   outline-offset: -1px;
   border-radius: var(--radius-xl) var(--radius-xl) 0 0;

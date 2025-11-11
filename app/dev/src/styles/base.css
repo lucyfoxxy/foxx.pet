@@ -58,8 +58,9 @@ body::before {
     background: 
     var(--background-overlay),
     var(--bg-overlay--nebula),   
+    
     linear-gradient(205deg, #371173, #6e26cb ,rgb(40, 7, 112));
-  background-blend-mode:darken,overlay,hue;
+  background-blend-mode:multiply,overlay,hue;
   background-repeat: no-repeat,repeat,no-repeat;
   background-size: cover,contain,cover;
   background-position: center, top,center;
