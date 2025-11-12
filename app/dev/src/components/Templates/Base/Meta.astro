@@ -57,3 +57,26 @@ const goatCounterScriptSrc = 'https://stats.foxx.pet/count.js';
 {enableAnalytics && (
   <script data-goatcounter={`${goatCounterBase}/count`} async src={goatCounterScriptSrc}></script>
 )}
+<script>
+import _runOnReady from '@Scripts/utils/_runOnReady.js';
+import initStarsCanvas from '@Scripts/stars-overlay.js';
+
+const starsRegistry = new WeakMap<HTMLCanvasElement, () => void>();
+
+_runOnReady(() => {
+  document
+    .querySelectorAll<HTMLCanvasElement>('.panel.has-stars .stars-canvas')
+    .forEach((canvas) => {
+      const stop = initStarsCanvas(canvas, { density: 0.22, fps: 50, glow: true });
+      starsRegistry.set(canvas, stop);
+    });
+});
+
+// Beispiel Cleanup (wenn du Panels entfernst/Hot-Reload o.ä.):
+export function stopStars(canvas: HTMLCanvasElement) {
+  const stop = starsRegistry.get(canvas);
+  if (stop) stop();
+  starsRegistry.delete(canvas);
+}
+
+</script>
