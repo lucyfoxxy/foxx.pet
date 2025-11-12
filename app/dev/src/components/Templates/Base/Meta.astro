@@ -65,7 +65,7 @@ const starsRegistry = new WeakMap<HTMLCanvasElement, () => void>();
 
 _runOnReady(() => {
   document
-    .querySelectorAll<HTMLCanvasElement>('.panel.has-stars .stars-canvas')
+    .querySelectorAll<HTMLCanvasElement>('.panel-shell.has-stars .stars-canvas')
     .forEach((canvas) => {
       const stop = initStarsCanvas(canvas, { density: 0.22, fps: 50, glow: true });
       starsRegistry.set(canvas, stop);

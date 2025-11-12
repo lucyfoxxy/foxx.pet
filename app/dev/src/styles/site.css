@@ -30,31 +30,33 @@
   outline: 2px solid var(--color-dark);
   outline-offset: -1px;
   border-radius: var(--radius-xl);
-
-  background:
-    var(--bg-overlay--nebula),
+  background: 
     var(--bg-overlay--stars),
-    radial-gradient(ellipse at top, oklch(24% 0.125 290),oklch(34% 0.135 295),oklch(29% 0.125 300),var(--color-dark));
-    
+    var(--bg-overlay--nebula),
+    radial-gradient(ellipse at center,color-mix(in oklab,transparent 50%,var(--color-accent)) 30%,transparent),
+    radial-gradient(ellipse at center,color-mix(in oklab,var(--color-dark) 50%,var(--color-accent)),var(--color-dark));
   background-repeat:
     repeat,
     repeat,
-    no-repeat; 
-
+    no-repeat,
+    no-repeat;
   background-size:
     1280px 1280px,
     1280px 1280px,
-    auto;
+    cover,    
+    cover;
 
   background-blend-mode:
-    overlay,
     screen,
+    overlay,
+    soft-light,
     normal;
 
   background-position:
     top,
-    top,
-    top;
+    center,
+    center,    
+    center;    
 }
 
 .panel-shell.has-stars { position: relative; }
