@@ -52,25 +52,37 @@
 
   border-radius: var(--radius-xl) var(--radius-xl) 0 0;
   backdrop-filter: var(--blur-s);
+  filter: saturate(.74);
   box-shadow: 0 8px 14px -4px var(--color-shadow--strong);
 
   background: 
     var(--bg-overlay--stars),
-    var(--control-surface--dark);
+    var(--bg-overlay--nebula),
+    radial-gradient(ellipse at center,color-mix(in oklab,transparent 50%,var(--color-dark)) 30%,transparent),
+    radial-gradient(ellipse at center,color-mix(in oklab,var(--color-dark) 90%,var(--color-accent)),var(--color-dark));
   background-repeat:
     repeat,
+    repeat,
+    no-repeat,
     no-repeat;
-
   background-size:
-    640px 640px,    
+    1280px 1280px,
+    1280px 1280px,
+    cover,    
     cover;
 
   background-blend-mode:
     soft-light,
+    overlay,
+    soft-light,
     normal;
+
   background-position:
+    top,
+    center,
     center,    
-    center;   
+    center;    
+  
 }
 .header__bar--bottom {
   grid-area: bottom;
@@ -117,13 +129,13 @@
 
 /* ====== HEADER - NAV ================= */
 .header__nav {
-    inline-size: 100%;
-    block-size: 100%;
-    margin: 0;
-    display: inline-flex;
-    grid-area: nav;
-    transition: var(--transition--nav);
-    filter: drop-shadow(6px 6px 4px var(--color-shadow--strong));
+  inline-size: 100%;
+  block-size: 100%;
+  margin: 0;
+  display: inline-flex;
+  grid-area: nav;
+  transition: var(--transition--nav);
+  filter: drop-shadow(6px 6px 4px var(--color-shadow--strong));
 }
 
 .header__nav > .button:hover > *,
@@ -146,6 +158,8 @@
   backdrop-filter: none;
   filter: none;
 }
+.header__nav > .button:first-child{border-radius: 0 var(--radius-l) 0 var(--radius-l);}
+.header__nav > .button:last-child{border-radius: var(--radius-l) 0 var(--radius-l) 0;} 
 .header__nav > .button[data-active="true"]  {
   background: transparent;
     filter: drop-shadow(2px 3px 14px var(--color--accent));
