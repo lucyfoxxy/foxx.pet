@@ -163,6 +163,7 @@
   }
   .header__nav > .button { 
     border-radius: 0 ;
+    inline-size: 100%;
   }
 }
 
