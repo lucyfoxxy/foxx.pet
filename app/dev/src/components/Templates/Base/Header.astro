@@ -9,6 +9,7 @@ type NavLink = {
   icon?: string;
   includeInHeader?: boolean;
   isActive?: boolean;
+  weight?: number;
 };
 
 type Breadcrumb = {
@@ -25,6 +26,12 @@ type Props = {
 
 const { navLinks = [], breadcrumbs = [] } = (Astro.props ?? {}) as Props;
 const hasActions = Astro.slots.has('actions');
+
+const crumbItems = breadcrumbs.reduce<Array<Breadcrumb | 'separator'>>((acc, crumb, index) => {
+  if (index > 0) acc.push('separator');
+  acc.push(crumb);
+  return acc;
+}, []);
 ---
 <header class="header" aria-label="Primary navigation">
   <div class="header__bar header__bar--top">
@@ -54,16 +61,22 @@ const hasActions = Astro.slots.has('actions');
 
   <div class="header__bar header__bar--bottom">
     <div class="header__crumbs" aria-label="Breadcrumb">
-      <ol class="controls controls--center controls--evenly controls--roomy controls--nowrap">
-        {breadcrumbs.map((crumb) => (
-          <li>
-            {crumb.isCurrent ? (
-              <span class="control control--badge is-current" aria-current="page">{crumb.label}</span>
-            ) : (
-              <a class="control control--badge" href={crumb.href}>{crumb.label}</a>
-            )}
-          </li>
-        ))}
+      <ol class="controls controls--center controls--center controls--tight controls--nowrap">
+        {crumbItems.map((item) =>
+          item === 'separator' ? (
+            <li class="header__crumb-separator" aria-hidden="true">
+              <ICONS class="media-icon" name="chevron-right-duo" />
+            </li>
+          ) : (
+            <li class="header__crumb">
+              {item.isCurrent ? (
+                <span class="control control--badge is-current" aria-current="page">{item.label}</span>
+              ) : (
+                <a class="control control--badge" href={item.href}>{item.label}</a>
+              )}
+            </li>
+          )
+        )}
       </ol>
     </div>
     {hasActions ? (

@@ -10,6 +10,7 @@
     "icon": "cookie"
   },
   "includeInHeader": true,
+  "navWeight": 60,
   "description": "Baking and Cooking recipes approved by the cosmic dinner foundation will soon be published here!",
   "introParagraphs": [
     "This is the upcoming place where you gonna find all the foxx' recipes!"

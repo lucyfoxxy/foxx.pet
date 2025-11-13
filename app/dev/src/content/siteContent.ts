@@ -47,6 +47,19 @@ const normalizeIcon = (icon?: string) => (icon?.trim().length ? icon : undefined
 export const getNavLabelParts = (page: PageContent) =>
   normalizeNavLabel(page.navLabel, page.title, normalizeIcon(page.icon));
 
+const toNavWeight = (value: PageContent['navWeight']) => (typeof value === 'number' ? value : 0);
+
+const sortPagesByWeight = (pages: PageEntry[]) =>
+  pages
+    .map((entry, index) => ({ entry, index }))
+    .sort((a, b) => {
+      const weightA = toNavWeight(a.entry.data.navWeight);
+      const weightB = toNavWeight(b.entry.data.navWeight);
+      if (weightA === weightB) return a.index - b.index;
+      return weightB - weightA;
+    })
+    .map(({ entry }) => entry);
+
 export const getIntroParagraphs = (page: PageContent) =>
   page.introParagraphs ?? (page.description ? [page.description] : []);
 
@@ -57,8 +70,9 @@ export const findCategory = (page: PageContent, slug: string) =>
 
 export const getNavigationLinks = async () => {
   const pages = await loadPages();
+  const sortedPages = sortPagesByWeight(pages);
 
-  return pages.map(({ data }) => {
+  return sortedPages.map(({ data }) => {
     const { text, emoji, icon } = getNavLabelParts(data);
     return {
       href: normalizePath(data.href),
@@ -66,6 +80,7 @@ export const getNavigationLinks = async () => {
       emoji,
       icon,
       includeInHeader: data.includeInHeader ?? true,
+      weight: toNavWeight(data.navWeight),
     };
   });
 };

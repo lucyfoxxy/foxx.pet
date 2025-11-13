@@ -1,5 +1,5 @@
 :root { 
-  /* ====== Base Spacings / Radius ============= */
+  /* ============= Base Spacings / Radius ============= */
   --space-xxs:              0.25rem; 
   --space-xs:               0.50rem; 
   --space-s:                0.75rem; 
@@ -15,8 +15,43 @@
   --radius-l:               18px;
   --radius-xl:              36px;
   --radius-xxl:             72px;
+  /* ============= Font & Other Sizes ================= */
+  /* ====== Font Styles ====== */
+  --primary-font-family:     Grandstander, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --secondary-font-family:   'Fuzzy Bubbles', var(--primary-font-family);
 
-  /* ====== Role specific Spacings ============= */
+  --thin-font-weight:        300;
+  --normal-font-weight:      400;
+  --thick-font-weight:       500;
+  --bold-font-weight:        700;
+
+  --line-height-xs:      1;
+  --line-height-s:       1.5;
+  --line-height-m:      1.35;
+  --line-height-l:       1.225;
+  --line-height-xl:      1.2;
+
+  --letter-spacing-s:    .0065em;
+  --letter-spacing-m:    clamp(.0065em, calc(0.225em + .01vw ), .0225em);
+  --letter-spacing-l:    clamp(.0225em, calc(0.225em + .03vw ), .0525em);
+  --letter-spacing-xl:    clamp(.0525em, calc(0.525em + .05vw ), .0650em);
+
+  --font-size-xs:        clamp(.75rem, calc(.75rem + .025vw), .95rem);
+  --font-size-s:         clamp(.9rem,  calc(.9rem + .075vw), 1.05rem);
+  --font-size-m:        clamp(1rem, calc(1rem + .35vw), 1.45rem);
+  --font-size-l:         clamp(1.4rem, calc(1.4rem + .4vw), 1.8rem);
+  --font-size-xl:        clamp(1.75rem, calc(1.75rem + 1.5vw), 3rem);
+
+  --icon-size-s:        calc(var(--font-size-s) * 1.1);
+  --icon-size-m:        calc(var(--font-size-m) * 1.125);
+  --icon-size-l:        calc(var(--font-size-xl) * .9);
+
+  --site-logo--size:         calc(var(--control-gap) + 12vw);
+  --thumb-size:              clamp(64px, 9vw, 128px);
+  --hero-size:               clamp(320px,40vw,calc(var(--container-max) * .4));
+  
+
+  /* ============= Role specific Spacings ============= */
   --flow-gap:               var(--space-xxs);  
   --card-gap:               var(--space-s);    
   --cluster-gap:            clamp(var(--space-xs),  calc(var(--space-xs) + .5vw),    var(--space-l));   
@@ -35,10 +70,8 @@
   --container-padding:       clamp(var(--space-xxs),  calc(var(--space-xxs) + 2vw),    var(--space-xxl)); 
   --container-max:           1280px;
   
-  --site-logo--size:         calc(var(--control-gap) + 12vw);
-  --thumb-size:              clamp(64px, 9vw, 128px);
-  --hero-size:               clamp(320px,40vw,calc(var(--container-max) * .4));
-  --icon-size:               1.5em;   
+   
+
 
   /* ====== Base Colors ========================= */
   --color-dark:              oklch(21% 0.095 295);

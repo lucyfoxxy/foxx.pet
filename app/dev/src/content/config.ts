@@ -109,6 +109,7 @@ const sitePages = defineCollection({
       icon: z.string().optional(),
       navLabel: navLabelSchema.optional(),
       includeInHeader: z.boolean().optional(),
+      navWeight: z.number().optional(),
       description: z.string().optional(),
       hero: heroSchema.optional(),
       intro: introSchema.optional(),

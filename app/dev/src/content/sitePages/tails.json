@@ -9,6 +9,7 @@
     "icon": "star"
   },
   "includeInHeader": true,
+  "navWeight": 70,
   "description": "Narrative experiments and cosmic adventures — coming soon.",
   "introParagraphs": [
     "This is the new home for short tales and blog-style updates about Lucy's travels.",

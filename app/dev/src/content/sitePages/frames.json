@@ -9,6 +9,7 @@
     "icon": "palette"
   },
   "includeInHeader": true,
+  "navWeight": 90,
   "description": "Here you gonna find a selection of my previous works.",
   "introParagraphs": [
     "See where Lucy has left their Paw Prints!"
