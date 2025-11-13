@@ -89,7 +89,7 @@
 
 .control--ghost { background: transparent; }
 
-.control--dark {  }
+
 
 .control--glow { transition: var(--transition-glow); }
 .control--glow:hover { box-shadow: var(--surface-glow--soft); }
