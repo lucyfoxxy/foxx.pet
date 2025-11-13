@@ -52,9 +52,7 @@ a {
   letter-spacing: var(--letter-spacing-xl);
   text-align: left;
 }
-.header__nav-item[data-active="true"] > .header__nav-text {
-  font-weight: var(--bold-font-weight);  
-}
+
 .footer,
 .badge,
 .control--badge,
