@@ -36,11 +36,11 @@
   padding-inline: var(--control-padding);
   border-radius: var(--control-border-radius);
   box-shadow: var(--surface-shadow--soft), var(--control-shadow--inset);
-  transition: var(--transition-glow), var(--transition-raise);
+  transition: var(--transition--control);
   vertical-align: middle;
 }
 
-:where(.control--button, .media-controls) {
+:where(.control--button, .media-controls, a.control) {
   cursor: pointer;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
@@ -65,31 +65,23 @@
   border-radius: var(--radius-s);
   padding-block: calc(var(--control-padding) * 0.5);
 }
-
 .control--large {
   inline-size: 3.25rem;
   block-size: 3.25rem;
   padding: calc(var(--control-padding) * 0.5);
 }
-
 .control--circle { border-radius: 999px; }
 .control--stretch { inline-size: 100%; }
-
 .control--plain,
 .control--ghost {
+  background: none;
   box-shadow: none;
   outline: none;
 }
-
 .control--plain {
-  background: none;
   backdrop-filter: none;
   filter: none;
 }
-
-.control--ghost { background: transparent; }
-
-
 
 .control--glow { transition: var(--transition-glow); }
 .control--glow:hover { box-shadow: var(--surface-glow--soft); }
@@ -98,12 +90,21 @@
 .control--animated:hover { transform: var(--transform-raise); }
 
 /* Filtereffekte für aktive Steuerlemente und Hover/Focus */
-.control[data-active="true"] :where(svg, span, a, p),
-.control:hover :where(svg, span, a, p),
-.control:focus-visible :where(svg, span, a, p) {
-  filter: drop-shadow(0 0 2px var(--color-accent)) brightness(1.25);
-  text-shadow: var(--text-shadow--strong), var(--text-glow--strong);
-  font-weight: var(--bold-font-weight);
+.control--button[data-active="true"],
+a.control.control--badge:hover ,
+.control--button:hover,
+.control--button:focus-visible  {
+  text-shadow: 1px 1px 2px var(--control-surface--light);
+  transform: var(--transform-scale);
+
+  backdrop-filter: brightness(1.7);
+}
+.control--button[data-active="true"] > *,
+a.control.control--badge:hover > *,
+.control--button:hover > *,
+.control--button:focus-visible > *  {
+  filter: drop-shadow(0px 0px 2px var(--color-accent));
+    font-weight: var(--bold-font-weight);
 }
 
 .media-controls {

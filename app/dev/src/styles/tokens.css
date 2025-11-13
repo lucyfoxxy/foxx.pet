@@ -46,8 +46,8 @@
   --color-accent:            oklch(74% 0.145 295);          
   --color-shadow--soft:       color-mix(in oklch, var(--color-dark) 30%, transparent);
   --color-shadow--strong:     color-mix(in oklch, var(--color-dark) 50%, transparent);
-  --color-glow--soft:         color-mix(in oklch, var(--color-accent) 75%, transparent);
-  --color-glow--strong:        color-mix(in oklch, var(--color-accent) 90%, transparent);
+  --color-glow--soft:         color-mix(in oklch, var(--color-accent) 85%, transparent);
+  --color-glow--strong:        color-mix(in oklch, var(--color-accent) 99%, transparent);
 
   /* ====== Text Colors & FX ==================== */
   --text-color:              color-mix(in oklch, var(--color-light) 85%, white);
@@ -77,8 +77,8 @@
   --control-shadow--inset: inset 0 0 24px 2px var(--color-shadow--strong);
   --card-shadow--inset: inset 0 0 24px 2px var(--color-shadow--soft),inset 0 0 0 1px var(--color-shadow--strong);
 
-  --surface-glow--strong:      0 0 4px 2px var(--color-glow--strong);
-  --surface-glow--soft:        0 0 4px 1px var(--color-glow--strong);
+  --surface-glow--strong:      0 0 2px 2px var(--color-glow--strong);
+  --surface-glow--soft:        0 0 2px 1px var(--color-glow--strong);
   
   --blur-xxs:              blur(var(--radius-xxs));
   --blur-xs:              blur(var(--radius-xs));
@@ -148,7 +148,12 @@
   --transition-brightness:      filter .5s ease-in-out;
   --transition-glow:            color .2s ease, text-shadow .2s ease, transform .2s ease, box-shadow .2s ease;
   --transition-soft:            opacity .25s ease, transform .25s ease, background .25s ease, box-shadow .25s ease;
-  --transition-scale:           transform .25s ease-in-out;
+  --transition--control:        box-shadow .2s ease,
+                                backdrop-filter .2s ease,
+                                font-weight .2s ease,
+                                opacity .2s ease;
+                                
+  --transition-scale:           transform .25s ease;
   --transition-opacity:          opacity .5s ease-in-out;
   
   --backdrop-brightness:        brightness(1.5);

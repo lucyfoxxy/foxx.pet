@@ -45,7 +45,6 @@ a {
   text-decoration: none;
 }
 
-
 .header__nav-item :where(.media-icon),
 .header__nav-text {
   font-weight: var(--normal-font-weight);
@@ -71,8 +70,10 @@ a {
 }
 .button--large,
 .control--large,
- .is-current{
-  font-weight: var(--thick-font-weight);
+ .is-current,
+ .control--button:hover,
+ a.control.control--badge:hover{
+  font-weight: var(--bold-font-weight);
 }
 
 /* ====== HEADINGS ====== */

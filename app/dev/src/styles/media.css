@@ -165,7 +165,7 @@
   font-size: var(--font-size-m);
   filter: drop-shadow(var(--icon-shadow));
 }
-.media-icon--large {font-size: var(--font-size-l);}
+.media-icon--large {font-size: calc(var(--font-size-l) + var(--font-size-xl) / 2);}
 
 /* =========<[     PROGRESS BAR      ]>=========== */
 .media-progress {
