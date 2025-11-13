@@ -72,7 +72,7 @@ const isExternalLink = (href: string) => href.startsWith('http');
 ---
 <Template.Base meta={meta}>
   <head>
-    <link rel="preload" href={hero.image} as="image" type="image/webp" />
+    <link rel="preload" href={hero.logo.src} as="image" type="image/webp" />
   </head>
 
   <section class="content-section content-section--head">
@@ -81,11 +81,10 @@ const isExternalLink = (href: string) => href.startsWith('http');
         <h1 class="card__title">{hero.heading}</h1>
       </Fragment>
       <Fragment slot="body">
-        <Picture
-          src={hero.logo}
-          formats={['webp']}
-          inferSize
+        <img
+          src={hero.logo.src}
           alt={hero.heading}
+          loading='eager'
           fetchpriority="high"
           class="media-image hero"
         />

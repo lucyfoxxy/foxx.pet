@@ -80,10 +80,11 @@
   pointer-events: none;  /* klicks bleiben frei */
   /* optional für “leuchtend über BG”: */
   mix-blend-mode: screen; opacity: .85;
-  min-width: 100%;
-  min-height: 100%;
-  inline-size: 100%;
-  block-size: 100%;
+  inline-size: 90%;
+  block-size: 90%;
+  justify-self: center;
+  align-self: center;
+  margin: var(--panel-padding);
 }
 @media (max-width: 900px) {
   .container > .panel-shell {

@@ -28,16 +28,16 @@ const hasActions = Astro.slots.has('actions');
 ---
 <header class="header" aria-label="Primary navigation">
   <div class="header__bar header__bar--top">
-    <a class="header__logo" aria-label="Home" href="/">
+    <!--a class="header__logo" aria-label="Home" href="/">
       <img src={ASSETS.logo_header.src} alt="foxx.pet" />
-    </a>
+    </a-->
 
-    <nav class="header__nav controls controls--end controls--nowrap">
+    <nav class="header__nav controls controls--center controls--evenly controls--roomy controls--nowrap">
       {navLinks
         .filter((link) => link.includeInHeader)
         .map((link) => (
           <a
-            class="button control--round"
+            class="button control--ghost"
             href={link.href}
             data-active={link.isActive ? 'true' : undefined}
           >
@@ -54,13 +54,13 @@ const hasActions = Astro.slots.has('actions');
 
   <div class="header__bar header__bar--bottom">
     <div class="header__crumbs" aria-label="Breadcrumb">
-      <ol>
+      <ol class="controls controls--center controls--evenly controls--roomy controls--nowrap">
         {breadcrumbs.map((crumb) => (
           <li>
             {crumb.isCurrent ? (
-              <span class="is-current" aria-current="page">{crumb.label}</span>
+              <span class="badge is-current" aria-current="page">{crumb.label}</span>
             ) : (
-              <a href={crumb.href}>{crumb.label}</a>
+              <a class="badge" href={crumb.href}>{crumb.label}</a>
             )}
           </li>
         ))}

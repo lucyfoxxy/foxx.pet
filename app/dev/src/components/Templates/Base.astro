@@ -137,25 +137,26 @@ const breadcrumbs = buildBreadcrumbs({
 <html lang="en">
   <BaseParts.Meta title={title} description={description} url={url} image={image} />
   <body style={`
-                --bg-image--panel: url(${ASSETS.bg__panel.src});
                 --bg-overlay--nebula: url(${ASSETS.overlay__nebula.src});
                 --bg-overlay--stars: url(${ASSETS.overlay__stars.src});
               `}>
     <div class="container">
       <div class="panel-shell has-stars">
-  
 
         <BaseParts.Header meta={meta} navLinks={navLinks} breadcrumbs={breadcrumbs}>
           {Astro.slots.has('header__actions') ? (
             <slot name="header__actions" slot="actions" />
           ) : null}
         </BaseParts.Header>
+
         <canvas class="stars-canvas" aria-hidden="true"></canvas>
+
         <main class="panel">
-          
           <slot />
         </main>
+
         <BaseParts.Footer />
+
       </div>
     </div>
   </body>
