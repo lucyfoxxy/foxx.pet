@@ -46,20 +46,20 @@
   --color-accent:            oklch(74% 0.145 295);          
   --color-shadow--soft:       color-mix(in oklch, var(--color-dark) 30%, transparent);
   --color-shadow--strong:     color-mix(in oklch, var(--color-dark) 50%, transparent);
-  --color-glow--soft:         color-mix(in oklch, var(--color-light) 65%, transparent);
-  --color-glow--strong:        color-mix(in oklch, var(--color-light) 80%, transparent);
+  --color-glow--soft:         color-mix(in oklch, var(--color-accent) 75%, transparent);
+  --color-glow--strong:        color-mix(in oklch, var(--color-accent) 90%, transparent);
 
   /* ====== Text Colors & FX ==================== */
   --text-color:              color-mix(in oklch, var(--color-light) 85%, white);
   --text-accent:             color-mix(in oklab, var(--color-accent) 40%, white);
   --text-highlight:          color-mix(in oklab, var(--color-light) 65%, var(--color-accent));
 
-  --text-shadow--soft:       1px 2px 3px var(--color-shadow--soft);  
-  --text-shadow--strong:     2px 2px 3px var(--color-shadow--strong);
+  --text-shadow--soft:       1px 2px 1px var(--color-shadow--soft);  
+  --text-shadow--strong:     1px 2px 1px var(--color-shadow--soft);
   --icon-shadow:             3px 4px 3px var(--color-shadow--strong);
 
-  --text-glow--soft:         1px 1px 3px var(--color-glow--soft);
-  --text-glow--strong:       1px 1px 3px var(--color-glow--strong);
+  --text-glow--soft:         1px 1px 2px var(--color-glow--soft);
+  --text-glow--strong:       1px 1px 2px var(--color-glow--strong);
 
   /* ====== Surface / Control Colors & FX ======= */  
   --card-surface--dark:      color-mix(in oklab,var(--color-dark) 51%, transparent);

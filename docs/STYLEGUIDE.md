@@ -7,7 +7,7 @@ This directory now groups the global styles into a consistent set of layers:
 - `typography.css` – font-face declarations and text hierarchy.
 - `site.css` – structural layout for the shell (header, footer, panel).
 - `content.css` – rich text flow, content cards, and grid helpers.
-- `ui.css` – reusable UI elements (chips, badges, call-to-action buttons).
+- `controls.css` – reusable UI elements (chips, badges, call-to-action buttons).
 - `media.css` – hero artwork, gallery frames, and lightbox controls.
 - `table.css` – tabular data and definition lists.
 

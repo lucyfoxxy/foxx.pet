@@ -39,17 +39,18 @@
     "card-body"
     "card-foot";
   grid-template-rows: auto 1fr auto;
-  filter: drop-shadow(6px 6px 4px var(--color-shadow--strong));
   border-radius: var(--radius-l);
   padding: var(--card-padding);
   gap: var(--card-gap);
-  background: var(--card-surface--dark);
-  box-shadow: var(--surface-shadow--default),var(--card-shadow--inset);
-  backdrop-filter: var(--blur-m);
+  backdrop-filter: var(--blur-m) brightness(1.15) saturate(.9);
+  box-shadow: var(--surface-shadow--default), inset 0 0 29px color-mix(in oklab,transparent 20%,var(--card-surface--light));
 }
-.card--ghost    { background: unset;}
+
+.card--ghost    { box-shadow: var(--surface-shadow--default), inset 0 0 29px color-mix(in oklab,transparent 90%,var(--color-accent));}
 .card--plain    { background: transparent; box-shadow: none; backdrop-filter: none;}
-.card--light   { background: var(--card-surface--light); }
+.card--dark   { 
+  backdrop-filter: var(--blur-m) brightness(1.15) saturate(.9);
+  box-shadow: var(--surface-shadow--default), inset 0 0 29px color-mix(in oklab,transparent 20%,var(--card-surface--dark)); }
 .card--flush   { padding: 0;  gap: 0;}
 .card--flush > .card__head {row-gap: 0; column-gap: 0;}
 .card--plain :where(.prose){font-weight: var(--thick-font-weight);}
@@ -90,7 +91,16 @@
 .card__body { grid-area: card-body; display: contents; }
 .card__foot { grid-area: card-foot; display: contents; }
 
-.card__title { grid-area: title; min-width: 0; align-items: center; display: inline-flex; gap: var(--control-gap) }  /* min-width 0 gegen Overflow */
+.card__title { 
+  grid-area: title; 
+  min-width: 0; 
+  align-items: center; 
+  display: inline-flex; 
+  gap: var(--control-gap);
+}
+.card__title > *, .card__title {
+  filter: drop-shadow(1px 2px 2px var(--color-shadow--strong));
+}  
 .card__head > .card__badges{ grid-area: badges; }
 .card__spacer { flex: 1 1 auto; }
 
@@ -105,7 +115,10 @@
 }
 
 .prose:first-child { margin-block-start: 0; }
-.prose > * { margin: 0; }
+.prose > * { 
+  filter: drop-shadow(1px 2px 2px var(--color-shadow--strong));
+  margin: 0; 
+}
 
 .prose ul,
 .prose ol {

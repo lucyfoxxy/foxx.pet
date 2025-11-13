@@ -1,0 +1,185 @@
+/* ============================================ */
+/* ========= UI ELEMENTS: CONTROLS ============ */
+/* ====== Depends on: tokens, site, typography ====== */
+/* ============================================ */
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--control-gap);
+}
+
+.controls--start  { justify-content: flex-start; }
+.controls--center { justify-content: center; }
+.controls--end    { justify-content: flex-end; }
+.controls--spread { justify-content: space-between; }
+.controls--evenly { justify-content: space-evenly; }
+.controls--nowrap { flex-wrap: nowrap; }
+.controls--tight  { gap: calc(var(--control-gap) * 0.65); }
+.controls--roomy  { gap: calc(var(--control-gap) * 1.35); }
+
+.card__badges.controls { vertical-align: text-bottom; }
+
+:where(.control, .media-controls) {
+  color: var(--text-color);
+  text-shadow: var(--text-shadow--soft), var(--text-glow--soft);
+}
+
+.control {
+  --control-border-radius: var(--radius-m);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--control-gap);
+  padding-block: calc(var(--control-padding) * 0.75);
+  padding-inline: var(--control-padding);
+  border-radius: var(--control-border-radius);
+  box-shadow: var(--surface-shadow--soft), var(--control-shadow--inset);
+  transition: var(--transition-glow), var(--transition-raise);
+  vertical-align: middle;
+}
+
+:where(.control--button, .media-controls) {
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.control--button {
+  background: var(--control-surface--dark);
+  outline: 1px solid color-mix(in srgb, var(--color-dark) 5%, transparent);
+  outline-offset: -1px;
+}
+
+.control--badge {
+  border-radius: 999px;
+  padding-block: calc(var(--control-padding) * 0.5);
+  padding-inline: calc(var(--control-padding) * 0.75);
+  backdrop-filter: var(--blur-s) brightness(1.25) saturate(.95);
+  box-shadow: var(--surface-shadow--soft), inset 0 0 16px color-mix(in oklab,transparent 40%,var(--control-surface--light));
+}
+
+.control--small {
+  border-radius: var(--radius-s);
+  padding-block: calc(var(--control-padding) * 0.5);
+}
+
+.control--large {
+  inline-size: 3.25rem;
+  block-size: 3.25rem;
+  padding: calc(var(--control-padding) * 0.5);
+}
+
+.control--circle { border-radius: 999px; }
+.control--stretch { inline-size: 100%; }
+
+.control--plain,
+.control--ghost {
+  box-shadow: none;
+  outline: none;
+}
+
+.control--plain {
+  background: none;
+  backdrop-filter: none;
+  filter: none;
+}
+
+.control--ghost { background: transparent; }
+
+.control--dark {  }
+
+.control--glow { transition: var(--transition-glow); }
+.control--glow:hover { box-shadow: var(--surface-glow--soft); }
+
+.control--animated { transition: var(--transition-raise); }
+.control--animated:hover { transform: var(--transform-raise); }
+
+.control[data-active="true"],
+:where(.control--button, .media-controls):hover,
+.control :where(a:hover, a:focus-visible),
+.media-controls:focus-visible {
+  filter: brightness(1.25);
+}
+
+.control[data-active="true"] > *,
+:where(.control--button, .media-controls):hover > *,
+.control :where(a:hover, a:focus-visible) > *,
+.media-controls:focus-visible > * {
+  filter: drop-shadow(0 0 2px var(--color-accent));
+}
+
+.control[data-active="true"] > * > *,
+:where(.control--button, .media-controls):hover > * > *,
+.control :where(a:hover, a:focus-visible) > * > *,
+.media-controls:focus-visible > * > * {
+  text-shadow: var(--text-shadow--strong), var(--text-glow--strong);
+  font-weight: var(--bold-font-weight);
+}
+
+.media-controls {
+  --media-control-size: 2.75rem;
+  position: relative;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  inline-size: var(--media-control-size);
+  block-size: var(--media-control-size);
+  border: none;
+  border-radius: 999px;
+  background: var(--control-surface--dark);
+  box-shadow: var(--surface-shadow--default);
+  transition: var(--transition-raise), var(--transition-brightness), var(--transition-scale);
+}
+
+.media-controls:active {
+  transform: var(--transform-scale);
+  filter: brightness(1.95);
+  backdrop-filter: var(--control-glow);
+}
+
+.media-controls:hover,
+.media-controls:focus-visible {
+  opacity: 1;
+  transform: var(--transform-scale);
+  filter: brightness(1.95);
+  backdrop-filter: var(--control-glow);
+}
+
+.media-play[data-active="false"],
+.media-pause[data-active="false"] {
+  display: none;
+}
+
+.media-controls[disabled] {
+  opacity: 0.35;
+  cursor: default;
+  pointer-events: none;
+}
+
+.media-prev.is-thumbs-prev,
+.media-next.is-thumbs-next {
+  position: static;
+  inset: auto;
+  transform: none;
+  opacity: 1;
+}
+
+.media-prev.is-thumbs-prev:hover,
+.media-prev.is-thumbs-prev:focus-visible,
+.media-next.is-thumbs-next:hover,
+.media-next.is-thumbs-next:focus-visible {
+  transform: none;
+}
+
+.media-prev.is-thumbs-prev:active,
+.media-next.is-thumbs-next:active {
+  transform: scale(0.95);
+}
+
+@supports not (color: oklch(50% 0 0)) {
+  :where(.control--button, .media-controls):hover { filter: brightness(1.08); }
+  :where(.control--button, .media-controls):active { filter: brightness(0.92); }
+}

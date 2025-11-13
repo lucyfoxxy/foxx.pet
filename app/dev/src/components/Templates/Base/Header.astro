@@ -37,7 +37,7 @@ const hasActions = Astro.slots.has('actions');
         .filter((link) => link.includeInHeader)
         .map((link) => (
           <a
-            class="button control--ghost"
+            class="control control--button control--ghost"
             href={link.href}
             data-active={link.isActive ? 'true' : undefined}
           >
@@ -58,9 +58,9 @@ const hasActions = Astro.slots.has('actions');
         {breadcrumbs.map((crumb) => (
           <li>
             {crumb.isCurrent ? (
-              <span class="badge is-current" aria-current="page">{crumb.label}</span>
+              <span class="control control--badge is-current" aria-current="page">{crumb.label}</span>
             ) : (
-              <a class="badge" href={crumb.href}>{crumb.label}</a>
+              <a class="control control--badge" href={crumb.href}>{crumb.label}</a>
             )}
           </li>
         ))}

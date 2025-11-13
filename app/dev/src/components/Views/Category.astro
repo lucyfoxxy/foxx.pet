@@ -174,7 +174,7 @@ const backLabel = parentPage ? `← ${parentPage.title}` : undefined;
 
   {errorMessage ? (
     <section class="content-section">
-      <Template.Card class="card--ghost is-centered">
+      <Template.Card class=" is-centered">
         <Fragment slot="body">
           <p>{errorMessage}</p>
         </Fragment>
@@ -197,7 +197,7 @@ const backLabel = parentPage ? `← ${parentPage.title}` : undefined;
     </section>
   ) : (
     <section class="content-section">
-      <Template.Card class="card--ghost is-centered">
+      <Template.Card class=" is-centered">
         <Fragment slot="body">
           <p>No entries yet — check back soon!</p>
         </Fragment>

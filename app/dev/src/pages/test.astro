@@ -22,8 +22,8 @@ import { Picture } from 'astro:assets';
     <Fragment slot="head">
       <h2 class="card__title">I am card title</h2>
       <div class="card__badges controls">
-        <span class="badge">hint</span><span class="badge badge--dark">hint</span>
-        <span class="badge">hint</span><span class="badge badge--dark">hint</span><span class="badge ">hint</span>
+        <span class="control control--badge">hint</span><span class="control control--badge control--dark">hint</span>
+        <span class="control control--badge">hint</span><span class="control control--badge control--dark">hint</span><span class="control control--badge">hint</span>
       </div>
     </Fragment>
     <Fragment slot="body">
@@ -35,15 +35,15 @@ import { Picture } from 'astro:assets';
     </Fragment>
     <Fragment slot="foot">
       <div class="controls controls--spread">
-      <span class="button control--small">click me</span><span class="button control--small button--dark">click me</span><span class="button control--small control--plain">click me</span>
+      <span class="control control--button control--small">click me</span><span class="control control--button control--small control--dark">click me</span><span class="control control--button control--small control--plain">click me</span>
       </div>
     </Fragment>
   </Template.Card>
-  <Template.Card class="card--ghost is-animated">
+  <Template.Card class=" is-animated">
     <Fragment slot="head">
       <h2 class="card__title">I am card title</h2>
       <div class="card__badges controls controls--tight">
-        <span class="badge">hint</span><span class="badge badge--dark">hint</span>
+        <span class="control control--badge">hint</span><span class="control control--badge control--dark">hint</span>
       </div>
     </Fragment>
     <Fragment slot="body">
@@ -56,16 +56,16 @@ import { Picture } from 'astro:assets';
     <Fragment slot="foot">
 
       <div class="controls controls--spread controls--nowrap">
-        <span class="button">click me</span><span class="button button--dark">click me</span><span class="button control--plain">click me</span>
+        <span class="control control--button">click me</span><span class="control control--button control--dark">click me</span><span class="control control--button control--plain">click me</span>
       </div>
     </Fragment>
   </Template.Card>
-  <Template.Card class="card--light" headClass="card__head--column">
+  <Template.Card class="card--dark" headClass="card__head--column">
     <Fragment slot="head">
       <h2 class="card__title">I am card title</h2>
       <div class="card__badges controls">
-        <span class="badge">hint</span><span class="badge badge--dark">hint</span>
-        <span class="badge">hint</span><span class="badge badge--dark">hint</span><span class="badge control--plain">hint</span>
+        <span class="control control--badge">hint</span><span class="control control--badge control--dark">hint</span>
+        <span class="control control--badge">hint</span><span class="control control--badge control--dark">hint</span><span class="control control--badge control--plain">hint</span>
       </div>
     </Fragment>
     <Fragment slot="body">
@@ -78,7 +78,7 @@ import { Picture } from 'astro:assets';
     <Fragment slot="foot">
 
       <div class="controls controls--spread">
-        <span class="button button--large">click me</span><span class="button button--large button--dark">click me</span><span class="button button--large control--plain">click me</span>
+        <span class="control control--button control--large">click me</span><span class="control control--button control--large control--dark">click me</span><span class="control control--button control--large control--plain">click me</span>
       </div>
     </Fragment>
   </Template.Card>
@@ -87,20 +87,20 @@ import { Picture } from 'astro:assets';
   <Template.Card>
     <Fragment slot="body">
       <div class="controls">
-        <span class="button"><Icons kind="palette"></Icons></span></span>
-        <span class="button button--dark"><Icons kind="paw"></Icons></span></span>
-        <span class="button control--plain"><Icons kind="cookie"></Icons></span>
-        <span class="button"><Icons name="sparkles"></Icons></span></span>
-        <span class="button button--dark"><Icons kind="sparkles"></Icons></span></span>
-        <span class="button control--plain"><Icons name="star"></Icons></span>
+        <span class="control control--button"><Icons kind="palette"></Icons></span></span>
+        <span class="control control--button control--dark"><Icons kind="paw"></Icons></span></span>
+        <span class="control control--button control--plain"><Icons kind="cookie"></Icons></span>
+        <span class="control control--button"><Icons name="sparkles"></Icons></span></span>
+        <span class="control control--button control--dark"><Icons kind="sparkles"></Icons></span></span>
+        <span class="control control--button control--plain"><Icons name="star"></Icons></span>
       </div>
     </Fragment>
   </Template.Card>
-  <Template.Card class="card--ghost" headClass="card__head--column is-centered">
+  <Template.Card class="" headClass="card__head--column is-centered">
     <Fragment slot="head">
       <h2 class="card__title">Card Title</h2>
       <div class="card__badges controls">
-        <span class="badge">hint</span><span class="badge badge--dark">hint</span>
+        <span class="control control--badge">hint</span><span class="control control--badge control--dark">hint</span>
         
       </div>
     </Fragment>
@@ -126,7 +126,7 @@ import { Picture } from 'astro:assets';
     <Fragment slot="head">
       <h2 class="card__title">Card Tiiiiiiiiiiiiiiiiiiiiiiiiiiiii iiiitle</h2>
       <div class="card__badges controls">
-        <span class="badge">hint</span><span class="badge badge--dark">hint</span>
+        <span class="control control--badge">hint</span><span class="control control--badge control--dark">hint</span>
         
       </div>
     </Fragment>
@@ -149,11 +149,11 @@ import { Picture } from 'astro:assets';
   </Template.Card>
 </section>
 <section class="content-section">
-  <Template.Card class="card--ghost" headClass="is-centered card__head--column" >
+  <Template.Card class="" headClass="is-centered card__head--column" >
     <Fragment slot="head">
       <h2 class="card__title">Card Title</h2>
       <div class="card__badges controls">
-        <span class="badge">hint</span><span class="badge badge--dark">hint</span>
+        <span class="control control--badge">hint</span><span class="control control--badge control--dark">hint</span>
         
       </div>
     </Fragment>
@@ -171,7 +171,7 @@ import { Picture } from 'astro:assets';
       </div></div>
     </Fragment>
  </Template.Card>      
-  <Template.Card class="card--light is-condensed" headClass="is-centered card__head--column" >
+  <Template.Card class="card--dark is-condensed" headClass="is-centered card__head--column" >
     <Fragment slot="body">
       <div class="media-wrapper is-thumbs-wrap">
         <div class="media-frame is-thumbs-frame">

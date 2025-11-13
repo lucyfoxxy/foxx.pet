@@ -45,13 +45,11 @@ a {
   text-decoration: none;
 }
 
+
 .header__nav-item :where(.media-icon),
 .header__nav-text {
-  font-size: clamp(var(--font-size-s),var(--font-size-s),var(--font-size-m));
-}
-.header__nav-text {
   font-weight: var(--normal-font-weight);
-  font-size: clamp(var(--font-size-s),var(--font-size-s),var(--font-size-m));
+  font-size: clamp(var(--font-size-s),calc(var(--font-size-s) + .45vw),var(--font-size-l));
   letter-spacing: var(--letter-spacing-xl);
   text-align: left;
 }
@@ -60,16 +58,19 @@ a {
 }
 .footer,
 .badge,
+.control--badge,
 .control--small {
   font-size: var(--font-size-xs);
   font-weight: var(--thin-font-weight);
   line-height: var(--line-height-xs);
 }
-.button {
+.button,
+.control--button {
   font-weight: var(--normal-font-weight);
   line-height: var(--line-height-xs);
 }
 .button--large,
+.control--large,
  .is-current{
   font-weight: var(--thick-font-weight);
 }

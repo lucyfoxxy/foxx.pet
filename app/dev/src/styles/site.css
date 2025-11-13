@@ -25,16 +25,16 @@
 
   box-shadow:
     var(--surface-shadow--strong),
-    inset 0 0 16px 0 var(--color-dark);
-  outline: 2px solid var(--color-dark);
+    inset 0 0 56px 0 var(--color-dark);
+  outline: 1px solid var(--color-dark);
   outline-offset: -1px;
   border-radius: 0;
   background: 
-
     var(--bg-overlay--nebula),
     var(--background-overlay),
-    radial-gradient(ellipse at top left,oklch(44% 0.145 295 / 50%) 10%,oklch(40% 0.145 315 / 90%),oklch(54% 0.145 305 / 50%) 90%),
-    radial-gradient(ellipse at top right,oklch(34% 0.145 305 / 50%) 10%,oklch(50% 0.145 295 / 90%),oklch(64% 0.145 295 / 50%) 90%),
+    
+    radial-gradient(ellipse at top left,oklch(49% 0.145 295 / 50%) 90%,oklch(49% 0.15 295 / 90%),oklch(44% 0.145 305 / 90%) 90%),
+    radial-gradient(ellipse at top right,oklch(49% 0.145 305 / 50%) 90%,oklch(49% 0.15 295 / 90%),oklch(54% 0.145 295 / 90%) 90%),
     var(--color-dark);
   background-repeat:
 
@@ -76,9 +76,8 @@
 .panel-shell.has-stars .stars-canvas {
   position: absolute;
   inset: 0;
-  z-index: 0;            /* unter Content */
-  pointer-events: none;  /* klicks bleiben frei */
-  /* optional für “leuchtend über BG”: */
+  z-index: 0;           
+  pointer-events: none; 
   mix-blend-mode: screen; opacity: .85;
   inline-size: 90%;
   block-size: 90%;

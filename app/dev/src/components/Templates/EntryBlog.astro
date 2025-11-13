@@ -31,7 +31,7 @@ const hasBlogSummary = blogDescription.length > 0 || blogSummaryParagraphs.lengt
 ---
 
 <section class="content-section content-section--head" id="article-top">
-  <Template.Card class="card--ghost card--flush" headClass="card__head--column">
+  <Template.Card class=" card--flush" headClass="card__head--column">
     <Fragment slot="head">
       <div class="card__hero-banner">
 
@@ -52,11 +52,11 @@ const hasBlogSummary = blogDescription.length > 0 || blogSummaryParagraphs.lengt
 {hasBlogChapters || hasBlogSummary ? (
   <section class:list={['content-section']}>
     {hasBlogChapters ? (
-      <Template.Card class="card--ghost">
+      <Template.Card class="">
         <Fragment slot="head">
           <h2 class="card__title">Table of Contents</h2>
           <div class="card__badges controls controls--tight">
-            <span class="badge badge--dark">{blogChapters.length} total</span>
+            <span class="control control--badge control--dark">{blogChapters.length} total</span>
           </div>
         </Fragment>
         <Fragment slot="body">
@@ -100,7 +100,7 @@ const hasBlogSummary = blogDescription.length > 0 || blogSummaryParagraphs.lengt
         <Fragment slot="foot">
           <nav class="controls controls--spread">
             <button
-              class="button control--small button--dark control--round"
+              class="control control--button control--small control--dark control--circle"
               type="button"
               data-chapter-prev
             >
@@ -108,7 +108,7 @@ const hasBlogSummary = blogDescription.length > 0 || blogSummaryParagraphs.lengt
             </button>
 
             <button
-              class="button control--small button--dark control--round"
+              class="control control--button control--small control--dark control--circle"
               type="button"
               data-chapter-next
             >
