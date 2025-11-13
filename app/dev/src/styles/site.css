@@ -10,13 +10,12 @@
   max-inline-size: none;
   margin: 0;
   padding-inline: var(--container-padding);
-  padding-block: var(--section-gap);
+  padding-block: 0;
 }
 
 @media (max-width: 900px) {
   .container {
     padding-inline: 0;
-    padding-block: 0;
   }
 }
 
@@ -26,33 +25,43 @@
 
   box-shadow:
     var(--surface-shadow--strong),
-    inset 0 0 26px 0px var(--color-shadow--strong);
+    inset 0 0 16px 0 var(--color-dark);
   outline: 2px solid var(--color-dark);
   outline-offset: -1px;
-  border-radius: var(--radius-xl);
+  border-radius: 0;
   background: 
-    var(--bg-overlay--stars),
+
     var(--bg-overlay--nebula),
-    radial-gradient(ellipse at center,color-mix(in oklab,transparent 50%,var(--color-accent)) 30%,transparent),
-    radial-gradient(ellipse at center,color-mix(in oklab,var(--color-dark) 50%,var(--color-accent)),var(--color-dark));
+    var(--background-overlay),
+    radial-gradient(ellipse at top left,oklch(44% 0.145 295 / 50%) 10%,oklch(40% 0.145 315 / 90%),oklch(54% 0.145 305 / 50%) 90%),
+    radial-gradient(ellipse at top right,oklch(34% 0.145 305 / 50%) 10%,oklch(50% 0.145 295 / 90%),oklch(64% 0.145 295 / 50%) 90%),
+    var(--color-dark);
   background-repeat:
+
     repeat,
-    repeat,
+    no-repeat,
+    no-repeat,
     no-repeat,
     no-repeat;
   background-size:
+
     1280px 1280px,
-    1280px 1280px,
-    cover,    
+    cover,
+    cover,
+    cover,
     cover;
 
   background-blend-mode:
-    screen,
+
     overlay,
-    soft-light,
+    multiply,
+    normal,
+    normal,
     normal;
 
   background-position:
+
+    top,
     top,
     center,
     center,    
@@ -70,7 +79,11 @@
   z-index: 0;            /* unter Content */
   pointer-events: none;  /* klicks bleiben frei */
   /* optional für “leuchtend über BG”: */
-  /* mix-blend-mode: screen; opacity: .85; */
+  mix-blend-mode: screen; opacity: .85;
+  min-width: 100%;
+  min-height: 100%;
+  inline-size: 100%;
+  block-size: 100%;
 }
 @media (max-width: 900px) {
   .container > .panel-shell {
@@ -89,6 +102,6 @@ main.panel {
   padding-block-start: 0;
 }
 
-.panel :where(p, .prose) {
+p, .prose,h1,h2,h3,h4 {
   hyphens: auto;
 }
