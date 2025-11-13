@@ -51,7 +51,7 @@
   grid-template-areas: "nav";
   padding-inline: var(--panel-padding);
   padding-block: calc(.75 * var(--panel-bar-padding));
-  border-radius: 0 0 999px 999px;
+  border-radius: 0 0 var(--radius-xl) var(--radius-xl);
   backdrop-filter: var(--blur-l) brightness(1.35) saturate(.85);
   border: 1px solid var(--control-surface--dark);
   border-top: hidden;

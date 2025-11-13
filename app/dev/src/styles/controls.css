@@ -97,24 +97,11 @@
 .control--animated { transition: var(--transition-raise); }
 .control--animated:hover { transform: var(--transform-raise); }
 
-.control[data-active="true"],
-:where(.control--button, .media-controls):hover,
-.control :where(a:hover, a:focus-visible),
-.media-controls:focus-visible {
-  filter: brightness(1.25);
-}
-
-.control[data-active="true"] > *,
-:where(.control--button, .media-controls):hover > *,
-.control :where(a:hover, a:focus-visible) > *,
-.media-controls:focus-visible > * {
-  filter: drop-shadow(0 0 2px var(--color-accent));
-}
-
-.control[data-active="true"] > * > *,
-:where(.control--button, .media-controls):hover > * > *,
-.control :where(a:hover, a:focus-visible) > * > *,
-.media-controls:focus-visible > * > * {
+/* Filtereffekte für aktive Steuerlemente und Hover/Focus */
+.control[data-active="true"] :where(svg, span, a, p),
+.control:hover :where(svg, span, a, p),
+.control:focus-visible :where(svg, span, a, p) {
+  filter: drop-shadow(0 0 2px var(--color-accent)) brightness(1.25);
   text-shadow: var(--text-shadow--strong), var(--text-glow--strong);
   font-weight: var(--bold-font-weight);
 }
