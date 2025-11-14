@@ -2,16 +2,17 @@
 import { registry  } from '@Assets/icons.registry';
 
 type IconName = keyof typeof registry;
+type IconIdentifier = IconName | (string & {});
 
 export interface Props {
   /**
    * Preferred property for selecting an icon. Use `kind` for backwards compatibility.
    */
-  name?: IconName;
+  name?: IconIdentifier;
   /**
    * Legacy property retained so older usages keep working.
    */
-  kind?: IconName;
+  kind?: IconIdentifier;
   class?: string
   size?: string
   title?: string
@@ -37,10 +38,17 @@ if (!iconName) {
   throw new Error('Missing icon identifier. Provide a `name` (preferred) or `kind` prop.');
 }
 
-let icon = registry[iconName];
-if (!icon) {
+const isKnownIcon = (value: string): value is IconName => value in registry;
+
+type IconDefinition = (typeof registry)[IconName];
+type ResolvedIcon = IconDefinition | ReturnType<typeof fallbackIcon>;
+
+let icon: ResolvedIcon;
+if (typeof iconName === 'string' && isKnownIcon(iconName)) {
+  icon = registry[iconName];
+} else {
   console.warn(`Unknown icon: ${iconName}`);
-  icon = fallbackIcon(iconName);
+  icon = fallbackIcon(String(iconName));
 }
 
 const { vb, body, attrs = {} } = icon;

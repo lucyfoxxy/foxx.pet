@@ -15,6 +15,8 @@
 .controls--end    { justify-content: flex-end; }
 .controls--spread { justify-content: space-between; }
 .controls--evenly { justify-content: space-evenly; }
+.controls--around { justify-content: space-around; }
+.controls--stretch { justify-content: stretch; }
 .controls--nowrap { flex-wrap: nowrap; }
 .controls--tight  { gap: calc(var(--control-gap) * 0.65); }
 .controls--roomy  { gap: calc(var(--control-gap) * 1.35); }
@@ -72,8 +74,7 @@
   padding-block: calc(var(--control-padding) * 0.5);
 }
 .control--large {
-  inline-size: 3.25rem;
-  block-size: 3.25rem;
+
   padding: calc(var(--control-padding) * 0.5);
 }
 .control--circle { border-radius: 999px; }

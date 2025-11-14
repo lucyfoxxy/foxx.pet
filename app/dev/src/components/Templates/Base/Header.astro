@@ -1,5 +1,4 @@
 ---
-import { ASSETS } from '@Assets/ui';
 import ICONS from '@Assets/Icons.astro';
 
 type NavLink = {
@@ -12,77 +11,33 @@ type NavLink = {
   weight?: number;
 };
 
-type Breadcrumb = {
-  label: string;
-  href: string;
-  isCurrent: boolean;
-};
-
 type Props = {
   navLinks: NavLink[];
   meta?: { title?: string; description?: string; url?: string };
-  breadcrumbs: Breadcrumb[];
 };
 
-const { navLinks = [], breadcrumbs = [] } = (Astro.props ?? {}) as Props;
-const hasActions = Astro.slots.has('actions');
+const { navLinks = [] } = (Astro.props ?? {}) as Props;
 
-const crumbItems = breadcrumbs.reduce<Array<Breadcrumb | 'separator'>>((acc, crumb, index) => {
-  if (index > 0) acc.push('separator');
-  acc.push(crumb);
-  return acc;
-}, []);
 ---
 <header class="header" aria-label="Primary navigation">
-  <div class="header__bar header__bar--top">
-    <!--a class="header__logo" aria-label="Home" href="/">
-      <img src={ASSETS.logo_header.src} alt="foxx.pet" />
-    </a-->
-
-    <nav class="header__nav controls controls--center controls--evenly controls--roomy controls--nowrap">
-      {navLinks
-        .filter((link) => link.includeInHeader)
-        .map((link) => (
-          <a
-            class="control control--button control--ghost"
-            href={link.href}
-            data-active={link.isActive ? 'true' : undefined}
-          >
-            <div class="header__nav-item">
-              <span class="header__nav-symbol" aria-hidden="true">
-                <ICONS class="media-icon" name={link.icon} />
-              </span>
-              <span class="header__nav-text">{link.label}</span>
-            </div>
-          </a>
-        ))}
-    </nav>
-
-    <div class="header__crumbs" aria-label="Breadcrumb">
-      <ol class="controls controls--center controls--tight controls--nowrap">
-        {crumbItems.map((item) =>
-          item === 'separator' ? (
-            <li class="header__crumb-separator" aria-hidden="true">
-              <ICONS class="media-icon" name="chevron-right-duo" />
-            </li>
-          ) : (
-            <li class="header__crumb">
-              {item.isCurrent ? (
-                <span class="control control--badge is-current" aria-current="page">{item.label}</span>
-              ) : (
-                <a class="control control--badge" href={item.href}>{item.label}</a>
-              )}
-            </li>
-          )
-        )}
-      </ol>
-    </div>
-    {hasActions ? (
-      <div class="header__actions controls controls--end">
-        <slot name="actions" />
-      </div>
-    ) : null}
-  </div>
+  <nav class="header__nav controls controls--evenly  controls--roomy controls--nowrap">
+    {navLinks
+      .filter((link) => link.includeInHeader)
+      .map((link) => (
+        <a
+          class="control control--button control--small control--ghost"
+          href={link.href}
+          data-active={link.isActive ? 'true' : undefined}
+        >
+          <div class="header__nav-item">
+            <span class="header__nav-symbol" aria-hidden="true">
+              <ICONS class="media-icon" name={link.icon} />
+            </span>
+            <span class="header__nav-text">{link.label}</span>
+          </div>
+        </a>
+      ))}
+  </nav>
 </header>
 
 <script>

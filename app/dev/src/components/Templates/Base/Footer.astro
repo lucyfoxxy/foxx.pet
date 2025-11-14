@@ -1,7 +1,50 @@
 ---
+import ICONS from '@Assets/Icons.astro';
+type Breadcrumb = {
+  label: string;
+  href: string;
+  isCurrent: boolean;
+};
 
+type Props = {
+  breadcrumbs: Breadcrumb[];
+};
+const { breadcrumbs = [] } = (Astro.props ?? {}) as Props;
+const hasActions = Astro.slots.has('actions');
+
+const crumbItems = breadcrumbs.reduce<Array<Breadcrumb | 'separator'>>((acc, crumb, index) => {
+  if (index > 0) acc.push('separator');
+  acc.push(crumb);
+  return acc;
+}, []);
 ---
 <footer class="footer">
+  
+    <div class="footer__nav" aria-label="Breadcrumb">
+      <ol class="controls controls--center controls--tight controls--nowrap">
+        {crumbItems.map((item) =>
+          item === 'separator' ? (
+            <li class="header__crumb-separator" aria-hidden="true">
+              <ICONS class="media-icon" name="chevron-right-duo" />
+            </li>
+          ) : (
+            <li class="header__crumb">
+              {item.isCurrent ? (
+                <span class="control control--badge control--plain is-current" aria-current="page">{item.label}</span>
+              ) : (
+                <a class="control control--badge control--plain" href={item.href}>{item.label}</a>
+              )}
+            </li>
+          )
+        )}
+      </ol>
+    </div>
+    {hasActions ? (
+      <div class="header__actions controls controls--end">
+        <slot name="actions" />
+      </div>
+    ) : null}
+    
     <span class="footer__left">
         <p>&copy;&nbsp;<span data-current-year></span>&nbsp;–&nbsp;<a href="/imprint">Imprint</a></p>
     </span>
