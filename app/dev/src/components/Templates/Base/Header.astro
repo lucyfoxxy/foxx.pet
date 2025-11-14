@@ -57,11 +57,9 @@ const crumbItems = breadcrumbs.reduce<Array<Breadcrumb | 'separator'>>((acc, cru
           </a>
         ))}
     </nav>
-  </div>
 
-  <div class="header__bar header__bar--bottom">
     <div class="header__crumbs" aria-label="Breadcrumb">
-      <ol class="controls controls--center controls--center controls--tight controls--nowrap">
+      <ol class="controls controls--center controls--tight controls--nowrap">
         {crumbItems.map((item) =>
           item === 'separator' ? (
             <li class="header__crumb-separator" aria-hidden="true">

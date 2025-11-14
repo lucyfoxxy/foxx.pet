@@ -22,7 +22,7 @@ body {
   background: none;
   display: flex;
   flex-direction: column;
-  text-shadow: var(--text-glow--soft);
+  text-shadow: var(--text-glow--soft), var(--text-shadow--soft);
   color: var(--text-color);
 }
 button {
