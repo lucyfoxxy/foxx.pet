@@ -6,7 +6,7 @@
 - [x] Overlay-Logik: Mobile fix (kein klebendes `:hover`, `data-show` Steuerung)
 - [x] Logo auf Mobile ausgeblendet → Sticky-Header-Sprung behoben
 - [x] Footer-Layout vereinheitlicht (Mobile 1 Spalte, Desktop 3 Spalten)
-  - [ ] Ausnahme-Regel für unsichtbaren Button-Padding wieder entfernen (Teil des Button-Style-Refactors)
+  - [x] Ausnahme-Regel für unsichtbaren Button-Padding wieder entfernen (Teil des Button-Style-Refactors)
 - [x] Back-Button falsches Label im EntryView
 - [x] Crumb-Link „Album / Blog“ führt zu 404 → gelöst durch direkte Pfade (`frames`, `paws`, `noms`, `tails`)
 - [x] Gallery: Category-Covers (jetzt, wo Kategorien stabil sind)
@@ -16,8 +16,8 @@
 *(keine akuten offen)*
 
 # 🎨 UX / Polish
-- [ ] Navigation: Hover/Active-Zustände konsistent (Desktop & Mobile „aktueller Tab“)
-- [ ] Buttons/Badges vereinheitlichen (inkl. Back-Button-Style)
+- [x] Navigation: Hover/Active-Zustände konsistent (Desktop & Mobile „aktueller Tab“)
+- [x] Buttons/Badges vereinheitlichen (inkl. Back-Button-Style)
 - [x] Dezenter Shadow hinter Covern in TileViews (für mehr Tiefe)
 
 # 🖼️ Gallery / Home Intro (neu)
@@ -32,6 +32,6 @@
 - [ ] E2E-Test: 1 Story + 1 Rezept wirklich veröffentlichen (mit neuer Pipeline)
 
 # 🧱 Tech-Schulden (klein, optional)
-- [ ] Ausnahme-Regel für unsichtbaren Button-Padding wieder entfernen (Teil des Button-Style-Refactors)
-- [ ] `slug` in alten MD-Files ggf. harmonisieren (falls noch Pfad-Slugs liegen)
-- [ ] Entry-Overlays: `no-hover`-Klassenschalter global setzen (robust gegen Emulatoren)
+- [x] Ausnahme-Regel für unsichtbaren Button-Padding wieder entfernen (Teil des Button-Style-Refactors)
+- [x] `slug` in alten MD-Files ggf. harmonisieren (falls noch Pfad-Slugs liegen)
+- [x] Entry-Overlays: `no-hover`-Klassenschalter global setzen (robust gegen Emulatoren)

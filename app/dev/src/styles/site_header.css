@@ -79,15 +79,17 @@
   block-size: 100%;
   margin: 0;
 
-  padding-inline: var(--panel-bar-padding);
-  padding-block: calc(.5 * var(--panel-bar-padding));
+  padding-inline: calc(.5 * var(--panel-bar-padding));
+  padding-block: calc(.75 * var(--panel-bar-padding));
   display: inline-flex;
-  border-radius: 0 0 var(--radius-xxl) var(--radius-xxl);
-  border: 1px solid var(--control-surface--dark);
+  border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+  border: 1px solid var(--card-surface--dark);
   border-top: hidden;
-  backdrop-filter: var(--blur-l) brightness(1.15) saturate(1.05);
-  box-shadow: var(--surface-shadow--default), inset 0 0 29px color-mix(in oklab,transparent 20%,var(--card-surface--dark));
+  backdrop-filter: var(--blur-l) brightness(.95) saturate(1.15);
+  
+  background: radial-gradient(ellipse at top center,var(--card-surface--light),transparent 80%);
   transition: var(--transition--nav);
+  box-shadow: var(--surface-shadow--strong);
 }
 @media (max-width: 900px) {
   .header__nav { 
@@ -113,6 +115,7 @@
   gap: var(--control-gap);
   transition: var(--transition--nav);
   align-items: center;
+  filter: drop-shadow(1px 2px 4px var(--color-shadow--strong));
 }
 @media (max-width: 900px) {
   .header__nav-item {

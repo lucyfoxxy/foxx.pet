@@ -163,7 +163,7 @@
   align-items: center;
   vertical-align: middle;
   font-size: var(--icon-size-m);
-  filter: drop-shadow(var(--icon-shadow));
+
 }
 .media-icon--large {font-size: var(--icon-size-l);}
 .media-icon--small {font-size: var(--icon-size-s);}
