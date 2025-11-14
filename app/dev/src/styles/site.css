@@ -32,9 +32,9 @@
   background: 
     var(--bg-overlay--nebula),
     var(--background-overlay),
-    radial-gradient(ellipse at -55% 5%,transparent 40%,oklch(40% 0.175 310 / 50%),transparent 65%),
-    radial-gradient(ellipse at top left,oklch(40% 0.165 295 / 70%) 10%,oklch(41% 0.165 295 / 70%),oklch(40% 0.165 305 / 70%) 90%),
-    radial-gradient(ellipse at top right,oklch(40% 0.165 305 / 70%) 10%,oklch(41% 0.165 295 / 70%),oklch(40% 0.165 295 / 70%) 90%),
+    radial-gradient(ellipse at -55% 5%,transparent 44%,oklch(40% 0.175 310 / 50%),transparent 65%),
+    radial-gradient(ellipse at top left,oklch(48% 0.165 295 / 80%) 10%,oklch(48% 0.165 295 / 80%),oklch(48% 0.165 305 / 80%) 90%),
+    radial-gradient(ellipse at top right,oklch(48% 0.165 305 / 80%) 10%,oklch(48% 0.165 295 / 80%),oklch(48% 0.165 295 / 80%) 90%),
     var(--color-dark);
   background-repeat:
 

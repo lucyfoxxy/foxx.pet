@@ -10,21 +10,22 @@
   bottom: 0;
   grid-template-columns: 33% auto 33%;
   grid-template-areas:
-    "footer-top footer-top footer-top"
+    "footer-nav footer-nav footer-nav"
     "footer-left footer-center footer-right";
   justify-content: stretch;
   align-items: end;
   vertical-align: middle;
 
   margin-block: var(--section-gap) 0;
-  gap: var(--flow-gap);
+  gap: var(--cluster-gap);
   padding-inline: var(--panel-padding);
-  padding-block: calc(.75 * var(--panel-bar-padding));
-  border-radius: var(--radius-xxl) var(--radius-xxl) 0 0 ;
-  backdrop-filter: var(--blur-l) brightness(1.35) saturate(.85);
+  padding-block: calc(.5 * var(--panel-bar-padding));
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0 ;
+  
   border: 1px solid var(--control-surface--dark);
   border-bottom: hidden;
-  box-shadow: var(--surface-shadow--default), inset 0 0 299px color-mix(in oklab,transparent 20%,var(--card-surface--dark));
+  backdrop-filter: var(--blur-l) brightness(1.15) saturate(1.05);
+  box-shadow: var(--surface-shadow--default), inset 0 0 299px color-mix(in oklab,transparent 50%,var(--card-surface--dark));
 }
 
 @media (max-width: 900px) {
@@ -37,7 +38,7 @@
 .footer :where(p) {
   opacity: 0.75;
 }
-.footer__nav    {  grid-area: footer-top;     justify-self: center;   }
+.footer__nav    {  grid-area: footer-nav;     justify-self: center;   }
 .footer__left   {  grid-area: footer-left;    justify-self: start;  }
 .footer__center {  grid-area: footer-center;  justify-self: center;  }
 .footer__right  {  grid-area: footer-right;   justify-self: end;  }
@@ -49,25 +50,23 @@
 }
 
 
-/* ====== HEADER - CRUMBS ================= */
-.footer__nav{
+/* ====== FOOTER NAV - CRUMBS ================= */
+.footer__nav {
   inline-size: 100%;
   margin-block: 0;
-  padding-block: calc(.15 * var(--panel-bar-padding));
+  
   margin-inline: 0;
-  border-top: 1px solid color-mix(in oklab,transparent 70%,var(--color-dark));
-  grid-area: crumbs;
-  border-radius: 0;
+
   align-self: center;
   justify-self: center;
   display: flex;
   flex-direction: column;
-  gap: var(--cluster-gap);
+  gap: var(--control-gap);
   transform: translateY(0);
   transition: opacity .2s ease, transform .2s ease;
 }
 
-.footer__navol {
+.footer__nav ol {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -80,8 +79,8 @@
   min-width: 0;
 }
 
-.header__crumbs,
-.footer__navli {
+.footer__nav,
+.footer__nav li {
   align-items: center;
 }
 

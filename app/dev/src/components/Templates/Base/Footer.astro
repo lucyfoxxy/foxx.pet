@@ -20,7 +20,7 @@ const crumbItems = breadcrumbs.reduce<Array<Breadcrumb | 'separator'>>((acc, cru
 ---
 <footer class="footer">
   
-    <div class="footer__nav" aria-label="Breadcrumb">
+    <nav class="footer__nav" aria-label="Breadcrumb">
       <ol class="controls controls--center controls--tight controls--nowrap">
         {crumbItems.map((item) =>
           item === 'separator' ? (
@@ -38,7 +38,8 @@ const crumbItems = breadcrumbs.reduce<Array<Breadcrumb | 'separator'>>((acc, cru
           )
         )}
       </ol>
-    </div>
+    </nav>
+    
     {hasActions ? (
       <div class="header__actions controls controls--end">
         <slot name="actions" />
