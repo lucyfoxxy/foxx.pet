@@ -47,14 +47,12 @@ a {
 
 
 .header__nav-text {
-  font-weight: var(--normal-font-weight);
-  font-size: clamp(var(--font-size-s),calc(var(--font-size-s) + .15vw),var(--font-size-m));
+  font-weight: var(--bold-font-weight); 
+  font-size: clamp(var(--font-size-s),calc(var(--font-size-s) + .3vw),var(--font-size-m));
   letter-spacing: var(--letter-spacing-xl);
   text-align: left;
 }
-.header__nav-item[data-active="true"] > .header__nav-text {
-  font-weight: var(--bold-font-weight);  
-}
+
 .footer,
 .badge,
 .control--badge,

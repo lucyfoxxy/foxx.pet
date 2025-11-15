@@ -41,7 +41,7 @@ const crumbItems = breadcrumbs.reduce<Array<Breadcrumb | 'separator'>>((acc, cru
     </nav>
     
     {hasActions ? (
-      <div class="header__actions controls controls--end">
+      <div class="footer__actions controls controls--end">
         <slot name="actions" />
       </div>
     ) : null}
