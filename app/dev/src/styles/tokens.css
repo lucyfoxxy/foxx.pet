@@ -43,8 +43,8 @@
   --font-size-xl:        clamp(1.75rem, calc(1.75rem + 1.5vw), 3rem);
 
   --icon-size-s:        calc(var(--font-size-s) * 1.1);
-  --icon-size-m:        calc(var(--font-size-m) * 1.125);
-  --icon-size-l:        calc(var(--font-size-xl) * .9);
+  --icon-size-m:        calc(var(--font-size-m) * 1.5);
+  --icon-size-l:        calc(var(--font-size-l) * 1.4);
 
   --site-logo--size:         calc(var(--control-gap) + 12vw);
   --thumb-size:              clamp(64px, 9vw, 128px);
@@ -144,33 +144,7 @@
     radial-gradient(1100px 800px at center right, oklch(42% 0.22 305 / .28), transparent 72%),
     linear-gradient(to top, oklch(60% 0.20 230 / .96), transparent 54%);
 
-  --site-logo--filter:       drop-shadow(0 3px 2px var(--color-shadow--strong)); 
 
-  /* ====== Font Styles ====== */
-  --primary-font-family:     Grandstander, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --secondary-font-family:   'Fuzzy Bubbles', var(--primary-font-family);
-
-  --thin-font-weight:        300;
-  --normal-font-weight:      400;
-  --thick-font-weight:       500;
-  --bold-font-weight:        700;
-
-  --font-size-xs:        clamp(.75rem, calc(.75rem + .025vw), .95rem);
-  --font-size-s:         clamp(.9rem,  calc(.9rem + .075vw), 1.05rem);
-  --font-size-m:        clamp(1rem, calc(1rem + .35vw), 1.45rem);
-  --font-size-l:         clamp(1.4rem, calc(1.4rem + .4vw), 1.8rem);
-  --font-size-xl:        clamp(1.75rem, calc(1.75rem + 1.5vw), 3rem);
-
-  --line-height-xs:      1;
-  --line-height-s:       1.5;
-  --line-height-m:      1.35;
-  --line-height-l:       1.225;
-  --line-height-xl:      1.2;
-
-  --letter-spacing-s:    .0065em;
-  --letter-spacing-m:   clamp(.0065em, calc(0.225em + .01vw ), .0225em);
-  --letter-spacing-l:    clamp(.0225em, calc(0.225em + .03vw ), .0525em);
-  --letter-spacing-xl:    clamp(.0525em, calc(0.525em + .05vw ), .0650em);
 
   /* ====== Gallery ====== */                                 
   --gallery-interval:           8000ms;  
@@ -181,10 +155,11 @@
   --transition-brightness:      filter .5s ease-in-out;
   --transition-glow:            color .2s ease, text-shadow .2s ease, transform .2s ease, box-shadow .2s ease;
   --transition-soft:            opacity .25s ease, transform .25s ease, background .25s ease, box-shadow .25s ease;
-  --transition--control:        box-shadow .2s ease,
-                                backdrop-filter .2s ease,
-                                font-weight .2s ease,
-                                opacity .2s ease;
+  --transition--control:        box-shadow .25s ease,
+                                backdrop-filter .25s ease,
+                                font-weight .25s ease,
+                                opacity .25s ease,
+                                transform .25s ease;
                                 
   --transition-scale:           transform .25s ease;
   --transition-opacity:          opacity .5s ease-in-out;

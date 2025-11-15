@@ -45,7 +45,7 @@ a {
   text-decoration: none;
 }
 
-.header__nav-item :where(.media-icon),
+
 .header__nav-text {
   font-weight: var(--normal-font-weight);
   font-size: clamp(var(--font-size-s),calc(var(--font-size-s) + .45vw),var(--font-size-l));

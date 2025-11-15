@@ -61,7 +61,7 @@
   padding-inline: calc(var(--control-padding) * 0.75);
   backdrop-filter: var(--blur-s) brightness(1.25) saturate(.95);
   box-shadow: var(--surface-shadow--soft), inset 0 0 16px color-mix(in oklab,transparent 40%,var(--control-surface--light));
-  transition: none;
+
 }
 
 :where(a.control--badge, button.control--badge, .control--badge.is-current) {
@@ -87,7 +87,8 @@
 }
 .control--plain {
   backdrop-filter: none;
-  filter: none;
+  filter: drop-shadow(3px 3px 2px var(--color-dark));
+  opacity: .8;
 }
 
 .control--glow { transition: var(--transition-glow); }
@@ -98,28 +99,18 @@
 
 /* Filtereffekte für aktive Steuerlemente und Hover/Focus */
 .control--button[data-active="true"],
+.control--button:hover,
+.control--button:focus-visible,
 :where(a.control--badge, button.control--badge):hover,
 :where(a.control--badge, button.control--badge):focus-visible,
 .control--badge.is-current {
-  text-shadow: 1px 1px 2px var(--control-surface--light);
-  transform: var(--transform-scale);
-
-  backdrop-filter: brightness(1.7);
+  filter: drop-shadow(0 0 0 var(--color-accent)) drop-shadow(3px 3px 3px var(--color-dark)) ;
+  opacity: 1;
 }
-.control--button[data-active="true"] > *,
-.control--button:hover > *,
-.control--button:focus-visible > *  {
-  filter: drop-shadow(0px 0px 2px var(--color-accent));
-  font-weight: var(--bold-font-weight);
+.control--button:hover,
+:where(a.control--badge, button.control--badge):hover {
+  transform: translateY(-5%);
 }
-
-:where(a.control--badge, button.control--badge):hover,
-:where(a.control--badge, button.control--badge):focus-visible,
-.control--badge.is-current {
-  font-weight: var(--bold-font-weight);
-  filter: drop-shadow(0px 0px 2px var(--color-accent));
-}
-
 .media-controls {
   --media-control-size: 2.75rem;
   position: relative;
