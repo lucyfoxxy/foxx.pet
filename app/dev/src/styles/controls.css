@@ -37,9 +37,9 @@
   padding-block: calc(var(--control-padding) * 0.75);
   padding-inline: var(--control-padding);
   border-radius: var(--control-border-radius);
-  box-shadow: var(--surface-shadow--soft), var(--control-shadow--inset);
-  transition: var(--transition--control);
-  background: var(--control-surface--dark);
+  box-shadow: var(--surface-shadow--soft);
+  
+  
   vertical-align: middle;
 }
 
@@ -51,18 +51,21 @@
 }
 
 .control--button {
-  
+  background: var(--control-surface--dark);
   outline: 1px solid color-mix(in srgb, var(--color-dark) 5%, transparent);
   outline-offset: -1px;
+  transition: var(--transition--control);
 }
 
 .control--badge {
   border-radius: 999px;
   padding-block: calc(var(--control-padding) * 0.5);
   padding-inline: calc(var(--control-padding) * 0.75);
+  background: var(--card-surface--dark);
+  transition: var(--transition--control);
 }
 
-:where(a.control--badge, button.control--badge, .control--badge.is-current) {
+a,button :where(.control) {
   transition: var(--transition--control);
   cursor: pointer;
 }
@@ -73,7 +76,7 @@
 }
 .control--large {
 
-  padding: calc(var(--control-padding) * 0.5);
+  padding: calc(var(--control-padding) * 1.25);
 }
 .control--circle { border-radius: 999px; }
 .control--stretch { inline-size: 100%; }
@@ -85,8 +88,10 @@
 }
 .control--plain {
   backdrop-filter: none;
-  filter: drop-shadow(3px 3px 2px var(--color-dark));
+  filter: drop-shadow(2px 2px 1px var(--color-shadow--soft));
   opacity: .8;
+  padding-block: 0;
+  padding-inline: 0;
 }
 
 .control--glow { transition: var(--transition-glow); }
@@ -101,8 +106,8 @@
 .control--button:focus-visible,
 :where(a.control--badge, button.control--badge):hover,
 :where(a.control--badge, button.control--badge):focus-visible,
-.control--badge.is-current {
-  filter: drop-shadow(0 0 0 var(--color-accent)) drop-shadow(3px 3px 3px var(--color-dark)) ;
+.control--badge[data-current="true"] {
+  filter: drop-shadow(0 0 0 var(--color-accent)) drop-shadow(2px 2px 2px var(--color-shadow--strong)) ;
   opacity: 1;
 }
 .control--button:hover,

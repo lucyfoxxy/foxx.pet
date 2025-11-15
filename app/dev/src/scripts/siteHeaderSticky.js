@@ -1,133 +1,111 @@
-const MOBILE_QUERY = '(max-width: 900px)';
+// @Scripts/siteHeaderSticky.js
+// Generic sticky helper for header (top) and footer (bottom).
+// Assumes the element itself has `position: sticky` in CSS and either `top` or `bottom` set.
 
-const addMediaListener = (mediaQueryList, handler) => {
-  if (!mediaQueryList || typeof handler !== 'function') return () => {};
+function createStickyController(el, { mode = 'top' } = {}) {
+  if (!el) return;
 
-  if (typeof mediaQueryList.addEventListener === 'function') {
-    mediaQueryList.addEventListener('change', handler);
-    return () => mediaQueryList.removeEventListener('change', handler);
+  const style = window.getComputedStyle(el);
+  if (style.position !== 'sticky') {
+    return;
   }
 
-  if (typeof mediaQueryList.addListener === 'function') {
-    mediaQueryList.addListener(handler);
-    return () => mediaQueryList.removeListener(handler);
+  const doc = document.documentElement;
+  const initialScrollY = window.scrollY || window.pageYOffset;
+  const initialViewportHeight = window.innerHeight || doc.clientHeight;
+  const initialRect = el.getBoundingClientRect();
+  const initialDocHeight = doc.scrollHeight;
+  const originalMaxScroll = Math.max(0, initialDocHeight - initialViewportHeight);
+  const isShortPage = initialDocHeight <= initialViewportHeight + 1;
+
+  let anchorTop = null;
+  let anchorBottom = null;
+
+  if (mode === 'top') {
+    const topOffset = parseFloat(style.top || '0') || 0;
+    anchorTop = initialRect.top + initialScrollY - topOffset;
+  } else if (mode === 'bottom') {
+    const bottomOffset = parseFloat(style.bottom || '0') || 0;
+    // When the bottom edge of the element would naturally be at the bottom
+    // of the viewport, sticky mode begins.
+    anchorBottom =
+      initialRect.top +
+      initialScrollY +
+      initialRect.height -
+      initialViewportHeight +
+      bottomOffset;
   }
 
-  return () => {};
-};
-
-const measure = (element) => (element ? element.getBoundingClientRect().height : 0);
-
-export function ResponsiveSiteHeader() {
-
-  const root = document.documentElement;
-
-  const nav = document.querySelector('.header');
-  const navBar = nav?.querySelector('.header__nav');
-
-  if (!root || !nav) return undefined;
-
-  const media = window.matchMedia(MOBILE_QUERY);
-  const SCROLL_THRESHOLD = 4;
-  let lastScrollY = window.scrollY;
   let rafId = 0;
-  let detailsVisible = true;
 
-  const setDetailsVisible = (visible) => {
-    if (detailsVisible === visible) return;
-    detailsVisible = visible;
-    nav.toggleAttribute('data-show-details', visible);
-  };
+  const update = () => {
+    rafId = 0;
+    const scrollY = window.scrollY || window.pageYOffset;
+    const vhNow = window.innerHeight || doc.clientHeight; // aktuell, falls du's mal brauchst
 
-  nav.toggleAttribute('data-show-details', detailsVisible);
+    let stuck = false;
 
-  const applyScrollState = (currentY) => {
-    if (!media.matches) {
-      setDetailsVisible(true);
-      lastScrollY = currentY;
-      return;
+    if (mode === 'top' && anchorTop !== null) {
+      // Header: auf kurzen Seiten gar nicht „compakten“,
+      // sonst: stuck sobald wir über seine natürliche Position hinaus sind.
+      if (!isShortPage) {
+        stuck = scrollY > anchorTop;
+      }
+    } else if (mode === 'bottom' && anchorBottom !== null) {
+      // Footer:
+      // - Wenn Anfang und Ende quasi zusammenfallen (kurze Seite):
+      //   -> nie stuck, immer kompletter Footer.
+      // - Sonst:
+      //   -> Scrolltiefe über anchorBottom: sticky-Phase (nur Nav-Bar)
+      //   -> aber wenn wir das ursprünglich berechnete Seitenende erreichen,
+      //      wieder zurück auf „nicht stuck“ (kompletter Footer sichtbar).
+      if (!isShortPage) {
+        const originalMaxScrollNow = originalMaxScroll; // eingefroren
+        const atEnd = scrollY >= originalMaxScrollNow - 1;
+        if (!atEnd) {
+          stuck = scrollY > anchorBottom;
+        }
+      } else {
+        stuck = false;
+      }
     }
 
-    const delta = currentY - lastScrollY;
-    if (currentY <= 0 || delta < -SCROLL_THRESHOLD) {
-      setDetailsVisible(true);
-    } else if (delta > SCROLL_THRESHOLD) {
-      setDetailsVisible(false);
+    if (stuck) {
+      el.setAttribute('data-stuck', 'true');
+    } else {
+      el.removeAttribute('data-stuck');
     }
-
-    lastScrollY = currentY;
   };
 
-  const handleScroll = () => {
-    const currentY = window.scrollY;
+  const onScrollOrResize = () => {
     if (rafId) return;
-    rafId = window.requestAnimationFrame(() => {
-      rafId = 0;
-      applyScrollState(currentY);
-    });
+    rafId = window.requestAnimationFrame(update);
   };
 
-  const updateStickyOffset = () => {
-    const target = media.matches && navBar ? navBar : nav;
-    const height = Math.round(measure(target));
-    root.style.setProperty('--site-header--sticky-offset', `${height}px`);
-    root.toggleAttribute('data-site-header-compact', media.matches);
-  };
+  // Initialer Zustand
+  update();
 
-  const updateLayout = () => {
-    updateStickyOffset();
-    applyScrollState(window.scrollY);
-  };
-
-  updateLayout();
-
-  const resizeObservers = [];
-  if (typeof ResizeObserver === 'function') {
-    const resizeObserver = new ResizeObserver(() => updateLayout());
-
-    resizeObserver.observe(nav);
-    resizeObservers.push(resizeObserver);
-  }
-
-  const removeMediaListener = addMediaListener(media, updateLayout);
-  window.addEventListener('orientationchange', updateLayout);
-  window.addEventListener('resize', updateLayout);
-  window.addEventListener('scroll', handleScroll, { passive: true });
+  window.addEventListener('scroll', onScrollOrResize, { passive: true });
+  window.addEventListener('resize', onScrollOrResize);
 
   const cleanup = () => {
-    removeMediaListener();
-    resizeObservers.forEach((observer) => observer.disconnect());
-    window.removeEventListener('orientationchange', updateLayout);
-    window.removeEventListener('resize', updateLayout);
-    window.removeEventListener('scroll', handleScroll);
     if (rafId) {
       window.cancelAnimationFrame(rafId);
       rafId = 0;
     }
-    root.style.removeProperty('--site-header--sticky-offset');
-    root.removeAttribute('data-site-header-compact');
-    nav.removeAttribute('data-show-details');
+    window.removeEventListener('scroll', onScrollOrResize);
+    window.removeEventListener('resize', onScrollOrResize);
   };
 
   return cleanup;
 }
 
-
-
-export function observer() {
-  const nav = document.querySelector('.header');
-  if (nav) {
-    const sentry = document.createElement('div');
-    sentry.style.position = 'absolute';
-    sentry.style.top = '0';
-    sentry.style.height = '1px';
-    nav.before(sentry); // direkt vor die Nav
-
-    const io = new IntersectionObserver(([e]) => {
-      nav.toggleAttribute('data-stuck', e.intersectionRatio === 0);
-    }, { rootMargin: `-${getComputedStyle(nav).top || 0} 0px 0px 0px`, threshold: [0,1] });
-
-    io.observe(sentry);
-  }
+export function initHeaderSticky(selector = '.header') {
+  const el = typeof selector === 'string' ? document.querySelector(selector) : selector;
+  return createStickyController(el, { mode: 'top' });
 }
 
+export function initFooterSticky(selector = '.footer') {
+  const el = typeof selector === 'string' ? document.querySelector(selector) : selector;
+  return createStickyController(el, { mode: 'bottom' });
+}

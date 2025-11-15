@@ -6,10 +6,10 @@
 }
 
 @media (max-width: 900px) {
-  .header[data-stuck] .header__nav-text {
+  .header[data-visible="false"] .header__nav-text {
     display: none;
   }
-  .header[data-stuck] .header__nav-item {
+  .header[data-visible="false"] .header__nav-item {
     gap: 0;
     grid-template-areas: "symbol";
   }

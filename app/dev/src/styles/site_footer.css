@@ -1,118 +1,103 @@
-/* ============================================ */
-/* ======== SITE: LAYOUT & STRUCTURE ========== */
-/* ====== Depends on: tokens, base, typography ====== */
-/* ============================================ */
-
 /* ====== FOOTER ================= */
 .footer {
   display: grid;
+  
   position: sticky;
   bottom: 0;
-  grid-template-columns: 33% auto 33%;
+  z-index: 1001;          /* nicht mehr sticky */
+  grid-template-columns: 1fr;
   grid-template-areas:
-    "footer-nav footer-nav footer-nav"
-    "footer-left footer-center footer-right";
-  justify-content: stretch;
-  align-items: end;
-  vertical-align: middle;
+    "nav"
+    "meta";
 
+  align-items: end;
   margin-block: var(--section-gap) 0;
-  gap: var(--cluster-gap);
-  padding-inline: var(--panel-padding);
-  padding-block: calc(.5 * var(--panel-bar-padding));
-  border-radius: var(--radius-xxl) var(--radius-xxl) 0 0 ;
-  
+  gap: var(--control-gap);
+
+  border-radius: var(--radius-xxl) var(--radius-xxl) 0 0;
   border: 1px solid var(--control-surface--dark);
-  border-bottom: hidden;
+  border-bottom: 0;
+  
   backdrop-filter: var(--blur-l) brightness(1.15) saturate(1.05);
-  box-shadow: var(--surface-shadow--default), inset 0 0 29px color-mix(in oklab,transparent 50%,var(--card-surface--dark));
+  box-shadow: var(--surface-shadow--default),
+    inset 0 0 29px color-mix(in oklab, transparent 50%, var(--card-surface--dark));
 }
+
+.footer[data-visible="false"] .footer__meta { display: none; }
+.footer[data-visible="false"] { grid-template-areas: "nav"; }
+
+.footer :where(p)   { opacity: 0.75; }
 
 @media (max-width: 900px) {
-  .footer {
-    box-shadow: var(--surface-shadow--default);
-    border-radius: var(--radius-m) var(--radius-m) 0 0;
-  }
+  .footer { border-radius: var(--radius-m) var(--radius-m) 0 0; }
 }
 
-.footer :where(p) {
-  opacity: 0.75;
-}
-.footer__nav    {  grid-area: footer-nav;     justify-self: center;   }
-.footer__left   {  grid-area: footer-left;    justify-self: start;  }
-.footer__center {  grid-area: footer-center;  justify-self: center;  }
-.footer__right  {  grid-area: footer-right;   justify-self: end;  }
-
-.footer__center > .control.control--button.control--small {
-  font-size: var(--font-size-xxs);
-  padding-block: 0;
-  vertical-align: bottom;
-}
-
-
-/* ====== FOOTER NAV - CRUMBS ================= */
-.footer__nav {
+/* ====== FOOTER NAV & ACTIONS ================= */
+.footer__nav, 
+.footer__meta {
+  display: grid;
   inline-size: 100%;
-  align-self: center;
-  justify-self: center;
-  display: flex;
-  flex-direction: column;
-  gap: var(--control-gap);
-  transform: translateY(0);
-  transition: opacity .2s ease, transform .2s ease;
+  padding-inline: var(--panel-bar-padding);
+}
+
+.footer__nav {
+  grid-area: nav;
+  place-items: center;
+  grid-template-columns: 1fr;
+  grid-template-areas: "crumbs";
+  padding-block: calc(.75 * var(--panel-bar-padding));
 }
 
 .footer__nav ol {
+  grid-area: crumbs;
+
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: row;
+  flex-wrap: nowrap;
   align-items: center;
   margin: 0;
   padding: 0;
   list-style: none;
+  gap: calc(.5 * var(--control-gap));
   font-size: var(--font-size-xs);
   color: var(--text-accent);
-  text-shadow: var(--text-shadow--soft);
+  text-shadow: var(--text-shadow--strong);
   min-width: 0;
 }
-
-.footer__nav,
-.footer__nav li {
-  align-items: center;
-}
-
-
-
-
 
 .footer__crumb-separator {
   display: inline-flex;
   align-items: center;
-  margin-inline: -.25rem;
-  opacity: .65;
+  transform: translateY(-22%);
+  opacity: .5;
   pointer-events: none;
 }
-
-.footer__nav:where(.control--badge) {
-  opacity: .7;
-  transition: var(--transition--control);
-}
-
-.footer__nav:where(a.control--badge):focus-visible,
-.footer__nav:where(a.control--badge):hover,
-.footer__nav:where(.control--badge.is-current) {
-  color: var(--text-color);
-  text-shadow: var(--text-glow--strong);
-  opacity: 1;
-}
-
-
-
 
 .footer__actions:empty {
   display: none;
 }
 .footer__actions {  
-  grid-area: actions; 
   align-self: center;
   justify-self: end;
 }
+
+/* ====== FOOTER META ================= */
+.footer__meta   {  
+  padding-block-end: calc(.5 * var(--panel-bar-padding));
+  grid-area: meta;
+  grid-template-columns: 33% auto 33%; 
+  grid-template-areas: 
+    "l c r"; 
+}
+.footer__left   {  grid-area: l;    justify-self: start;  }
+.footer__center {  grid-area: c;  justify-self: center;  }
+.footer__right  {  grid-area: r;   justify-self: end;  }
+
+
+
+
+
+
+
+
+

@@ -26,7 +26,7 @@
   --thick-font-weight:       500;
   --bold-font-weight:        700;
 
-  --line-height-xs:      1;
+  --line-height-xs:      .75;
   --line-height-s:       1.5;
   --line-height-m:      1.35;
   --line-height-l:       1.225;
@@ -108,7 +108,7 @@
   --surface-shadow--default: 0 0 18px -10px var(--color-shadow--soft),0 0 24px -6px var(--color-shadow--strong);
   --surface-shadow--strong:  0 0 20px -10px var(--color-shadow--soft),0 0 28px -6px var(--color-shadow--strong),0 0 28px 0 var(--color-shadow--strong);
 
-  --control-shadow--inset: inset 0 0 24px 2px var(--color-shadow--strong);
+  --control-shadow--inset: inset 0 0 99px 0 var(--color-shadow--strong);
   --card-shadow--inset: inset 0 0 24px 2px var(--color-shadow--soft),inset 0 0 0 1px var(--color-shadow--strong);
 
   --surface-glow--strong:      0 0 2px 2px var(--color-glow--strong);

@@ -37,13 +37,14 @@ const { navLinks = [] } = (Astro.props ?? {}) as Props;
 </header>
 
 <script>
-  import { ResponsiveSiteHeader, observer } from '@Scripts/siteHeaderSticky.js';
+  import stickyBar from '@Scripts/stickyBars.js';
   import { runOnReady } from '@Scripts/utils/_runOnReady.js';
+
+
   runOnReady(() => {
-    const cleanup = ResponsiveSiteHeader();
-    observer();
+    const cleanup = stickyBar('.header');
     if (typeof cleanup === 'function') {
       window.addEventListener('astro:before-swap', cleanup, { once: true });
     }
-  });
+  });  
 </script>

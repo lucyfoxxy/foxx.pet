@@ -38,14 +38,15 @@ const crumbItems = breadcrumbs.reduce<Array<Breadcrumb | 'separator'>>((acc, cru
           )
         )}
       </ol>
-    </nav>
-    
-    {hasActions ? (
+          {hasActions ? (
       <div class="footer__actions controls controls--end">
         <slot name="actions" />
       </div>
     ) : null}
+    </nav>
     
+
+    <div class="footer__meta">
     <span class="footer__left">
         <p>&copy;&nbsp;<span data-current-year></span>&nbsp;–&nbsp;<a href="/imprint">Imprint</a></p>
     </span>
@@ -55,4 +56,17 @@ const crumbItems = breadcrumbs.reduce<Array<Breadcrumb | 'separator'>>((acc, cru
     <span class="footer__right">
         <p><em>using<a href="https://astro.build">&nbsp;astro</a></em>&nbsp;–&nbsp;<a href="/test">Test</a></p>
     </span>
+    </div>
 </footer>
+<script>
+  import stickyBar from '@Scripts/stickyBars.js';
+  import { runOnReady } from '@Scripts/utils/_runOnReady.js';
+
+
+  runOnReady(() => {
+    const cleanup = stickyBar('.footer');
+    if (typeof cleanup === 'function') {
+      window.addEventListener('astro:before-swap', cleanup, { once: true });
+    }
+  });  
+</script>
