@@ -25,11 +25,11 @@ const { navLinks = [] } = (Astro.props ?? {}) as Props;
       .filter((link) => link.includeInHeader)
       .map((link) => (
         <a
-          class="header__nav-item control control--button control--small control--plain"
+          class="header__nav-item control--button control--plain"
           href={link.href}
           data-active={link.isActive ? 'true' : undefined}
         >
-          <ICONS class="header__nav-symbol media-icon media-icon--large" name={link.icon} />
+          <ICONS class="header__nav-symbol media-icon" name={link.icon} />
           <span class="header__nav-text">{link.label}</span>
         </a>
       ))}

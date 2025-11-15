@@ -20,7 +20,7 @@
   gap: var(--cluster-gap);
   padding-inline: var(--panel-padding);
   padding-block: calc(.5 * var(--panel-bar-padding));
-  border-radius: var(--radius-xl) var(--radius-xl) 0 0 ;
+  border-radius: var(--radius-xxl) var(--radius-xxl) 0 0 ;
   
   border: 1px solid var(--control-surface--dark);
   border-bottom: hidden;

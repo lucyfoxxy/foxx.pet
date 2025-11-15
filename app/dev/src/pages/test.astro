@@ -1,213 +1,771 @@
 ---
 import { Template } from '@Frontend';
 import Icons from '@Assets/Icons.astro';
+import { registry as iconRegistry } from '@Assets/icons.registry';
 import { COVERS } from '@Assets/covers';
 import { Picture } from 'astro:assets';
+
+const formatClassList = (value: string, fallback = 'default') =>
+  value && value.trim().length > 0
+    ? value
+        .trim()
+        .split(/\s+/)
+        .map((cls) => `.${cls}`)
+        .join(' ')
+    : fallback;
+
+const navSections = [
+  { id: 'shadows', label: 'Shadows & Glows' },
+  { id: 'cards', label: 'Cards' },
+  { id: 'controls', label: 'Buttons & Badges' },
+  { id: 'layouts', label: 'Control Layouts' },
+  { id: 'media', label: 'Media & Icons' },
+  { id: 'typography', label: 'Typography' },
+];
+
+const surfaceEffects = [
+  {
+    id: 'surface-soft',
+    label: 'Surface Soft Shadow',
+    token: '--surface-shadow--soft',
+    preview: 'shadow-preview--surface-soft',
+    description: 'Subtle lift used on thumbnails and compact frames.',
+  },
+  {
+    id: 'surface-default',
+    label: 'Surface Default Shadow',
+    token: '--surface-shadow--default',
+    preview: 'shadow-preview--surface-default',
+    description: 'Primary elevation for cards and media wrappers.',
+  },
+  {
+    id: 'surface-strong',
+    label: 'Surface Strong Shadow',
+    token: '--surface-shadow--strong',
+    preview: 'shadow-preview--surface-strong',
+    description: 'High emphasis surfaces like header or footer.',
+  },
+  {
+    id: 'surface-glow-soft',
+    label: 'Surface Glow Soft',
+    token: '--surface-glow--soft',
+    preview: 'shadow-preview--glow-soft',
+    description: 'Gentle glow triggered by `.control--glow` hover states.',
+  },
+  {
+    id: 'surface-glow-strong',
+    label: 'Surface Glow Strong',
+    token: '--surface-glow--strong',
+    preview: 'shadow-preview--glow-strong',
+    description: 'Intense hover glow used on animated cards.',
+  },
+  {
+    id: 'control-inset',
+    label: 'Control Inset Shadow',
+    token: '--control-shadow--inset',
+    preview: 'shadow-preview--control-inset',
+    description: 'Creates the pressed look for buttons and controls.',
+  },
+  {
+    id: 'card-inset',
+    label: 'Card Inset Shadow',
+    token: '--card-shadow--inset',
+    preview: 'shadow-preview--card-inset',
+    description: 'Inner glow accent that appears on dark cards.',
+  },
+];
+
+const textEffects = [
+  {
+    label: 'Soft text glow',
+    className: 'text-preview text-preview--soft',
+    description: 'Default glow paired with prose body copy.',
+  },
+  {
+    label: 'Strong text glow',
+    className: 'text-preview text-preview--strong',
+    description: 'Used for hero headings and call-to-action highlights.',
+  },
+  {
+    label: 'Icon shadow',
+    className: 'text-preview text-preview--icon',
+    description: 'Drop shadow applied to all `.media-icon` glyphs.',
+  },
+];
+
+const cardVariants = [
+  {
+    title: 'Default card',
+    classes: '',
+    note: 'Balanced spacing, frosted surface & default shadow stack.',
+  },
+  {
+    title: 'Dark card',
+    classes: 'card--dark',
+    note: 'Uses darker surface with inset shadow for contrast.',
+  },
+  {
+    title: 'Ghost card',
+    classes: 'card--ghost',
+    note: 'Accent tinted glass with a luminous border glow.',
+  },
+  {
+    title: 'Plain card',
+    classes: 'card--plain is-centered',
+    note: 'Removes backdrop & aligns content to center.',
+  },
+  {
+    title: 'Flush media card',
+    classes: 'card--flush',
+    note: 'Zero padding – perfect for edge-to-edge media.',
+    showMedia: true,
+  },
+  {
+    title: 'Condensed animated card',
+    classes: 'is-condensed is-animated',
+    note: 'Tighter vertical rhythm and hover scale effect.',
+  },
+];
+
+const buttonVariants = [
+  {
+    label: 'Default button',
+    classes: 'control control--button',
+    description: 'Primary button surface.',
+  },
+  {
+    label: 'Dark button',
+    classes: 'control control--button control--dark',
+    description: 'High contrast variant used on cards & overlays.',
+  },
+  {
+    label: 'Plain button',
+    classes: 'control control--button control--plain',
+    description: 'No backdrop or outline – integrates with media.',
+  },
+  {
+    label: 'Ghost button',
+    classes: 'control control--button control--ghost',
+    description: 'Outline-free subtle action.',
+  },
+  {
+    label: 'Glow + animated',
+    classes: 'control control--button control--dark control--glow control--animated',
+    description: 'Hover to see glow, brightness & scale transitions.',
+    icon: 'sparkles',
+  },
+];
+
+const buttonSizes = [
+  {
+    label: 'Small',
+    classes: 'control control--button control--small',
+  },
+  {
+    label: 'Default',
+    classes: 'control control--button',
+  },
+  {
+    label: 'Large',
+    classes: 'control control--button control--large',
+  },
+  {
+    label: 'Circle',
+    classes: 'control control--button control--dark control--circle',
+    icon: 'paw',
+  },
+  {
+    label: 'Stretch',
+    classes: 'control control--button control--stretch',
+  },
+];
+
+const badgeVariants = [
+  {
+    label: 'Default badge',
+    classes: 'control control--badge',
+  },
+  {
+    label: 'Dark badge',
+    classes: 'control control--badge control--dark',
+  },
+  {
+    label: 'Current badge',
+    classes: 'control control--badge is-current',
+  },
+  {
+    label: 'Badge link',
+    classes: 'control control--badge control--dark control--glow',
+  },
+];
+
+const layoutGroups = [
+  {
+    title: 'Alignment',
+    variants: [
+      { label: 'controls--start', classes: 'controls controls--start' },
+      { label: 'controls--center', classes: 'controls controls--center' },
+      { label: 'controls--end', classes: 'controls controls--end' },
+      { label: 'controls--spread', classes: 'controls controls--spread' },
+      { label: 'controls--around', classes: 'controls controls--around' },
+      { label: 'controls--evenly', classes: 'controls controls--evenly' },
+    ],
+  },
+  {
+    title: 'Spacing & flow',
+    variants: [
+      { label: 'controls--tight', classes: 'controls controls--tight' },
+      { label: 'controls--roomy', classes: 'controls controls--roomy' },
+      { label: 'controls--nowrap', classes: 'controls controls--nowrap' },
+      { label: 'controls--stretch', classes: 'controls controls--stretch' },
+    ],
+  },
+];
+
+const iconSizes = [
+  { label: 'Small icon', classes: 'media-icon media-icon--small', kind: 'star' },
+  { label: 'Default icon', classes: 'media-icon', kind: 'palette' },
+  { label: 'Large icon', classes: 'media-icon media-icon--large', kind: 'sparkles' },
+];
+
+const iconCatalog = Object.keys(iconRegistry).sort((a, b) => a.localeCompare(b));
+
+const mediaThumbs = [
+  { alt: 'Placeholder cover', src: COVERS.placeholder },
+  { alt: 'Lucys Journeys cover', src: COVERS.lucys_journeys },
+  { alt: 'Placeholder cover duplicate', src: COVERS.placeholder },
+];
 ---
 <Template.Base>
-<section class="content-section">
-  <Template.Card class="card--plain is-centered">
-    <Fragment slot="head">
-      <h1 class="card__title">I am site title</h1>
-    </Fragment>
-    <Fragment slot="body">
-      <div class="prose">
-        <p>Im some description text and I have a maximum size so I will wrap at some point!</p>
-      </div>
-    </Fragment>
-  </Template.Card>
-</section>
-<section class="content-section cols-3">
-  <Template.Card headClass="card__head--column" class="is-animated">
-    <Fragment slot="head">
-      <h2 class="card__title">I am card title</h2>
-      <div class="card__badges controls">
-        <span class="control control--badge">hint</span><span class="control control--badge control--dark">hint</span>
-        <span class="control control--badge">hint</span><span class="control control--badge control--dark">hint</span><span class="control control--badge">hint</span>
-      </div>
-    </Fragment>
-    <Fragment slot="body">
-      <div class="prose">
-        <p>I'm the default card</p>
-        <p>Im some description text and I have a maximum size so I will wrap at some point!</p>
-        <h3>I am accent title</h3>
-      </div>
-    </Fragment>
-    <Fragment slot="foot">
-      <div class="controls controls--spread">
-      <span class="control control--button control--small">click me</span><span class="control control--button control--small control--dark">click me</span><span class="control control--button control--small control--plain">click me</span>
-      </div>
-    </Fragment>
-  </Template.Card>
-  <Template.Card class=" is-animated">
-    <Fragment slot="head">
-      <h2 class="card__title">I am card title</h2>
-      <div class="card__badges controls controls--tight">
-        <span class="control control--badge">hint</span><span class="control control--badge control--dark">hint</span>
-      </div>
-    </Fragment>
-    <Fragment slot="body">
-      <div class="prose">
-        <p>I'm the default card</p>
-        <p>Im some description text and I have a maximum size so I will wrap at some point!</p>
-        <h3>I am accent title</h3>
-      </div>
-    </Fragment>
-    <Fragment slot="foot">
+  <section class="content-section">
+    <Template.Card class="card--plain is-centered is-condensed">
+      <Fragment slot="head">
+        <h1 class="card__title">UI Test Bench</h1>
+      </Fragment>
+      <Fragment slot="body">
+        <div class="prose">
+          <p>
+            Every surface, control and helper class used across the site is gathered here. Hover, focus and click
+            elements to review their interactive states and elevation tokens.
+          </p>
+        </div>
+      </Fragment>
+      <Fragment slot="foot">
+        <div class="controls controls--center controls--tight">
+          {navSections.map((section) => (
+            <a class="control control--button control--dark control--glow" href={`#${section.id}`}>
+              {section.label}
+            </a>
+          ))}
+        </div>
+      </Fragment>
+    </Template.Card>
+  </section>
 
-      <div class="controls controls--spread controls--nowrap">
-        <span class="control control--button">click me</span><span class="control control--button control--dark">click me</span><span class="control control--button control--plain">click me</span>
-      </div>
-    </Fragment>
-  </Template.Card>
-  <Template.Card class="card--dark" headClass="card__head--column">
-    <Fragment slot="head">
-      <h2 class="card__title">I am card title</h2>
-      <div class="card__badges controls">
-        <span class="control control--badge">hint</span><span class="control control--badge control--dark">hint</span>
-        <span class="control control--badge">hint</span><span class="control control--badge control--dark">hint</span><span class="control control--badge control--plain">hint</span>
-      </div>
-    </Fragment>
-    <Fragment slot="body">
-      <div class="prose">
-        <p>I'm the default card</p>
-        <p>Im some description text and I have a maximum size so I will wrap at some point!</p>
-        <h3>I am accent title</h3>
-      </div>
-    </Fragment>
-    <Fragment slot="foot">
+  <section class="content-section cols-2" id="shadows">
+    <Template.Card headClass="card__head--column" class="is-condensed">
+      <Fragment slot="head">
+        <h2 class="card__title">Surface shadows & glows</h2>
+        <p>Tokens that set depth and halo effects for cards, media and controls.</p>
+      </Fragment>
+      <Fragment slot="body">
+        <div class="swatch-grid">
+          {surfaceEffects.map((effect) => (
+            <div class="swatch" id={effect.id}>
+              <div class:list={["shadow-preview", effect.preview]} aria-hidden="true"></div>
+              <div class="swatch__meta">
+                <strong>{effect.label}</strong>
+                <code>{effect.token}</code>
+                <p>{effect.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </Fragment>
+    </Template.Card>
 
-      <div class="controls controls--spread">
-        <span class="control control--button control--large">click me</span><span class="control control--button control--large control--dark">click me</span><span class="control control--button control--large control--plain">click me</span>
-      </div>
-    </Fragment>
-  </Template.Card>
-</section>
-<section class="content-section cols-3">
-  <Template.Card>
-    <Fragment slot="body">
-      <div class="controls">
-        <span class="control control--button"><Icons kind="palette"></Icons></span></span>
-        <span class="control control--button control--dark"><Icons kind="paw"></Icons></span></span>
-        <span class="control control--button control--plain"><Icons kind="cookie"></Icons></span>
-        <span class="control control--button"><Icons name="sparkles"></Icons></span></span>
-        <span class="control control--button control--dark"><Icons kind="sparkles"></Icons></span></span>
-        <span class="control control--button control--plain"><Icons name="star"></Icons></span>
-      </div>
-    </Fragment>
-  </Template.Card>
-  <Template.Card class="" headClass="card__head--column is-centered">
-    <Fragment slot="head">
-      <h2 class="card__title">Card Title</h2>
-      <div class="card__badges controls">
-        <span class="control control--badge">hint</span><span class="control control--badge control--dark">hint</span>
-        
-      </div>
-    </Fragment>
-    <Fragment slot="body">
+    <Template.Card headClass="card__head--column" class="is-condensed">
+      <Fragment slot="head">
+        <h2 class="card__title">Text glow stack</h2>
+        <p>Glows & shadows layered onto copy and iconography.</p>
+      </Fragment>
+      <Fragment slot="body">
+        <div class="swatch-grid">
+          {textEffects.map((effect) => (
+            <div class="swatch">
+              <div class={effect.className}>
+                <span>Glowing text</span>
+              </div>
+              <div class="swatch__meta">
+                <strong>{effect.label}</strong>
+                <p>{effect.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </Fragment>
+    </Template.Card>
+  </section>
 
-    </Fragment>
-    <Fragment slot="foot">
-      <div class="media-wrapper">
-      <div class="media-frame">
-        <Picture
-          src={COVERS.placeholder}
-          formats={['webp']}
-          inferSize
-          alt="space-fox"
-          fetchpriority="high"
-          class="media-image"
-        />
-      </div>
-      </div>
-    </Fragment>
-  </Template.Card>
-  <Template.Card headClass="card__head--column is-centered">
-    <Fragment slot="head">
-      <h2 class="card__title">Card Tiiiiiiiiiiiiiiiiiiiiiiiiiiiii iiiitle</h2>
-      <div class="card__badges controls">
-        <span class="control control--badge">hint</span><span class="control control--badge control--dark">hint</span>
-        
-      </div>
-    </Fragment>
-    <Fragment slot="body">
+  <section class="content-section" id="cards">
+    <Template.Card class="card--plain" headClass="card__head--column">
+      <Fragment slot="head">
+        <h2 class="card__title">Card variations</h2>
+        <p>Core `Template.Card` surfaces with utility modifiers.</p>
+      </Fragment>
+      <Fragment slot="body">
+        <div class="card-grid">
+          {cardVariants.map((variant) => (
+            <Template.Card class={`${variant.classes} showcase-card`} headClass="card__head--column is-centered">
+              <Fragment slot="head">
+                <h3 class="card__title">{variant.title}</h3>
+              </Fragment>
+              <Fragment slot="body">
+                {variant.showMedia ? (
+                  <div class="media-wrapper">
+                    <div class="media-frame">
+                      <Picture
+                        src={COVERS.lucys_journeys}
+                        formats={["webp"]}
+                        inferSize
+                        alt="Lucy looking into the stars"
+                        class="media-image"
+                      />
+                    </div>
+                  </div>
+                ) : (
+                  <div class="prose">
+                    <p>{variant.note}</p>
+                  </div>
+                )}
+              </Fragment>
+              {!variant.showMedia && (
+                <Fragment slot="foot">
+                  <p class="showcase-card__note">{formatClassList(variant.classes, 'default card')}</p>
+                </Fragment>
+              )}
+            </Template.Card>
+          ))}
+        </div>
+      </Fragment>
+    </Template.Card>
+  </section>
 
-    </Fragment>
-    <Fragment slot="foot">
-            <div class="media-wrapper">
-      <div class="media-frame">
-        <Picture
-          src={COVERS.lucys_journeys}
-          formats={['webp']}
-          inferSize
-          alt="space-fox"
-          fetchpriority="high"
-          class="media-image"
-        />
-      </div></div>
-    </Fragment>
-  </Template.Card>
-</section>
-<section class="content-section">
-  <Template.Card class="" headClass="is-centered card__head--column" >
-    <Fragment slot="head">
-      <h2 class="card__title">Card Title</h2>
-      <div class="card__badges controls">
-        <span class="control control--badge">hint</span><span class="control control--badge control--dark">hint</span>
-        
-      </div>
-    </Fragment>
-    <Fragment slot="body">
-            <div class="media-wrapper">
-      <div class="media-frame">
-        <Picture
-          src={COVERS.lucys_journeys}
-          formats={['webp']}
-          inferSize
-          alt="space-fox"
-          fetchpriority="high"
-          class="media-image"
-        />
-      </div></div>
-    </Fragment>
- </Template.Card>      
-  <Template.Card class="card--dark is-condensed" headClass="is-centered card__head--column" >
-    <Fragment slot="body">
-      <div class="media-wrapper is-thumbs-wrap">
-        <div class="media-frame is-thumbs-frame">
-          <div class="media-frame is-thumb">
+  <section class="content-section cols-2" id="controls">
+    <Template.Card headClass="card__head--column">
+      <Fragment slot="head">
+        <h2 class="card__title">Button variants</h2>
+        <p>All button skins, hover glows and icon treatments.</p>
+      </Fragment>
+      <Fragment slot="body">
+        <div class="control-grid">
+          {buttonVariants.map((variant) => (
+            <div class="control-swatch">
+              <span class={variant.classes}>
+                {variant.icon ? <Icons class="media-icon" kind={variant.icon} /> : variant.label}
+              </span>
+              <div class="control-swatch__meta">
+                <strong>{variant.label}</strong>
+                <p>{variant.description}</p>
+                <code>{formatClassList(variant.classes)}</code>
+              </div>
+            </div>
+          ))}
+        </div>
+      </Fragment>
+    </Template.Card>
+
+    <Template.Card headClass="card__head--column">
+      <Fragment slot="head">
+        <h2 class="card__title">Sizes & shapes</h2>
+        <p>Scale, stretch and circle helpers applied to controls.</p>
+      </Fragment>
+      <Fragment slot="body">
+        <div class="control-grid">
+          {buttonSizes.map((variant) => (
+            <div class="control-swatch">
+              <span class={variant.classes}>
+                {variant.icon ? <Icons class="media-icon" kind={variant.icon} /> : variant.label}
+              </span>
+              <div class="control-swatch__meta">
+                <strong>{variant.label}</strong>
+                <code>{formatClassList(variant.classes)}</code>
+              </div>
+            </div>
+          ))}
+        </div>
+      </Fragment>
+    </Template.Card>
+  </section>
+
+  <section class="content-section cols-2" id="layouts">
+    <Template.Card headClass="card__head--column">
+      <Fragment slot="head">
+        <h2 class="card__title">Badges & states</h2>
+        <p>Lightweight info tags and their interactive styles.</p>
+      </Fragment>
+      <Fragment slot="body">
+        <div class="control-grid">
+          {badgeVariants.map((variant) => (
+            <div class="control-swatch">
+              <span class={variant.classes}>meta</span>
+              <div class="control-swatch__meta">
+                <strong>{variant.label}</strong>
+                <code>{formatClassList(variant.classes)}</code>
+              </div>
+            </div>
+          ))}
+        </div>
+      </Fragment>
+    </Template.Card>
+
+    <Template.Card headClass="card__head--column">
+      <Fragment slot="head">
+        <h2 class="card__title">Control layout helpers</h2>
+        <p>Alignment & gap utilities applied to `.controls` containers.</p>
+      </Fragment>
+      <Fragment slot="body">
+        <div class="layout-grid">
+          {layoutGroups.map((group) => (
+            <div class="layout-group">
+              <h3>{group.title}</h3>
+              {group.variants.map((variant) => (
+                <div class="layout-group__row">
+                  <div class="layout-group__label">{variant.label}</div>
+                  <div class={variant.classes}>
+                    <span class="control control--button control--small">Alpha</span>
+                    <span class="control control--button control--dark">Beta</span>
+                    <span class="control control--button control--plain">Gamma</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+      </Fragment>
+    </Template.Card>
+  </section>
+
+  <section class="content-section cols-2" id="media">
+    <Template.Card headClass="card__head--column">
+      <Fragment slot="head">
+        <h2 class="card__title">Media player shell</h2>
+        <p>Gallery frame with interactive controls and progress indicator.</p>
+      </Fragment>
+      <Fragment slot="body">
+        <div class="media-wrapper media-wrapper--controls">
+          <div class="media-frame">
             <Picture
               src={COVERS.lucys_journeys}
-              formats={['webp']}
+              formats={["webp"]}
               inferSize
-              alt="space-fox"
-              fetchpriority="high"
-              class="media-image is-thumb"
+              alt="Starry fox illustration"
+              class="media-image"
             />
+            <div class="media-progress" style="--p: .45;"></div>
           </div>
-          <div class="media-frame is-thumb">
-            <Picture
-              src={COVERS.lucys_journeys}
-              formats={['webp']}
-              inferSize
-              alt="space-fox"
-              fetchpriority="high"
-              class="media-image is-thumb"
-            />
-          </div>
-          <div class="media-frame is-thumb">
-            <Picture
-              src={COVERS.lucys_journeys}
-              formats={['webp']}
-              inferSize
-              alt="space-fox"
-              fetchpriority="high"
-              class="media-image is-thumb"
-            />
+          <div class="media-controls-tray">
+            <button class="media-controls media-prev" type="button" aria-label="Previous frame">❮</button>
+            <button class="media-controls media-pause" type="button" data-active="true" aria-label="Pause autoplay">
+              <Icons class="media-icon" kind="pause" />
+            </button>
+            <button class="media-controls media-play" type="button" data-active="false" aria-label="Start autoplay">
+              <Icons class="media-icon" kind="play" />
+            </button>
+            <button class="media-controls media-next" type="button" aria-label="Next frame">❯</button>
+            <button class="media-controls media-fullscreen" type="button" aria-label="Open lightbox">
+              <Icons class="media-icon" kind="fullscreen" />
+            </button>
           </div>
         </div>
-      </div>
-    </Fragment>
-  </Template.Card> 
-</section>
+      </Fragment>
+    </Template.Card>
+
+    <Template.Card headClass="card__head--column">
+      <Fragment slot="head">
+        <h2 class="card__title">Thumbnail rail & icons</h2>
+        <p>Thumbnails, wrappers and icon sizing utilities.</p>
+      </Fragment>
+      <Fragment slot="body">
+        <div class="media-wrapper media-wrapper--thumbs">
+          <button class="media-controls media-prev is-thumbs-prev" type="button" aria-label="Previous thumbnails">❮</button>
+          <div class="media-wrapper media-wrapper--frames" role="list" data-window="3">
+            {mediaThumbs.map((thumb, index) => (
+              <div
+                class="media-frame media-frame--thumb"
+                role="listitem"
+                aria-current={index === 0 ? 'true' : undefined}
+              >
+                <Picture src={thumb.src} formats={["webp"]} inferSize alt={thumb.alt} class="media-image media-image--thumb" />
+              </div>
+            ))}
+          </div>
+          <button class="media-controls media-next is-thumbs-next" type="button" aria-label="Next thumbnails">❯</button>
+        </div>
+        <div class="icon-section icon-section--sizes">
+          <h3 class="icon-section__title">Icon sizing helpers</h3>
+          <div class="icon-grid icon-grid--sizes">
+            {iconSizes.map((icon) => (
+              <div class="icon-grid__item">
+                <Icons class={icon.classes} kind={icon.kind} />
+                <span>{icon.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div class="icon-section icon-section--catalog">
+          <h3 class="icon-section__title">Icon catalog</h3>
+          <div class="icon-grid icon-grid--catalog">
+            {iconCatalog.map((icon) => (
+              <div class="icon-grid__item icon-grid__item--catalog">
+                <Icons class="media-icon" kind={icon} />
+                <span>{icon}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </Fragment>
+    </Template.Card>
+  </section>
+
+  <section class="content-section" id="typography">
+    <Template.Card headClass="card__head--column">
+      <Fragment slot="head">
+        <h2 class="card__title">Typography, prose & helpers</h2>
+        <p>Examples of `.prose`, italic treatments and balanced headings.</p>
+      </Fragment>
+      <Fragment slot="body">
+        <div class="typography-grid">
+          <div>
+            <h3 class="card__title">Balanced heading</h3>
+            <div class="prose">
+              <p>
+                Fox companions help travellers find their way home. The copy stack uses `prose` spacing and inherits the
+                soft text glow token.
+              </p>
+              <ul>
+                <li>Responsive clamp-based font sizing.</li>
+                <li>Drop shadow applied to each paragraph.</li>
+                <li>Comfortable flow gaps between blocks.</li>
+              </ul>
+            </div>
+          </div>
+          <div>
+            <h3 class="card__title">Utility mix</h3>
+            <p class="is-italic">`.is-italic` for emphasis quotes.</p>
+            <Template.Card class="card--plain is-condensed showcase-card">
+              <Fragment slot="head">
+                <h4 class="card__title">Embedded plain card</h4>
+              </Fragment>
+              <Fragment slot="body">
+                <div class="prose">
+                  <p>Cards can be nested to preview combinations of utilities.</p>
+                </div>
+              </Fragment>
+            </Template.Card>
+          </div>
+        </div>
+      </Fragment>
+    </Template.Card>
+  </section>
+
+  <style>
+    .swatch-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+      gap: var(--flow-gap);
+    }
+
+    .swatch {
+      display: grid;
+      gap: calc(var(--flow-gap) * 0.75);
+    }
+
+    .shadow-preview {
+      inline-size: 100%;
+      block-size: 6rem;
+      border-radius: var(--radius-l);
+      background: color-mix(in oklab, var(--card-surface--light) 80%, transparent);
+      box-shadow: var(--surface-shadow--soft);
+    }
+
+    .shadow-preview--surface-soft { box-shadow: var(--surface-shadow--soft); }
+    .shadow-preview--surface-default { box-shadow: var(--surface-shadow--default); }
+    .shadow-preview--surface-strong { box-shadow: var(--surface-shadow--strong); }
+    .shadow-preview--glow-soft { box-shadow: var(--surface-glow--soft); }
+    .shadow-preview--glow-strong { box-shadow: var(--surface-glow--strong); }
+    .shadow-preview--control-inset {
+      background: var(--card-surface--dark);
+      box-shadow: var(--control-shadow--inset);
+    }
+    .shadow-preview--card-inset {
+      background: var(--card-surface--dark);
+      box-shadow: var(--card-shadow--inset);
+    }
+
+    .text-preview {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--control-padding);
+      border-radius: var(--radius-m);
+      min-block-size: 4rem;
+      font-weight: var(--bold-font-weight);
+      font-size: var(--font-size-m);
+      background: color-mix(in oklab, var(--card-surface--dark) 40%, transparent);
+    }
+
+    .text-preview--soft { text-shadow: var(--text-shadow--soft), var(--text-glow--soft); }
+    .text-preview--strong { text-shadow: var(--text-shadow--strong), var(--text-glow--strong); }
+    .text-preview--icon {
+      text-shadow: var(--icon-shadow);
+    }
+
+    .swatch__meta {
+      display: grid;
+      gap: calc(var(--flow-gap) * 0.35);
+      font-size: var(--font-size-xs);
+    }
+
+    .swatch__meta > strong {
+      font-size: var(--font-size-s);
+    }
+
+    .card-grid {
+      display: grid;
+      gap: var(--section-gap);
+      grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+    }
+
+    .showcase-card {
+      min-block-size: 100%;
+    }
+
+    .showcase-card__note {
+      margin: 0;
+      font-size: var(--font-size-xs);
+      opacity: 0.8;
+    }
+
+    .control-grid {
+      display: grid;
+      gap: var(--flow-gap);
+      grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    }
+
+    .control-swatch {
+      display: grid;
+      gap: calc(var(--flow-gap) * 0.5);
+      align-content: start;
+    }
+
+    .control-swatch > span {
+      justify-self: start;
+    }
+
+    .control-swatch__meta {
+      display: grid;
+      gap: calc(var(--flow-gap) * 0.35);
+      font-size: var(--font-size-xs);
+    }
+
+    .layout-grid {
+      display: grid;
+      gap: var(--section-gap);
+    }
+
+    .layout-group {
+      display: grid;
+      gap: var(--flow-gap);
+    }
+
+    .layout-group__row {
+      display: grid;
+      gap: calc(var(--flow-gap) * 0.35);
+    }
+
+    .layout-group__label {
+      font-size: var(--font-size-xs);
+      opacity: 0.8;
+    }
+
+    .layout-group__row > .controls {
+      background: color-mix(in oklab, var(--card-surface--light) 40%, transparent);
+      padding: calc(var(--control-padding) * 0.75);
+      border-radius: var(--radius-l);
+    }
+
+    .media-controls-tray {
+      display: flex;
+      flex-wrap: wrap;
+      gap: calc(var(--control-gap) * 0.75);
+      justify-content: center;
+      padding: var(--control-padding);
+    }
+
+    .icon-section {
+      display: grid;
+      gap: calc(var(--flow-gap) * 0.75);
+    }
+
+    .icon-section__title {
+      margin: 0;
+      font-size: var(--font-size-s);
+      font-weight: var(--bold-font-weight);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      opacity: 0.8;
+    }
+
+    .icon-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+      gap: var(--flow-gap);
+      margin-block-start: var(--flow-gap);
+    }
+
+    .icon-grid--sizes {
+      margin-block-start: 0;
+      grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+    }
+
+    .icon-grid--catalog {
+      grid-template-columns: repeat(auto-fit, minmax(6.5rem, 1fr));
+    }
+
+    .icon-grid__item {
+      display: grid;
+      gap: calc(var(--flow-gap) * 0.35);
+      justify-items: center;
+      font-size: var(--font-size-xs);
+    }
+
+    .icon-grid__item--catalog {
+      padding: calc(var(--control-padding) * 0.75) calc(var(--control-padding) * 0.5);
+      border-radius: var(--radius-m);
+      background: color-mix(in oklab, var(--card-surface--light) 32%, transparent);
+    }
+
+    .icon-grid__item--catalog > span {
+      word-break: break-word;
+      text-align: center;
+      line-height: 1.25;
+    }
+
+    .typography-grid {
+      display: grid;
+      gap: var(--section-gap);
+      grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+    }
+
+    .typography-grid .prose {
+      margin-block-start: 0;
+    }
+
+    @media (max-width: 900px) {
+      .media-controls-tray {
+        justify-content: space-between;
+      }
+    }
+  </style>
 </Template.Base>

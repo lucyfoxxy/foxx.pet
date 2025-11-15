@@ -64,11 +64,11 @@
   --card-padding:           clamp(var(--space-s),  calc(var(--space-s) + 1.75vw),  var(--space-xl));   
   --section-gap:            clamp(var(--space-s),  calc(var(--space-s) + 1.5vw),    var(--space-xxl)); 
   
-  --panel-padding:           clamp(var(--space-s),  calc(var(--space-s) + 1.5vw),    var(--space-xxl)); 
+  --panel-padding:           calc(var(--section-gap) * 2); 
   --panel-bar-padding:       calc(var(--panel-padding) * .55);
  
   --container-padding:       clamp(var(--space-xxs),  calc(var(--space-xxs) + 2vw),    var(--space-xxl)); 
-  --container-max:           1280px;
+  --container-max:           1366px;
   
    
 
