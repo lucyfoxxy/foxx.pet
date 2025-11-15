@@ -53,10 +53,6 @@
 /* ====== FOOTER NAV - CRUMBS ================= */
 .footer__nav {
   inline-size: 100%;
-  margin-block: 0;
-  
-  margin-inline: 0;
-
   align-self: center;
   justify-self: center;
   display: flex;
@@ -84,18 +80,11 @@
   align-items: center;
 }
 
-.header__crumb {
-  display: inline-flex;
-  align-items: center;
-}
 
-.header__crumb :where(.control--badge) {
-  display: inline-flex;
-  border-radius: 999px;
-  padding-inline: var(--control-gap);
-}
 
-.header__crumb-separator {
+
+
+.footer__crumb-separator {
   display: inline-flex;
   align-items: center;
   margin-inline: -.25rem;
@@ -116,23 +105,13 @@
   opacity: 1;
 }
 
-@media (max-width: 900px) {
-  .header:not([data-show-details]) .header__nav-text {
-    opacity: 0;
-    transform: translateY(-.35rem);
-  }
 
-  .header:not([data-show-details]) .footer__nav{
-    opacity: 0;
-    transform: translateY(-.5rem);
-    pointer-events: none;
-  }
-}
 
-.header__actions:empty {
+
+.footer__actions:empty {
   display: none;
 }
-.header__actions {  
+.footer__actions {  
   grid-area: actions; 
   align-self: center;
   justify-self: end;

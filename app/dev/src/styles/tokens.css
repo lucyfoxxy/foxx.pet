@@ -7,6 +7,7 @@
   --space-l:                1.50rem; 
   --space-xl:               2.00rem; 
   --space-xxl:              3.00rem; 
+  --space-xxxl:             4.00rem; 
 
   --radius-xxs:             6px;
   --radius-xs:              8px;
@@ -46,9 +47,9 @@
   --icon-size-m:        calc(var(--font-size-m) * 1.5);
   --icon-size-l:        calc(var(--font-size-l) * 1.4);
 
-  --site-logo--size:         calc(var(--control-gap) + 12vw);
+  --site-logo--size:         calc(var(--control-gap) + 10vw);
   --thumb-size:              clamp(64px, 9vw, 128px);
-  --hero-size:               clamp(320px,40vw,calc(var(--container-max) * .4));
+  --hero-size:               clamp(320px,30vw,calc(var(--container-max) * .3));
   
 
   /* ============= Role specific Spacings ============= */
@@ -64,7 +65,7 @@
   --card-padding:           clamp(var(--space-s),  calc(var(--space-s) + 1.75vw),  var(--space-xl));   
   --section-gap:            clamp(var(--space-s),  calc(var(--space-s) + 1.5vw),    var(--space-xxl)); 
   
-  --panel-padding:           calc(var(--section-gap) * 2); 
+  --panel-padding:           clamp(var(--space-xs),  calc(var(--space-xs) + 2.5vw),    var(--space-xxxl)); 
   --panel-bar-padding:       calc(var(--panel-padding) * .55);
  
   --container-padding:       clamp(var(--space-xxs),  calc(var(--space-xxs) + 2vw),    var(--space-xxl)); 
