@@ -27,7 +27,7 @@ Total unique tokens: 117
 
 | Class | Selector Count | Total Uses | Usage Locations |
 | --- | ---: | ---: | --- |
-| `header__nav` | 6 | 2 | `src/components/Templates/Base/Header.astro` (1)<br>`src/scripts/siteHeaderSticky.js` (1) |
+| `header__nav` | 6 | 1 | `src/components/Templates/Base/Header.astro` (1) |
 | `panel` | 11 | 1 | `src/components/Templates/Base.astro` (1) |
 
 ### `src/styles/bg.css`
@@ -108,19 +108,19 @@ Total unique tokens: 117
 | --- | ---: | ---: | --- |
 | `content-section` | 11 | 25 | `src/components/StaticPages/ImprintPage.astro` (2)<br>`src/components/StaticPages/StartPage.astro` (4)<br>`src/components/Templates/EntryBlog.astro` (3)<br>`src/components/Views/Category.astro` (4)<br>`src/components/Views/Entry.astro` (4)<br>`src/components/Views/Section.astro` (4)<br>`src/pages/test.astro` (4) |
 | `media-empty` | 1 | 0 | _Not referenced outside stylesheets_ |
-| `media-frame` | 6 | 13 | `src/components/Templates/AlbumFrame.astro` (1)<br>`src/components/Templates/TileView.astro` (1)<br>`src/pages/test.astro` (7)<br>`src/scripts/galleryViewer.js` (3)<br>`src/scripts/galleryViewer_compact.js` (1) |
+| `media-frame` | 6 | 12 | `src/components/Templates/AlbumFrame.astro` (1)<br>`src/components/Templates/TileView.astro` (1)<br>`src/pages/test.astro` (7)<br>`src/scripts/galleryViewer.js` (3) |
 | `media-frame--thumb` | 9 | 2 | `src/scripts/galleryViewer.js` (2) |
 | `media-icon` | 1 | 7 | `src/components/StaticPages/StartPage.astro` (1)<br>`src/components/Templates/AlbumFrame.astro` (3)<br>`src/components/Templates/Base/Footer.astro` (1)<br>`src/components/Templates/Base/Header.astro` (1)<br>`src/components/Templates/TitleWithIcon.astro` (1) |
 | `media-icon--large` | 1 | 2 | `src/components/Templates/Base/Header.astro` (1)<br>`src/components/Templates/TitleWithIcon.astro` (1) |
 | `media-icon--small` | 1 | 0 | _Not referenced outside stylesheets_ |
-| `media-image` | 4 | 15 | `src/components/StaticPages/StartPage.astro` (1)<br>`src/components/Templates/AlbumFrame.astro` (1)<br>`src/components/Templates/EntryBlog.astro` (1)<br>`src/components/Templates/TileView.astro` (2)<br>`src/pages/test.astro` (6)<br>`src/scripts/galleryViewer.js` (3)<br>`src/scripts/galleryViewer_compact.js` (1) |
+| `media-image` | 4 | 14 | `src/components/StaticPages/StartPage.astro` (1)<br>`src/components/Templates/AlbumFrame.astro` (1)<br>`src/components/Templates/EntryBlog.astro` (1)<br>`src/components/Templates/TileView.astro` (2)<br>`src/pages/test.astro` (6)<br>`src/scripts/galleryViewer.js` (3) |
 | `media-image--hero` | 2 | 1 | `src/components/Templates/EntryBlog.astro` (1) |
 | `media-image--placeholder` | 1 | 0 | _Not referenced outside stylesheets_ |
 | `media-image--thumb` | 1 | 2 | `src/scripts/galleryViewer.js` (2) |
 | `media-lightbox` | 4 | 2 | `src/scripts/galleryViewer.js` (2) |
 | `media-lightbox__close` | 3 | 2 | `src/scripts/galleryViewer.js` (2) |
-| `media-progress` | 3 | 3 | `src/components/Templates/AlbumFrame.astro` (1)<br>`src/scripts/galleryViewer.js` (1)<br>`src/scripts/galleryViewer_compact.js` (1) |
-| `media-wrapper` | 1 | 10 | `src/components/Templates/AlbumFrame.astro` (1)<br>`src/components/Templates/AlbumThumbs.astro` (2)<br>`src/components/Templates/TileView.astro` (1)<br>`src/pages/test.astro` (4)<br>`src/scripts/galleryViewer.js` (1)<br>`src/scripts/galleryViewer_compact.js` (1) |
+| `media-progress` | 3 | 2 | `src/components/Templates/AlbumFrame.astro` (1)<br>`src/scripts/galleryViewer.js` (1) |
+| `media-wrapper` | 1 | 9 | `src/components/Templates/AlbumFrame.astro` (1)<br>`src/components/Templates/AlbumThumbs.astro` (2)<br>`src/components/Templates/TileView.astro` (1)<br>`src/pages/test.astro` (4)<br>`src/scripts/galleryViewer.js` (1) |
 | `media-wrapper--controls` | 1 | 2 | `src/components/Templates/AlbumFrame.astro` (1)<br>`src/scripts/galleryViewer.js` (1) |
 | `media-wrapper--frames` | 1 | 2 | `src/components/Templates/AlbumThumbs.astro` (1)<br>`src/scripts/galleryViewer.js` (1) |
 | `media-wrapper--thumbs` | 1 | 2 | `src/components/Templates/AlbumThumbs.astro` (1)<br>`src/scripts/galleryViewer.js` (1) |
@@ -145,7 +145,7 @@ Total unique tokens: 117
 | `footer__left` | 1 | 1 | `src/components/Templates/Base/Footer.astro` (1) |
 | `footer__nav` | 10 | 1 | `src/components/Templates/Base/Footer.astro` (1) |
 | `footer__right` | 1 | 1 | `src/components/Templates/Base/Footer.astro` (1) |
-| `header` | 10 | 5 | `src/components/Templates/Base/Header.astro` (3)<br>`src/scripts/siteHeaderSticky.js` (2) |
+| `header` | 10 | 3 | `src/components/Templates/Base/Header.astro` (3) |
 | `footer__actions` | 2 | 6 | `src/components/Templates/Base.astro` (2)<br>`src/components/Templates/Base/Footer.astro` (1)<br>`src/components/Views/Category.astro` (1)<br>`src/components/Views/Entry.astro` (1)<br>`src/components/Views/Section.astro` (1) |
 | `footer__crumb` | 2 | 1 | `src/components/Templates/Base/Footer.astro` (1) |
 | `footer__crumb-separator` | 1 | 1 | `src/components/Templates/Base/Footer.astro` (1) |
@@ -156,11 +156,11 @@ Total unique tokens: 117
 | Class | Selector Count | Total Uses | Usage Locations |
 | --- | ---: | ---: | --- |
 | `control` | 4 | 45 | `src/components/StaticPages/StartPage.astro` (1)<br>`src/components/Templates/AlbumFrame.astro` (2)<br>`src/components/Templates/Base/Footer.astro` (3)<br>`src/components/Templates/Base/Header.astro` (1)<br>`src/components/Templates/EntryBlog.astro` (3)<br>`src/components/Templates/TileView.astro` (2)<br>`src/pages/test.astro` (33) |
-| `header` | 10 | 5 | `src/components/Templates/Base/Header.astro` (3)<br>`src/scripts/siteHeaderSticky.js` (2) |
+| `header` | 10 | 3 | `src/components/Templates/Base/Header.astro` (3) |
 | `header__bar` | 6 | 0 | _Not referenced outside stylesheets_ |
 | `header__bar--bottom` | 2 | 0 | _Not referenced outside stylesheets_ |
 | `header__bar--top` | 3 | 0 | _Not referenced outside stylesheets_ |
-| `header__nav` | 6 | 2 | `src/components/Templates/Base/Header.astro` (1)<br>`src/scripts/siteHeaderSticky.js` (1) |
+| `header__nav` | 6 | 1 | `src/components/Templates/Base/Header.astro` (1) |
 | `header__nav-item` | 4 | 1 | `src/components/Templates/Base/Header.astro` (1) |
 | `header__nav-symbol` | 3 | 1 | `src/components/Templates/Base/Header.astro` (1) |
 | `header__nav-text` | 7 | 1 | `src/components/Templates/Base/Header.astro` (1) |
@@ -195,7 +195,7 @@ Total unique tokens: 117
 | `control--large` | 2 | 4 | `src/components/StaticPages/StartPage.astro` (1)<br>`src/pages/test.astro` (3) |
 | `control--small` | 2 | 8 | `src/components/Templates/Base/Footer.astro` (1)<br>`src/components/Templates/Base/Header.astro` (1)<br>`src/components/Templates/EntryBlog.astro` (2)<br>`src/components/Templates/HeaderActions.astro` (1)<br>`src/pages/test.astro` (3) |
 | `footer` | 4 | 3 | `src/components/Templates/Base/Footer.astro` (3) |
-| `header__nav` | 6 | 2 | `src/components/Templates/Base/Header.astro` (1)<br>`src/scripts/siteHeaderSticky.js` (1) |
+| `header__nav` | 6 | 1 | `src/components/Templates/Base/Header.astro` (1) |
 | `header__nav-item` | 4 | 1 | `src/components/Templates/Base/Header.astro` (1) |
 | `header__nav-text` | 7 | 1 | `src/components/Templates/Base/Header.astro` (1) |
 | `is-current` | 1 | 1 | `src/components/Templates/Base/Footer.astro` (1) |

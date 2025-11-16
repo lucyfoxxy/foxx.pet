@@ -20,6 +20,15 @@ export default function stickyBar(selector) {
   const initialDocHeight = doc.scrollHeight;
   const isShortPage = initialDocHeight <= initialViewportHeight + 1;
 
+  const footerMeta =
+    selector === '.footer' ? bar.querySelector('.footer__meta') : null;
+  const footerMetaHeight = footerMeta
+    ? Math.max(0, footerMeta.getBoundingClientRect().height)
+    : 0;
+  const footerScrollHeight = Math.max(0, initialDocHeight - footerMetaHeight);
+  const footerAlwaysVisible =
+    selector === '.footer' && footerScrollHeight <= initialViewportHeight + 1;
+
   let anchorTop = null;
 
   // Nur für Header relevant
@@ -48,11 +57,16 @@ export default function stickyBar(selector) {
       }
     } else {
       // Footer:
-      // - kurze Seite: immer visible=true (Nav + Meta)
+      // - kurze Seite oder kein Scrollraum ohne Meta: immer visible=true
       // - sonst: visible=true nur am (ursprünglichen) Seitenende
-      const viewportHeightNow = window.innerHeight || doc.clientHeight;
-      const atEnd = scrollY + viewportHeightNow >= initialDocHeight - 1;
-      visible = isShortPage || atEnd;
+      if (footerAlwaysVisible) {
+        visible = true;
+      } else {
+        const viewportHeightNow = window.innerHeight || doc.clientHeight;
+        const atEnd =
+          scrollY + viewportHeightNow >= footerScrollHeight - 1;
+        visible = isShortPage || atEnd;
+      }
     }
 
     bar.setAttribute('data-visible', visible ? 'true' : 'false');
