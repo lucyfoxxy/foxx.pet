@@ -3,6 +3,7 @@ import { Template } from '@Frontend';
 import Icons from '@Assets/Icons.astro';
 import { registry as iconRegistry } from '@Assets/icons.registry';
 import { COVERS } from '@Assets/covers';
+import { ASSETS } from '@Assets/ui';
 import { Picture } from 'astro:assets';
 
 const formatClassList = (value: string, fallback = 'default') =>
@@ -234,6 +235,7 @@ const mediaThumbs = [
   { alt: 'Placeholder cover', src: COVERS.placeholder },
   { alt: 'Lucys Journeys cover', src: COVERS.lucys_journeys },
   { alt: 'Placeholder cover duplicate', src: COVERS.placeholder },
+
 ];
 ---
 <Template.Base>
