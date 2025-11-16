@@ -275,7 +275,7 @@ Total unique tokens: 117
 | `--nav-gap--row` | `src/styles/tokens.css` | 1 | 0 | _No var(--token) references found_ |
 | `--normal-font-weight` | `src/styles/tokens.css` | 1 | 4 | `src/styles/typography.css` (4) |
 | `--outline` | `src/styles/tokens.css` | 1 | 1 | `src/styles/media.css` (1) |
-| `--panel-bar-padding` | `src/styles/tokens.css` | 1 | 5 | `src/styles/site_footer.css` (1)<br>`src/styles/site_header.css` (4) |
+| `--bars-padding` | `src/styles/tokens.css` | 1 | 5 | `src/styles/site_footer.css` (1)<br>`src/styles/site_header.css` (4) |
 | `--panel-padding` | `src/styles/tokens.css` | 1 | 5 | `src/styles/site.css` (2)<br>`src/styles/site_footer.css` (1)<br>`src/styles/site_header.css` (1)<br>`src/styles/tokens.css` (1) |
 | `--plain` | `src/styles/content.css` | 1 | 0 | _No var(--token) references found_ |
 | `--primary-font-family` | `src/styles/tokens.css` | 1 | 2 | `src/styles/tokens.css` (1)<br>`src/styles/typography.css` (1) |
@@ -318,10 +318,10 @@ Total unique tokens: 117
 | `--transform-raise--strong` | `src/styles/tokens.css` | 1 | 0 | _No var(--token) references found_ |
 | `--transform-scale` | `src/styles/tokens.css` | 1 | 4 | `src/styles/content.css` (1)<br>`src/styles/controls.css` (2)<br>`src/styles/media.css` (1) |
 | `--transition--control` | `src/styles/tokens.css` | 1 | 3 | `src/styles/controls.css` (2)<br>`src/styles/site_footer.css` (1) |
-| `--transition-brightness` | `src/styles/tokens.css` | 1 | 1 | `src/styles/controls.css` (1) |
-| `--transition-glow` | `src/styles/tokens.css` | 1 | 1 | `src/styles/controls.css` (1) |
-| `--transition-interactive` | `src/styles/tokens.css` | 1 | 1 | `src/styles/base.css` (1) |
-| `--transition-opacity` | `src/styles/tokens.css` | 1 | 2 | `src/styles/media.css` (2) |
-| `--transition-raise` | `src/styles/tokens.css` | 1 | 4 | `src/styles/controls.css` (2)<br>`src/styles/media.css` (2) |
-| `--transition-scale` | `src/styles/tokens.css` | 1 | 1 | `src/styles/controls.css` (1) |
-| `--transition-soft` | `src/styles/tokens.css` | 1 | 3 | `src/styles/content.css` (2)<br>`src/styles/media.css` (1) |
+| `--transition--brightness` | `src/styles/tokens.css` | 1 | 1 | `src/styles/controls.css` (1) |
+| `--transition--glow` | `src/styles/tokens.css` | 1 | 1 | `src/styles/controls.css` (1) |
+| `--transition--interactive` | `src/styles/tokens.css` | 1 | 1 | `src/styles/base.css` (1) |
+| `--transition--opacity` | `src/styles/tokens.css` | 1 | 2 | `src/styles/media.css` (2) |
+| `--transition--raise` | `src/styles/tokens.css` | 1 | 4 | `src/styles/controls.css` (2)<br>`src/styles/media.css` (2) |
+| `--transition--scale` | `src/styles/tokens.css` | 1 | 1 | `src/styles/controls.css` (1) |
+| `--transition--soft` | `src/styles/tokens.css` | 1 | 3 | `src/styles/content.css` (2)<br>`src/styles/media.css` (1) |

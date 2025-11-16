@@ -76,7 +76,7 @@ var(--overlay--dim), var(--overlay--nebula), var(--overlay--stars), linear-gradi
 }
 .panel :where(a) {
   
-  transition: var(--transition-interactive);
+  transition: var(--transition--interactive);
 }
 .panel,.header__nav:where(a):hover,
 .panel,.header__nav:where(a):focus-visible {

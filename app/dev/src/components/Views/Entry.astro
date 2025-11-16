@@ -1,8 +1,13 @@
 ---
 import { Template } from '@Frontend';
-import { PLACEHOLDER_COVER, findCoverImage } from '@Assets/covers';
-import { findCategory, getIntroParagraphs, getPageContent } from '@Content/siteContent';
-import { getEntriesBySectionAndCategory, isAlbumEntry, type Entry } from '@utils/getEntries';
+import { PLACEHOLDER_COVER } from '@Assets/covers';
+import { getEntriesBySectionAndCategory, isAlbumEntry } from '@utils/getEntries';
+import { getSectionBaseHref, loadSectionContext } from '@utils/sectionContext';
+import {
+  createAlbumEntryView,
+  createBlogEntryView,
+  matchesEntrySlug,
+} from '@utils/entryTransforms';
 import type { CollectionEntry } from 'astro:content';
 
 interface Props {
@@ -13,40 +18,22 @@ interface Props {
 
 const { slug, section, backToParentCategory = false } = Astro.props as Props;
 
-const pathSegments = Astro.url.pathname.replace(/\/+$/, '').split('/').filter(Boolean);
-const sectionSlug =
-  section?.trim() ??
-  (pathSegments.length >= 4
-    ? pathSegments[1]
-    : pathSegments.length >= 1
-    ? pathSegments[0]
-    : '');
-const categorySlug =
-  pathSegments.length >= 3
-    ? pathSegments[pathSegments.length - 2]
-    : pathSegments.length >= 2
-    ? pathSegments[pathSegments.length - 1]
-    : undefined;
+const placeholderCover = PLACEHOLDER_COVER.src;
 
-let errorMessage: string | undefined;
+const {
+  sectionSlug,
+  categorySlug,
+  page: parentPage,
+  category,
+  error: contextError,
+} = await loadSectionContext({
+  url: Astro.url,
+  section,
+  kind: 'entry',
+  missingSectionMessage: 'We could not resolve this page — please try again later.',
+});
 
-if (!sectionSlug) {
-  errorMessage = 'We could not resolve this page — please try again later.';
-}
-
-let parentPage = undefined as Awaited<ReturnType<typeof getPageContent>> | undefined;
-
-if (!errorMessage) {
-  try {
-    parentPage = await getPageContent(sectionSlug);
-  } catch (unknownError) {
-    const message =
-      unknownError instanceof Error ? unknownError.message : 'Unable to load page details.';
-    errorMessage = message;
-  }
-}
-
-const category = parentPage && categorySlug ? findCategory(parentPage, categorySlug) : undefined;
+let errorMessage = contextError;
 
 const targetCategory = categorySlug ?? slug;
 
@@ -54,52 +41,18 @@ const entries = !errorMessage
   ? await getEntriesBySectionAndCategory(sectionSlug, targetCategory)
   : [];
 
-const matchesEntrySlug = (entry: Entry, value: string) => {
-  const normalized = value.trim();
-  if (!normalized) return false;
-
-  if (isAlbumEntry(entry)) {
-    
-    return (entry.data.slug ?? entry.slug) === normalized;
-  }
-
-  const segments = entry.slug.split('/').filter(Boolean);
-  return segments[segments.length - 1] === normalized || entry.data.slug === normalized;
-};
-
 const entry = entries.find((candidate) => matchesEntrySlug(candidate, slug));
-
-const placeholderCover = PLACEHOLDER_COVER.src;
 
 let pageTitle = parentPage?.title ?? 'Coming soon';
 let pageDescription = parentPage?.description ?? '';
 let metaImage: string | undefined;
 
-const parentHref = parentPage?.href?.replace(/\/+$/, '') ?? (sectionSlug ? `/${sectionSlug}` : '');
+const parentHref = getSectionBaseHref(sectionSlug, parentPage);
 let headerBackHref = parentHref ? `${parentHref}/` : '/';
 let headerBackLabel = category?.title ? `← ${category?.title}` : '← Back';
 
-let albumView:
-  | {
-      title: string;
-      description: string;
-      shareKey?: string;
-      albumSlug: string;
-      categoryBadge?: string;
-      dateBadge?: string;
-      initialThumb?: { src?: string; width?: number; height?: number; alt?: string; full?: string };
-    }
-  | undefined;
-
-let blogView:
-  | {
-      title: string;
-      description?: string;
-      introParagraphs: string[];
-      cover: { src: string; alt: string };
-      chapters?: { id: string; title: string; summary?: string }[];
-    }
-  | undefined;
+let albumView: ReturnType<typeof createAlbumEntryView>['album'] | undefined;
+let blogView: ReturnType<typeof createBlogEntryView>['blog'] | undefined;
 
 let BlogContent: Awaited<
   ReturnType<CollectionEntry<'blog'>['render']>
@@ -111,96 +64,32 @@ if (!entry && !errorMessage) {
 
 if (!errorMessage && entry) {
   if (isAlbumEntry(entry)) {
-    const initialItem = entry.data.items?.find((item) => item?.thumb || item?.full);
-    const albumThumb = initialItem
-      ? {
-          src: initialItem.thumb ?? initialItem.full ?? undefined,
-          width: typeof initialItem.width === 'number' ? initialItem.width : undefined,
-          height: typeof initialItem.height === 'number' ? initialItem.height : undefined,
-          alt: initialItem.filename ?? undefined,
-          full: initialItem.full ?? undefined,
-        }
-      : entry.data.cover
-      ? { src: entry.data.cover, alt: entry.data.title ?? entry.data.slug }
-      : undefined;
-
-    const parsedDate = entry.data.date instanceof Date ? entry.data.date : undefined;
-    const formattedDate = parsedDate
-      ? new Intl.DateTimeFormat('en', { month: 'long', year: 'numeric' }).format(parsedDate)
-      : undefined;
-
-    const baseHref = parentHref;
-    const categorySegment = categorySlug ?? entry.data.category ?? '';
-    headerBackHref = backToParentCategory || !categorySegment
-      ? `${baseHref}/`
-      : `${baseHref}/${categorySegment}/`.replace(/\/{2,}/g, '/');
-
-    albumView = {
-      title: entry.data.title ?? entry.data.albumName ?? entry.data.slug ?? entry.slug,
-      description: entry.data.description ?? entry.data.albumName ?? '',
-      shareKey: entry.data.shareKey ?? undefined,
-      albumSlug: entry.data.slug ?? entry.slug,
-      categoryBadge: category?.title ?? entry.data.category ?? undefined,
-      dateBadge: formattedDate,
-      initialThumb: albumThumb,
-    };
-
-    pageTitle = albumView.title;
-    pageDescription = albumView.description;
-    metaImage =
-      entry.data.cover ?? albumThumb?.full ?? (typeof albumThumb?.src === 'string' ? albumThumb.src : undefined);
+    const albumData = createAlbumEntryView(entry, parentHref, {
+      categorySlug,
+      categoryTitle: category?.title,
+      backToParentCategory,
+    });
+    albumView = albumData.album;
+    headerBackHref = albumData.headerBackHref;
+    pageTitle = albumData.pageTitle;
+    pageDescription = albumData.pageDescription;
+    metaImage = albumData.metaImage;
   } else {
     const rendered = await entry.render();
     BlogContent = rendered.Content;
 
-    const coverImage =
-      entry.data.cover?.trim().length
-        ? entry.data.cover.trim()
-        : findCoverImage(entry.data.slug, entry.slug, entry.data.category)?.src ?? placeholderCover;
+    const blogData = createBlogEntryView(entry, parentHref, {
+      categorySlug,
+      categoryDescription: category?.description,
+      parentPage,
+      placeholderCover,
+    });
 
-    const introParagraphs = category?.description
-      ? [category.description]
-      : parentPage
-      ? getIntroParagraphs(parentPage)
-      : [];
-
-    const backHrefBase = parentHref;
-    const categorySegment = entry.data.category?.trim() || categorySlug || '';
-    headerBackHref = categorySegment
-      ? `${backHrefBase}/${categorySegment}/`.replace(/\/{2,}/g, '/')
-      : `${backHrefBase}/`;
-
-
-    const chapters = Array.isArray(entry.data.chapters)
-      ? entry.data.chapters
-          .map((chapter, index) => {
-            const title = chapter.title.trim();
-            if (!title) return undefined;
-            const baseId = (chapter.slug?.trim().length ? chapter.slug.trim() : title)
-              .toLowerCase()
-              .replace(/[^\p{Letter}\p{Number}]+/gu, '-');
-            const id = baseId.length > 0 ? baseId : `chapter-${index + 1}`;
-            const summary = chapter.summary?.trim();
-            return {
-              id,
-              title,
-              summary: summary && summary.length > 0 ? summary : undefined,
-            };
-          })
-          .filter((value): value is NonNullable<typeof value> => Boolean(value))
-      : [];
-
-    blogView = {
-      title: entry.data.title,
-      description: entry.data.description ?? undefined,
-      introParagraphs,
-      cover: { src: coverImage, alt: entry.data.title },
-      chapters: chapters.length > 0 ? chapters : undefined,
-    };
-
-    pageTitle = entry.data.title;
-    pageDescription = entry.data.description ?? parentPage?.description ?? '';
-    metaImage = coverImage;
+    blogView = blogData.blog;
+    headerBackHref = blogData.headerBackHref;
+    pageTitle = blogData.pageTitle;
+    pageDescription = blogData.pageDescription;
+    metaImage = blogData.metaImage;
   }
 }
 

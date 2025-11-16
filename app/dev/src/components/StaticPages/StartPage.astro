@@ -3,7 +3,7 @@ import { Template } from '@Frontend';
 import Icon from '@Assets/Icons.astro';
 import { ASSETS } from '@Assets/ui';
 import { getPageContent } from '@Content/siteContent';
-import { Picture } from 'astro:assets';
+import { getRandomAlbumTeaser } from '@utils/albumTeaser';
 
 export const prerender = true;
 
@@ -25,47 +25,7 @@ const feature = content.feature;
 const links = content.contactLinks ?? [];
 const contact = content.contact;
 
-// 👉 Random-Picker aus frames/{sfw,nsfw}
-const albums = import.meta.glob('@Content/album/*/*/*.json', { eager: true, import: 'default' });
-const pool = Object.values(albums)
-  .filter((a: any) => a && Array.isArray(a.items) && a.items.length > 0) as any[];
-
-function pick<T>(arr: T[]): T | null {
-  return arr.length ? arr[Math.floor(Math.random() * arr.length)] : null;
-}
-
-const chosen = pick(pool);
-
-// Hilfsformatierungen
-const fmtDate = (iso?: string) => (iso ? iso.slice(0, 10) : undefined);
-const withPrefix = (t?: string) => (t && (t.includes('SFW') || t.includes('NSFW')) ? `Artworks: ${t}` : t);
-
-// AlbumFrame-Props
-const albumData =
-  chosen
-    ? {
-        title: withPrefix(chosen.title) ?? '',
-        description: chosen.description ?? '',
-        shareKey: chosen.shareKey,
-        albumSlug: chosen.slug, // z.B. "frames-sfw"
-        categoryBadge: chosen.category?.toUpperCase(),
-        dateBadge: fmtDate(chosen.date),
-        initialThumb: (() => {
-          const f = chosen.items[0];
-          return f
-            ? {
-                src: f.thumb || f.full,
-                width: f.width ?? undefined,
-                height: f.height ?? undefined,
-                alt: f.filename ?? '',
-                full: f.full,
-              }
-            : undefined;
-        })(),
-        // Für späteren Direktlink:
-        href: `/frames/${chosen.category}/${chosen.slug}/`,
-      }
-    : null;
+const albumData = getRandomAlbumTeaser() ?? null;
 
 const shareKey = 'KEkdKYpvFNPFgS654sbWB28rHuXIohcLo5MtrD1BERFqwHOtrQjmDxMhsRTnRSsKRSw';
 const isExternalLink = (href: string) => href.startsWith('http');

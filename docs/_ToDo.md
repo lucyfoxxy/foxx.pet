@@ -13,7 +13,7 @@
 - [x] Fehlende Section-Covers ergänzt
 
 # 🐞 Offene Bugs
-*(keine akuten offen)*
+- [ ] Frames Overview zeigt "Entries" -> sollte aber "Artworks" sein und die richtige Anzahl haben
 
 # 🎨 UX / Polish
 - [x] Navigation: Hover/Active-Zustände konsistent (Desktop & Mobile „aktueller Tab“)

@@ -1,18 +1,19 @@
 ---
 import { View } from '@Frontend';
-import { getEntriesBySection, isAlbumEntry } from '@utils/getEntries';
+import { isAlbumEntry } from '@utils/getEntries';
+import { buildSectionEntryStaticPaths } from '@utils/sectionPaths';
 
 export async function getStaticPaths() {
-  const entries = await getEntriesBySection('paws');
+  return buildSectionEntryStaticPaths('paws', (entry) => {
+    if (!isAlbumEntry(entry)) {
+      return null;
+    }
 
-  return entries
-    .filter(isAlbumEntry)
-    .map((entry) => ({
-      params: {
-        category: entry.data.category ?? 'general',
-        album: entry.data.slug,
-      },
-    }));
+    return {
+      category: entry.data.category ?? 'general',
+      album: entry.data.slug,
+    };
+  });
 }
 
 const { album } = Astro.params;

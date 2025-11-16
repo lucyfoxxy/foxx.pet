@@ -1,19 +1,10 @@
 ---
 import { Template } from '@Frontend';
-import { PLACEHOLDER_COVER, findCoverImage } from '@Assets/covers';
-import {
-  findCategory,
-  getIntroParagraphs,
-  getNavLabelParts,
-  getPageContent,
-  type PageContent,
-} from '@Content/siteContent';
-import {
-  getEntriesBySectionAndCategory,
-  isAlbumEntry,
-  sortEntriesByDateDesc,
-  type Entry,
-} from '@utils/getEntries';
+import { PLACEHOLDER_COVER } from '@Assets/covers';
+import { getIntroParagraphs, getNavLabelParts } from '@Content/siteContent';
+import { getEntriesBySectionAndCategory } from '@utils/getEntries';
+import { getSectionBaseHref, loadSectionContext } from '@utils/sectionContext';
+import { normalizeEntriesForTile } from '@utils/entryTransforms';
 
 interface Props {
   slug: string;
@@ -22,34 +13,15 @@ interface Props {
 
 const { slug, section } = Astro.props as Props;
 
-const pathSegments = Astro.url.pathname.replace(/\/+$/, '').split('/').filter(Boolean);
-const sectionSlug =
-  section?.trim() ??
-  (pathSegments.length >= 3
-    ? pathSegments[1]
-    : pathSegments.length >= 1
-    ? pathSegments[0]
-    : '');
+const { sectionSlug, page: parentPage, category, error: contextError } = await loadSectionContext({
+  url: Astro.url,
+  section,
+  categorySlug: slug,
+  kind: 'category',
+  missingSectionMessage: 'We could not resolve the requested collection.',
+});
 
-let errorMessage: string | undefined;
-
-if (!sectionSlug) {
-  errorMessage = 'We could not resolve the requested collection.';
-}
-
-let parentPage: PageContent | undefined;
-
-if (!errorMessage) {
-  try {
-    parentPage = await getPageContent(sectionSlug);
-  } catch (unknownError) {
-    const message =
-      unknownError instanceof Error ? unknownError.message : 'Unable to load page details.';
-    errorMessage = message;
-  }
-}
-
-const category = parentPage ? findCategory(parentPage, slug) : undefined;
+let errorMessage = contextError;
 
 if (!errorMessage && !category) {
   errorMessage = 'There is nothing in this section yet — please check back later!';
@@ -60,72 +32,15 @@ const entries = !errorMessage
   : [];
 
 const placeholderCover = PLACEHOLDER_COVER.src;
+const parentHref = getSectionBaseHref(sectionSlug, parentPage);
 
-const toEntryHref = (entry: Entry) => {
-  const parentHref = parentPage?.href?.replace(/\/+$/, '') ?? (sectionSlug ? `/${sectionSlug}` : '');
-  if (isAlbumEntry(entry)) {
-    const entrySlug = entry.data.slug?.trim() || entry.slug;
-    const categorySegment = entry.data.category?.trim() || slug;
-    const base = `${parentHref}/${categorySegment}`.replace(/\/{2,}/g, '/');
-    const href = `${base}/${entrySlug}`.replace(/\/{2,}/g, '/');
-    return href.endsWith('/') ? href : `${href}/`;
-  }
-
-  const segments = entry.slug.split('/').filter(Boolean);
-  const entrySlug = segments[segments.length - 1] ?? entry.data.slug ?? slug;
-  const categorySegment = entry.data.category?.trim() || slug;
-  const base = `${parentHref}/${categorySegment}`.replace(/\/{2,}/g, '/');
-  const href = `${base}/${entrySlug}`.replace(/\/{2,}/g, '/');
-  return href.endsWith('/') ? href : `${href}/`;
-};
-
-const normalizedEntries = sortEntriesByDateDesc(entries)
-  .map((entry) => {
-    const href = toEntryHref(entry);
-    if (!href) return undefined;
-
-    const title = entry.data.title?.trim().length
-      ? entry.data.title.trim()
-      : entry.data.slug ?? entry.slug;
-    const description = entry.data.description?.trim() ?? '';
-    const date = entry.data.date;
-
-    if (isAlbumEntry(entry)) {
-      const cover = entry.data.cover?.trim()
-        ? entry.data.cover.trim()
-        : entry.data.items?.find((item) => item?.thumb || item?.full)?.thumb ?? placeholderCover;
-
-      const count = typeof entry.data.count === 'number' ? entry.data.count : undefined;
-
-      return {
-        href,
-        title,
-        description,
-        dataSlug: entry.data.slug ?? entry.slug,
-        cover,
-        date,
-        count,
-        countLabel: count !== undefined ? 'Photos' : undefined,
-      };
-    }
-    
-    const coverImage =
-      entry.data.cover?.trim().length
-        ? entry.data.cover.trim()
-        : findCoverImage(entry.data.slug, entry.slug, entry.data.category)?.src ?? placeholderCover;
-
-    return {
-      href,
-      title,
-      description,
-      dataSlug: entry.slug,
-      cover: coverImage,
-      date,
-      count: undefined,
-      countLabel: undefined,
-    };
-  })
-  .filter((value): value is NonNullable<typeof value> => Boolean(value));
+const normalizedEntries = !errorMessage
+  ? normalizeEntriesForTile(entries, {
+      parentHref,
+      defaultCategorySlug: slug,
+      placeholderCover,
+    })
+  : [];
 
 const hasEntries = normalizedEntries.length > 0;
 
@@ -142,7 +57,7 @@ const introParagraphs = category?.description
   ? getIntroParagraphs(parentPage)
   : [];
 
-const backHref = parentPage ? `${parentPage.href.replace(/\/+$/, '')}/` : undefined;
+const backHref = parentPage ? `${parentHref.replace(/\/+$/, '')}/`.replace(/\/{2,}/g, '/') : undefined;
 const backLabel = parentPage ? `← ${parentPage.title}` : undefined;
 ---
 <Template.Base title={pageTitle} meta={meta}>

@@ -41,7 +41,7 @@ body {
 
 /* ====== LINKS & FOOTER ====== */
 a {
-  font-weight: var(--thick-font-weight);
+  font-weight: var(--bold-font-weight);
   text-decoration: none;
 }
 
@@ -54,12 +54,17 @@ a {
 }
 
 .footer__nav,
-.control--small {
+.control--small,
+.control--badge {
   font-size: clamp(var(--font-size-xs), calc(var(--font-size-xs) + .125rem), var(--font-size-s));
   font-weight: var(--thin-font-weight);
   line-height: var(--line-height-xs);
 }
-.button,
+.footer__meta {
+  font-size: clamp(var(--font-size-xs), calc(var(--font-size-xs) + .0125rem), var(--font-size-s));
+}
+
+
 .control--button {
   font-weight: var(--normal-font-weight);
   line-height: var(--line-height-xs);

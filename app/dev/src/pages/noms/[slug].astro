@@ -1,19 +1,11 @@
 ---
 import { View } from '@Frontend';
-import { getPageContent } from '@Content/siteContent';
+import { buildCategoryStaticPaths } from '@utils/sectionPaths';
 
 export const prerender = true;
 
 export async function getStaticPaths() {
-  const page = await getPageContent('noms');
-  const categories = page.categories ?? [];
-
-  return categories
-    .map((category) => category.slug?.trim())
-    .filter((slug): slug is string => Boolean(slug?.length))
-    .map((slug) => ({
-      params: { slug },
-    }));
+  return buildCategoryStaticPaths('noms');
 }
 
 const { slug } = Astro.params;
