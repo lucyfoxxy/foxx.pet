@@ -17,6 +17,7 @@ export default function stickyBar(selector) {
 
   const doc = document.documentElement;
   let anchorTop = null;
+  let lastVisible = null;
 
   // Nur für Header relevant
   if (selector === '.header') {
@@ -39,6 +40,11 @@ export default function stickyBar(selector) {
     let visible = true;
 
     if (selector === '.header') {
+      if (scrollY <= 1) {
+        const rect = bar.getBoundingClientRect();
+        const topOffset = parseFloat(style.top || '0') || 0;
+        anchorTop = rect.top + scrollY - topOffset;
+      }
       // Header:
       // - kurze Seite: immer visible=true
       // - sonst: visible=true nur oberhalb anchorTop, darunter compact
@@ -52,12 +58,17 @@ export default function stickyBar(selector) {
       if (isShortPageNow) {
         visible = true;
       } else {
-        const atEnd = scrollY + viewportHeightNow >= docHeightNow + 2;
+        const footerHeight = bar.offsetHeight;
+        const threshold = Math.max(docHeightNow - footerHeight - 2, 0);
+        const atEnd = scrollY + viewportHeightNow >= threshold;
         visible = atEnd;
       }
     }
 
-    bar.setAttribute('data-visible', visible ? 'true' : 'false');
+    if (visible !== lastVisible) {
+      bar.setAttribute('data-visible', visible ? 'true' : 'false');
+      lastVisible = visible;
+    }
   };
 
   const onScrollOrResize = () => {

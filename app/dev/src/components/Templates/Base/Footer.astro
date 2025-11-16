@@ -20,19 +20,19 @@ const crumbItems = breadcrumbs.reduce<Array<Breadcrumb | 'separator'>>((acc, cru
 ---
 <footer class="footer">
   
-    <nav class="footer__nav" aria-label="Breadcrumb">
-      <ol class="controls controls--center controls--tight controls--nowrap">
+    <nav class="footer__nav controls controls--center controls--tight controls--nowrap" aria-label="Breadcrumb">
+      <ol>
         {crumbItems.map((item) =>
           item === 'separator' ? (
-            <li class="header__crumb-separator" aria-hidden="true">
-              <ICONS class="media-icon" name="chevron-right-duo" />
+            <li class="footer__crumb-separator" aria-hidden="true">
+              <ICONS class="media-icon media-icon--small" name="chevron-right-duo" />
             </li>
           ) : (
-            <li class="header__crumb">
+            <li>
               {item.isCurrent ? (
-                <span class="control control--badge control--plain is-current" aria-current="page">{item.label}</span>
+                <span class="control control--badge control--plain control--small" data-current="true" aria-current="page">{item.label}</span>
               ) : (
-                <a class="control control--badge control--plain" href={item.href}>{item.label}</a>
+                <a class="control control--badge control--plain control--small" href={item.href}>{item.label}</a>
               )}
             </li>
           )
