@@ -111,10 +111,13 @@
   --surface-glow--strong:   0 0 2px 2px var(--color-glow--strong),inset   0 0 96px 0 var(--color-glow--soft);
   --surface-glow--soft:     inset   0 0 12px 1px var(--color-glow--soft);
   
-  /* GLOW / SHADOW REFACTOR */
-  --hover-glow--card: inset   0 0 56px 0 color-mix(in oklch,var(--color-accent),transparent), 0 0 6px 0 color-mix(in oklch,var(--color-dark),transparent);
-  --hover-glow--control: inset   0 0 96px var(--color-glow--soft);
-
+  /* GLOW / SHADOW REFACTOR 
+  --hover-glow--card: 
+    transform: var(--transform-scale);
+    filter:brightness(1.1) saturate(1.1) drop-shadow(0 0 var(--color-dark));
+  --hover-control: 
+    filter:brightness(1.4) saturate(1.4); box-shadow: inset 0 0 99px var(--color-glow--soft);transform: var(--transform-raise);
+*/
   --blur-xxs:              blur(var(--radius-xxs));
   --blur-xs:              blur(var(--radius-xs));
   --blur-s:              blur(var(--radius-s));
