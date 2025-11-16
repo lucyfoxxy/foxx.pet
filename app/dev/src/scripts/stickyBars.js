@@ -10,15 +10,18 @@ export default function stickyBar(selector) {
   
   if (!bar) return;
   
-  let meta = null;
-  if (selector === '.footer'){
-    meta = bar.querySelector('.footer__meta');
-  };
-
-  let text = null;
-  if (selector === '.header'){
-    text = bar.querySelector('.header__nav a.header__nav-item .header__nav-text');
-  };
+  const meta = (selector === '.footer') 
+    ? (bar.querySelector('.footer__meta')) 
+    : null;
+  
+  const item = (selector === '.header') 
+    ? (document.querySelectorAll('.header__nav-item')) 
+    : null;
+  
+  const label = (selector === '.header')
+    ? (document.querySelectorAll('.header__nav-label')) 
+    : null;
+  
   
   const style = window.getComputedStyle(bar);
   if (style.position !== 'sticky') {
@@ -85,13 +88,11 @@ export default function stickyBar(selector) {
     }
 
     if (visible !== lastVisible) {
-      if(selector === '.footer') {       
-        meta.setAttribute('data-visible', visible ? 'true' : 'false');
-      }; 
-      if(selector === '.header') {
-        
-        text.setAttribute('data-visible', visible ? 'true' : 'false');
-      };       
+
+      if(meta) meta.setAttribute('data-visible', visible ? 'true' : 'false');
+      if(item) item.forEach ((item) => ( item.setAttribute('data-visible', visible ? 'true' : 'false')));
+      if(label) label.forEach ((label) => ( label.setAttribute('data-visible', visible ? 'true' : 'false')));
+
       bar.setAttribute('data-visible', visible ? 'true' : 'false');
       lastVisible = visible;
     }
@@ -103,16 +104,6 @@ export default function stickyBar(selector) {
   };
 
   // Initialen Zustand setzen
-        if(selector === '.footer') {
-        
-        meta.setAttribute('data-visible', 'false');
-        bar.setAttribute('data-visible', 'false');
-      }; 
-      if(selector === '.header') {
-        bar.setAttribute('data-visible', 'true' );
-        text.setAttribute('data-visible', 'true');
-      };       
-      
   update();
 
   window.addEventListener('scroll', onScrollOrResize, { passive: true });

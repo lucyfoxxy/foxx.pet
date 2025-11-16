@@ -19,7 +19,7 @@ type Props = {
 const { navLinks = [] } = (Astro.props ?? {}) as Props;
 
 ---
-<header class="header" aria-label="Primary navigation">
+<header class="header site-bar site-bar--head" aria-label="Primary navigation" data-visible="true">
   <nav class="header__nav controls controls--evenly controls--nowrap">
     {navLinks
       .filter((link) => link.includeInHeader)
@@ -29,8 +29,8 @@ const { navLinks = [] } = (Astro.props ?? {}) as Props;
           href={link.href}
           data-active={link.isActive ? 'true' : undefined}
         >
-          <ICONS class="header__nav-symbol media-icon" name={link.icon} />
-          <span class="header__nav-text">{link.label}</span>
+          <ICONS class="header__nav-icon media-icon" name={link.icon} />
+          <span class="header__nav-label">{link.label}</span>
         </a>
       ))}
   </nav>

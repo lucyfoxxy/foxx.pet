@@ -26,7 +26,7 @@
   --thick-font-weight:       500;
   --bold-font-weight:        700;
 
-  --line-height-xs:      .75;
+  --line-height-xs:      .85;
   --line-height-s:       1.5;
   --line-height-m:      1.35;
   --line-height-l:       1.225;
@@ -44,8 +44,8 @@
   --font-size-xl:        clamp(1.75rem, calc(1.75rem + 1.5vw), 3rem);
 
   --icon-size-s:        calc(var(--font-size-s) * 1.1);
-  --icon-size-m:        calc(var(--font-size-m) * 1.5);
-  --icon-size-l:        calc(var(--font-size-l) * 1.4);
+  --icon-size-m:        calc(var(--font-size-m) * 1.4);
+  --icon-size-l:        calc(var(--font-size-xl) * .95);
 
 
   --thumb-size:              clamp(64px, 9vw, 128px);
@@ -59,14 +59,11 @@
   --control-gap:            var(--space-xs);   
   --control-padding:        var(--space-s);  
 
-  --nav-gap--column:        clamp(var(--space-s),calc(var(--space-s) + 1.5vw),var(--space-xl));
-  --nav-gap--row:           var(--space-xs);
-
   --card-padding:           clamp(var(--space-s),  calc(var(--space-s) + 1.5vw),  var(--space-xl));   
   --section-gap:            clamp(var(--space-xs),  calc(var(--space-xs) + 1.5vh),    var(--space-xl)); 
   
   --panel-padding:           clamp(var(--space-xs),  calc(var(--space-xs) + 2.5vw),    var(--space-xxxl)); 
-  --panel-bar-padding:       calc(var(--panel-padding) * .55);
+  --bars-padding:       clamp(var(--space-xxs),  calc(var(--space-xxs) + 1.25vw),    var(--space-xl));
  
   --container-padding:       clamp(var(--space-xxs),  calc(var(--space-xxs) + 2vw),    var(--space-xxl)); 
   --container-max:           1366px;
@@ -80,8 +77,8 @@
   --color-accent:            oklch(74% 0.145 295);          
   --color-shadow--soft:       color-mix(in oklch, var(--color-dark) 30%, transparent);
   --color-shadow--strong:     color-mix(in oklch, var(--color-dark) 50%, transparent);
-  --color-glow--soft:         color-mix(in oklch, var(--color-accent) 85%, transparent);
-  --color-glow--strong:        color-mix(in oklch, var(--color-accent) 99%, transparent);
+  --color-glow--soft:         color-mix(in oklch, var(--color-accent) 55%, transparent);
+  --color-glow--strong:        color-mix(in oklch, var(--color-accent) 80%, transparent);
 
   /* ====== Text Colors & FX ==================== */
   --text-color:              color-mix(in oklch, var(--color-light) 85%, white);
@@ -111,8 +108,8 @@
   --control-shadow--inset: inset 0 0 99px 0 var(--color-shadow--strong);
   --card-shadow--inset: inset 0 0 24px 2px var(--color-shadow--soft),inset 0 0 0 1px var(--color-shadow--strong);
 
-  --surface-glow--strong:      0 0 2px 2px var(--color-glow--strong);
-  --surface-glow--soft:        0 0 2px 1px var(--color-glow--strong);
+  --surface-glow--strong:   0 0 2px 2px var(--color-glow--strong),inset   0 0 96px 0 var(--color-glow--soft);
+  --surface-glow--soft:     inset   0 0 12px 1px var(--color-glow--soft);
   
   --blur-xxs:              blur(var(--radius-xxs));
   --blur-xs:              blur(var(--radius-xs));
@@ -136,23 +133,27 @@
   --gallery-interval:           8000ms;  
 
   /* ====== Motion ====== */
-  --transition-interactive:     color .2s ease, text-shadow .2s ease;
-  --transition-raise:           transform .35s ease-in-out, box-shadow .2s ease;
-  --transition-brightness:      filter .5s ease-in-out;
-  --transition-glow:            color .2s ease, text-shadow .2s ease, transform .2s ease, box-shadow .2s ease;
-  --transition-soft:            opacity .25s ease, transform .25s ease, background .25s ease, box-shadow .25s ease;
+  --transition--interactive:     color .2s ease, text-shadow .2s ease;
+  
+  --transition--raise:           transform .35s ease-in-out, box-shadow .2s ease;
+  --transition--brightness:      filter .5s ease-in-out;
+  --transition--scale:           transform .25s ease;
+
+  --transition--glow:            color .2s ease, text-shadow .2s ease, transform .2s ease, box-shadow .2s ease;
+  --transition--card:            opacity .25s ease, transform .25s ease, background .25s ease, box-shadow .25s ease;
   --transition--control:        box-shadow .25s ease,
                                 backdrop-filter .25s ease,
                                 font-weight .25s ease,
                                 opacity .25s ease,
                                 transform .25s ease;
                                 
-  --transition-scale:           transform .25s ease;
-  --transition-opacity:          opacity .5s ease-in-out;
+
+  --transition--opacity:          opacity .5s ease-in-out;
   
   --backdrop-brightness:        brightness(1.5);
   --transform-raise:            translateY(-10%);
   --transform-raise--soft:      translateY(-5%);
-  --transform-raise--strong:      translateY(-15%);
+  --transform-raise--strong:    translateY(-15%);
   --transform-scale:            scale(1.05);
+  --transform-scale--soft:      scale(1.025);
 }

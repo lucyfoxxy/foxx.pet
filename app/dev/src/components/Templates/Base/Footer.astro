@@ -1,5 +1,6 @@
 ---
 import ICONS from '@Assets/Icons.astro';
+
 type Breadcrumb = {
   label: string;
   href: string;
@@ -9,64 +10,95 @@ type Breadcrumb = {
 type Props = {
   breadcrumbs: Breadcrumb[];
 };
+
 const { breadcrumbs = [] } = (Astro.props ?? {}) as Props;
 const hasActions = Astro.slots.has('actions');
 
-const crumbItems = breadcrumbs.reduce<Array<Breadcrumb | 'separator'>>((acc, crumb, index) => {
-  if (index > 0) acc.push('separator');
-  acc.push(crumb);
-  return acc;
-}, []);
+const crumbItems = breadcrumbs.reduce<Array<Breadcrumb | 'separator'>>(
+  (acc, crumb, index) => {
+    if (index > 0) acc.push('separator');
+    acc.push(crumb);
+    return acc;
+  },
+  [],
+);
 ---
-<footer class="footer">
-  
-    <nav class="footer__nav controls controls--center controls--tight controls--nowrap" aria-label="Breadcrumb">
-      <ol>
-        {crumbItems.map((item) =>
-          item === 'separator' ? (
-            <li class="footer__crumb-separator" aria-hidden="true">
-              <ICONS class="media-icon media-icon--small" name="chevron-right-duo" />
-            </li>
-          ) : (
-            <li>
-              {item.isCurrent ? (
-                <span class="control control--badge control--plain control--small" data-current="true" aria-current="page">{item.label}</span>
-              ) : (
-                <a class="control control--badge control--plain control--small" href={item.href}>{item.label}</a>
-              )}
-            </li>
-          )
-        )}
-      </ol>
-          {hasActions ? (
+
+<footer class="footer site-bar site-bar--foot" data-visible="false">
+  <nav
+    class="footer__crumbs controls controls--center controls--tight controls--nowrap"
+    aria-label="Breadcrumb"
+  >
+    <ol>
+      {crumbItems.map((item) =>
+        item === 'separator' ? (
+          <li class="footer__crumbs--seperator" aria-hidden="true">
+            <ICONS
+              class="media-icon media-icon--small"
+              name="chevron-right-duo"
+            />
+          </li>
+        ) : (
+          <li>
+            {item.isCurrent ? (
+              <span
+                class="control control--badge control--plain control--small"
+                data-current="true"
+                aria-current="page"
+              >
+                {item.label}
+              </span>
+            ) : (
+              <a
+                class="control control--badge control--plain control--small"
+                href={item.href}
+              >
+                {item.label}
+              </a>
+            )}
+          </li>
+        ),
+      )}
+    </ol>
+
+    {hasActions ? (
       <div class="footer__actions controls controls--end">
         <slot name="actions" />
       </div>
     ) : null}
-    </nav>
-    
+  </nav>
 
-    <div class="footer__meta">
-    <span class="footer__left">
-        <p>&copy;&nbsp;<span data-current-year></span>&nbsp;–&nbsp;<a href="/imprint">Imprint</a></p>
+  <div class="footer__meta" data-visible="false">
+    <span class="col--left">
+      <p>
+        &copy;&nbsp;<span data-current-year></span>&nbsp;–&nbsp;
+        <a href="/imprint">Imprint</a>
+      </p>
     </span>
-    <span class="footer__center">
-        <a class="control control--plain" href="#top">⇡ Scroll Up ⇡</a>
+    <span class="col--center">
+      <a class="control control--plain" href="#top">
+        ⇡ Scroll Up ⇡
+      </a>
     </span>
-    <span class="footer__right">
-        <p><em>using<a href="https://astro.build">&nbsp;astro</a></em>&nbsp;–&nbsp;<a href="/test">Test</a></p>
+    <span class="col--right">
+      <p>
+        <em>
+          using<a href="https://astro.build">&nbsp;astro</a>
+        </em>
+        &nbsp;–&nbsp;<a href="/test">Test</a>
+      </p>
     </span>
-    </div>
+  </div>
 </footer>
+
 <script>
   import stickyBar from '@Scripts/stickyBars.js';
   import { runOnReady } from '@Scripts/utils/_runOnReady.js';
-
 
   runOnReady(() => {
     const cleanup = stickyBar('.footer');
     if (typeof cleanup === 'function') {
       window.addEventListener('astro:before-swap', cleanup, { once: true });
     }
-  });  
+  });
 </script>
