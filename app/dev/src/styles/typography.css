@@ -53,11 +53,9 @@ a {
   text-align: left;
 }
 
-.footer,
-.badge,
-.control--badge,
+.footer__nav,
 .control--small {
-  font-size: var(--font-size-xs);
+  font-size: clamp(var(--font-size-xs), calc(var(--font-size-xs) + .125rem), var(--font-size-s));
   font-weight: var(--thin-font-weight);
   line-height: var(--line-height-xs);
 }
@@ -66,11 +64,9 @@ a {
   font-weight: var(--normal-font-weight);
   line-height: var(--line-height-xs);
 }
-.button--large,
-.control--large,
- .is-current,
  .control--button:hover,
- a.control.control--badge:hover{
+ button.control:hover,
+ a.control:hover{
   font-weight: var(--bold-font-weight);
 }
 
