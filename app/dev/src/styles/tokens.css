@@ -44,7 +44,7 @@
   --font-size-xl:        clamp(1.75rem, calc(1.75rem + 1.5vw), 3rem);
 
   --icon-size-s:        calc(var(--font-size-s) * 1.1);
-  --icon-size-m:        calc(var(--font-size-m) * 1.4);
+  --icon-size-m:        calc(var(--font-size-m) * 1.45);
   --icon-size-l:        calc(var(--font-size-xl) * .95);
 
 
@@ -82,7 +82,7 @@
 
   /* ====== Text Colors & FX ==================== */
   --text-color:              color-mix(in oklch, var(--color-light) 85%, white);
-  --text-accent:             color-mix(in oklab, var(--color-accent) 40%, white);
+  --text-accent:             color-mix(in oklab, var(--color-accent) 40%, var(--color-light));
   --text-highlight:          color-mix(in oklab, var(--color-light) 65%, var(--color-accent));
 
   --text-shadow--soft:       1px 2px 1px var(--color-shadow--soft);  
@@ -111,6 +111,10 @@
   --surface-glow--strong:   0 0 2px 2px var(--color-glow--strong),inset   0 0 96px 0 var(--color-glow--soft);
   --surface-glow--soft:     inset   0 0 12px 1px var(--color-glow--soft);
   
+  /* GLOW / SHADOW REFACTOR */
+  --hover-glow--card: inset   0 0 56px 0 color-mix(in oklch,var(--color-accent),transparent), 0 0 6px 0 color-mix(in oklch,var(--color-dark),transparent);
+  --hover-glow--control: inset   0 0 96px var(--color-glow--soft);
+
   --blur-xxs:              blur(var(--radius-xxs));
   --blur-xs:              blur(var(--radius-xs));
   --blur-s:              blur(var(--radius-s));
@@ -135,6 +139,8 @@
   /* ====== Motion ====== */
   --transition--interactive:     color .2s ease, text-shadow .2s ease;
   
+  --transition--nav:             opacity .35s ease, transform .35s ease, brightness .5s ease, drop-shadow .5s ease-in-out;
+
   --transition--raise:           transform .35s ease-in-out, box-shadow .2s ease;
   --transition--brightness:      filter .5s ease-in-out;
   --transition--scale:           transform .25s ease;

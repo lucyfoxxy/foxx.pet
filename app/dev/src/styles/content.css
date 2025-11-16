@@ -14,7 +14,7 @@
 .content-section {
   display: grid;
   flex-wrap: wrap; 
-  gap: var(--section-gap);
+  gap: calc(var(--section-gap) * 1.5);
   align-items: stretch; 
   max-inline-size: 100%;
   grid-template-columns: 1fr;
@@ -62,7 +62,7 @@
 .is-animated:hover,
 .is-animated:focus-visible {
   transform: var(--transform-scale);
-  box-shadow: var(--surface-glow--strong);
+  filter:brightness(1.1) saturate(1.1) drop-shadow(0 0 var(--color-dark));
 }
 
 

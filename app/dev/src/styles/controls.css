@@ -104,11 +104,11 @@ button.control:hover {
   filter: drop-shadow(0 0 0 var(--color-accent)) drop-shadow(2px 2px 2px var(--color-shadow--strong)) ;
   opacity: 1;
 }
-.control--glow { transition: var(--transition--glow); }
-.control--glow:hover { box-shadow: var(--surface-glow--soft); }
+.control--glow { transition: filter .4s ease, saturate .4s ease, box-shadow .5s ease, transform .25s ease; }
+.control--glow:hover { filter:brightness(1.4) saturate(1.4); box-shadow: inset 0 0 99px var(--color-glow--soft);transform: var(--transform-raise);}
 
-.control--animated { transition: var(--transition--raise); }
-.control--animated:hover { transform: var(--transform-raise); }
+.control--animated { /*transition: var(--transition--raise);*/ }
+.control--animated:hover {  }
 
 .control--button:hover,
 :where(a.control--badge, button.control--badge):hover {

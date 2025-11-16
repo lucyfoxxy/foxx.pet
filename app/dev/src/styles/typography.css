@@ -48,8 +48,9 @@ a {
 
 .header__nav-label {
   font-weight: var(--bold-font-weight); 
-  font-size: clamp(var(--font-size-s),calc(var(--font-size-s) + .3vw),var(--font-size-m));
+  font-size: clamp(var(--font-size-s),calc(var(--font-size-s) + 1.3vw),var(--font-size-m));
   letter-spacing: var(--letter-spacing-xl);
+  line-height: var(--line-height-xs);
   text-align: left;
 }
 
