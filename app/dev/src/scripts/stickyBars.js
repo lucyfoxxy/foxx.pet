@@ -16,10 +16,6 @@ export default function stickyBar(selector) {
   }
 
   const doc = document.documentElement;
-  const initialViewportHeight = window.innerHeight || doc.clientHeight;
-  const initialDocHeight = doc.scrollHeight;
-  const isShortPage = initialDocHeight <= initialViewportHeight + 1;
-
   let anchorTop = null;
 
   // Nur für Header relevant
@@ -36,6 +32,9 @@ export default function stickyBar(selector) {
   const update = () => {
     rafId = 0;
     const scrollY = window.scrollY || window.pageYOffset;
+    const viewportHeightNow = window.innerHeight || doc.clientHeight;
+    const docHeightNow = doc.scrollHeight;
+    const isShortPageNow = docHeightNow <= viewportHeightNow + 1;
 
     let visible = true;
 
@@ -43,16 +42,19 @@ export default function stickyBar(selector) {
       // Header:
       // - kurze Seite: immer visible=true
       // - sonst: visible=true nur oberhalb anchorTop, darunter compact
-      if (!isShortPage && anchorTop !== null) {
+      if (!isShortPageNow && anchorTop !== null) {
         visible = scrollY <= anchorTop;
       }
     } else {
       // Footer:
-      // - kurze Seite: immer visible=true (Nav + Meta)
-      // - sonst: visible=true nur am (ursprünglichen) Seitenende
-      const viewportHeightNow = window.innerHeight || doc.clientHeight;
-      const atEnd = scrollY + viewportHeightNow >= initialDocHeight - 1;
-      visible = isShortPage || atEnd;
+      // - kurze Seite: immer visible=true
+      // - sonst: visible=true nur am Seitenende
+      if (isShortPageNow) {
+        visible = true;
+      } else {
+        const atEnd = scrollY + viewportHeightNow >= docHeightNow + 2;
+        visible = atEnd;
+      }
     }
 
     bar.setAttribute('data-visible', visible ? 'true' : 'false');
