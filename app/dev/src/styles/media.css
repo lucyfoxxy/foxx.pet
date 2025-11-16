@@ -148,19 +148,20 @@
 .media-frame--thumb:focus-visible > * {
   opacity: 1;
 }
-.media-image--hero
+.media-image--banner,
+.media-image--banner img
  {
   display: block;
   inline-size: 100%;
-  max-block-size: clamp(14rem, 38vh, 22rem);
-  object-position: top;
 }
-.media-image--hero img {
-  display: block;
-  inline-size: 100%;
+.media-image--banner {
+  object-position: top;
+  max-block-size: clamp(14rem, 38vh, 22rem);
+}
+.media-image--banner img {
+
   block-size: 100%;
   object-fit: cover;
-  
 }
 
 /* ==========<[      ICON      ]>============== */

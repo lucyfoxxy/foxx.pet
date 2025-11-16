@@ -114,7 +114,7 @@ Total unique tokens: 117
 | `media-icon--large` | 1 | 2 | `src/components/Templates/Base/Header.astro` (1)<br>`src/components/Templates/TitleWithIcon.astro` (1) |
 | `media-icon--small` | 1 | 0 | _Not referenced outside stylesheets_ |
 | `media-image` | 4 | 14 | `src/components/StaticPages/StartPage.astro` (1)<br>`src/components/Templates/AlbumFrame.astro` (1)<br>`src/components/Templates/EntryBlog.astro` (1)<br>`src/components/Templates/TileView.astro` (2)<br>`src/pages/test.astro` (6)<br>`src/scripts/galleryViewer.js` (3) |
-| `media-image--hero` | 2 | 1 | `src/components/Templates/EntryBlog.astro` (1) |
+| .media-image--banner` | 2 | 1 | `src/components/Templates/EntryBlog.astro` (1) |
 | `media-image--placeholder` | 1 | 0 | _Not referenced outside stylesheets_ |
 | `media-image--thumb` | 1 | 2 | `src/scripts/galleryViewer.js` (2) |
 | `media-lightbox` | 4 | 2 | `src/scripts/galleryViewer.js` (2) |

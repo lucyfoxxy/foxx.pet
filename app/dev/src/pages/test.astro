@@ -16,12 +16,99 @@ const formatClassList = (value: string, fallback = 'default') =>
     : fallback;
 
 const navSections = [
+  { id: 'overview', label: 'Style Overview' },
   { id: 'shadows', label: 'Shadows & Glows' },
   { id: 'cards', label: 'Cards' },
   { id: 'controls', label: 'Buttons & Badges' },
   { id: 'layouts', label: 'Control Layouts' },
   { id: 'media', label: 'Media & Icons' },
   { id: 'typography', label: 'Typography' },
+];
+
+const stylesheetStats = [
+  { file: 'src/styles/base.css', classes: 2, tokens: 0 },
+  { file: 'src/styles/bg.css', classes: 2, tokens: 0 },
+  { file: 'src/styles/content.css', classes: 27, tokens: 2 },
+  { file: 'src/styles/controls.css', classes: 28, tokens: 5 },
+  { file: 'src/styles/media.css', classes: 18, tokens: 1 },
+  { file: 'src/styles/site.css', classes: 4, tokens: 0 },
+  { file: 'src/styles/site_footer.css', classes: 12, tokens: 0 },
+  { file: 'src/styles/site_header.css', classes: 9, tokens: 0 },
+  { file: 'src/styles/table.css', classes: 13, tokens: 0 },
+  { file: 'src/styles/tokens.css', classes: 0, tokens: 108 },
+  { file: 'src/styles/typography.css', classes: 16, tokens: 2 },
+];
+
+const uniqueTotals = { classes: 110, tokens: 117 };
+
+const unusedClasses = [
+  'badge',
+  'button--large',
+  'card--ghost',
+  'card__spacer',
+  'control--ghost',
+  'control--stretch',
+  'controls--evenly',
+  'controls--stretch',
+  'header__bar',
+  'header__bar--bottom',
+  'header__bar--top',
+  'media-empty',
+  'media-icon--small',
+  'media-image--placeholder',
+  'table__price',
+  'table__subtitle',
+  'table__td',
+  'table__td--right',
+  'table__th',
+  'table__th--left',
+  'table__th--right',
+  'table__tr',
+  'table__unit',
+  'table__wrap',
+];
+
+const unusedTokens = [
+  '--animated',
+  '--backdrop-brightness',
+  '--badge',
+  '--bg-field',
+  '--bg-nebula',
+  '--bg-stars',
+  '--blur-xl',
+  '--blur-xs',
+  '--blur-xxl',
+  '--blur-xxs',
+  '--button',
+  '--card-shadow--inset',
+  '--glow',
+  '--icon-shadow',
+  '--letter-spacing-m',
+  '--nav-gap--column',
+  '--nav-gap--row',
+  '--plain',
+  '--site-logo--size',
+  '--space-m',
+  '--title',
+  '--transform-raise--soft',
+  '--transform-raise--strong',
+];
+
+const mascotGallery = [
+  {
+    id: 'mascot-v1',
+    label: 'Mascot (Hero render)',
+    asset: ASSETS.mascot,
+    token: 'ASSETS.mascot',
+    description: 'Original hero render used throughout the landing + blog hero cards.',
+  },
+  {
+    id: 'mascot-v2',
+    label: 'Mascot v2 (Spacewalk)',
+    asset: ASSETS.mascot_v2,
+    token: 'ASSETS.mascot_v2',
+    description: 'New floating fox illustration for feature banners and experimental layouts.',
+  },
 ];
 
 const surfaceEffects = [
@@ -264,6 +351,82 @@ const mediaThumbs = [
     </Template.Card>
   </section>
 
+  <section class="content-section" id="overview">
+    <Template.Card class="card--plain" headClass="card__head--column">
+      <Fragment slot="head">
+        <h2 class="card__title">Class & token overview</h2>
+        <p>Snapshot of selectors + CSS variables tracked across `src/styles`.</p>
+      </Fragment>
+      <Fragment slot="body">
+        <div class="overview-grid">
+          <div class="overview-stats">
+            <div class="stat stat--classes">
+              <span class="stat__label">Unique classes</span>
+              <strong class="stat__value">{uniqueTotals.classes}</strong>
+              <span class="stat__hint">Across Astro components & pages</span>
+            </div>
+            <div class="stat stat--tokens">
+              <span class="stat__label">Unique tokens</span>
+              <strong class="stat__value">{uniqueTotals.tokens}</strong>
+              <span class="stat__hint">Shadow, glow & color variables</span>
+            </div>
+          </div>
+          <div class="overview-table-wrapper">
+            <table class="overview-table">
+              <thead>
+                <tr>
+                  <th scope="col">Stylesheet</th>
+                  <th scope="col">Classes</th>
+                  <th scope="col">Tokens</th>
+                </tr>
+              </thead>
+              <tbody>
+                {stylesheetStats.map((sheet) => (
+                  <tr>
+                    <th scope="row"><code>{sheet.file}</code></th>
+                    <td>{sheet.classes}</td>
+                    <td>{sheet.tokens}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div class="overview-audit">
+            <div class="audit-card">
+              <div class="audit-card__head">
+                <h3>Unused selectors</h3>
+                <span class="pill">{unusedClasses.length}</span>
+              </div>
+              <p class="audit-card__lede">
+                Defined in stylesheets but currently not applied in any Astro page or script. Reclaim or drop to reduce
+                bundle weight.
+              </p>
+              <div class="pill-grid" role="list">
+                {unusedClasses.map((className) => (
+                  <span class="pill pill--ghost" role="listitem">.{className}</span>
+                ))}
+              </div>
+            </div>
+            <div class="audit-card">
+              <div class="audit-card__head">
+                <h3>Unused tokens</h3>
+                <span class="pill">{unusedTokens.length}</span>
+              </div>
+              <p class="audit-card__lede">
+                Variables with zero <code>var(--token)</code> references. Candidates for cleanup or future refactors.
+              </p>
+              <div class="pill-grid" role="list">
+                {unusedTokens.map((token) => (
+                  <span class="pill pill--ghost" role="listitem">{token}</span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </Fragment>
+    </Template.Card>
+  </section>
+
   <section class="content-section cols-2" id="shadows">
     <Template.Card headClass="card__head--column" class="is-condensed">
       <Fragment slot="head">
@@ -485,6 +648,29 @@ const mediaThumbs = [
 
     <Template.Card headClass="card__head--column">
       <Fragment slot="head">
+        <h2 class="card__title">Mascot renders</h2>
+        <p>Reference imagery for `.media-frame` and `.media-image` tokens.</p>
+      </Fragment>
+      <Fragment slot="body">
+        <div class="mascot-gallery">
+          {mascotGallery.map((mascot) => (
+            <div class="mascot-card" id={mascot.id}>
+              <div class="media-frame">
+                <Picture src={mascot.asset} formats={["webp"]} inferSize alt={mascot.label} class="media-image" />
+              </div>
+              <div class="mascot-card__meta">
+                <strong>{mascot.label}</strong>
+                <p>{mascot.description}</p>
+                <code>{mascot.token}</code>
+              </div>
+            </div>
+          ))}
+        </div>
+      </Fragment>
+    </Template.Card>
+
+    <Template.Card headClass="card__head--column">
+      <Fragment slot="head">
         <h2 class="card__title">Thumbnail rail & icons</h2>
         <p>Thumbnails, wrappers and icon sizing utilities.</p>
       </Fragment>
@@ -576,6 +762,122 @@ const mediaThumbs = [
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
       gap: var(--flow-gap);
+    }
+
+    .overview-grid {
+      display: grid;
+      gap: var(--section-gap);
+      grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+    }
+
+    .overview-stats {
+      display: grid;
+      gap: var(--flow-gap);
+    }
+
+    .stat {
+      padding: var(--section-gap);
+      border-radius: var(--radius-xl);
+      background: color-mix(in oklab, var(--card-surface--light) 35%, transparent);
+      display: grid;
+      gap: calc(var(--flow-gap) * 0.35);
+    }
+
+    .stat__label {
+      font-size: var(--font-size-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      opacity: 0.75;
+    }
+
+    .stat__value {
+      font-size: clamp(2.5rem, 4vw, 3rem);
+      line-height: 1;
+    }
+
+    .stat__hint {
+      font-size: var(--font-size-xs);
+      opacity: 0.8;
+    }
+
+    .overview-table-wrapper {
+      overflow-x: auto;
+    }
+
+    .overview-table {
+      inline-size: 100%;
+      border-collapse: collapse;
+      font-size: var(--font-size-s);
+    }
+
+    .overview-table th,
+    .overview-table td {
+      padding: 0.35rem 0.5rem;
+      border-bottom: 1px solid color-mix(in oklab, var(--card-border) 70%, transparent);
+    }
+
+    .overview-table tbody tr:last-child th,
+    .overview-table tbody tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .overview-audit {
+      display: grid;
+      gap: var(--flow-gap);
+      grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    }
+
+    .audit-card {
+      padding: var(--section-gap);
+      border-radius: var(--radius-l);
+      border: 1px solid color-mix(in oklab, var(--card-border) 70%, transparent);
+      background: color-mix(in oklab, var(--card-surface--light) 65%, transparent);
+      display: grid;
+      gap: calc(var(--flow-gap) * 0.75);
+    }
+
+    .audit-card__head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--flow-gap);
+      font-size: var(--font-size-s);
+    }
+
+    .audit-card__head h3 {
+      margin: 0;
+    }
+
+    .audit-card__lede {
+      margin: 0;
+      font-size: var(--font-size-xs);
+      opacity: 0.85;
+    }
+
+    .pill-grid {
+      display: grid;
+      gap: 0.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+      align-items: flex-start;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem;
+      padding: 0.25rem 0.65rem;
+      border-radius: 999px;
+      background: color-mix(in oklab, var(--card-surface--dark) 60%, transparent);
+      border: 1px solid color-mix(in oklab, var(--card-border) 60%, transparent);
+      font-size: var(--font-size-xs);
+      white-space: nowrap;
+      text-align: center;
+    }
+
+    .pill--ghost {
+      background: color-mix(in oklab, var(--card-border) 20%, transparent);
+      color: var(--text-color);
     }
 
     .swatch {
@@ -708,6 +1010,23 @@ const mediaThumbs = [
     .icon-section {
       display: grid;
       gap: calc(var(--flow-gap) * 0.75);
+    }
+
+    .mascot-gallery {
+      display: grid;
+      gap: var(--flow-gap);
+      grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+    }
+
+    .mascot-card {
+      display: grid;
+      gap: calc(var(--flow-gap) * 0.5);
+    }
+
+    .mascot-card__meta {
+      display: grid;
+      gap: calc(var(--flow-gap) * 0.25);
+      font-size: var(--font-size-xs);
     }
 
     .icon-section__title {

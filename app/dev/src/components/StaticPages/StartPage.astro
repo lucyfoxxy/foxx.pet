@@ -4,6 +4,7 @@ import Icon from '@Assets/Icons.astro';
 import { ASSETS } from '@Assets/ui';
 import { getPageContent } from '@Content/siteContent';
 import { getRandomAlbumTeaser } from '@utils/albumTeaser';
+import '@Styles/sections/startpage.css';
 
 export const prerender = true;
 
@@ -16,8 +17,8 @@ const meta = {
 
 const hero = {
   ...content.hero,
-  logo: ASSETS.logo_hero,
-  image: ASSETS.logo_hero.src,
+  logo: ASSETS.mascot,
+  image: ASSETS.mascot.src,
 };
 
 const intro = content.intro;
@@ -37,23 +38,34 @@ const isExternalLink = (href: string) => href.startsWith('http');
 
   <section class="content-section content-section--head">
     <Template.Card class="card--plain is-centered is-condensed">
-      <Fragment slot="head">
-        <h1 class="card__title">{hero.heading}</h1>
-      </Fragment>
       <Fragment slot="body">
-        <img
-          src={hero.logo.src}
-          alt={hero.heading}
-          loading='eager'
-          fetchpriority="high"
-          class="media-image hero"
-        />
+        
+        <div class="hero-logo">
+          <div class="hero-logo__mascot">
+            <img
+              src={hero.logo.src}
+              alt={hero.heading}
+              loading='eager'
+              fetchpriority="high"
+              class="media-image hero"
+            />
+          </div>
+
+        <div class="hero-logo__text">
+          <span class="hero-logo__kicker">Welcome to</span>
+
+          <span class="hero-logo__brand">
+            <span class="hero-logo__brand-main">Lucy’s</span>
+            <span class="hero-logo__brand-sub">Cosmos</span>
+          </span>
+
+          <span class="hero-logo__squeak">
+            …Eeeeeeeeeeeeeeeeeeeek!
+          </span>
+        </div>
+      </div>        
       </Fragment>
-      <Fragment slot="foot">
-        <h2>
-          <em>...Eeeeeeeeeeeeeeeeeeeeek!</em>
-        </h2>
-      </Fragment>
+
     </Template.Card>
   </section>
 
