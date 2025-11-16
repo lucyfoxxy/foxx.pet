@@ -43,18 +43,27 @@
   vertical-align: middle;
 }
 
-:where(.control--button, .media-controls, a.control) {
+.control--button, 
+.media-controls, 
+a.control, 
+button.control {
+  transition: var(--transition--control);
   cursor: pointer;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
 }
-
+.control--button:hover, 
+.media-controls:hover, 
+a.control:hover, 
+button.control:hover {
+  transform: var(--transform-raise);
+}
 .control--button {
   background: var(--control-surface--dark);
   outline: 1px solid color-mix(in srgb, var(--color-dark) 5%, transparent);
   outline-offset: -1px;
-  transition: var(--transition--control);
+
 }
 
 .control--badge {
@@ -63,11 +72,6 @@
   padding-inline: calc(var(--control-padding) * 0.75);
   background: var(--card-surface--dark);
   transition: var(--transition--control);
-}
-
-a,button :where(.control) {
-  transition: var(--transition--control);
-  cursor: pointer;
 }
 
 .control--small {
@@ -93,23 +97,19 @@ a,button :where(.control) {
   padding-block: 0;
   padding-inline: 0;
 }
-
+.control--plain:hover,
+.control--plain:focus-visible,
+.control--plain[data-active="true"],
+.control--plain[data-current="true"] {
+  filter: drop-shadow(0 0 0 var(--color-accent)) drop-shadow(2px 2px 2px var(--color-shadow--strong)) ;
+  opacity: 1;
+}
 .control--glow { transition: var(--transition-glow); }
 .control--glow:hover { box-shadow: var(--surface-glow--soft); }
 
 .control--animated { transition: var(--transition-raise); }
 .control--animated:hover { transform: var(--transform-raise); }
 
-/* Filtereffekte für aktive Steuerlemente und Hover/Focus */
-.control--button[data-active="true"],
-.control--button:hover,
-.control--button:focus-visible,
-:where(a.control--badge, button.control--badge):hover,
-:where(a.control--badge, button.control--badge):focus-visible,
-.control--badge[data-current="true"] {
-  filter: drop-shadow(0 0 0 var(--color-accent)) drop-shadow(2px 2px 2px var(--color-shadow--strong)) ;
-  opacity: 1;
-}
 .control--button:hover,
 :where(a.control--badge, button.control--badge):hover {
   transform: translateY(-5%);

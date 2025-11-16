@@ -55,7 +55,7 @@ body::before {
   z-index: -1;
   box-shadow: inset 0 0 164px 64px rgba(0,0,0,.5);
     background: 
-var(--background-overlay), var(--bg-overlay--nebula), var(--bg-overlay--stars), linear-gradient(205deg, #371173, #240a46, rgb(40, 7, 112));
+var(--overlay--dim), var(--overlay--nebula), var(--overlay--stars), linear-gradient(205deg, #371173, #240a46, rgb(40, 7, 112));
   background-blend-mode:multiply,overlay,soft-light,normal;
   background-repeat: no-repeat,repeat,repeat,no-repeat;
   background-size: cover,1280px 1280px,auto,cover;

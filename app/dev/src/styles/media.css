@@ -13,6 +13,7 @@
   gap: var(--control-gap);
 }
 
+
 .media-wrapper--controls { 
   outline: 1px solid var(--card-surface--dark);
   border-radius: var(--radius-l);
@@ -27,9 +28,8 @@
 }
 
 .media-wrapper--thumbs {
-  backdrop-filter: var(--blur-m);
-  box-shadow: var(--control-shadow--inset), 1px 1px 12px -2px var(--color-shadow--strong), inset 0 0 0 1px var(--control-surface--dark);
-  background: var(--card-surface--light);
+  backdrop-filter: var(--blur-m) brightness(1.35) saturate(1.05);
+  box-shadow: var(--surface-shadow--default), inset 0 0 29px color-mix(in oklab,transparent 90%,var(--color-accent));
   border-radius: var(--radius-l);
   padding: var(--card-gap);
 }
@@ -44,16 +44,19 @@
   border-style: hidden;
   background: var(--card-surface--dark);
   overflow: hidden; 
-  max-block-size: 55vh;
+  max-block-size: 60vh;
+  
   filter: drop-shadow(1px 2px 2px var(--color-shadow--strong));
 }
 
 .content-section.cols-2 :where(.media-frame) {
   aspect-ratio: 16 / 10;
+  max-block-size: 40vh;
 }
 
 .content-section.cols-3 :where(.media-frame) {
   aspect-ratio: 1 / 1;
+  max-block-size: 35vh;
 }
 
 @media (max-width: 800px) {
@@ -61,6 +64,7 @@
   .content-section.cols-2 :where(.media-frame),
   .content-section.cols-3 :where(.media-frame) {
     aspect-ratio: 1 / 1;
+    max-block-size: 35vh;
   }
 }
 

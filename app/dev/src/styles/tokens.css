@@ -47,7 +47,7 @@
   --icon-size-m:        calc(var(--font-size-m) * 1.5);
   --icon-size-l:        calc(var(--font-size-l) * 1.4);
 
-  --site-logo--size:         calc(var(--control-gap) + 10vw);
+
   --thumb-size:              clamp(64px, 9vw, 128px);
   --hero-size:               clamp(320px,30vw,calc(var(--container-max) * .3));
   
@@ -62,8 +62,8 @@
   --nav-gap--column:        clamp(var(--space-s),calc(var(--space-s) + 1.5vw),var(--space-xl));
   --nav-gap--row:           var(--space-xs);
 
-  --card-padding:           clamp(var(--space-s),  calc(var(--space-s) + 1.75vw),  var(--space-xl));   
-  --section-gap:            clamp(var(--space-s),  calc(var(--space-s) + 1.5vw),    var(--space-xxl)); 
+  --card-padding:           clamp(var(--space-s),  calc(var(--space-s) + 1.5vw),  var(--space-xl));   
+  --section-gap:            clamp(var(--space-xs),  calc(var(--space-xs) + 1.5vh),    var(--space-xl)); 
   
   --panel-padding:           clamp(var(--space-xs),  calc(var(--space-xs) + 2.5vw),    var(--space-xxxl)); 
   --panel-bar-padding:       calc(var(--panel-padding) * .55);
@@ -89,7 +89,7 @@
   --text-highlight:          color-mix(in oklab, var(--color-light) 65%, var(--color-accent));
 
   --text-shadow--soft:       1px 2px 1px var(--color-shadow--soft);  
-  --text-shadow--strong:     1px 2px 1px var(--color-shadow--soft);
+  --text-shadow--strong:     1px 2px 1px var(--color-shadow--strong);
   --icon-shadow:             3px 4px 3px var(--color-shadow--strong);
 
   --text-glow--soft:         1px 1px 2px var(--color-glow--soft);
@@ -125,25 +125,10 @@
   --outline:                 1px solid color-mix(in oklab, var(--color-light) 10%,transparent);; 
 
   /* ====== Overlays / Filter Presets ============ */   
-  --background-overlay:      radial-gradient(ellipse at center,transparent 50%, var(--color-dark) 120%); 
-  --bg-stars:  var(--bg-overlay--stars);
-  --bg-nebula: var(--bg-overlay--nebula);
+  --overlay--dim:      radial-gradient(ellipse at center,transparent 50%, var(--color-dark) 120%); 
+  /* --overlay--nebula === Def -> Base.astro */
+  /* --overlay--stars  === Def -> Base.astro */
 
-  /* Dim-Layer separat steuerbar */
-  --bg-dim-alpha: .55; /* dunkler/heller machen */
-  --bg-dim: linear-gradient(0deg, rgba(0,0,0,var(--bg-dim-alpha)) 0 100%);
-
-  /* Deine Farbfläche (bereinigt) */
-  --bg-field:
-    radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,.65) 120%),
-    linear-gradient(135deg,
-      oklch(45% .19 285 / 60%) 33%,
-      oklch(43.474% 0.20015 317.691 / 60%) 53%,
-      oklch(40.655% 0.23003 284.249 / 0.728) 80%
-    ),
-    radial-gradient(1200px 900px at top left,    oklch(75% 0.20 285 / .36), transparent 74%),
-    radial-gradient(1100px 800px at center right, oklch(42% 0.22 305 / .28), transparent 72%),
-    linear-gradient(to top, oklch(60% 0.20 230 / .96), transparent 54%);
 
 
 
@@ -166,8 +151,8 @@
   --transition-opacity:          opacity .5s ease-in-out;
   
   --backdrop-brightness:        brightness(1.5);
-  --transform-raise:            translateY(-5px) scale(1.04);
-  --transform-raise--soft:      translateY(-1px) scale(1.01);
-  --transform-raise--strong:      translateY(-10%);
+  --transform-raise:            translateY(-10%);
+  --transform-raise--soft:      translateY(-5%);
+  --transform-raise--strong:      translateY(-15%);
   --transform-scale:            scale(1.05);
 }

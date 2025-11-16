@@ -7,8 +7,19 @@ export default function stickyBar(selector) {
   if (selector !== '.header' && selector !== '.footer') return;
 
   const bar = document.querySelector(selector);
+  
   if (!bar) return;
+  
+  let meta = null;
+  if (selector === '.footer'){
+    meta = bar.querySelector('.footer__meta');
+  };
 
+  let text = null;
+  if (selector === '.header'){
+    text = bar.querySelector('.header__nav a.header__nav-item .header__nav-text');
+  };
+  
   const style = window.getComputedStyle(bar);
   if (style.position !== 'sticky') {
     // Falls Layout mal geändert wird, ohne sticky: still aussteigen
@@ -35,7 +46,9 @@ export default function stickyBar(selector) {
     const scrollY = window.scrollY || window.pageYOffset;
     const viewportHeightNow = window.innerHeight || doc.clientHeight;
     const docHeightNow = doc.scrollHeight;
-    const isShortPageNow = docHeightNow <= viewportHeightNow + 1;
+    const contentHeightNow = docHeightNow - bar.offsetHeight;
+    const isShortPageNow = contentHeightNow <= viewportHeightNow + 1;
+
 
     let visible = true;
 
@@ -52,12 +65,18 @@ export default function stickyBar(selector) {
         visible = scrollY <= anchorTop;
       }
     } else {
-      // Footer:
-      // - kurze Seite: immer visible=true
-      // - sonst: visible=true nur am Seitenende
+    const barHeight = bar.offsetHeight || 0;
+    const scrollRoomNow = Math.max(0, docHeightNow - viewportHeightNow);
+
+    // wirklich "short", wenn man weniger als ~¾ Barhöhe scrollen kann
+    const minScrollForLongPage = Math.max(barHeight * 0.75, 32);
+    const isShortPageNow = scrollRoomNow <= minScrollForLongPage;
       if (isShortPageNow) {
         visible = true;
       } else {
+        // Trick: docHeightNow und footerHeight ändern sich beide,
+        // je nachdem ob Meta sichtbar ist. Durch (docHeightNow - footerHeight)
+        // bleibt die Schwelle stabil, egal ob Meta an/aus ist.
         const footerHeight = bar.offsetHeight;
         const threshold = Math.max(docHeightNow - footerHeight - 2, 0);
         const atEnd = scrollY + viewportHeightNow >= threshold;
@@ -66,6 +85,13 @@ export default function stickyBar(selector) {
     }
 
     if (visible !== lastVisible) {
+      if(selector === '.footer') {       
+        meta.setAttribute('data-visible', visible ? 'true' : 'false');
+      }; 
+      if(selector === '.header') {
+        
+        text.setAttribute('data-visible', visible ? 'true' : 'false');
+      };       
       bar.setAttribute('data-visible', visible ? 'true' : 'false');
       lastVisible = visible;
     }
@@ -77,6 +103,16 @@ export default function stickyBar(selector) {
   };
 
   // Initialen Zustand setzen
+        if(selector === '.footer') {
+        
+        meta.setAttribute('data-visible', 'false');
+        bar.setAttribute('data-visible', 'false');
+      }; 
+      if(selector === '.header') {
+        bar.setAttribute('data-visible', 'true' );
+        text.setAttribute('data-visible', 'true');
+      };       
+      
   update();
 
   window.addEventListener('scroll', onScrollOrResize, { passive: true });

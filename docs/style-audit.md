@@ -210,7 +210,7 @@ Total unique tokens: 117
 | --- | --- | ---: | ---: | --- |
 | `--animated` | `src/styles/controls.css` | 1 | 0 | _No var(--token) references found_ |
 | `--backdrop-brightness` | `src/styles/tokens.css` | 1 | 0 | _No var(--token) references found_ |
-| `--background-overlay` | `src/styles/tokens.css` | 1 | 2 | `src/styles/base.css` (1)<br>`src/styles/site.css` (1) |
+| `--overlay--dim` | `src/styles/tokens.css` | 1 | 2 | `src/styles/base.css` (1)<br>`src/styles/site.css` (1) |
 | `--badge` | `src/styles/typography.css` | 1 | 0 | _No var(--token) references found_ |
 | `--bg-dim` | `src/styles/tokens.css` | 1 | 1 | `src/styles/tokens.css` (1) |
 | `--bg-dim-alpha` | `src/styles/tokens.css` | 1 | 1 | `src/styles/tokens.css` (1) |
