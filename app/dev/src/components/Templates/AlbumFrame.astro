@@ -27,7 +27,7 @@ interface Props {
 const { album } = Astro.props;
 
 ---
-<Template.Card class="card--plain card--flush is-centered" headClass="card__head--column">
+<Template.Card class="card--flush card--ghost is-centered" headClass="card__head--column">
   {album.description ? (
     <Fragment slot="body">
       <div class="prose">

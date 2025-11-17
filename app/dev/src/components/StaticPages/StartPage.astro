@@ -17,8 +17,8 @@ const meta = {
 
 const hero = {
   ...content.hero,
-  logo: ASSETS.mascot,
-  image: ASSETS.mascot.src,
+  logo: ASSETS.mascot_v2,
+  image: ASSETS.mascot_v2.src,
 };
 
 const intro = content.intro;
@@ -36,41 +36,29 @@ const isExternalLink = (href: string) => href.startsWith('http');
     <link rel="preload" href={hero.logo.src} as="image" type="image/webp" />
   </head>
 
-  <section class="content-section content-section--head">
+  <section class="content-section content-section--hero">
+    <!--- Hero Card --->   
     <Template.Card class="card--plain is-centered is-condensed">
       <Fragment slot="body">
         
         <div class="hero-logo">
-          <div class="hero-logo__mascot">
-            <img
-              src={hero.logo.src}
-              alt={hero.heading}
-              loading='eager'
-              fetchpriority="high"
-              class="media-image hero"
-            />
-          </div>
-
-        <div class="hero-logo__text">
-          <span class="hero-logo__kicker">Welcome to</span>
-
+          <div class="hero-logo__text">
+            <h4 class="hero__signature">Welcome to</h4>
+            <h4 class="hero__signature hero__signature--lucy">Lucy's</h4>
           <span class="hero-logo__brand">
-            <span class="hero-logo__brand-main">Lucy’s</span>
-            <span class="hero-logo__brand-sub">Cosmos</span>
+            <span class="hero-logo__brand-sub">Cozy Cosmos</span>
           </span>
 
-          <span class="hero-logo__squeak">
-            …Eeeeeeeeeeeeeeeeeeeek!
+          <span class="hero-logo__squeak is-italic">
+            … a place full of love and joy 
           </span>
         </div>
       </div>        
       </Fragment>
-
     </Template.Card>
-  </section>
 
-  <section class="content-section cols-2">
-    <section class="content-section">
+  <section class="content-section content-section--masonry">
+      <!--- Intro Card --->  
       <Template.Card>
         <Fragment slot="head">
           <h2 class="card__title">{intro.heading}</h2>
@@ -85,10 +73,12 @@ const isExternalLink = (href: string) => href.startsWith('http');
         <Fragment slot="foot">
           <div class="prose">
             <p>- Always follow your heart -</p>
-            <h3 class="is-italic">{intro.signature}</h3>
+            <h4 class="is-italic">{intro.signature}</h4>
           </div>
         </Fragment>
       </Template.Card>
+
+      <!--- Contact Card --->      
       <Template.Card class="" headClass="card__head--column">
         <Fragment slot="head">
           <h2 class="card__title">{contact.heading}</h2>
@@ -109,17 +99,20 @@ const isExternalLink = (href: string) => href.startsWith('http');
           </div>
         </Fragment>
       </Template.Card>
-    </section>
 
-    <section class="content-section">
+      <!--- Feature Card --->  
       <Template.Card class="" headClass="card__head--column">
         <Fragment slot="head">
           <h2 class="card__title">{feature.heading}</h2>
           <p>{feature.description}</p>
         </Fragment>
-      </Template.Card>
+      </Template.Card>      
+
+
+
+      <!--- Album Card --->  
       <Template.AlbumFrame album={albumData} />
-    </section>
+
   </section>
 
   <script>

@@ -1,66 +1,62 @@
 .hero-logo {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  align-items: center;
-  column-gap: var(--space-xl, 2rem);
-}
-
-/* Mobile: alles untereinander */
-@media (max-width: 700px) {
-  .hero-logo {
-    grid-template-columns: 1fr;
-    justify-items: center;
+    display: grid;
+    place-items: center;
     text-align: center;
-    row-gap: var(--space-md, 1.25rem);
-  }
+
+    inline-size: 100%;
+    block-size: var(--hero-size);
+
+    background-image: var(--img--mascot-v2);
+    background-repeat: no-repeat;
+    background-size: calc(.7 * var(--hero-size));
+    /* leicht nach unten schieben, damit der Text mittig über dem Körper sitzt */
+    background-position: 40% 85%;
+    mix-blend-mode: luminosity;
+    
+    filter:
+        drop-shadow(2px 3px 3px var(--color-dark))
+        drop-shadow(2px 3px 6px var(--color-shadow--soft));
+    }
+
+    /* Ein Wrapper für alles Textige */
+ .hero-logo__text {
+    display: grid;
+    row-gap: 0.15em;
+
+    /* Text ein kleines Stück nach oben ziehen, damit er nicht
+        mitten in Lucys Gesicht hängt */
+
+    transform: translate(-3%, 12%) scale(1.5);
+    text-shadow:
+        2px 3px 6px var(--color-dark),
+        2px 3px 16px var(--color-shadow--soft);
 }
 
-.hero-logo__mascot img {
-  display: block;
-  max-width: min(220px, 40vw);
-  height: auto;
-  filter: drop-shadow(0 0 10px rgba(0,0,0,.7));
+/* "Welcome to Lucy's" */
+.hero__signature {
+    transform: translate(-15%, 50%) scale(.45);
+    text-align: start;
+    opacity: 0.9;
+}
+.hero__signature--lucy { 
+    transform: translate(15%, 0%) scale(1.12);
 }
 
-.hero-logo__text {
-  display: grid;
-  row-gap: 0.25em;
-}
-
-/* "Welcome to" */
-.hero-logo__kicker {
-  font-size: var(--fs-kicker, 1.2rem);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  opacity: 0.9;
-}
-
-/* Lucy’s Cosmos Zeile */
-.hero-logo__brand {
-  display: inline-grid;
-  grid-auto-flow: row;
-}
-
-/* Lucy’s */
-.hero-logo__brand-main {
-  font-family: var(--font-display, inherit);
-  font-size: clamp(2.2rem, 3vw, 2.8rem);
-  font-weight: 700;
-}
-
-/* Cosmos */
+/* Cozy Cosmos */
 .hero-logo__brand-sub {
-  font-family: var(--font-display, inherit);
-  font-size: clamp(3rem, 4.5vw, 3.8rem);
+  font-family: var(--font--fancy);
+  font-size: var(--font-size-xxl);
+  line-height: var(--line-height-s);
   font-weight: 800;
-  text-shadow:
-    0 0 6px rgba(0,0,0,.7),
-    0 0 18px rgba(0,0,0,.8);
 }
 
-/* Eeeeeek */
+/* …Eeeeeek */
 .hero-logo__squeak {
-  margin-top: 0.5em;
-  font-size: var(--fs-squeak, 1rem);
-  letter-spacing: 0.12em;
+    transform: translate(-2%, -80%);
+    text-align: end;
+    opacity: 0.9;
 }
+
+
+
+

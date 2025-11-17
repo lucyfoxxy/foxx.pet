@@ -18,8 +18,9 @@
   --radius-xxl:             72px;
   /* ============= Font & Other Sizes ================= */
   /* ====== Font Styles ====== */
-  --primary-font-family:     Grandstander, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --secondary-font-family:   'Fuzzy Bubbles', var(--primary-font-family);
+  --font--display:     Grandstander, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font--fancy:   'Fuzzy Bubbles', var(--font--display);
+  --font--signature:  'Beautiful Dream', var(--font--display);
 
   --thin-font-weight:        300;
   --normal-font-weight:      400;
@@ -39,9 +40,10 @@
 
   --font-size-xs:        clamp(.75rem, calc(.75rem + .025vw), .95rem);
   --font-size-s:         clamp(.9rem,  calc(.9rem + .075vw), 1.05rem);
-  --font-size-m:        clamp(1rem, calc(1rem + .35vw), 1.45rem);
+  --font-size-m:         clamp(1rem, calc(1rem + .35vw), 1.45rem);
   --font-size-l:         clamp(1.4rem, calc(1.4rem + .4vw), 1.8rem);
   --font-size-xl:        clamp(1.75rem, calc(1.75rem + 1.5vw), 3rem);
+  --font-size-xxl:       clamp(3rem, calc(3rem + 1.5vw), 3.6rem) ;
 
   --icon-size-s:        calc(var(--font-size-s) * 1.1);
   --icon-size-m:        calc(var(--font-size-m) * 1.45);
@@ -49,7 +51,7 @@
 
 
   --thumb-size:              clamp(64px, 9vw, 128px);
-  --hero-size:               clamp(96px,128px,196px);
+  --hero-size:               calc(6 * var(--font-size-xxl));
   
 
   /* ============= Role specific Spacings ============= */
