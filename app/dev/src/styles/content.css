@@ -45,11 +45,7 @@
   page-break-inside: avoid;
   margin-block-end: var(--section-gap);
 }
-
 .content-section--masonry .card { min-block-size: auto; }
-
-
-
 
 /* ====== CONTENT CARD ====== */
 .card{
@@ -72,23 +68,21 @@
 
 .card--ghost    { box-shadow: var(--surface-shadow--default), inset 0 0 29px color-mix(in oklab,transparent 90%,var(--color-accent));}
 .card--plain    { background: transparent; box-shadow: none; backdrop-filter: none;}
-.card--dark   { 
-  backdrop-filter: var(--blur-m) brightness(1.15) saturate(.9);
-  box-shadow: var(--surface-shadow--default), inset 0 0 29px color-mix(in oklab,transparent 20%,var(--card-surface--dark)); }
 .card--flush  { padding: 0;  gap: 0;}
 .card--flush .card__head {row-gap: 0; column-gap: 0;}
 .card--plain :where(.prose){font-weight: var(--thick-font-weight);}
+
+.card--animated { transition: var(--transition-hover--card); }
+.card--animated:hover,
+.card--animated:focus-visible {
+  transform: var(--transform-hover--card);
+  filter: var(--filter-hover--card);
+}
+
 .is-centered { justify-items: center; text-align: center; }
 .is-centered :where(.prose) { margin-inline: auto; }
 .is-condensed { gap: var(--flow-gap); }
 .is-italic { font-style: italic; }
-.is-animated { transition: var(--transition--card); }
-.is-animated:hover,
-.is-animated:focus-visible {
-  transform: var(--transform-scale);
-  filter:brightness(1.1) saturate(1.1) drop-shadow(0 0 var(--color-dark));
-}
-
 
 /* ===== CARD: HEAD ===== */
 .card__head { 
@@ -157,21 +151,21 @@
   align-items: flex-start;
   padding: var(--card-padding);
   border-radius: var(--radius-m);
-  background: color-mix(in oklab, var(--card-surface--light) 70%, transparent);
+  background: color-mix(in oklab, var(--control-surface--light) 30%, transparent);
   box-shadow: var(--surface-shadow--soft);
   text-decoration: none;
   color: inherit;
-  transition: var(--transition--soft);
+  transition: var(--transition-hover--card);
 }
 
 .card__body > ol > li > a:hover,
 .card__body > ol > li > a:focus-visible {
-  transform: var(--transform-scale--soft);
-  box-shadow: var(--surface-glow--soft);
+  transform: var(--transform-hover--card);
+  box-shadow: var(--shadow-hover--control);
 }
 
 .card__body > ol > li > [data-chapter][data-active] {
-  box-shadow: var(--surface-glow--strong);
+  box-shadow: var(--shadow-hover--control);
 }
 
 [data-blog-chapter] {

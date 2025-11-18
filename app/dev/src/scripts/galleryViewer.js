@@ -21,7 +21,7 @@ export function initGalleryFrame(root = document) {
   const slug = frame.getAttribute('data-slug');
   const autoplay = frame.getAttribute('data-autoplay') === 'true';
   const random = frame.getAttribute('data-random') === 'true';
-  const interval = parseInt(frame.getAttribute('data-interval') || '7000', 10);
+  const interval = parseInt(frame.getAttribute('data-interval') || '8500', 10);
   const imgEl = frame.querySelector('.media-image');
 
   const controls = wrapper.querySelector('.card__overlay--controls');

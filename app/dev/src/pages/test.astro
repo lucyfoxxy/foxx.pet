@@ -27,7 +27,6 @@ const navSections = [
 
 const stylesheetStats = [
   { file: 'src/styles/base.css', classes: 2, tokens: 0 },
-  { file: 'src/styles/bg.css', classes: 2, tokens: 0 },
   { file: 'src/styles/content.css', classes: 27, tokens: 2 },
   { file: 'src/styles/controls.css', classes: 28, tokens: 5 },
   { file: 'src/styles/media.css', classes: 18, tokens: 1 },
@@ -102,13 +101,7 @@ const mascotGallery = [
     token: 'ASSETS.mascot',
     description: 'Original hero render used throughout the landing + blog hero cards.',
   },
-  {
-    id: 'mascot-v2',
-    label: 'Mascot v2 (Spacewalk)',
-    asset: ASSETS.mascot_v2,
-    token: 'ASSETS.mascot_v2',
-    description: 'New floating fox illustration for feature banners and experimental layouts.',
-  },
+
 ];
 
 const surfaceEffects = [
@@ -210,7 +203,7 @@ const cardVariants = [
   },
   {
     title: 'Condensed animated card',
-    classes: 'is-condensed is-animated',
+    classes: 'is-condensed card--animated',
     note: 'Tighter vertical rhythm and hover scale effect.',
   },
 ];

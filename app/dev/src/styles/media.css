@@ -105,7 +105,7 @@
   transition: opacity .7s ease;
   opacity: 1;
   will-change: opacity, transform, top, bottom;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .media-image--placeholder { background: var(--card-surface--dark);}
@@ -123,16 +123,19 @@
 
 .media-image.is-transitioning { opacity: 0; }
 .media-image.is-animating {
-  animation: media-image__animation var(--gallery-interval) ease;
+  animation: media-slideshow var(--gallery-interval) ease;
 }
 
-@keyframes media-image__animation {
+@keyframes media-slideshow {
   0%   { opacity:  .02; transform: scale(5.00) rotate(90deg); }
   10%  { opacity: 1.00; transform: scale(1.25); }
-  90%  { opacity: 0.90; }
-  100% { opacity:  0.0; transform: scale(1.00);}
+  90%  { opacity: 0.90; transform: scale(1.00); }
+  100% { opacity:  0.0; }
 }
-
+.media-image--cover {
+  object-fit: cover;
+  transform: scale(1.05);
+}
 .media-image--thumb { 
   inline-size: 100%;
   block-size: 100%;
@@ -142,6 +145,7 @@
   transition: var(--transition--raise), var(--transition--opacity);
   background: transparent;
   opacity: .8;
+  object-fit: cover;
   will-change: opacity;
 }
 .media-frame--thumb[aria-current="true"] > *,
