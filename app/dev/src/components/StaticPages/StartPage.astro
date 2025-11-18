@@ -17,8 +17,8 @@ const meta = {
 
 const hero = {
   ...content.hero,
-  logo: ASSETS.mascot_v2,
-  image: ASSETS.mascot_v2.src,
+  logo: ASSETS.mascot,
+  image: ASSETS.mascot.src,
 };
 
 const intro = content.intro;
@@ -36,24 +36,26 @@ const isExternalLink = (href: string) => href.startsWith('http');
     <link rel="preload" href={hero.logo.src} as="image" type="image/webp" />
   </head>
 
-  <section class="content-section content-section--hero">
+  <section class="content-section">
     <!--- Hero Card --->   
-    <Template.Card class="card--plain is-centered is-condensed">
+    <Template.Card class="card--plain card--flush is-centered">
       <Fragment slot="body">
-        
-        <div class="hero-logo">
-          <div class="hero-logo__text">
-            <h4 class="hero__signature">Welcome to</h4>
-            <h4 class="hero__signature hero__signature--lucy">Lucy's</h4>
-          <span class="hero-logo__brand">
-            <span class="hero-logo__brand-sub">Cozy Cosmos</span>
-          </span>
 
-          <span class="hero-logo__squeak is-italic">
-            … a place full of love and joy 
-          </span>
+        <div class="hero">
+          <div class="hero__text">
+        
+            <div class="hero__signature">
+              <span class="hero__welcome">{hero.heading}</span>
+              <span class="hero__lucy">{hero.subheading}</span>
+            </div>
+
+            <div class="hero__title">{hero.title}</div>
+
+            <div class="hero__tagline is-italic">{hero.subtitle}</div>
+
+          </div>
         </div>
-      </div>        
+      
       </Fragment>
     </Template.Card>
 
