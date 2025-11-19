@@ -5,19 +5,16 @@
 
 .hero {
   place-items: center;
-  text-align: center;
+  align-content: end;
 
   font-size: var(--hero-scale);
-  inline-size: 100%;
+  
   block-size: 8.65em;
-
-  row-gap: 0.04em;
-  margin-block-start: clamp(.25em,calc(.25em + .5vw),1.5em);
-
+  margin-block-start: var(--section-gap);
   mix-blend-mode: screen;
   background: 
     var(--hero--bg)
-    calc(50% - 2.75em) calc(50% - 0.65em)/8.45em 
+    calc(50% - 2em) calc(50% - .25em)/8.45em 
     no-repeat;
   
   filter:
@@ -34,14 +31,14 @@
 .hero__signature {
   grid-template-areas: "welcome sub";
   inline-size: auto;
-  row-gap: .25em;
-  column-gap: 3.5em;
+  row-gap: 0;
+  column-gap: 3.25em;
   
   
   align-items:center;
   text-align: start;
   justify-self: center;
-  
+  transform: translate(.75em, -.35em);
 }
 
 .hero__welcome {
@@ -50,12 +47,11 @@
   font-weight: 300;
   
   letter-spacing: var(--letter-spacing-l);
-  font-size: .8em;
+  font-size: .75em;
   
   transform: rotate(-6deg);
   opacity: .95;
 }
-.hero__welcome::first-letter {font-size: 1em;}
 
 .hero__sub {
   font-family: var(--font--signature);
@@ -67,8 +63,20 @@
   transform: translateY(.5em) rotate(6deg);
 
 }
-.hero__lucy {  grid-area: lucy; font-size: 1.12em; font-weight: thick;}
-.hero__to { opacity: .9;  grid-area: to; font-size: .55em;transform: translate(.15em,.25em); font-weight: thin}
+.hero__lucy { 
+  grid-area: lucy; 
+  font-size: 1.12em; 
+  font-weight: thick;
+}
+
+.hero__to { 
+  opacity: .9;  
+  grid-area: to; 
+  font-size: .5em;
+  transform: translate(.25em,.25em); 
+  font-weight: thin
+}
+
 .hero__title {
   font-family: var(--font--fancy);
   font-weight: var(--bold-font-weight);
