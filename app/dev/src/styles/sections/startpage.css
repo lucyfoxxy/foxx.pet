@@ -17,7 +17,7 @@
   mix-blend-mode: screen;
   background: 
     var(--hero--bg)
-    calc(50% - 2.25em) calc(50% - 0.65em)/8.45em 
+    calc(50% - 2.75em) calc(50% - 0.65em)/8.45em 
     no-repeat;
   
   filter:
@@ -35,23 +35,24 @@
   grid-template-areas: "welcome sub";
   inline-size: auto;
   row-gap: .25em;
-  column-gap: 4.5em;
+  column-gap: 3.5em;
   
   
   align-items:center;
   text-align: start;
   justify-self: center;
-  transform: translate(.5em, .125em);
+  
 }
 
 .hero__welcome {
   grid-area: welcome;
-  font-family: var(--font--signature);
-  font-weight: thin;
-  letter-spacing: var(--letter-spacing-m);
-  font-size: 0.7em;
+  font-family: var(--font--fancy);
+  font-weight: 300;
   
-  transform: translate(.5em,-.5em) rotate(-3.5deg);
+  letter-spacing: var(--letter-spacing-l);
+  font-size: .8em;
+  
+  transform: rotate(-6deg);
   opacity: .95;
 }
 .hero__welcome::first-letter {font-size: 1em;}
@@ -63,17 +64,17 @@
   grid-template-areas: "to lucy";
   gap: .015em;
   letter-spacing: var(--letter-spacing-xl);
-  transform: translate(.25em,.25em) rotate(6deg);
+  transform: translateY(.5em) rotate(6deg);
 
 }
-.hero__lucy {  grid-area: lucy; font-size: 1.2em; font-weight: thick;}
+.hero__lucy {  grid-area: lucy; font-size: 1.12em; font-weight: thick;}
 .hero__to { opacity: .9;  grid-area: to; font-size: .55em;transform: translate(.15em,.25em); font-weight: thin}
 .hero__title {
   font-family: var(--font--fancy);
   font-weight: var(--bold-font-weight);
   font-size: 3em;       
   font-variant: small-caps;
-  letter-spacing: var(--letter-spacing-l);
+  letter-spacing: var(--letter-spacing-xl);
 }
 
 .hero__tagline {
