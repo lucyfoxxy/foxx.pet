@@ -2,7 +2,6 @@
     "files.exclude": {
         "**/.astro/**": true,
         "**/.Trash-1000": true,
-        "**/dist": true,
         "**/node_modules": true
     }
 }

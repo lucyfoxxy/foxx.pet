@@ -5,6 +5,8 @@ import { registry as iconRegistry } from '@Assets/icons.registry';
 import { COVERS } from '@Assets/covers';
 import { ASSETS } from '@Assets/ui';
 import { Picture } from 'astro:assets';
+import { isProd } from '@utils/env';
+export const prerender = !isProd;
 
 const formatClassList = (value: string, fallback = 'default') =>
   value && value.trim().length > 0

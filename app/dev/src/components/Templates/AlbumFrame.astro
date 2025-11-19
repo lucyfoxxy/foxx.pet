@@ -22,12 +22,13 @@ interface Props {
   album: AlbumViewData;
   cardClass?: string;
   frameClass?: string;
+  imageClass?: string;
 }
 
-const { album } = Astro.props;
+const { album, cardClass, frameClass, imageClass } = Astro.props as Props;
 
 ---
-<Template.Card class="card--flush card--ghost is-centered" headClass="card__head--column">
+<Template.Card class:list={['card--flush', 'card--ghost', 'is-centered', cardClass]} headClass="card__head--column">
   {album.description ? (
     <Fragment slot="body">
       <div class="prose">
@@ -39,9 +40,8 @@ const { album } = Astro.props;
   <Fragment slot="body">
     <div class="media-wrapper media-wrapper--controls">
       <div
-        class="media-frame"
+        class:list={['media-frame', frameClass]}
         data-slug={album.albumSlug}
-        data-href={album.href}    
         data-autoplay="true"
         data-interval="8500"
         data-random="true"
@@ -55,7 +55,7 @@ const { album } = Astro.props;
           width={album.initialThumb?.width}
           height={album.initialThumb?.height}
           alt={album.initialThumb?.alt ?? ''}
-          class="media-image"
+          class:list={['media-image', imageClass]}
           loading="eager"
           decoding="async"
           data-initial-full={album.initialThumb?.full ?? undefined}

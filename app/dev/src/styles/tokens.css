@@ -105,11 +105,7 @@
   --surface-shadow--default: 0 0 18px -10px var(--color-shadow--soft),0 0 24px -6px var(--color-shadow--strong);
   --surface-shadow--strong:  0 0 20px -10px var(--color-shadow--soft),0 0 28px -6px var(--color-shadow--strong),0 0 28px 0 var(--color-shadow--strong);
 
-  --control-shadow--inset: inset 0 0 99px 0 var(--color-shadow--strong);
-  --card-shadow--inset: inset 0 0 24px 2px var(--color-shadow--soft),inset 0 0 0 1px var(--color-shadow--strong);
 
-  --surface-glow--strong:   0 0 2px 2px var(--color-glow--strong),inset   0 0 96px 0 var(--color-glow--soft);
-  --surface-glow--soft:     inset   0 0 12px 1px var(--color-glow--soft);
   
   /* ====== Filters ======*/
   --filter-hover--card:     brightness(1.1) saturate(1.1) drop-shadow(0 0 var(--color-dark));
@@ -154,11 +150,7 @@
 
   --transition--glow:            color .2s ease, text-shadow .2s ease, transform .2s ease, box-shadow .2s ease;
   
-  --transition--control:        box-shadow .25s ease,
-                                backdrop-filter .25s ease,
-                                font-weight .25s ease,
-                                opacity .25s ease,
-                                transform .25s ease;
+  --transition--control:        filter .4s ease, saturate .4s ease, box-shadow .5s ease, transform .25s ease;
                                 
 
   --transition--opacity:          opacity .5s ease-in-out;
