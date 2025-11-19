@@ -32,27 +32,36 @@
 }
 
 .hero__signature {
-  grid-template-areas: "welcome" "lucy";
-
+  grid-template-areas: "welcome sub";
+  inline-size: auto;
+  row-gap: .25em;
+  column-gap: 4em;
   font-family: var(--font--signature);
+  
+  align-items:center;
   text-align: start;
-  transform: translate(2.35em,.5em);
+  justify-self: center;
+  transform: translateY(.75em);
 }
 
 .hero__welcome {
   grid-area: welcome;
-
-  font-size: 0.5em;
-  transform: translate(1.75em, .75em);
+  letter-spacing: var(--letter-spacing-l);
+  font-size: 0.7em;
+  
 }
 
-.hero__lucy {
-  grid-area: lucy;
-
-  font-size: 1.25em;
+.hero__sub {
+  display: grid;
+  grid-area: sub;
+  grid-template-areas: "to lucy";
+  gap: .015em;
   letter-spacing: var(--letter-spacing-xl);
-}
+  transform: translateY(.25em);
 
+}
+.hero__lucy {  grid-area: lucy; font-size: 1.125em;}
+.hero__to {   grid-area: to; font-size: .55em;transform: translate(.15em,.25em);}
 .hero__title {
   font-family: var(--font--fancy);
   font-weight: var(--bold-font-weight);
