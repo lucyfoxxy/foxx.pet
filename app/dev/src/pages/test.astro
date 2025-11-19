@@ -8,6 +8,10 @@ import { Picture } from 'astro:assets';
 import { isProd } from '@utils/env';
 export const prerender = !isProd;
 
+if (isProd) {
+  return Astro.redirect('/');
+}
+
 const formatClassList = (value: string, fallback = 'default') =>
   value && value.trim().length > 0
     ? value
@@ -69,31 +73,10 @@ const unusedClasses = [
   'table__wrap',
 ];
 
-const unusedTokens = [
-  '--animated',
-  '--backdrop-brightness',
-  '--badge',
-  '--bg-field',
-  '--bg-nebula',
-  '--bg-stars',
-  '--blur-xl',
-  '--blur-xs',
-  '--blur-xxl',
-  '--blur-xxs',
-  '--button',
-  '--card-shadow--inset',
-  '--glow',
-  '--icon-shadow',
-  '--letter-spacing-m',
-  '--nav-gap--column',
-  '--nav-gap--row',
-  '--plain',
-  '--site-logo--size',
-  '--space-m',
-  '--title',
-  '--transform-raise--soft',
-  '--transform-raise--strong',
-];
+const unusedTokens: string[] = [];
+
+const tokenAuditNote =
+  'Glow-specific tokens were removed during the control refactor. The audit will return once the new token set is finalized.';
 
 const mascotGallery = [
   {
@@ -128,34 +111,6 @@ const surfaceEffects = [
     preview: 'shadow-preview--surface-strong',
     description: 'High emphasis surfaces like header or footer.',
   },
-  {
-    id: 'surface-glow-soft',
-    label: 'Surface Glow Soft',
-    token: '--surface-glow--soft',
-    preview: 'shadow-preview--glow-soft',
-    description: 'Gentle glow triggered by `.control--glow` hover states.',
-  },
-  {
-    id: 'surface-glow-strong',
-    label: 'Surface Glow Strong',
-    token: '--surface-glow--strong',
-    preview: 'shadow-preview--glow-strong',
-    description: 'Intense hover glow used on animated cards.',
-  },
-  {
-    id: 'control-inset',
-    label: 'Control Inset Shadow',
-    token: '--control-shadow--inset',
-    preview: 'shadow-preview--control-inset',
-    description: 'Creates the pressed look for buttons and controls.',
-  },
-  {
-    id: 'card-inset',
-    label: 'Card Inset Shadow',
-    token: '--card-shadow--inset',
-    preview: 'shadow-preview--card-inset',
-    description: 'Inner glow accent that appears on dark cards.',
-  },
 ];
 
 const textEffects = [
@@ -181,11 +136,6 @@ const cardVariants = [
     title: 'Default card',
     classes: '',
     note: 'Balanced spacing, frosted surface & default shadow stack.',
-  },
-  {
-    title: 'Dark card',
-    classes: 'card--dark',
-    note: 'Uses darker surface with inset shadow for contrast.',
   },
   {
     title: 'Ghost card',
@@ -217,11 +167,6 @@ const buttonVariants = [
     description: 'Primary button surface.',
   },
   {
-    label: 'Dark button',
-    classes: 'control control--button control--dark',
-    description: 'High contrast variant used on cards & overlays.',
-  },
-  {
     label: 'Plain button',
     classes: 'control control--button control--plain',
     description: 'No backdrop or outline – integrates with media.',
@@ -230,12 +175,6 @@ const buttonVariants = [
     label: 'Ghost button',
     classes: 'control control--button control--ghost',
     description: 'Outline-free subtle action.',
-  },
-  {
-    label: 'Glow + animated',
-    classes: 'control control--button control--dark control--glow control--animated',
-    description: 'Hover to see glow, brightness & scale transitions.',
-    icon: 'sparkles',
   },
 ];
 
@@ -254,7 +193,7 @@ const buttonSizes = [
   },
   {
     label: 'Circle',
-    classes: 'control control--button control--dark control--circle',
+    classes: 'control control--button control--circle',
     icon: 'paw',
   },
   {
@@ -269,16 +208,12 @@ const badgeVariants = [
     classes: 'control control--badge',
   },
   {
-    label: 'Dark badge',
-    classes: 'control control--badge control--dark',
-  },
-  {
     label: 'Current badge',
     classes: 'control control--badge is-current',
   },
   {
-    label: 'Badge link',
-    classes: 'control control--badge control--dark control--glow',
+    label: 'Ghost badge',
+    classes: 'control control--badge control--ghost',
   },
 ];
 
@@ -337,7 +272,7 @@ const mediaThumbs = [
       <Fragment slot="foot">
         <div class="controls controls--center controls--tight">
           {navSections.map((section) => (
-            <a class="control control--button control--dark control--glow" href={`#${section.id}`}>
+            <a class="control control--button" href={`#${section.id}`}>
               {section.label}
             </a>
           ))}
@@ -410,11 +345,15 @@ const mediaThumbs = [
               <p class="audit-card__lede">
                 Variables with zero <code>var(--token)</code> references. Candidates for cleanup or future refactors.
               </p>
-              <div class="pill-grid" role="list">
-                {unusedTokens.map((token) => (
-                  <span class="pill pill--ghost" role="listitem">{token}</span>
-                ))}
-              </div>
+              {unusedTokens.length > 0 ? (
+                <div class="pill-grid" role="list">
+                  {unusedTokens.map((token) => (
+                    <span class="pill pill--ghost" role="listitem">{token}</span>
+                  ))}
+                </div>
+              ) : (
+                <p class="audit-card__note">{tokenAuditNote}</p>
+              )}
             </div>
           </div>
         </div>
@@ -425,8 +364,8 @@ const mediaThumbs = [
   <section class="content-section cols-2" id="shadows">
     <Template.Card headClass="card__head--column" class="is-condensed">
       <Fragment slot="head">
-        <h2 class="card__title">Surface shadows & glows</h2>
-        <p>Tokens that set depth and halo effects for cards, media and controls.</p>
+        <h2 class="card__title">Surface shadows</h2>
+        <p>Tokens that set depth cues for cards, media and controls.</p>
       </Fragment>
       <Fragment slot="body">
         <div class="swatch-grid">
@@ -594,7 +533,7 @@ const mediaThumbs = [
                   <div class="layout-group__label">{variant.label}</div>
                   <div class={variant.classes}>
                     <span class="control control--button control--small">Alpha</span>
-                    <span class="control control--button control--dark">Beta</span>
+                    <span class="control control--button">Beta</span>
                     <span class="control control--button control--plain">Gamma</span>
                   </div>
                 </div>
@@ -849,6 +788,12 @@ const mediaThumbs = [
       opacity: 0.85;
     }
 
+    .audit-card__note {
+      margin: 0;
+      font-size: var(--font-size-xs);
+      opacity: 0.8;
+    }
+
     .pill-grid {
       display: grid;
       gap: 0.5rem;
@@ -891,16 +836,6 @@ const mediaThumbs = [
     .shadow-preview--surface-soft { box-shadow: var(--surface-shadow--soft); }
     .shadow-preview--surface-default { box-shadow: var(--surface-shadow--default); }
     .shadow-preview--surface-strong { box-shadow: var(--surface-shadow--strong); }
-    .shadow-preview--glow-soft { box-shadow: var(--surface-glow--soft); }
-    .shadow-preview--glow-strong { box-shadow: var(--surface-glow--strong); }
-    .shadow-preview--control-inset {
-      background: var(--card-surface--dark);
-      box-shadow: var(--control-shadow--inset);
-    }
-    .shadow-preview--card-inset {
-      background: var(--card-surface--dark);
-      box-shadow: var(--card-shadow--inset);
-    }
 
     .text-preview {
       display: inline-flex;

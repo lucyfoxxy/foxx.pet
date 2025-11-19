@@ -1,6 +1,6 @@
 ---
 import ICONS from '@Assets/Icons.astro';
-
+import { isProd } from '@utils/env';
 type Breadcrumb = {
   label: string;
   href: string;
@@ -72,7 +72,7 @@ const crumbItems = breadcrumbs.reduce<Array<Breadcrumb | 'separator'>>(
     <span class="col--left">
       <p>
         &copy;&nbsp;<span data-current-year></span>&nbsp;–&nbsp;
-        <a href="/imprint">Imprint</a>
+        <a href="/imprint">Imprint</a> 
       </p>
     </span>
     <span class="col--center">
@@ -85,7 +85,7 @@ const crumbItems = breadcrumbs.reduce<Array<Breadcrumb | 'separator'>>(
         <em>
           using<a href="https://astro.build">&nbsp;astro</a>
         </em>
-        &nbsp;–&nbsp;<a href="/test">Test</a>
+        {!isProd ? (<a href="/test">&nbsp;–&nbsp;Test</a>):null}
       </p>
     </span>
   </div>

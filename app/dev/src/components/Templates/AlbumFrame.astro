@@ -64,18 +64,18 @@ const { album, cardClass, frameClass, imageClass } = Astro.props as Props;
 
       <div class="card__overlay card__overlay--controls card__overlay--bottom card__overlay--hover">
         <div class="controls controls--center controls--tight">
-          <button class="media-controls media-controls media-prev" aria-label="Previous" type="button">❮</button>
-          <button class="media-controls media-pause" aria-label="Pause autoplay" type="button">
-            <ICONS class="media-icon" kind="pause" />
+          <button class="control--button media-controls media-prev" aria-label="Previous" type="button">❮</button>
+          <button class="control--button media-controls media-pause" aria-label="Pause autoplay" type="button">
+            <ICONS class="media-icon media-icon--small" kind="pause" />
           </button>
-          <button class="media-controls media-play" aria-label="Start autoplay" type="button">
-            <ICONS class="media-icon" kind="play" />
+          <button class="control--button media-controls media-play" aria-label="Start autoplay" type="button">
+            <ICONS class="media-icon media-icon--small" kind="play" />
           </button>          
-          <button class="media-controls media-next" aria-label="Next" type="button">❯</button>
+          <button class="control--button media-controls media-next" aria-label="Next" type="button">❯</button>
         </div>
         <div class="controls controls--end">
-          <button class="media-controls media-fullscreen" aria-label="Open Lightbox" type="button">
-            <ICONS class="media-icon" kind="fullscreen" />
+          <button class="control--button media-controls media-fullscreen" aria-label="Open Lightbox" type="button">
+            <ICONS class="media-icon media-icon--small" kind="fullscreen" />
           </button>            
         </div>
         <div class="media-progress" aria-hidden="true"></div>
