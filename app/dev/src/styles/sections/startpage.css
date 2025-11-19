@@ -2,30 +2,47 @@
 .hero__signature {
   display: grid; 
 }
-
+.hero::before {
+  content: "";
+  z-index: -1;
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  inline-size: 32em;
+  block-size: 16em;
+  border-radius: 999px;
+  background-image: var(--overlay--stars), radial-gradient(ellipse at center, rgba(255,255,255,.12), transparent 60%);
+  background-position: center,50% 55%;
+  background-size: 12em 8em, auto;
+  background-repeat: no-repeat,no-repeat;
+  background-blend-mode: soft-light,screen;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
 .hero {
   place-items: center;
   align-content: end;
-
+  z-index: 222;
+  opacity: .9;
   font-size: var(--hero-scale);
-  
+  inline-size: 100%;
   block-size: 8.65em;
   margin-block-start: var(--section-gap);
-  mix-blend-mode: luminosity;
+  mix-blend-mode: normal;
   background: 
-    var(--hero--bg)
-    calc(50% - 2em) calc(50% - .25em)/8.45em 
-    no-repeat;
+    var(--hero--bg)  calc(50% - 2em) calc(50% - .25em)/8.45em   no-repeat;
   
   filter:
-    drop-shadow(.1em .1em .1em rgba(0,0,0,.39))    
-    drop-shadow(0 0 3em var(--color-glow--strong));
+    contrast(1.6)
+
+    saturate(1.05)
+    drop-shadow(.15em .15em .1em rgba(0,0,0,.7))    
+    ;
 }
 
 .hero__text {
   filter:
-    drop-shadow(.1em .1em .1em rgba(0,0,0,.39))
-    drop-shadow(.1em .1em .1em var(--color-shadow--strong));
+    drop-shadow(.1em .1em .1em rgba(0,0,0,.5));
 }
 
 .hero__signature {
@@ -50,7 +67,7 @@
   font-size: .75em;
   
   transform: rotate(-6deg);
-  opacity: .95;
+  opacity: .85;
 }
 
 .hero__sub {
@@ -70,7 +87,7 @@
 }
 
 .hero__to { 
-  opacity: .9;  
+  opacity: .75;  
   grid-area: to; 
   font-size: .5em;
   transform: translate(.25em,.25em); 
@@ -89,7 +106,8 @@
   font-family: var(--font--display);
   font-size: .7em;       
   text-align: end;
-  font-weight: 200;
+  opacity: .85;
+  font-weight: 300;
   transform: translate(-.5em, -1.7em);
 }
 
