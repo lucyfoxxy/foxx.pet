@@ -56,7 +56,7 @@ const hasBlogSummary = blogDescription.length > 0 || blogSummaryParagraphs.lengt
         <Fragment slot="head">
           <h2 class="card__title">Table of Contents</h2>
           <div class="card__badges controls controls--tight">
-            <span class="control control--badge control--dark">{blogChapters.length} total</span>
+            <span class="control control--badge">{blogChapters.length} total</span>
           </div>
         </Fragment>
         <Fragment slot="body">
@@ -100,7 +100,7 @@ const hasBlogSummary = blogDescription.length > 0 || blogSummaryParagraphs.lengt
         <Fragment slot="foot">
           <nav class="controls controls--spread">
             <button
-              class="control control--button control--small control--dark control--circle"
+              class="control control--button control--small control--circle"
               type="button"
               data-chapter-prev
             >
@@ -108,7 +108,7 @@ const hasBlogSummary = blogDescription.length > 0 || blogSummaryParagraphs.lengt
             </button>
 
             <button
-              class="control control--button control--small control--dark control--circle"
+              class="control control--button control--small control--circle"
               type="button"
               data-chapter-next
             >

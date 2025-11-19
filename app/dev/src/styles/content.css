@@ -161,11 +161,12 @@
 .card__body > ol > li > a:hover,
 .card__body > ol > li > a:focus-visible {
   transform: var(--transform-hover--card);
-  box-shadow: var(--shadow-hover--control);
+  filter: var(--filter-hover--card);
 }
 
 .card__body > ol > li > [data-chapter][data-active] {
-  box-shadow: var(--shadow-hover--control);
+  filter: var(--filter-hover--card);
+  transform: var(--transform-hover--card);
 }
 
 [data-blog-chapter] {

@@ -89,8 +89,8 @@ const { album, cardClass, frameClass, imageClass } = Astro.props as Props;
         </h1>
         {(album.categoryBadge || album.dateBadge) && (
           <div class="card__badges controls controls--end">
-            {album.categoryBadge ? <span class="control control--badge control--dark">{album.categoryBadge}</span> : null}
-            {album.dateBadge ? <span class="control control--badge control--dark">{album.dateBadge}</span> : null}
+            {album.categoryBadge ? <span class="control control--badge">{album.categoryBadge}</span> : null}
+            {album.dateBadge ? <span class="control control--badge">{album.dateBadge}</span> : null}
 
           </div>
         )}

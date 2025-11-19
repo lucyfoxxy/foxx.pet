@@ -79,12 +79,9 @@ Total unique tokens: 117
 | `control--badge` | 7 | 25 | `src/components/Templates/AlbumFrame.astro` (2)<br>`src/components/Templates/Base/Footer.astro` (2)<br>`src/components/Templates/EntryBlog.astro` (1)<br>`src/components/Templates/TileView.astro` (2)<br>`src/pages/test.astro` (18) |
 | `control--button` | 10 | 20 | `src/components/StaticPages/StartPage.astro` (1)<br>`src/components/Templates/Base/Footer.astro` (1)<br>`src/components/Templates/Base/Header.astro` (1)<br>`src/components/Templates/EntryBlog.astro` (2)<br>`src/pages/test.astro` (15) |
 | `control--circle` | 1 | 2 | `src/components/Templates/EntryBlog.astro` (2) |
-| `control--ghost` | 1 | 0 | _Not referenced outside stylesheets_ |
-| `control--glow` | 2 | 1 | `src/components/StaticPages/StartPage.astro` (1) |
 | `control--large` | 2 | 4 | `src/components/StaticPages/StartPage.astro` (1)<br>`src/pages/test.astro` (3) |
 | `control--plain` | 2 | 11 | `src/components/Templates/Base/Footer.astro` (3)<br>`src/components/Templates/Base/Header.astro` (1)<br>`src/components/Templates/HeaderActions.astro` (1)<br>`src/pages/test.astro` (6) |
 | `control--small` | 2 | 8 | `src/components/Templates/Base/Footer.astro` (1)<br>`src/components/Templates/Base/Header.astro` (1)<br>`src/components/Templates/EntryBlog.astro` (2)<br>`src/components/Templates/HeaderActions.astro` (1)<br>`src/pages/test.astro` (3) |
-| `control--stretch` | 1 | 0 | _Not referenced outside stylesheets_ |
 | `controls` | 1 | 28 | `src/components/StaticPages/StartPage.astro` (1)<br>`src/components/Templates/AlbumFrame.astro` (3)<br>`src/components/Templates/Base.astro` (1)<br>`src/components/Templates/Base/Footer.astro` (2)<br>`src/components/Templates/Base/Header.astro` (1)<br>`src/components/Templates/EntryBlog.astro` (2)<br>`src/components/Templates/TileView.astro` (1)<br>`src/pages/test.astro` (10)<br>`src/scripts/galleryViewer.js` (7) |
 | `controls--around` | 1 | 1 | `src/components/Templates/Base/Header.astro` (1) |
 | `controls--center` | 1 | 2 | `src/components/Templates/AlbumFrame.astro` (1)<br>`src/components/Templates/Base/Footer.astro` (1) |
@@ -209,7 +206,6 @@ Total unique tokens: 117
 | Token | Defined In | Definition Count | Total Uses | Usage Locations |
 | --- | --- | ---: | ---: | --- |
 | `--animated` | `src/styles/controls.css` | 1 | 0 | _No var(--token) references found_ |
-| `--backdrop-brightness` | `src/styles/tokens.css` | 1 | 0 | _No var(--token) references found_ |
 | `--overlay--dim` | `src/styles/tokens.css` | 1 | 2 | `src/styles/base.css` (1)<br>`src/styles/site.css` (1) |
 | `--badge` | `src/styles/typography.css` | 1 | 0 | _No var(--token) references found_ |
 | `--bg-dim` | `src/styles/tokens.css` | 1 | 1 | `src/styles/tokens.css` (1) |
@@ -314,14 +310,9 @@ Total unique tokens: 117
 | `--thumb-size` | `src/styles/tokens.css` | 1 | 7 | `src/styles/media.css` (7) |
 | `--title` | `src/styles/content.css` | 2 | 0 | _No var(--token) references found_ |
 | `--transform-raise` | `src/styles/tokens.css` | 1 | 1 | `src/styles/controls.css` (1) |
-| `--transform-raise--soft` | `src/styles/tokens.css` | 1 | 0 | _No var(--token) references found_ |
-| `--transform-raise--strong` | `src/styles/tokens.css` | 1 | 0 | _No var(--token) references found_ |
 | `--transform-scale` | `src/styles/tokens.css` | 1 | 4 | `src/styles/content.css` (1)<br>`src/styles/controls.css` (2)<br>`src/styles/media.css` (1) |
 | `--transition--control` | `src/styles/tokens.css` | 1 | 3 | `src/styles/controls.css` (2)<br>`src/styles/site_footer.css` (1) |
-| `--transition--brightness` | `src/styles/tokens.css` | 1 | 1 | `src/styles/controls.css` (1) |
-| `--transition--glow` | `src/styles/tokens.css` | 1 | 1 | `src/styles/controls.css` (1) |
 | `--transition--interactive` | `src/styles/tokens.css` | 1 | 1 | `src/styles/base.css` (1) |
 | `--transition--opacity` | `src/styles/tokens.css` | 1 | 2 | `src/styles/media.css` (2) |
 | `--transition--raise` | `src/styles/tokens.css` | 1 | 4 | `src/styles/controls.css` (2)<br>`src/styles/media.css` (2) |
-| `--transition--scale` | `src/styles/tokens.css` | 1 | 1 | `src/styles/controls.css` (1) |
 | `--transition--soft` | `src/styles/tokens.css` | 1 | 3 | `src/styles/content.css` (2)<br>`src/styles/media.css` (1) |

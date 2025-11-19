@@ -73,11 +73,11 @@
   /* ====== Base Colors ========================= */
   --color-dark:              oklch(21% 0.095 295);
   --color-light:             oklch(92% 0.125 295); 
-  --color-accent:            oklch(74% 0.145 295);          
-  --color-shadow--soft:       color-mix(in oklch, var(--color-dark) 30%, transparent);
-  --color-shadow--strong:     color-mix(in oklch, var(--color-dark) 50%, transparent);
+  --color-accent:            oklch(74% 0.15 295);          
+  --color-shadow--soft:       color-mix(in oklch, var(--color-dark) 45%, transparent);
+  --color-shadow--strong:     color-mix(in oklch, var(--color-dark) 60%, transparent);
   --color-glow--soft:         color-mix(in oklch, var(--color-accent) 55%, transparent);
-  --color-glow--strong:        color-mix(in oklch, var(--color-accent) 80%, transparent);
+  --color-glow--strong:       color-mix(in oklch, var(--color-accent) 80%, transparent);
 
   /* ====== Text Colors & FX ==================== */
   --text-color:              color-mix(in oklch, var(--color-light) 85%, white);
@@ -101,17 +101,18 @@
   
   --control-glow:            inset 0 0 1px 2px var(--color-glow--soft);
 
-  --surface-shadow--soft:    1px 2px 4px 0px var(--color-shadow--soft);
+  --surface-shadow--soft:    2px 2px 4px 0 var(--color-shadow--soft);
   --surface-shadow--default: 0 0 18px -10px var(--color-shadow--soft),0 0 24px -6px var(--color-shadow--strong);
   --surface-shadow--strong:  0 0 20px -10px var(--color-shadow--soft),0 0 28px -6px var(--color-shadow--strong),0 0 28px 0 var(--color-shadow--strong);
 
 
   
   /* ====== Filters ======*/
-  --filter-hover--card:     brightness(1.1) saturate(1.1) drop-shadow(0 0 var(--color-dark));
-  --filter-hover--control:  brightness(1.4) saturate(1.4);
+  --filter-hover--card:       brightness(1.1) saturate(1.1) drop-shadow(0 0 var(--color-dark));
+  --filter-hover--control:    brightness(1.4) saturate(1.4);
+  --filter-hover--plain:      drop-shadow(0 0 0 var(--color-accent)) drop-shadow(2px 2px 2px var(--color-shadow--strong));
 
-  --shadow-hover--control:  inset 0 0 99px var(--color-accent);
+  --shadow-hover--control:    var(--surface-shadow--soft), inset 0 0 99px var(--color-glow--soft);
 
   --transform-hover--card:  scale(1.05);
   --transition-hover--card: transform .35s ease, filter .35s ease;
@@ -141,24 +142,15 @@
 
   /* ====== Motion ====== */
   --transition--interactive:     color .2s ease, text-shadow .2s ease;
-  
+
   --transition--nav:             opacity .35s ease, transform .35s ease, brightness .5s ease, drop-shadow .5s ease-in-out;
 
   --transition--raise:           transform .35s ease-in-out, box-shadow .2s ease;
-  --transition--brightness:      filter .5s ease-in-out;
-  --transition--scale:           transform .25s ease;
 
-  --transition--glow:            color .2s ease, text-shadow .2s ease, transform .2s ease, box-shadow .2s ease;
-  
-  --transition--control:        filter .4s ease, saturate .4s ease, box-shadow .5s ease, transform .25s ease;
-                                
+  --transition--control:         filter .4s ease, saturate .4s ease, box-shadow .5s ease, transform .25s ease;
 
-  --transition--opacity:          opacity .5s ease-in-out;
-  
-  --backdrop-brightness:        brightness(1.5);
-  --transform-raise:            translateY(-10%);
-  --transform-raise--soft:      translateY(-5%);
-  --transform-raise--strong:    translateY(-15%);
-  --transform-scale:            scale(1.05);
-  --transform-scale--soft:      scale(1.025);
+  --transition--opacity:         opacity .5s ease-in-out;
+
+  --transform-raise:             translateY(-10%);
+  --transform-scale:             scale(1.05);
 }

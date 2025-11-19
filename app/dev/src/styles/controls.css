@@ -42,19 +42,28 @@
 }
 
 .control--button {
-  background: var(--control-surface--dark);
-  outline: 1px solid color-mix(in srgb, var(--color-dark) 5%, transparent);
-  outline-offset: -1px;
+  background: var(--color-dark);
+
   transition: var(--transition--control);
   cursor: pointer;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
 }
-.control--button:hover { 
-  filter:brightness(1.4) saturate(1.4);
-  box-shadow: var(--surface-shadow--soft), inset 0 0 99px var(--color-glow--soft);
+
+:where(.control--button:not(.control--plain), .media-controls) {
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+:where(.control--button:not(.control--plain)):is(:hover, :focus-visible, [data-current="true"]) {
+
+  box-shadow: var(--surface-shadow--soft),var(--shadow-hover--control);
+  background: var(--color-accent);
   transform: var(--transform-raise);
+  outline: none;
 }
 
 .control--badge {
@@ -74,25 +83,22 @@
   padding: calc(var(--control-padding) * 1.25);
 }
 .control--circle { border-radius: 999px; }
-.control--stretch { inline-size: 100%; }
-.control--plain,
-.control--ghost {
+.control--plain {
   background: none;
   box-shadow: none;
   outline: none;
-}
-.control--plain {
   backdrop-filter: none;
   filter: drop-shadow(2px 2px 1px var(--color-shadow--soft));
   opacity: .8;
   padding-block: 0;
   padding-inline: 0;
+  transition: var(--transition--control);
 }
 .control--plain:hover,
 .control--plain:focus-visible,
 .control--plain[data-active="true"],
 .control--plain[data-current="true"] {
-  filter: drop-shadow(0 0 0 var(--color-accent)) drop-shadow(2px 2px 2px var(--color-shadow--strong)) ;
+  filter: var(--filter-hover--plain);
   opacity: 1;
 }
 
@@ -106,13 +112,10 @@
   block-size: var(--media-control-size);
   border: none;
   border-radius: 999px;
+
 }
 
-.media-controls:active {
-  transform: var(--transform-scale);
-  filter: brightness(1.95);
-  backdrop-filter: var(--control-glow);
-}
+
 
 
 
@@ -148,6 +151,6 @@
 }
 
 @supports not (color: oklch(50% 0 0)) {
-  :where(.control--button, .media-controls):hover { filter: brightness(1.08); }
-  :where(.control--button, .media-controls):active { filter: brightness(0.92); }
+  :where(.control--button:not(.control--plain), .media-controls):hover { filter: brightness(1.08); }
+  :where(.control--button:not(.control--plain), .media-controls):active { filter: brightness(0.92); }
 }

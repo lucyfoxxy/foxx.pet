@@ -9,6 +9,7 @@ import {
   type PageContent,
 } from '@Content/siteContent';
 import { getEntriesBySection } from '@utils/getEntries';
+import { isProd } from '@utils/env';
 
 interface Props {
   slug: string;
@@ -78,6 +79,10 @@ const normalizedCategories = !loadError
           findCoverImage(categorySlug, category.title)?.src ?? placeholderCover;
         const href = resolveHref(page, categorySlug, category.href);
         const count = categoryCounts.get(categorySlug) ?? 0;
+
+        if (isProd && count === 0) {
+          return undefined;
+        }
 
         return {
           ...category,
