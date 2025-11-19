@@ -9,7 +9,7 @@
 
   font-size: var(--hero-scale);
   inline-size: 100%;
-  block-size: 8.5em;
+  block-size: 8.65em;
 
   row-gap: 0.04em;
   margin-block-start: clamp(.25em,calc(.25em + .5vw),1.5em);
@@ -17,7 +17,7 @@
   mix-blend-mode: screen;
   background: 
     var(--hero--bg)
-    calc(50% - 2.5em) calc(50% + 0.35em)/8.35em 
+    calc(50% - 2.25em) calc(50% - 0.65em)/8.45em 
     no-repeat;
   
   filter:
@@ -35,33 +35,39 @@
   grid-template-areas: "welcome sub";
   inline-size: auto;
   row-gap: .25em;
-  column-gap: 4em;
-  font-family: var(--font--signature);
+  column-gap: 4.5em;
+  
   
   align-items:center;
   text-align: start;
   justify-self: center;
-  transform: translateY(.75em);
+  transform: translate(.5em, .125em);
 }
 
 .hero__welcome {
   grid-area: welcome;
-  letter-spacing: var(--letter-spacing-l);
+  font-family: var(--font--signature);
+  font-weight: thin;
+  letter-spacing: var(--letter-spacing-m);
   font-size: 0.7em;
   
+  transform: translate(.5em,-.5em) rotate(-3.5deg);
+  opacity: .95;
 }
+.hero__welcome::first-letter {font-size: 1em;}
 
 .hero__sub {
+  font-family: var(--font--signature);
   display: grid;
   grid-area: sub;
   grid-template-areas: "to lucy";
   gap: .015em;
   letter-spacing: var(--letter-spacing-xl);
-  transform: translateY(.25em);
+  transform: translate(.25em,.25em) rotate(6deg);
 
 }
-.hero__lucy {  grid-area: lucy; font-size: 1.125em;}
-.hero__to {   grid-area: to; font-size: .55em;transform: translate(.15em,.25em);}
+.hero__lucy {  grid-area: lucy; font-size: 1.2em; font-weight: thick;}
+.hero__to { opacity: .9;  grid-area: to; font-size: .55em;transform: translate(.15em,.25em); font-weight: thin}
 .hero__title {
   font-family: var(--font--fancy);
   font-weight: var(--bold-font-weight);
@@ -74,7 +80,7 @@
   font-family: var(--font--display);
   font-size: .7em;       
   text-align: end;
-
+  font-weight: 200;
   transform: translate(-.5em, -1.7em);
 }
 
