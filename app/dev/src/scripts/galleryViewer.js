@@ -306,8 +306,8 @@ export function initGalleryThumbs(api, root = document) {
       const idx = parseInt(th.dataset.index || '', 10);
       const active = idx === api.index;
       th.classList.toggle('active', active);
-      th.setAttribute('aria-current', active ? 'true' : 'false');
-      th.querySelector('.media-image.media-image--thumb')?.setAttribute('aria-current', active ? 'true' : 'false');
+      th.setAttribute('data-current', active ? 'true' : 'false');
+      th.querySelector('.media-image.media-image--thumb')?.setAttribute('data-current', active ? 'true' : 'false');
     });
   };
 
