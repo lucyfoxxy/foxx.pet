@@ -46,40 +46,72 @@
 .card{
   display: grid;
   position: relative;
-
-  min-block-size: 100%;
-
   grid-template-areas:
     "card-head"
     "card-body"
     "card-foot";
   grid-template-rows: auto 1fr auto;
-  border-radius: var(--radius-l);
+
+  min-block-size: 100%;
   padding: var(--card-padding);
   gap: var(--card-gap);
-  backdrop-filter: var(--blur-m) brightness(1.35) saturate(1.05);
-  box-shadow: var(--surface-shadow--default), inset 0 0 29px color-mix(in oklab,transparent 90%,var(--color-accent));
+
+  border-radius: var(--radius-l);
+  backdrop-filter: var(--backdrop--card);
+  box-shadow: var(--shadow--card);
 }
 
-.card--ghost    { box-shadow: var(--surface-shadow--default), inset 0 0 29px color-mix(in oklab,transparent 90%,var(--color-accent));}
-.card--plain    { background: transparent; box-shadow: none; backdrop-filter: none;}
-.card--flush  { padding: 0;  gap: 0;}
-.card--flush .card__head {row-gap: 0; column-gap: 0;}
-.card--plain :where(.prose){font-weight: var(--thick-font-weight);}
-
-.card--animated { transition: var(--transition-hover--card); }
-.card--animated:hover,
-.card--animated:focus-visible {
-  transform: var(--transform-hover--card);
-  filter: var(--filter-hover--card);
+/* ====== Card: VARIATIONS ======*/
+/* === PLAIN (w/o bg, shadow, backdrop) === */
+.card--plain  { 
+  background: transparent; 
+  box-shadow: none; 
+  backdrop-filter: none;
+}
+.card--plain :where(.prose){ 
+  font-weight: var(--thick-font-weight);
 }
 
-.is-centered { justify-items: center; text-align: center; }
-.is-centered :where(.prose) { margin-inline: auto; }
-.is-condensed { gap: var(--flow-gap); }
-.is-italic { font-style: italic; }
 
-/* ===== CARD: HEAD ===== */
+/* === FLUSH (padding / gap 0) === */
+.card--flush { 
+  padding: 0;  
+  gap: 0;
+}
+.card--flush .card__head { 
+  row-gap: 0; 
+  column-gap: 0; 
+}
+
+
+/* === ANIMATE (on hover: scale + filter) === */
+.card--animate { 
+  transition: var(--transition--card); 
+}
+.card--animate:is(:hover,:focus-visible) {
+  transform: var(--transform--card);
+  filter: var(--filter--card);
+}
+
+
+/* === CENTER === */
+.card--center { 
+  justify-items: center; 
+  text-align: center; 
+}
+.card--center :where(.prose) {
+   margin-inline: auto; 
+}
+
+
+/* === CONDENSE (smaller gap) === */
+.card--condense { 
+  gap: var(--flow-gap); 
+}
+
+
+/* ====== CARD AREAS ====== */
+/* === HEAD === */
 .card__head { 
   grid-area: card-head; 
   display: grid;
@@ -105,20 +137,18 @@
 }
 
 
-/* ===== CARD: TITLE ===== */
+/* === TITLE === */
 .card__title { 
   grid-area: title; 
   min-width: 0; 
   align-items: center; 
   display: inline-flex; 
-  gap: var(--control-gap);
+  gap: var(--flow-gap);
 }
-.card__title > *, .card__title {
-  filter: drop-shadow(1px 2px 2px var(--color-shadow--strong));
-}  
 
 
-/* ===== CARD: BODY ===== */
+/* === BODY === */
+/* Refactor: move font-related ordered list properties to typography */
 .card__body { grid-area: card-body; display: contents; }
 
 .card__body > ol {
@@ -139,33 +169,21 @@
 }
 .card__body > ol > li { margin: 0; }
 
+/* Refactor: find a better selector for .card__body > ol > li > a */
 .card__body > ol > li > a {
   display: grid;
   grid-template-columns: auto 1fr;
   gap: var(--card-gap);
   align-items: flex-start;
-  padding: var(--card-padding);
+  padding: var(--control-padding);
   border-radius: var(--radius-m);
-  background: color-mix(in oklab, var(--control-surface--light) 30%, transparent);
-  box-shadow: var(--surface-shadow--soft);
+  background: var(--color-dark--soft);
+  box-shadow: var(--shadow--soft);
+  opacity: .7;
   text-decoration: none;
   color: inherit;
-  transition: var(--transition-hover--card);
-}
-
-.card__body > ol > li > a:hover,
-.card__body > ol > li > a:focus-visible {
-  transform: var(--transform-hover--card);
-  filter: var(--filter-hover--card);
-}
-
-.card__body > ol > li > [data-chapter][data-active] {
-  filter: var(--filter-hover--card);
-  transform: var(--transform-hover--card);
-}
-
-[data-blog-chapter] {
-  transition: opacity 0.25s ease;
+  transition: background .35s ease, opacity .35s ease;
+  will-change: opacity, background;
 }
 
 #blog-chapter-target [data-blog-chapter] > :is(h1, h2, h3):first-child {
@@ -173,35 +191,57 @@
 }
 
 .card__body > ol > li > a > span:first-child {
-  font-weight: var(--bold-font-weight);
+  font-weight: var(--thick-font-weight);
   font-size: var(--font-size-m);
   line-height: var(--line-height-m);
-  color: var(--text-highlight);
+  color: var(--color-accent--bright);
 }
 
 .card__body > ol > li > a > div {
   display: flex;
   flex-direction: column;
   gap: calc(var(--flow-gap) * 2);
+  opacity: 0.85;
 }
 
 .card__body > ol > li > a > div > strong {
-  font-weight: var(--bold-font-weight);
+  font-weight: var(--thick-font-weight);
   font-size: var(--font-size-m);
   line-height: var(--line-height-m);
 }
 
 .card__body > ol > li > a > div > span {
   font-size: var(--font-size-s);
+  font-weight: var(--thin-font-weight);
   line-height: var(--line-height-m);
-  opacity: 0.85;
+  
 }
 
-/* ===== CARD: FOOT ===== */
+/* === hover, focus & active states === */
+.card__body > ol > li > a:is(:hover,:focus-visible,[data-chapter][data-active]){
+  opacity: 1;
+  background: var(--color-dark--strong);
+}
+
+.card__body > ol > li > a:is(:hover,:focus-visible,[data-chapter][data-active])
+:where(span:first-child,strong){
+  opacity: 1;
+  font-weight: var(--bold-font-weight);
+  filter: var(--filter--card-list);
+}
+
+.card__body > ol > li > a:is(:hover,:focus-visible,[data-chapter][data-active]) > div {
+  opacity: 1;
+  font-weight: var(--thick-font-weight);
+}
+
+
+/* === FOOT === */
 .card__foot { grid-area: card-foot; display: contents; }
 
 
-/* ===== CARD: OVERLAY ===== */
+
+/* ===== Card: OVERLAY ===== */
 .card__overlay {
   position: absolute;
   inset-inline: 0; 
@@ -209,7 +249,6 @@
   flex-direction: row;
   gap: calc(var(--flow-gap) * 2);
   padding: var(--card-gap);
-
   backdrop-filter: var(--blur-l);
 }
 
@@ -236,10 +275,7 @@
 
 .card__overlay--title :where(h1,h2,h3) {
   margin: 0;
-  font-size: var(--font-size-l);
-  line-height: var(--line-height-l);
   text-wrap: balance;
-  text-shadow: var(--text-shadow--strong),var(--text-glow--soft);
 }
 
 .card__overlay--title :where(p) {
@@ -271,15 +307,16 @@
 
 .card__hero-banner {
   position: relative;
-  border-radius: var(--radius-xl);
+  border-radius: var(--radius-l);
   overflow: hidden;
-  background: var(--card-surface--dark);
-  box-shadow: var(--surface-shadow--default);
+  background: var(--color-dark--soft);
+  box-shadow: var(--shadow--card);
   block-size: clamp(14rem, 38vh, 24rem);
 }
 
 
 /* ====== PROSE CONTENT ====== */
+
 .prose {
   display: flex;
   flex-direction: column;
@@ -290,7 +327,6 @@
 
 .prose:first-child { margin-block-start: 0; }
 .prose > * { 
-  filter: drop-shadow(1px 2px 2px var(--color-shadow--strong));
   margin: 0; 
 }
 
@@ -299,8 +335,4 @@
   padding-inline-start: 1.2em;
   margin: 0;
 }
-
-/* ===== BLOG CHAPTERS ===== */
-
-
 

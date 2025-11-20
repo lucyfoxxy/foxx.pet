@@ -91,21 +91,21 @@ const surfaceEffects = [
   {
     id: 'surface-soft',
     label: 'Surface Soft Shadow',
-    token: '--surface-shadow--soft',
+    token: '--shadow--soft',
     preview: 'shadow-preview--surface-soft',
     description: 'Subtle lift used on thumbnails and compact frames.',
   },
   {
     id: 'surface-default',
     label: 'Surface Default Shadow',
-    token: '--surface-shadow--default',
+    token: '--shadow--default',
     preview: 'shadow-preview--surface-default',
     description: 'Primary elevation for cards and media wrappers.',
   },
   {
     id: 'surface-strong',
     label: 'Surface Strong Shadow',
-    token: '--surface-shadow--strong',
+    token: '--shadow--strong',
     preview: 'shadow-preview--surface-strong',
     description: 'High emphasis surfaces like header or footer.',
   },
@@ -142,7 +142,7 @@ const cardVariants = [
   },
   {
     title: 'Plain card',
-    classes: 'card--plain is-centered',
+    classes: 'card--plain card--center',
     note: 'Removes backdrop & aligns content to center.',
   },
   {
@@ -153,7 +153,7 @@ const cardVariants = [
   },
   {
     title: 'Condensed animated card',
-    classes: 'is-condensed card--animated',
+    classes: 'card--condense card--animate',
     note: 'Tighter vertical rhythm and hover scale effect.',
   },
 ];
@@ -242,7 +242,7 @@ const mediaThumbs = [
 ---
 <Template.Base>
   <section class="content-section">
-    <Template.Card class="card--plain is-centered is-condensed">
+    <Template.Card class="card--plain card--center card--condense">
       <Fragment slot="head">
         <h1 class="card__title">UI Test Bench</h1>
       </Fragment>
@@ -347,7 +347,7 @@ const mediaThumbs = [
   </section>
 
   <section class="content-section cols-2" id="shadows">
-    <Template.Card headClass="card__head--column" class="is-condensed">
+    <Template.Card headClass="card__head--column" class="card--condense">
       <Fragment slot="head">
         <h2 class="card__title">Surface shadows</h2>
         <p>Tokens that set depth cues for cards, media and controls.</p>
@@ -368,7 +368,7 @@ const mediaThumbs = [
       </Fragment>
     </Template.Card>
 
-    <Template.Card headClass="card__head--column" class="is-condensed">
+    <Template.Card headClass="card__head--column" class="card--condense">
       <Fragment slot="head">
         <h2 class="card__title">Text glow stack</h2>
         <p>Glows & shadows layered onto copy and iconography.</p>
@@ -400,7 +400,7 @@ const mediaThumbs = [
       <Fragment slot="body">
         <div class="card-grid">
           {cardVariants.map((variant) => (
-            <Template.Card class={`${variant.classes} showcase-card`} headClass="card__head--column is-centered">
+            <Template.Card class={`${variant.classes} showcase-card`} headClass="card__head--column card--center">
               <Fragment slot="head">
                 <h3 class="card__title">{variant.title}</h3>
               </Fragment>
@@ -660,7 +660,7 @@ const mediaThumbs = [
           <div>
             <h3 class="card__title">Utility mix</h3>
             <p class="is-italic">`.is-italic` for emphasis quotes.</p>
-            <Template.Card class="card--plain is-condensed showcase-card">
+            <Template.Card class="card--plain card--condense showcase-card">
               <Fragment slot="head">
                 <h4 class="card__title">Embedded plain card</h4>
               </Fragment>
@@ -697,7 +697,7 @@ const mediaThumbs = [
     .stat {
       padding: var(--section-gap);
       border-radius: var(--radius-xl);
-      background: color-mix(in oklab, var(--card-surface--light) 35%, transparent);
+      background: color-mix(in oklab, var(--color-light--ghosty) 35%, transparent);
       display: grid;
       gap: calc(var(--flow-gap) * 0.35);
     }
@@ -750,7 +750,7 @@ const mediaThumbs = [
       padding: var(--section-gap);
       border-radius: var(--radius-l);
       border: 1px solid color-mix(in oklab, var(--card-border) 70%, transparent);
-      background: color-mix(in oklab, var(--card-surface--light) 65%, transparent);
+      background: color-mix(in oklab, var(--color-light--ghosty) 65%, transparent);
       display: grid;
       gap: calc(var(--flow-gap) * 0.75);
     }
@@ -793,7 +793,7 @@ const mediaThumbs = [
       gap: 0.35rem;
       padding: 0.25rem 0.65rem;
       border-radius: 999px;
-      background: color-mix(in oklab, var(--card-surface--dark) 60%, transparent);
+      background: color-mix(in oklab, var(--color-dark--soft) 60%, transparent);
       border: 1px solid color-mix(in oklab, var(--card-border) 60%, transparent);
       font-size: var(--font-size-xs);
       white-space: nowrap;
@@ -814,13 +814,13 @@ const mediaThumbs = [
       inline-size: 100%;
       block-size: 6rem;
       border-radius: var(--radius-l);
-      background: color-mix(in oklab, var(--card-surface--light) 80%, transparent);
-      box-shadow: var(--surface-shadow--soft);
+      background: color-mix(in oklab, var(--color-light--ghosty) 80%, transparent);
+      box-shadow: var(--shadow--soft);
     }
 
-    .shadow-preview--surface-soft { box-shadow: var(--surface-shadow--soft); }
-    .shadow-preview--surface-default { box-shadow: var(--surface-shadow--default); }
-    .shadow-preview--surface-strong { box-shadow: var(--surface-shadow--strong); }
+    .shadow-preview--surface-soft { box-shadow: var(--shadow--soft); }
+    .shadow-preview--surface-default { box-shadow: var(--shadow--default); }
+    .shadow-preview--surface-strong { box-shadow: var(--shadow--strong); }
 
     .text-preview {
       display: inline-flex;
@@ -831,11 +831,11 @@ const mediaThumbs = [
       min-block-size: 4rem;
       font-weight: var(--bold-font-weight);
       font-size: var(--font-size-m);
-      background: color-mix(in oklab, var(--card-surface--dark) 40%, transparent);
+      background: color-mix(in oklab, var(--color-dark--soft) 40%, transparent);
     }
 
-    .text-preview--soft { text-shadow: var(--text-shadow--soft), var(--text-glow--soft); }
-    .text-preview--strong { text-shadow: var(--text-shadow--strong), var(--text-glow--strong); }
+    .text-preview--soft { text-shadow: var(--text-shadow), var(--text-glow); }
+    .text-preview--strong { text-shadow: var(--text-shadow), var(--text-glow); }
     .text-preview--icon {
       text-shadow: var(--icon-shadow);
     }
@@ -909,7 +909,7 @@ const mediaThumbs = [
     }
 
     .layout-group__row > .controls {
-      background: color-mix(in oklab, var(--card-surface--light) 40%, transparent);
+      background: color-mix(in oklab, var(--color-light--ghosty) 40%, transparent);
       padding: calc(var(--control-padding) * 0.75);
       border-radius: var(--radius-l);
     }
@@ -979,7 +979,7 @@ const mediaThumbs = [
     .icon-grid__item--catalog {
       padding: calc(var(--control-padding) * 0.75) calc(var(--control-padding) * 0.5);
       border-radius: var(--radius-m);
-      background: color-mix(in oklab, var(--card-surface--light) 32%, transparent);
+      background: color-mix(in oklab, var(--color-light--ghosty) 32%, transparent);
     }
 
     .icon-grid__item--catalog > span {

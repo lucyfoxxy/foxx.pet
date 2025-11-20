@@ -22,8 +22,6 @@ body {
   background: none;
   display: flex;
   flex-direction: column;
-  text-shadow: var(--text-glow--soft), var(--text-shadow--soft);
-  color: var(--text-color);
 }
 button {
     appearance: none;
@@ -53,9 +51,12 @@ body::before {
   position: fixed;
   inset: 0;
   z-index: -1;
-  box-shadow: inset 0 0 164px 64px rgba(0,0,0,.5);
-    background: 
-var(--overlay--dim), var(--overlay--nebula), var(--overlay--stars), linear-gradient(205deg, #371173, #240a46, rgb(40, 7, 112));
+  box-shadow: var(--shadow--base);
+  background-image: 
+    var(--overlay--dim), 
+    var(--overlay--nebula), 
+    var(--overlay--stars), 
+    var(--bg--base);
   background-blend-mode:multiply,overlay,soft-light,normal;
   background-repeat: no-repeat,repeat,repeat,no-repeat;
   background-size: cover,1280px 1280px,auto,cover;
@@ -70,18 +71,16 @@ var(--overlay--dim), var(--overlay--nebula), var(--overlay--stars), linear-gradi
     filter: none;
   }
 }
+
 :where(h1, h2, h3, h4, a) {
-  text-shadow: var(--text-shadow--soft);
-  color: var(--text-accent);
+  text-shadow: var(--text-shadow);
+  color: var(--color-accent--bright);
 }
 .panel :where(a) {
-  
   transition: var(--transition--interactive);
 }
-.panel,.header__nav:where(a):hover,
-.panel,.header__nav:where(a):focus-visible {
-  text-shadow: var(--text-glow--strong);
-
+a:is(:hover,:focus-visible):not(.header__nav-item) {
+  text-shadow: var(--text-glow);
   opacity: 1;
 }
 

@@ -45,7 +45,7 @@
 }
 
 .table__th {
-  background: var(--card-surface--dark);
+  background: var(--color-dark--soft);
 }
 
 .table__th--left {
@@ -63,7 +63,7 @@
 }
 
 .table__tr.is-alt {
-  background: var(--card-surface--dark);
+  background: var(--color-dark--soft);
 }
 
 .table__td {

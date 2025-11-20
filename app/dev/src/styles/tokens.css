@@ -16,6 +16,7 @@
   --radius-l:               18px;
   --radius-xl:              36px;
   --radius-xxl:             72px;
+  
   /* ============= Font & Other Sizes ================= */
   --font--display:     Grandstander, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font--fancy:   'Fuzzy Bubbles', var(--font--display);
@@ -62,68 +63,41 @@
   --card-padding:           clamp(var(--space-s),  calc(var(--space-s) + 1.5vw),  var(--space-xl));   
   --section-gap:            clamp(var(--space-xs),  calc(var(--space-xs) + 1.5vh),    var(--space-xl)); 
   
-  --panel-padding:           clamp(var(--space-xs),  calc(var(--space-xs) + 2.5vw),    var(--space-xxxl)); 
+  --panel-padding:           clamp(var(--space-xs),  calc(var(--space-xs) + 2.5vw),    var(--space-xxxl));
+
   --bars-padding:       clamp(var(--space-xxs),  calc(var(--space-xxs) + 1.25vw),    var(--space-xl));
- 
+  --bars-gap:           var(--space-xxs);
+
   --container-padding:       clamp(var(--space-xxs),  calc(var(--space-xxs) + 2vw),    var(--space-xxl)); 
   --container-max:           1366px;
-  
-   
-
-
+ 
   /* ====== Base Colors ========================= */
-  --color-dark:              oklch(21% 0.095 295);
+  --color-dark:              oklch(19.5% 0.095 295);
+  --color-dark--strong:      color-mix(in oklch, var(--color-dark) 70%, transparent);
+  --color-dark--soft:        color-mix(in oklch, var(--color-dark) 50%, transparent);
+  --color-dark--ghosty:      color-mix(in oklch, var(--color-dark) 30%, transparent);
+
   --color-light:             oklch(92% 0.125 295); 
-  --color-accent:            oklch(74% 0.145 295); 
-  --color-control:           oklch(31% 0.169 295);         
-  --color-shadow--soft:       color-mix(in oklch, var(--color-dark) 45%, transparent);
-  --color-shadow--strong:     color-mix(in oklch, var(--color-dark) 60%, transparent);
-  --color-glow--soft:         color-mix(in oklch, var(--color-accent) 55%, transparent);
-  --color-glow--strong:       color-mix(in oklch, var(--color-accent) 80%, transparent);
+  --color-light--strong:      color-mix(in oklch, var(--color-light) 70%, transparent);
+  --color-light--soft:        color-mix(in oklch, var(--color-light) 50%, transparent);
+  --color-light--ghosty:      color-mix(in oklch, var(--color-light) 30%, transparent);
 
-  /* ====== Text Colors & FX ==================== */
-  --text-color:              color-mix(in oklch, var(--color-light) 85%, white);
-  --text-accent:             color-mix(in oklab, var(--color-accent) 30%, var(--color-light));
-  --text-highlight:          color-mix(in oklab, var(--color-light) 65%, var(--color-accent));
+  --color-accent:            oklch(74% 0.145 310); 
+  --color-accent--bright:    oklch(91% 0.07 310);
 
-  --text-shadow--soft:       1px 2px 1px var(--color-shadow--soft);  
-  --text-shadow--strong:     1px 2px 1px var(--color-shadow--strong);
+  --color-control:           oklch(26% 0.17 290);         
+
+
+  /* ====== Base FX ==================== */  
+  --text-shadow:             2px 2px 4px var(--color-dark--soft);
   --icon-shadow:             0 0 3px color-mix(in oklch,transparent 30%,currentColor);
 
-  --text-glow--soft:         1px 1px 2px var(--color-glow--soft);
-  --text-glow--strong:       1px 1px 2px var(--color-glow--strong);
+  --text-glow:               1px 1px 2px var(--color-light--soft);
 
-  /* ====== Surface / Control Colors & FX ======= */  
+  --shadow--soft:    1px 1px 4px 0 var(--color-dark--soft),1px 1px 3px 0 var(--color-dark--strong);
+  --shadow--default: 0 0 18px -6px var(--color-dark--soft),0 0 18px -6px var(--color-dark--strong);
+  --shadow--strong:  0 0 20px -10px var(--color-dark--soft),0 0 28px -6px var(--color-dark--strong),0 0 28px 0 var(--color-dark--strong);
 
-  --card-surface--dark:      color-mix(in oklab,var(--color-dark) 51%, transparent);
-  --card-surface--light:     color-mix(in oklab,var(--color-light) 19%, transparent);
-
-  --control-surface--light:           color-mix(in oklab,var(--color-accent) 90%, transparent);
-  --control-surface--dark:            color-mix(in oklch, var(--color-dark)100%,transparent);
-  
-  --control-glow:            inset 0 0 1px 2px var(--color-glow--soft);
-
-  --surface-shadow--soft:    1px 1px 4px 0 var(--color-shadow--soft),1px 1px 3px 0 var(--color-shadow--strong);
-  --surface-shadow--default: 0 0 18px -6px var(--color-shadow--soft),0 0 18px -2px var(--color-shadow--strong);
-  --surface-shadow--strong:  0 0 20px -10px var(--color-shadow--soft),0 0 28px -6px var(--color-shadow--strong),0 0 28px 0 var(--color-shadow--strong);
-
-
-  
-  /* ====== Filters ======*/
-  --filter-hover--card:       brightness(1.1) saturate(1.1) drop-shadow(0 0 var(--color-dark));
-  --filter-hover--control:    brightness(1.4) saturate(1.4);
-  --filter-hover--plain:      drop-shadow(0 0 0 var(--color-accent)) drop-shadow(2px 2px 2px var(--color-shadow--strong));
-
-  --shadow-hover--control:    var(--surface-shadow--soft), inset 0 0 99px var(--color-glow--soft);
-
-  --transform-hover--card:  scale(1.05);
-  --transition-hover--card: transform .35s ease, filter .35s ease;
-
-  /* GLOW / SHADOW REFACTOR 
-
-  --hover-control: 
-    filter:;transform: var(--transform-raise);
-*/
   --blur-xxs:              blur(var(--radius-xxs));
   --blur-xs:              blur(var(--radius-xs));
   --blur-s:              blur(var(--radius-s));
@@ -132,12 +106,42 @@
   --blur-xl:              blur(var(--radius-xl));
   --blur-xxl:              blur(var(--radius-xxl));
 
-  --outline:                 1px solid color-mix(in oklab, var(--color-light) 10%,transparent);; 
+  --outline:                 1px solid color-mix(in oklab, var(--color-light) 10%,transparent);;   
+
+
+  /* ====== Card FX ====== */
+  /* === Defaults ===*/
+  --backdrop--card: var(--blur-m) brightness(1.35) saturate(1.05);
+  --shadow--card: var(--shadow--default), inset 0 0 29px color-mix(in oklab,transparent 90%,var(--color-accent));
+  --transition--card: transform .35s ease, filter .35s ease;
+
+  /* === Interactive ===*/
+  --filter--card:             brightness(1.1) saturate(1.1) drop-shadow(0 0 var(--color-dark));
+  --filter--card-list:        drop-shadow(0 0 3px color-mix(in oklch,transparent,currentColor));
+  --transform--card:  scale(1.05);
+  
+
+  /* ====== Controls FX ======*/
+  /* === Defaults ===*/
+  --base-filter--control-plain: drop-shadow(2px 2px 1px var(--color-dark--soft));
+  --transition--control:         filter .4s ease, saturate .4s ease, box-shadow .5s ease, transform .25s ease;
+  /* === Interactive ===*/
+  --filter--control:          brightness(2);
+  --filter--control-plain:    drop-shadow(0 0 0 var(--color-accent)) drop-shadow(2px 2px 2px var(--color-dark--strong));
+
+
+  /* ====== Bars FX ======*/
+  /* === Defaults ===*/
+  /* === Interactive ===*/
+  --filter--nav:              drop-shadow(0 0 3px color-mix(in oklch,transparent,currentColor)); 
+  --transition--nav:             opacity .35s ease, transform .35s ease, brightness .5s ease, drop-shadow .5s ease-in-out;
 
   /* ====== Overlays / Filter Presets ============ */   
   --overlay--dim:      radial-gradient(ellipse at center,transparent 50%, var(--color-dark) 120%); 
-  /* --overlay--nebula === Def -> Base.astro */
-  /* --overlay--stars  === Def -> Base.astro */
+  /* --overlay--nebula --overlay--stars  Def -> Base.astro */
+
+  --bg--base: linear-gradient(205deg, #371173, #240a46, rgb(40, 7, 112));
+  --shadow--base: inset 0 0 164px 64px rgba(0,0,0,.5);
 
   /* ====== Gallery ====== */                                 
   --gallery-interval:           8500ms;  
@@ -145,11 +149,9 @@
   /* ====== Motion ====== */
   --transition--interactive:     color .2s ease, text-shadow .2s ease;
 
-  --transition--nav:             opacity .35s ease, transform .35s ease, brightness .5s ease, drop-shadow .5s ease-in-out;
+
 
   --transition--raise:           transform .35s ease-in-out, box-shadow .2s ease;
-
-  --transition--control:         filter .4s ease, saturate .4s ease, box-shadow .5s ease, transform .25s ease;
 
   --transition--opacity:         opacity .5s ease-in-out;
 

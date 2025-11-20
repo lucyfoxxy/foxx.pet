@@ -40,7 +40,8 @@ body {
   font-size: var(--font-size-s);
   line-height: var(--line-height-s);
   letter-spacing: var(--letter-spacing-s);
-  color: var(--text-color);
+  color: var(--color-light);
+  text-shadow: var(--text-shadow);
 }
 
 
@@ -50,7 +51,7 @@ a {
   text-decoration: none;
 }
 
-
+.is-italic { font-style: italic; }
 .header__nav-label {
   font-weight: var(--bold-font-weight); 
   font-size: clamp(var(--font-size-s),calc(var(--font-size-s) + 1.3vw),var(--font-size-m));
@@ -75,9 +76,7 @@ a {
   font-weight: var(--normal-font-weight);
   line-height: var(--line-height-xs);
 }
- .control--button:hover,
- button.control:hover,
- a.control:hover{
+ .control--button:hover {
   font-weight: var(--bold-font-weight);
 }
 
@@ -90,53 +89,47 @@ a {
 :where(h1, h2, h3, h4, p) {
   margin-block: 0;
   margin-inline: 0;
+  letter-spacing: var(--letter-spacing-l);
 }
 
-:where(h1) {
+h1 {
   font-weight: var(--bold-font-weight);
   font-size: var(--font-size-xl);
   line-height: var(--line-height-xl);
-  letter-spacing: var(--letter-spacing-l);
-  text-shadow: var(--text-shadow--strong);
 }
 
-:where(h2) {
+h2 {
   font-size: var(--font-size-l);
   line-height: var(--line-height-xs);
-  text-shadow: var(--text-glow--soft),var(--text-shadow--strong);
-  letter-spacing: var(--letter-spacing-l);
 }
 
-:where(h3) {
+h3 {
   font-weight: var(--normal-font-weight);
-  text-shadow: var(--text-glow--soft),var(--text-shadow--strong);
-  letter-spacing: var(--letter-spacing-l);
   font-size: var(--font-size-m);
 }
 
-:where(h4) {
+h4 {
   font-family: var(--font--signature);
-  font-weight: var(--normal-font-weight);
-  text-shadow: var(--text-glow--soft),var(--text-shadow--strong);
+  font-weight: var(--thick-font-weight);
   line-height: var(--line-height-m);
   letter-spacing: var(--letter-spacing-xl);
   font-size: var(--font-size-m);  
 }
 
 /* ====== PROSE & LISTEN ====== */
-.panel :where(p) {  
+:where(p) {  
   margin: 0 0 var(--flow-gap);  
 }
 
-.panel :where(ul, ol) {
+:where(ul, ol) {
   padding-inline-start: 1.2rem;
   margin: var(--flow-gap) 0;
 }
-.panel :where(li) {
+:where(li) {
   margin: calc(var(--flow-gap) * .35) 0;
 }
 
-.panel :where(blockquote) {
+:where(blockquote) {
   margin: var(--flow-gap) 0;
   padding: calc(var(--flow-gap) * .75) var(--flow-gap);
   border-left: 3px solid var(--color-accent);

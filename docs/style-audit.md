@@ -62,9 +62,9 @@ Total unique tokens: 117
 | `card__title` | 3 | 22 | `src/components/StaticPages/ImprintPage.astro` (3)<br>`src/components/StaticPages/StartPage.astro` (4)<br>`src/components/Templates/AlbumFrame.astro` (1)<br>`src/components/Templates/EntryBlog.astro` (3)<br>`src/components/Templates/TileView.astro` (1)<br>`src/components/Templates/TitleWithIcon.astro` (1)<br>`src/components/Views/Category.astro` (1)<br>`src/components/Views/Section.astro` (1)<br>`src/pages/test.astro` (7) |
 | `content-section` | 11 | 25 | `src/components/StaticPages/ImprintPage.astro` (2)<br>`src/components/StaticPages/StartPage.astro` (4)<br>`src/components/Templates/EntryBlog.astro` (3)<br>`src/components/Views/Category.astro` (4)<br>`src/components/Views/Entry.astro` (4)<br>`src/components/Views/Section.astro` (4)<br>`src/pages/test.astro` (4) |
 | `content-section--head` | 1 | 5 | `src/components/StaticPages/StartPage.astro` (1)<br>`src/components/Templates/EntryBlog.astro` (1)<br>`src/components/Views/Category.astro` (1)<br>`src/components/Views/Entry.astro` (1)<br>`src/components/Views/Section.astro` (1) |
-| `card--animated` | 3 | 3 | `src/components/Templates/TileView.astro` (1)<br>`src/pages/test.astro` (2) |
-| `is-centered` | 2 | 18 | `src/components/StaticPages/ImprintPage.astro` (1)<br>`src/components/StaticPages/StartPage.astro` (1)<br>`src/components/Templates/AlbumFrame.astro` (1)<br>`src/components/Templates/AlbumThumbs.astro` (1)<br>`src/components/Templates/TileView.astro` (1)<br>`src/components/Views/Category.astro` (3)<br>`src/components/Views/Entry.astro` (2)<br>`src/components/Views/Section.astro` (3)<br>`src/pages/test.astro` (5) |
-| `is-condensed` | 1 | 2 | `src/components/StaticPages/StartPage.astro` (1)<br>`src/pages/test.astro` (1) |
+| `card--animate` | 3 | 3 | `src/components/Templates/TileView.astro` (1)<br>`src/pages/test.astro` (2) |
+| `card--center` | 2 | 18 | `src/components/StaticPages/ImprintPage.astro` (1)<br>`src/components/StaticPages/StartPage.astro` (1)<br>`src/components/Templates/AlbumFrame.astro` (1)<br>`src/components/Templates/AlbumThumbs.astro` (1)<br>`src/components/Templates/TileView.astro` (1)<br>`src/components/Views/Category.astro` (3)<br>`src/components/Views/Entry.astro` (2)<br>`src/components/Views/Section.astro` (3)<br>`src/pages/test.astro` (5) |
+| `card--condense` | 1 | 2 | `src/components/StaticPages/StartPage.astro` (1)<br>`src/pages/test.astro` (1) |
 | `is-italic` | 1 | 1 | `src/components/StaticPages/StartPage.astro` (1) |
 | `panel` | 11 | 1 | `src/components/Templates/Base.astro` (1) |
 | `prose` | 8 | 12 | `src/components/StaticPages/ImprintPage.astro` (2)<br>`src/components/StaticPages/StartPage.astro` (2)<br>`src/components/Templates/AlbumFrame.astro` (1)<br>`src/components/Templates/EntryBlog.astro` (1)<br>`src/components/Views/Category.astro` (1)<br>`src/components/Views/Section.astro` (1)<br>`src/pages/test.astro` (4) |
@@ -225,16 +225,16 @@ Total unique tokens: 117
 | `--card-gap` | `src/styles/tokens.css` | 1 | 8 | `src/styles/content.css` (7)<br>`src/styles/media.css` (1) |
 | `--card-padding` | `src/styles/tokens.css` | 1 | 3 | `src/styles/content.css` (2)<br>`src/styles/table.css` (1) |
 | `--card-shadow--inset` | `src/styles/tokens.css` | 1 | 0 | _No var(--token) references found_ |
-| `--card-surface--dark` | `src/styles/tokens.css` | 1 | 10 | `src/styles/content.css` (3)<br>`src/styles/media.css` (3)<br>`src/styles/site_footer.css` (1)<br>`src/styles/site_header.css` (1)<br>`src/styles/table.css` (2) |
-| `--card-surface--light` | `src/styles/tokens.css` | 1 | 4 | `src/styles/content.css` (1)<br>`src/styles/media.css` (2)<br>`src/styles/site_header.css` (1) |
+| `--color-dark--soft` | `src/styles/tokens.css` | 1 | 10 | `src/styles/content.css` (3)<br>`src/styles/media.css` (3)<br>`src/styles/site_footer.css` (1)<br>`src/styles/site_header.css` (1)<br>`src/styles/table.css` (2) |
+| `--color-light--ghosty` | `src/styles/tokens.css` | 1 | 4 | `src/styles/content.css` (1)<br>`src/styles/media.css` (2)<br>`src/styles/site_header.css` (1) |
 | `--cluster-gap` | `src/styles/tokens.css` | 1 | 2 | `src/styles/site_footer.css` (1)<br>`src/styles/table.css` (1) |
 | `--color-accent` | `src/styles/tokens.css` | 1 | 9 | `src/styles/base.css` (1)<br>`src/styles/content.css` (1)<br>`src/styles/controls.css` (1)<br>`src/styles/tokens.css` (5)<br>`src/styles/typography.css` (1) |
 | `--color-dark` | `src/styles/tokens.css` | 1 | 10 | `src/styles/controls.css` (3)<br>`src/styles/site.css` (2)<br>`src/styles/tokens.css` (5) |
-| `--color-glow--soft` | `src/styles/tokens.css` | 1 | 2 | `src/styles/tokens.css` (2) |
-| `--color-glow--strong` | `src/styles/tokens.css` | 1 | 3 | `src/styles/tokens.css` (3) |
+| `--color-light--soft` | `src/styles/tokens.css` | 1 | 2 | `src/styles/tokens.css` (2) |
+| `--color-light--strong` | `src/styles/tokens.css` | 1 | 3 | `src/styles/tokens.css` (3) |
 | `--color-light` | `src/styles/tokens.css` | 1 | 5 | `src/styles/media.css` (1)<br>`src/styles/tokens.css` (4) |
-| `--color-shadow--soft` | `src/styles/tokens.css` | 1 | 6 | `src/styles/tokens.css` (6) |
-| `--color-shadow--strong` | `src/styles/tokens.css` | 1 | 10 | `src/styles/content.css` (2)<br>`src/styles/media.css` (2)<br>`src/styles/tokens.css` (6) |
+| `--color-dark--soft` | `src/styles/tokens.css` | 1 | 6 | `src/styles/tokens.css` (6) |
+| `--color-dark--strong` | `src/styles/tokens.css` | 1 | 10 | `src/styles/content.css` (2)<br>`src/styles/media.css` (2)<br>`src/styles/tokens.css` (6) |
 | `--container-max` | `src/styles/tokens.css` | 1 | 2 | `src/styles/site.css` (1)<br>`src/styles/tokens.css` (1) |
 | `--container-padding` | `src/styles/tokens.css` | 1 | 1 | `src/styles/site.css` (1) |
 | `--control-border-radius` | `src/styles/controls.css` | 1 | 1 | `src/styles/controls.css` (1) |
@@ -242,7 +242,7 @@ Total unique tokens: 117
 | `--control-glow` | `src/styles/tokens.css` | 1 | 2 | `src/styles/controls.css` (2) |
 | `--control-padding` | `src/styles/tokens.css` | 1 | 7 | `src/styles/controls.css` (6)<br>`src/styles/table.css` (1) |
 | `--control-shadow--inset` | `src/styles/tokens.css` | 1 | 2 | `src/styles/controls.css` (1)<br>`src/styles/media.css` (1) |
-| `--control-surface--dark` | `src/styles/tokens.css` | 1 | 6 | `src/styles/controls.css` (2)<br>`src/styles/media.css` (3)<br>`src/styles/site_footer.css` (1) |
+| `--color-dark` | `src/styles/tokens.css` | 1 | 6 | `src/styles/controls.css` (2)<br>`src/styles/media.css` (3)<br>`src/styles/site_footer.css` (1) |
 | `--control-surface--light` | `src/styles/tokens.css` | 1 | 1 | `src/styles/controls.css` (1) |
 | `--flow-gap` | `src/styles/tokens.css` | 1 | 14 | `src/styles/content.css` (7)<br>`src/styles/media.css` (1)<br>`src/styles/typography.css` (6) |
 | `--font-size-l` | `src/styles/tokens.css` | 1 | 4 | `src/styles/content.css` (1)<br>`src/styles/tokens.css` (1)<br>`src/styles/typography.css` (2) |
@@ -294,16 +294,16 @@ Total unique tokens: 117
 | `--space-xxs` | `src/styles/tokens.css` | 1 | 3 | `src/styles/tokens.css` (3) |
 | `--surface-glow--soft` | `src/styles/tokens.css` | 1 | 2 | `src/styles/content.css` (1)<br>`src/styles/controls.css` (1) |
 | `--surface-glow--strong` | `src/styles/tokens.css` | 1 | 2 | `src/styles/content.css` (2) |
-| `--surface-shadow--default` | `src/styles/tokens.css` | 1 | 9 | `src/styles/content.css` (4)<br>`src/styles/controls.css` (1)<br>`src/styles/media.css` (2)<br>`src/styles/site_footer.css` (2) |
-| `--surface-shadow--soft` | `src/styles/tokens.css` | 1 | 4 | `src/styles/content.css` (1)<br>`src/styles/controls.css` (2)<br>`src/styles/media.css` (1) |
-| `--surface-shadow--strong` | `src/styles/tokens.css` | 1 | 2 | `src/styles/media.css` (1)<br>`src/styles/site.css` (1) |
-| `--text-accent` | `src/styles/tokens.css` | 1 | 2 | `src/styles/base.css` (1)<br>`src/styles/site_footer.css` (1) |
+| `--shadow--default` | `src/styles/tokens.css` | 1 | 9 | `src/styles/content.css` (4)<br>`src/styles/controls.css` (1)<br>`src/styles/media.css` (2)<br>`src/styles/site_footer.css` (2) |
+| `--shadow--soft` | `src/styles/tokens.css` | 1 | 4 | `src/styles/content.css` (1)<br>`src/styles/controls.css` (2)<br>`src/styles/media.css` (1) |
+| `--shadow--strong` | `src/styles/tokens.css` | 1 | 2 | `src/styles/media.css` (1)<br>`src/styles/site.css` (1) |
+| `--color-accent--bright` | `src/styles/tokens.css` | 1 | 2 | `src/styles/base.css` (1)<br>`src/styles/site_footer.css` (1) |
 | `--text-color` | `src/styles/tokens.css` | 1 | 4 | `src/styles/base.css` (1)<br>`src/styles/controls.css` (1)<br>`src/styles/site_footer.css` (1)<br>`src/styles/typography.css` (1) |
 | `--text-glow--soft` | `src/styles/tokens.css` | 1 | 5 | `src/styles/base.css` (1)<br>`src/styles/content.css` (1)<br>`src/styles/controls.css` (1)<br>`src/styles/typography.css` (2) |
-| `--text-glow--strong` | `src/styles/tokens.css` | 1 | 2 | `src/styles/base.css` (1)<br>`src/styles/site_footer.css` (1) |
+| `--text-glow` | `src/styles/tokens.css` | 1 | 2 | `src/styles/base.css` (1)<br>`src/styles/site_footer.css` (1) |
 | `--text-highlight` | `src/styles/tokens.css` | 1 | 1 | `src/styles/content.css` (1) |
-| `--text-shadow--soft` | `src/styles/tokens.css` | 1 | 4 | `src/styles/base.css` (2)<br>`src/styles/controls.css` (1)<br>`src/styles/site_footer.css` (1) |
-| `--text-shadow--strong` | `src/styles/tokens.css` | 1 | 4 | `src/styles/content.css` (1)<br>`src/styles/typography.css` (3) |
+| `--text-shadow` | `src/styles/tokens.css` | 1 | 4 | `src/styles/base.css` (2)<br>`src/styles/controls.css` (1)<br>`src/styles/site_footer.css` (1) |
+| `--text-shadow` | `src/styles/tokens.css` | 1 | 4 | `src/styles/content.css` (1)<br>`src/styles/typography.css` (3) |
 | `--thick-font-weight` | `src/styles/tokens.css` | 1 | 3 | `src/styles/content.css` (1)<br>`src/styles/typography.css` (2) |
 | `--thin-font-weight` | `src/styles/tokens.css` | 1 | 2 | `src/styles/typography.css` (2) |
 | `--thumb` | `src/styles/media.css` | 6 | 7 | `src/styles/media.css` (7) |

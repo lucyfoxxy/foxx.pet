@@ -135,24 +135,30 @@ const hasBlogSummary = blogDescription.length > 0 || blogSummaryParagraphs.lengt
       import initBlogChapters from '@Scripts/initBlogChapters.js';
 
       const dataEl = document.getElementById('blog-chapters-data');
-      if (!dataEl) return;
+      const raw = dataEl?.dataset.chapters || '[]';
 
-      const raw = dataEl.dataset.chapters || '[]';
-      let chapters = [];
-      try {
-        chapters = JSON.parse(raw);
-      } catch (err) {
-        console.warn('Blog chapters JSON broken:', err, raw);
-        return;
+      if (!dataEl || !raw) {
+        console.warn('Blog chapters data missing');
+      } else {
+        let chapters = [];
+
+        try {
+          chapters = JSON.parse(raw);
+        } catch (err) {
+          console.warn('Blog chapters JSON broken:', err, raw);
+          chapters = [];
+        }
+
+        if (chapters.length > 0) {
+          initBlogChapters({
+            chapters,
+            targetSelector: '#blog-chapter-target',
+            titleSelector: '[data-chapter-title]',
+            prevSelector: '[data-chapter-prev]',
+            nextSelector: '[data-chapter-next]',
+          });
+        }
       }
-
-      initBlogChapters({
-        chapters,
-        targetSelector: '#blog-chapter-target',
-        titleSelector: '[data-chapter-title]',
-        prevSelector: '[data-chapter-prev]',
-        nextSelector: '[data-chapter-next]',
-      });
     </script>
   </>
 ) : null}

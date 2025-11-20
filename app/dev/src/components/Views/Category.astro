@@ -66,7 +66,7 @@ const backLabel = parentPage ? `← ${parentPage.title}` : undefined;
   ) : null}
 
   <section class="content-section content-section--head">
-    <Template.Card class="card--plain is-centered">
+    <Template.Card class="card--plain card--center">
       <Fragment slot="head">
         <Template.TitleWithIcon
           class="card__title"
@@ -89,7 +89,7 @@ const backLabel = parentPage ? `← ${parentPage.title}` : undefined;
 
   {errorMessage ? (
     <section class="content-section">
-      <Template.Card class=" is-centered">
+      <Template.Card class=" card--center">
         <Fragment slot="body">
           <p>{errorMessage}</p>
         </Fragment>
@@ -112,7 +112,7 @@ const backLabel = parentPage ? `← ${parentPage.title}` : undefined;
     </section>
   ) : (
     <section class="content-section">
-      <Template.Card class=" is-centered">
+      <Template.Card class=" card--center">
         <Fragment slot="body">
           <p>No entries yet — check back soon!</p>
         </Fragment>
