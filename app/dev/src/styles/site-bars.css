@@ -50,15 +50,15 @@
 
 
 /* ====== HEADER: NAV-ITEM ====== */
-.header__nav-item {
+.header__nav-item,.header__nav-item svg {
     display: grid;
     gap: var(--control-gap);
     grid-template-columns: 1fr; 
     grid-template-areas: 
         "icon label";
-    color: var(--text-accent);
+    color: var(--text-text);
     opacity: .8;
-    filter: drop-shadow(2px 4px 6px var(--color-dark));
+    filter: drop-shadow(2px 4px 4px var(--color-dark));
     transition: var(--transition--nav);
     will-change: opacity, color, brightness, transform;
 }

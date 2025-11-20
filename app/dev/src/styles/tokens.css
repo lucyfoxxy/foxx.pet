@@ -48,8 +48,9 @@
   --icon-size-m:        calc(var(--font-size-m) * 1.45);
   --icon-size-l:        calc(var(--font-size-xl) * .95);
 
+  --media-control-size: 2.75rem;
   --thumb-size:              clamp(64px, 9vw, 128px);
-  --hero-scale:               clamp(1rem, 2.65vw, 2.25rem);
+  --hero-scale:               clamp(1.05rem, 4.5vw, 2.25rem);
 
   /* ============= Role specific Spacings ============= */
   --flow-gap:               var(--space-xxs);  
@@ -73,7 +74,8 @@
   /* ====== Base Colors ========================= */
   --color-dark:              oklch(21% 0.095 295);
   --color-light:             oklch(92% 0.125 295); 
-  --color-accent:            oklch(74% 0.15 295);          
+  --color-accent:            oklch(74% 0.145 295); 
+  --color-control:           oklch(31% 0.169 295);         
   --color-shadow--soft:       color-mix(in oklch, var(--color-dark) 45%, transparent);
   --color-shadow--strong:     color-mix(in oklch, var(--color-dark) 60%, transparent);
   --color-glow--soft:         color-mix(in oklch, var(--color-accent) 55%, transparent);
@@ -81,12 +83,12 @@
 
   /* ====== Text Colors & FX ==================== */
   --text-color:              color-mix(in oklch, var(--color-light) 85%, white);
-  --text-accent:             color-mix(in oklab, var(--color-accent) 40%, var(--color-light));
+  --text-accent:             color-mix(in oklab, var(--color-accent) 30%, var(--color-light));
   --text-highlight:          color-mix(in oklab, var(--color-light) 65%, var(--color-accent));
 
   --text-shadow--soft:       1px 2px 1px var(--color-shadow--soft);  
   --text-shadow--strong:     1px 2px 1px var(--color-shadow--strong);
-  --icon-shadow:             3px 4px 3px var(--color-shadow--strong);
+  --icon-shadow:             0 0 3px color-mix(in oklch,transparent 30%,currentColor);
 
   --text-glow--soft:         1px 1px 2px var(--color-glow--soft);
   --text-glow--strong:       1px 1px 2px var(--color-glow--strong);
@@ -101,8 +103,8 @@
   
   --control-glow:            inset 0 0 1px 2px var(--color-glow--soft);
 
-  --surface-shadow--soft:    2px 2px 4px 0 var(--color-shadow--soft);
-  --surface-shadow--default: 0 0 18px -10px var(--color-shadow--soft),0 0 24px -6px var(--color-shadow--strong);
+  --surface-shadow--soft:    1px 1px 4px 0 var(--color-shadow--soft),1px 1px 3px 0 var(--color-shadow--strong);
+  --surface-shadow--default: 0 0 18px -6px var(--color-shadow--soft),0 0 18px -2px var(--color-shadow--strong);
   --surface-shadow--strong:  0 0 20px -10px var(--color-shadow--soft),0 0 28px -6px var(--color-shadow--strong),0 0 28px 0 var(--color-shadow--strong);
 
 

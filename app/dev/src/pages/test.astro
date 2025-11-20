@@ -548,16 +548,16 @@ const mediaThumbs = [
             />
             <div class="media-progress" style="--p: .45;"></div>
           </div>
-          <div class="media-controls-tray">
-            <button class="media-controls media-prev" type="button" aria-label="Previous frame">❮</button>
-            <button class="media-controls media-pause" type="button" data-active="true" aria-label="Pause autoplay">
+          <div class="control control--button control--circle control--media-tray">
+            <button class="control control--button control--circle control--media media-prev" type="button" aria-label="Previous frame">❮</button>
+            <button class="control control--button control--circle control--media media-pause" type="button" data-active="true" aria-label="Pause autoplay">
               <Icons class="media-icon" kind="pause" />
             </button>
-            <button class="media-controls media-play" type="button" data-active="false" aria-label="Start autoplay">
+            <button class="control control--button control--circle control--media media-play" type="button" data-active="false" aria-label="Start autoplay">
               <Icons class="media-icon" kind="play" />
             </button>
-            <button class="media-controls media-next" type="button" aria-label="Next frame">❯</button>
-            <button class="media-controls media-fullscreen" type="button" aria-label="Open lightbox">
+            <button class="control control--button control--circle control--media media-next" type="button" aria-label="Next frame">❯</button>
+            <button class="control control--button control--circle control--media media-fullscreen" type="button" aria-label="Open lightbox">
               <Icons class="media-icon" kind="fullscreen" />
             </button>
           </div>
@@ -595,7 +595,7 @@ const mediaThumbs = [
       </Fragment>
       <Fragment slot="body">
         <div class="media-wrapper media-wrapper--thumbs">
-          <button class="media-controls media-prev is-thumbs-prev" type="button" aria-label="Previous thumbnails">❮</button>
+          <button class="control control--button control--circle control--media media-prev is-thumbs-prev" type="button" aria-label="Previous thumbnails">❮</button>
           <div class="media-wrapper media-wrapper--frames" role="list" data-window="3">
             {mediaThumbs.map((thumb, index) => (
               <div
@@ -607,7 +607,7 @@ const mediaThumbs = [
               </div>
             ))}
           </div>
-          <button class="media-controls media-next is-thumbs-next" type="button" aria-label="Next thumbnails">❯</button>
+          <button class="control control--button control--circle control--media media-next is-thumbs-next" type="button" aria-label="Next thumbnails">❯</button>
         </div>
         <div class="icon-section icon-section--sizes">
           <h3 class="icon-section__title">Icon sizing helpers</h3>
@@ -914,7 +914,7 @@ const mediaThumbs = [
       border-radius: var(--radius-l);
     }
 
-    .media-controls-tray {
+    .control--media-tray {
       display: flex;
       flex-wrap: wrap;
       gap: calc(var(--control-gap) * 0.75);
@@ -999,7 +999,7 @@ const mediaThumbs = [
     }
 
     @media (max-width: 900px) {
-      .media-controls-tray {
+      .control--media-tray {
         justify-content: space-between;
       }
     }

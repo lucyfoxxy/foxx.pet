@@ -23,55 +23,45 @@
 
 .card__badges.controls { vertical-align: text-bottom; }
 
-:where(.control, .media-controls) {
+.control {
   color: var(--text-color);
   text-shadow: var(--text-shadow--soft), var(--text-glow--soft);
-}
-
-.control {
-  --control-border-radius: var(--radius-m);
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: var(--control-gap);
   padding-block: calc(var(--control-padding) * 0.75);
   padding-inline: var(--control-padding);
-  border-radius: var(--control-border-radius);
+  border-radius: 999px;
   box-shadow: var(--surface-shadow--soft);
   vertical-align: middle;
+  background: radial-gradient(ellipse at center,var(--color-control),var(--color-dark));
+}
+
+.control--media {
+  position: relative;
+  z-index: 2;
+  place-items: center;
+  inline-size: var(--media-control-size);
+  block-size: var(--media-control-size);
 }
 
 .control--button {
-  background: var(--color-dark);
-
-  transition: var(--transition--control);
+  transition: var(--transition--control);   
   cursor: pointer;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
 }
 
-:where(.control--button:not(.control--plain), .media-controls) {
-  cursor: pointer;
-  user-select: none;
-  -webkit-tap-highlight-color: transparent;
-  touch-action: manipulation;
-}
-
-:where(.control--button:not(.control--plain)):is(:hover, :focus-visible, [data-current="true"]) {
-
-  box-shadow: var(--surface-shadow--soft),var(--shadow-hover--control);
-  background: var(--color-accent);
+.control--button:not(.control--plain):is(:hover, :focus-visible, [data-current="true"]) {
   transform: var(--transform-raise);
-  outline: none;
+  filter: brightness(2);
 }
 
 .control--badge {
-  border-radius: 999px;
   padding-block: calc(var(--control-padding) * 0.5);
   padding-inline: calc(var(--control-padding) * 0.75);
-  background: var(--card-surface--dark);
-  transition: var(--transition--control);
 }
 
 .control--small {
@@ -79,7 +69,6 @@
   padding-block: calc(var(--control-padding) * 0.5);
 }
 .control--large {
-
   padding: calc(var(--control-padding) * 1.25);
 }
 .control--circle { border-radius: 999px; }
@@ -102,29 +91,12 @@
   opacity: 1;
 }
 
-.media-controls {
-  --media-control-size: 2.75rem;
-  position: relative;
-  z-index: 2;
-  display: grid;
-  place-items: center;
-  inline-size: var(--media-control-size);
-  block-size: var(--media-control-size);
-  border: none;
-  border-radius: 999px;
-
-}
-
-
-
-
-
 .media-play[data-active="false"],
 .media-pause[data-active="false"] {
   display: none;
 }
 
-.media-controls[disabled] {
+.control--media[disabled] {
   opacity: 0.35;
   cursor: default;
   pointer-events: none;
@@ -151,6 +123,6 @@
 }
 
 @supports not (color: oklch(50% 0 0)) {
-  :where(.control--button:not(.control--plain), .media-controls):hover { filter: brightness(1.08); }
-  :where(.control--button:not(.control--plain), .media-controls):active { filter: brightness(0.92); }
+  :where(.control--button:not(.control--plain), .control--media):hover { filter: brightness(1.08); }
+  :where(.control--button:not(.control--plain), .control--media):active { filter: brightness(0.92); }
 }
