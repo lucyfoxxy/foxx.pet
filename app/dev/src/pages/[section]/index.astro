@@ -1,0 +1,18 @@
+---
+import { View } from '@Frontend';
+import { buildSectionIndexStaticPaths, findSectionConfig } from '../../components/utils/sectionRoutes';
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  return buildSectionIndexStaticPaths();
+}
+
+const { section } = Astro.params;
+const config = findSectionConfig(section);
+
+if (!config) {
+  throw new Error('Unknown section index');
+}
+---
+<View.Section slug={config.slug} />

@@ -2,6 +2,8 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 
 export type Entry = CollectionEntry<'album'> | CollectionEntry<'blog'>;
 
+type EntryFilter = (data: Entry['data']) => boolean;
+
 export const isAlbumEntry = (
   entry: Entry,
 ): entry is CollectionEntry<'album'> => entry.collection === 'album';
@@ -28,23 +30,22 @@ const toTimestamp = (value: unknown) => {
 export const sortEntriesByDateDesc = <T extends Entry>(entries: T[]) =>
   [...entries].sort((a, b) => toTimestamp(b.data.date) - toTimestamp(a.data.date));
 
-export async function getEntriesBySection(section: string): Promise<Entry[]> {
+export async function getEntriesByFilter(filter: EntryFilter): Promise<Entry[]> {
   const [albums, posts] = await Promise.all([
-    getCollection('album', ({ data }) => data.section === section),
-    getCollection('blog', ({ data }) => data.section === section),
+    getCollection('album', ({ data }) => filter(data)),
+    getCollection('blog', ({ data }) => filter(data)),
   ]);
 
   return [...albums, ...posts];
+}
+
+export async function getEntriesBySection(section: string): Promise<Entry[]> {
+  return getEntriesByFilter((data) => data.section === section);
 }
 
 export async function getEntriesBySectionAndCategory(
   section: string,
   category: string,
 ): Promise<Entry[]> {
-  const [albums, posts] = await Promise.all([
-    getCollection('album', ({ data }) => data.section === section && data.category === category),
-    getCollection('blog', ({ data }) => data.section === section && data.category === category),
-  ]);
-
-  return [...albums, ...posts];
+  return getEntriesByFilter((data) => data.section === section && data.category === category);
 }

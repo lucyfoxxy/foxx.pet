@@ -1,6 +1,10 @@
+import { runOnReady } from './utils/_runOnReady.js';
+
 // src/scripts/initBlogChapters.js
 export function initBlogChapters(options) {
-  if (!options) return;
+  if (!options) return () => {};
+
+  let cleanupListeners = () => {};
 
   const {
     chapters,
@@ -10,9 +14,11 @@ export function initBlogChapters(options) {
     nextSelector = '[data-chapter-next]',
   } = options;
 
-  if (!Array.isArray(chapters) || chapters.length === 0) return;
+  if (!Array.isArray(chapters) || chapters.length === 0) return () => {};
 
   const run = () => {
+    cleanupListeners();
+
     const host = document.querySelector(targetSelector);
     if (!host) return;
 
@@ -97,8 +103,7 @@ export function initBlogChapters(options) {
       history.replaceState?.(null, '', '#' + id);
     };
 
-    // Clicks im TOC
-    document.addEventListener('click', (ev) => {
+    const onTocClick = (ev) => {
       const a = ev.target.closest('[data-chapter]');
       if (!a) return;
       const id = a.dataset.chapter;
@@ -109,21 +114,20 @@ export function initBlogChapters(options) {
 
       ev.preventDefault();
       showByIndex(idx);
-    });
+    };
+    document.addEventListener('click', onTocClick);
 
     // Prev / Next Buttons
-    if (prevBtn) {
-      prevBtn.addEventListener('click', () => {
-        const nextIdx = currentIndex - 1;
-        if (nextIdx >= 0) showByIndex(nextIdx);
-      });
-    }
-    if (nextBtn) {
-      nextBtn.addEventListener('click', () => {
-        const nextIdx = currentIndex + 1;
-        if (nextIdx < chapters.length) showByIndex(nextIdx);
-      });
-    }
+    const onPrev = () => {
+      const nextIdx = currentIndex - 1;
+      if (nextIdx >= 0) showByIndex(nextIdx);
+    };
+    const onNext = () => {
+      const nextIdx = currentIndex + 1;
+      if (nextIdx < chapters.length) showByIndex(nextIdx);
+    };
+    if (prevBtn) prevBtn.addEventListener('click', onPrev);
+    if (nextBtn) nextBtn.addEventListener('click', onNext);
 
     // Initial: Hash oder erstes Kapitel
     const initialHash = window.location.hash.replace('#', '');
@@ -132,13 +136,29 @@ export function initBlogChapters(options) {
       : 0;
 
     showByIndex(initialIdx >= 0 ? initialIdx : 0);
+
+    cleanupListeners = () => {
+      document.removeEventListener('click', onTocClick);
+      if (prevBtn) prevBtn.removeEventListener('click', onPrev);
+      if (nextBtn) nextBtn.removeEventListener('click', onNext);
+    };
   };
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', run, { once: true });
-  } else {
+  runOnReady(() => {
     run();
-  }
+
+    document.addEventListener(
+      'astro:before-swap',
+      () => {
+        cleanupListeners();
+      },
+      { once: true },
+    );
+  });
+
+  return () => {
+    cleanupListeners();
+  };
 }
 
 

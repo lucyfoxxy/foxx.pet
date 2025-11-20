@@ -12,19 +12,10 @@ import '@Styles/table.css';
 import { ASSETS } from '@Assets/ui';
 import { getNavigationLinks, getPageContent } from '@Content/siteContent';
 import { BaseParts,Template } from '@Frontend';
+import { buildBreadcrumbs, isLinkActive, normalizePath } from '@utils/navigation';
 
 
 // ---------------------------------------------------------------------------
-// Types & helpers
-// ---------------------------------------------------------------------------
-type NavLink = Awaited<ReturnType<typeof getNavigationLinks>>[number];
-
-type Breadcrumb = {
-  label: string;
-  href: string;
-  isCurrent: boolean;
-};
-
 type LayoutMeta = {
   title: string;
   description: string;
@@ -35,60 +26,6 @@ type LayoutMeta = {
 type LayoutProps = {
   title?: string;
   meta?: Partial<LayoutMeta>;
-};
-
-const normalizePath = (path: string) => {
-  if (!path || path === '/') return '/';
-  return path.replace(/\/+$/, '') || '/';
-};
-
-const toTitleCase = (value: string) =>
-  value
-    .split(/[-_]/g)
-    .filter(Boolean)
-    .map((segment) => segment.charAt(0).toUpperCase() + segment.slice(1))
-    .join(' ');
-
-const buildBreadcrumbs = ({
-  currentPath,
-  navLinks,
-  pageTitle,
-}: {
-  currentPath: string;
-  navLinks: NavLink[];
-  pageTitle: string;
-}): Breadcrumb[] => {
-  const normalizedCurrentPath = normalizePath(currentPath);
-  const navLabelByPath = new Map(navLinks.map((link) => [normalizePath(link.href), link.label]));
-  const segments = normalizedCurrentPath === '/' ? [] : normalizedCurrentPath.slice(1).split('/');
-  const collectedSegments: string[] = [];
-  const homeLink = navLinks.find((link) => normalizePath(link.href) === '/');
-  const homeLabel = homeLink ? homeLink.label : '↩ Home';
-
-  const crumbs: Breadcrumb[] = [
-    {
-      label: homeLabel,
-      href: '/',
-      isCurrent: segments.length === 0,
-    },
-  ];
-
-  segments.forEach((segment, index) => {
-    collectedSegments.push(segment);
-    const href = normalizePath(`/${collectedSegments.join('/')}`);
-    const isLast = index === segments.length - 1;
-    let label = navLabelByPath.get(href) ?? toTitleCase(segment);
-    if (isLast && pageTitle?.trim().length) {
-      label = pageTitle.trim();
-    }
-    crumbs.push({
-      label,
-      href,
-      isCurrent: isLast,
-    });
-  });
-
-  return crumbs;
 };
 
 // ---------------------------------------------------------------------------
@@ -116,15 +53,10 @@ const { title, description, url, image } = meta;
 // ---------------------------------------------------------------------------
 const rawNavLinks = await getNavigationLinks();
 const currentPath = normalizePath(Astro.url.pathname);
-const isLinkActive = (href: string) => {
-  const target = normalizePath(href);
-  if (target === '/') return currentPath === '/';
-  return currentPath === target || currentPath.startsWith(`${target}/`);
-};
 const navLinks = rawNavLinks.map((link) => ({
   ...link,
-  isActive: isLinkActive(link.href),
-  
+  isActive: isLinkActive(link.href, currentPath),
+
 }));
 const breadcrumbs = buildBreadcrumbs({
   currentPath: Astro.url.pathname,
@@ -143,8 +75,8 @@ const breadcrumbs = buildBreadcrumbs({
       <div class="panel-shell has-stars">
 
         <BaseParts.Header meta={meta} navLinks={navLinks} >
-          {Astro.slots.has('head-bar__actions') ? (
-            <slot name="head-bar__actions" slot="actions" />
+          {Astro.slots.has('header__actions') ? (
+            <slot name="header__actions" slot="actions" />
           ) : null}
         </BaseParts.Header>
 

@@ -15,9 +15,11 @@ export default defineConfig({
       '@utils': resolvePath('components/utils'),
       '@Views': resolvePath('components/Views'),
       '@Frontend': resolvePath('components/frontend.ts'),
+      'astro:content': resolvePath('test-utils/mocks/astroContent'),
     },
   },
   test: {
     include: ['src/**/*.{test,spec}.ts', 'src/**/__tests__/**/*.{ts,tsx}'],
+    environment: 'jsdom',
   },
 });

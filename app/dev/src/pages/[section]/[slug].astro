@@ -1,0 +1,38 @@
+---
+import { View } from '@Frontend';
+import { buildSectionCategoryStaticPaths, findSectionConfig } from '../../components/utils/sectionRoutes';
+
+export const prerender = true;
+
+type StaticProps = {
+  albumSlug?: string;
+  backToParentCategory?: boolean;
+};
+
+export async function getStaticPaths() {
+  return buildSectionCategoryStaticPaths();
+}
+
+const { section, slug } = Astro.params;
+
+if (!section) {
+  throw new Error('Missing section slug');
+}
+
+if (!slug) {
+  throw new Error('Missing category slug');
+}
+
+const config = findSectionConfig(section);
+
+if (!config) {
+  throw new Error('Unknown section category');
+}
+
+const { albumSlug, backToParentCategory = false } = Astro.props as StaticProps;
+---
+{albumSlug ? (
+  <View.Entry section={config.slug} slug={albumSlug} backToParentCategory={backToParentCategory} />
+) : (
+  <View.Category section={config.slug} slug={slug} />
+)}

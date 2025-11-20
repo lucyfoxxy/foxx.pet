@@ -1,0 +1,27 @@
+---
+import { View } from '@Frontend';
+import { buildSectionEntryStaticPaths, findSectionConfig } from '../../../components/utils/sectionRoutes';
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  return buildSectionEntryStaticPaths();
+}
+
+const { section, entry } = Astro.params;
+
+if (!section) {
+  throw new Error('Missing section slug');
+}
+
+if (!entry) {
+  throw new Error('Missing entry slug');
+}
+
+const config = findSectionConfig(section);
+
+if (!config?.buildEntryParams) {
+  throw new Error('Unknown section entry');
+}
+---
+<View.Entry section={config.slug} slug={entry} />
