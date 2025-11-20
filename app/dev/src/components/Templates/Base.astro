@@ -143,8 +143,8 @@ const breadcrumbs = buildBreadcrumbs({
       <div class="panel-shell has-stars">
 
         <BaseParts.Header meta={meta} navLinks={navLinks} >
-          {Astro.slots.has('header__actions') ? (
-            <slot name="header__actions" slot="actions" />
+          {Astro.slots.has('head-bar__actions') ? (
+            <slot name="head-bar__actions" slot="actions" />
           ) : null}
         </BaseParts.Header>
 

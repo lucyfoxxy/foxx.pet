@@ -106,7 +106,7 @@ const meta = {
 ---
 <Template.Base title={pageTitle} meta={meta}>
   {headerBackHref && headerBackLabel ? (
-    <Template.HeaderActions slot="header__actions" href={headerBackHref} label={headerBackLabel} />
+    <Template.HeaderActions slot="head-bar__actions" href={headerBackHref} label={headerBackLabel} />
   ) : null}
 
   {errorMessage ? (

@@ -78,8 +78,8 @@ var(--overlay--dim), var(--overlay--nebula), var(--overlay--stars), linear-gradi
   
   transition: var(--transition--interactive);
 }
-.panel,.header__nav:where(a):hover,
-.panel,.header__nav:where(a):focus-visible {
+.panel,.head-bar__nav:where(a):hover,
+.panel,.head-bar__nav:where(a):focus-visible {
   text-shadow: var(--text-glow--strong);
 
   opacity: 1;

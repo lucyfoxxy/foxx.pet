@@ -51,7 +51,7 @@ a {
 }
 
 
-.header__nav-label {
+.head-bar__nav-label {
   font-weight: var(--bold-font-weight); 
   font-size: clamp(var(--font-size-s),calc(var(--font-size-s) + 1.3vw),var(--font-size-m));
   letter-spacing: var(--letter-spacing-xl);
@@ -82,7 +82,7 @@ a {
 }
 
 /* ====== HEADINGS ====== */
-:where(h1, h2, h3, .header__nav-label) {
+:where(h1, h2, h3, .head-bar__nav-label) {
   font-family: var(--font--fancy);
   font-variant: small-caps;
 }
