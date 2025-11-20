@@ -62,7 +62,7 @@ const backLabel = parentPage ? `← ${parentPage.title}` : undefined;
 ---
 <Template.Base title={pageTitle} meta={meta}>
   {backHref && backLabel ? (
-    <Template.HeaderActions slot="head-bar__actions" href={backHref} label={backLabel} />
+    <Template.HeaderActions slot="header__actions" href={backHref} label={backLabel} />
   ) : null}
 
   <section class="content-section content-section--head">

@@ -24,7 +24,9 @@ export default function stickyBar(selector) {
   
   
   const style = window.getComputedStyle(bar);
-  if (style.position !== 'sticky') {
+  const position = style.position;
+
+  if (position !== 'sticky' && position !== '-webkit-sticky') {
     // Falls Layout mal geändert wird, ohne sticky: still aussteigen
     return;
   }
