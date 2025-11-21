@@ -51,12 +51,12 @@ if (typeof iconName === 'string' && isKnownIcon(iconName)) {
   icon = fallbackIcon(String(iconName));
 }
 
-const { vb, body, attrs = {} } = icon;
+const { vb, body = {} } = icon;
 const labelled = !!title;
 ---
 
 <svg
-  class={`${cls}`}
+  class={cls}
   width={size} height={size}
   viewBox={vb}
   preserveAspectRatio="xMidYMid meet"
@@ -68,7 +68,6 @@ const labelled = !!title;
   aria-hidden={labelled ? 'false' : 'true'}
   role="img"
   focusable="false"
-  {...attrs}
 >
   {title ? <title>{title}</title> : null}
   {typeof body === 'string' ? <Fragment set:html={body} /> : body}

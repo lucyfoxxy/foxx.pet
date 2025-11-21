@@ -2,25 +2,9 @@
 .hero__signature {
   display: grid; 
 }
-.hero::before {
-  content: "";
-  z-index: -1;
-  position: absolute;
-  inset: 0;
-  margin: auto;
-  inline-size: 32em;
-  block-size: 16em;
-  border-radius: 999px;
-  background-image: var(--overlay--stars), radial-gradient(ellipse at center, rgba(255,255,255,.12), transparent 60%);
-  background-position: center,50% 55%;
-  background-size: 12em 8em, auto;
-  background-repeat: no-repeat,no-repeat;
-  background-blend-mode: soft-light,screen;
-  mix-blend-mode: screen;
-  pointer-events: none;
-}
+
 .hero {
-    position: relative;
+  position: relative;
   isolation: isolate;
   place-items: center;
   align-content: end;
@@ -28,47 +12,46 @@
   opacity: .9;
   font-size: var(--hero-scale);
   inline-size: 100%;
-  block-size: 8.65em;
+  block-size: 8.25em;
   margin-block-start: var(--section-gap);
   mix-blend-mode: normal;
-  background: 
-    var(--hero--bg)  calc(50% - 2em) calc(50% - .25em)/8.45em   no-repeat;
-  
-  filter:
-    contrast(1.6)
+  background-image: var(--hero--bg),var(--overlay--stars), radial-gradient(ellipse at center, rgba(255,255,255,.12), transparent 60%);
+  background-position: calc(43%) calc(75%),center,50% 55%;
+  background-size: 8.25em, 12em 8em, auto;
+  background-repeat:no-repeat,no-repeat,no-repeat;
+  background-blend-mode: normal,screen,lighten;
 
-    saturate(1.05)
-    drop-shadow(.15em .15em .125em rgba(0,0,0,.7))    
-    ;
+  filter: contrast(1.6) saturate(1.05) drop-shadow(0 0 .25em var(--color-dark--strong)) ;
+  transform: translateY(-.5em);
 }
 
-.hero__text {
-  filter:
-    drop-shadow(.1em .1em .125em rgba(0,0,0,.5));
+.hero__text { 
+  display: grid;
+  grid-template-areas: "signature""main";
+  row-gap:.8em; 
+  filter: drop-shadow(0 0 .25em var(--color-dark--strong));
 }
 
 .hero__signature {
+  grid-area: signature;
   grid-template-areas: "welcome sub";
   inline-size: auto;
-  row-gap: 0;
-  column-gap: 4.5em;
-  
-  
+  gap: 6em;
   align-items:center;
   text-align: start;
   justify-self: center;
-  transform: translate(.5em, -.35em);
+  transform: translateY(1.25em)
 }
 
 .hero__welcome {
   grid-area: welcome;
   font-family: var(--font--fancy);
-  font-weight: 250;
+  font-weight: 200;
   
-  letter-spacing: var(--letter-spacing-l);
-  font-size: .95em;
+  letter-spacing: var(--letter-spacing-m);
+  font-size: .8em;
   
-  transform: rotate(-6deg);
+  transform: rotate(-4deg) translate(2.75em,-.5em);;
   opacity: .85;
 }
 
@@ -79,38 +62,43 @@
   grid-template-areas: "to lucy";
   gap: .015em;
   letter-spacing: var(--letter-spacing-xl);
-  transform: translateY(.5em) rotate(6deg);
+  transform:  rotate(4deg);
 
 }
 .hero__lucy { 
   grid-area: lucy; 
-  font-size: 1.25em; 
+  font-size: 1.13em; 
   font-weight: 550;
 }
 
 .hero__to { 
   opacity: .8;  
   grid-area: to; 
-  font-size: .6em;
+  font-size: .45em;
   transform: translate(.25em,.25em); 
   font-weight: 250;
 }
-
-.hero__title {
+.hero__main {grid-area: main; transform: translateY(.25em);}
+.hero__main--title {
   font-family: var(--font--fancy);
   font-weight: var(--font-weight-bold);
-  font-size: 3em;       
+  font-size: 2.75em;       
   font-variant: small-caps;
   letter-spacing: var(--letter-spacing-xl);
+  gap:.5em;
+  
+  
 }
-
-.hero__tagline {
+.hero__main--title > span.cozy {display: inline-block; transform: rotate(-3deg);}
+.hero__main--title > span.cosmos {display: inline-block; transform: rotate(-3deg);}
+span.cozy + span.cosmos {}
+.hero__main--tagline {
   font-family: var(--font--display);
   font-size: .7em;       
   text-align: end;
   opacity: .85;
   font-weight: 300;
-  transform: translate(-.5em, -1.7em);
+  transform: translate(-.5em, -1.25em) rotate(-3deg);
 }
 
 
