@@ -88,7 +88,7 @@ Fonts are preloaded in the shared layout (`@Layout/Main.astro`) to avoid layout 
 
 Complementary rhythm tokens:
 
-- Line heights: `--line-height-s` (1.5), `--line-height-m` (1.35), `--line-height-l` (1.2), `--line-height-xl` (1.15).
+- Line heights: `--line-height-xxl` (1.5), `--line-height-xl` (1.35), `--line-height-m` (1.2), `--line-height-s` (1.15).
 - Letter spacing: `--letter-spacing-s` (.005em), `--letter-spacing-m` (.02em), `--letter-spacing-l` (.04em).
 - Paragraph spacing inside panels: `--flow-gap` (`clamp(.65rem, .5rem + .3vw, .95rem)`).
 

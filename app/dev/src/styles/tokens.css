@@ -27,11 +27,16 @@
   --font-weight-thick:       500;
   --font-weight-bold:        700;
 
-  --line-height-xs:      .85;
-  --line-height-s:       1.5;
-  --line-height-m:      1.35;
-  --line-height-l:       1.225;
-  --line-height-xl:      1.2;
+  --line-height-xxs:        .8;
+  --line-height-xs:         .9;
+  --line-height-s:         1.0;
+  --line-height-m:         1.1;
+  --line-height-l:         1.2;
+  --line-height-xl:        1.3;
+  --line-height-xxl:       1.5;
+  
+  
+  
 
   --letter-spacing-s:    .0065em;
   --letter-spacing-m:    clamp(.0065em, calc(0.225em + .01vw ), .0225em);

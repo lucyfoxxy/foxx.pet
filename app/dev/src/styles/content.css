@@ -191,7 +191,7 @@
 .card__body > ol > li > a > span:first-child {
   font-weight: var(--font-weight-thick);
   font-size: var(--font-size-m);
-  line-height: var(--line-height-m);
+  line-height: var(--line-height-xl);
   color: var(--color-accent--bright);
 }
 
@@ -205,13 +205,13 @@
 .card__body > ol > li > a > div > strong {
   font-weight: var(--font-weight-thick);
   font-size: var(--font-size-m);
-  line-height: var(--line-height-m);
+  line-height: var(--line-height-xl);
 }
 
 .card__body > ol > li > a > div > span {
   font-size: var(--font-size-s);
   font-weight: var(--font-weight-thin);
-  line-height: var(--line-height-m);
+  line-height: var(--line-height-xl);
   
 }
 
@@ -279,7 +279,7 @@
 .card__overlay--title :where(p) {
   margin: 0;
   font-size: var(--font-size-s);
-  line-height: var(--line-height-m);
+  line-height: var(--line-height-xl);
   opacity: 0.9;
 }
 

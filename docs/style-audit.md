@@ -261,11 +261,11 @@ Total unique tokens: 117
 | `--letter-spacing-m` | `src/styles/tokens.css` | 1 | 0 | _No var(--token) references found_ |
 | `--letter-spacing-s` | `src/styles/tokens.css` | 1 | 1 | `src/styles/typography.css` (1) |
 | `--letter-spacing-xl` | `src/styles/tokens.css` | 1 | 1 | `src/styles/typography.css` (1) |
-| `--line-height-l` | `src/styles/tokens.css` | 1 | 1 | `src/styles/content.css` (1) |
-| `--line-height-m` | `src/styles/tokens.css` | 1 | 5 | `src/styles/content.css` (4)<br>`src/styles/typography.css` (1) |
+| `--line-height-m` | `src/styles/tokens.css` | 1 | 1 | `src/styles/content.css` (1) |
+| `--line-height-xl` | `src/styles/tokens.css` | 1 | 5 | `src/styles/content.css` (4)<br>`src/styles/typography.css` (1) |
+| `--line-height-xxl` | `src/styles/tokens.css` | 1 | 1 | `src/styles/typography.css` (1) |
 | `--line-height-s` | `src/styles/tokens.css` | 1 | 1 | `src/styles/typography.css` (1) |
-| `--line-height-xl` | `src/styles/tokens.css` | 1 | 1 | `src/styles/typography.css` (1) |
-| `--line-height-xs` | `src/styles/tokens.css` | 1 | 3 | `src/styles/typography.css` (3) |
+| `--line-height-xxs` | `src/styles/tokens.css` | 1 | 3 | `src/styles/typography.css` (3) |
 | `--media-control-size` | `src/styles/controls.css` | 1 | 2 | `src/styles/controls.css` (2) |
 | `--nav-gap--column` | `src/styles/tokens.css` | 1 | 0 | _No var(--token) references found_ |
 | `--nav-gap--row` | `src/styles/tokens.css` | 1 | 0 | _No var(--token) references found_ |
