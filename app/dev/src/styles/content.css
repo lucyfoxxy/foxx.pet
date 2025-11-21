@@ -273,6 +273,7 @@
 
 .card__overlay--title :where(h1,h2,h3) {
   margin: 0;
+  font-size: var(--font-size-m);
   text-wrap: balance;
 }
 
