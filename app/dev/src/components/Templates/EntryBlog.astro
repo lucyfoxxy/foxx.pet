@@ -38,7 +38,7 @@ const hasBlogSummary = blogDescription.length > 0 || blogSummaryParagraphs.lengt
         <img
           src={blog.cover.src}
           alt={blog.title}
-          class="media-image.media-image--banner"
+          class="media-image media-image--banner media-image--cover"
         />
         <div class="card__overlay card__overlay--title card__overlay--column card__overlay--bottom">
           <h1 class="card__title">{blog.title}</h1>
@@ -50,7 +50,7 @@ const hasBlogSummary = blogDescription.length > 0 || blogSummaryParagraphs.lengt
 </section>
 
 {hasBlogChapters || hasBlogSummary ? (
-  <section class:list={['content-section']}>
+  <section class:list={['content-section cols-2']}>
     {hasBlogChapters ? (
       <Template.Card class="">
         <Fragment slot="head">

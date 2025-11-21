@@ -16,11 +16,15 @@
 .media-wrapper--roomy {
   padding: var(--card-gap);
 }
+.media-wrapper--ghost {
+  background: none;
+  backdrop-filter: none;
+  box-shadow: none;
+}
 
 .media-wrapper--controls { 
   outline: 1px solid var(--color-dark--soft);
   border-radius: var(--radius-l);
-  box-shadow: var(--shadow--default);
 }
 
 .media-wrapper--frames {
@@ -31,10 +35,8 @@
 }
 
 .media-wrapper--thumbs {
-  backdrop-filter: var(--blur-m);
-  box-shadow: var(--shadow--default), inset 0 0 9px var(--color-dark--ghosty);
   border-radius: var(--radius-l);
-  padding: var(--card-gap);
+  padding: var(--card-padding);
 }
 
 
@@ -45,12 +47,12 @@
   aspect-ratio: 16 / 9;
   border-radius: var(--radius-l);
   border-style: hidden;
-  background: var(--color-dark--soft);
   overflow: hidden; 
   max-block-size: 60vh;
   block-size: auto;
   box-shadow: var(--shadow--soft);
 }
+.media-wrapper > .media-frame { box-shadow: none; }
 
 .content-section.cols-2 :where(.media-frame),
 .content-section--masonry :where(.media-frame) {

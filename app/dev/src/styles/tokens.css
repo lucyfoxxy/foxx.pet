@@ -82,11 +82,11 @@
   --color-light--soft:        color-mix(in oklch, var(--color-light) 50%, transparent);
   --color-light--ghosty:      color-mix(in oklch, var(--color-light) 30%, transparent);
 
-  --color-accent--dark:      oklch(34% 0.13 305);
-  --color-accent:            oklch(74% 0.145 305); 
-  --color-accent--bright:    oklch(91% 0.07 305);
+  --color-accent--dark:      oklch(21% 0.11 300);
+  --color-accent:            oklch(74% 0.145 300); 
+  --color-accent--bright:    oklch(91% 0.07 300);
 
-  --color-control:           oklch(26% 0.17 290);         
+          
 
   /* ====== Base FX ==================== */  
   --text-shadow:             2px 2px 4px var(--color-dark--soft);
@@ -141,7 +141,7 @@
 
   --bg--base:     linear-gradient(205deg, #371173, #240a46, rgb(40, 7, 112));
   --shadow--base: inset 0 0 164px 64px rgba(0,0,0,.5);
-  --control-bg:  radial-gradient(ellipse at center, var(--color-accent--dark), var(--color-dark--soft));
+  --control-bg:  radial-gradient(ellipse at center, var(--color-accent--dark), var(--color-dark--strong));
   /* ====== Gallery ====== */                                 
   --gallery-interval:           8500ms;  
 

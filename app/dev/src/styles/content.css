@@ -143,7 +143,7 @@
   min-width: 0; 
   align-items: center; 
   display: inline-flex; 
-  gap: var(--flow-gap);
+  gap: var(--cluster-gap);
 }
 
 
@@ -156,9 +156,9 @@
   padding: 0;
   margin: 0;
   display: inline-grid;
-  grid-auto-flow: column;
+
   list-style: none;
-  grid-template-columns: repeat(auto-fit, minmax(10vw, 1fr));
+
   gap: var(--cluster-gap);
 }
 @media (max-width: 900px) {
