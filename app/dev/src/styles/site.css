@@ -51,7 +51,7 @@
 
   background-size:
     1280px 1280px,
-    cover,
+    640px 640px,
     auto,
     cover,
     cover,
@@ -60,7 +60,7 @@
 
   background-blend-mode:
     overlay,
-    soft-light,
+    lighten,
     multiply,
     normal,
     normal,

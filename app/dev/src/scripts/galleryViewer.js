@@ -1,6 +1,7 @@
 // src/scripts/galleryViewer.js
 import { createGalleryItemsBySlug } from './utils/_slugLoader.js';
 import { loadImageWithTransition } from './utils/_transitionLoader.js';
+import _isMobile from '@Scripts/utils/_isMobile.js';
 
 const metas = import.meta.glob('@Content/album/**/*.json', { query: '?json', eager: true });
 const assetModules = import.meta.glob('@Assets/albums/**/*', { query: '?url', import: 'default', eager: true });
@@ -15,11 +16,13 @@ const buildRemoteUrl = (id, key, kind) => (id && key) ? `https://img.foxx.pet/ap
 export function initGalleryFrame(root = document) {
   const wrapper = root.querySelector('.media-wrapper.media-wrapper--controls');
   if (!wrapper) return null;
-
+  
   const overlay = wrapper.querySelectorAll('.card__overlay--hover');
   const frame = wrapper.querySelector('.media-frame[data-slug]');
+  
   const slug = frame.getAttribute('data-slug');
-  const autoplay = frame.getAttribute('data-autoplay') === 'true';
+  const autoplay = !_isMobile() && frame.getAttribute('data-autoplay') === 'true';
+  frame.setAttribute('data-autoplay',!_isMobile);
   const random = frame.getAttribute('data-random') === 'true';
   const interval = parseInt(frame.getAttribute('data-interval') || '8500', 10);
   const imgEl = frame.querySelector('.media-image');
@@ -74,6 +77,7 @@ export function initGalleryFrame(root = document) {
   const setProgress = (p) => progress?.style.setProperty('--p', String(p));
   const updatePlayButton = () => {
     btnPause?.setAttribute('data-active', playing ? 'true' : 'false');
+    frame?.setAttribute('data-active', playing ? 'true' : 'false');
     btnPlay?.setAttribute('data-active', playing ? 'false' : 'true');
     btnPlay?.setAttribute('aria-label', playing ? 'Pause autoplay' : 'Resume autoplay');
   };

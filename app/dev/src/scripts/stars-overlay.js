@@ -1,5 +1,9 @@
+import _isMobile from '@Scripts/utils/_isMobile.js';
 // stars-overlay.js
 export default function initStarsCanvas(canvas, opts = {}) {
+
+  if(_isMobile()) {return;};
+
   const ctx = canvas.getContext('2d');
   let animId = null;
   let W = 0, H = 0;
@@ -66,7 +70,7 @@ export default function initStarsCanvas(canvas, opts = {}) {
 
     if (glow) {
       ctx.shadowBlur = 5;
-      ctx.shadowColor = '#ffff33';
+      ctx.shadowColor = '#8c62ffe6';
     }
     ctx.fillStyle = `rgba(255,255,200,${s.op})`;
     ctx.fill();

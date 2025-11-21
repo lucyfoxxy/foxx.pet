@@ -52,6 +52,7 @@
   block-size: auto;
   box-shadow: var(--shadow--soft);
 }
+
 .media-wrapper > .media-frame { box-shadow: none; }
 
 .content-section.cols-2 :where(.media-frame),
@@ -124,7 +125,7 @@
 .media-image.is-animating {
   animation: media-slideshow var(--gallery-interval) ease;
 }
-
+.media-frame[data-autoplay="false"]:not([data-active="true"]) > .is-animating {animation: none;}
 @keyframes media-slideshow {
   0%   { opacity:  .02; transform: scale(5.00) rotate(90deg); }
   10%  { opacity: 1.00; transform: scale(1.25); }

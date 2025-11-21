@@ -57,25 +57,26 @@ const goatCounterScriptSrc = 'https://stats.foxx.pet/count.js';
   <script data-goatcounter={`${goatCounterBase}/count`} async src={goatCounterScriptSrc}></script>
 )}
 <script>
-import _runOnReady from '@Scripts/utils/_runOnReady.js';
-import initStarsCanvas from '@Scripts/stars-overlay.js';
+  import _runOnReady from '@Scripts/utils/_runOnReady.js';
 
-const starsRegistry = new WeakMap<HTMLCanvasElement, () => void>();
+  import initStarsCanvas from '@Scripts/stars-overlay.js';
 
-_runOnReady(() => {
-  document
-    .querySelectorAll<HTMLCanvasElement>('.panel-shell.has-stars .stars-canvas')
-    .forEach((canvas) => {
-      const stop = initStarsCanvas(canvas, { density: 0.1, fps: 90, glow: true });
-      starsRegistry.set(canvas, stop);
-    });
-});
+  const starsRegistry = new WeakMap<HTMLCanvasElement, () => void>();
 
-// Beispiel Cleanup (wenn du Panels entfernst/Hot-Reload o.ä.):
-export function stopStars(canvas: HTMLCanvasElement) {
-  const stop = starsRegistry.get(canvas);
-  if (stop) stop();
-  starsRegistry.delete(canvas);
-}
+  _runOnReady(() => {
+    document
+      .querySelectorAll<HTMLCanvasElement>('.panel-shell.has-stars .stars-canvas')
+      .forEach((canvas) => {
+        const stop = initStarsCanvas(canvas, { density: 0.11, fps: 60, glow: true });
+        starsRegistry.set(canvas, stop);
+      });
+  });
+
+  // Beispiel Cleanup (wenn du Panels entfernst/Hot-Reload o.ä.):
+  export function stopStars(canvas: HTMLCanvasElement) {
+    const stop = starsRegistry.get(canvas);
+    if (stop) stop();
+    starsRegistry.delete(canvas);
+  }
 
 </script>

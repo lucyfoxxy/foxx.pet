@@ -15,11 +15,11 @@
   block-size: 8.25em;
   margin-block-start: var(--section-gap);
   mix-blend-mode: normal;
-  background-image: var(--hero--bg),var(--overlay--stars), radial-gradient(ellipse at center, rgba(255,255,255,.12), transparent 60%);
+  background-image: var(--hero--bg), radial-gradient(ellipse at center, rgba(255,255,255,.12), transparent 60%);
   background-position: calc(43%) calc(75%),center,50% 55%;
   background-size: 8.25em, 12em 8em, auto;
-  background-repeat:no-repeat,no-repeat,no-repeat;
-  background-blend-mode: normal,screen,lighten;
+  background-repeat:no-repeat,no-repeat;
+  background-blend-mode: normal,lighten;
 
   filter: contrast(1.6) saturate(1.05) drop-shadow(.15em .15em .25em var(--color-dark--strong));
   transform: translateY(-.5em);
