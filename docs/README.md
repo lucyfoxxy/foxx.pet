@@ -73,7 +73,7 @@ Typography tokens are centralised in [`app/dev/src/styles/tokens.css`](app/dev/s
 
 - **Primary font family** – `Grandstander` with a system sans-serif fallback. Used for body copy and the default site type.
 - **Secondary font family** – `Fuzzy Bubbles`, falling back to the primary stack. Applied to display elements such as headings, navigation links, pricing table highlights, and accent chips.
-- **Font weights** – Normal text uses `var(--normal-font-weight)` (400) and emphasis uses `var(--bold-font-weight)` (700).
+- **Font weights** – Normal text uses `var(--font-weight-normal)` (400) and emphasis uses `var(--font-weight-bold)` (700).
 
 Fonts are preloaded in the shared layout (`@Layout/Main.astro`) to avoid layout shifts.
 

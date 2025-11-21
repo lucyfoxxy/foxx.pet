@@ -20,6 +20,8 @@
   pointer-events: none;
 }
 .hero {
+    position: relative;
+  isolation: isolate;
   place-items: center;
   align-content: end;
   z-index: 222;
@@ -96,7 +98,7 @@
 
 .hero__title {
   font-family: var(--font--fancy);
-  font-weight: var(--bold-font-weight);
+  font-weight: var(--font-weight-bold);
   font-size: 3em;       
   font-variant: small-caps;
   letter-spacing: var(--letter-spacing-xl);

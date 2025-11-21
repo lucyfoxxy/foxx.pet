@@ -220,7 +220,7 @@ Total unique tokens: 117
 | `--blur-xs` | `src/styles/tokens.css` | 1 | 0 | _No var(--token) references found_ |
 | `--blur-xxl` | `src/styles/tokens.css` | 1 | 0 | _No var(--token) references found_ |
 | `--blur-xxs` | `src/styles/tokens.css` | 1 | 0 | _No var(--token) references found_ |
-| `--bold-font-weight` | `src/styles/tokens.css` | 1 | 5 | `src/styles/content.css` (2)<br>`src/styles/typography.css` (3) |
+| `--font-weight-bold` | `src/styles/tokens.css` | 1 | 5 | `src/styles/content.css` (2)<br>`src/styles/typography.css` (3) |
 | `--button` | `src/styles/controls.css`<br>`src/styles/typography.css` | 4 | 0 | _No var(--token) references found_ |
 | `--card-gap` | `src/styles/tokens.css` | 1 | 8 | `src/styles/content.css` (7)<br>`src/styles/media.css` (1) |
 | `--card-padding` | `src/styles/tokens.css` | 1 | 3 | `src/styles/content.css` (2)<br>`src/styles/table.css` (1) |
@@ -269,7 +269,7 @@ Total unique tokens: 117
 | `--media-control-size` | `src/styles/controls.css` | 1 | 2 | `src/styles/controls.css` (2) |
 | `--nav-gap--column` | `src/styles/tokens.css` | 1 | 0 | _No var(--token) references found_ |
 | `--nav-gap--row` | `src/styles/tokens.css` | 1 | 0 | _No var(--token) references found_ |
-| `--normal-font-weight` | `src/styles/tokens.css` | 1 | 4 | `src/styles/typography.css` (4) |
+| `--font-weight-normal` | `src/styles/tokens.css` | 1 | 4 | `src/styles/typography.css` (4) |
 | `--outline` | `src/styles/tokens.css` | 1 | 1 | `src/styles/media.css` (1) |
 | `--bars-padding` | `src/styles/tokens.css` | 1 | 5 | `src/styles/site_footer.css` (1)<br>`src/styles/site_header.css` (4) |
 | `--panel-padding` | `src/styles/tokens.css` | 1 | 5 | `src/styles/site.css` (2)<br>`src/styles/site_footer.css` (1)<br>`src/styles/site_header.css` (1)<br>`src/styles/tokens.css` (1) |
@@ -304,8 +304,8 @@ Total unique tokens: 117
 | `--text-highlight` | `src/styles/tokens.css` | 1 | 1 | `src/styles/content.css` (1) |
 | `--text-shadow` | `src/styles/tokens.css` | 1 | 4 | `src/styles/base.css` (2)<br>`src/styles/controls.css` (1)<br>`src/styles/site_footer.css` (1) |
 | `--text-shadow` | `src/styles/tokens.css` | 1 | 4 | `src/styles/content.css` (1)<br>`src/styles/typography.css` (3) |
-| `--thick-font-weight` | `src/styles/tokens.css` | 1 | 3 | `src/styles/content.css` (1)<br>`src/styles/typography.css` (2) |
-| `--thin-font-weight` | `src/styles/tokens.css` | 1 | 2 | `src/styles/typography.css` (2) |
+| `--font-weight-thick` | `src/styles/tokens.css` | 1 | 3 | `src/styles/content.css` (1)<br>`src/styles/typography.css` (2) |
+| `--font-weight-thin` | `src/styles/tokens.css` | 1 | 2 | `src/styles/typography.css` (2) |
 | `--thumb` | `src/styles/media.css` | 6 | 7 | `src/styles/media.css` (7) |
 | `--thumb-size` | `src/styles/tokens.css` | 1 | 7 | `src/styles/media.css` (7) |
 | `--title` | `src/styles/content.css` | 2 | 0 | _No var(--token) references found_ |

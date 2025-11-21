@@ -36,7 +36,7 @@
 /* ====== BASE TYPOGRAPHY ====== */
 body {
   font-family: var(--font--display);
-  font-weight: var(--thin-font-weight);
+  font-weight: var(--font-weight-thin);
   font-size: var(--font-size-s);
   line-height: var(--line-height-s);
   letter-spacing: var(--letter-spacing-s);
@@ -47,13 +47,13 @@ body {
 
 /* ====== LINKS & FOOTER ====== */
 a {
-  font-weight: var(--bold-font-weight);
+  font-weight: var(--font-weight-bold);
   text-decoration: none;
 }
 
 .is-italic { font-style: italic; }
 .header__nav-label {
-  font-weight: var(--bold-font-weight); 
+  font-weight: var(--font-weight-bold); 
   font-size: clamp(var(--font-size-s),calc(var(--font-size-s) + 1.3vw),var(--font-size-m));
   letter-spacing: var(--letter-spacing-xl);
   line-height: var(--line-height-xs);
@@ -64,7 +64,7 @@ a {
 .control--small,
 .control--badge {
   font-size: clamp(var(--font-size-xs), calc(var(--font-size-xs) + .125rem), var(--font-size-s));
-  font-weight: var(--thin-font-weight);
+  font-weight: var(--font-weight-thin);
   line-height: var(--line-height-xs);
 }
 .footer__meta {
@@ -73,11 +73,11 @@ a {
 
 
 .control--button {
-  font-weight: var(--normal-font-weight);
+  font-weight: var(--font-weight-normal);
   line-height: var(--line-height-xs);
 }
  .control--button:hover {
-  font-weight: var(--bold-font-weight);
+  font-weight: var(--font-weight-bold);
 }
 
 /* ====== HEADINGS ====== */
@@ -93,7 +93,7 @@ a {
 }
 
 h1 {
-  font-weight: var(--bold-font-weight);
+  font-weight: var(--font-weight-bold);
   font-size: var(--font-size-xl);
   line-height: var(--line-height-xl);
 }
@@ -104,13 +104,13 @@ h2 {
 }
 
 h3 {
-  font-weight: var(--normal-font-weight);
+  font-weight: var(--font-weight-normal);
   font-size: var(--font-size-m);
 }
 
 h4 {
   font-family: var(--font--signature);
-  font-weight: var(--thick-font-weight);
+  font-weight: var(--font-weight-thick);
   line-height: var(--line-height-m);
   letter-spacing: var(--letter-spacing-xl);
   font-size: var(--font-size-m);  
@@ -139,6 +139,6 @@ h4 {
 
 /* ====== TABLES ====== */
 .table__subtitle { line-height: var(--line-height-m); }
-.table__th { font-weight: var(--thick-font-weight); }
-.table__price { font-weight: var(--normal-font-weight); }
+.table__th { font-weight: var(--font-weight-thick); }
+.table__price { font-weight: var(--font-weight-normal); }
 

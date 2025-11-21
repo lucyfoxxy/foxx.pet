@@ -16,16 +16,16 @@
   --radius-l:               18px;
   --radius-xl:              36px;
   --radius-xxl:             72px;
-  
+
   /* ============= Font & Other Sizes ================= */
   --font--display:     Grandstander, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font--fancy:   'Fuzzy Bubbles', var(--font--display);
   --font--signature:  'Beautiful Dream', var(--font--display);
 
-  --thin-font-weight:        300;
-  --normal-font-weight:      400;
-  --thick-font-weight:       500;
-  --bold-font-weight:        700;
+  --font-weight-thin:        300;
+  --font-weight-normal:      400;
+  --font-weight-thick:       500;
+  --font-weight-bold:        700;
 
   --line-height-xs:      .85;
   --line-height-s:       1.5;
@@ -82,7 +82,7 @@
   --color-light--soft:        color-mix(in oklch, var(--color-light) 50%, transparent);
   --color-light--ghosty:      color-mix(in oklch, var(--color-light) 30%, transparent);
 
-  --color-accent--dark:      oklch(21% 0.11 300);
+  --color-accent--dark:      oklch(34% 0.16 300);
   --color-accent:            oklch(74% 0.145 300); 
   --color-accent--bright:    oklch(91% 0.07 300);
 
@@ -93,7 +93,7 @@
   --icon-shadow:             0 0 3px color-mix(in oklch,transparent 30%,currentColor);
   --text-glow:               1px 1px 2px var(--color-light--soft);
 
-  --shadow--soft:   2px 2px 5px var(--color-dark--soft);
+  --shadow--soft:    2px 2px 12px rgba(0,0,0,.39);
   --shadow--default: 0 0 18px -6px var(--color-dark--soft),0 0 18px -6px var(--color-dark--strong);
   --shadow--strong:  0 0 20px -10px var(--color-dark--soft),0 0 28px -6px var(--color-dark--strong),0 0 28px 0 var(--color-dark--strong);
 
@@ -141,7 +141,7 @@
 
   --bg--base:     linear-gradient(205deg, #371173, #240a46, rgb(40, 7, 112));
   --shadow--base: inset 0 0 164px 64px rgba(0,0,0,.5);
-  --control-bg:  radial-gradient(ellipse at center, var(--color-accent--dark), var(--color-dark--strong));
+  --control-bg:  radial-gradient(ellipse at center, var(--color-accent--dark),var(--color-dark));
   /* ====== Gallery ====== */                                 
   --gallery-interval:           8500ms;  
 
