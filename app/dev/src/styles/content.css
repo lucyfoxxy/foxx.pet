@@ -243,10 +243,14 @@
 .card__overlay {
   position: absolute;
   inset-inline: 0; 
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas: "title badges""desc desc";
   flex-direction: row;
-  gap: calc(var(--flow-gap) * 2);
-  padding: var(--card-gap);
+  gap: var(--card-gap);
+  padding-inline: var(--card-padding);
+  padding-block-start: var(--card-padding);
+  padding-block-end: var(--card-gap);
   backdrop-filter: var(--blur-l);
 }
 
@@ -256,10 +260,9 @@
   padding-block-end: var(--card-padding);
 }
 
-.card__overlay--title {
-  justify-content: space-between;  
-}
-
+.card__overlay--title  {  grid-area: title;  place-self: start;  }
+.card__overlay--desc   {  grid-area: desc;  place-self: start; text-align: start;  }
+.card__overlay--badges {  grid-area: badges;  place-self: end;   }
 .card__overlay--column {flex-direction: column;}
 .card__overlay--bottom {
   border-radius:  0 0 var(--radius-m) var(--radius-m);
@@ -323,7 +326,7 @@
   margin-block: var(--flow-gap);
   max-inline-size: clamp(65ch, 35vw, 95ch);
 }
-
+.prose--unlimited { max-inline-size: none}
 .prose:first-child { margin-block-start: 0; }
 .prose > * { 
   margin: 0; 

@@ -69,19 +69,31 @@ const { album, frameClass, imageClass } = Astro.props as Props;
     <div class="media-progress" aria-hidden="true"></div>
   </div>
 
-  <div class="card__overlay card__overlay--title card__overlay--top card__overlay--hover">
-    <h1 class="card__title">
-      {album.title && (album.title.includes('SFW') || album.title.includes('NSFW'))
-      ? `Artworks: ${album.title}`  
-      : album.title} 
-    </h1>
-    {(album.categoryBadge || album.dateBadge) && (
-      <div class="card__badges controls controls--end">
-        {album.categoryBadge ? <span class="control control--badge">{album.categoryBadge}</span> : null}
-        {album.dateBadge ? <span class="control control--badge">{album.dateBadge}</span> : null}
+  <div class="card__overlay card__overlay--top card__overlay--hover">
+    <div class="card__overlay--title">
+      <h2>
+        {album.title && (album.title.includes('SFW') || album.title.includes('NSFW'))
+        ? `Artworks: ${album.title}`  
+        : album.title} 
+      </h1>
+    </div>
 
-      </div>
-    )}
+    <div class="card__overlay--badges">
+      {(album.categoryBadge || album.dateBadge) && (
+        <div class="card__badges controls controls--end">
+          {album.categoryBadge ? <span class="control control--badge">{album.categoryBadge}</span> : null}
+          {album.dateBadge ? <span class="control control--badge">{album.dateBadge}</span> : null}
+        </div>
+      )}
+    </div>
+
+    <div class="card__overlay--desc">
+      {album.description ? (
+        <div class="prose prose--unlimited">
+          <p>{album.description}</p>
+        </div>
+      ) : null}
+    </div>
   </div>
 </div>
 
