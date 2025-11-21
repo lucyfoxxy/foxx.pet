@@ -3,6 +3,7 @@
 /* ====== Depends on: tokens, site, content ====== */
 /* =============================================== */
 
+
 /* ==========<[      Wrapper      ]>============== */
 .media-wrapper {
   display: inline-flex;
@@ -30,8 +31,8 @@
 }
 
 .media-wrapper--thumbs {
-  backdrop-filter: var(--blur-m) brightness(1.35) saturate(1.05);
-  box-shadow: var(--shadow--default), inset 0 0 29px color-mix(in oklab,transparent 90%,var(--color-accent));
+  backdrop-filter: var(--blur-m);
+  box-shadow: var(--shadow--default), inset 0 0 9px var(--color-dark--ghosty);
   border-radius: var(--radius-l);
   padding: var(--card-gap);
 }
@@ -48,7 +49,7 @@
   overflow: hidden; 
   max-block-size: 60vh;
   block-size: auto;
-  filter: drop-shadow(1px 2px 2px var(--color-dark--strong));
+  box-shadow: var(--shadow--soft);
 }
 
 .content-section.cols-2 :where(.media-frame),
@@ -83,16 +84,12 @@
   opacity: .8;
   will-change: opacity;
 }
-.media-frame--thumb:hover,
-.media-frame--thumb:focus-visible {
+.media-frame--thumb:is(:hover,:focus-visible) {
   transform: var(--transform-scale);  
 }
-.media-frame--thumb[aria-current="true"],
-.media-frame--thumb:hover,
-.media-frame--thumb:focus-visible {
-  outline: var(--outline);
+.media-frame--thumb:is([data-current="true"],:hover,:focus-visible) {
   opacity: 1;
-  box-shadow: var(--shadow--default);
+  outline: 2px solid var(--color-accent);
 }
 
 
@@ -148,9 +145,7 @@
   object-fit: cover;
   will-change: opacity;
 }
-.media-frame--thumb[aria-current="true"] > *,
-.media-frame--thumb:hover > *,
-.media-frame--thumb:focus-visible > * {
+.media-frame--thumb:is([aria-current="true"],:hover,:focus-visible) > * {
   opacity: 1;
 }
 .media-image--banner,
@@ -164,7 +159,6 @@
   max-block-size: clamp(14rem, 38vh, 22rem);
 }
 .media-image--banner img {
-
   block-size: 100%;
   object-fit: cover;
 }
@@ -176,9 +170,11 @@
   vertical-align: middle;
   font-size: var(--icon-size-m);  
 }
-
+.media-icon--shadow {filter: var(--icon-shadow);}
 .media-icon--large {font-size: var(--icon-size-l);}
 .media-icon--small {font-size: var(--icon-size-s);}
+
+
 /* =========<[     PROGRESS BAR      ]>=========== */
 .media-progress {
   position: absolute;
@@ -255,7 +251,7 @@
   border: none;
   border-radius: 999px;
   font-size: 1.35rem;
-  background: rgba(17, 22, 28, .65);
+  background: var(--color-dark--soft);
   cursor: pointer;
   transition: var(--transition--soft);
 }

@@ -34,7 +34,7 @@
   border-radius: 999px;
   box-shadow: var(--shadow--soft);
   vertical-align: middle;
-  background: radial-gradient(ellipse at center,var(--color-control),var(--color-dark));
+  background: var(--control-bg)
 }
 
 .control--media {

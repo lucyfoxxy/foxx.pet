@@ -20,24 +20,14 @@ interface AlbumViewData {
 
 interface Props {
   album: AlbumViewData;
-  cardClass?: string;
   frameClass?: string;
   imageClass?: string;
 }
 
-const { album, cardClass, frameClass, imageClass } = Astro.props as Props;
+const { album, frameClass, imageClass } = Astro.props as Props;
 
 ---
-<Template.Card class:list={['card--flush', 'card--ghost', 'card--center', cardClass]} headClass="card__head--column">
-  {album.description ? (
-    <Fragment slot="body">
-      <div class="prose">
-        <p>{album.description}</p>
-      </div>
-    </Fragment>
-  ) : null}
 
-  <Fragment slot="body">
     <div class="media-wrapper media-wrapper--controls">
       <div
         class:list={['media-frame', frameClass]}
@@ -96,8 +86,7 @@ const { album, cardClass, frameClass, imageClass } = Astro.props as Props;
         )}
       </div>
     </div>
-  </Fragment>
-</Template.Card>
+
 
 
 

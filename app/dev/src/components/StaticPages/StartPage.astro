@@ -49,7 +49,7 @@ const isExternalLink = (href: string) => href.startsWith('http');
               </span>
               <div class="hero__sub">
                 <span class="hero__to">to</span>
-                <span class="hero__lucy">Lucy's</span>
+                <span class="hero__lucy">{hero.subheading}</span>
               </div>
             </div>
 
@@ -116,8 +116,20 @@ const isExternalLink = (href: string) => href.startsWith('http');
 
 
 
-      <!--- Album Card --->  
+      <!--- Album Card ---> 
+<Template.Card class:list={['card--flush', 'card--plain', 'card--center']} headClass="card__head--column">
+  {albumData.description ? (
+    <Fragment slot="head">
+      <div class="prose">
+        <p>{albumData.description}</p>
+      </div>
+    </Fragment>
+  ) : null}
+
+  <Fragment slot="body">       
       <Template.AlbumFrame album={albumData} imageClass="media-image--cover"/>
+  </Fragment>
+</Template.Card>
 
   </section>
 

@@ -82,19 +82,18 @@
   --color-light--soft:        color-mix(in oklch, var(--color-light) 50%, transparent);
   --color-light--ghosty:      color-mix(in oklch, var(--color-light) 30%, transparent);
 
-  --color-accent:            oklch(74% 0.145 310); 
-  --color-accent--bright:    oklch(91% 0.07 310);
+  --color-accent--dark:      oklch(34% 0.13 305);
+  --color-accent:            oklch(74% 0.145 305); 
+  --color-accent--bright:    oklch(91% 0.07 305);
 
   --color-control:           oklch(26% 0.17 290);         
-
 
   /* ====== Base FX ==================== */  
   --text-shadow:             2px 2px 4px var(--color-dark--soft);
   --icon-shadow:             0 0 3px color-mix(in oklch,transparent 30%,currentColor);
-
   --text-glow:               1px 1px 2px var(--color-light--soft);
 
-  --shadow--soft:    1px 1px 4px 0 var(--color-dark--soft),1px 1px 3px 0 var(--color-dark--strong);
+  --shadow--soft:   2px 2px 5px var(--color-dark--soft);
   --shadow--default: 0 0 18px -6px var(--color-dark--soft),0 0 18px -6px var(--color-dark--strong);
   --shadow--strong:  0 0 20px -10px var(--color-dark--soft),0 0 28px -6px var(--color-dark--strong),0 0 28px 0 var(--color-dark--strong);
 
@@ -140,9 +139,9 @@
   --overlay--dim:      radial-gradient(ellipse at center,transparent 50%, var(--color-dark) 120%); 
   /* --overlay--nebula --overlay--stars  Def -> Base.astro */
 
-  --bg--base: linear-gradient(205deg, #371173, #240a46, rgb(40, 7, 112));
+  --bg--base:     linear-gradient(205deg, #371173, #240a46, rgb(40, 7, 112));
   --shadow--base: inset 0 0 164px 64px rgba(0,0,0,.5);
-
+  --control-bg:  radial-gradient(ellipse at center, var(--color-accent--dark), var(--color-dark--soft));
   /* ====== Gallery ====== */                                 
   --gallery-interval:           8500ms;  
 
