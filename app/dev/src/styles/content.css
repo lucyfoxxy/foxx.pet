@@ -175,13 +175,13 @@
   align-items: flex-start;
   padding: var(--control-padding);
   border-radius: var(--radius-m);
-  background: var(--color-dark--soft);
-  box-shadow: var(--shadow--soft);
+  background: var(--card-list-bg);
+  box-shadow: var(--card-list-shadow);
   opacity: .7;
   text-decoration: none;
   color: inherit;
-  transition: background .35s ease, opacity .35s ease;
-  will-change: opacity, background;
+  transition: var(--card-list-transition);
+  will-change: var(--card-list-will-change);
 }
 
 #blog-chapter-target [data-blog-chapter] > :is(h1, h2, h3):first-child {
@@ -218,7 +218,7 @@
 /* === hover, focus & active states === */
 .card__body > ol > li > a:is(:hover,:focus-visible,[data-chapter][data-active]){
   opacity: 1;
-  background: var(--color-dark--strong);
+  background: var(--card-list-bg--fx);
 }
 
 .card__body > ol > li > a:is(:hover,:focus-visible,[data-chapter][data-active])
@@ -253,7 +253,7 @@
   padding-block-end: var(--card-gap);
   backdrop-filter: var(--card-overlay-backdrop);
   transition: var(--card-overlay-transition);
-  will-change: opacity;
+  will-change: var(--card-overlay-will-change);
 }
 
 .card__overlay--controls {
@@ -296,7 +296,7 @@
 *:hover > .card__overlay,
 .card__overlay[data-show="true"] {
   opacity: 1;
-  transition: opacity .5s ease;
+  transition: var(--card-overlay-transition--fx);
 }
 
 
@@ -307,7 +307,7 @@
   position: relative;
   border-radius: var(--radius-l);
   overflow: hidden;
-  background: var(--color-dark--soft);
+  background: var(--card-hero-banner-bg);
   box-shadow: var(--card-shadow);
   block-size: clamp(14rem, 38vh, 24rem);
 }

@@ -4,6 +4,7 @@
 }
 .content-section > .card :where(:is(.hero)),.hero + .card {margin-block: 0; gap: 0}
 .hero {
+  --nebula-pos-y: 55%;
   position: relative;
   isolation: isolate;
   place-items: center;
@@ -12,40 +13,55 @@
   opacity: .9;
   font-size: var(--hero-scale);
   inline-size: 100%;
-  block-size: 9.25em;
+  block-size: 9.5em;
   margin-block-start: var(--section-gap);
   mix-blend-mode: screen;
-  background-image: var(--hero--bg), radial-gradient(ellipse at 50% calc(69% - .5em), rgba(255,255,255,.2), transparent 60%);
-  background-position: 42% calc(73% - .75em),42% calc(93% - .75em);
-  background-size: 8.25em, 22em 8.25em;
+  background-image: var(--hero--bg), radial-gradient(ellipse at 45% var(--nebula-pos-y),rgba(251, 0, 255, 0.089), rgba(140, 0, 255, 0.0351) 35%, transparent 60%);
+  background-position: 50% 99%,50% var(--nebula-pos-y);
+  background-size: 8.25em, 100% 100%;
   background-repeat:no-repeat,no-repeat;
   background-blend-mode: normal,lighten;
 
-  filter: contrast(1.5) saturate(1.25) drop-shadow(.005em .005em .0125em) ;
+  filter: var(--hero-filter);
   
   animation-name: fly-in, fly-up-down;
-  animation-delay: .5s, 2.5s;
-  animation-duration: 2s, 2.5s;
+  animation-delay: .5s, 3s;
+  animation-duration: 2.5s, 3s;
   animation-iteration-count: 1,infinite;
-  animation-timing-function:ease,cubic-bezier(0.75, 0.75, 0.75, 0.75);
+  animation-timing-function:ease-out,ease-in;
 }
 @keyframes fly-in {
-  0% {background-position-x: -20%, 42%; background-position-y:-120%,calc(93% - .75em);background-size: .25em, 22em 8.25em}
-  100% {background-position-x: 42%, 42%; }
+  0% {
+    background-position-x: -20%, 50%; 
+    background-position-y:-120%,var(--nebula-pos-y);
+    background-size: .25em, 100%
+  }
+  100% {
+    background-position-x: 
+    50%, 50%; 
+  }
 }
 @keyframes fly-up-down {
-  20% {background-position-y: calc(45% - .75em),calc(93% - .75em)}
-  40% {background-position-x: 41.5%, 42%;}
-  60% {background-position-y: calc(110% - .75em),calc(93% - .75em)}  
-  80% {background-position-x: 43.5%, 42%; }  
+  33% {
+    background-position-y: 99%,var(--nebula-pos-y);background-position-x: 49%, 50%;
+  }
+  66% {
+    background-position-y: 15%,var(--nebula-pos-y); background-position-x: 51%, 50%;
+  }
+  100%,0% {
+    background-position-y: 99%,var(--nebula-pos-y);background-position-x: 50%, 50%;
+  }  
+  98% {
+     
+  }  
 }
 @media(prefers-reduced-motion: reduce) {.hero {animation: none,none;}}
 .hero__text { 
   display: grid;
   grid-template-areas: "signature""main";
   row-gap:.8em; 
-  filter: drop-shadow(.01em .01em .125em var(--color-dark));
-  transform: translateY(-.75em);
+  filter: var(--hero-text-filter);
+  transform: var(--hero-text-transform);
 }
 
 .hero__signature {
@@ -56,7 +72,7 @@
   align-items:center;
   text-align: start;
   justify-self: center;
-  transform: translate(-.25em, 1.25em)
+  transform: var(--hero-signature-transform)
 }
 
 .hero__welcome {
@@ -67,7 +83,7 @@
   letter-spacing: var(--letter-spacing-m);
   font-size: .8em;
   
-  transform: rotate(-4deg) translate(2.75em,-.5em);;
+  transform: var(--hero-welcome-transform);
   opacity: .85;
 }
 
@@ -78,7 +94,7 @@
   grid-template-areas: "to lucy";
   gap: .015em;
   letter-spacing: var(--letter-spacing-xl);
-  transform:  rotate(4deg);
+  transform: var(--hero-sub-transform);
 
 }
 .hero__lucy { 
@@ -91,10 +107,10 @@
   opacity: .8;  
   grid-area: to; 
   font-size: .45em;
-  transform: translate(.25em,.25em); 
+  transform: var(--hero-to-transform);
   font-weight: 250;
 }
-.hero__main {grid-area: main; transform: translateY(.25em);}
+.hero__main {grid-area: main; transform: var(--hero-main-transform);}
 .hero__main--title {
   font-family: var(--font--fancy);
   font-weight: var(--font-weight-bold);
@@ -105,8 +121,8 @@
   
   
 }
-.hero__main--title > span.cozy {display: inline-block; transform: rotate(-3deg);}
-.hero__main--title > span.cosmos {display: inline-block; transform: rotate(-3deg);}
+.hero__main--title > span.cozy {display: inline-block; transform: var(--hero-title-transform);}
+.hero__main--title > span.cosmos {display: inline-block; transform: var(--hero-title-transform);}
 span.cozy + span.cosmos {}
 .hero__main--tagline {
   font-family: var(--font--display);
@@ -114,7 +130,7 @@ span.cozy + span.cosmos {}
   text-align: end;
   opacity: .85;
   font-weight: 300;
-  transform: translate(-.5em, -1.25em) rotate(-3deg);
+  transform: var(--hero-tagline-transform);
 }
 
 

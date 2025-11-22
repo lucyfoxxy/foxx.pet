@@ -22,8 +22,8 @@
   box-shadow: none;
 }
 
-.media-wrapper--controls { 
-  outline: 1px solid var(--color-dark--soft);
+.media-wrapper--controls {
+  outline: var(--media-controls-outline);
   border-radius: var(--radius-l);
 }
 
@@ -47,10 +47,10 @@
   aspect-ratio: 16 / 9;
   border-radius: var(--radius-l);
   border-style: hidden;
-  overflow: hidden; 
+  overflow: hidden;
   max-block-size: 60vh;
   block-size: auto;
-  box-shadow: var(--shadow--soft);
+  box-shadow: var(--media-frame-shadow);
 }
 
 .media-wrapper > .media-frame { box-shadow: none; }
@@ -83,9 +83,9 @@
   max-block-size: var(--thumb-size);
   aspect-ratio: 1 / 1;
   transition: var(--transition--raise), var(--transition--opacity);
-  box-shadow: var(--shadow--soft);
+  box-shadow: var(--media-thumb-shadow);
   opacity: .8;
-  will-change: opacity;
+  will-change: var(--media-thumb-will-change);
 }
 .media-frame--thumb:is(:hover,:focus-visible) {
   transform: var(--transform-scale);  
@@ -102,13 +102,13 @@
   inline-size: 100%;
   block-size: 100%;
   transform-origin: center;
-  transition: opacity .7s ease;
+  transition: var(--media-image-transition);
   opacity: 1;
-  will-change: opacity, transform, top, bottom;
+  will-change: var(--media-image-will-change);
   object-fit: contain;
 }
 
-.media-image--placeholder { background: var(--color-dark--soft);}
+.media-image--placeholder { background: var(--media-image-placeholder-bg);}
 .media-image.hero {
   max-inline-size: var(--hero-size);
   inline-size: auto;
@@ -134,19 +134,19 @@
 }
 .media-image--cover {
   object-fit: cover;
-  transform: scale(1.05);
+  transform: var(--transform-scale);
 }
 .media-image--thumb { 
   inline-size: 100%;
   block-size: 100%;
   max-block-size: var(--thumb-size);
   max-inline-size: var(--thumb-size);
-  transform: scale(1.15);
+  transform: var(--transform-scale-strong);
   transition: var(--transition--raise), var(--transition--opacity);
   background: transparent;
   opacity: .8;
   object-fit: cover;
-  will-change: opacity;
+  will-change: var(--media-thumb-will-change);
 }
 .media-frame--thumb:is([aria-current="true"],:hover,:focus-visible) > * {
   opacity: 1;
@@ -184,10 +184,10 @@
   inset: auto .9rem .9rem .9rem;
   block-size: .3rem;
   border-radius: 999px;
-  background: var(--color-light--ghosty);
+  background: var(--media-progress-bg);
   overflow: hidden;
   z-index: 1;
-  pointer-events: none; 
+  pointer-events: none;
 }
 .media-progress::before {
   content: "";
@@ -195,9 +195,9 @@
   inset: 0;
   transform-origin: left center;
   transform: scaleX(var(--p, 0));
-  background: var(--color-light);
+  background: var(--media-progress-fill-bg);
   opacity: .75;
-  transition: transform .12s linear;
+  transition: var(--media-progress-transition);
 }
 .media-progress.compact {
   inset: auto .6rem .6rem .6rem;
@@ -212,11 +212,11 @@
   display: grid;
   place-items: center;
   padding: clamp(1rem, 4vw, 3rem);
-  background: var(--color-dark);
+  background: var(--media-lightbox-bg);
   z-index: 999;
   opacity: 0;
   pointer-events: none;
-  transition: opacity .3s ease;
+  transition: var(--media-lightbox-transition);
 }
 .media-lightbox.is-open {
   opacity: 1;
@@ -233,15 +233,15 @@
   margin: 0;
   border-radius: var(--radius-m);
   overflow: hidden;
-  box-shadow: var(--shadow--strong);
-  transform: scale(.95);
+  box-shadow: var(--media-lightbox-shadow);
+  transform: var(--media-lightbox-figure-transform);
 }
 .media-lightbox img {
   inline-size: auto;
   block-size: auto;
   max-inline-size: inherit;
   max-block-size: inherit;
-  background: var(--color-dark);
+  background: var(--media-lightbox-bg);
 }
 .media-lightbox__close {
   position: absolute;
@@ -254,13 +254,13 @@
   border: none;
   border-radius: 999px;
   font-size: 1.35rem;
-  background: var(--color-dark--soft);
+  background: var(--media-lightbox-close-bg);
   cursor: pointer;
   transition: var(--transition--soft);
 }
 .media-lightbox__close:hover,
 .media-lightbox__close:focus-visible {
-  transform: scale(1.05);
+  transform: var(--transform-scale);
   opacity: 1;
 }
 body.media-lightbox-open {

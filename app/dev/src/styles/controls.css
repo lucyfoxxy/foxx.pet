@@ -116,10 +116,10 @@
 
 .media-prev.is-thumbs-prev:active,
 .media-next.is-thumbs-next:active {
-  transform: scale(0.95);
+  transform: var(--transform-scale-soft);
 }
 
 @supports not (color: oklch(50% 0 0)) {
-  :where(.control--button:not(.control--plain), .control--media):hover { filter: brightness(1.08); }
-  :where(.control--button:not(.control--plain), .control--media):active { filter: brightness(0.92); }
+  :where(.control--button:not(.control--plain), .control--media):hover { filter: var(--control-filter--legacy-fx); }
+  :where(.control--button:not(.control--plain), .control--media):active { filter: var(--control-filter--legacy-active); }
 }

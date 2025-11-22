@@ -49,8 +49,8 @@ body::before {
   background-repeat: no-repeat,repeat,repeat,no-repeat;
   background-size: cover,1280px 1280px,640px 640px,cover;
   background-position: center, top,center,center;
-  will-change: transform;
-  transform: translateZ(0);
+  will-change: var(--panel-base-will-change);
+  transform: var(--panel-base-transform);
 }
 @media(max-width: 900px){
   body::before {

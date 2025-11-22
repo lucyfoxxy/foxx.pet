@@ -45,7 +45,7 @@
 }
 
 .table__th {
-  background: var(--color-dark--soft);
+  background: var(--table-head-bg);
 }
 
 .table__th--left {
@@ -63,7 +63,7 @@
 }
 
 .table__tr.is-alt {
-  background: var(--color-dark--soft);
+  background: var(--table-row-alt-bg);
 }
 
 .table__td {

@@ -116,34 +116,73 @@
   --card-shadow:                 var(--shadow--default), inset 0 0 29px color-mix(in oklab,transparent 90%,var(--color-accent));
   --card-transition:             transform .35s ease, filter .35s ease;
   --card-filter--fx:             brightness(1.1) saturate(1.1) drop-shadow(0 0 var(--color-dark));
-  --card-transform--fx:          scale(1.05);
+  --card-transform--fx:          scale(1.05);  
+  
+  --card-list-transition:        background .35s ease, opacity .35s ease;
+  --card-list-will-change:       opacity, background;
+  --card-list-bg:                var(--color-dark--soft);
+  --card-list-bg--fx:            var(--color-dark--strong);
+  --card-list-shadow:            var(--shadow--soft);
   --card-list-filter--fx:        drop-shadow(0 0 3px color-mix(in oklch,transparent,currentColor));
+
   --card-overlay-backdrop:       var(--blur-l);
   --card-overlay-transition:     opacity 1.4s ease;
+  --card-overlay-transition--fx: opacity .5s ease;
+  --card-overlay-will-change:    opacity;
+
+  --card-hero-banner-bg:         var(--color-dark--soft);
   
 
   /* ====== Controls ======*/
   --control-bg:                   radial-gradient(ellipse at center, var(--color-accent--dark),var(--color-dark));
   --control-filter--fx:           brightness(2);
   --control-plain-filter:         drop-shadow(2px 2px 1px var(--color-dark--soft));
-  --control-plain-filter--fx:     drop-shadow(0 0 0 var(--color-accent)) drop-shadow(2px 2px 2px var(--color-dark--strong));  
+  --control-plain-filter--fx:     drop-shadow(0 0 0 var(--color-accent)) drop-shadow(2px 2px 2px var(--color-dark--strong));
   --control-transition:           filter .4s ease, transform .4s ease;
   --control-transform--fx:        translateY(-10%);
+  --control-filter--legacy-fx:    brightness(1.08);
+  --control-filter--legacy-active: brightness(0.92);
 
   
   /* ====== Bars ======*/
   --header-item-shadow: var(--shadow--default), inset 0 0 29px var(--color-dark--soft);
   --header-item-filter: drop-shadow(2px 2px 2px rgba(0,0,0,.5));
   --header-item-filter--fx: drop-shadow(0 0 3px color-mix(in oklch,transparent,currentColor));
+  --header-transition: transform .35s ease, padding-block .35s ease;
+  --header-will-change: transform, filter;
+  --header-item-transition: transform .35s ease, filter .35s ease;
+  --header-item-will-change: transform, filter;
+  --header-icon-transition: font-size .35s ease;
+  --header-icon-will-change: font-size;
+  --header-label-transition: opacity .35s ease, transform .35s ease, max-height .35s ease, white-space .35s ease;
+  --header-label-will-change: opacity, filter , transform, max-height, white-space;
+  --header-label-transform--show: translateY(0);
+  --header-label-transform--hide: translateY(-4px);
   --header-item-backdrop: var(--blur-l) brightness(1.2) saturate(1.05);
+  --bars-border: 1px solid var(--color-dark--ghosty);
+  --bars-shadow: var(--shadow--default), inset 0 0 29px var(--color-dark--soft);
+  --footer-meta-border: 1px solid var(--color-dark--ghosty);
   
   
   /* ====== Panel ======*/
   --panel-shadow: var(--shadow--strong), inset 0 0 56px 0 var(--color-dark);
   --panel-outline: 1px solid var(--color-dark);
+  --panel-base-transform: translateZ(0);
+  --panel-base-will-change: transform;
+  --footer-separator-transform: translateY(-10%);
+  --footer-meta-transform--fx: translateY(6px);
+  --footer-meta-transition: opacity .35s ease, transform .35s ease, max-height .35s ease, border-color .35s ease;
 
-  --hero-filter: contrast(1.5) saturate(1.25) drop-shadow(.15em .15em .25em var(--color-dark--strong));
-  --hero-text-filter: drop-shadow(.1em .1em .25em var(--color-dark--strong));
+  --hero-filter: contrast(1.5) saturate(1.25) drop-shadow(.005em .005em .0125em);
+  --hero-text-filter: drop-shadow(.01em .01em .125em var(--color-dark));
+  --hero-text-transform: translateY(.75em);
+  --hero-signature-transform: translate(-.25em, 1.25em);
+  --hero-welcome-transform: rotate(-4deg) translate(2.75em,-.5em);
+  --hero-sub-transform: rotate(4deg);
+  --hero-to-transform: translate(.25em,.25em);
+  --hero-main-transform: translateY(.25em);
+  --hero-title-transform: rotate(-3deg);
+  --hero-tagline-transform: translate(-.5em, -1.25em) rotate(-3deg);
 
   --blockquote-bg: color-mix(in oklab, var(--content-background) 4%, transparent);
   --blockquote-border: 3px solid var(--color-accent);
@@ -165,9 +204,32 @@
 
 
   --transition--raise:           transform .35s ease-in-out, box-shadow .2s ease;
+  --transition--soft:            opacity .35s ease, transform .35s ease;
 
   --transition--opacity:         opacity .5s ease-in-out;
 
   --transform-raise:             translateY(-10%);
   --transform-scale:             scale(1.05);
+  --transform-scale-strong:      scale(1.15);
+  --transform-scale-soft:        scale(.95);
+  --media-progress-transition:   transform .12s linear;
+  --media-image-transition:      opacity .7s ease;
+  --media-image-will-change:     opacity, transform, top, bottom;
+  --media-lightbox-transition:   opacity .3s ease;
+  --media-lightbox-figure-transform: scale(.95);
+  --media-thumb-will-change:     opacity;
+  --media-raise-will-change:     opacity;
+  --media-controls-outline:      1px solid var(--color-dark--soft);
+  --media-frame-shadow:          var(--shadow--soft);
+  --media-thumb-shadow:          var(--shadow--soft);
+  --media-image-placeholder-bg:  var(--color-dark--soft);
+  --media-lightbox-bg:           var(--color-dark);
+  --media-lightbox-shadow:       var(--shadow--strong);
+  --media-lightbox-close-bg:     var(--color-dark--soft);
+  --media-progress-bg:           var(--color-light--ghosty);
+  --media-progress-fill-bg:      var(--color-light);
+
+  /* ====== Tables ====== */
+  --table-head-bg:               var(--color-dark--soft);
+  --table-row-alt-bg:            var(--color-dark--soft);
 }
