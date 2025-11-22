@@ -55,8 +55,8 @@ function createHeaderController(bar) {
   if (!isSticky(style.position)) return {};
 
   const doc = document.documentElement;
-  const items = bar.querySelectorAll('.header__nav-item');
-  const labels = bar.querySelectorAll('.header__nav-label');
+  const items = bar.querySelectorAll('.header__item');
+  const labels = bar.querySelectorAll('.header__item-label');
   let anchorTop = null;
   let lastVisible = null;
 

@@ -158,7 +158,7 @@ Total unique tokens: 117
 | `header__bar--bottom` | 2 | 0 | _Not referenced outside stylesheets_ |
 | `header__bar--top` | 3 | 0 | _Not referenced outside stylesheets_ |
 | `header__nav` | 6 | 1 | `src/components/Templates/Base/Header.astro` (1) |
-| `header__nav-item` | 4 | 1 | `src/components/Templates/Base/Header.astro` (1) |
+| `header__item` | 4 | 1 | `src/components/Templates/Base/Header.astro` (1) |
 | `header__nav-symbol` | 3 | 1 | `src/components/Templates/Base/Header.astro` (1) |
 | `header__nav-text` | 7 | 1 | `src/components/Templates/Base/Header.astro` (1) |
 
@@ -193,7 +193,7 @@ Total unique tokens: 117
 | `control--small` | 2 | 8 | `src/components/Templates/Base/Footer.astro` (1)<br>`src/components/Templates/Base/Header.astro` (1)<br>`src/components/Templates/EntryBlog.astro` (2)<br>`src/components/Templates/HeaderActions.astro` (1)<br>`src/pages/test.astro` (3) |
 | `footer` | 4 | 3 | `src/components/Templates/Base/Footer.astro` (3) |
 | `header__nav` | 6 | 1 | `src/components/Templates/Base/Header.astro` (1) |
-| `header__nav-item` | 4 | 1 | `src/components/Templates/Base/Header.astro` (1) |
+| `header__item` | 4 | 1 | `src/components/Templates/Base/Header.astro` (1) |
 | `header__nav-text` | 7 | 1 | `src/components/Templates/Base/Header.astro` (1) |
 | `is-current` | 1 | 1 | `src/components/Templates/Base/Footer.astro` (1) |
 | `panel` | 11 | 1 | `src/components/Templates/Base.astro` (1) |
@@ -206,7 +206,7 @@ Total unique tokens: 117
 | Token | Defined In | Definition Count | Total Uses | Usage Locations |
 | --- | --- | ---: | ---: | --- |
 | `--animated` | `src/styles/controls.css` | 1 | 0 | _No var(--token) references found_ |
-| `--overlay--dim` | `src/styles/tokens.css` | 1 | 2 | `src/styles/base.css` (1)<br>`src/styles/site.css` (1) |
+| `--overlay-dim` | `src/styles/tokens.css` | 1 | 2 | `src/styles/base.css` (1)<br>`src/styles/site.css` (1) |
 | `--badge` | `src/styles/typography.css` | 1 | 0 | _No var(--token) references found_ |
 | `--bg-dim` | `src/styles/tokens.css` | 1 | 1 | `src/styles/tokens.css` (1) |
 | `--bg-dim-alpha` | `src/styles/tokens.css` | 1 | 1 | `src/styles/tokens.css` (1) |
@@ -235,7 +235,7 @@ Total unique tokens: 117
 | `--color-light` | `src/styles/tokens.css` | 1 | 5 | `src/styles/media.css` (1)<br>`src/styles/tokens.css` (4) |
 | `--color-dark--soft` | `src/styles/tokens.css` | 1 | 6 | `src/styles/tokens.css` (6) |
 | `--color-dark--strong` | `src/styles/tokens.css` | 1 | 10 | `src/styles/content.css` (2)<br>`src/styles/media.css` (2)<br>`src/styles/tokens.css` (6) |
-| `--container-max` | `src/styles/tokens.css` | 1 | 2 | `src/styles/site.css` (1)<br>`src/styles/tokens.css` (1) |
+| `--panel-size` | `src/styles/tokens.css` | 1 | 2 | `src/styles/site.css` (1)<br>`src/styles/tokens.css` (1) |
 | `--container-padding` | `src/styles/tokens.css` | 1 | 1 | `src/styles/site.css` (1) |
 | `--control-border-radius` | `src/styles/controls.css` | 1 | 1 | `src/styles/controls.css` (1) |
 | `--control-gap` | `src/styles/tokens.css` | 1 | 11 | `src/styles/content.css` (1)<br>`src/styles/controls.css` (4)<br>`src/styles/media.css` (1)<br>`src/styles/site_footer.css` (2)<br>`src/styles/site_header.css` (1)<br>`src/styles/table.css` (1)<br>`src/styles/tokens.css` (1) |
@@ -250,7 +250,7 @@ Total unique tokens: 117
 | `--font-size-s` | `src/styles/tokens.css` | 1 | 6 | `src/styles/content.css` (2)<br>`src/styles/tokens.css` (1)<br>`src/styles/typography.css` (3) |
 | `--font-size-xl` | `src/styles/tokens.css` | 1 | 1 | `src/styles/typography.css` (1) |
 | `--font-size-xs` | `src/styles/tokens.css` | 1 | 2 | `src/styles/site_footer.css` (1)<br>`src/styles/typography.css` (1) |
-| `--gallery-interval` | `src/styles/tokens.css` | 1 | 1 | `src/styles/media.css` (1) |
+| `--slideshow-interval` | `src/styles/tokens.css` | 1 | 1 | `src/styles/media.css` (1) |
 | `--glow` | `src/styles/controls.css` | 1 | 0 | _No var(--token) references found_ |
 | `--hero-size` | `src/styles/tokens.css` | 1 | 1 | `src/styles/media.css` (1) |
 | `--icon-shadow` | `src/styles/tokens.css` | 1 | 0 | _No var(--token) references found_ |
@@ -311,7 +311,7 @@ Total unique tokens: 117
 | `--title` | `src/styles/content.css` | 2 | 0 | _No var(--token) references found_ |
 | `--transform-raise` | `src/styles/tokens.css` | 1 | 1 | `src/styles/controls.css` (1) |
 | `--transform-scale` | `src/styles/tokens.css` | 1 | 4 | `src/styles/content.css` (1)<br>`src/styles/controls.css` (2)<br>`src/styles/media.css` (1) |
-| `--transition--control` | `src/styles/tokens.css` | 1 | 3 | `src/styles/controls.css` (2)<br>`src/styles/site_footer.css` (1) |
+| `--control-transition` | `src/styles/tokens.css` | 1 | 3 | `src/styles/controls.css` (2)<br>`src/styles/site_footer.css` (1) |
 | `--transition--interactive` | `src/styles/tokens.css` | 1 | 1 | `src/styles/base.css` (1) |
 | `--transition--opacity` | `src/styles/tokens.css` | 1 | 2 | `src/styles/media.css` (2) |
 | `--transition--raise` | `src/styles/tokens.css` | 1 | 4 | `src/styles/controls.css` (2)<br>`src/styles/media.css` (2) |

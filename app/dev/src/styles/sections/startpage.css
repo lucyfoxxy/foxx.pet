@@ -12,24 +12,40 @@
   opacity: .9;
   font-size: var(--hero-scale);
   inline-size: 100%;
-  block-size: 8.25em;
+  block-size: 9.25em;
   margin-block-start: var(--section-gap);
-  mix-blend-mode: normal;
-  background-image: var(--hero--bg), radial-gradient(ellipse at center, rgba(255,255,255,.12), transparent 60%);
-  background-position: calc(43%) calc(75%),center,50% 55%;
-  background-size: 8.25em, 12em 8em, auto;
+  mix-blend-mode: screen;
+  background-image: var(--hero--bg), radial-gradient(ellipse at 50% calc(59% - .5em), rgba(255,255,255,.2), transparent 60%);
+  background-position: 42% calc(73% - .75em),42% calc(93% - .75em);
+  background-size: 8.25em, 26em 9em;
   background-repeat:no-repeat,no-repeat;
   background-blend-mode: normal,lighten;
 
-  filter: contrast(1.6) saturate(1.05) drop-shadow(.15em .15em .25em var(--color-dark--strong));
-  transform: translateY(-.5em);
+  filter: contrast(1.5) saturate(1.25) drop-shadow(.005em .005em .0125em) ;
+  
+  animation-name: fly-in, fly-up-down;
+  animation-delay: .5s, 2.5s;
+  animation-duration: 2s, 2.5s;
+  animation-iteration-count: 1,infinite;
+  animation-timing-function:ease,cubic-bezier(0.75, 0.75, 0.75, 0.75);
 }
-
+@keyframes fly-in {
+  0% {background-position-x: -20%, 42%; background-position-y:-120%,calc(93% - .75em);background-size: .25em, 26em 9em}
+  100% {background-position-x: 42%, 42%; }
+}
+@keyframes fly-up-down {
+  20% {background-position-y: calc(45% - .75em),calc(93% - .75em)}
+  40% {background-position-x: 41.5%, 42%;}
+  60% {background-position-y: calc(110% - .75em),calc(93% - .75em)}  
+  80% {background-position-x: 43.5%, 42%; }  
+}
+@media(prefers-reduced-motion: reduce) {.hero {animation: none,none;}}
 .hero__text { 
   display: grid;
   grid-template-areas: "signature""main";
   row-gap:.8em; 
-  filter: drop-shadow(.1em .1em .25em var(--color-dark--soft));
+  filter: drop-shadow(.01em .01em .125em var(--color-dark));
+  transform: translateY(-.75em);
 }
 
 .hero__signature {
@@ -40,7 +56,7 @@
   align-items:center;
   text-align: start;
   justify-self: center;
-  transform: translateY(1.25em)
+  transform: translate(-.25em, 1.25em)
 }
 
 .hero__welcome {

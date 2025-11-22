@@ -123,7 +123,7 @@
 
 .media-image.is-transitioning { opacity: 0; }
 .media-image.is-animating {
-  animation: media-slideshow var(--gallery-interval) ease;
+  animation: media-slideshow var(--slideshow-interval) ease;
 }
 .media-frame[data-autoplay="false"]:not([data-active="true"]) > .is-animating {animation: none;}
 @keyframes media-slideshow {

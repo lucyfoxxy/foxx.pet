@@ -67,12 +67,12 @@ const breadcrumbs = buildBreadcrumbs({
 <html lang="en">
   <BaseParts.Meta title={title} description={description} url={url} image={image} />
   <body style={`
-                --overlay--nebula: url(${ASSETS.overlay__nebula.src});
-                --overlay--stars: url(${ASSETS.overlay__stars.src});
+                --overlay-nebula: url(${ASSETS.overlay__nebula.src});
+                --overlay-stars: url(${ASSETS.overlay__stars.src});
                 --hero--bg: url(${ASSETS.mascot.src});
               `}>
     <div class="container">
-      <div class="panel-shell has-stars">
+      <div class="panel-wrapper">
 
         <BaseParts.Header meta={meta} navLinks={navLinks} >
           {Astro.slots.has('header__actions') ? (

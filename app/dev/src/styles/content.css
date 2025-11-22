@@ -57,8 +57,8 @@
   gap: var(--card-gap);
 
   border-radius: var(--radius-l);
-  backdrop-filter: var(--backdrop--card);
-  box-shadow: var(--shadow--card);
+  backdrop-filter: var(--card-backdrop);
+  box-shadow: var(--card-shadow);
 }
 
 /* ====== Card: VARIATIONS ======*/
@@ -86,11 +86,11 @@
 
 /* === ANIMATE (on hover: scale + filter) === */
 .card--animate { 
-  transition: var(--transition--card); 
+  transition: var(--card-transition); 
 }
 .card--animate:is(:hover,:focus-visible) {
-  transform: var(--transform--card);
-  filter: var(--filter--card);
+  transform: var(--card-transform--fx);
+  filter: var(--card-filter--fx);
 }
 
 
@@ -225,7 +225,7 @@
 :where(span:first-child,strong){
   opacity: 1;
   font-weight: var(--font-weight-bold);
-  filter: var(--filter--card-list);
+  filter: var(--card-list-filter--fx);
 }
 
 .card__body > ol > li > a:is(:hover,:focus-visible,[data-chapter][data-active]) > div {
@@ -251,7 +251,9 @@
   padding-inline: var(--card-padding);
   padding-block-start: var(--card-padding);
   padding-block-end: var(--card-gap);
-  backdrop-filter: var(--blur-l);
+  backdrop-filter: var(--card-overlay-backdrop);
+  transition: var(--card-overlay-transition);
+  will-change: opacity;
 }
 
 .card__overlay--controls {
@@ -263,7 +265,7 @@
 .card__overlay--title  {  grid-area: title;  place-self: start;  }
 .card__overlay--desc   {  grid-area: desc;  place-self: start; text-align: start;  }
 .card__overlay--badges {  grid-area: badges;  place-self: end;   }
-.card__overlay--column {flex-direction: column;}
+.card__overlay--column {  flex-direction: column; }
 .card__overlay--bottom {
   border-radius:  0 0 var(--radius-m) var(--radius-m);
   inset-block-end: 0;
@@ -287,16 +289,10 @@
   opacity: 0.9;
 }
 
-:where(.card__overlay[data-show="false"]) {
-  opacity: 0;
-  transition: opacity .5s ease;
+.card__overlay[data-show="false"] {
+  opacity: 0;  
 }
-@media (max-width: 1100px) {
-  .card__overlay[data-show="false"] {
-    opacity: 0;
-    transition: opacity .5s ease;
-  }
-}
+
 *:hover > .card__overlay,
 .card__overlay[data-show="true"] {
   opacity: 1;
@@ -312,7 +308,7 @@
   border-radius: var(--radius-l);
   overflow: hidden;
   background: var(--color-dark--soft);
-  box-shadow: var(--shadow--card);
+  box-shadow: var(--card-shadow);
   block-size: clamp(14rem, 38vh, 24rem);
 }
 

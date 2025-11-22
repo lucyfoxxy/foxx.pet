@@ -34,7 +34,8 @@
   border-radius: 999px;
   box-shadow: var(--shadow--soft);
   vertical-align: middle;
-  background: var(--control-bg)
+  background: var(--control-bg);
+
 }
 
 .control--media {
@@ -46,7 +47,7 @@
 }
 
 .control--button {
-  transition: var(--transition--control);   
+  transition: var(--control-transition);   
   cursor: pointer;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
@@ -54,8 +55,8 @@
 }
 
 .control--button:not(.control--plain):is(:hover, :focus-visible, [data-current="true"]) {
-  transform: var(--transform-raise);
-  filter: var(--filter--control);
+  transform: var(--control-transform--fx);
+  filter: var(--control-filter--fx);
 }
 
 .control--badge {
@@ -76,14 +77,14 @@
   box-shadow: none;
   outline: none;
   backdrop-filter: none;
-  filter: var(--base-filter--control-plain);
+  filter: var(--control-plain-filter);
   opacity: .8;
   padding-block: 0;
   padding-inline: 0;
-  transition: var(--transition--control);
+  transition: var(--control-transition);
 }
 .control--plain:is(:hover,:focus-visible,[data-active="true"],[data-current="true"]) {
-  filter: var(--filter--control-plain) ;
+  filter: var(--control-plain-filter--fx) ;
   opacity: 1;
 }
 

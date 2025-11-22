@@ -20,22 +20,22 @@
   }
 }
 
-.panel-shell {
+.panel-wrapper {
   display: flex;
+  position: relative;
   flex-direction: column;
   min-block-size:  100dvh;
-  box-shadow:
-    
-    var(--shadow--strong),
-    inset 0 0 56px 0 var(--color-dark);
-  outline: 1px solid var(--color-dark);
+  max-inline-size: var(--panel-size);
+  margin-inline: auto;
+  box-shadow: var(--panel-shadow);
+  outline: var(--panel-outline);
   outline-offset: -1px;
-  border-radius: 0;
+  border: none;
 
-  background: 
-    var(--overlay--nebula),
-    var(--overlay--stars),
-    var(--overlay--dim),
+  background-image: 
+    var(--overlay-nebula),
+    var(--overlay-stars),
+    var(--overlay-dim),
     radial-gradient(ellipse at -55% 5%,transparent 39%,oklch(30% 0.175 190 / 2%),transparent 71%),
     radial-gradient(ellipse at bottom left,oklch(34% 0.165 285 / 8%) 10%,oklch(28% 0.165 295 / 18%),oklch(32% 0.165 315 / 8%) 90%),
     radial-gradient(ellipse at top right,oklch(34% 0.165 315 / 8%) 10%,oklch(28% 0.165 315 / 18%),oklch(32% 0.165 285 / 8%) 90%),
@@ -60,7 +60,7 @@
 
   background-blend-mode:
     overlay,
-    lighten,
+    screen,
     multiply,
     normal,
     normal,
@@ -76,14 +76,15 @@
     center,    
     center;    
 }
-
-
-.panel-shell.has-stars { position: relative; }
-.container > .panel-shell {
-  max-inline-size: var(--container-max);
-  margin-inline: auto;
+@media (max-width: 900px) {
+  .panel-wrapper {
+    max-inline-size: 100%;
+    margin-block: 0;
+    margin-inline: 0;
+  }
 }
-.panel-shell.has-stars .stars-canvas {
+
+.panel-wrapper .stars-canvas {
   position: absolute;
   inset: 0;
   z-index: 0;           
@@ -95,17 +96,7 @@
   align-self: center;
   margin: var(--panel-padding);
 }
-@media (max-width: 900px) {
-  .container > .panel-shell {
-    max-inline-size: 100%;
-    margin-block: 0;
-    margin-inline: 0;
-  }
-
-  .panel-shell {
-    border-radius: 0;
-  }
-}
+@media (max-width: 900px) {.panel-wrapper .stars-canvas { display: none; }}
 
 main.panel {
   padding: var(--panel-padding);
@@ -113,6 +104,4 @@ main.panel {
   flex: 1 1 auto;
 }
 
-p, .prose,h1,h2,h3,h4 {
-  hyphens: auto;
-}
+

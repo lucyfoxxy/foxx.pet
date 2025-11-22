@@ -52,7 +52,7 @@ a {
 }
 
 .is-italic { font-style: italic; }
-.header__nav-label {
+.header__item-label {
   font-weight: var(--font-weight-bold); 
   font-size: var(--font-size-m);
   letter-spacing: var(--letter-spacing-l);
@@ -81,12 +81,13 @@ a {
 }
 
 /* ====== HEADINGS ====== */
-:where(h1, h2, h3, .header__nav-label) {
+:where(h1, h2, h3, .header__item-label) {
   font-family: var(--font--fancy);
   font-variant: small-caps;
 }
 
-:where(h1, h2, h3, h4, p) {
+h1, h2, h3, h4, p {
+  hyphens: auto;
   margin-block: 0;
   margin-inline: 0;
   letter-spacing: var(--letter-spacing-l);
@@ -111,29 +112,29 @@ h3 {
 h4 {
   font-family: var(--font--signature);
   font-weight: var(--font-weight-thick);
-  line-height: var(--line-height-xl);
+  line-height: var(--line-height-xxl);
   letter-spacing: var(--letter-spacing-xl);
   font-size: var(--font-size-m);  
 }
 
 /* ====== PROSE & LISTEN ====== */
-:where(p) {  
+p {  
   margin: 0 0 var(--flow-gap);  
 }
 
-:where(ul, ol) {
+ul, ol {
   padding-inline-start: 1.2rem;
   margin: var(--flow-gap) 0;
 }
-:where(li) {
+li {
   margin: calc(var(--flow-gap) * .35) 0;
 }
 
-:where(blockquote) {
+blockquote {
   margin: var(--flow-gap) 0;
   padding: calc(var(--flow-gap) * .75) var(--flow-gap);
-  border-left: 3px solid var(--color-accent);
-  background: color-mix(in oklab, var(--content-background) 4%, transparent);
+  border-left: var(--blockquote-border);
+  background: var(--blockquote-bg);
   border-radius: .5rem;
 }
 
