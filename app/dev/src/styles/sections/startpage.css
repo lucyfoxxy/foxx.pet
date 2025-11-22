@@ -2,7 +2,7 @@
 .hero__signature {
   display: grid; 
 }
-
+.content-section > .card :where(:is(.hero)),.hero + .card {margin-block: 0; gap: 0}
 .hero {
   position: relative;
   isolation: isolate;
@@ -15,9 +15,9 @@
   block-size: 9.25em;
   margin-block-start: var(--section-gap);
   mix-blend-mode: screen;
-  background-image: var(--hero--bg), radial-gradient(ellipse at 50% calc(59% - .5em), rgba(255,255,255,.2), transparent 60%);
+  background-image: var(--hero--bg), radial-gradient(ellipse at 50% calc(69% - .5em), rgba(255,255,255,.2), transparent 60%);
   background-position: 42% calc(73% - .75em),42% calc(93% - .75em);
-  background-size: 8.25em, 26em 9em;
+  background-size: 8.25em, 22em 8.25em;
   background-repeat:no-repeat,no-repeat;
   background-blend-mode: normal,lighten;
 
@@ -30,7 +30,7 @@
   animation-timing-function:ease,cubic-bezier(0.75, 0.75, 0.75, 0.75);
 }
 @keyframes fly-in {
-  0% {background-position-x: -20%, 42%; background-position-y:-120%,calc(93% - .75em);background-size: .25em, 26em 9em}
+  0% {background-position-x: -20%, 42%; background-position-y:-120%,calc(93% - .75em);background-size: .25em, 22em 8.25em}
   100% {background-position-x: 42%, 42%; }
 }
 @keyframes fly-up-down {
