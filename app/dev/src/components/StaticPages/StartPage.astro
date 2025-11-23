@@ -40,22 +40,23 @@ const isExternalLink = (href: string) => href.startsWith('http');
     <Template.Card class="card--plain card--flush card--center">
       <Fragment slot="body">
 
-        <div class="hero hero__image">
-          <div class="hero hero__text">
-        
-            <div class="hero hero__signature">
-              <span class="hero__welcome">{hero.heading}</span>
-              
-              <div class="hero hero__sub">
+        <div class="hero">
+          <div class="hero__backdrop" aria-hidden="true"></div>
+          <div class="hero__content">
+            <div class="hero__grid">
+              <span class="hero__welcome is-fancy">{hero.heading}</span>
+
+              <div class="hero__signature-line is-signature">
                 <span class="hero__to">to</span>
-                <span class="hero__lucy">{hero.subheading}</span>
+                <span class="hero__name">{hero.subheading}</span>
               </div>
-            </div>
-            <div class="hero hero__main">
-              <div class="hero__main--title">
-                <span class="cozy">Cozy</span>&nbsp;<span class="cosmos">Cosmos</span>
+
+              <div class="hero__main">
+                <div class="hero__title is-fancy">
+                  <span class="hero__title-word cozy">Cozy</span>&nbsp;<span class="hero__title-word cosmos">Cosmos</span>
+                </div>
+                <div class="hero__tagline is-italic is-fancy">{hero.subtitle}</div>
               </div>
-              <div class="hero__main--tagline is-italic">{hero.subtitle}</div>
             </div>
           </div>
         </div>

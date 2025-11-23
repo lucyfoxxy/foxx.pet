@@ -6,7 +6,7 @@
     position: sticky;
     z-index: 1001;
     border: var(--bars-border);
-    backdrop-filter: var(--blur-l) brightness(1.2) saturate(1.05);
+    backdrop-filter: var(--bars-backdrop);
     box-shadow: var(--bars-shadow);
 }
 
@@ -52,12 +52,11 @@
     place-content: center;
     place-items: center;
     filter: var(--header-item-filter);
-    transition: var(--header-item-transition);
-    will-change: var(--header-item-will-change);
+
 }
 
 .header__item[data-active="false"]:hover { 
-    transform: var(--transform-raise);
+    transform: var(--header-item-transform);
 }
 
 .header__item:is(:hover,:focus-visible,[data-active="true"])> *{
@@ -83,6 +82,8 @@
     place-content: center;
     place-items: center;
     place-self: center;
+    transition: var(--header-item-transition);
+    will-change: var(--header-item-will-change);
 }
 
 .header__item-icon    {

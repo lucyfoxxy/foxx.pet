@@ -36,3 +36,5 @@ svgs.list
 sync.ffs_db
 sync.ffs_lock
 sync.ffs_db
+deprecated/**
+deprecated

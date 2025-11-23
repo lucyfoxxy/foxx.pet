@@ -75,7 +75,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: var(--cluster-gap);
+  gap: var(--flow-gap);
   white-space: nowrap;
 }
 
@@ -91,7 +91,7 @@
   .table__td--right {
     flex-direction: column;
     align-items: flex-end;
-    gap: var(--control-gap);
+    gap: var(--flow-gap);
   }
 
   .table__price {

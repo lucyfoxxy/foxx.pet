@@ -52,8 +52,7 @@
   --icon-size-m:                    calc(var(--font-size-m) * 1.075);
   --icon-size-l:                    calc(var(--font-size-xl) * .95);
 
-  --media-control-size:             2.75rem;
-  --thumb-size:                     clamp(64px, 9vw, 128px);
+
   
   --header-label-size:              clamp(var(--font-size-xs), calc(.75rem + .85vw), var(--font-size-xl));
   --header-icon-size:               clamp(var(--icon-size-s), calc(.8rem + .875vw), var(--icon-size-l));
@@ -62,10 +61,16 @@
   --header-icon-transform--fx:      translateY(0);
 
   /* ============= Role specific Spacings ============= */
+
+
+  /* ====== Base ======*/
   --flow-gap:                       var(--space-xs);
-  --control-gap:                    clamp(var(--space-xxs),  calc(var(--space-xxs) + .15rem),    var(--space-xs));
-  --control-padding:                var(--space-s);
-  --cluster-gap:                    clamp(var(--space-xs),  calc(var(--space-xs) + .5vw),    var(--space-l));
+
+  --blockquote-bg:                  color-mix(in oklab, var(--content-background) 4%, transparent);
+  --blockquote-border:              3px solid var(--color-accent);
+
+  --base-bg:                        linear-gradient(205deg, #371173, #240a46, rgb(40, 7, 112));
+  --base-shadow:                    inset 0 0 164px 64px rgba(0,0,0,.5);
 
   --section-gap:                    clamp(var(--space-xs),  calc(var(--space-xs) + 1.5vh),    var(--space-xl));
   --container-padding:              clamp(var(--space-xxs),  calc(var(--space-xxs) + 2vw),    var(--space-xxl));
@@ -111,20 +116,37 @@
 
   --overlay-dim:                    radial-gradient(ellipse at center,transparent 50%, var(--color-dark) 120%); 
 
+
+  /* ====== Motion ====== */
+  --transition-link:                color .2s ease, text-shadow .2s ease;
+  --transition--raise:              transform .35s ease-in-out, box-shadow .2s ease;
+  --transition--soft:               opacity .35s ease, transform .35s ease;
+
+  --transition--opacity:            opacity .5s ease-in-out;
+
+  --transition-fx:                  transform .35s ease, filter .35s ease-in-out, opacity .35s ease-in-out, box-shadow .25s ease, background .35s ease-in-out;
+
+  --transform-raise:                translateY(-12%);
+  --transform-grow:                 scale(1.05);
+  --transform-grow--strong:         scale(1.15);
+  --transform-shrink:               scale(.95);
+  --transform-shrink--strong:       scale(.85);
+
+
   /* ====== Card FX ====== */
   --card-gap:                       var(--space-s);
   --card-padding:                   clamp(var(--space-s),  calc(var(--space-s) + 1.5vw),  var(--space-xl));
   --card-backdrop:                  var(--blur-m) brightness(1.35) saturate(1.05);
   --card-shadow:                    var(--shadow--default), inset 0 0 29px color-mix(in oklab,transparent 90%,var(--color-accent));
-  --card-transition:                transform .35s ease, filter .35s ease;
-  --card-transform--fx:             scale(1.05);
+  --card-transition:                var(--transition-fx);
+  --card-transform--fx:             var(--transform-grow);
   --card-filter--fx:                brightness(1.1) saturate(1.1) drop-shadow(0 0 var(--color-dark));
 
   --card-list-bg:                   var(--color-dark--soft);
   --card-list-bg--fx:               var(--color-dark--strong);
   --card-list-shadow:               var(--shadow--soft);
   --card-list-filter--fx:           drop-shadow(0 0 3px color-mix(in oklch,transparent,currentColor));
-  --card-list-transition:           background .35s ease, opacity .35s ease;
+  --card-list-transition:           var(--transition-fx);
   --card-list-will-change:          opacity, background;
 
   --card-overlay-backdrop:          var(--blur-l);
@@ -136,12 +158,15 @@
   
 
   /* ====== Controls ======*/
+  --control-gap:                    clamp(var(--space-xxs),  calc(var(--space-xxs) + .15rem),    var(--space-xs));
+  --control-padding:                var(--space-s);
+
   --control-bg:                     radial-gradient(ellipse at center, var(--color-accent--dark),var(--color-dark));
   --control-filter--fx:             brightness(2);
   --control-filter--legacy-fx:      brightness(1.08);
   --control-filter--legacy-active:  brightness(0.92);
-  --control-transition:             filter .4s ease, transform .4s ease;
-  --control-transform--fx:          translateY(-10%);
+  --control-transition:             var(--transition-fx);
+  --control-transform--fx:          translateY(-12%);
 
   --control-plain-filter:           drop-shadow(2px 2px 1px var(--color-dark--soft));
   --control-plain-filter--fx:       drop-shadow(0 0 0 var(--color-accent)) drop-shadow(2px 2px 2px var(--color-dark--strong));
@@ -153,27 +178,30 @@
 
   --bars-border:                    1px solid var(--color-dark--ghosty);
   --bars-shadow:                    var(--shadow--default), inset 0 0 29px var(--color-dark--soft);
+  --bars-backdrop:                  var(--blur-l) brightness(1.2) saturate(1.05);
 
   --header-item-shadow:             var(--shadow--default), inset 0 0 29px var(--color-dark--soft);
   --header-item-filter:             drop-shadow(2px 2px 2px rgba(0,0,0,.5));
   --header-item-filter--fx:         drop-shadow(0 0 3px color-mix(in oklch,transparent,currentColor));
   --header-item-backdrop:           var(--blur-l) brightness(1.2) saturate(1.05);
+  --header-item-transform:          var(--transform-raise);
+  --header-item-transition:         var(--transition-fx);
 
-  --header-transition:              transform .35s ease, padding-block .35s ease;
+  --header-transition:              var(--transition-fx), padding-block .4s ease;
   --header-will-change:             transform, filter;
   --header-icon-transition:         font-size .35s ease;
   --header-icon-will-change:        font-size;
-  --header-item-transition:         transform .35s ease, filter .35s ease;
+  --header-item-transition:         var(--transition-fx);
   --header-item-will-change:        transform, filter;
-  --header-label-transition:        opacity .35s ease, transform .35s ease, max-height .35s ease, white-space .35s ease;
-  --header-label-will-change:       opacity, filter , transform, max-height, white-space;
+  --header-label-transition:        var(--transition-fx), max-height .4s ease;
+  --header-label-will-change:       opacity, filter , transform, max-height;
   --header-label-transform--show:   translateY(0);
-  --header-label-transform--hide:   translateY(-4px);
+  --header-label-transform--hide:   translateY(-12%);
 
   --footer-meta-border:             1px solid var(--color-dark--ghosty);
-  --footer-separator-transform:     translateY(-10%);
+  --footer-separator-transform:     translateY(-12%);
   --footer-meta-transform--fx:      translateY(6px);
-  --footer-meta-transition:         opacity .35s ease, transform .35s ease, max-height .35s ease, border-color .35s ease; 
+  --footer-meta-transition:         opacity .35s ease, transform .35s ease, max-height .35s ease; 
   
 
   /* ====== Panel ======*/
@@ -185,19 +213,10 @@
   --panel-base-transform:           translateZ(0);
   --panel-base-will-change:         transform;
 
-
-  /* ====== Hero ======*/
-
-
-  --blockquote-bg:                  color-mix(in oklab, var(--content-background) 4%, transparent);
-  --blockquote-border:              3px solid var(--color-accent);
-
-  
-  /* ====== Base ======*/
-  --base-bg:                        linear-gradient(205deg, #371173, #240a46, rgb(40, 7, 112));
-  --base-shadow:                    inset 0 0 164px 64px rgba(0,0,0,.5);
-
   /* ====== Media ====== */
+  --media-control-size:             2.75rem;
+  --thumb-size:                     clamp(64px, 9vw, 128px);
+
   --media-animation-interval:       8500ms;
 
   --media-controls-outline:         1px solid var(--color-dark--soft);
@@ -214,26 +233,13 @@
   --media-lightbox-shadow:          var(--shadow--strong);
   --media-lightbox-close-bg:        var(--color-dark--soft);
   --media-lightbox-transition:      opacity .3s ease;
-  --media-lightbox-figure-transform:scale(.95);
+  --media-lightbox-figure-transform:var(--transform-shrink);
 
   --media-progress-bg:              var(--color-light--ghosty);
   --media-progress-fill-bg:         var(--color-light);
   --media-progress-transition:      transform .12s linear;
 
   --media-raise-will-change:        opacity;
-
-  /* ====== Motion ====== */
-  --transition-link:                color .2s ease, text-shadow .2s ease;
-  --transition--raise:              transform .35s ease-in-out, box-shadow .2s ease;
-  --transition--soft:               opacity .35s ease, transform .35s ease;
-
-  --transition--opacity:            opacity .5s ease-in-out;
-
-  --transform-raise:                translateY(-10%);
-  --transform-scale:                scale(1.05);
-  --transform-scale-strong:         scale(1.15);
-  --transform-scale-soft:           scale(.95);
-
 
   /* ====== Tables ====== */
   --table-head-bg:                  var(--color-dark--soft);
