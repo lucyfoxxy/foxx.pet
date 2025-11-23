@@ -1,242 +1,248 @@
 :root { 
   /* ============= Base Spacings / Radius ============= */
-  --space-xxs:              0.25rem; 
-  --space-xs:               0.50rem; 
-  --space-s:                0.75rem; 
-  --space-m:                1.00rem; 
-  --space-l:                1.50rem; 
-  --space-xl:               2.00rem; 
-  --space-xxl:              3.00rem; 
-  --space-xxxl:             4.00rem; 
+  --space-xxs:                      0.25rem; 
+  --space-xs:                       0.50rem; 
+  --space-s:                        0.75rem; 
+  --space-m:                        1.00rem; 
+  --space-l:                        1.50rem; 
+  --space-xl:                       2.00rem; 
+  --space-xxl:                      3.00rem; 
+  --space-xxxl:                     4.00rem; 
 
-  --radius-xxs:             6px;
-  --radius-xs:              8px;
-  --radius-s:               10px;
-  --radius-m:               14px;
-  --radius-l:               18px;
-  --radius-xl:              36px;
-  --radius-xxl:             72px;
+  --radius-xxs:                     6px;
+  --radius-xs:                      8px;
+  --radius-s:                       10px;
+  --radius-m:                       14px;
+  --radius-l:                       18px;
+  --radius-xl:                      36px;
+  --radius-xxl:                     72px;
 
   /* ============= Font & Other Sizes ================= */
-  --font--display:     Grandstander, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font--fancy:   'Fuzzy Bubbles', var(--font--display);
-  --font--signature:  'Beautiful Dream', var(--font--display);
+  --font--display:                  Grandstander, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font--fancy:                    'Fuzzy Bubbles', var(--font--display);
+  --font--signature:                'Beautiful Dream', var(--font--display);
 
-  --font-weight-thin:        300;
-  --font-weight-normal:      400;
-  --font-weight-thick:       500;
-  --font-weight-bold:        700;
+  --font-weight-thin:               300;
+  --font-weight-normal:             400;
+  --font-weight-thick:              500;
+  --font-weight-bold:               700;
 
-  --line-height-xxs:        .8;
-  --line-height-xs:         .9;
-  --line-height-s:         1.0;
-  --line-height-m:         1.1;
-  --line-height-l:         1.2;
-  --line-height-xl:        1.3;
-  --line-height-xxl:       1.5;
+  --line-height-xxs:                 .8;
+  --line-height-xs:                  .9;
+  --line-height-s:                  1.0;
+  --line-height-m:                  1.1;
+  --line-height-l:                  1.2;
+  --line-height-xl:                 1.3;
+  --line-height-xxl:                1.5;
   
   
   
 
-  --letter-spacing-s:    .0065em;
-  --letter-spacing-m:    clamp(.0065em, calc(0.225em + .01vw ), .0225em);
-  --letter-spacing-l:    clamp(.0225em, calc(0.225em + .03vw ), .0525em);
-  --letter-spacing-xl:    clamp(.0525em, calc(0.525em + .05vw ), .0650em);
+  --letter-spacing-s:               .0065em;
+  --letter-spacing-m:               clamp(.0065em, calc(0.225em + .01vw ), .0225em);
+  --letter-spacing-l:               clamp(.0225em, calc(0.225em + .03vw ), .0525em);
+  --letter-spacing-xl:              clamp(.0525em, calc(0.525em + .05vw ), .0650em);
 
-  --font-size-xs:        clamp(.75rem, calc(.75rem + .025vw), .95rem);
-  --font-size-s:         clamp(.9rem,  calc(.9rem + .075vw), 1.05rem);
-  --font-size-m:         clamp(1.1rem, calc(1.1rem + .45vw), 1.5rem);
-  --font-size-l:         clamp(1.4rem, calc(1.4rem + .35vw), 1.8rem);
-  --font-size-xl:        clamp(1.75rem, calc(1.75rem + 1.5vw), 3rem);
-  --font-size-xxl:       clamp(3rem, calc(3rem + 1.5vw), 3.6rem);
+  --font-size-xs:                   clamp(.75rem, calc(.75rem + .025vw), .95rem);
+  --font-size-s:                    clamp(.9rem,  calc(.9rem + .075vw), 1.05rem);
+  --font-size-m:                    clamp(1.1rem, calc(1.1rem + .45vw), 1.5rem);
+  --font-size-l:                    clamp(1.4rem, calc(1.4rem + .35vw), 1.8rem);
+  --font-size-xl:                   clamp(1.75rem, calc(1.75rem + 1.5vw), 3rem);
+  --font-size-xxl:                  clamp(3rem, calc(3rem + 1.5vw), 3.6rem);
 
-  --icon-size-s:        calc(var(--font-size-s) * 1.075);
-  --icon-size-m:        calc(var(--font-size-m) * 1.075);
-  --icon-size-l:        calc(var(--font-size-xl) * .75);
+  --icon-size-s:                    calc(var(--font-size-s) * 1.075);
+  --icon-size-m:                    calc(var(--font-size-m) * 1.075);
+  --icon-size-l:                    calc(var(--font-size-xl) * .75);
 
-  --media-control-size: 2.75rem;
-  --thumb-size:              clamp(64px, 9vw, 128px);
-  --hero-scale:               clamp(1.05rem, 4.5vw, 2.25rem);
+  --media-control-size:             2.75rem;
+  --thumb-size:                     clamp(64px, 9vw, 128px);
+  --hero-scale:                     clamp(1.05rem, 4.5vw, 2.25rem);
 
   /* ============= Role specific Spacings ============= */
-  --flow-gap:               var(--space-xs);  
-  --card-gap:               var(--space-s);    
-  --cluster-gap:            clamp(var(--space-xs),  calc(var(--space-xs) + .5vw),    var(--space-l));   
-  --control-gap:            clamp(var(--space-xxs),  calc(var(--space-xxs) + .15rem),    var(--space-xs)); 
-  --control-padding:        var(--space-s);  
+  --flow-gap:                       var(--space-xs);
+  --control-gap:                    clamp(var(--space-xxs),  calc(var(--space-xxs) + .15rem),    var(--space-xs));
+  --control-padding:                var(--space-s);
+  --cluster-gap:                    clamp(var(--space-xs),  calc(var(--space-xs) + .5vw),    var(--space-l));
 
-  --card-padding:           clamp(var(--space-s),  calc(var(--space-s) + 1.5vw),  var(--space-xl));   
-  --section-gap:            clamp(var(--space-xs),  calc(var(--space-xs) + 1.5vh),    var(--space-xl)); 
-  
+  --section-gap:                    clamp(var(--space-xs),  calc(var(--space-xs) + 1.5vh),    var(--space-xl));
+  --container-padding:              clamp(var(--space-xxs),  calc(var(--space-xxs) + 2vw),    var(--space-xxl));
 
 
-
-
-  --container-padding:       clamp(var(--space-xxs),  calc(var(--space-xxs) + 2vw),    var(--space-xxl)); 
-  
- 
   /* ====== Base Colors ========================= */
-  --color-dark:              oklch(19.5% 0.095 295);
-  --color-dark--strong:      color-mix(in oklch, var(--color-dark) 70%, transparent);
-  --color-dark--soft:        color-mix(in oklch, var(--color-dark) 50%, transparent);
-  --color-dark--ghosty:      color-mix(in oklch, var(--color-dark) 30%, transparent);
+  --color-dark:                   oklch(19.5% 0.095 295);
+  --color-dark--strong:             color-mix(in oklch, var(--color-dark) 70%, transparent);
+  --color-dark--soft:               color-mix(in oklch, var(--color-dark) 50%, transparent);
+  --color-dark--ghosty:             color-mix(in oklch, var(--color-dark) 30%, transparent);
 
-  --color-light:             oklch(92% 0.125 295); 
-  --color-light--strong:      color-mix(in oklch, var(--color-light) 70%, transparent);
-  --color-light--soft:        color-mix(in oklch, var(--color-light) 50%, transparent);
-  --color-light--ghosty:      color-mix(in oklch, var(--color-light) 30%, transparent);
+  --color-light:                  oklch(92% 0.125 295); 
+  --color-light--strong:            color-mix(in oklch, var(--color-light) 70%, transparent);
+  --color-light--soft:              color-mix(in oklch, var(--color-light) 50%, transparent);
+  --color-light--ghosty:            color-mix(in oklch, var(--color-light) 30%, transparent);
 
-  --color-accent--dark:      oklch(34% 0.16 300);
-  --color-accent:            oklch(74% 0.145 300); 
-  --color-accent--bright:    oklch(91% 0.07 300);
+  --color-accent--dark:           oklch(34% 0.16 300);
+  --color-accent:                 oklch(74% 0.145 300); 
+  --color-accent--bright:         oklch(91% 0.07 300);
 
           
 
   /* ====== Base FX ==================== */  
-  --text-shadow:             2px 2px 4px var(--color-dark--soft);
-  --icon-shadow:             0 0 3px color-mix(in oklch,transparent 30%,currentColor);
-  --text-glow:               1px 1px 2px var(--color-light--soft);
+  --text-shadow:                    2px 2px 4px var(--color-dark--soft);
+  --icon-shadow:                    0 0 3px color-mix(in oklch,transparent 30%,currentColor);
+  --text-glow:                      1px 1px 2px var(--color-light--soft);
 
-  --shadow--soft:    2px 2px 12px rgba(0,0,0,.39);
-  --shadow--default: 0 0 18px -6px var(--color-dark--soft),0 0 18px -6px var(--color-dark--strong);
-  --shadow--strong:  0 0 20px -10px var(--color-dark--soft),0 0 28px -6px var(--color-dark--strong),0 0 28px 0 var(--color-dark--strong);
+  --shadow--soft:                   2px 2px 12px rgba(0,0,0,.39);
 
-  --blur-xxs:              blur(var(--radius-xxs));
-  --blur-xs:              blur(var(--radius-xs));
-  --blur-s:              blur(var(--radius-s));
-  --blur-m:              blur(var(--radius-m));
-  --blur-l:              blur(var(--radius-l));
-  --blur-xl:              blur(var(--radius-xl));
-  --blur-xxl:              blur(var(--radius-xxl));
+  --shadow--default:                0 0 18px -6px var(--color-dark--soft),
+                                    0 0 18px -6px var(--color-dark--strong);
 
+  --shadow--strong:                 0 0 20px -10px var(--color-dark--soft),
+                                    0 0 28px -6px var(--color-dark--strong),
+                                    0 0 28px 0 var(--color-dark--strong);
+
+  --blur-xxs:                       blur(var(--radius-xxs));
+  --blur-xs:                        blur(var(--radius-xs));
+  --blur-s:                         blur(var(--radius-s));
+  --blur-m:                         blur(var(--radius-m));
+  --blur-l:                         blur(var(--radius-l));
+  --blur-xl:                        blur(var(--radius-xl));
+  --blur-xxl:                       blur(var(--radius-xxl));
+
+  --overlay-dim:                    radial-gradient(ellipse at center,transparent 50%, var(--color-dark) 120%); 
 
   /* ====== Card FX ====== */
-  --card-backdrop:               var(--blur-m) brightness(1.35) saturate(1.05);
-  --card-shadow:                 var(--shadow--default), inset 0 0 29px color-mix(in oklab,transparent 90%,var(--color-accent));
-  --card-transition:             transform .35s ease, filter .35s ease;
-  --card-filter--fx:             brightness(1.1) saturate(1.1) drop-shadow(0 0 var(--color-dark));
-  --card-transform--fx:          scale(1.05);  
-  
-  --card-list-transition:        background .35s ease, opacity .35s ease;
-  --card-list-will-change:       opacity, background;
-  --card-list-bg:                var(--color-dark--soft);
-  --card-list-bg--fx:            var(--color-dark--strong);
-  --card-list-shadow:            var(--shadow--soft);
-  --card-list-filter--fx:        drop-shadow(0 0 3px color-mix(in oklch,transparent,currentColor));
+  --card-gap:                       var(--space-s);
+  --card-padding:                   clamp(var(--space-s),  calc(var(--space-s) + 1.5vw),  var(--space-xl));
+  --card-backdrop:                  var(--blur-m) brightness(1.35) saturate(1.05);
+  --card-shadow:                    var(--shadow--default), inset 0 0 29px color-mix(in oklab,transparent 90%,var(--color-accent));
+  --card-transition:                transform .35s ease, filter .35s ease;
+  --card-transform--fx:             scale(1.05);
+  --card-filter--fx:                brightness(1.1) saturate(1.1) drop-shadow(0 0 var(--color-dark));
 
-  --card-overlay-backdrop:       var(--blur-l);
-  --card-overlay-transition:     opacity 1.4s ease;
-  --card-overlay-transition--fx: opacity .5s ease;
-  --card-overlay-will-change:    opacity;
+  --card-list-bg:                   var(--color-dark--soft);
+  --card-list-bg--fx:               var(--color-dark--strong);
+  --card-list-shadow:               var(--shadow--soft);
+  --card-list-filter--fx:           drop-shadow(0 0 3px color-mix(in oklch,transparent,currentColor));
+  --card-list-transition:           background .35s ease, opacity .35s ease;
+  --card-list-will-change:          opacity, background;
 
-  --card-hero-banner-bg:         var(--color-dark--soft);
+  --card-overlay-backdrop:          var(--blur-l);
+  --card-overlay-transition:        opacity 1.4s ease;
+  --card-overlay-will-change:       opacity;
+  --card-overlay-transition--fx:    opacity .5s ease;
+
+  --card-hero-banner-bg:            var(--color-dark--soft);
   
 
   /* ====== Controls ======*/
-  --control-bg:                   radial-gradient(ellipse at center, var(--color-accent--dark),var(--color-dark));
-  --control-filter--fx:           brightness(2);
-  --control-plain-filter:         drop-shadow(2px 2px 1px var(--color-dark--soft));
-  --control-plain-filter--fx:     drop-shadow(0 0 0 var(--color-accent)) drop-shadow(2px 2px 2px var(--color-dark--strong));
-  --control-transition:           filter .4s ease, transform .4s ease;
-  --control-transform--fx:        translateY(-10%);
-  --control-filter--legacy-fx:    brightness(1.08);
-  --control-filter--legacy-active: brightness(0.92);
+  --control-bg:                     radial-gradient(ellipse at center, var(--color-accent--dark),var(--color-dark));
+  --control-filter--fx:             brightness(2);
+  --control-filter--legacy-fx:      brightness(1.08);
+  --control-filter--legacy-active:  brightness(0.92);
+  --control-transition:             filter .4s ease, transform .4s ease;
+  --control-transform--fx:          translateY(-10%);
 
+  --control-plain-filter:           drop-shadow(2px 2px 1px var(--color-dark--soft));
+  --control-plain-filter--fx:       drop-shadow(0 0 0 var(--color-accent)) drop-shadow(2px 2px 2px var(--color-dark--strong));
   
+
   /* ====== Bars ======*/
-  --bars-padding:       clamp(var(--space-xxs),  calc(var(--space-xxs) + 1.25vw),    var(--space-xl));
-  --bars-gap:           var(--space-xxs);  
-  
-  --bars-border: 1px solid var(--color-dark--ghosty);
-  --bars-shadow: var(--shadow--default), inset 0 0 29px var(--color-dark--soft);
+  --bars-padding:                   clamp(var(--space-xxs),  calc(var(--space-xxs) + 1.25vw),    var(--space-xl));
+  --bars-gap:                       var(--space-xxs);
 
-  --header-item-shadow: var(--shadow--default), inset 0 0 29px var(--color-dark--soft);
-  --header-item-filter: drop-shadow(2px 2px 2px rgba(0,0,0,.5));
-  --header-item-filter--fx: drop-shadow(0 0 3px color-mix(in oklch,transparent,currentColor));
-  --header-transition: transform .35s ease, padding-block .35s ease;
-  --header-will-change: transform, filter;
-  --header-item-transition: transform .35s ease, filter .35s ease;
-  --header-item-will-change: transform, filter;
-  --header-icon-transition: font-size .35s ease;
-  --header-icon-will-change: font-size;
-  --header-label-transition: opacity .35s ease, transform .35s ease, max-height .35s ease, white-space .35s ease;
-  --header-label-will-change: opacity, filter , transform, max-height, white-space;
-  --header-label-transform--show: translateY(0);
-  --header-label-transform--hide: translateY(-4px);
-  --header-item-backdrop: var(--blur-l) brightness(1.2) saturate(1.05);
+  --bars-border:                    1px solid var(--color-dark--ghosty);
+  --bars-shadow:                    var(--shadow--default), inset 0 0 29px var(--color-dark--soft);
 
-  --footer-meta-border: 1px solid var(--color-dark--ghosty);
-  --footer-separator-transform: translateY(-10%);
-  --footer-meta-transform--fx: translateY(6px);
-  --footer-meta-transition: opacity .35s ease, transform .35s ease, max-height .35s ease, border-color .35s ease; 
+  --header-item-shadow:             var(--shadow--default), inset 0 0 29px var(--color-dark--soft);
+  --header-item-filter:             drop-shadow(2px 2px 2px rgba(0,0,0,.5));
+  --header-item-filter--fx:         drop-shadow(0 0 3px color-mix(in oklch,transparent,currentColor));
+  --header-item-backdrop:           var(--blur-l) brightness(1.2) saturate(1.05);
+
+  --header-transition:              transform .35s ease, padding-block .35s ease;
+  --header-will-change:             transform, filter;
+  --header-icon-transition:         font-size .35s ease;
+  --header-icon-will-change:        font-size;
+  --header-item-transition:         transform .35s ease, filter .35s ease;
+  --header-item-will-change:        transform, filter;
+  --header-label-transition:        opacity .35s ease, transform .35s ease, max-height .35s ease, white-space .35s ease;
+  --header-label-will-change:       opacity, filter , transform, max-height, white-space;
+  --header-label-transform--show:   translateY(0);
+  --header-label-transform--hide:   translateY(-4px);
+
+  --footer-meta-border:             1px solid var(--color-dark--ghosty);
+  --footer-separator-transform:     translateY(-10%);
+  --footer-meta-transform--fx:      translateY(6px);
+  --footer-meta-transition:         opacity .35s ease, transform .35s ease, max-height .35s ease, border-color .35s ease; 
   
 
   /* ====== Panel ======*/
-  --panel-size:           1366px;
-  --panel-padding:           clamp(var(--space-xs),  calc(var(--space-xs) + 2.5vw),    var(--space-xxxl));
+  --panel-size:                     1366px;
+  --panel-padding:                  clamp(var(--space-xs),  calc(var(--space-xs) + 2.5vw),    var(--space-xxxl));
 
-  --panel-shadow: var(--shadow--strong), inset 0 0 56px 0 var(--color-dark);
-  --panel-outline: 1px solid var(--color-dark);
-  --panel-base-transform: translateZ(0);
-  --panel-base-will-change: transform;
+  --panel-shadow:                   var(--shadow--strong), inset 0 0 56px 0 var(--color-dark);
+  --panel-outline:                  1px solid var(--color-dark);
+  --panel-base-transform:           translateZ(0);
+  --panel-base-will-change:         transform;
 
 
   /* ====== Hero ======*/
-  --hero-filter: contrast(1.5) saturate(1.25) drop-shadow(.005em .005em .0125em);
-  --hero-text-filter: drop-shadow(.01em .01em .125em var(--color-dark));
-  --hero-text-transform: translateY( -1.5em);
-  --hero-signature-transform: translate(-.25em, .5em);
-  --hero-welcome-transform: rotate(-4deg) translateY(-.25em);
-  --hero-sub-transform: rotate(4deg);
-  --hero-to-transform: translate(.25em,.25em);
-  --hero-main-transform: translateY(1.25em);
-  --hero-title-transform: rotate(-3deg);
-  --hero-tagline-transform: translate(-.5em, -1.25em) rotate(-3deg);
+  --hero-filter:                    contrast(1.5) saturate(1.25) drop-shadow(.005em .005em .0125em);
+  --hero-text-filter:               drop-shadow(.01em .01em .125em var(--color-dark));
+  --hero-text-transform:            translateY( -1.5em);
+  --hero-signature-transform:       translate(-.25em, .5em);
+  --hero-welcome-transform:         rotate(-4deg) translateY(-.25em);
+  --hero-sub-transform:             rotate(4deg);
+  --hero-to-transform:              translate(.25em,.25em);
+  --hero-main-transform:            translateY(1.25em);
+  --hero-title-transform:           rotate(-3deg);
+  --hero-tagline-transform:         translate(-.5em, -1.25em) rotate(-3deg);
 
-  --blockquote-bg: color-mix(in oklab, var(--content-background) 4%, transparent);
-  --blockquote-border: 3px solid var(--color-accent);
+  --blockquote-bg:                  color-mix(in oklab, var(--content-background) 4%, transparent);
+  --blockquote-border:              3px solid var(--color-accent);
 
+  
+  /* ====== Base ======*/
+  --base-bg:                        linear-gradient(205deg, #371173, #240a46, rgb(40, 7, 112));
+  --base-shadow:                    inset 0 0 164px 64px rgba(0,0,0,.5);
 
-  /* ====== Overlays / Filter Presets ============ */   
-  --overlay-dim:      radial-gradient(ellipse at center,transparent 50%, var(--color-dark) 120%); 
-  /* --overlay-nebula --overlay-stars  Def -> Base.astro */
+  /* ====== Media ====== */
+  --media-animation-interval:       8500ms;
 
-  --base-bg:     linear-gradient(205deg, #371173, #240a46, rgb(40, 7, 112));
-  --base-shadow: inset 0 0 164px 64px rgba(0,0,0,.5);
+  --media-controls-outline:         1px solid var(--color-dark--soft);
+  --media-frame-shadow:             var(--shadow--soft);
 
-  /* ====== Media ====== */                                 
-  --media-animation-interval:           8500ms;  
-  --media-progress-transition:   transform .12s linear;
-  --media-image-transition:      opacity .7s ease;
-  --media-image-will-change:     opacity, transform, top, bottom;
-  --media-lightbox-transition:   opacity .3s ease;
-  --media-lightbox-figure-transform: scale(.95);
-  --media-thumb-will-change:     opacity;
-  --media-raise-will-change:     opacity;
-  --media-controls-outline:      1px solid var(--color-dark--soft);
-  --media-frame-shadow:          var(--shadow--soft);
-  --media-thumb-shadow:          var(--shadow--soft);
-  --media-image-placeholder-bg:  var(--color-dark--soft);
-  --media-lightbox-bg:           var(--color-dark);
-  --media-lightbox-shadow:       var(--shadow--strong);
-  --media-lightbox-close-bg:     var(--color-dark--soft);
-  --media-progress-bg:           var(--color-light--ghosty);
-  --media-progress-fill-bg:      var(--color-light);
+  --media-thumb-shadow:             var(--shadow--soft);
+  --media-thumb-will-change:        opacity;
+
+  --media-image-placeholder-bg:     var(--color-dark--soft);
+  --media-image-transition:         opacity .7s ease;
+  --media-image-will-change:        opacity, transform, top, bottom;
+
+  --media-lightbox-bg:              var(--color-dark);
+  --media-lightbox-shadow:          var(--shadow--strong);
+  --media-lightbox-close-bg:        var(--color-dark--soft);
+  --media-lightbox-transition:      opacity .3s ease;
+  --media-lightbox-figure-transform:scale(.95);
+
+  --media-progress-bg:              var(--color-light--ghosty);
+  --media-progress-fill-bg:         var(--color-light);
+  --media-progress-transition:      transform .12s linear;
+
+  --media-raise-will-change:        opacity;
 
   /* ====== Motion ====== */
-  --transition-link:     color .2s ease, text-shadow .2s ease;
-  --transition--raise:           transform .35s ease-in-out, box-shadow .2s ease;
-  --transition--soft:            opacity .35s ease, transform .35s ease;
+  --transition-link:                color .2s ease, text-shadow .2s ease;
+  --transition--raise:              transform .35s ease-in-out, box-shadow .2s ease;
+  --transition--soft:               opacity .35s ease, transform .35s ease;
 
-  --transition--opacity:         opacity .5s ease-in-out;
+  --transition--opacity:            opacity .5s ease-in-out;
 
-  --transform-raise:             translateY(-10%);
-  --transform-scale:             scale(1.05);
-  --transform-scale-strong:      scale(1.15);
-  --transform-scale-soft:        scale(.95);
+  --transform-raise:                translateY(-10%);
+  --transform-scale:                scale(1.05);
+  --transform-scale-strong:         scale(1.15);
+  --transform-scale-soft:           scale(.95);
 
 
   /* ====== Tables ====== */
-  --table-head-bg:               var(--color-dark--soft);
-  --table-row-alt-bg:            var(--color-dark--soft);
+  --table-head-bg:                  var(--color-dark--soft);
+  --table-row-alt-bg:               var(--color-dark--soft);
 }
