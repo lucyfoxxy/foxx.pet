@@ -19,9 +19,9 @@
 
 
   /* ============= Font & Other Sizes ================= */
-  --font--display:                  Grandstander, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font--fancy:                    'Fuzzy Bubbles', var(--font--display);
-  --font--signature:                'Beautiful Dream', var(--font--display);
+  --font-display:                  Grandstander, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-fancy:                    'Fuzzy Bubbles', var(--font-display);
+  --font-signature:                'Beautiful Dream', var(--font-display);
 
   --font-weight-thin:               300;
   --font-weight-normal:             400;
@@ -50,12 +50,16 @@
 
   --icon-size-s:                    calc(var(--font-size-s) * 1.075);
   --icon-size-m:                    calc(var(--font-size-m) * 1.075);
-  --icon-size-l:                    calc(var(--font-size-xl) * .75);
+  --icon-size-l:                    calc(var(--font-size-xl) * .95);
 
   --media-control-size:             2.75rem;
   --thumb-size:                     clamp(64px, 9vw, 128px);
-  --hero-scale:                     clamp(1.05rem, 4.5vw, 2.25rem);
-
+  
+  --header-label-size:              clamp(var(--font-size-xs), calc(.75rem + .85vw), var(--font-size-xl));
+  --header-icon-size:               clamp(var(--icon-size-s), calc(.8rem + .875vw), var(--icon-size-l));
+  --header-icon-size--fx:           calc(var(--header-icon-size) * 1.75);
+  --header-icon-transform:          translateY(-.05em);
+  --header-icon-transform--fx:      translateY(0);
 
   /* ============= Role specific Spacings ============= */
   --flow-gap:                       var(--space-xs);
@@ -124,9 +128,9 @@
   --card-list-will-change:          opacity, background;
 
   --card-overlay-backdrop:          var(--blur-l);
-  --card-overlay-transition:        opacity 1.4s ease;
+  --card-overlay-transition:        opacity 1.2s ease;
   --card-overlay-will-change:       opacity;
-  --card-overlay-transition--fx:    opacity .5s ease;
+  --card-overlay-transition--fx:    opacity 1.2s ease;
 
   --card-hero-banner-bg:            var(--color-dark--soft);
   
@@ -183,16 +187,7 @@
 
 
   /* ====== Hero ======*/
-  --hero-filter:                    contrast(1.5) saturate(1.25) drop-shadow(.005em .005em .0125em);
-  --hero-text-filter:               drop-shadow(.01em .01em .125em var(--color-dark));
-  --hero-text-transform:            translateY( -1.5em);
-  --hero-signature-transform:       translate(-.25em, .5em);
-  --hero-welcome-transform:         rotate(-4deg) translateY(-.25em);
-  --hero-sub-transform:             rotate(4deg);
-  --hero-to-transform:              translate(.25em,.25em);
-  --hero-main-transform:            translateY(1.25em);
-  --hero-title-transform:           rotate(-3deg);
-  --hero-tagline-transform:         translate(-.5em, -1.25em) rotate(-3deg);
+
 
   --blockquote-bg:                  color-mix(in oklab, var(--content-background) 4%, transparent);
   --blockquote-border:              3px solid var(--color-accent);

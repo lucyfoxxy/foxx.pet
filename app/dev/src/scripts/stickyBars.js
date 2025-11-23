@@ -57,42 +57,64 @@ function createHeaderController(bar) {
   const doc = document.documentElement;
   const items = bar.querySelectorAll('.header__item');
   const labels = bar.querySelectorAll('.header__item-label');
-  let anchorTop = null;
+
   let lastVisible = null;
-
-  const recalcAnchor = () => {
-    const scrollY = window.scrollY || window.pageYOffset;
-    const rect = bar.getBoundingClientRect();
-    const topOffset = parseFloat(style.top || '0') || 0;
-    anchorTop = rect.top + scrollY - topOffset;
-  };
-
-  recalcAnchor();
+  let lastY = window.scrollY || 0;
 
   const update = () => {
     const scrollY = window.scrollY || window.pageYOffset;
     const viewportHeightNow = window.innerHeight || doc.clientHeight;
     const docHeightNow = doc.scrollHeight;
-    const contentHeightNow = docHeightNow - bar.offsetHeight;
-    const isShortPageNow = contentHeightNow <= viewportHeightNow + 1;
+    const barHeight = bar.offsetHeight || 0;
 
-    if (scrollY <= 1) {
-      recalcAnchor();
-    }
+    // Wie viel "echter" Scrollweg ist überhaupt vorhanden?
+    const scrollRoomNow = Math.max(0, docHeightNow - viewportHeightNow);
+    const minScrollForLongPage = Math.max(barHeight * 0.75, 32);
+    const isShortPage = scrollRoomNow <= minScrollForLongPage;
 
+    // Default: oben immer "voll"
     let visible = true;
-    if (!isShortPageNow && anchorTop !== null) {
-      visible = scrollY <= anchorTop;
+
+    if (!isShortPage) {
+      // Hysterese-Schwellen – hier kannst du später feinjustieren
+      const HIDE_AT = Math.max(barHeight * 1.4, 96); // ab hier: kompakt
+      const SHOW_AT = Math.max(barHeight * 0.5, 40); // unterhalb: wieder groß
+
+      const goingDown = scrollY > lastY;
+
+      if (lastVisible === null) {
+        // Initialzustand: nah am Anfang -> groß
+        visible = scrollY <= HIDE_AT;
+      } else if (lastVisible) {
+        // war gerade "groß" -> nur bei deutlichem Runterscrollen verstecken
+        if (goingDown && scrollY >= HIDE_AT) {
+          visible = false;
+        } else {
+          visible = true;
+        }
+      } else {
+        // war gerade "kompakt" -> nur bei deutlichem Hochschieben wieder groß
+        if (!goingDown && scrollY <= SHOW_AT) {
+          visible = true;
+        } else {
+          visible = false;
+        }
+      }
     }
 
-    if (visible === lastVisible) return;
+    if (visible === lastVisible) {
+      lastY = scrollY;
+      return;
+    }
 
     setVisibility({ bar, items, labels }, visible);
     lastVisible = visible;
+    lastY = scrollY;
   };
 
   return { update };
 }
+
 
 function createFooterController(bar) {
   const style = window.getComputedStyle(bar);

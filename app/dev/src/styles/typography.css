@@ -35,7 +35,7 @@
 }
 /* ====== BASE TYPOGRAPHY ====== */
 body {
-  font-family: var(--font--display);
+  font-family: var(--font-display);
   font-weight: var(--font-weight-thin);
   font-size: var(--font-size-s);
   line-height: var(--line-height-xxl);
@@ -52,18 +52,22 @@ a {
 }
 
 .is-italic { font-style: italic; }
-.is-signature { font-family: var(--font--signature); }
-.is-fancy { font-family: var(--font--fancy); }
+.is-signature { font-family: var(--font-signature); }
+.is-fancy { font-family: var(--font-fancy); }
 .is-small-caps { font-variant: small-caps; }
 
 .header__item-label {
   font-weight: var(--font-weight-bold); 
-  font-size: var(--font-size-l);
+  font-size: var(--header-label-size);
   letter-spacing: var(--letter-spacing-xs);
   line-height: var(--line-height-s);
   text-align: left;
 }
-@media (max-width: 900px) {.header__item-label { font-size: var(--font-size-s);}}
+@media (max-width: 900px) {
+  .header__item-label { 
+   /* font-size: calc( .8 * var(--font-size-m));*/
+  }
+}
 .footer__nav,
 .control--small,
 .control--badge {
@@ -86,7 +90,7 @@ a {
 
 /* ====== HEADINGS ====== */
 :where(h1, h2, h3, .header__item-label) {
-  font-family: var(--font--fancy);
+  font-family: var(--font-fancy);
   font-variant: small-caps;
 }
 

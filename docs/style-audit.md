@@ -274,7 +274,7 @@ Total unique tokens: 117
 | `--bars-padding` | `src/styles/tokens.css` | 1 | 5 | `src/styles/site_footer.css` (1)<br>`src/styles/site_header.css` (4) |
 | `--panel-padding` | `src/styles/tokens.css` | 1 | 5 | `src/styles/site.css` (2)<br>`src/styles/site_footer.css` (1)<br>`src/styles/site_header.css` (1)<br>`src/styles/tokens.css` (1) |
 | `--plain` | `src/styles/content.css` | 1 | 0 | _No var(--token) references found_ |
-| `--font--display` | `src/styles/tokens.css` | 1 | 2 | `src/styles/tokens.css` (1)<br>`src/styles/typography.css` (1) |
+| `--font-display` | `src/styles/tokens.css` | 1 | 2 | `src/styles/tokens.css` (1)<br>`src/styles/typography.css` (1) |
 | `--radius-l` | `src/styles/tokens.css` | 1 | 5 | `src/styles/content.css` (1)<br>`src/styles/media.css` (3)<br>`src/styles/tokens.css` (1) |
 | `--radius-m` | `src/styles/tokens.css` | 1 | 13 | `src/styles/content.css` (5)<br>`src/styles/controls.css` (1)<br>`src/styles/media.css` (1)<br>`src/styles/site_footer.css` (2)<br>`src/styles/table.css` (3)<br>`src/styles/tokens.css` (1) |
 | `--radius-s` | `src/styles/tokens.css` | 1 | 2 | `src/styles/controls.css` (1)<br>`src/styles/tokens.css` (1) |
@@ -282,7 +282,7 @@ Total unique tokens: 117
 | `--radius-xs` | `src/styles/tokens.css` | 1 | 1 | `src/styles/tokens.css` (1) |
 | `--radius-xxl` | `src/styles/tokens.css` | 1 | 1 | `src/styles/tokens.css` (1) |
 | `--radius-xxs` | `src/styles/tokens.css` | 1 | 1 | `src/styles/tokens.css` (1) |
-| `--font--fancy` | `src/styles/tokens.css` | 1 | 1 | `src/styles/typography.css` (1) |
+| `--font-fancy` | `src/styles/tokens.css` | 1 | 1 | `src/styles/typography.css` (1) |
 | `--section-gap` | `src/styles/tokens.css` | 1 | 4 | `src/styles/content.css` (3)<br>`src/styles/site_footer.css` (1) |
 | `--site-logo--size` | `src/styles/tokens.css` | 1 | 0 | _No var(--token) references found_ |
 | `--space-l` | `src/styles/tokens.css` | 1 | 1 | `src/styles/tokens.css` (1) |
