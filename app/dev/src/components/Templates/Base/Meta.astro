@@ -67,7 +67,7 @@ const goatCounterScriptSrc = 'https://stats.foxx.pet/count.js';
     document
       .querySelectorAll<HTMLCanvasElement>('.panel-wrapper .stars-canvas')
       .forEach((canvas) => {
-        const stop = initStarsCanvas(canvas, { density: 0.19, fps: 90, glow: true });
+        const stop = initStarsCanvas(canvas, { density: 0.17, fps: 90, glow: true });
         starsRegistry.set(canvas, stop);
       });
   });

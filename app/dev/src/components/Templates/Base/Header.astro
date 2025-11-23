@@ -29,8 +29,8 @@ const { navLinks = [] } = (Astro.props ?? {}) as Props;
           href={link.href}
           data-active={link.isActive ? 'true' : 'false'}
         >
-          <ICONS class="header__item-icon media-icon" name={link.icon} />
           <span class="header__item-label">{link.label}</span>
+          <ICONS class="header__item-icon media-icon" name={link.icon} />
         </a>
       ))}
   </nav>

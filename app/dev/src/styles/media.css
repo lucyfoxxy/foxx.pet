@@ -123,7 +123,7 @@
 
 .media-image.is-transitioning { opacity: 0; }
 .media-image.is-animating {
-  animation: media-slideshow var(--slideshow-interval) ease;
+  animation: media-slideshow var(--media-animation-interval) ease;
 }
 .media-frame[data-autoplay="false"]:not([data-active="true"]) > .is-animating {animation: none;}
 @keyframes media-slideshow {
@@ -170,8 +170,9 @@
 .media-icon {
   display: inline-flex;
   align-items: center;
-  vertical-align: middle;
+  vertical-align: -1.1em;
   font-size: var(--icon-size-m);  
+
 }
 .media-icon--shadow {filter: var(--icon-shadow);}
 .media-icon--large {font-size: var(--icon-size-l);}

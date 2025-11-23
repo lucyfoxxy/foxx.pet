@@ -46,35 +46,34 @@
   --font-size-xs:        clamp(.75rem, calc(.75rem + .025vw), .95rem);
   --font-size-s:         clamp(.9rem,  calc(.9rem + .075vw), 1.05rem);
   --font-size-m:         clamp(1.1rem, calc(1.1rem + .45vw), 1.5rem);
-  --font-size-l:         clamp(1.4rem, calc(1.4rem + .4vw), 1.8rem);
+  --font-size-l:         clamp(1.4rem, calc(1.4rem + .35vw), 1.8rem);
   --font-size-xl:        clamp(1.75rem, calc(1.75rem + 1.5vw), 3rem);
   --font-size-xxl:       clamp(3rem, calc(3rem + 1.5vw), 3.6rem);
 
-  --icon-size-s:        calc(var(--font-size-s) * 1.1);
-  --icon-size-m:        calc(var(--font-size-m) * 1.15);
-  --icon-size-l:        calc(var(--font-size-xl) * .95);
+  --icon-size-s:        calc(var(--font-size-s) * 1.075);
+  --icon-size-m:        calc(var(--font-size-m) * 1.075);
+  --icon-size-l:        calc(var(--font-size-xl) * .75);
 
   --media-control-size: 2.75rem;
   --thumb-size:              clamp(64px, 9vw, 128px);
   --hero-scale:               clamp(1.05rem, 4.5vw, 2.25rem);
 
   /* ============= Role specific Spacings ============= */
-  --flow-gap:               var(--space-xxs);  
+  --flow-gap:               var(--space-xs);  
   --card-gap:               var(--space-s);    
   --cluster-gap:            clamp(var(--space-xs),  calc(var(--space-xs) + .5vw),    var(--space-l));   
-  --control-gap:            var(--space-xs);   
+  --control-gap:            clamp(var(--space-xxs),  calc(var(--space-xxs) + .15rem),    var(--space-xs)); 
   --control-padding:        var(--space-s);  
 
   --card-padding:           clamp(var(--space-s),  calc(var(--space-s) + 1.5vw),  var(--space-xl));   
   --section-gap:            clamp(var(--space-xs),  calc(var(--space-xs) + 1.5vh),    var(--space-xl)); 
   
-  --panel-padding:           clamp(var(--space-xs),  calc(var(--space-xs) + 2.5vw),    var(--space-xxxl));
 
-  --bars-padding:       clamp(var(--space-xxs),  calc(var(--space-xxs) + 1.25vw),    var(--space-xl));
-  --bars-gap:           var(--space-xxs);
+
+
 
   --container-padding:       clamp(var(--space-xxs),  calc(var(--space-xxs) + 2vw),    var(--space-xxl)); 
-  --panel-size:           1366px;
+  
  
   /* ====== Base Colors ========================= */
   --color-dark:              oklch(19.5% 0.095 295);
@@ -145,6 +144,12 @@
 
   
   /* ====== Bars ======*/
+  --bars-padding:       clamp(var(--space-xxs),  calc(var(--space-xxs) + 1.25vw),    var(--space-xl));
+  --bars-gap:           var(--space-xxs);  
+  
+  --bars-border: 1px solid var(--color-dark--ghosty);
+  --bars-shadow: var(--shadow--default), inset 0 0 29px var(--color-dark--soft);
+
   --header-item-shadow: var(--shadow--default), inset 0 0 29px var(--color-dark--soft);
   --header-item-filter: drop-shadow(2px 2px 2px rgba(0,0,0,.5));
   --header-item-filter--fx: drop-shadow(0 0 3px color-mix(in oklch,transparent,currentColor));
@@ -159,28 +164,32 @@
   --header-label-transform--show: translateY(0);
   --header-label-transform--hide: translateY(-4px);
   --header-item-backdrop: var(--blur-l) brightness(1.2) saturate(1.05);
-  --bars-border: 1px solid var(--color-dark--ghosty);
-  --bars-shadow: var(--shadow--default), inset 0 0 29px var(--color-dark--soft);
+
   --footer-meta-border: 1px solid var(--color-dark--ghosty);
+  --footer-separator-transform: translateY(-10%);
+  --footer-meta-transform--fx: translateY(6px);
+  --footer-meta-transition: opacity .35s ease, transform .35s ease, max-height .35s ease, border-color .35s ease; 
   
-  
+
   /* ====== Panel ======*/
+  --panel-size:           1366px;
+  --panel-padding:           clamp(var(--space-xs),  calc(var(--space-xs) + 2.5vw),    var(--space-xxxl));
+
   --panel-shadow: var(--shadow--strong), inset 0 0 56px 0 var(--color-dark);
   --panel-outline: 1px solid var(--color-dark);
   --panel-base-transform: translateZ(0);
   --panel-base-will-change: transform;
-  --footer-separator-transform: translateY(-10%);
-  --footer-meta-transform--fx: translateY(6px);
-  --footer-meta-transition: opacity .35s ease, transform .35s ease, max-height .35s ease, border-color .35s ease;
 
+
+  /* ====== Hero ======*/
   --hero-filter: contrast(1.5) saturate(1.25) drop-shadow(.005em .005em .0125em);
   --hero-text-filter: drop-shadow(.01em .01em .125em var(--color-dark));
-  --hero-text-transform: translateY(.75em);
-  --hero-signature-transform: translate(-.25em, 1.25em);
-  --hero-welcome-transform: rotate(-4deg) translate(2.75em,-.5em);
+  --hero-text-transform: translateY( -1.5em);
+  --hero-signature-transform: translate(-.25em, .5em);
+  --hero-welcome-transform: rotate(-4deg) translateY(-.25em);
   --hero-sub-transform: rotate(4deg);
   --hero-to-transform: translate(.25em,.25em);
-  --hero-main-transform: translateY(.25em);
+  --hero-main-transform: translateY(1.25em);
   --hero-title-transform: rotate(-3deg);
   --hero-tagline-transform: translate(-.5em, -1.25em) rotate(-3deg);
 
@@ -195,23 +204,8 @@
   --base-bg:     linear-gradient(205deg, #371173, #240a46, rgb(40, 7, 112));
   --base-shadow: inset 0 0 164px 64px rgba(0,0,0,.5);
 
-  /* ====== Gallery ====== */                                 
-  --slideshow-interval:           8500ms;  
-
-  /* ====== Motion ====== */
-  --transition-link:     color .2s ease, text-shadow .2s ease;
-
-
-
-  --transition--raise:           transform .35s ease-in-out, box-shadow .2s ease;
-  --transition--soft:            opacity .35s ease, transform .35s ease;
-
-  --transition--opacity:         opacity .5s ease-in-out;
-
-  --transform-raise:             translateY(-10%);
-  --transform-scale:             scale(1.05);
-  --transform-scale-strong:      scale(1.15);
-  --transform-scale-soft:        scale(.95);
+  /* ====== Media ====== */                                 
+  --media-animation-interval:           8500ms;  
   --media-progress-transition:   transform .12s linear;
   --media-image-transition:      opacity .7s ease;
   --media-image-will-change:     opacity, transform, top, bottom;
@@ -228,6 +222,19 @@
   --media-lightbox-close-bg:     var(--color-dark--soft);
   --media-progress-bg:           var(--color-light--ghosty);
   --media-progress-fill-bg:      var(--color-light);
+
+  /* ====== Motion ====== */
+  --transition-link:     color .2s ease, text-shadow .2s ease;
+  --transition--raise:           transform .35s ease-in-out, box-shadow .2s ease;
+  --transition--soft:            opacity .35s ease, transform .35s ease;
+
+  --transition--opacity:         opacity .5s ease-in-out;
+
+  --transform-raise:             translateY(-10%);
+  --transform-scale:             scale(1.05);
+  --transform-scale-strong:      scale(1.15);
+  --transform-scale-soft:        scale(.95);
+
 
   /* ====== Tables ====== */
   --table-head-bg:               var(--color-dark--soft);

@@ -83,7 +83,7 @@ export function initGalleryFrame(root = document) {
   };
   const updateOverlayState = () => overlay.forEach(o => o.setAttribute('data-show', playing ? 'false' : 'true'));
 
-  frame.style.setProperty('--slideshow-interval', `${interval}ms`);
+  frame.style.setProperty('--media-animation-interval', `${interval}ms`);
 
   const lightbox = (() => {
     let overlay = document.querySelector('.media-lightbox');

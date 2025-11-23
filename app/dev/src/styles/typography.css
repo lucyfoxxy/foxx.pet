@@ -52,14 +52,18 @@ a {
 }
 
 .is-italic { font-style: italic; }
+.is-signature { font-family: var(--font--signature); }
+.is-fancy { font-family: var(--font--fancy); }
+.is-small-caps { font-variant: small-caps; }
+
 .header__item-label {
   font-weight: var(--font-weight-bold); 
-  font-size: var(--font-size-m);
-  letter-spacing: var(--letter-spacing-l);
+  font-size: var(--font-size-l);
+  letter-spacing: var(--letter-spacing-xs);
   line-height: var(--line-height-s);
   text-align: left;
 }
-
+@media (max-width: 900px) {.header__item-label { font-size: var(--font-size-s);}}
 .footer__nav,
 .control--small,
 .control--badge {
@@ -110,7 +114,6 @@ h3 {
 }
 
 h4 {
-  font-family: var(--font--signature);
   font-weight: var(--font-weight-thick);
   line-height: var(--line-height-xxl);
   letter-spacing: var(--letter-spacing-xl);

@@ -250,7 +250,7 @@ Total unique tokens: 117
 | `--font-size-s` | `src/styles/tokens.css` | 1 | 6 | `src/styles/content.css` (2)<br>`src/styles/tokens.css` (1)<br>`src/styles/typography.css` (3) |
 | `--font-size-xl` | `src/styles/tokens.css` | 1 | 1 | `src/styles/typography.css` (1) |
 | `--font-size-xs` | `src/styles/tokens.css` | 1 | 2 | `src/styles/site_footer.css` (1)<br>`src/styles/typography.css` (1) |
-| `--slideshow-interval` | `src/styles/tokens.css` | 1 | 1 | `src/styles/media.css` (1) |
+| `--media-animation-interval` | `src/styles/tokens.css` | 1 | 1 | `src/styles/media.css` (1) |
 | `--glow` | `src/styles/controls.css` | 1 | 0 | _No var(--token) references found_ |
 | `--hero-size` | `src/styles/tokens.css` | 1 | 1 | `src/styles/media.css` (1) |
 | `--icon-shadow` | `src/styles/tokens.css` | 1 | 0 | _No var(--token) references found_ |

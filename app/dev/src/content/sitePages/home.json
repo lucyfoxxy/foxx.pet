@@ -22,12 +22,12 @@
       "My name is Lucy Foxx and I welcome you to my personal space!",
       "Hop on my rocket to — watch me fuzzing around, learn to make delicious Nom Noms, and catch up on how my journey’s been so far!"
     ],
-    "greeting": "- Always follow your heart -",
+    "greeting": "Always follow your heart ~",
     "signature": "Lucy Foxx"
   },
   "feature": {
-    "heading": "Featured Posts",
-    "description": "... <coming soon> ...",
+    "heading": "Featured",
+    "description": "See latest posts or random image here!",
     "placeholder": "<Most recent gallery images here>"
   },
   "contact": {

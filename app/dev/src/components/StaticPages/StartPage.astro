@@ -78,8 +78,8 @@ const isExternalLink = (href: string) => href.startsWith('http');
         </Fragment>
         <Fragment slot="foot">
           <div class="prose">
-            <p class="is-italic">- Always follow your heart -</p>
-            <h4 class="is-italic">{intro.signature}</h4>
+            <p class="is-italic is-signature">{intro.greeting}</p>
+            <h4 class="is-italic is-signature">{intro.signature}</h4>
           </div>
         </Fragment>
       </Template.Card>
@@ -106,31 +106,24 @@ const isExternalLink = (href: string) => href.startsWith('http');
         </Fragment>
       </Template.Card>
 
-      <!--- Feature Card --->  
-      <Template.Card class="" headClass="card__head--column">
+      <!--- Featured Card ---> 
+      <Template.Card  headClass="card__head--column">
         <Fragment slot="head">
           <h2 class="card__title">{feature.heading}</h2>
           <p>{feature.description}</p>
+        </Fragment>  
+        {albumData.description ? (
+        <Fragment slot="body">
+          <div class="prose">
+            <p>{albumData.description}</p>
+          </div>
         </Fragment>
-      </Template.Card>      
+        ) : null}
 
-
-
-      <!--- Album Card ---> 
-<Template.Card class:list={['card--flush', 'card--plain', 'card--center']} headClass="card__head--column">
-  {albumData.description ? (
-    <Fragment slot="head">
-      <div class="prose">
-        <p>{albumData.description}</p>
-      </div>
-    </Fragment>
-  ) : null}
-
-  <Fragment slot="body">       
-      <Template.AlbumFrame album={albumData} imageClass="media-image--cover"/>
-  </Fragment>
-</Template.Card>
-
+        <Fragment slot="foot">       
+          <Template.AlbumFrame album={albumData} imageClass="media-image--cover"/>
+        </Fragment>
+      </Template.Card>
   </section>
 
   <script>

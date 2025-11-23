@@ -2,9 +2,9 @@
 .hero__signature {
   display: grid; 
 }
-.content-section > .card :where(:is(.hero)),.hero + .card {margin-block: 0; gap: 0}
+
 .hero {
-  --nebula-pos-y: 55%;
+  
   position: relative;
   isolation: isolate;
   place-items: center;
@@ -13,55 +13,75 @@
   opacity: .9;
   font-size: var(--hero-scale);
   inline-size: 100%;
-  block-size: 9.5em;
-  margin-block-start: var(--section-gap);
+  block-size: 10em;
+  margin-block: var(--section-gap);
   mix-blend-mode: screen;
-  background-image: var(--hero--bg), radial-gradient(ellipse at 45% var(--nebula-pos-y),rgba(251, 0, 255, 0.089), rgba(140, 0, 255, 0.0351) 35%, transparent 60%);
-  background-position: 50% 99%,50% var(--nebula-pos-y);
-  background-size: 8.25em, 100% 100%;
-  background-repeat:no-repeat,no-repeat;
-  background-blend-mode: normal,lighten;
+  background-image: var(--hero--bg);
+  background-position: 41% 80%;
+  background-size: 8.25em;
+  background-repeat:no-repeat;
+  background-blend-mode: normal;
 
   filter: var(--hero-filter);
-  
+
   animation-name: fly-in, fly-up-down;
   animation-delay: .5s, 3s;
   animation-duration: 2.5s, 3s;
   animation-iteration-count: 1,infinite;
-  animation-timing-function:ease-out,ease-in;
+  animation-timing-function:ease-out,cubic-bezier(.42,0,.58,1);
+}
+.hero::after {
+  --nebula-pos-y: 50%;
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  
+  margin-inline: auto;
+
+  inline-size: 100%;
+  block-size: 10em;
+  margin-block: var(--section-gap);
+  mix-blend-mode:color;
+  background-position: 50% var(--nebula-pos-y);
+  background-size: 100% 100%;
+  background-repeat:no-repeat;
+  background-blend-mode: color;
+  background-image:  radial-gradient(ellipse at 50% var(--nebula-pos-y),rgba(251, 0, 255, 0.089), rgba(140, 0, 255, 0.069) 35%, transparent 70%);
+  
+
+  pointer-events: none;
+  z-index: -1;
 }
 @keyframes fly-in {
   0% {
-    background-position-x: -20%, 50%; 
-    background-position-y:-120%,var(--nebula-pos-y);
-    background-size: .25em, 100%
-  }
+    background-position-x: -20%; 
+    background-position-y:-120%;
+    background-size: .25em;
+   }
   100% {
     background-position-x: 
-    50%, 50%; 
+    41%; 
   }
 }
 @keyframes fly-up-down {
-  33% {
-    background-position-y: 99%,var(--nebula-pos-y);background-position-x: 49%, 50%;
+  0%, 100% {
+    background-position-y: 80%;
+    
   }
-  66% {
-    background-position-y: 15%,var(--nebula-pos-y); background-position-x: 51%, 50%;
+  50% {
+    background-position-y: 15%;
+    
   }
-  100%,0% {
-    background-position-y: 99%,var(--nebula-pos-y);background-position-x: 50%, 50%;
-  }  
-  98% {
-     
-  }  
+
 }
-@media(prefers-reduced-motion: reduce) {.hero {animation: none,none;}}
+@media(prefers-reduced-motion: reduce) {.hero {animation: none;}}
 .hero__text { 
   display: grid;
   grid-template-areas: "signature""main";
   row-gap:.8em; 
   filter: var(--hero-text-filter);
   transform: var(--hero-text-transform);
+  mix-blend-mode: luminosity;
 }
 
 .hero__signature {

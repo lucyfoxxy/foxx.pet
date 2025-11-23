@@ -72,7 +72,7 @@ export default function initStarsCanvas(canvas, opts = {}) {
       ctx.shadowBlur = 5;
       ctx.shadowColor = '#8c62ffe6';
     }
-    ctx.fillStyle = `rgba(255,255,200,${s.op})`;
+    ctx.fillStyle = `rgba(225,200,255,${s.op})`;
     ctx.fill();
     ctx.restore();
   }
