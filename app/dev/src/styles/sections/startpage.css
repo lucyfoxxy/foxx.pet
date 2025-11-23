@@ -28,8 +28,7 @@
   opacity: .9;
   font-size: var(--hero-scale);
   min-inline-size: 18em;
-  block-size: 10em;
-  margin-block: var(--section-gap);
+  block-size: 9em;
   mix-blend-mode: screen;
   background-image: var(--hero--bg);
   background-position: 3em  2.2em;
