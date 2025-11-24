@@ -1,6 +1,5 @@
 ---
-import { ASSETS } from '@Assets/ui';
-import { COVERS } from '@Assets/covers';
+import { ASSETS } from '@Assets/assets.registry';
 type LayoutMeta = {
   title: string;
   description: string;
@@ -53,25 +52,26 @@ const goatCounterScriptSrc = 'https://stats.foxx.pet/count.js';
     yearEl.textContent = new Date().getFullYear().toString();
   }
 </script>
-{enableAnalytics && (
+<!--{enableAnalytics && (
   <script data-goatcounter={`${goatCounterBase}/count`} async src={goatCounterScriptSrc}></script>
-)}
+)}-->
 <script>
   import _runOnReady from '@Scripts/utils/_runOnReady.js';
 
   import initStarsCanvas from '@Scripts/stars-overlay.js';
-
+  import _isMobile from '@/scripts/utils/_isMobile';
   const starsRegistry = new WeakMap<HTMLCanvasElement, () => void>();
 
-  _runOnReady(() => {
-    document
-      .querySelectorAll<HTMLCanvasElement>('.panel-wrapper .stars-canvas')
-      .forEach((canvas) => {
-        const stop = initStarsCanvas(canvas, { density: 0.17, fps: 90, glow: true });
-        starsRegistry.set(canvas, stop);
-      });
-  });
-
+  if(!_isMobile()){
+    _runOnReady(() => {
+      document
+        .querySelectorAll<HTMLCanvasElement>('.panel-wrapper .stars-canvas')
+        .forEach((canvas) => {
+          const stop = initStarsCanvas(canvas, { density: 0.17, fps: 90, glow: true });
+          starsRegistry.set(canvas, stop);
+        });
+    });
+  };
   // Beispiel Cleanup (wenn du Panels entfernst/Hot-Reload o.ä.):
   export function stopStars(canvas: HTMLCanvasElement) {
     const stop = starsRegistry.get(canvas);

@@ -4,8 +4,9 @@ import Header from '@Templates/Base/Header.astro';
 import Meta from '@Templates/Base/Meta.astro';
 
 import Card from '@Templates/Card.astro';
-import AlbumFrame from '@Templates/AlbumFrame.astro';
-import AlbumThumbs from '@Templates/AlbumThumbs.astro';
+import MediaFrame from '@Templates/Media/Frame.astro';
+import MediaThumbs from '@Templates/Media/Thumbs.astro';
+import MediaLightbox from '@Templates/Media/Lightbox.astro';
 import EntryBlog from '@Templates/EntryBlog.astro';
 import HeaderActions from '@Templates/HeaderActions.astro';
 import TileView from '@Templates/TileView.astro';
@@ -31,8 +32,9 @@ export const Template = {
   TitleWithIcon,
   TileView,
   HeaderActions,
-  AlbumFrame,
-  AlbumThumbs,
+  MediaFrame,
+  MediaThumbs,
+  MediaLightbox,
   EntryBlog,
 
 };

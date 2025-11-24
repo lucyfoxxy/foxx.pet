@@ -22,7 +22,7 @@ export function initGalleryFrame(root = document) {
   
   const slug = frame.getAttribute('data-slug');
   const autoplay = !_isMobile() && frame.getAttribute('data-autoplay') === 'true';
-  frame.setAttribute('data-autoplay',!_isMobile);
+  frame.dataset.autoplay = _isMobile() ? 'false' : 'true';
   const random = frame.getAttribute('data-random') === 'true';
   const interval = parseInt(frame.getAttribute('data-interval') || '8500', 10);
   const imgEl = frame.querySelector('.media-image');
@@ -85,47 +85,63 @@ export function initGalleryFrame(root = document) {
 
   frame.style.setProperty('--media-animation-interval', `${interval}ms`);
 
-  const lightbox = (() => {
-    let overlay = document.querySelector('.media-lightbox');
-    let created = false;
-    if (!(overlay instanceof HTMLElement)) {
-      overlay = document.createElement('div');
-      overlay.className = 'media-lightbox';
-      overlay.innerHTML = `<figure><img class="media-lightbox-image" alt="" /><button class="media-lightbox__close" type="button" aria-label="Close">×</button></figure>`;
-      document.body.appendChild(overlay);
-      created = true;
-    }
-    const img = overlay.querySelector('.media-lightbox-image');
-    const btnClose = overlay.querySelector('.media-lightbox__close');
-    if (!img || !btnClose) { if (created) overlay.remove(); return null; }
+const lightbox = (() => {
+  const el = document.querySelector('.media-lightbox');
+  if (!el) return null;
 
-    const close = () => {
-      overlay.classList.remove('is-open');
-      document.body.classList.remove('media-lightbox-open');
-      document.removeEventListener('keydown', handleKey);
-      if (resumeAfterLightbox) {
-        playing = true; resumeAfterLightbox = false; updatePlayButton(); resumeKenBurns(); run({ resetProgress:false });
-      }
-    };
-    const handleKey = (e) => { if (e.key === 'Escape') { e.preventDefault(); close(); } };
-    if (!overlay.dataset.bound) {
-      btnClose.addEventListener('click', close);
-      overlay.addEventListener('click', (e) => { if (e.target === overlay) close(); });
-      overlay.dataset.bound = 'true';
+  const img = el.querySelector('.media-lightbox-image');
+  const btnClose = el.querySelector('.media-lightbox__close');
+  if (!img || !btnClose) return null;
+
+  const handleKey = (e) => {
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      close();
     }
-    return {
-      open(item) {
-        if (!item) return;
-        const primary = item.full || item.thumb || '';
-        const fallback = item.thumb && item.thumb !== primary ? item.thumb : null;
-        img.onerror = () => { if (fallback && img.src !== fallback) img.src = fallback; };
-        img.src = primary; img.alt = item.alt || '';
-        overlay.classList.add('is-open'); document.body.classList.add('media-lightbox-open');
-        document.addEventListener('keydown', handleKey);
-      },
-      close,
-    };
-  })();
+  };
+
+  const close = () => {
+    el.setAttribute('data-visible', 'false');
+    document.body.classList.remove('media-lightbox-open');
+    document.removeEventListener('keydown', handleKey);
+
+    if (resumeAfterLightbox) {
+      playing = true;
+      resumeAfterLightbox = false;
+      updatePlayButton();
+      resumeKenBurns();
+      run({ resetProgress: false });
+    }
+  };
+
+  if (!el.dataset.bound) {
+    btnClose.addEventListener('click', close);
+    el.addEventListener('click', (e) => {
+      if (e.target === el) close();
+    });
+    el.dataset.bound = 'true';
+  }
+
+  return {
+    open(item) {
+      if (!item) return;
+      const primary = item.full || item.thumb || '';
+      const fallback = item.thumb && item.thumb !== primary ? item.thumb : null;
+
+      img.onerror = () => {
+        if (fallback && img.src !== fallback) img.src = fallback;
+      };
+      img.src = primary;
+      img.alt = item.alt || '';
+
+      el.setAttribute('data-visible', 'true');
+      document.body.classList.add('media-lightbox-open');
+      document.addEventListener('keydown', handleKey);
+    },
+    close,
+  };
+})();
+
 
   const show = (idx, direction = 0) => {
     if (order.length === 0) return;
@@ -197,11 +213,18 @@ export function initGalleryFrame(root = document) {
   btnPause?.addEventListener('click', (e) => { e.stopPropagation(); frame.click(); });
 
   btnFullscreen?.addEventListener('click', (e) => {
-    const t = e.target; if (t instanceof HTMLElement && t.closest('button')) return;
+    e.stopPropagation();
     if (!lightbox) return;
-    if (playing) { captureElapsed(); resumeAfterLightbox = true; playing = false; updatePlayButton(); }
-    pauseKenBurns(); lightbox.open(items[order[i]]);
+    if (playing) {
+      captureElapsed();
+      resumeAfterLightbox = true;
+      playing = false;
+      updatePlayButton();
+    }
+    pauseKenBurns();
+    lightbox.open(items[order[i]]);
   });
+
 
   frame.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); frame.click(); } });
 

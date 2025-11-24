@@ -46,8 +46,8 @@ body::before {
     var(--overlay-stars), 
     var(--base-bg);
   background-blend-mode:multiply,overlay,soft-light,normal;
-  background-repeat: no-repeat,repeat,repeat,no-repeat;
-  background-size: cover,1280px 1280px,640px 640px,cover;
+  background-repeat: no-repeat,no-repeat,repeat,no-repeat;
+  background-size: cover,cover,640px 640px,cover;
   background-position: center, top,center,center;
   will-change: var(--panel-base-will-change);
   transform: var(--panel-base-transform);
@@ -65,7 +65,7 @@ body::before {
   color: var(--color-accent--bright);
 }
 a:not(.header__item,.control) {
-  transition: var(--transition-link);
+  transition: var(--transition-fx);
 }
 a:is(:hover,:focus-visible):not(.header__item,.control) {
   text-shadow: var(--text-glow);

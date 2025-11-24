@@ -1,9 +1,7 @@
 ---
 import { Template } from '@Frontend';
 import Icons from '@Assets/Icons.astro';
-import { registry as iconRegistry } from '@Assets/icons.registry';
-import { COVERS } from '@Assets/covers';
-import { ASSETS } from '@Assets/ui';
+import { ASSETS, COVERS, ICON_REGISTRY } from '@Assets/assets.registry';
 import { Picture } from 'astro:assets';
 import { isProd } from '@utils/env';
 export const prerender = !isProd;
@@ -231,7 +229,7 @@ const iconSizes = [
   { label: 'Large icon', classes: 'media-icon media-icon--large', kind: 'sparkles' },
 ];
 
-const iconCatalog = Object.keys(iconRegistry).sort((a, b) => a.localeCompare(b));
+const iconCatalog = Object.keys(ICON_REGISTRY).sort((a, b) => a.localeCompare(b));
 
 const mediaThumbs = [
   { alt: 'Placeholder cover', src: COVERS.placeholder },

@@ -1,7 +1,7 @@
 ---
 import { Template } from '@Frontend';
 import Icon from '@Assets/Icons.astro';
-import { ASSETS } from '@Assets/ui';
+import { ASSETS } from '@Assets/assets.registry';
 import { getPageContent } from '@Content/siteContent';
 import { getRandomAlbumTeaser } from '@utils/albumTeaser';
 import '@Styles/sections/startpage.css';
@@ -44,7 +44,7 @@ const isExternalLink = (href: string) => href.startsWith('http');
           <div class="hero__backdrop" aria-hidden="true"></div>
           <div class="hero__content">
             <div class="hero__grid">
-              <span class="hero__welcome is-fancy">{hero.heading}</span>
+              <span class="hero__welcome is-italic is-signature">{hero.heading}</span>
 
               <div class="hero__signature-line is-signature">
                 <span class="hero__to">to</span>
@@ -122,7 +122,7 @@ const isExternalLink = (href: string) => href.startsWith('http');
         ) : null}
 
         <Fragment slot="foot">       
-          <Template.AlbumFrame album={albumData} imageClass="media-image--cover"/>
+          <Template.MediaFrame album={albumData} imageClass="media-image--cover"/>
         </Fragment>
       </Template.Card>
   </section>

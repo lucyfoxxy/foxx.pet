@@ -82,18 +82,22 @@
   max-inline-size: var(--thumb-size);
   max-block-size: var(--thumb-size);
   aspect-ratio: 1 / 1;
-  transition: var(--transition--raise), var(--transition--opacity);
+  transition: var(--media-thumb-transition);
   box-shadow: var(--media-thumb-shadow);
   opacity: .8;
   will-change: var(--media-thumb-will-change);
 }
 .media-frame--thumb:is(:hover,:focus-visible) {
-  transform: var(--transform-scale);  
+  transform: var(--media-thumb-transform);  
 }
 .media-frame--thumb:is([data-current="true"],:hover,:focus-visible) {
   opacity: 1;
   outline: 2px solid var(--color-accent);
 }
+.media-frame--thumb:is([aria-current="true"],:hover,:focus-visible) > * {
+  opacity: 1;
+}
+
 
 
 /* ==========<[      IMAGE      ]>================= */
@@ -141,16 +145,14 @@
   block-size: 100%;
   max-block-size: var(--thumb-size);
   max-inline-size: var(--thumb-size);
-  transform: var(--transform-scale-strong);
-  transition: var(--transition--raise), var(--transition--opacity);
+  transform: var(--media-thumb-transform);
+  transition: var(--media-thumb-transition);
   background: transparent;
   opacity: .8;
   object-fit: cover;
   will-change: var(--media-thumb-will-change);
 }
-.media-frame--thumb:is([aria-current="true"],:hover,:focus-visible) > * {
-  opacity: 1;
-}
+
 .media-image--banner,
 .media-image--banner img
  {
@@ -219,9 +221,13 @@
   pointer-events: none;
   transition: var(--media-lightbox-transition);
 }
-.media-lightbox.is-open {
+.media-lightbox[data-visible="true"] {
   opacity: 1;
   pointer-events: auto;
+}
+.media-lightbox[data-visible="false"] {
+  opacity: 0;
+  pointer-events: none;
 }
 .media-lightbox figure {
   position: relative;
@@ -257,7 +263,7 @@
   font-size: 1.35rem;
   background: var(--media-lightbox-close-bg);
   cursor: pointer;
-  transition: var(--transition--soft);
+  transition: var(---media-lightbox-close-transition);
 }
 .media-lightbox__close:hover,
 .media-lightbox__close:focus-visible {

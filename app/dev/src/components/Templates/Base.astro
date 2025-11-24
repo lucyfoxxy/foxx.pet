@@ -9,7 +9,7 @@ import '@Styles/controls.css';
 import '@Styles/media.css';
 import '@Styles/table.css';
 
-import { ASSETS } from '@Assets/ui';
+import { ASSETS } from '@Assets/assets.registry';
 import { getNavigationLinks, getPageContent } from '@Content/siteContent';
 import { BaseParts,Template } from '@Frontend';
 import { buildBreadcrumbs, isLinkActive, normalizePath } from '@utils/navigation';
@@ -69,9 +69,14 @@ const breadcrumbs = buildBreadcrumbs({
   <body style={`
                 --overlay-nebula: url(${ASSETS.overlay__nebula.src});
                 --overlay-stars: url(${ASSETS.overlay__stars.src});
+                --overlay-stars--dense: url(${ASSETS.overlay__stars__dense.src});
+                --overlay-header: url(${ASSETS.overlay__header.src});
+                --overlay-footer: url(${ASSETS.overlay__footer.src});
                 --hero--bg: url(${ASSETS.mascot.src});
               `}>
+    
     <div class="container">
+      <Template.MediaLightbox />
       <div class="panel-wrapper">
 
         <BaseParts.Header meta={meta} navLinks={navLinks} >

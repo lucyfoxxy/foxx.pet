@@ -61,11 +61,13 @@ const { album, frameClass, imageClass } = Astro.props as Props;
       </button>          
       <button class="control control--button control--circle control--media media-next" aria-label="Next" type="button">❯</button>
     </div>
+
     <div class="controls controls--end">
       <button class="control control--button control--circle control--media media-fullscreen" aria-label="Open Lightbox" type="button">
         <ICONS class="media-icon media-icon--small" kind="fullscreen" />
       </button>            
     </div>
+    
     <div class="media-progress" aria-hidden="true"></div>
   </div>
 
@@ -75,7 +77,7 @@ const { album, frameClass, imageClass } = Astro.props as Props;
         {album.title && (album.title.includes('SFW') || album.title.includes('NSFW'))
         ? `Artworks: ${album.title}`  
         : album.title} 
-      </h1>
+      </h2>
     </div>
 
     <div class="card__overlay--badges">
@@ -96,6 +98,8 @@ const { album, frameClass, imageClass } = Astro.props as Props;
     </div>
   </div>
 </div>
+
+      
 
 
 
