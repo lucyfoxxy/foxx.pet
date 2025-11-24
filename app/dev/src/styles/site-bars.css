@@ -4,7 +4,7 @@
     grid-template-columns: 1fr;
         position: -webkit-sticky;
     position: sticky;
-    z-index: 1001;
+    z-index: 99;
     border: var(--bars-border);
     backdrop-filter: var(--bars-backdrop);
     box-shadow: var(--bars-shadow);
@@ -52,7 +52,7 @@
     place-content: center;
     place-items: center;
     filter: var(--header-item-filter);
-
+    transition: var(--header-item-transition);
 }
 
 .header__item[data-active="false"]:hover { 
@@ -82,8 +82,6 @@
     place-content: center;
     place-items: center;
     place-self: center;
-    transition: var(--header-item-transition);
-    will-change: var(--header-item-will-change);
 }
 
 .header__item-icon    {

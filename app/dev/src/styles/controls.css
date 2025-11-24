@@ -81,7 +81,7 @@
   opacity: .8;
   padding-block: 0;
   padding-inline: 0;
-  transition: var(--control-transition);
+  transition: var(--control-plain-transition);
 }
 .control--plain:is(:hover,:focus-visible,[data-active="true"],[data-current="true"]) {
   filter: var(--control-plain-filter--fx) ;
