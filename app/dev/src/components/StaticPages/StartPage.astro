@@ -4,7 +4,7 @@ import Icon from '@Assets/Icons.astro';
 import { ASSETS } from '@Assets/assets.registry';
 import { getPageContent } from '@Content/siteContent';
 import { getRandomAlbumTeaser } from '@utils/albumTeaser';
-import '@Styles/sections/startpage.css';
+import '@Styles/sections/hero.css';
 
 export const prerender = true;
 
@@ -79,7 +79,7 @@ const isExternalLink = (href: string) => href.startsWith('http');
         </Fragment>
         <Fragment slot="foot">
           <div class="prose">
-            <p class="is-italic is-signature">{intro.greeting}</p>
+            <p class="is-italic is-fancy">{intro.greeting}</p>
             <h4 class="is-italic is-signature">{intro.signature}</h4>
           </div>
         </Fragment>

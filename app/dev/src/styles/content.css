@@ -109,6 +109,10 @@
   gap: var(--flow-gap); 
 }
 
+/* === STRETCH === */
+.card--stretch {
+  min-inline-size: 100%;
+}
 
 /* ====== CARD AREAS ====== */
 /* === HEAD === */
