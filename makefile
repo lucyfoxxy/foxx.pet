@@ -2,11 +2,9 @@ SHELL := /bin/bash
 MAKEFLAGS += -s   # suppress command echoing, only show our messages
 
 # Basis-Pfade
-BASE_PATH  ?= /srv/foxx.pet/app
+APP   ?= /srv/foxx.pet/app
 WEB_ROOT   ?= /var/www
 
-# Ein einziges Astro-Projekt (ehemals "dev")
-APP        ?= ${BASE_PATH}/dev
 DIST       ?= ${APP}/dist
 
 # Deploy-Ziele
