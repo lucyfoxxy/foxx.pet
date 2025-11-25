@@ -19,31 +19,25 @@
 .controls--stretch { justify-content: stretch; }
 .controls--nowrap { flex-wrap: nowrap; }
 .controls--tight  { gap: calc(var(--control-gap) * 0.65); }
-.controls--roomy  { gap: calc(var(--control-gap) * 1.35); }
+.controls--roomy  { gap: calc(var(--control-gap) * 1.75); }
 
 .card__badges.controls { vertical-align: text-bottom; }
 
 .control {
   text-shadow: var(--text-shadow), var(--text-glow);
   display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  place-items: center;
   gap: var(--control-gap);
-  padding-block: calc(var(--control-padding) * 0.75);
-  padding-inline: var(--control-padding);
-  border-radius: 999px;
+  position: relative;
+  padding: var(--control-padding);
+  border-radius: var(--radius-m);
   box-shadow: var(--shadow--soft);
   vertical-align: middle;
   background: var(--control-bg);
-
 }
 
 .control--media {
-  position: relative;
   z-index: 2;
-  place-items: center;
-  inline-size: var(--media-control-size);
-  block-size: var(--media-control-size);
 }
 
 .control--button {
@@ -60,16 +54,16 @@
 }
 
 .control--badge {
-  padding-block: calc(var(--control-padding) * 0.5);
-  padding-inline: calc(var(--control-padding) * 0.75);
+  padding-block: calc(var(--control-padding) * 0.65);
+  padding-inline: calc(var(--control-padding) * 0.85);
 }
 
 .control--small {
-  border-radius: var(--radius-s);
-  padding-block: calc(var(--control-padding) * 0.5);
+  padding-block: calc(var(--control-padding) * 0.75);
+
 }
 .control--large {
-  padding: calc(var(--control-padding) * 1.25);
+  padding: calc(var(--control-padding) * 1.5);
 }
 .control--circle { border-radius: 999px; }
 .control--plain {

@@ -30,56 +30,59 @@ const hasBlogSummary = blogDescription.length > 0 || blogSummaryParagraphs.lengt
 
 ---
 
-<section class="content-section content-section--head" id="article-top">
-  <Template.Card class=" card--flush" headClass="card__head--column">
+<section class="content-section cols-2 content-section--head" id="article-top">
+  <Template.Card class="card--flush card--plain">
     <Fragment slot="head">
-      <div class="card__hero-banner">
+      <div class="media-frame">
 
         <img
           src={blog.cover.src}
           alt={blog.title}
-          class="media-image media-image--banner media-image--cover"
+          class="media-image media-image--top media-image--cover"
         />
-        <div class="card__overlay card__overlay--title card__overlay--column card__overlay--bottom">
-          <h1 class="card__title">{blog.title}</h1>
-          {blogDescription ? <p>{blogDescription}</p> : null}
-        </div>
       </div>
     </Fragment>
+    <Fragment slot="footOverlay">
+      <div class="card__overlay-item"><h2>{blog.title}</h2></div>
+      {blogDescription ? <span class="card__overlay-item"><p>{blogDescription}</p></span> : null}
+    </Fragment>
   </Template.Card>
+  {hasBlogChapters ? (
+    <Template.Card class="">
+      <Fragment slot="head">
+        <h2 class="card__title">Table of Contents</h2>
+        <div class="card__badges controls controls--tight">
+          <span class="control control--badge">{blogChapters.length} total</span>
+        </div>
+      </Fragment>
+      <Fragment slot="body">
+        <ol>
+          {blogChapters.map((chapter, index) => (
+            <li>
+              <a
+                href={`#${chapter.id}`}
+                data-chapter={chapter.id}
+              >
+                <span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+                <div>
+                  <strong>{chapter.title}</strong>
+                  {chapter.summary ? <span>{chapter.summary}</span> : null}
+                </div>
+              </a>
+            </li>
+          ))}
+        </ol>
+
+      </Fragment>
+    </Template.Card>
+  ) : null}
+
+
 </section>
 
 {hasBlogChapters || hasBlogSummary ? (
   <section class:list={['content-section cols-2']}>
-    {hasBlogChapters ? (
-      <Template.Card class="">
-        <Fragment slot="head">
-          <h2 class="card__title">Table of Contents</h2>
-          <div class="card__badges controls controls--tight">
-            <span class="control control--badge">{blogChapters.length} total</span>
-          </div>
-        </Fragment>
-        <Fragment slot="body">
-          <ol>
-            {blogChapters.map((chapter, index) => (
-              <li>
-                <a
-                  href={`#${chapter.id}`}
-                  data-chapter={chapter.id}
-                >
-                  <span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
-                  <div>
-                    <strong>{chapter.title}</strong>
-                    {chapter.summary ? <span>{chapter.summary}</span> : null}
-                  </div>
-                </a>
-              </li>
-            ))}
-          </ol>
 
-        </Fragment>
-      </Template.Card>
-    ) : null}
 
     <Template.Card headClass={hasBlogChapters ? '' : undefined}>
       {hasBlogChapters ? (

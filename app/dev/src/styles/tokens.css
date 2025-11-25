@@ -49,7 +49,7 @@
   --font-size-xxl:                  clamp(3rem, calc(3rem + 1.5vw), 3.6rem);
 
   --icon-size-s:                    calc(var(--font-size-s) * 1.075);
-  --icon-size-m:                    calc(var(--font-size-m) * 1.075);
+  --icon-size-m:                    calc(var(--font-size-m) * 1.1);
   --icon-size-l:                    calc(var(--font-size-xl) * .95);
 
 
@@ -87,9 +87,20 @@
   --color-light--soft:              color-mix(in oklch, var(--color-light) 50%, transparent);
   --color-light--ghosty:            color-mix(in oklch, var(--color-light) 30%, transparent);
 
-  --color-accent--dark:           oklch(34% 0.16 300);
   --color-accent:                 oklch(74% 0.145 300); 
-  --color-accent--bright:         oklch(91% 0.07 300);
+  --color-accent--strong:           color-mix(in oklch, var(--color-accent) 70%, transparent);
+  --color-accent--soft:             color-mix(in oklch, var(--color-accent) 50%, transparent);
+  --color-accent--ghosty:           color-mix(in oklch, var(--color-accent) 30%, transparent);
+
+  --color-accent-dark:              oklch(30% 0.15 295);
+  --color-accent-dark--strong:      color-mix(in oklch, var(--color-accent-dark) 70%, transparent);
+  --color-accent-dark--soft:        color-mix(in oklch, var(--color-accent-dark) 50%, transparent);
+  --color-accent-dark--ghosty:      color-mix(in oklch, var(--color-accent-dark) 30%, transparent);
+
+  --color-accent-light:             oklch(91% 0.07 300);
+  --color-accent-light--strong:     color-mix(in oklch, var(--color-accent-light) 70%, transparent);
+  --color-accent-light--soft:       color-mix(in oklch, var(--color-accent-light) 50%, transparent);
+  --color-accent-light--ghosty:     color-mix(in oklch, var(--color-accent-light) 30%, transparent);
           
 
   /* ====== Base FX ==================== */  
@@ -97,7 +108,11 @@
   --icon-shadow:                    0 0 3px color-mix(in oklch,transparent 30%,currentColor);
   --text-glow:                      1px 1px 2px var(--color-light--soft);
 
-  --shadow--soft:                   2px 2px 12px rgba(0,0,0,.39);
+  --drop-shadow--soft:           drop-shadow(2px 2px 4px var(--color-dark--ghosty));
+  --drop-shadow--default:           drop-shadow(2px 2px 4px var(--color-dark--soft));
+  --drop-shadow--strong:           drop-shadow(2px 2px 4px var(--color-dark--strong));
+
+  --shadow--soft:                   2px 2px 16px -6px rgba(0,0,0,.65);
 
   --shadow--default:                0 0 18px -6px var(--color-dark--soft),
                                     0 0 18px -6px var(--color-dark--strong);
@@ -105,6 +120,8 @@
   --shadow--strong:                 0 0 20px -10px var(--color-dark--soft),
                                     0 0 28px -6px var(--color-dark--strong),
                                     0 0 28px 0 var(--color-dark--strong);
+
+  --glow--default:                  drop-shadow(0 0 4px var(--color-accent--strong)) ;
 
   --blur-xxs:                       blur(var(--radius-xxs));
   --blur-xs:                        blur(var(--radius-xs));
@@ -118,11 +135,13 @@
 
 
   /* ====== Motion ====== */
-  --transition-transform:           transform ease-out .3s, font-size ease-out .3s, max-height ease-out .3s;
-  --transition-fade-in:             opacity ease-out .4s;
-  --transition-fade-out:            opacity ease-in .4s;
-  --transition-fx:                  color .3s ease,        text-shadow .3s ease,        box-shadow .3s ease,        filter .3s ease,        background .3s ease;
-  --transition-fx--large:           color .4s ease-in-out, text-shadow .4s ease-in-out, box-shadow .4s ease-in-out, filter .4s ease-in-out, background .4s ease-in-out;
+  --transition-transform:           transform ease-out .25s, font-size ease-out .25s, max-height ease-out .25s;
+  --transition-fade-in:             opacity ease-out .25s;
+  --transition-fade-in--slow:       opacity ease-out .45s;
+  --transition-fade-out:            opacity ease-in .25s;
+  --transition-fade-out--slow:      opacity ease-in .45s;
+  --transition-fx:                  color .25s ease,        text-shadow .25s ease,        box-shadow .25s ease,        filter .25s ease,        background .25s ease;
+  --transition-fx--slow:            color .45s ease-in-out, text-shadow .45s ease-in-out, box-shadow .45s ease-in-out, filter .45s ease-in-out, background .45s ease-in-out;
   
   --transform-raise:                translateY(-15%);
   --transform-grow:                 scale(1.05);
@@ -138,37 +157,38 @@
   --card-backdrop:                  var(--blur-m) brightness(1.35) saturate(1.05);
   --card-shadow:                    var(--shadow--default), 
                                     inset 0 0 29px color-mix(in oklab,transparent 90%,var(--color-accent));
-  --card-transition:                var(--transition-fx--large), var(--transition-transform);
+  --card-transition:                var(--transition-fx--slow), var(--transition-transform);
   --card-transform--fx:             var(--transform-grow);
   --card-filter--fx:                brightness(1.1) saturate(1.1) drop-shadow(0 0 var(--color-dark));
 
   --card-list-bg:                   var(--color-dark--soft);
   --card-list-bg--fx:               var(--color-dark--strong);
   --card-list-shadow:               var(--shadow--soft);
-  --card-list-filter--fx:           drop-shadow(0 0 3px color-mix(in oklch,transparent,currentColor));
-  --card-list-transition:           var(--transition-fx--large), var(--transition-fade-in);
+  --card-list-filter--fx:           var(--glow--default);
+  --card-list-transition:           var(--transition-fx--slow), var(--transition-fade-in);
   --card-list-will-change:          opacity, background;
 
-  --card-overlay-backdrop:          var(--blur-l);
-  --card-overlay-transition:        var(--transition-fade-in);
+  --card-overlay-backdrop:          var(--blur-xl);
+  --card-overlay-shadow:            inset 0 0 59px var(--color-dark--ghosty);
+  --card-overlay-transition:        var(--transition-fade-in--slow);
   --card-overlay-will-change:       opacity;
-  --card-overlay-transition--fx:    var(--transition-fade-out);
+  --card-overlay-transition--fx:    var(--transition-fade-out--slow);
 
-  --card-hero-banner-bg:            var(--color-dark--soft);
   
 
   /* ====== Controls ======*/
   --control-gap:                    clamp(var(--space-xxs),  calc(var(--space-xxs) + .15rem),    var(--space-xs));
   --control-padding:                var(--space-s);
 
-  --control-bg:                     radial-gradient(ellipse at center, var(--color-accent--dark),var(--color-dark));
-  --control-filter--fx:             brightness(2);
+  --control-bg:                     radial-gradient(ellipse at center,var(--color-accent-dark),var(--color-dark));
+  --control-filter--fx:             brightness(1.5);
   --control-filter--legacy-fx:      brightness(1.08);
   --control-filter--legacy-active:  brightness(0.92);
   --control-transition:             var(--transition-fx),var(--transition-transform);
-  --control-transform--fx:          var(--transform-raise);
+  --control-transform--fx:          var(--transform-grow);
 
-  --control-plain-transition:       var(--transition-fx);
+  --control-plain-transition:       var(--transition-fx),var(--transition-fade-in);
+  --control-plain-transition--fx:   var(--transition-fx),var(--transition-fade-out);
   --control-plain-filter:           drop-shadow(2px 2px 1px var(--color-dark--soft));
   --control-plain-filter--fx:       drop-shadow(0 0 0 var(--color-accent)) 
                                     drop-shadow(2px 2px 2px var(--color-dark--strong));
@@ -186,19 +206,18 @@
   --header-transition:              var(--transition-fx), padding-block .4s ease;
   --header-will-change:             transform, filter;
 
-  --header-item-shadow:             var(--shadow--default), 
-                                    inset 0 0 29px var(--color-dark--soft);
-  --header-item-filter:             drop-shadow(2px 2px 2px rgba(0,0,0,.5));
-  --header-item-filter--fx:         drop-shadow(0 0 3px color-mix(in oklch,transparent,currentColor));
-  --header-item-backdrop:           var(--blur-l) brightness(1.2) saturate(1.05);
+  --header-item-shadow:             none;
+  --header-item-filter:             var(--drop-shadow--default);
+  --header-item-filter--fx:         var(--glow--default);
+  --header-item-backdrop:           none;
   --header-item-transform:          var(--transform-raise);
   --header-item-transition:         var(--transition-fx), var(--transition-transform);
   --header-item-will-change:        transform, filter;
 
-  --header-icon-transition:         var(--transition-fx), var(--transition-transform);
+  --header-icon-transition:         var(--transition-transform);
   --header-icon-will-change:        font-size;
   
-  --header-label-transition:        var(--transition-fx), var(--transition-transform);
+  --header-label-transition:        var(--transition-transform);
   --header-label-will-change:       opacity, filter , transform, max-height;
   --header-label-transform--show:   translateY(0);
   --header-label-transform--hide:   var(--transform-raise);
@@ -224,11 +243,13 @@
 
   --media-animation-interval:       8500ms;
 
+  --media-icon-filter:              var(--glow--default);
+
   --media-controls-outline:         1px solid var(--color-dark--soft);
   --media-frame-shadow:             var(--shadow--soft);
 
   --media-thumb-shadow:             var(--shadow--soft);
-  --media-thumb-transform:          var(--transform-raise);
+  --media-thumb-transform:          var(--transform-grow);
   --media-thumb-transition:         var(--transition-fade-in), var(--transition-transform);
   --media-thumb-will-change:        opacity, transform;
 

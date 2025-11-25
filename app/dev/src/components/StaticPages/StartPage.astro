@@ -44,7 +44,7 @@ const isExternalLink = (href: string) => href.startsWith('http');
           <div class="hero__backdrop" aria-hidden="true"></div>
           <div class="hero__content">
             <div class="hero__grid">
-              <span class="hero__welcome is-italic is-signature">{hero.heading}</span>
+              <span class="hero__welcome is-signature">{hero.heading}</span>
 
               <div class="hero__signature-line is-signature">
                 <span class="hero__to">to</span>
@@ -92,7 +92,7 @@ const isExternalLink = (href: string) => href.startsWith('http');
           <p>{contact.description}</p>
         </Fragment>
         <Fragment slot="body">
-          <div class="controls controls--start">
+          <div class="controls controls--start controls--roomy">
             {links.map((link) => (
               <a
                 class="control control--button control--large"
@@ -100,7 +100,7 @@ const isExternalLink = (href: string) => href.startsWith('http');
                 rel={isExternalLink(link.href) ? 'noopener noreferrer' : undefined}
                 target={isExternalLink(link.href) ? '_blank' : undefined}
               >
-                <Icon class="media-icon" kind={link.kind} />
+                <Icon class="media-icon media-icon--glow" kind={link.kind} />
               </a>
             ))}
           </div>
@@ -128,8 +128,18 @@ const isExternalLink = (href: string) => href.startsWith('http');
   </section>
 
   <script>
-    import initGalleryFrame from '@Scripts/galleryViewer.js';
+    import { initMediaFrame, initMediaLightbox, initMediaThumbs } from '@Scripts/mediaHandler.js';
     import { runOnReady } from '@Scripts/utils/_runOnReady.js';
-    runOnReady(initGalleryFrame);
+
+    runOnReady(() => {
+      const lightbox = initMediaLightbox();
+      const api = initMediaFrame({ lightbox });
+
+      if (api && lightbox?.el) {
+        api.setLightbox(lightbox);
+        api.addControls(lightbox.el);
+        initMediaThumbs(api, lightbox.el);
+      }
+    });
   </script>
 </Template.Base>

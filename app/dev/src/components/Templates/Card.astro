@@ -13,6 +13,8 @@ export interface CardProps<T extends TagName = 'div'> extends ElementAttributes<
   headClass?: SlotClass;
   bodyClass?: SlotClass;
   footClass?: SlotClass;
+  headOverlayClass?: SlotClass;
+  footOverlayClass?: SlotClass;
 }
 
 const {
@@ -21,6 +23,8 @@ const {
   headClass,
   bodyClass,
   footClass,
+  headOverlayClass,
+  footOverlayClass,
   ...rest
 } = Astro.props as CardProps;
 
@@ -29,6 +33,8 @@ const hasHead = Astro.slots.has('head');
 const hasBody = Astro.slots.has('body');
 const hasDefault = Astro.slots.has('default');
 const hasFoot = Astro.slots.has('foot');
+const hasHeadOverlay = Astro.slots.has('headOverlay');
+const hasFootOverlay = Astro.slots.has('footOverlay');
 ---
 <Tag class:list={['card', className]} {...rest}>
   {hasHead && (
@@ -44,6 +50,16 @@ const hasFoot = Astro.slots.has('foot');
   {hasFoot && (
     <div class:list={['card__foot', footClass]}>
       <slot name="foot" />
+    </div>
+  )}
+  {hasHeadOverlay && (
+    <div class:list={['card__overlay', 'card__overlay--head', headOverlayClass]}>
+      <slot name="headOverlay" />
+    </div>
+  )}
+  {hasFootOverlay && (
+    <div class:list={['card__overlay', 'card__overlay--foot', footOverlayClass]}>
+      <slot name="footOverlay" />
     </div>
   )}
 </Tag>

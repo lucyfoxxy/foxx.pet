@@ -62,7 +62,7 @@ body::before {
 
 :where(h1, h2, h3, h4, a) {
   text-shadow: var(--text-shadow);
-  color: var(--color-accent--bright);
+  color: var(--color-accent-light);
 }
 a:not(.header__item,.control) {
   transition: var(--transition-fx);

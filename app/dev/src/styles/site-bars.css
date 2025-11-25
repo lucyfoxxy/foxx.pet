@@ -61,7 +61,7 @@
 
 .header__item:is(:hover,:focus-visible,[data-active="true"])> *{
     opacity: .95;
-    filter: var(--header-item-filter) var(--header-item-filter--fx); 
+    filter: var(--header-item-filter--fx); 
 }
 @media (max-width: 900px) {
     .header__item                       { inline-size: 100%;  flex-direction: column;}

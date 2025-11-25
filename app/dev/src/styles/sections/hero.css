@@ -1,5 +1,5 @@
 :root {
-  --hero-scale: clamp(.55rem, calc(.55rem + 2.25vw), 2.35rem);
+  --hero-scale: clamp(.55rem, calc(.55rem + 2.5vw), 2.35rem);
 
   --hero-filter:                    contrast(1.3) saturate(1.02) brightness(.98) drop-shadow(.1em .1em .125em black);
   
@@ -13,7 +13,7 @@
   font-size: var(--hero-scale);
   min-inline-size: 18em;
   inline-size: min(100%, 26em);
-  block-size: 11em;
+  min-block-size: 9em;
   mix-blend-mode: screen;
   filter: var(--hero-filter) var(--hero-text-filter);
 }
@@ -55,7 +55,7 @@
     background-position-y: 0em;
   }
   50% {
-    background-position-y: 2.8em;
+    background-position-y: 2.28em;
   }
 }
 .hero__backdrop::after {
@@ -107,9 +107,9 @@
 
 .hero__welcome {
   grid-area: welcome;
-  font-weight: 200;
+  font-weight: 250;
   letter-spacing: var(--letter-spacing-xl);
-  font-size: .75em;
+  font-size: .85em;
   opacity: .85;
   transform: rotate(-19deg);
   filter: var(--hero-text-filter);
@@ -128,15 +128,15 @@
 
 .hero__name {
   grid-area: name;
-  font-size: 1.13em;
-  font-weight: 550;
+  font-size: 1.25em;
+  font-weight: 600;
   
 }
 
 .hero__to {
   grid-area: to;
   opacity: .8;
-  font-size: .45em;
+  font-size: .55em;
   font-weight: 250;
   transform: translate(.75em,-1.5em);
   

@@ -1,17 +1,26 @@
 ---
+import ICONS from '@Assets/Icons.astro';
 import { Template } from '@Frontend';
 ---
-<div class="media-lightbox" data-visible="false" data-bound="false">
+<div class="media-lightbox" data-visible="false">
 
-  <Template.Card class="card--center card--stretch media-lightbox__thumbs">
+  <Template.Card
+    class="card--center card--stretch media-lightbox__thumbs"
+    footOverlayClass="card__overlay--controls card__overlay--hover media-lightbox__overlay"
+  > <Fragment slot="head">
+    <div class="controls controls--end">
+       <button class="media-lightbox__close" type="button" aria-label="Close">×</button>
+    </div>
+  </Fragment>
     <Fragment slot="body">
       <figure>
         <img class="media-lightbox-image" alt="" />
-        <button class="media-lightbox__close" type="button" aria-label="Close">×</button>
-      </figure>        
+       
+      </figure>
     </Fragment>
     <Fragment slot="foot">
-      <Template.MediaThumbs />
-    </Fragment>      
+        <Template.MediaThumbs />
+
+    </Fragment>
   </Template.Card>
 </div>

@@ -297,7 +297,7 @@ Total unique tokens: 117
 | `--shadow--default` | `src/styles/tokens.css` | 1 | 9 | `src/styles/content.css` (4)<br>`src/styles/controls.css` (1)<br>`src/styles/media.css` (2)<br>`src/styles/site_footer.css` (2) |
 | `--shadow--soft` | `src/styles/tokens.css` | 1 | 4 | `src/styles/content.css` (1)<br>`src/styles/controls.css` (2)<br>`src/styles/media.css` (1) |
 | `--shadow--strong` | `src/styles/tokens.css` | 1 | 2 | `src/styles/media.css` (1)<br>`src/styles/site.css` (1) |
-| `--color-accent--bright` | `src/styles/tokens.css` | 1 | 2 | `src/styles/base.css` (1)<br>`src/styles/site_footer.css` (1) |
+| `--color-accent-light` | `src/styles/tokens.css` | 1 | 2 | `src/styles/base.css` (1)<br>`src/styles/site_footer.css` (1) |
 | `--text-color` | `src/styles/tokens.css` | 1 | 4 | `src/styles/base.css` (1)<br>`src/styles/controls.css` (1)<br>`src/styles/site_footer.css` (1)<br>`src/styles/typography.css` (1) |
 | `--text-glow--soft` | `src/styles/tokens.css` | 1 | 5 | `src/styles/base.css` (1)<br>`src/styles/content.css` (1)<br>`src/styles/controls.css` (1)<br>`src/styles/typography.css` (2) |
 | `--text-glow` | `src/styles/tokens.css` | 1 | 2 | `src/styles/base.css` (1)<br>`src/styles/site_footer.css` (1) |

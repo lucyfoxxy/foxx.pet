@@ -152,11 +152,10 @@ const meta = {
   )}
 </Template.Base>
 <script>
-  import {initGalleryFrame,initGalleryThumbs} from '@Scripts/galleryViewer.js';
+  import { initMediaHandler } from '@Scripts/mediaHandler.js';
   import { runOnReady } from '@Scripts/utils/_runOnReady.js';
 
   runOnReady(() => {
-    const api = initGalleryFrame();   // Frame + Controls
-    initGalleryThumbs(api);           // Thumbs-Bar (optional)
+    initMediaHandler();
   });
 </script>
