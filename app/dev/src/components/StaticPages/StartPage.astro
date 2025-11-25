@@ -95,7 +95,7 @@ const isExternalLink = (href: string) => href.startsWith('http');
           <div class="controls controls--start controls--roomy">
             {links.map((link) => (
               <a
-                class="control control--button control--large"
+                class="control control--button control--large control--circle"
                 href={link.href}
                 rel={isExternalLink(link.href) ? 'noopener noreferrer' : undefined}
                 target={isExternalLink(link.href) ? '_blank' : undefined}

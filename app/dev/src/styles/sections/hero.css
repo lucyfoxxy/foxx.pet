@@ -107,7 +107,7 @@
 
 .hero__welcome {
   grid-area: welcome;
-  font-weight: 250;
+  font-weight: 20;
   letter-spacing: var(--letter-spacing-xl);
   font-size: .85em;
   opacity: .85;

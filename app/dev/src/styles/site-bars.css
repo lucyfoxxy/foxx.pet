@@ -1,4 +1,4 @@
-/* ===== SITE-BARS: SHARED LOOK & BEHAVIOR ===== */
+/* ===== SITE-BARS: SHARED LOOK & BEHAVIORsaturate(1.15) ===== */
 .footer,.header {
     display: grid;
     grid-template-columns: 1fr;
@@ -8,6 +8,7 @@
     border: var(--bars-border);
     backdrop-filter: var(--bars-backdrop);
     box-shadow: var(--bars-shadow);
+    overflow: hidden;
 }
 
 /* ===== SITE-BARS: HEAD ===== */
@@ -19,6 +20,28 @@
     padding-block: var(--bars-padding);
     transition: var(--header-transition);
     will-change: var(--header-will-change);
+}
+.header::before {
+    content: "";
+    inset: -2em;
+    isolation: isolate;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+    border-radius: 0 0 var(--radius-xxl) var(--radius-xxl);
+    background-blend-mode: darken,multiply,normal;
+    background-size: 200%,auto,auto;
+    background-position: 50% -54%,top,center;
+    
+    background-image: 
+        var(--overlay-nebula),
+        var(--overlay-dim),
+
+
+
+radial-gradient(circle at left,oklch(23.5% 0.129 287),oklch(33.5% 0.1975 295)60%,oklch(23.5% 0.129 303 ))
+
+
 }
 @media (max-width: 900px) {
 .header {

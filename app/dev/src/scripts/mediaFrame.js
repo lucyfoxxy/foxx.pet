@@ -22,7 +22,7 @@ const buildRemoteUrl = (id, key, kind) =>
 export function initMediaFrame({ root = document, lightbox: providedLightbox = null } = {}) {
   const wrapper = root.querySelector('.media-wrapper.media-wrapper--controls');
   if (!wrapper) return null;
-
+  let lightbox = providedLightbox;
   // Overlays, die während Autoplay ausgeblendet werden
   const overlayTargets = new Set();
   const registerOverlayTargets = (scope) => {
@@ -82,7 +82,7 @@ export function initMediaFrame({ root = document, lightbox: providedLightbox = n
   // ---- Controls (mehrere Sets: Card + Lightbox etc.) -----------------------
 
   const controlSets = new Set();
-  let lightbox = providedLightbox;
+  
 
   const setProgress = (p) => {
     controlSets.forEach(({ progress }) => {

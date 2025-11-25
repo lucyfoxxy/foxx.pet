@@ -92,7 +92,7 @@
   --color-accent--soft:             color-mix(in oklch, var(--color-accent) 50%, transparent);
   --color-accent--ghosty:           color-mix(in oklch, var(--color-accent) 30%, transparent);
 
-  --color-accent-dark:              oklch(30% 0.15 295);
+  --color-accent-dark:              oklch(30% 0.15 290);
   --color-accent-dark--strong:      color-mix(in oklch, var(--color-accent-dark) 70%, transparent);
   --color-accent-dark--soft:        color-mix(in oklch, var(--color-accent-dark) 50%, transparent);
   --color-accent-dark--ghosty:      color-mix(in oklch, var(--color-accent-dark) 30%, transparent);
@@ -109,7 +109,7 @@
   --text-glow:                      1px 1px 2px var(--color-light--soft);
 
   --drop-shadow--soft:           drop-shadow(2px 2px 4px var(--color-dark--ghosty));
-  --drop-shadow--default:           drop-shadow(2px 2px 4px var(--color-dark--soft));
+  --drop-shadow--default:           drop-shadow(2px 3px 1px var(--color-dark--strong));
   --drop-shadow--strong:           drop-shadow(2px 2px 4px var(--color-dark--strong));
 
   --shadow--soft:                   2px 2px 16px -6px rgba(0,0,0,.65);
@@ -181,11 +181,11 @@
   --control-padding:                var(--space-s);
 
   --control-bg:                     radial-gradient(ellipse at center,var(--color-accent-dark),var(--color-dark));
-  --control-filter--fx:             brightness(1.5);
+  --control-filter--fx:             brightness(1.65);
   --control-filter--legacy-fx:      brightness(1.08);
   --control-filter--legacy-active:  brightness(0.92);
   --control-transition:             var(--transition-fx),var(--transition-transform);
-  --control-transform--fx:          var(--transform-grow);
+  --control-transform--fx:          var(--transform-raise);
 
   --control-plain-transition:       var(--transition-fx),var(--transition-fade-in);
   --control-plain-transition--fx:   var(--transition-fx),var(--transition-fade-out);

@@ -5,7 +5,7 @@ const EXTRA_VISIBLE_THUMBS = 0;
 
 const parseLength = (v) => { const n = parseFloat(v); return Number.isFinite(n) ? n : null; };
 
-export function initMediaThumbs(api, root = document) {
+export function initMediaThumbs(api, root =document) {
   if (!api) return null;
 
   const thumbsWrap = root.querySelector('.media-wrapper--thumbs');

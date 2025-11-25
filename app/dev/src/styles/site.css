@@ -36,10 +36,12 @@
     var(--overlay-nebula),
     var(--overlay-stars),
     var(--overlay-dim),
+
     radial-gradient(ellipse at -55% 5%,transparent 39%,oklch(30% 0.175 190 / 2%),transparent 71%),
     radial-gradient(ellipse at bottom left,oklch(34% 0.165 285 / 8%) 10%,oklch(28% 0.165 295 / 18%),oklch(32% 0.165 315 / 8%) 90%),
     radial-gradient(ellipse at top right,oklch(34% 0.165 315 / 8%) 10%,oklch(28% 0.165 315 / 18%),oklch(32% 0.165 285 / 8%) 90%),
-    linear-gradient(165deg, rgb(37, 7, 112) , #2f0340, rgb(37, 7, 112)) ;
+    radial-gradient(circle at left,oklch(18.5% 0.1 287),oklch(24.5% 0.1475 295)60%,oklch(18.5% 0.1 303 ));
+    /*linear-gradient(165deg, rgb(37, 7, 112) , #2f0340, rgb(37, 7, 112)) ;*/
   
   background-repeat:
     repeat,

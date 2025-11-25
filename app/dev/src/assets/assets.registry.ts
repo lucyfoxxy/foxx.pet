@@ -6,7 +6,7 @@ import meta__favicon from './meta/meta__favicon.webp';
 import overlay__nebula from './overlays/overlay__nebula.webp';
 import overlay__stars from './overlays/overlay__stars.webp';
 import overlay__stars__dense from './overlays/overlay__stars--dense.webp';
-import overlay__footer from './overlays/overlay__footer.webp';
+import overlay__nebula__bars from './overlays/overlay__nebula__bars.webp';
 import overlay__header from './overlays/overlay__header.webp';
 import { COVERS, PLACEHOLDER_COVER, findCoverImage } from './covers';
 import { registry as ICON_REGISTRY } from './icons.registry';
@@ -21,7 +21,7 @@ export const ASSETS: AssetRegistry = {
   overlay__stars,
   overlay__stars__dense,
   overlay__header,
-  overlay__footer,
+  overlay__nebula__bars,
 };
 
 export const assetsRegistry = {

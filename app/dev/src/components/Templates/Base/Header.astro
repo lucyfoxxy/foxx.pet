@@ -19,7 +19,7 @@ type Props = {
 const { navLinks = [] } = (Astro.props ?? {}) as Props;
 
 ---
-<header class="header" aria-label="Primary navigation" data-visible="true">
+<header class="site-bar header" aria-label="Primary navigation" data-visible="true">
   <nav class="controls controls--evenly controls--nowrap">
     {navLinks
       .filter((link) => link.includeInHeader)
