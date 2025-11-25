@@ -31,6 +31,7 @@
   outline: var(--panel-outline);
   outline-offset: -1px;
   border: none;
+  
 
   background-image: 
     var(--overlay-nebula),

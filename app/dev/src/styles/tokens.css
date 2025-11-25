@@ -48,9 +48,9 @@
   --font-size-xl:                   clamp(1.75rem, calc(1.75rem + 1.5vw), 3rem);
   --font-size-xxl:                  clamp(3rem, calc(3rem + 1.5vw), 3.6rem);
 
-  --icon-size-s:                    calc(var(--font-size-s) * 1.075);
-  --icon-size-m:                    calc(var(--font-size-m) * 1.1);
-  --icon-size-l:                    calc(var(--font-size-xl) * .95);
+  --icon-size-s:                    calc(var(--font-size-s) * 1.1);
+  --icon-size-m:                    calc(var(--font-size-m) * 1.19);
+  --icon-size-l:                    calc(var(--font-size-xl) * .98);
 
 
   
@@ -92,7 +92,7 @@
   --color-accent--soft:             color-mix(in oklch, var(--color-accent) 50%, transparent);
   --color-accent--ghosty:           color-mix(in oklch, var(--color-accent) 30%, transparent);
 
-  --color-accent-dark:              oklch(30% 0.15 290);
+  --color-accent-dark:              oklch(32% 0.17 300);
   --color-accent-dark--strong:      color-mix(in oklch, var(--color-accent-dark) 70%, transparent);
   --color-accent-dark--soft:        color-mix(in oklch, var(--color-accent-dark) 50%, transparent);
   --color-accent-dark--ghosty:      color-mix(in oklch, var(--color-accent-dark) 30%, transparent);
@@ -178,9 +178,11 @@
 
   /* ====== Controls ======*/
   --control-gap:                    clamp(var(--space-xxs),  calc(var(--space-xxs) + .15rem),    var(--space-xs));
-  --control-padding:                var(--space-s);
+  --control-padding:                clamp(var(--space-xs),  calc(var(--space-xs) + 1.29vw),    var(--space-s));
 
-  --control-bg:                     radial-gradient(ellipse at center,var(--color-accent-dark),var(--color-dark));
+
+  --control-bg:                     linear-gradient(135deg,oklch(21.5% 0.14 280),oklch(21.5% 0.14 310 ));
+  --control-outline:                2px solid color-mix(in oklch,oklch(17% 0.1 310 ),oklch(17% 0.1 280));
   --control-filter--fx:             brightness(1.65);
   --control-filter--legacy-fx:      brightness(1.08);
   --control-filter--legacy-active:  brightness(0.92);

@@ -1,9 +1,9 @@
 :root {
   --hero-scale: clamp(.55rem, calc(.55rem + 2.5vw), 2.35rem);
 
-  --hero-filter:                    contrast(1.3) saturate(1.02) brightness(.98) drop-shadow(.1em .1em .125em black);
-  
-  --hero-text-filter:               drop-shadow(.01em .01em .125em var(--color-dark)) drop-shadow(.005em .005em 1.2em color-mix(in oklch,currentColor,transparent 70%));
+    --hero-filter: drop-shadow(.1em .1em .125em black);
+    --hero-text-filter: drop-shadow(.01em .01em .125em var(--color-accent-dark));
+    
 }
 .hero {
   position: relative;
@@ -67,16 +67,18 @@
   inline-size: 100%;
   block-size: 100%;
   mix-blend-mode: luminosity;
-  background-position: center,50% var(--hero-nebula-pos);
-  background-size: auto,100% 100%;
-  background-repeat: repeat,no-repeat;
-  background-blend-mode: screen,screen;
+  background-position: top left,bottom right, 7.05em 2.2em,50% var(--hero-nebula-pos);
+  background-size: 512px,512px,512px,100% 100%;
+  background-repeat: no-repeat,no-repeat,no-repeat,no-repeat;
+  background-blend-mode: screen,screen,screen,normal;
   background-image: 
-    var(--overlay-stars--dense),
+    var(--overlay-stars),
+        var(--overlay-stars),
+         var(--overlay-stars--dense),
     radial-gradient(
     ellipse at 50% var(--hero-nebula-pos),
-    rgba(251, 0, 255, 0.09),
-    rgba(140, 0, 255, 0.09) 35%,
+    oklch(87.5% 0.2975 295 / 10%),
+   oklch(17.5% 0.2975 295 / 10%) 35%,
     transparent 70%
   );
   pointer-events: none;
@@ -89,7 +91,7 @@
   display: grid;
   place-items: center;
   pointer-events: none;;
-  
+  text-shadow: 5px 5px 3px rgba(0, 0, 0, .9);
   
 }
 
