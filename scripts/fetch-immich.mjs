@@ -6,13 +6,11 @@ import 'dotenv/config';
 // ──────────────────────────────────────────────────────────────────────────────
 // Configuration ----------------------------------------------------------------
 
-const { target: TARGET, quiet: QUIET } = parseCliArgs(
-  process.argv.slice(2)
-);
+const { quiet: QUIET } = parseCliArgs(process.argv.slice(2));
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const REPO_ROOT = path.resolve(__dirname, '..');
-const PATHS = createPathConfig(REPO_ROOT, TARGET);
+const PATHS = createPathConfig(REPO_ROOT);
 
 const BASE = process.env.IMMICH_BASE_URL || process.env.IMMICH_URL;
 const KEY = process.env.IMMICH_API_KEY;
@@ -60,10 +58,6 @@ const CATEGORY_CONFIG = new Map([
 ]);
 const BESTOF_LINK_ID = (process.env.IMMICH_BESTOF_SHARED_LINK || '').trim();
 
-if (!['dev', 'prod'].includes(TARGET)) {
-  console.error(`Invalid TARGET "${TARGET}". Exiting.`);
-  process.exit(1);
-}
 if (!BASE || !KEY) {
   console.error('.env not found, exiting:', {
     BASE,
@@ -125,7 +119,7 @@ function getAssetsCached(id) {
 async function main() {
   await fs.mkdir(PATHS.srcRoot, { recursive: true });
   if (!QUIET) {
-    console.log(`→ fetch-immich target: ${TARGET}`);
+    console.log('→ fetch-immich');
     console.log(`   entries: ${PATHS.albumDataRoot}`);
   }
 
@@ -457,23 +451,16 @@ async function listAssets(albumId) {
 // CLI / utility helpers --------------------------------------------------------
 
 function parseCliArgs(argv) {
-  const args = { target: 'dev', quiet: false };
+  const args = { quiet: false };
   for (const entry of argv) {
     if (entry === '--quiet') args.quiet = true;
-    else if (entry.startsWith('--target=')) {
-      args.target = entry.split('=')[1]?.toLowerCase() ?? args.target;
-    }
-  }
-
-  if (!argv.some((arg) => arg.startsWith('--target=')) && process.env.TARGET) {
-    args.target = process.env.TARGET.toLowerCase();
   }
 
   return args;
 }
 
-function createPathConfig(repoRoot, target) {
-  const appRoot = path.join(repoRoot, 'app', target);
+function createPathConfig(repoRoot) {
+  const appRoot = path.join(repoRoot, 'app');
   const srcRoot = path.join(appRoot, 'src');
   const contentRoot = path.join(srcRoot, 'content');
 

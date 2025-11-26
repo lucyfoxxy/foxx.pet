@@ -1,6 +1,6 @@
 # Style and Token Audit
 
-This document captures the CSS class selectors and design tokens defined in `app/dev/src/styles` and shows where they are used across Astro pages, components, scripts, and supporting styles. File counts include Astro components/pages, JavaScript utilities, and structured content files. JSON usage totals are aggregated by folder to keep the report concise.
+This document captures the CSS class selectors and design tokens defined in `app/src/styles` and shows where they are used across Astro pages, components, scripts, and supporting styles. File counts include Astro components/pages, JavaScript utilities, and structured content files. JSON usage totals are aggregated by folder to keep the report concise.
 
 ## Overview
 

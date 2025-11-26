@@ -3,6 +3,8 @@ import { createGalleryItemsBySlug } from './utils/_slugLoader.js';
 import { loadImageWithTransition } from './utils/_transitionLoader.js';
 import _isMobile from '@Scripts/utils/_isMobile.js';
 
+const LIGHTBOX_RESUME_DELAY = 2500;
+
 const metas = import.meta.glob('@Content/album/**/*.json', {
   query: '?json',
   eager: true,
@@ -20,7 +22,9 @@ const buildRemoteUrl = (id, key, kind) =>
     : undefined;
 
 export function initMediaFrame({ root = document, lightbox: providedLightbox = null } = {}) {
-  const wrapper = root.querySelector('.media-wrapper.media-wrapper--controls');
+  const wrapper = root.querySelector(
+    '.media-wrapper.media-wrapper--controls:not([data-lightbox="true"])',
+  );
   if (!wrapper) return null;
   let lightbox = providedLightbox;
   // Overlays, die während Autoplay ausgeblendet werden
@@ -205,7 +209,8 @@ export function initMediaFrame({ root = document, lightbox: providedLightbox = n
 
   let elapsedBeforePause = 0;
   let tickStartTime = 0;
-  let resumeAfterLightbox = false;
+  let lightboxResumeTimer = null;
+  let lightboxOpen = false;
 
   const pauseKenBurns = () => {
     imgEl.classList.remove('is-transitioning');
@@ -216,6 +221,13 @@ export function initMediaFrame({ root = document, lightbox: providedLightbox = n
   const resumeKenBurns = () => {
     imgEl.style.animationPlayState = '';
     imgEl.style.opacity = '';
+  };
+
+  const clearLightboxResume = () => {
+    if (lightboxResumeTimer) {
+      clearTimeout(lightboxResumeTimer);
+      lightboxResumeTimer = null;
+    }
   };
 
   const show = (idx, direction = 0) => {
@@ -334,26 +346,38 @@ export function initMediaFrame({ root = document, lightbox: providedLightbox = n
   };
 
   const handleLightboxClose = () => {
-    if (!resumeAfterLightbox) return;
+    lightboxOpen = false;
+    clearLightboxResume();
 
-    playing = true;
-    resumeAfterLightbox = false;
+    if (!playing) return;
+
     updatePlayButton(playing);
     resumeKenBurns();
     run({ resetProgress: false });
+    updateOverlayState(playing);
   };
 
   const openLightbox = () => {
     if (!lightbox || typeof lightbox.open !== 'function') return;
 
+    lightboxOpen = true;
+    clearLightboxResume();
+
     if (playing) {
       captureElapsed();
-      resumeAfterLightbox = true;
-      playing = false;
-      updatePlayButton(playing);
-    }
+      pauseKenBurns();
+      updateOverlayState(false);
 
-    pauseKenBurns();
+      lightboxResumeTimer = setTimeout(() => {
+        if (!playing || !lightboxOpen) return;
+
+        resumeKenBurns();
+        run({ resetProgress: false });
+        updateOverlayState(playing);
+      }, LIGHTBOX_RESUME_DELAY);
+    } else {
+      pauseKenBurns();
+    }
 
     const item = items[order[index]];
     if (item) {

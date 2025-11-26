@@ -14,6 +14,7 @@ export function initMediaThumbs(api, root =document) {
 
   const thumbsPrev = thumbsWrap.querySelector('.media-prev.is-thumbs-prev');
   const thumbsNext = thumbsWrap.querySelector('.media-next.is-thumbs-next');
+  const lightboxRoot = thumbsWrap.closest('.media-lightbox');
 
   const imgClass = 'media-image media-image--thumb';
   const buttonClass = 'media-frame media-frame--thumb';
@@ -149,10 +150,23 @@ export function initMediaThumbs(api, root =document) {
 
   const unsubscribe = api.subscribeThumbs((dir = 0) => { ensureThumbVisibility(dir); highlightThumbs(); });
 
-  renderThumbs();
-  window.addEventListener('resize', () => { if (updateMaxVisible()) ensureThumbVisibility(0); });
+  const handleLightboxToggle = (event) => {
+    if (event?.detail?.visible) {
+      requestAnimationFrame(() => renderThumbs());
+    }
+  };
 
-  return () => { unsubscribe?.(); };
+  const handleResize = () => { if (updateMaxVisible()) ensureThumbVisibility(0); };
+
+  renderThumbs();
+  window.addEventListener('resize', handleResize);
+  lightboxRoot?.addEventListener('media-lightbox-toggle', handleLightboxToggle);
+
+  return () => {
+    unsubscribe?.();
+    window.removeEventListener('resize', handleResize);
+    lightboxRoot?.removeEventListener('media-lightbox-toggle', handleLightboxToggle);
+  };
 }
 
 export default initMediaThumbs;

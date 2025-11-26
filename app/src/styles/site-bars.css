@@ -26,7 +26,7 @@
     filter: brightness(.75);
     background-image: 
         var(--overlay-nebula),       
-        radial-gradient(circle at left,oklch(18% 0.10 282)-10%,oklch(37.5% 0.2975 295)50%,oklch(18% 0.1 307 )110%)
+        radial-gradient(circle at left,oklch(18% 0.10 282)-10%,oklch(37.5% 0.2975 295)50%,oklch(18% 0.1 307 )110%);
 }
 .site-bar.header {background-position: 50% -54%,top;}
 .site-bar.footer {background-position: 50% 54%,bottom;}

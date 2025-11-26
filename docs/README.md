@@ -1,21 +1,17 @@
 # foxx.pet
 
-foxx.pet is the codebase for the public portfolio and commission site of Faelis Paw Artistry. The site is built with [Astro](https://astro.build) and ships two workspaces – a **dev** app for local iteration and a **prod** app that mirrors the production deployment. Shared helper scripts live in the repository root.
+foxx.pet is the codebase for the public portfolio and commission site of Faelis Paw Artistry. The site is built with [Astro](https://astro.build) and ships a single workspace under `app/`, with shared helper scripts in the repository root.
 
 ## Repository layout
 
 ```
 .
-├── app/
-│   ├── dev/   # Local development workspace (Astro project)
-│   └── prod/  # Production workspace (Astro project)
+├── app/       # Astro workspace
 ├── config/    # Deployment helpers (Apache vhost, shell scripts)
 ├── scripts/   # Shared maintenance scripts
 ├── makefile   # Utility tasks for the repo owner
 └── package.json
 ```
-
-Each workspace has its own `astro.config.mjs`, `package.json`, and `tsconfig.json`, but they share the same content, assets, and styling through the monorepo setup.
 
 ## Getting started
 
@@ -23,30 +19,27 @@ Each workspace has its own `astro.config.mjs`, `package.json`, and `tsconfig.jso
    ```bash
    npm install
    ```
-2. **Run the dev workspace**
+2. **Run the app**
    ```bash
-   npm run dev:dev
+   npm run dev
    ```
-   This starts the Astro dev server for `app/dev`.
-3. **Build the prod workspace**
+   This starts the Astro dev server for `app/`.
+3. **Build the site**
    ```bash
-   npm run build:prod
+   npm run build
    ```
-   Use `npm run preview:prod` to inspect the generated production build locally.
+   Use `npm run preview` to inspect the generated production build locally.
 
 ### Synchronising gallery content
 
 Artwork and gallery manifests are fetched from an Immich instance via `scripts/fetch-immich.mjs`. The script is exposed through npm scripts:
 
 ```bash
-# Populate development galleries
-npm run fetch:dev
-
-# Populate production galleries
-npm run fetch:prod
+# Populate galleries
+npm run fetch
 ```
 
-Provide the following environment variables in `app/<target>/.env` before running a fetch:
+Provide the following environment variables in `app/.env` before running a fetch:
 
 | Variable | Purpose |
 | --- | --- |
@@ -55,11 +48,11 @@ Provide the following environment variables in `app/<target>/.env` before runnin
 | `IMMICH_ALBUMS` | Comma separated map of gallery slugs to Immich album IDs (`slug:uuid,slug:uuid`). |
 | `IMMICH_BESTOF_SHARED_LINK` | Optional shared link ID or key for the curated “best of” gallery. |
 
-The script downloads assets into `app/<target>/src/assets/galleries/<slug>/`, renders thumbnails and resized images via Sharp, and writes JSON indices to `app/<target>/src/content/galleries/index/`. The manifest stored at `app/<target>/src/content/galleries/manifest.json` is regenerated automatically and only references slugs supplied through `IMMICH_ALBUMS`.
+The script downloads assets into `app/src/assets/galleries/<slug>/`, renders thumbnails and resized images via Sharp, and writes JSON indices to `app/src/content/galleries/index/`. The manifest stored at `app/src/content/galleries/manifest.json` is regenerated automatically and only references slugs supplied through `IMMICH_ALBUMS`.
 
 ## Content architecture
 
-Content collections are defined with `astro:content` in [`app/dev/src/content/config.ts`](app/dev/src/content/config.ts) and currently only cover gallery image metadata. Shared navigation, page copy, and descriptions are centralised in [`app/dev/src/content/site.ts`](app/dev/src/content/site.ts) so both workspaces can reuse the same wording.
+Content collections are defined with `astro:content` in [`app/src/content/config.ts`](app/src/content/config.ts) and currently only cover gallery image metadata. Shared navigation, page copy, and descriptions are centralised in [`app/src/content/site.ts`](app/src/content/site.ts).
 
 ### Reusing the start page
 
@@ -67,7 +60,7 @@ If you want to create your own landing page while keeping the site layout, the `
 
 ## Typography guidelines
 
-Typography tokens are centralised in [`app/dev/src/styles/tokens.css`](app/dev/src/styles/tokens.css) and implemented in [`app/dev/src/styles/typography.css`](app/dev/src/styles/typography.css).
+Typography tokens are centralised in [`app/src/styles/tokens.css`](app/src/styles/tokens.css) and implemented in [`app/src/styles/typography.css`](app/src/styles/typography.css).
 
 ### Font stacks
 
@@ -104,11 +97,11 @@ Complementary rhythm tokens:
   - Lists, blockquotes, and pricing tables reuse the same rhythm tokens to stay aligned with prose.
 - Table-specific styles promote key data: headers become bold, subtitle rows keep a medium line height, and note chips stay compact using the small font size token.
 
-When introducing new components, prefer reusing these tokens instead of hard-coding values. This keeps typography in sync across dev and prod builds while letting tokens evolve in one place.
+When introducing new components, prefer reusing these tokens instead of hard-coding values. This keeps typography in sync across builds while letting tokens evolve in one place.
 
 ## CSS layer styleguide
 
-The project follows a five-layer CSS architecture. Stylesheets are located in `app/dev/src/styles/` and are loaded in this order within the shared layout:
+The project follows a five-layer CSS architecture. Stylesheets are located in `app/src/styles/` and are loaded in this order within the shared layout:
 
 1. **`tokens.css`** – design tokens (colors, spacing, radii, shadows, fonts). Define variables only.
 2. **`base.css`** – resets and baseline defaults (box sizing, body defaults, focus states, motion preferences).
@@ -138,16 +131,11 @@ From the repository root you can run the following convenience commands:
 
 | Command | Description |
 | --- | --- |
-| `npm run dev:dev` | Start the dev workspace in watch mode. |
-| `npm run dev:prod` | Start the prod workspace locally (rarely needed). |
-| `npm run build:dev` | Create a production build for the dev workspace. |
-| `npm run build:prod` | Create a production build for the prod workspace. |
-| `npm run preview:dev` | Preview the dev build locally. |
-| `npm run preview:prod` | Preview the prod build locally. |
-| `npm run fetch:dev` | Sync galleries for the dev workspace. |
-| `npm run fetch:prod` | Sync galleries for the prod workspace. |
-| `npm run sync:dev` | Run `astro sync` for the dev workspace. |
-| `npm run sync:prod` | Run `astro sync` for the prod workspace. |
+| `npm run dev` | Start the app in watch mode. |
+| `npm run build` | Create a production build. |
+| `npm run preview` | Preview the production build locally. |
+| `npm run fetch` | Sync galleries from Immich. |
+| `npm run sync` | Run `astro sync` to refresh content types. |
 
 Refer to `makefile` for owner-specific deployment shortcuts.
 

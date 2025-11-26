@@ -181,8 +181,9 @@
   --control-padding:                clamp(var(--space-xs),  calc(var(--space-xs) + 1.29vw),    var(--space-s));
 
 
-  --control-bg:                     linear-gradient(135deg,oklch(21.5% 0.14 280),oklch(21.5% 0.14 310 ));
-  --control-outline:                2px solid color-mix(in oklch,oklch(17% 0.1 310 ),oklch(17% 0.1 280));
+  --control-bg:                     linear-gradient(135deg,oklch(28.533% 0.209 285),oklch(33% 0.22 305));
+  --control-outline:                2px solid color-mix(in oklch,oklch(17% 0.19 310 ),oklch(17% 0.19 280));
+  --control-shadow:                 1px 1px 6px -2px var(--color-dark--strong);
   --control-filter--fx:             brightness(1.65);
   --control-filter--legacy-fx:      brightness(1.08);
   --control-filter--legacy-active:  brightness(0.92);

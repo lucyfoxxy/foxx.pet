@@ -31,12 +31,11 @@
   position: relative;
   padding: var(--control-padding);
   border-radius: var(--radius-m);
-  box-shadow: var(--shadow--soft);
+  box-shadow: var(--control-shadow);
   vertical-align: middle;
   background: var(--control-bg);
   outline: var(--control-outline);
   outline-offset: -2px;
-  min-inline-size: var(--control-size);
   block-size: auto;
 }
 

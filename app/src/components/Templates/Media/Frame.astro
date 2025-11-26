@@ -19,20 +19,41 @@ interface AlbumViewData {
 
 interface Props {
   album: AlbumViewData;
+  wrapperClass?: string;
   frameClass?: string;
   imageClass?: string;
+  isLightbox?: boolean;
+  autoplay?: boolean;
+  random?: boolean;
+  interval?: number;
 }
 
-const { album, frameClass, imageClass } = Astro.props as Props;
+const {
+  album,
+  wrapperClass,
+  frameClass,
+  imageClass,
+  isLightbox = false,
+  autoplay = true,
+  random = true,
+  interval = 8500,
+} = Astro.props as Props;
 
 ---
-<div class="media-wrapper media-wrapper--controls">
+<div
+  class:list={[
+    'media-wrapper media-wrapper--controls',
+    isLightbox ? 'media-wrapper--lightbox' : null,
+    wrapperClass,
+  ]}
+  data-lightbox={isLightbox ? 'true' : undefined}
+>
   <div
     class:list={['media-frame', frameClass]}
     data-slug={album.albumSlug}
-    data-autoplay="true"
-    data-interval="8500"
-    data-random="true"
+    data-autoplay={autoplay ? 'true' : 'false'}
+    data-interval={String(interval)}
+    data-random={random ? 'true' : 'false'}
     data-share-key={album.shareKey}
     role="button"
     tabindex="0"
@@ -78,26 +99,26 @@ const { album, frameClass, imageClass } = Astro.props as Props;
   <div class="card__overlay card__overlay--head card__overlay--hover">
     <div class="card__overlay-item">
       
-      {album.title ? (
-        <h2> 
-          {album.title.includes('SFW') ? `Artworks: ${album.title}` : album.title} 
-        </h2>)
-      :null}
-
-      {(album.categoryBadge || album.dateBadge) && (
-        <div class="card__badges controls controls--end">
-          <span class="control control--badge">
-            {album.categoryBadge ? album.categoryBadge :  album.dateBadge }
-          </span>
-        </div>
-      )}
-    </div>
-    {album.description ? (
-    <div class="card__overlay-item">
-        <p>{album.description}</p>
-    </div>
+    {album.title ? (
+      <h2>
+        {album.title.includes('SFW') ? `Artworks: ${album.title}` : album.title}
+      </h2>
     ) : null}
+
+    {(album.categoryBadge || album.dateBadge) && (
+      <div class="card__badges controls controls--end">
+        <span class="control control--badge">
+          {album.categoryBadge ? album.categoryBadge : album.dateBadge}
+        </span>
+      </div>
+    )}
   </div>
+  {album.description ? (
+    <div class="card__overlay-item">
+      <p>{album.description}</p>
+    </div>
+  ) : null}
+</div>
 </div>
 
       

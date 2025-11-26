@@ -196,6 +196,22 @@
   pointer-events: none;
   transition: var(--media-lightbox-transition);
 }
+.media-lightbox__dialog {
+  position: relative;
+  display: grid;
+  gap: var(--card-gap);
+  inline-size: min(92vw, 1200px);
+  max-inline-size: 1200px;
+  max-block-size: 96vh;
+  align-content: center;
+}
+.media-lightbox__frame { inline-size: 100%; max-block-size: 100%; }
+.media-lightbox__frame .media-frame {
+  max-block-size: min(90vh, 96vh);
+  inline-size: 100%;
+  block-size: auto;
+}
+.media-frame--lightbox {  background: var(--media-lightbox-bg); }
 .media-lightbox[data-visible="true"] {
   opacity: 1;
   pointer-events: auto;
@@ -204,31 +220,18 @@
   opacity: 0;
   pointer-events: none;
 }
-.media-lightbox figure {
-  position: relative;
-  display: block;
-  inline-size: auto;
-  block-size: auto;
+.media-lightbox-image {
+  inline-size: 100%;
+  block-size: 100%;
   max-inline-size: 100%;
-  max-block-size: 100vh;
+  max-block-size: 100%;
   object-fit: contain;
-  margin: 0;
-  border-radius: var(--radius-m);
-  overflow: hidden;
-  box-shadow: var(--media-lightbox-shadow);
-  transform: var(--media-lightbox-figure-transform);
-}
-.media-lightbox img {
-  inline-size: auto;
-  block-size: auto;
-  max-inline-size: inherit;
-  max-block-size: inherit;
   background: var(--media-lightbox-bg);
 }
 .media-lightbox__close {
   position: absolute;
-  inset-block-start: .75rem;
-  inset-inline-end: .75rem;
+  inset-block-start: .35rem;
+  inset-inline-end: .35rem;
   inline-size: 2.5rem;
   block-size: 2.5rem;
   display: grid;
@@ -238,7 +241,7 @@
   font-size: 1.35rem;
   background: var(--media-lightbox-close-bg);
   cursor: pointer;
-  transition: var(---media-lightbox-close-transition);
+  transition: var(--media-lightbox-close-transition);
 }
 .media-lightbox__close:hover,
 .media-lightbox__close:focus-visible {
@@ -246,9 +249,8 @@
   opacity: 1;
 }
 
-.media-lightbox__overlay { row-gap: var(--card-gap); }
-.media-lightbox__overlay .media-lightbox__thumbs-bar { grid-column: 1 / -1; inline-size: 100%; }
-.media-lightbox__overlay .media-wrapper--thumbs { inline-size: 100%; }
+.media-lightbox__thumbs { inline-size: 100%; display: flex; justify-content: center; }
+.media-lightbox__thumbs .media-wrapper--thumbs { inline-size: 100%; margin-inline: auto; }
 body.media-lightbox-open {
   overflow: hidden;
 }

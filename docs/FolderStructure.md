@@ -3,7 +3,7 @@
 --------------------------
 ## Below you gonna find the conceptual Folder Structure, which - as soon as working as intended - shall be the Criteria for Release of v1
 
-app/dev/src
+app/src
 ├── assets
 │   ├── Icons.astro
 │   ├── ui (--> containing the webp images imported in ui.ts)

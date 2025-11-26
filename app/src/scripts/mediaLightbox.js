@@ -10,6 +10,12 @@ export function initMediaLightbox({ root = document } = {}) {
   if (!img || !closeButton) return null;
 
   let onClose = null;
+  const setVisibility = (visible) => {
+    el.setAttribute('data-visible', visible ? 'true' : 'false');
+    el.setAttribute('aria-hidden', visible ? 'false' : 'true');
+    document.body.classList.toggle('media-lightbox-open', visible);
+    el.dispatchEvent(new CustomEvent('media-lightbox-toggle', { detail: { visible } }));
+  };
 
   const handleKey = (e) => {
     if (e.key === 'Escape') {
@@ -19,9 +25,9 @@ export function initMediaLightbox({ root = document } = {}) {
   };
 
   const close = () => {
-    el.setAttribute('data-visible', 'false');
-   
-   
+    setVisibility(false);
+
+
     document.removeEventListener('keydown', handleKey);
 
     if (typeof onClose === 'function') {
@@ -48,7 +54,7 @@ export function initMediaLightbox({ root = document } = {}) {
     img.src = primary;
     img.alt = item.alt || '';
 
-    el.setAttribute('data-visible', 'true');
+    setVisibility(true);
     document.addEventListener('keydown', handleKey);
   };
 
