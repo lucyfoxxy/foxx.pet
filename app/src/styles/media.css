@@ -54,9 +54,7 @@
   justify-content: center;
   gap: var(--control-gap);
 }
-.media-wrapper--roomy {
-  padding: var(--card-gap);
-}
+
 
 .media-wrapper--controls {
 
@@ -75,6 +73,7 @@
   padding: var(--card-padding);
 }
 
+
 /* ------------------------------------ */
 /* ---->  FRAME  <--------------------- */
 /* ------------------------------------ */
@@ -89,7 +88,6 @@
   block-size: auto;
   box-shadow: var(--media-frame-shadow);
 }
-
 
 .content-section.cols-2 :where(.media-frame),
 .content-section--masonry :where(.media-frame) {
@@ -151,11 +149,11 @@
 
 .media-image--placeholder { background: var(--media-image-placeholder-bg);}
 
-.media-image.is-transitioning { opacity: 0; }
-.media-image.is-animating {
+:is([data-transitioning="true"]) { opacity: 0; }
+:is([data-animating="true"]) {
   animation: media-slideshow var(--media-animation-interval) ease;
 }
-.media-frame[data-autoplay="false"]:not([data-active="true"]) > .is-animating {animation: none;}
+:where([data-active="false"],[data-animating="false"]) > .media-image {animation: none;}
 @keyframes media-slideshow {
   0%   { opacity:  .02; transform: scale(5.00) rotate(90deg); }
   10%  { opacity: 1.00; transform: scale(1.25); }
@@ -241,6 +239,8 @@
   opacity: 0;
   pointer-events: none;
   transition: var(--media-lightbox-transition);
+  inline-size: 100%;
+  gap: var(--card-gap);
 }
 
 .media-lightbox[data-visible="true"] {
@@ -253,50 +253,12 @@
   pointer-events: none;
 }
 
-/* ---->  LIGHTBOX  DIALOG <------------ */
-.media-lightbox__dialog {
-  position: relative;
-  display: grid;
-  gap: var(--card-gap);
-  inline-size: min(92vw, 1200px);
-  max-inline-size: 1200px;
-  max-block-size: 96vh;
-  align-content: center;
-}
-
-/* ---->  LIGHTBOX FRAME <--------------- */
-.media-lightbox__frame { inline-size: 100%; max-block-size: 100%; }
-.media-lightbox__frame .media-frame {
-  max-block-size: min(90vh, 96vh);
-  inline-size: 100%;
-  block-size: auto;
-}
-.media-frame--lightbox {  background: var(--media-lightbox-bg); }
-
-/* ---->  LIGHTBOX IMAGE <--------------- */
-.media-lightbox-image {
-  inline-size: 100%;
-  block-size: 100%;
-  max-inline-size: 100%;
-  max-block-size: 100%;
-  object-fit: contain;
-}
 
 /* ---->  LIGHTBOX CLOSE <--------------- */
 .media-lightbox__close {
   position: absolute;
   inset-block-start: .35rem;
   inset-inline-end: .35rem;
-  inline-size: 2.5rem;
-  block-size: 2.5rem;
-  display: grid;
-  place-items: center;
-  border: none;
-  border-radius: 999px;
-  font-size: 1.35rem;
-  background: var(--media-lightbox-close-bg);
-  cursor: pointer;
-  transition: var(--media-lightbox-close-transition);
 }
 .media-lightbox__close:hover,
 .media-lightbox__close:focus-visible {
@@ -305,8 +267,7 @@
 }
 
 /* ---->  LIGHTBOX THUMBS <--------------- */
-.media-lightbox__thumbs { inline-size: 100%; display: flex; justify-content: center; }
-.media-lightbox__thumbs .media-wrapper--thumbs { inline-size: 100%; margin-inline: auto; }
+
 body.media-lightbox-open {
   overflow: hidden;
 }

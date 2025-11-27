@@ -9,16 +9,16 @@ export function loadImageWithTransition(imgEl, { src, alt = '', fallbackSrc, onA
     }
     requestAnimationFrame(() => {
       void imgEl.offsetWidth;
-      imgEl.classList.add('is-animating');
-      imgEl.classList.remove('is-transitioning');
+      imgEl.setAttribute('data-animating','true');    
+      imgEl.setAttribute('data-transitioning','false');
     });
   };
 
   const loader = new Image();
   loader.decoding = 'async';
-
-  imgEl.classList.remove('is-animating');
-  imgEl.classList.add('is-transitioning');
+  imgEl.setAttribute('data-animating','false');
+  imgEl.setAttribute('data-transitioning','true');
+      
 
   loader.addEventListener('load', () => {
     applyImage(src);

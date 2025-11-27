@@ -258,6 +258,8 @@ export function initMediaFrame({ root = document, lightbox: providedLightbox = n
     // Wenn Lightbox gerade offen ist → Bild dort synchron mit aktualisieren
     if (lightbox?.el && lightbox.el.getAttribute('data-visible') === 'true') {
       lightbox.open(item, { onClose: handleLightboxClose });
+    } else {
+      
     }
 
     notifyThumbs(direction);

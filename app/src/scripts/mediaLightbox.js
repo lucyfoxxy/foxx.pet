@@ -1,5 +1,5 @@
 // src/scripts/mediaLightbox.js
-
+import { loadImageWithTransition } from './utils/_transitionLoader.js';
 export function initMediaLightbox({ root = document } = {}) {
   const el = root.querySelector('.media-lightbox');
   if (!el) return null;
@@ -48,11 +48,25 @@ export function initMediaLightbox({ root = document } = {}) {
         img.src = fallback;
       }
     };
-
+        const width = Number.isFinite(item.width) ? item.width : null;
+    const height = Number.isFinite(item.height) ? item.height : null;
     onClose = typeof closeCb === 'function' ? closeCb : null;
 
-    img.src = primary;
-    img.alt = item.alt || '';
+    loadImageWithTransition(img, {
+      src: item.full,
+      alt: item.alt || item.filename || '',
+      fallbackSrc: item.thumb || item.full,
+      onApply: () => {
+        if (width && width > 0) img.width = width;
+        else img.removeAttribute('width');
+
+        if (height && height > 0) img.height = height;
+        else img.removeAttribute('height');
+
+        delete img.dataset.initialFull;
+      },
+    });
+
 
     setVisibility(true);
     document.addEventListener('keydown', handleKey);

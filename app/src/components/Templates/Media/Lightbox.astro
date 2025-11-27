@@ -16,7 +16,7 @@ const lightboxAlbum = {
 };
 ---
 <div class="media-lightbox" data-visible="false" aria-hidden="true">
-  <div class="media-lightbox__dialog" role="dialog" aria-modal="true">
+
     <MediaFrame
       album={lightboxAlbum}
       wrapperClass="media-lightbox__frame"
@@ -28,10 +28,10 @@ const lightboxAlbum = {
       interval={12000}
     />
 
-    <div class="media-lightbox__thumbs">
-      <MediaThumbs />
-    </div>
 
-    <button class="media-lightbox__close" type="button" aria-label="Close">×</button>
-  </div>
+      <MediaThumbs />
+
+
+    <button class="control control--button control--media media-lightbox__close" type="button" aria-label="Close">×</button>
+
 </div>
