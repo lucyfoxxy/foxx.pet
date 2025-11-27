@@ -298,14 +298,13 @@ async function writeAlbumIndex({ filePath, meta, mode, items, shareKey, album })
           shareKey
         )}`
       : undefined;
-  let title = meta.title;
-  if(title==='SFW'||title==='NSFW') {let title=`Artworks: ${title}`}
+
   const index = {
     type: 'album',
     section: meta.section,
     category: meta.category,
     slug: meta.slug,
-    title: title,
+    title: meta.title,
     description: album?.description ?? '',
     date: toIsoString(album?.startDate ?? album?.createdAt ?? '1970-01-01T00:00:00.000Z'),
     cover,

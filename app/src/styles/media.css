@@ -1,10 +1,51 @@
-/* =============================================== */
-/* ======== MEDIA: HERO & GALLERIES ============== */
-/* ====== Depends on: tokens, site, content ====== */
-/* =============================================== */
+/* ------------------------------------ */
+/* - MEDIA WRAPPER, FRAME, IMAGE, ----- */
+/* - THUMBS, ICON & PROGRESS BAR ------ */
+/* ------------------------------------ */
 
+/* ------------------------------------ */
+/* ---->  TOKENS  <-------------------- */
+/* ------------------------------------ */
+:root {
+  --media-control-size:             2.75rem;
+  --thumb-size:                     clamp(64px, 9vw, 128px);
 
-/* ==========<[      Wrapper      ]>============== */
+  --media-animation-interval:       8500ms;
+  
+  --icon-size-s:                    calc(var(--font-size-s) * 1.1);
+  --icon-size-m:                    calc(var(--font-size-m) * 1.19);
+  --icon-size-l:                    calc(var(--font-size-xl) * .98);
+  --media-icon-filter:              var(--fx-glow);
+
+  --media-frame-shadow:             var(--fx-shadow--soft);
+
+  --media-thumb-shadow:             var(--fx-shadow--soft);
+  --media-thumb-transform:          var(--transform-grow);
+  --media-thumb-transition:         var(--transition-fade-in), var(--transition-state);
+  --media-thumb-will-change:        opacity, transform;
+
+  --media-image-placeholder-bg:     var(--color-dark--soft);
+  --media-image-transition:         var(--transition-state--slow), var(--transition-fade-out--slow);
+  --media-image-will-change:        opacity, transform, top, bottom;
+
+  --media-lightbox-bg:              var(--color-dark);
+  --media-lightbox-shadow:          var(--fx-shadow--strong);
+  
+  --media-lightbox-transition:      var(--transition-fade-in);
+  --media-lightbox-close-bg:        var(--color-dark--soft);
+  --media-lightbox-close-transition:var(--transition-fade-out);
+  --media-lightbox-figure-transform:var(--transform-shrink);
+
+  --media-progress-bg:              var(--color-light--ghosty);
+  --media-progress-fill-bg:         var(--color-light);
+  --media-progress-transition:      var(--transition-progress);
+
+  --media-raise-will-change:        opacity;
+}
+
+/* ------------------------------------ */
+/* ---->  WRAPPER  <------------------- */
+/* ------------------------------------ */
 .media-wrapper {
   display: inline-flex;
   inline-size: 100%;
@@ -16,14 +57,9 @@
 .media-wrapper--roomy {
   padding: var(--card-gap);
 }
-.media-wrapper--ghost {
-  background: none;
-  backdrop-filter: none;
-  box-shadow: none;
-}
 
 .media-wrapper--controls {
-  outline: var(--media-controls-outline);
+
   border-radius: var(--radius-l);
 }
 
@@ -39,8 +75,9 @@
   padding: var(--card-padding);
 }
 
-
-/* ==========<[      FRAME      ]>================= */
+/* ------------------------------------ */
+/* ---->  FRAME  <--------------------- */
+/* ------------------------------------ */
 .media-frame {
   display: block;
   inline-size: 100%;
@@ -53,7 +90,6 @@
   box-shadow: var(--media-frame-shadow);
 }
 
-.media-wrapper > .media-frame { box-shadow: none; }
 
 .content-section.cols-2 :where(.media-frame),
 .content-section--masonry :where(.media-frame) {
@@ -75,6 +111,7 @@
   }
 }
 
+/* ---->  FRAME THUMB  <---------------- */
 .media-frame--thumb {
   min-inline-size: 0;
   inline-size: var(--thumb-size);
@@ -98,9 +135,9 @@
   opacity: 1;
 }
 
-
-
-/* ==========<[      IMAGE      ]>================= */
+/* ------------------------------------ */
+/* ---->  IMAGE  <--------------------- */
+/* ------------------------------------ */
 .media-image{
   display: block;
   inline-size: 100%;
@@ -125,10 +162,14 @@
   90%  { opacity: 0.90; transform: scale(1.00); }
   100% { opacity:  0.0; }
 }
+
+/* ---->  IMAGE COVER  <---------------- */
 .media-image--cover {
   object-fit: cover;
   transform: var(--transform-scale);
 }
+
+/* ---->  IMAGE THUMB  <---------------- */
 .media-image--thumb { 
   inline-size: 100%;
   block-size: 100%;
@@ -142,12 +183,14 @@
   will-change: var(--media-thumb-will-change);
 }
 
+/* ---->  IMAGE TOP  <------------------ */
 .media-image--top {
   object-position: top;
 }
 
-
-/* ==========<[      ICON      ]>============== */
+/* ------------------------------------ */
+/* ---->  ICON  <---------------------- */
+/* ------------------------------------ */
 .media-icon {
   display: inline-flex;
   align-items: center;
@@ -160,7 +203,9 @@
 .media-icon--small {font-size: var(--icon-size-s);}
 
 
-/* =========<[     PROGRESS BAR      ]>=========== */
+/* ------------------------------------ */
+/* ---->  PROGRESS BAR  <-------------- */
+/* ------------------------------------ */
 .media-progress {
   position: relative;
   inline-size: 100%;
@@ -182,8 +227,9 @@
   transition: var(--media-progress-transition);
 }
 
-
-/* ==========<[      LIGHTBOX      ]>============== */
+/* ------------------------------------ */
+/* ---->  LIGHTBOX  <------------------ */
+/* ------------------------------------ */
 .media-lightbox {
   position: fixed;
   inset: 0;
@@ -196,6 +242,18 @@
   pointer-events: none;
   transition: var(--media-lightbox-transition);
 }
+
+.media-lightbox[data-visible="true"] {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.media-lightbox[data-visible="false"] {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ---->  LIGHTBOX  DIALOG <------------ */
 .media-lightbox__dialog {
   position: relative;
   display: grid;
@@ -205,6 +263,8 @@
   max-block-size: 96vh;
   align-content: center;
 }
+
+/* ---->  LIGHTBOX FRAME <--------------- */
 .media-lightbox__frame { inline-size: 100%; max-block-size: 100%; }
 .media-lightbox__frame .media-frame {
   max-block-size: min(90vh, 96vh);
@@ -212,22 +272,17 @@
   block-size: auto;
 }
 .media-frame--lightbox {  background: var(--media-lightbox-bg); }
-.media-lightbox[data-visible="true"] {
-  opacity: 1;
-  pointer-events: auto;
-}
-.media-lightbox[data-visible="false"] {
-  opacity: 0;
-  pointer-events: none;
-}
+
+/* ---->  LIGHTBOX IMAGE <--------------- */
 .media-lightbox-image {
   inline-size: 100%;
   block-size: 100%;
   max-inline-size: 100%;
   max-block-size: 100%;
   object-fit: contain;
-  background: var(--media-lightbox-bg);
 }
+
+/* ---->  LIGHTBOX CLOSE <--------------- */
 .media-lightbox__close {
   position: absolute;
   inset-block-start: .35rem;
@@ -249,14 +304,14 @@
   opacity: 1;
 }
 
+/* ---->  LIGHTBOX THUMBS <--------------- */
 .media-lightbox__thumbs { inline-size: 100%; display: flex; justify-content: center; }
 .media-lightbox__thumbs .media-wrapper--thumbs { inline-size: 100%; margin-inline: auto; }
 body.media-lightbox-open {
   overflow: hidden;
 }
 
-
-/* ==========<[      FALLBACK      ]>============== */
+/* ---->  FALLBACK <--------------- */
 .media-empty {
   margin: .5rem 0;
   text-align: center;

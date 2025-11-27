@@ -89,21 +89,21 @@ const surfaceEffects = [
   {
     id: 'surface-soft',
     label: 'Surface Soft Shadow',
-    token: '--shadow--soft',
+    token: '--fx-shadow--soft',
     preview: 'shadow-preview--surface-soft',
     description: 'Subtle lift used on thumbnails and compact frames.',
   },
   {
     id: 'surface-default',
     label: 'Surface Default Shadow',
-    token: '--shadow--default',
+    token: '--fx-shadow',
     preview: 'shadow-preview--surface-default',
     description: 'Primary elevation for cards and media wrappers.',
   },
   {
     id: 'surface-strong',
     label: 'Surface Strong Shadow',
-    token: '--shadow--strong',
+    token: '--fx-shadow--strong',
     preview: 'shadow-preview--surface-strong',
     description: 'High emphasis surfaces like header or footer.',
   },
@@ -813,12 +813,12 @@ const mediaThumbs = [
       block-size: 6rem;
       border-radius: var(--radius-l);
       background: color-mix(in oklab, var(--color-light--ghosty) 80%, transparent);
-      box-shadow: var(--shadow--soft);
+      box-shadow: var(--fx-shadow--soft);
     }
 
-    .shadow-preview--surface-soft { box-shadow: var(--shadow--soft); }
-    .shadow-preview--surface-default { box-shadow: var(--shadow--default); }
-    .shadow-preview--surface-strong { box-shadow: var(--shadow--strong); }
+    .shadow-preview--surface-soft { box-shadow: var(--fx-shadow--soft); }
+    .shadow-preview--surface-default { box-shadow: var(--fx-shadow); }
+    .shadow-preview--surface-strong { box-shadow: var(--fx-shadow--strong); }
 
     .text-preview {
       display: inline-flex;

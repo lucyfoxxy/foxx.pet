@@ -2,6 +2,11 @@
 /* ======== TABLES & DEFINITION LISTS ========= */
 /* ====== Depends on: tokens, site, typography ====== */
 /* ============================================ */
+/* ====== Tokens ====== */
+:root{
+  --table-head-bg:                  var(--color-dark--soft);
+  --table-row-alt-bg:               var(--color-dark--soft);
+}
 
 /* ====== DEFINITION LIST ====== */
 .deflist {

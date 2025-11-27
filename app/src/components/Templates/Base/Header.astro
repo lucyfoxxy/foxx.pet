@@ -20,7 +20,7 @@ const { navLinks = [] } = (Astro.props ?? {}) as Props;
 
 ---
 <header class="site-bar header" aria-label="Primary navigation" data-visible="true">
-  <nav class="controls controls--evenly controls--nowrap">
+  <nav class="controls controls--around controls--nowrap">
     {navLinks
       .filter((link) => link.includeInHeader)
       .map((link) => (

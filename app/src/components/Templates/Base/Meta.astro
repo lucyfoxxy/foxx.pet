@@ -63,6 +63,7 @@ const goatCounterScriptSrc = 'https://stats.foxx.pet/count.js';
   const starsRegistry = new WeakMap<HTMLCanvasElement, () => void>();
 
   if(!_isMobile()){
+    
     _runOnReady(() => {
       document
         .querySelectorAll<HTMLCanvasElement>('.panel-wrapper .stars-canvas')

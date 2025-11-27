@@ -1,8 +1,8 @@
 :root {
   --hero-scale: clamp(.55rem, calc(.55rem + 2.5vw), 2.35rem);
 
-    --hero-filter: drop-shadow(.1em .1em .125em black);
-    --hero-text-filter: drop-shadow(.01em .01em .125em var(--color-accent-dark));
+    --hero-filter: drop-shadow(0 0 0 black);
+    --hero-text-filter: drop-shadow(0 0 0 var(--color-accent-dark));
     
 }
 .hero {
@@ -21,7 +21,7 @@
 .hero__backdrop {
   position: fixed;
   inset: 0;
-  filter: drop-shadow( .1em .1em black);
+  filter: drop-shadow( 2px 2px 2px black);
   opacity: .9;
   background-image: var(--hero--bg);
   background-position: 7.05em 2.2em;
@@ -91,7 +91,7 @@
   display: grid;
   place-items: center;
   pointer-events: none;;
-  text-shadow: 5px 5px 3px rgba(0, 0, 0, .9);
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, .9);
   
 }
 

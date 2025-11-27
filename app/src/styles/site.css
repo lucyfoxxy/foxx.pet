@@ -1,13 +1,29 @@
-/* ============================================ */
-/* ======== SITE: LAYOUT & STRUCTURE ========== */
-/* ====== Depends on: tokens, base, typography ====== */
-/* ============================================ */
+/* ------------------------------------ */
+/* ---- SITE STRUCTURE / LAYOUT ------- */
+/* - Container, Panel, Section, Prose - */
+/* ------------------------------------ */
 
-/* ====== CONTAINER / PANEL ====== */
+/* ------------------------------------ */
+/* ---->  TOKENS  <-------------------- */
+/* ------------------------------------ */
+:root {
+  --section-gap:                    clamp(var(--space-xs),  calc(var(--space-xs) + 1.5vh),    var(--space-xl));
+  --container-padding:              clamp(var(--space-xxs),  calc(var(--space-xxs) + 2vw),    var(--space-xxl));
+  --flow-gap:                       var(--space-xs);
+  --panel-size:                     1366px;
+  --panel-padding:                  clamp(var(--space-xs),  calc(var(--space-xs) + 2.5vw),    var(--space-xxxl));
+
+  --panel-shadow:                   var(--fx-shadow--strong);
+  --panel-base-transform:           translateZ(0);
+  --panel-base-will-change:         transform;
+}
+
+/* ------------------------------------ */
+/* ---->  CONTAINER  <----------------- */
+/* ------------------------------------ */
 .container {
   flex: 1 0 auto;
   inline-size: 100%;
-  
   max-inline-size: none;
   margin: 0;
   padding-inline: var(--container-padding);
@@ -20,86 +36,55 @@
   }
 }
 
+/* ------------------------------------ */
+/* ---->  PANEL  <--------------------- */
+/* ------------------------------------ */
 .panel-wrapper {
   display: flex;
   position: relative;
   flex-direction: column;
-  min-block-size:  100dvh;
+  min-block-size: 100dvh;
   max-inline-size: var(--panel-size);
   margin-inline: auto;
   box-shadow: var(--panel-shadow);
   outline: var(--panel-outline);
   outline-offset: -1px;
   border: none;
-  
-
-  background-image: 
-    var(--overlay-nebula),
-    var(--overlay-stars),
-    var(--overlay-dim),
-
-    radial-gradient(ellipse at -55% 5%,transparent 39%,oklch(30% 0.175 190 / 2%),transparent 71%),
-    radial-gradient(ellipse at bottom left,oklch(34% 0.165 285 / 8%) 10%,oklch(28% 0.165 295 / 18%),oklch(32% 0.165 315 / 8%) 90%),
-    radial-gradient(ellipse at top right,oklch(34% 0.165 315 / 8%) 10%,oklch(28% 0.165 315 / 18%),oklch(32% 0.165 285 / 8%) 90%),
-    radial-gradient(circle at left,oklch(18.5% 0.1 287),oklch(24.5% 0.1475 295)60%,oklch(18.5% 0.1 303 ));
-    /*linear-gradient(165deg, rgb(37, 7, 112) , #2f0340, rgb(37, 7, 112)) ;*/
-  
-  background-repeat:
-    repeat,
-    repeat,
-    no-repeat,
-    repeat,
-    repeat,
-    repeat;
-
-  background-size:
-    1280px 1280px,
-    640px 640px,
-    auto,
-    cover,
-    cover,
-    cover,
-    cover;
-
-  background-blend-mode:
-    overlay,
-    soft-light,
-    multiply,
-    normal,
-    normal,
-    normal,
-    normal;
-
-  background-position:
-    top,
-    top,
-    top,
-    center,
-    center,
-    center,    
-    center;    
+  background-image: var(--overlay-nebula), var(--overlay-stars--dense), var(--overlay-dim), linear-gradient(105deg, oklch(21.5% 0.11 290), oklch(21.5% 0.125 300), oklch(21.5% 0.11 310));
+  background-repeat: no-repeat, repeat, no-repeat, no-repeat;
+  background-size: 1280px 1280px, 480px 480px, auto, cover;
+  background-blend-mode: overlay, soft-light, multiply, normal;
+  background-position: top, top, center, center;
 }
+
 @media (max-width: 900px) {
   .panel-wrapper {
     max-inline-size: 100%;
     margin-block: 0;
     margin-inline: 0;
+    background-blend-mode: overlay, screen, multiply, normal;
   }
 }
 
 .panel-wrapper .stars-canvas {
   position: absolute;
   inset: 0;
-  z-index: 0;           
-  pointer-events: none; 
-  mix-blend-mode: screen; opacity: .85;
+  z-index: 0;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  opacity: .85;
   inline-size: 90%;
   block-size: 90%;
   justify-self: center;
   align-self: center;
   margin: var(--panel-padding);
 }
-@media (max-width: 900px) {.panel-wrapper .stars-canvas { display: none; }}
+
+@media (max-width: 900px) {
+  .panel-wrapper .stars-canvas {
+    display: none;
+  }
+}
 
 main.panel {
   padding: var(--panel-padding);
@@ -107,4 +92,92 @@ main.panel {
   flex: 1 1 auto;
 }
 
+/* ------------------------------------ */
+/* ---->  SECTION  <------------------- */
+/* ------------------------------------ */
+.content-section {
+  display: grid;
+  flex-wrap: wrap;
+  gap: var(--section-gap);
+  align-items: stretch;
+  max-inline-size: 100%;
+  grid-template-columns: 1fr;
+}
 
+.content-section + .content-section, .content-section:first-of-type {
+  margin-block-start: var(--section-gap);
+}
+
+.content-section :where(h1, h2, h3, h4) {
+  margin: 0 0 calc(var(--flow-gap) * .5) 0;
+}
+
+.content-section.cols-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+@media (max-width: 800px) {
+  .content-section.cols-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+.content-section.cols-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+@media (max-width: 1100px) {
+  .content-section.cols-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.content-section--masonry {
+  display: block;
+  column-gap: var(--section-gap);
+  column-fill: balance;
+  column-count: 2;
+}
+@media (max-width: 800px) {
+  .content-section--masonry {
+    column-count: 1;
+  }
+}
+
+.content-section--masonry > * {
+  break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+  page-break-inside: avoid;
+  margin-block-end: var(--section-gap);
+}
+
+.content-section--masonry .card {
+  min-block-size: auto;
+}
+
+/* ------------------------------------ */
+/* ---->  PROSE FLOW  <---------------- */
+/* ------------------------------------ */
+.prose {
+  display: flex;
+  flex-direction: column;
+  gap: var(--flow-gap);
+  margin-block: var(--flow-gap);
+  max-inline-size: clamp(65ch, 35vw, 95ch);
+}
+
+.prose--unlimited {
+  max-inline-size: none
+}
+
+.prose:first-child {
+  margin-block-start: 0;
+}
+
+.prose>* {
+  margin: 0;
+}
+
+.prose ul,
+.prose ol {
+  padding-inline-start: 1.2em;
+  margin: 0;
+}

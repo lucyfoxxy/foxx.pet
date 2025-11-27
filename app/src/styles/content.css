@@ -2,45 +2,32 @@
 /* ======== CONTENT: COMPONENTS & ELEMENTS ==== */
 /* ====== Depends on: tokens, site, typography ====== */
 /* ============================================ */
-.content-section :where(h1,h2,h3,h4) {
-  margin: 0 0 calc(var(--flow-gap) * .5) 0;
+:root {
+  --card-gap:                       var(--space-s);
+  --card-padding:                   clamp(var(--space-m),  calc(var(--space-m) + 2.95vw),  var(--space-xl));
+  --card-radius:                    var(--radius-l);
+  --card-radius--inner:             var(--radius-m);
+
+  --card-backdrop:                  var(--fx-blur-m) var(--fx-bright) var(--fx-saturate--soft);
+  --card-shadow:                    var(--fx-shadow);
+  --card-transition:                var(--transition-state--slow);
+  --card-transform--fx:             var(--transform-grow);
+  --card-filter--fx:                var(--fx-bright--soft) var(--fx-saturate) var(--fx-drop-shadow--strong);
+
+  --card-list-bg:                   var(--color-dark--soft);
+  --card-list-bg--fx:               var(--color-dark--strong);
+  --card-list-shadow:               var(--fx-shadow--soft);
+  --card-list-filter--fx:           var(--fx-glow);
+  --card-list-transition:           var(--transition-state--slow), var(--transition-fade-in);
+  --card-list-will-change:          opacity, background;
+
+  --card-overlay-backdrop:          var(--fx-blur-xl);
+  --card-overlay-shadow:            var(var(--fx-shadow-inset--ghosty));
+  --card-overlay-transition:        var(--transition-fade-in--slow);
+  --card-overlay-will-change:       opacity;
+  --card-overlay-transition--fx:    var(--transition-fade-out--slow);
 }
 
-.content-section {
-  display: grid;
-  flex-wrap: wrap; 
-  gap: var(--section-gap);
-  align-items: stretch; 
-  max-inline-size: 100%;
-  grid-template-columns: 1fr;
-}
-.content-section:first-of-type,
-* + .content-section { 
-  margin-block-start: var(--section-gap); 
-}
-.content-section.cols-2 { grid-template-columns: repeat(2, 1fr); }
-.content-section.cols-3 { grid-template-columns: repeat(3, 1fr); }
-
-@media (max-width: 800px)  { .content-section.cols-2 { grid-template-columns: 1fr; }}
-@media (max-width: 1100px) { .content-section.cols-3  { grid-template-columns: repeat(2, 1fr); }}
-
-.content-section--masonry {
-  display: block;
-  column-gap: var(--section-gap);
-  column-fill: balance;
-  column-count: 2;
-}
-
-@media (max-width: 800px)  { .content-section--masonry { column-count: 1; } }
-
-
-.content-section--masonry > * {
-  break-inside: avoid;
-  -webkit-column-break-inside: avoid;
-  page-break-inside: avoid;
-  margin-block-end: var(--section-gap);
-}
-.content-section--masonry .card { min-block-size: auto; }
 
 /* ====== CONTENT CARD ====== */
 .card{
@@ -56,7 +43,7 @@
   padding: var(--card-padding);
   gap: var(--card-gap);
 
-  border-radius: var(--radius-l);
+  border-radius: var(--card-radius);
   backdrop-filter: var(--card-backdrop);
   box-shadow: var(--card-shadow);
 }
@@ -178,7 +165,7 @@
   gap: var(--card-gap);
   align-items: flex-start;
   padding: var(--control-padding);
-  border-radius: var(--radius-m);
+  border-radius: var(--card-radius--inner);
   background: var(--card-list-bg);
   box-shadow: var(--card-list-shadow);
   opacity: .7;
@@ -256,8 +243,8 @@
   will-change: var(--card-overlay-will-change);
   box-shadow: var(--card-overlay-shadow);
 }
-.card__overlay--head { inset-block-start: 0; border-radius: var(--radius-m) var(--radius-m) 0 0; }
-.card__overlay--foot { inset-block-end: 0;   border-radius: 0 0 var(--radius-m) var(--radius-m); }
+.card__overlay--head { inset-block-start: 0; border-radius: var(--card-radius--inner) var(--card-radius--inner) 0 0; }
+.card__overlay--foot { inset-block-end: 0;   border-radius: 0 0 var(--card-radius--inner) var(--card-radius--inner); }
 .card__overlay-item  { 
   display: inline-flex;
   flex-wrap: nowrap;
@@ -292,28 +279,3 @@
 
 /* ===== CARD: MISC ===== */
 .card__spacer { flex: 1 1 auto; }
-
-
-
-
-/* ====== PROSE CONTENT ====== */
-
-.prose {
-  display: flex;
-  flex-direction: column;
-  gap: var(--flow-gap);
-  margin-block: var(--flow-gap);
-  max-inline-size: clamp(65ch, 35vw, 95ch);
-}
-.prose--unlimited { max-inline-size: none}
-.prose:first-child { margin-block-start: 0; }
-.prose > * { 
-  margin: 0; 
-}
-
-.prose ul,
-.prose ol {
-  padding-inline-start: 1.2em;
-  margin: 0;
-}
-

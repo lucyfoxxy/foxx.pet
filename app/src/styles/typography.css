@@ -33,6 +33,41 @@
   font-style: normal;
   font-display: swap;
 }
+
+/* ====== TOKENS ====== */
+:root {
+  --font-display:                  Grandstander, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-fancy:                    'Fuzzy Bubbles', var(--font-display);
+  --font-signature:                'Beautiful Dream', var(--font-display);
+
+  --font-weight-thin:               300;
+  --font-weight-normal:             400;
+  --font-weight-thick:              500;
+  --font-weight-bold:               700;
+
+  --line-height-xxs:                 .8;
+  --line-height-xs:                  .9;
+  --line-height-s:                  1.0;
+  --line-height-m:                  1.1;
+  --line-height-l:                  1.2;
+  --line-height-xl:                 1.3;
+  --line-height-xxl:                1.5; 
+
+  --letter-spacing-s:               .0065em;
+  --letter-spacing-m:               clamp(.0065em, calc(0.225em + .01vw ), .0225em);
+  --letter-spacing-l:               clamp(.0225em, calc(0.225em + .03vw ), .0525em);
+  --letter-spacing-xl:              clamp(.0525em, calc(0.525em + .05vw ), .0650em);
+
+  --font-size-xs:                   clamp(.75rem, calc(.75rem + .025vw), .95rem);
+  --font-size-s:                    clamp(.9rem,  calc(.9rem + .075vw), 1.05rem);
+  --font-size-m:                    clamp(1.1rem, calc(1.1rem + .45vw), 1.5rem);
+  --font-size-l:                    clamp(1.4rem, calc(1.4rem + .35vw), 1.8rem);
+  --font-size-xl:                   clamp(1.75rem, calc(1.75rem + 1.5vw), 3rem);
+  --font-size-xxl:                  clamp(3rem, calc(3rem + 1.5vw), 3.6rem);
+
+  --blockquote-bg:                  color-mix(in oklab, var(--content-background) 4%, transparent);
+  --blockquote-border:              3px solid var(--color-accent);
+}
 /* ====== BASE TYPOGRAPHY ====== */
 body {
   font-family: var(--font-display);

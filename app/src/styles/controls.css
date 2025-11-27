@@ -2,7 +2,23 @@
 /* ========= UI ELEMENTS: CONTROLS ============ */
 /* ====== Depends on: tokens, site, typography ====== */
 /* ============================================ */
+:root {
+  --control-gap:                    clamp(var(--space-xxs),  calc(var(--space-xxs) + .15rem),    var(--space-xs));
+  --control-padding:                clamp(var(--space-xs),  calc(var(--space-xs) + 1.29vw),    var(--space-s));
 
+  --control-bg:                     var(--color-accent-dark);
+  --control-shadow:                 var(--fx-shadow--soft);
+  --control-filter--fx:             var(--fx-bright);
+
+  --control-transition:             var(--transition-state);
+  --control-transform--fx:          var(--transform-raise);
+
+  --control-plain-transition:       var(--transition-state),var(--transition-fade-in);
+  --control-plain-transition--fx:   var(--transition-state),var(--transition-fade-out);
+  --control-plain-filter:           var(--fx-drop-shadow--soft);
+  --control-plain-filter--fx:       var(--fx-glow--strong)
+                                    var(--fx-drop-shadow);
+}
 .controls {
   display: flex;
   flex-wrap: wrap;
@@ -24,7 +40,7 @@
 .card__badges.controls { vertical-align: text-bottom; }
 
 .control {
-  text-shadow: var(--text-shadow), var(--text-glow);
+  text-shadow: var(--text-glow),var(--text-shadow);
   display: inline-flex;
   place-items: center;
   gap: var(--control-gap);
@@ -34,8 +50,8 @@
   box-shadow: var(--control-shadow);
   vertical-align: middle;
   background: var(--control-bg);
-  outline: var(--control-outline);
-  outline-offset: -2px;
+
+
   block-size: auto;
 }
 
@@ -83,6 +99,7 @@
 .control--plain:is(:hover,:focus-visible,[data-active="true"],[data-current="true"]) {
   filter: var(--control-plain-filter--fx) ;
   opacity: 1;
+  transition: var(--control-plain-transition--fx);
 }
 
 .media-play[data-active="false"],
@@ -114,9 +131,4 @@
 .media-prev.is-thumbs-prev:active,
 .media-next.is-thumbs-next:active {
   transform: var(--transform-scale-soft);
-}
-
-@supports not (color: oklch(50% 0 0)) {
-  :where(.control--button:not(.control--plain), .control--media):hover { filter: var(--control-filter--legacy-fx); }
-  :where(.control--button:not(.control--plain), .control--media):active { filter: var(--control-filter--legacy-active); }
 }
