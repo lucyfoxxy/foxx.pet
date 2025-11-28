@@ -7,7 +7,7 @@
 /* ---->  TOKENS  <-------------------- */
 /* ------------------------------------ */
 :root {
-  --section-gap:                    clamp(var(--space-xs),  calc(var(--space-xs) + 1.5vh),    var(--space-xl));
+  --section-gap:                    clamp(var(--space-s),  calc(var(--space-s) + 1.25vh),    var(--space-xl));
   --container-padding:              clamp(var(--space-xxs),  calc(var(--space-xxs) + 2vw),    var(--space-xxl));
   --flow-gap:                       var(--space-xs);
   --panel-size:                     1366px;

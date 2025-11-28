@@ -1,7 +1,7 @@
 ---
 import MediaFrame from '@Templates/Media/Frame.astro';
 import MediaThumbs from '@Templates/Media/Thumbs.astro';
-
+import ICONS from '@Assets/Icons.astro';
 const lightboxAlbum = {
   title: '',
   description: '',
@@ -19,9 +19,9 @@ const lightboxAlbum = {
 
     <MediaFrame
       album={lightboxAlbum}
-      wrapperClass="media-lightbox__frame"
-      frameClass="media-frame--lightbox"
-      imageClass="media-lightbox-image"
+      wrapperClass=""
+      frameClass=""
+      imageClass=""
       isLightbox={true}
       autoplay={false}
       random={false}
@@ -29,9 +29,6 @@ const lightboxAlbum = {
     />
 
 
-      <MediaThumbs />
 
-
-    <button class="control control--button control--media media-lightbox__close" type="button" aria-label="Close">×</button>
 
 </div>

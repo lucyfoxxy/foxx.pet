@@ -3,7 +3,7 @@ import { createGalleryItemsBySlug } from './utils/_slugLoader.js';
 import { loadImageWithTransition } from './utils/_transitionLoader.js';
 import _isMobile from '@Scripts/utils/_isMobile.js';
 
-const LIGHTBOX_RESUME_DELAY = 2500;
+const LIGHTBOX_RESUME_DELAY = 500;
 
 const metas = import.meta.glob('@Content/album/**/*.json', {
   query: '?json',
@@ -22,9 +22,7 @@ const buildRemoteUrl = (id, key, kind) =>
     : undefined;
 
 export function initMediaFrame({ root = document, lightbox: providedLightbox = null } = {}) {
-  const wrapper = root.querySelector(
-    '.media-wrapper.media-wrapper--controls:not([data-lightbox="true"])',
-  );
+  const wrapper = root.querySelector('.media-wrapper:not([data-lightbox="true"])');
   if (!wrapper) return null;
   let lightbox = providedLightbox;
   // Overlays, die während Autoplay ausgeblendet werden
@@ -227,6 +225,7 @@ export function initMediaFrame({ root = document, lightbox: providedLightbox = n
     if (lightboxResumeTimer) {
       clearTimeout(lightboxResumeTimer);
       lightboxResumeTimer = null;
+      updatePlayButton(playing);
     }
   };
 
@@ -384,6 +383,7 @@ export function initMediaFrame({ root = document, lightbox: providedLightbox = n
     const item = items[order[index]];
     if (item) {
       lightbox.open(item, { onClose: handleLightboxClose });
+      updatePlayButton(playing);
     }
   };
 

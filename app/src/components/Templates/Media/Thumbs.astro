@@ -1,9 +1,20 @@
 ---
+import ICONS from '@Assets/Icons.astro';
+interface Props {
+  isLightbox?: boolean;
+}
+
+const {
+  isLightbox = false,
+} = Astro.props as Props;
 
 ---
-<div class="media-wrapper media-wrapper--thumbs" role="list">
-  <button class="control control--button control--circle control--media media-prev is-thumbs-prev" aria-label="Previous thumbnails" type="button">❮</button>
-  <div class="media-wrapper media-wrapper--frames media-wrapper--ghost" role="list" data-window="10"></div>
-  <button class="control control--button control--circle control--media media-next is-thumbs-next" aria-label="Next thumbnails" type="button">❯</button>
+<div class="media-wrapper media-wrapper--thumbs" role="list" data-lightbox={isLightbox ? 'true' : undefined}>
+  <button class="control control--button control--circle control--media media-prev is-thumbs-prev" aria-label="Previous thumbnails" type="button">
+    <ICONS kind="previous" /></button>
+  <div class="media-wrapper media-wrapper--frames" role="list" data-window="10" data-lightbox={isLightbox ? 'true' : undefined}></div>
+  <button class="control control--button control--circle control--media media-next is-thumbs-next" aria-label="Next thumbnails" type="button">
+    <ICONS kind="next" />
+  </button>
 </div>
 

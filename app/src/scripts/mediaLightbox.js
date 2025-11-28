@@ -3,9 +3,9 @@ import { loadImageWithTransition } from './utils/_transitionLoader.js';
 export function initMediaLightbox({ root = document } = {}) {
   const el = root.querySelector('.media-lightbox');
   if (!el) return null;
-
-  const img = el.querySelector('.media-lightbox-image');
-  const closeButton = el.querySelector('.media-lightbox__close');
+  
+  const img = el.querySelector('.media-wrapper .media-frame .media-image');
+  const closeButton = document.querySelector('.media-lightbox__close');
 
   if (!img || !closeButton) return null;
 

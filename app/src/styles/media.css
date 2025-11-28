@@ -19,6 +19,8 @@
 
   --media-frame-shadow:             var(--fx-shadow--soft);
 
+  --media-frame-thumb-outline-state: 2px solid var(--color-accent);
+
   --media-thumb-shadow:             var(--fx-shadow--soft);
   --media-thumb-transform:          var(--transform-grow);
   --media-thumb-transition:         var(--transition-fade-in), var(--transition-state);
@@ -54,11 +56,9 @@
   justify-content: center;
   gap: var(--control-gap);
 }
-
-
-.media-wrapper--controls {
-
-  border-radius: var(--radius-l);
+.media-lightbox > .media-wrapper[data-lightbox="true"] {
+  display: flex;
+  flex-direction: column;
 }
 
 .media-wrapper--frames {
@@ -73,7 +73,14 @@
   padding: var(--card-padding);
 }
 
+.media-wrapper--thumbs[data-lightbox="true"] {
+  padding: calc(var(--card-padding) * .25);
+  inline-size: 100%;
+}
 
+.media-wrapper--cover {
+  padding: var(--card-gap);
+}
 /* ------------------------------------ */
 /* ---->  FRAME  <--------------------- */
 /* ------------------------------------ */
@@ -87,6 +94,11 @@
   max-block-size: 60vh;
   block-size: auto;
   box-shadow: var(--media-frame-shadow);
+}
+
+.media-frame[data-lightbox="true"] {
+  max-block-size: 80vh;
+  backdrop-filter: blur(18px) brightness(.95);
 }
 
 .content-section.cols-2 :where(.media-frame),
@@ -127,11 +139,12 @@
 }
 .media-frame--thumb:is([data-current="true"],:hover,:focus-visible) {
   opacity: 1;
-  outline: 2px solid var(--color-accent);
+  outline: var(--media-frame-thumb-outline-state);
 }
 .media-frame--thumb:is([aria-current="true"],:hover,:focus-visible) > * {
   opacity: 1;
 }
+
 
 /* ------------------------------------ */
 /* ---->  IMAGE  <--------------------- */
@@ -164,18 +177,16 @@
 /* ---->  IMAGE COVER  <---------------- */
 .media-image--cover {
   object-fit: cover;
+  aspect-ratio: 1/1;
   transform: var(--transform-scale);
 }
 
 /* ---->  IMAGE THUMB  <---------------- */
 .media-image--thumb { 
-  inline-size: 100%;
-  block-size: 100%;
   max-block-size: var(--thumb-size);
   max-inline-size: var(--thumb-size);
   transform: var(--media-thumb-transform);
   transition: var(--media-thumb-transition);
-  background: transparent;
   opacity: .8;
   object-fit: cover;
   will-change: var(--media-thumb-will-change);
@@ -194,7 +205,6 @@
   align-items: center;
   vertical-align: -1.1em;
   font-size: var(--icon-size-m);  
-
 }
 .media-icon--glow {filter: var(--media-icon-filter);}
 .media-icon--large {font-size: var(--icon-size-l);}
@@ -233,8 +243,17 @@
   inset: 0;
   display: grid;
   place-items: center;
-  padding: clamp(1rem, 4vw, 3rem);
-  background: var(--media-lightbox-bg);
+  padding: var(--card-padding);
+  box-shadow: var(--base-shadow);
+  background-image: 
+    var(--overlay-dim), 
+    var(--overlay-nebula), 
+    var(--overlay-stars), 
+    var(--base-bg);
+  background-blend-mode:multiply,overlay,soft-light,normal;
+  background-repeat: no-repeat,no-repeat,repeat,no-repeat;
+  background-size: cover,cover,640px 640px,cover;
+  background-position: center, top,center,center;
   z-index: 999;
   opacity: 0;
   pointer-events: none;
@@ -248,33 +267,16 @@
   pointer-events: auto;
 }
 
-.media-lightbox[data-visible="false"] {
-  opacity: 0;
-  pointer-events: none;
-}
-
 
 /* ---->  LIGHTBOX CLOSE <--------------- */
 .media-lightbox__close {
-  position: absolute;
-  inset-block-start: .35rem;
-  inset-inline-end: .35rem;
+
+
 }
-.media-lightbox__close:hover,
-.media-lightbox__close:focus-visible {
-  transform: var(--transform-scale);
-  opacity: 1;
-}
+
 
 /* ---->  LIGHTBOX THUMBS <--------------- */
 
 body.media-lightbox-open {
   overflow: hidden;
-}
-
-/* ---->  FALLBACK <--------------- */
-.media-empty {
-  margin: .5rem 0;
-  text-align: center;
-  opacity: .75;
 }

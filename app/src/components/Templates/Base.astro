@@ -13,7 +13,7 @@ import { ASSETS } from '@Assets/assets.registry';
 import { getNavigationLinks, getPageContent } from '@Content/siteContent';
 import { BaseParts,Template } from '@Frontend';
 import { buildBreadcrumbs, isLinkActive, normalizePath } from '@utils/navigation';
-
+import { ViewTransitions } from 'astro:transitions';
 
 // ---------------------------------------------------------------------------
 type LayoutMeta = {
@@ -65,13 +65,14 @@ const breadcrumbs = buildBreadcrumbs({
 });
 ---
 <html lang="en">
+  <ViewTransitions />
   <BaseParts.Meta title={title} description={description} url={url} image={image} />
   <body style={`
                 --overlay-nebula: url(${ASSETS.overlay__nebula.src});
                 --overlay-stars: url(${ASSETS.overlay__stars.src});
                 --overlay-stars--dense: url(${ASSETS.overlay__stars__dense.src});
                 --overlay-stars--large: url(${ASSETS.overlay__header.src});
-
+                --overlay-glitter: url(${ASSETS.overlay__glitter.src});
                 --hero--bg: url(${ASSETS.mascot.src});
               `}>
     

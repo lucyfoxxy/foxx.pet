@@ -32,7 +32,7 @@ const aria = props.ariaLabel ?? `View ${props.title}`;
 
 const formattedDate =
   props.date instanceof Date
-    ? new Intl.DateTimeFormat('en', { dateStyle: 'medium' }).format(props.date)
+    ? new Intl.DateTimeFormat('en', { month: 'short', year: 'numeric' }).format(props.date)
     : typeof props.date === 'string' && props.date.trim().length
     ? props.date
     : undefined;
@@ -62,11 +62,11 @@ const coverAlt = props.coverAlt ?? '';
     <Fragment slot="head">
       <h2 class="card__title">{props.title}</h2>
     </Fragment>
-
+<!--
     <Fragment slot="body">
 
-      {props.description ? <p>{props.description}</p> : null}
-    </Fragment>
+      <!--{props.description ? <p>{props.description}</p> : null}---
+    </Fragment>-->
 
     <Fragment slot="foot">
       <div class="media-wrapper">
@@ -86,7 +86,7 @@ const coverAlt = props.coverAlt ?? '';
         </div>
       </div>
     {formattedDate || formattedCount ? (
-      <div class="card__badges controls controls--tight">
+      <div class="card__badges controls controls--tight controls--nowrap">
         {formattedDate ? <span class="control control--badge">{formattedDate}</span> : null}
         {formattedCount ? <span class="control control--badge">{formattedCount}</span> : null}
       </div>

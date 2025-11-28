@@ -173,7 +173,7 @@ ${body}
       ? baseName.slice(0, -4)
       : baseName;
     const dir = isUrl(input) ? process.cwd() : path.dirname(path.resolve(input));
-    outPathResolved = path.join(dir, `${stem}.converted.svg`);
+    outPathResolved = path.join(dir, `${stem}.svg.converted`);
   }
 
   await fs.mkdir(path.dirname(outPathResolved), { recursive: true });

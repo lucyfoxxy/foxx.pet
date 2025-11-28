@@ -3,8 +3,8 @@
 /* ====== Depends on: tokens, site, typography ====== */
 /* ============================================ */
 :root {
-  --card-gap:                       var(--space-s);
-  --card-padding:                   clamp(var(--space-m),  calc(var(--space-m) + 2.95vw),  var(--space-xl));
+  --card-gap:                       clamp(var(--space-xs),  calc(var(--space-xs) + 1.25vw),  var(--space-s));
+  --card-padding:                   clamp(var(--space-s),  calc(var(--space-s) + 2.25vw),  var(--space-l));
   --card-radius:                    var(--radius-l);
   --card-radius--inner:             var(--radius-m);
 
@@ -266,7 +266,7 @@
   opacity: 0.9;
 }
 
-.card__overlay[data-show="false"] {
+.card__overlay--hover[data-show="false"] {
   opacity: 0;  
 }
 

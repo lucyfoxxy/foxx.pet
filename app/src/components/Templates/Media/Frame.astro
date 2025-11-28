@@ -1,6 +1,6 @@
 ---
 import ICONS from '@Assets/Icons.astro';
-
+import MediaThumbs from '@Templates/Media/Thumbs.astro';
 interface AlbumViewData {
   title: string;
   description: string;
@@ -23,6 +23,7 @@ interface Props {
   frameClass?: string;
   imageClass?: string;
   isLightbox?: boolean;
+  hasTitleOverlay?: boolean;
   autoplay?: boolean;
   random?: boolean;
   interval?: number;
@@ -34,6 +35,7 @@ const {
   frameClass,
   imageClass,
   isLightbox = false,
+  hasTitleOverlay = false,
   autoplay = true,
   random = true,
   interval = 8500,
@@ -42,8 +44,7 @@ const {
 ---
 <div
   class:list={[
-    'media-wrapper media-wrapper--controls',
-    isLightbox ? 'media-wrapper--lightbox' : null,
+    'media-wrapper',
     wrapperClass,
   ]}
   data-lightbox={isLightbox ? 'true' : undefined}
@@ -58,53 +59,50 @@ const {
     role="button"
     tabindex="0"
     aria-label="Open artwork in lightbox"
+    data-lightbox={isLightbox ? 'true' : undefined}
   >
     <img
       src={album.initialThumb?.src ?? ''}
       width={album.initialThumb?.width}
       height={album.initialThumb?.height}
       alt={album.initialThumb?.alt ?? ''}
-      class:list={['media-image', imageClass]}
+      class:list={['media-image', isLightbox ? 'media-lightbox-image' : undefined,imageClass]}
       loading="eager"
       decoding="async"
       data-initial-full={album.initialThumb?.full ?? undefined}
+      data-lightbox={isLightbox ? 'true' : undefined}
     />
-  </div>
 
   <div class="card__overlay card__overlay--foot card__overlay--hover">
-    <div class="card__overlay-item">
-      <div class="media-progress" aria-hidden="true"></div>
-    </div>
-    <div class="card__overlay-item">
-      <div class="controls media-controls controls--center">
-        <button class="control control--button control--circle control--media media-prev" aria-label="Previous" type="button">❮</button>
-        <button class="control control--button control--circle control--media media-pause" aria-label="Pause autoplay" type="button">
-          <ICONS class="media-icon media-icon--small" kind="pause" />
-        </button>
-        <button class="control control--button control--circle control--media media-play" aria-label="Start autoplay" type="button">
-          <ICONS class="media-icon media-icon--small" kind="play" />
-        </button>
-        <button class="control control--button control--circle control--media media-next" aria-label="Next" type="button">❯</button>
-      </div>
+    <div class="card__overlay-item media-progress" aria-hidden="true"></div>
+    <div class="card__overlay-item controls media-controls controls--center">  
+      <button class="control control--button control--circle control--media media-prev is-thumbs-prev" aria-label="Previous thumbnails" type="button">
+        <ICONS kind="previous" />
+      </button>
+      <button class="control control--button control--circle control--media media-pause" aria-label="Pause autoplay" type="button">
+        <ICONS class="media-icon media-icon--small" kind="pause" />
+      </button>
+      <button class="control control--button control--circle control--media media-play" aria-label="Start autoplay" type="button">
+        <ICONS class="media-icon media-icon--small" kind="play" />
+      </button>
+      <button class="control control--button control--circle control--media media-next is-thumbs-next" aria-label="Next thumbnails" type="button">
+        <ICONS kind="next" />
+      </button>
 
-      <div class="controls media-controls controls--end">
-        <button class="control control--button control--circle control--media media-fullscreen" aria-label="Open Lightbox" type="button">
-          <ICONS class="media-icon media-icon--small" kind="fullscreen" />
-        </button>
-      </div>
+      <button class:list={['control', 'control--button', 'control--circle', 'control--media', isLightbox ? 'media-lightbox__close' : 'media-fullscreen']} 
+              aria-label={isLightbox ? "Close Lightbox" : "Open Lightbox"} 
+              type="button">
+              
+              <ICONS class="media-icon media-icon--small" kind={isLightbox ? "close" : "fullscreen"} />
+      </button>
     </div>
-
   </div>
-
+  {album.title && hasTitleOverlay ? (
   <div class="card__overlay card__overlay--head card__overlay--hover">
-    <div class="card__overlay-item">
-      
-    {album.title ? (
+    <div class="card__overlay-item">    
       <h2>
         {album.title.includes('SFW') ? `Artworks: ${album.title}` : album.title}
       </h2>
-    ) : null}
-
     {(album.categoryBadge || album.dateBadge) && (
       <div class="card__badges controls controls--end">
         <span class="control control--badge">
@@ -113,13 +111,9 @@ const {
       </div>
     )}
   </div>
-  {album.description ? (
-    <div class="card__overlay-item">
-      <p>{album.description}</p>
-    </div>
-  ) : null}
-</div>
-</div>
+</div>):null}
+{isLightbox ? <MediaThumbs isLightbox={isLightbox} /> : null}
+
 
       
 

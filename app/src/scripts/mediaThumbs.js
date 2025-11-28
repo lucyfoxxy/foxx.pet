@@ -1,6 +1,6 @@
 // src/scripts/mediaThumbs.js
-
-const MAX_VISIBLE_THUMBS = 7;
+import _isMobile from '@Scripts/utils/_isMobile.js';
+const MAX_VISIBLE_THUMBS = !_isMobile() ? 7 : 5;
 const EXTRA_VISIBLE_THUMBS = 0;
 
 const parseLength = (v) => { const n = parseFloat(v); return Number.isFinite(n) ? n : null; };
