@@ -91,7 +91,7 @@
   border-radius: var(--radius-l);
   border-style: hidden;
   overflow: hidden;
-  max-block-size: 60vh;
+  max-block-size: 40vh;
   block-size: auto;
   box-shadow: var(--media-frame-shadow);
 }

@@ -60,20 +60,33 @@ const goatCounterScriptSrc = 'https://stats.foxx.pet/count.js';
 
   import initStarsCanvas from '@Scripts/stars-overlay.js';
   import _isMobile from '@/scripts/utils/_isMobile';
-  const starsRegistry = new WeakMap<HTMLCanvasElement, () => void>();
+  const starsRegistry = new Map<HTMLCanvasElement, () => void>();
 
-  if(!_isMobile()){
-    
-    _runOnReady(() => {
-      document
-        .querySelectorAll<HTMLCanvasElement>('.panel-wrapper .stars-canvas')
-        .forEach((canvas) => {
-          const stop = initStarsCanvas(canvas, { density: 0.17, fps: 90, glow: true });
-          starsRegistry.set(canvas, stop);
-        });
-    });
+  const stopAllStars = () => {
+    starsRegistry.forEach((stop) => stop?.());
+    starsRegistry.clear();
   };
-  // Beispiel Cleanup (wenn du Panels entfernst/Hot-Reload o.ä.):
+
+  const initStars = () => {
+    if (_isMobile()) return;
+
+    stopAllStars();
+    document
+      .querySelectorAll<HTMLCanvasElement>('.panel-wrapper .stars-canvas')
+      .forEach((canvas) => {
+        const stop = initStarsCanvas(canvas, { density: 0.17, fps: 90, glow: true });
+        starsRegistry.set(canvas, stop);
+      });
+  };
+
+  const registerStars = () => {
+    initStars();
+    document.addEventListener('astro:page-load', initStars);
+    document.addEventListener('astro:before-swap', stopAllStars);
+  };
+
+  _runOnReady(registerStars);
+
   export function stopStars(canvas: HTMLCanvasElement) {
     const stop = starsRegistry.get(canvas);
     if (stop) stop();

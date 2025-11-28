@@ -3,12 +3,12 @@
 /* ====== Depends on: tokens, site, typography ====== */
 /* ============================================ */
 :root {
-  --card-gap:                       clamp(var(--space-xs),  calc(var(--space-xs) + 1.25vw),  var(--space-s));
+  --card-gap:                       var(--space-s);
   --card-padding:                   clamp(var(--space-s),  calc(var(--space-s) + 2.25vw),  var(--space-xl));
   --card-radius:                    var(--radius-l);
   --card-radius--inner:             var(--radius-m);
 
-  --card-backdrop:                  var(--fx-blur-m) var(--fx-bright) var(--fx-saturate--soft);
+  --card-backdrop:                  var(--fx-blur-s) var(--fx-bright) var(--fx-saturate--soft);
   --card-shadow:                    var(--fx-shadow);
   --card-transition:                var(--transition-state--slow);
   --card-transform--fx:             var(--transform-grow);

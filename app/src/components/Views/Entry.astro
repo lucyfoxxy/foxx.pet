@@ -119,8 +119,9 @@ const meta = {
     </section>
   ) : albumView ? (
     <>
+    <section class="content-section">
       {albumView.title || albumView.description ? (
-        <section class="content-section content-section--head">
+        
           <Template.Card class="card--plain card--center">
             {albumView.title ? (
               <Fragment slot="head">
@@ -130,14 +131,16 @@ const meta = {
 
             {albumView.description ? (
               <Fragment slot="body">
-                {albumView.description}
+                <div class="prose">
+                  <p>{albumView.description}</p>
+                </div>
               </Fragment>
             ) : null}
           </Template.Card>
-        </section>
+
       ) : null}
 
-      <section class="content-section">
+
         <Template.Card class="card--flush card--center">
 
           <Fragment slot="body">

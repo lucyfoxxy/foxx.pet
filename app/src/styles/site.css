@@ -171,7 +171,9 @@ main.panel {
 .prose:first-child {
   margin-block-start: 0;
 }
-
+.prose:last-child {
+  margin-block-end: 0;
+}
 .prose>* {
   margin: 0;
 }
