@@ -103,13 +103,13 @@
 
 .content-section.cols-2 :where(.media-frame),
 .content-section--masonry :where(.media-frame) {
-  aspect-ratio: 4/3;
+  aspect-ratio: 16/9;
 
 }
 
 .content-section.cols-3 :where(.media-frame) {
   aspect-ratio: 1 / 1;
-  max-block-size: 35vh;
+
 }
 
 @media (max-width: 800px) {
@@ -117,7 +117,8 @@
   .content-section.cols-2 :where(.media-frame),
   .content-section.cols-3 :where(.media-frame) {
     aspect-ratio: 1 / 1;
-    max-block-size: 35vh;
+  max-block-size: 35vh;
+  inline-size: auto;
   }
 }
 

@@ -108,7 +108,7 @@ a {
 .control--badge {
   font-size: clamp(var(--font-size-xs), calc(var(--font-size-xs) + .1vw), var(--font-size-s));
   font-weight: var(--font-weight-thin);
-  line-height: var(--line-height-xxs);
+  line-height: var(--line-height-xs);
 }
 .footer__meta {
   font-size: clamp(var(--font-size-xs), calc(var(--font-size-xs) + .0125rem), var(--font-size-s));

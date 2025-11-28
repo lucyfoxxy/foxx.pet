@@ -4,7 +4,7 @@
 /* ============================================ */
 :root {
   --card-gap:                       clamp(var(--space-xs),  calc(var(--space-xs) + 1.25vw),  var(--space-s));
-  --card-padding:                   clamp(var(--space-s),  calc(var(--space-s) + 2.25vw),  var(--space-l));
+  --card-padding:                   clamp(var(--space-s),  calc(var(--space-s) + 2.25vw),  var(--space-xl));
   --card-radius:                    var(--radius-l);
   --card-radius--inner:             var(--radius-m);
 

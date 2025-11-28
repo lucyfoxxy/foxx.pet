@@ -5,6 +5,10 @@ const EXTRA_VISIBLE_THUMBS = 0;
 
 const parseLength = (v) => { const n = parseFloat(v); return Number.isFinite(n) ? n : null; };
 
+/**
+ * @param {*} api
+ * @param {Document | Element} [root=document]
+ */
 export function initMediaThumbs(api, root =document) {
   if (!api) return null;
 
