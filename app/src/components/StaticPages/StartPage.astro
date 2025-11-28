@@ -113,13 +113,7 @@ const isExternalLink = (href: string) => href.startsWith('http');
           <h2 class="card__title">{feature.heading}</h2>
           <p>{feature.description}</p>
         </Fragment>  
-        {albumData.description ? (
-        <Fragment slot="body">
-          <div class="prose">
-            <p>{albumData.description}</p>
-          </div>
-        </Fragment>
-        ) : null}
+
 
         <Fragment slot="foot">       
           <Template.MediaFrame album={albumData} imageClass="media-image--cover" hasTitleOverlay={true}/>
