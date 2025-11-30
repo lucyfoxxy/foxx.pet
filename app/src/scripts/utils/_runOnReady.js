@@ -1,8 +1,14 @@
 export function runOnReady(callback) {
   if (typeof callback !== 'function') return;
 
+  let lastUrl = null;
+
   const run = () => {
     try {
+      const currentUrl = window.location.href;
+      if (currentUrl === lastUrl) return;
+
+      lastUrl = currentUrl;
       callback();
     } catch (error) {
       // eslint-disable-next-line no-console
@@ -10,17 +16,15 @@ export function runOnReady(callback) {
     }
   };
 
+  const scheduleRun = () => requestAnimationFrame(run);
+
   if (document.readyState === 'complete' || document.readyState === 'interactive') {
-    requestAnimationFrame(run);
-    return;
+    scheduleRun();
+  } else {
+    document.addEventListener('DOMContentLoaded', scheduleRun, { once: true });
   }
 
-  const once = () => {
-    requestAnimationFrame(run);
-  };
-
-  document.addEventListener('DOMContentLoaded', once, { once: true });
-  document.addEventListener('astro:page-load', once, { once: true });
+  document.addEventListener('astro:page-load', scheduleRun);
 }
 
 export default runOnReady;
