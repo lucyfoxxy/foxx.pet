@@ -29,7 +29,7 @@
   --color-light--soft:              color-mix(in oklch, var(--color-light) 50%, transparent);
   --color-light--ghosty:            color-mix(in oklch, var(--color-light) 30%, transparent);
 
-  --color-accent:                 oklch(74% 0.145 300); 
+  --color-accent:                 oklch(54% 0.2 291); 
   --color-accent--strong:           color-mix(in oklch, var(--color-accent) 70%, transparent);
   --color-accent--soft:             color-mix(in oklch, var(--color-accent) 50%, transparent);
   --color-accent--ghosty:           color-mix(in oklch, var(--color-accent) 30%, transparent);
