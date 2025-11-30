@@ -54,6 +54,7 @@
   background: transparent; 
   box-shadow: none; 
   backdrop-filter: none;
+  padding-block-end: 0;
 }
 .card--plain :where(.prose){ 
   font-weight: var(--font-weight-thick);

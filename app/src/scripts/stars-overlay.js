@@ -17,17 +17,30 @@ export default function initStarsCanvas(canvas, opts = {}) {
 
   function resize() {
     const rect = canvas.getBoundingClientRect();
+    const prevW = W || Math.max(1, Math.floor(rect.width));
+    const prevH = H || Math.max(1, Math.floor(rect.height));
+
     W = Math.max(1, Math.floor(rect.width));
     H = Math.max(1, Math.floor(rect.height));
     canvas.width = W;
     canvas.height = H;
 
     const target = Math.floor((W * H) / 1000 * density);
-    if (target !== stars.length) {
-      stars = [];
-      for (let i = 0; i < target; i++) {
+    const scaleX = W / prevW;
+    const scaleY = H / prevH;
+
+    // Preserve existing stars to avoid visible resets during minor resizes
+    for (const star of stars) {
+      star.x = Math.min(W, Math.max(0, star.x * scaleX));
+      star.y = Math.min(H, Math.max(0, star.y * scaleY));
+    }
+
+    if (target > stars.length) {
+      for (let i = stars.length; i < target; i++) {
         stars.push(makeStar());
       }
+    } else if (target < stars.length) {
+      stars.length = target;
     }
   }
 
