@@ -19,7 +19,7 @@
 
 
   /* ====== Base Colors ========================= */
-  --color-dark:                   oklch(19.5% 0.095 295);
+  --color-dark:                   oklch(0.2226 0.0801 295.25);
   --color-dark--strong:             color-mix(in oklch, var(--color-dark) 70%, transparent);
   --color-dark--soft:               color-mix(in oklch, var(--color-dark) 50%, transparent);
   --color-dark--ghosty:             color-mix(in oklch, var(--color-dark) 30%, transparent);
@@ -34,7 +34,7 @@
   --color-accent--soft:             color-mix(in oklch, var(--color-accent) 50%, transparent);
   --color-accent--ghosty:           color-mix(in oklch, var(--color-accent) 30%, transparent);
 
-  --color-accent-dark:              oklch(26.487% 0.13615 293.252);
+  --color-accent-dark:              oklch(0.2634 0.1131 294.84);
   --color-accent-dark--strong:      color-mix(in oklch, var(--color-accent-dark) 70%, transparent);
   --color-accent-dark--soft:        color-mix(in oklch, var(--color-accent-dark) 50%, transparent);
   --color-accent-dark--ghosty:      color-mix(in oklch, var(--color-accent-dark) 30%, transparent);
@@ -66,7 +66,7 @@
 
   --fx-bright--soft:                brightness(1.1);
   --fx-bright:                      brightness(1.35);
-  --fx-bright--strong:              brightness(1.4);
+  --fx-bright--strong:              brightness(1.6);
 
   --fx-saturate--soft:              saturate(1.05);
   --fx-saturate:                    saturate(1.1);
@@ -82,7 +82,7 @@
 
   --fx-border--soft:                1px solid var(--color-dark--ghosty);
 
-  --overlay-dim:                    radial-gradient(ellipse at center,transparent 40%, var(--color-dark--strong) 120%); 
+  --overlay-dim:                    radial-gradient(ellipse at center,transparent 40%, var(--color-dark--soft) 120%); 
 
 
   /* ====== Motion ====== */

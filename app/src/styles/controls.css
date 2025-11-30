@@ -6,9 +6,9 @@
   --control-gap:                    clamp(var(--space-xxs),  calc(var(--space-xxs) + .15rem),    var(--space-xs));
   --control-padding:                clamp(var(--space-xs),  calc(var(--space-xs) + 1.29vw),    var(--space-s));
 
-  --control-bg:                     var(--color-dark--strong);
+  --control-bg:                    var(--color-accent-dark);
   --control-shadow:                 var(--fx-shadow--soft);
-  --control-filter--fx:             var(--fx-bright);
+  --control-filter--fx:             var(--fx-bright--strong);
 
   --control-transition:             var(--transition-state);
   --control-transform--fx:          var(--transform-raise);
@@ -74,7 +74,7 @@
 
 .control--badge {
   padding-block: calc(var(--control-padding) * 0.65);
-  padding-inline: calc(var(--control-padding) * 0.65);
+  padding-inline: calc(var(--control-padding) * 0.85);
 }
 
 .control--small {

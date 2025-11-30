@@ -3,7 +3,7 @@
   --is-mobile: 'false';  
   color-scheme: dark; 
   view-transition-name: root;
-  --base-bg:                        linear-gradient(205deg, #371173, #240a46, rgb(40, 7, 112));
+  --base-bg:                        linear-gradient(135deg, #371173, #240a46, rgb(40, 7, 112));
   --base-shadow:                    inset 0 0 164px 64px rgba(0,0,0,.5);
 }
 @media (max-width: 900px) { :root { --is-mobile: 'true'; }}
@@ -42,13 +42,7 @@ body::before {
   will-change: var(--panel-base-will-change);
   transform: var(--panel-base-transform);
 }
-@media(max-width: 900px){
-  body::before {
-    background: none;
-    box-shadow: none;
-    filter: none;
-  }
-}
+
 
 :where(h1, h2, h3, h4, a) {
   text-shadow: var(--text-shadow);
