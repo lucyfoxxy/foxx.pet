@@ -20,69 +20,79 @@ const formatClassList = (value: string, fallback = 'default') =>
     : fallback;
 
 const navSections = [
-  { id: 'overview', label: 'Style Overview' },
+  { id: 'foundation', label: 'Foundation' },
   { id: 'shadows', label: 'Shadows & Glows' },
   { id: 'cards', label: 'Cards' },
-  { id: 'controls', label: 'Buttons & Badges' },
+  { id: 'controls', label: 'Controls' },
   { id: 'layouts', label: 'Control Layouts' },
   { id: 'media', label: 'Media & Icons' },
   { id: 'typography', label: 'Typography' },
 ];
 
-const stylesheetStats = [
-  { file: 'src/styles/base.css', classes: 2, tokens: 0 },
-  { file: 'src/styles/content.css', classes: 27, tokens: 2 },
-  { file: 'src/styles/controls.css', classes: 28, tokens: 5 },
-  { file: 'src/styles/media.css', classes: 18, tokens: 1 },
-  { file: 'src/styles/site.css', classes: 4, tokens: 0 },
-  { file: 'src/styles/site_footer.css', classes: 12, tokens: 0 },
-  { file: 'src/styles/site_header.css', classes: 9, tokens: 0 },
-  { file: 'src/styles/table.css', classes: 13, tokens: 0 },
-  { file: 'src/styles/tokens.css', classes: 0, tokens: 108 },
-  { file: 'src/styles/typography.css', classes: 16, tokens: 2 },
-];
-
-const uniqueTotals = { classes: 110, tokens: 117 };
-
-const unusedClasses = [
-  'badge',
-  'button--large',
-  'card--ghost',
-  'card__spacer',
-  'controls--evenly',
-  'controls--stretch',
-  'header__bar',
-  'header__bar--bottom',
-  'header__bar--top',
-  'media-empty',
-  'media-icon--small',
-  'media-image--placeholder',
-  'table__price',
-  'table__subtitle',
-  'table__td',
-  'table__td--right',
-  'table__th',
-  'table__th--left',
-  'table__th--right',
-  'table__tr',
-  'table__unit',
-  'table__wrap',
-];
-
-const unusedTokens: string[] = [];
-
-const tokenAuditNote =
-  'Glow-specific tokens were removed during the control refactor. The audit will return once the new token set is finalized.';
-
-const mascotGallery = [
+const tokenGroups = [
   {
-    id: 'mascot-v1',
-    label: 'Mascot (Hero render)',
-    asset: ASSETS.mascot,
-    token: 'ASSETS.mascot',
-    description: 'Original hero render used throughout the landing + blog hero cards.',
+    title: 'Spacing & radius',
+    description: 'Shared rhythm and rounding scale applied to every surface.',
+    items: [
+      {
+        label: 'Spacing scale',
+        tokens: ['--space-xxs', '--space-xs', '--space-s', '--space-m', '--space-l', '--space-xl', '--space-xxl', '--space-xxxl'],
+      },
+      {
+        label: 'Corner radius',
+        tokens: ['--radius-xxs', '--radius-xs', '--radius-s', '--radius-m', '--radius-l', '--radius-xl', '--radius-xxl'],
+      },
+    ],
   },
-
+  {
+    title: 'Color families',
+    description: 'Dark, light and accent ramps that inform surface, text and media tints.',
+    items: [
+      {
+        label: 'Dark spectrum',
+        swatch: '--color-dark',
+        tokens: ['--color-dark', '--color-dark--strong', '--color-dark--soft', '--color-dark--ghosty'],
+      },
+      {
+        label: 'Light spectrum',
+        swatch: '--color-light',
+        tokens: ['--color-light', '--color-light--strong', '--color-light--soft', '--color-light--ghosty'],
+      },
+      {
+        label: 'Accent core',
+        swatch: '--color-accent',
+        tokens: ['--color-accent', '--color-accent--strong', '--color-accent--soft', '--color-accent--ghosty'],
+      },
+      {
+        label: 'Accent light',
+        swatch: '--color-accent-light',
+        tokens: ['--color-accent-light', '--color-accent-light--strong', '--color-accent-light--soft', '--color-accent-light--ghosty'],
+      },
+      {
+        label: 'Accent dark',
+        swatch: '--color-accent-dark',
+        tokens: ['--color-accent-dark', '--color-accent-dark--strong', '--color-accent-dark--soft', '--color-accent-dark--ghosty'],
+      },
+    ],
+  },
+  {
+    title: 'FX & motion',
+    description: 'Reusable glow, shadow and transition stacks that cards and controls consume.',
+    items: [
+      {
+        label: 'Surface shadows',
+        tokens: ['--fx-shadow--soft', '--fx-shadow', '--fx-shadow--strong', '--fx-shadow-inset--ghosty', '--fx-shadow-inset--soft'],
+      },
+      {
+        label: 'Glows & filters',
+        tokens: ['--text-glow', '--icon-shadow', '--fx-glow', '--fx-glow--strong', '--fx-bright', '--fx-saturate'],
+      },
+      {
+        label: 'Motion & transforms',
+        tokens: ['--transition-state', '--transition-state--slow', '--transition-fade-in', '--transition-fade-out', '--transform-raise', '--transform-grow'],
+      },
+    ],
+  },
 ];
 
 const surfaceEffects = [
@@ -131,41 +141,46 @@ const cardVariants = [
   {
     title: 'Default card',
     classes: '',
-    note: 'Balanced spacing, frosted surface & default shadow stack.',
-  },
-  {
-    title: 'Ghost card',
-    classes: 'card--ghost',
-    note: 'Accent tinted glass with a luminous border glow.',
+    note: 'Backdropped surface with balanced spacing and default shadow stack.',
   },
   {
     title: 'Plain card',
-    classes: 'card--plain card--center',
-    note: 'Removes backdrop & aligns content to center.',
+    classes: 'card--plain',
+    note: 'Removes blur + shadow when nested into other layouts.',
+  },
+  {
+    title: 'Condensed card',
+    classes: 'card--condense',
+    note: 'Tighter vertical rhythm for dense control groupings.',
+  },
+  {
+    title: 'Animated card',
+    classes: 'card--animate',
+    note: 'Hover lift and glow driven by `--card-transition` stack.',
   },
   {
     title: 'Flush media card',
-    classes: 'card--flush',
-    note: 'Zero padding – perfect for edge-to-edge media.',
+    classes: 'card--flush card--stretch',
+    note: 'Edge-to-edge media wrapper with zero padding.',
     showMedia: true,
   },
   {
-    title: 'Condensed animated card',
-    classes: 'card--condense card--animate',
-    note: 'Tighter vertical rhythm and hover scale effect.',
+    title: 'Centered card',
+    classes: 'card--center',
+    note: 'Aligns headline, badges and prose to the center.',
   },
 ];
 
 const buttonVariants = [
   {
-    label: 'Default button',
+    label: 'Primary button',
     classes: 'control control--button',
-    description: 'Primary button surface.',
+    description: 'Uses `--control-bg`, drop shadow and glow hover states.',
   },
   {
     label: 'Plain button',
     classes: 'control control--button control--plain',
-    description: 'No backdrop or outline – integrates with media.',
+    description: 'Text-first control with transparent surface and glow hover.',
   },
 ];
 
@@ -195,8 +210,8 @@ const badgeVariants = [
     classes: 'control control--badge',
   },
   {
-    label: 'Current badge',
-    classes: 'control control--badge is-current',
+    label: 'Plain badge',
+    classes: 'control control--badge control--plain',
   },
 ];
 
@@ -235,7 +250,16 @@ const mediaThumbs = [
   { alt: 'Placeholder cover', src: COVERS.placeholder },
   { alt: 'Lucys Journeys cover', src: COVERS.lucys_journeys },
   { alt: 'Placeholder cover duplicate', src: COVERS.placeholder },
+];
 
+const mascotGallery = [
+  {
+    id: 'mascot-v1',
+    label: 'Mascot (Hero render)',
+    asset: ASSETS.mascot,
+    token: 'ASSETS.mascot',
+    description: 'Original hero render used throughout the landing + blog hero cards.',
+  },
 ];
 ---
 <Template.Base>
@@ -247,8 +271,8 @@ const mediaThumbs = [
       <Fragment slot="body">
         <div class="prose">
           <p>
-            Every surface, control and helper class used across the site is gathered here. Hover, focus and click
-            elements to review their interactive states and elevation tokens.
+            Every global token, surface and control style can be inspected here. Hover, focus and click elements to
+            review how the shared transitions, glows and shadows behave.
           </p>
         </div>
       </Fragment>
@@ -264,81 +288,37 @@ const mediaThumbs = [
     </Template.Card>
   </section>
 
-  <section class="content-section" id="overview">
+  <section class="content-section" id="foundation">
     <Template.Card class="card--plain" headClass="card__head--column">
       <Fragment slot="head">
-        <h2 class="card__title">Class & token overview</h2>
-        <p>Snapshot of selectors + CSS variables tracked across `src/styles`.</p>
+        <h2 class="card__title">Foundation tokens</h2>
+        <p>Spacing, color, motion and FX variables that drive every component.</p>
       </Fragment>
       <Fragment slot="body">
-        <div class="overview-grid">
-          <div class="overview-stats">
-            <div class="stat stat--classes">
-              <span class="stat__label">Unique classes</span>
-              <strong class="stat__value">{uniqueTotals.classes}</strong>
-              <span class="stat__hint">Across Astro components & pages</span>
-            </div>
-            <div class="stat stat--tokens">
-              <span class="stat__label">Unique tokens</span>
-              <strong class="stat__value">{uniqueTotals.tokens}</strong>
-              <span class="stat__hint">Shadow, glow & color variables</span>
-            </div>
-          </div>
-          <div class="overview-table-wrapper">
-            <table class="overview-table">
-              <thead>
-                <tr>
-                  <th scope="col">Stylesheet</th>
-                  <th scope="col">Classes</th>
-                  <th scope="col">Tokens</th>
-                </tr>
-              </thead>
-              <tbody>
-                {stylesheetStats.map((sheet) => (
-                  <tr>
-                    <th scope="row"><code>{sheet.file}</code></th>
-                    <td>{sheet.classes}</td>
-                    <td>{sheet.tokens}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <div class="overview-audit">
-            <div class="audit-card">
-              <div class="audit-card__head">
-                <h3>Unused selectors</h3>
-                <span class="pill">{unusedClasses.length}</span>
+        <div class="token-grid">
+          {tokenGroups.map((group) => (
+            <div class="token-card">
+              <div class="token-card__head">
+                <h3>{group.title}</h3>
+                <p>{group.description}</p>
               </div>
-              <p class="audit-card__lede">
-                Defined in stylesheets but currently not applied in any Astro page or script. Reclaim or drop to reduce
-                bundle weight.
-              </p>
-              <div class="pill-grid" role="list">
-                {unusedClasses.map((className) => (
-                  <span class="pill pill--ghost" role="listitem">.{className}</span>
+              <div class="token-card__list">
+                {group.items.map((item) => (
+                  <div class:list={["token-pill", item.swatch && 'token-pill--has-swatch']}>
+                    <div class="token-pill__meta">
+                      <strong>{item.label}</strong>
+                    </div>
+                    <div class="token-pill__tokens">
+                      {item.tokens.map((token) => (
+                        <code class="token-chip">{token}</code>
+                      ))}
+                    </div>
+                    {item.swatch && <span class="token-chip token-chip--swatch" style={`--token-color: var(${item.swatch})`} />}
+                  </div>
                 ))}
               </div>
             </div>
-            <div class="audit-card">
-              <div class="audit-card__head">
-                <h3>Unused tokens</h3>
-                <span class="pill">{unusedTokens.length}</span>
-              </div>
-              <p class="audit-card__lede">
-                Variables with zero <code>var(--token)</code> references. Candidates for cleanup or future refactors.
-              </p>
-              {unusedTokens.length > 0 ? (
-                <div class="pill-grid" role="list">
-                  {unusedTokens.map((token) => (
-                    <span class="pill pill--ghost" role="listitem">{token}</span>
-                  ))}
-                </div>
-              ) : (
-                <p class="audit-card__note">{tokenAuditNote}</p>
-              )}
-            </div>
-          </div>
+          ))}
         </div>
       </Fragment>
     </Template.Card>
@@ -594,37 +574,33 @@ const mediaThumbs = [
       <Fragment slot="body">
         <div class="media-wrapper media-wrapper--thumbs">
           <button class="control control--button control--circle control--media media-prev is-thumbs-prev" type="button" aria-label="Previous thumbnails">❮</button>
-          <div class="media-wrapper media-wrapper--frames" role="list" data-window="3">
+          <div class="media-thumbs">
             {mediaThumbs.map((thumb, index) => (
-              <div
-                class="media-frame media-frame--thumb"
-                role="listitem"
-                aria-current={index === 0 ? 'true' : undefined}
-              >
-                <Picture src={thumb.src} formats={["webp"]} inferSize alt={thumb.alt} class="media-image media-image--thumb" />
+              <div class={['media-frame', index === 1 ? 'media-frame--current' : '']}>
+                <Picture src={thumb.src} formats={["webp"]} inferSize alt={thumb.alt} class="media-image" />
               </div>
             ))}
           </div>
           <button class="control control--button control--circle control--media media-next is-thumbs-next" type="button" aria-label="Next thumbnails">❯</button>
         </div>
-        <div class="icon-section icon-section--sizes">
-          <h3 class="icon-section__title">Icon sizing helpers</h3>
+
+        <div class="icon-section">
+          <p class="icon-section__title">Icon sizes</p>
           <div class="icon-grid icon-grid--sizes">
             {iconSizes.map((icon) => (
               <div class="icon-grid__item">
                 <Icons class={icon.classes} kind={icon.kind} />
-                <span>{icon.label}</span>
+                <span>{formatClassList(icon.classes)}</span>
               </div>
             ))}
           </div>
-        </div>
-        <div class="icon-section icon-section--catalog">
-          <h3 class="icon-section__title">Icon catalog</h3>
+
+          <p class="icon-section__title">Icon catalog</p>
           <div class="icon-grid icon-grid--catalog">
-            {iconCatalog.map((icon) => (
+            {iconCatalog.map((iconKey) => (
               <div class="icon-grid__item icon-grid__item--catalog">
-                <Icons class="media-icon" kind={icon} />
-                <span>{icon}</span>
+                <Icons class="media-icon" kind={iconKey as keyof typeof ICON_REGISTRY} />
+                <span>{iconKey}</span>
               </div>
             ))}
           </div>
@@ -675,116 +651,62 @@ const mediaThumbs = [
   </section>
 
   <style>
-    .swatch-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-      gap: var(--flow-gap);
-    }
-
-    .overview-grid {
+    .token-grid {
       display: grid;
       gap: var(--section-gap);
       grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
     }
 
-    .overview-stats {
+    .token-card {
       display: grid;
       gap: var(--flow-gap);
     }
 
-    .stat {
-      padding: var(--section-gap);
-      border-radius: var(--radius-xl);
-      background: color-mix(in oklab, var(--color-light--ghosty) 35%, transparent);
-      display: grid;
-      gap: calc(var(--flow-gap) * 0.35);
-    }
-
-    .stat__label {
-      font-size: var(--font-size-xs);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      opacity: 0.75;
-    }
-
-    .stat__value {
-      font-size: clamp(2.5rem, 4vw, 3rem);
-      line-height: 1;
-    }
-
-    .stat__hint {
-      font-size: var(--font-size-xs);
-      opacity: 0.8;
-    }
-
-    .overview-table-wrapper {
-      overflow-x: auto;
-    }
-
-    .overview-table {
-      inline-size: 100%;
-      border-collapse: collapse;
-      font-size: var(--font-size-s);
-    }
-
-    .overview-table th,
-    .overview-table td {
-      padding: 0.35rem 0.5rem;
-      border-bottom: 1px solid color-mix(in oklab, var(--card-border) 70%, transparent);
-    }
-
-    .overview-table tbody tr:last-child th,
-    .overview-table tbody tr:last-child td {
-      border-bottom: 0;
-    }
-
-    .overview-audit {
-      display: grid;
-      gap: var(--flow-gap);
-      grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
-    }
-
-    .audit-card {
-      padding: var(--section-gap);
-      border-radius: var(--radius-l);
-      border: 1px solid color-mix(in oklab, var(--card-border) 70%, transparent);
-      background: color-mix(in oklab, var(--color-light--ghosty) 65%, transparent);
-      display: grid;
-      gap: calc(var(--flow-gap) * 0.75);
-    }
-
-    .audit-card__head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: var(--flow-gap);
-      font-size: var(--font-size-s);
-    }
-
-    .audit-card__head h3 {
+    .token-card__head h3 {
       margin: 0;
     }
 
-    .audit-card__lede {
+    .token-card__head p {
       margin: 0;
       font-size: var(--font-size-xs);
       opacity: 0.85;
     }
 
-    .audit-card__note {
-      margin: 0;
-      font-size: var(--font-size-xs);
-      opacity: 0.8;
-    }
-
-    .pill-grid {
+    .token-card__list {
       display: grid;
-      gap: 0.5rem;
-      grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
-      align-items: flex-start;
+      gap: var(--flow-gap);
     }
 
-    .pill {
+    .token-pill {
+      display: grid;
+      gap: calc(var(--flow-gap) * 0.35);
+      align-items: center;
+      grid-template-columns: 1fr;
+      padding: calc(var(--control-padding) * 0.9);
+      border-radius: var(--radius-l);
+      border: 1px solid color-mix(in oklab, var(--card-border) 65%, transparent);
+      background: color-mix(in oklab, var(--color-light--ghosty) 35%, transparent);
+    }
+
+    .token-pill--has-swatch {
+      grid-template-columns: 1fr auto;
+      align-items: start;
+    }
+
+    .token-pill__meta {
+      display: grid;
+      gap: calc(var(--flow-gap) * 0.25);
+      font-size: var(--font-size-xs);
+    }
+
+    .token-pill__tokens {
+      display: flex;
+      flex-wrap: wrap;
+      gap: calc(var(--flow-gap) * 0.5);
+      align-items: center;
+    }
+
+    .token-chip {
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -798,9 +720,19 @@ const mediaThumbs = [
       text-align: center;
     }
 
-    .pill--ghost {
-      background: color-mix(in oklab, var(--card-border) 20%, transparent);
-      color: var(--text-color);
+    .token-chip--swatch {
+      inline-size: 2rem;
+      block-size: 2rem;
+      padding: 0;
+      border-radius: var(--radius-m);
+      background: var(--token-color);
+      border: 1px solid color-mix(in oklab, var(--color-dark) 20%, transparent);
+    }
+
+    .swatch-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+      gap: var(--flow-gap);
     }
 
     .swatch {

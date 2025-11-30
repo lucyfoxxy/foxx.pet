@@ -34,7 +34,7 @@
   --color-accent--soft:             color-mix(in oklch, var(--color-accent) 50%, transparent);
   --color-accent--ghosty:           color-mix(in oklch, var(--color-accent) 30%, transparent);
 
-  --color-accent-dark:              oklch(28% 0.17 295);
+  --color-accent-dark:              oklch(26.487% 0.13615 293.252);
   --color-accent-dark--strong:      color-mix(in oklch, var(--color-accent-dark) 70%, transparent);
   --color-accent-dark--soft:        color-mix(in oklch, var(--color-accent-dark) 50%, transparent);
   --color-accent-dark--ghosty:      color-mix(in oklch, var(--color-accent-dark) 30%, transparent);

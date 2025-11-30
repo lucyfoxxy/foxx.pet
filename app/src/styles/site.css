@@ -50,24 +50,44 @@
   outline: var(--panel-outline);
   outline-offset: -1px;
   border: none;
-  background-image: var(--overlay-nebula), var(--overlay-stars--dense), var(--overlay-dim), linear-gradient(105deg, oklch(26.165% 0.13 280.826), oklch(31.33% 0.14 298.543), oklch(26.721% 0.13 313.7));
-  background-repeat: no-repeat, repeat, no-repeat, no-repeat;
-  background-size: 1280px 1280px, 480px 480px, auto, cover;
-  background-blend-mode: overlay, soft-light, multiply, normal;
-  background-position: top, top, center, center;
-  animation: hue-rotate 45s linear infinite;
+
+  background-repeat: no-repeat, repeat, no-repeat;
+  background-size: 1366px, 480px, auto;
+  background-blend-mode: overlay, soft-light, multiply;
+  background-position: top, top, center;
+  
 }
-@keyframes hue-rotate{
-  0%,100%{
-    filter:hue-rotate(0deg);
-  }
-  25%{
-    filter:hue-rotate(-10deg);
-  }
-  50%{
-    filter:hue-rotate(10deg);
-  }
+.panel-wrapper:after {
+  content: "";
+  inset: 0;
+  position: relative;
+  background-image: linear-gradient(105deg, oklch(26.165% 0.13 280.826), oklch(31.33% 0.14 298.543), oklch(26.721% 0.13 313.7));
+  animation: hue-rotate 15s linear infinite;
+  background-position:0% 50%;
+  z-index: -1;
+  mix-blend-mode: color;
 }
+@-webkit-keyframes hue-rotate {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@-moz-keyframes hue-rotate {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@keyframes hue-rotate {
+    0%,100% {
+
+      background-position: 0% 50%
+    }
+    50% {
+
+      background-position:100% 50%
+  }  
+}
+
 @media (max-width: 900px) {
   .panel-wrapper {
     max-inline-size: 100%;

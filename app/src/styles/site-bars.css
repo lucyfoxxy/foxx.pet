@@ -73,6 +73,18 @@
     background-blend-mode: normal;
     background-size: auto;   
     opacity: .85;
+    animation: hue-rotate 45s linear infinite;
+}
+@keyframes hue-rotate{
+  0%,100%{
+    filter:hue-rotate(0deg);
+  }
+  25%{
+    filter:hue-rotate(-2deg);
+  }
+  50%{
+    filter:hue-rotate(2deg);
+  }
 }
 .site-bar.header {background-position: 50% -54%,top;}
 .site-bar.footer {background-position: 50% 54%,bottom;}
