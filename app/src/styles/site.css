@@ -39,6 +39,18 @@
 /* ------------------------------------ */
 /* ---->  PANEL  <--------------------- */
 /* ------------------------------------ */
+.panel-wrapper:before {
+  content: "";
+  inset: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+  background-image: var(--overlay-nebula-3), var(--overlay-stars--dense), var(--overlay-dim), linear-gradient(105deg, oklch(21.33% 0.113 294.543), oklch(26.33% 0.114 295.543), oklch(21.33% 0.113 294.543));
+  background-repeat: no-repeat, repeat, no-repeat, no-repeat;
+  background-size: var(--panel-size), 480px 480px, auto, cover;
+  background-blend-mode: screen, soft-light, multiply, normal;
+  background-position: center 12%, top, center, center;
+}
 .panel-wrapper {
   display: flex;
   position: relative;
@@ -50,23 +62,12 @@
   outline: var(--panel-outline);
   outline-offset: -1px;
   border: none;
-  background-image: var(--overlay-nebula-3), var(--overlay-stars--dense), var(--overlay-dim), linear-gradient(105deg, oklch(21.33% 0.113 294.543), oklch(26.33% 0.114 295.543), oklch(21.33% 0.113 294.543));
-  background-repeat: no-repeat, repeat, no-repeat, no-repeat;
-  background-size: var(--panel-size), 480px 480px, auto, cover;
-  background-blend-mode: screen, soft-light, multiply, normal;
-  background-position: center 12%, top, center, center;
   animation: hue-rotate 45s linear infinite;
 }
 @keyframes hue-rotate{
-  0%,100%{
-    filter:hue-rotate(0deg);
-  }
-  25%{
-    filter:hue-rotate(-10deg);
-  }
-  50%{
-    filter:hue-rotate(10deg);
-  }
+  0%,100%{ filter:hue-rotate(0deg); }
+  25%    { filter:hue-rotate(-10deg); }
+  50%    { filter:hue-rotate(10deg);  }
 }
 @media (max-width: 900px) {
   .panel-wrapper {
@@ -79,17 +80,13 @@
 
 .panel-wrapper .stars-canvas {
   position: absolute;
-
+  inline-size: 90%;
   isolation: isolate;
   inset: 0;
-  z-index: 0;
+  z-index: -1;
   pointer-events: none;
   mix-blend-mode: screen;
   opacity: .85;
-  inline-size: 90%;
-  block-size: 90%;
-  justify-self: center;
-  align-self: center;
   margin: var(--panel-padding);
 }
 
