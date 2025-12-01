@@ -7,12 +7,16 @@
   --card-padding:                   clamp(var(--space-s),  calc(var(--space-s) + 2.25vw),  var(--space-xl));
   --card-radius:                    var(--radius-l);
   --card-radius--inner:             var(--radius-m);
+  --card-border:                    hidden;
 
-  --card-backdrop:                  var(--fx-blur-s) var(--fx-bright) var(--fx-saturate--soft);
-  --card-shadow:                    var(--fx-shadow);
+
+  --card-backdrop:                  var(--fx-blur-xxl) var(--fx-contrast);
+  --card-background:                var(--color-accent-dark--soft);
+
+  --card-shadow:                    var(--fx-shadow--elevated), var(--fx-shadow-inset--strong);
   --card-transition:                var(--transition-state--slow);
   --card-transform--fx:             var(--transform-grow);
-  --card-filter--fx:                var(--fx-bright--soft) var(--fx-saturate) var(--fx-drop-shadow--strong);
+  --card-filter--fx:                var(--fx-bright) var(--fx-saturate);
 
   --card-list-bg:                   var(--color-dark--soft);
   --card-list-bg--fx:               var(--color-dark--strong);
@@ -38,11 +42,11 @@
     "card-body"
     "card-foot";
   grid-template-rows: auto 1fr auto;
-
+  border: var(--card-border);
   min-block-size: 100%;
   padding: var(--card-padding);
   gap: var(--card-gap);
-
+  background-color: var(--card-background);
   border-radius: var(--card-radius);
   backdrop-filter: var(--card-backdrop);
   box-shadow: var(--card-shadow);
@@ -55,6 +59,7 @@
   box-shadow: none; 
   backdrop-filter: none;
   padding-block-end: 0;
+  border-style: hidden;
 }
 .card--plain :where(.prose){ 
   font-weight: var(--font-weight-thick);
@@ -75,10 +80,12 @@
 /* === ANIMATE (on hover: scale + filter) === */
 .card--animate { 
   transition: var(--card-transition); 
+  opacity: .9
 }
 .card--animate:is(:hover,:focus-visible) {
   transform: var(--card-transform--fx);
   filter: var(--card-filter--fx);
+  opacity: 1
 }
 
 

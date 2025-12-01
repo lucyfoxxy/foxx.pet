@@ -6,7 +6,7 @@
   --control-gap:                    clamp(var(--space-xxs),  calc(var(--space-xxs) + .15rem),    var(--space-xs));
   --control-padding:                clamp(var(--space-xs),  calc(var(--space-xs) + 1.29vw),    var(--space-s));
 
-  --control-bg:                     var(--color-accent);
+  --control-bg:                     var(--color-accent-dark);
   --control-shadow:                 var(--fx-shadow--soft);
   --control-filter--fx:             var(--fx-bright--strong);
 

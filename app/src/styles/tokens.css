@@ -34,19 +34,19 @@
   --color-accent--soft:             color-mix(in oklch, var(--color-accent) 50%, transparent);
   --color-accent--ghosty:           color-mix(in oklch, var(--color-accent) 30%, transparent);
 
-  --color-accent-dark:              oklch(0.2634 0.1131 294.84);
+  --color-accent-dark:              oklch(21.33% 0.113 294.543);
   --color-accent-dark--strong:      color-mix(in oklch, var(--color-accent-dark) 70%, transparent);
   --color-accent-dark--soft:        color-mix(in oklch, var(--color-accent-dark) 50%, transparent);
   --color-accent-dark--ghosty:      color-mix(in oklch, var(--color-accent-dark) 30%, transparent);
 
-  --color-accent-light:             oklch(91% 0.07 300);
+  --color-accent-light:             oklch(91% 0.17 295);
   --color-accent-light--strong:     color-mix(in oklch, var(--color-accent-light) 70%, transparent);
   --color-accent-light--soft:       color-mix(in oklch, var(--color-accent-light) 50%, transparent);
   --color-accent-light--ghosty:     color-mix(in oklch, var(--color-accent-light) 30%, transparent);
           
 
   /* ====== Base FX ==================== */  
-  --text-shadow:                    2px 2px 3px var(--color-dark--soft);
+  --text-shadow:                    0 0 .35rem rgba(0,0,0,.7);
   --icon-shadow:                    0 0 3px color-mix(in oklch,transparent 30%,currentColor);
   --text-glow:                      0 0 3px var(--color-accent-light--soft);
 
@@ -56,13 +56,17 @@
 
   --fx-shadow-inset--ghosty:        inset 0 0 59px var(--color-dark--ghosty);
   --fx-shadow-inset--soft:          inset 0 0 29px var(--color-dark--soft);          
+  --fx-shadow-inset--strong:        inset 0 0 44px var(--color-accent-dark--strong);
 
   --fx-shadow--soft:                2px 2px 3px -1px rgba(0,0,0,.45);
   --fx-shadow:                      0 0 28px -6px rgba(0,0,0,.5);
-  --fx-shadow--strong:              0 0 56px -10px rgba(0,0,0,.55);
+  --fx-shadow--elevated:            0 22px 40px rgba(0,0,0,.75);
+  --fx-shadow--strong:              0 0 74px rgba(0,0,0,.6);
 
   --fx-glow:                        drop-shadow(0 0 4px var(--color-accent--strong));
   --fx-glow--strong:                drop-shadow(0 0 0 var(--color-accent)); 
+
+  --fx-contrast:                    contrast(1.05);
 
   --fx-bright--soft:                brightness(1.1);
   --fx-bright:                      brightness(1.35);
@@ -82,7 +86,7 @@
 
   --fx-border--soft:                1px solid var(--color-dark--ghosty);
 
-  --overlay-dim:                    radial-gradient(ellipse at center,transparent 40%, var(--color-dark--soft) 120%); 
+  --overlay-dim:                    radial-gradient(ellipse at center,transparent 40%, var(--color-dark--ghosty) 120%); 
 
 
   /* ====== Motion ====== */

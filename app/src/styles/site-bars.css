@@ -11,7 +11,7 @@
   --bars-gap:                       var(--space-xxs);
 
   --bars-border:                    var(--fx-border--soft);
-  --bars-shadow:                    var(--fx-shadow);
+  --bars-shadow:                    var(--fx-shadow),var(--fx-shadow-inset--strong);
                                     
   --bars-backdrop:                  var(--fx-blur-s) ;
 
@@ -57,7 +57,7 @@
     z-index: 99;
     backdrop-filter: var(--bars-backdrop);
     box-shadow: var(--bars-shadow);
-    filter: saturate(1.25);
+   
     overflow: hidden;
     isolation: isolate;
     background-blend-mode: multiply,normal;
@@ -70,7 +70,7 @@
     overflow: hidden;
     position: absolute;
     z-index: -1;
-      background-image: linear-gradient(135deg, oklch(26.165% 0.13 285.826), oklch(31.33% 0.14 298.543), oklch(26.721% 0.13 305.7));
+      background-image: linear-gradient(135deg, oklch(21.33% 0.113 294.543), oklch(21.33% 0.113 294.543), oklch(21.33% 0.113 294.543));
       
     animation: hue-rotate 45s linear infinite;
 }
