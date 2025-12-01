@@ -86,7 +86,7 @@
 
   --fx-border--soft:                1px solid var(--color-dark--ghosty);
 
-  --overlay-dim:                    radial-gradient(ellipse at center,transparent 40%, var(--color-dark--ghosty) 120%); 
+  --overlay-dim:                    radial-gradient(ellipse at center,transparent 10%, var(--color-dark--soft) 120%); 
 
 
   /* ====== Motion ====== */

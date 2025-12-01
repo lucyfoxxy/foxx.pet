@@ -54,7 +54,7 @@
   background-repeat: no-repeat, repeat, no-repeat, no-repeat;
   background-size: var(--panel-size), 480px 480px, auto, cover;
   background-blend-mode: screen, soft-light, multiply, normal;
-  background-position: center, top, center, center;
+  background-position: center 12%, top, center, center;
   animation: hue-rotate 45s linear infinite;
 }
 @keyframes hue-rotate{

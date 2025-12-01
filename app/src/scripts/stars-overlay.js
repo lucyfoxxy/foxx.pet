@@ -1,35 +1,73 @@
 import _isMobile from '@Scripts/utils/_isMobile.js';
+
 // stars-overlay.js
 export default function initStarsCanvas(canvas, opts = {}) {
-
-  if(_isMobile()) {return;};
+  if (_isMobile()) return;
 
   const ctx = canvas.getContext('2d');
   let animId = null;
-  let W = 0, H = 0;
+  let W = 0;
+  let H = 0;
 
-  const fpsCap = opts.fps || 50;               // weiches Cap
-  const density = opts.density || 0.25;        // Sterne pro 1k px²
+  const fpsCap = opts.fps ?? 50;           // weiches Cap
+  const density = opts.density ?? 0.25;    // Sterne pro 1k px²
   const glow = opts.glow ?? true;
+
+  // >>> NEU: Toleranzen für Resize <<<
+  const resizeTolerancePx = opts.resizeTolerancePx ?? 1140;   // min. absolute Änderung
+  const resizeToleranceRatio = opts.resizeToleranceRatio ?? 0.06; // min. relative Änderung (~6%)
 
   let stars = [];
   let last = 0;
 
+  function makeStar() {
+    return {
+      x: Math.random() * W,
+      y: Math.random() * H,
+      len: 1 + Math.random() * 2,
+      op: Math.random(),
+      inc: Math.random() * 0.03,
+      fac: 1,
+      rot: Math.random() * Math.PI * 2,
+    };
+  }
+
   function resize() {
     const rect = canvas.getBoundingClientRect();
-    const prevW = W || Math.max(1, Math.floor(rect.width));
-    const prevH = H || Math.max(1, Math.floor(rect.height));
+    const newW = Math.max(1, Math.floor(rect.width));
+    const newH = Math.max(1, Math.floor(rect.height));
 
-    W = Math.max(1, Math.floor(rect.width));
-    H = Math.max(1, Math.floor(rect.height));
+    const prevW = W || newW;
+    const prevH = H || newH;
+
+    if (W && H) {
+      const diffW = Math.abs(newW - prevW);
+      const diffH = Math.abs(newH - prevH);
+      const relDiff = Math.max(diffW / prevW, diffH / prevH);
+
+      const withinPx = diffW < resizeTolerancePx && diffH < resizeTolerancePx;
+      const withinRatio = relDiff < resizeToleranceRatio;
+
+      // Kleine Layout-Wackler -> nur Canvasgröße anpassen, Sterne nicht anfassen
+      if (withinPx && withinRatio) {
+        W = newW;
+        H = newH;
+        canvas.width = W;
+        canvas.height = H;
+        return;
+      }
+    }
+
+    W = newW;
+    H = newH;
     canvas.width = W;
     canvas.height = H;
 
     const target = Math.floor((W * H) / 1000 * density);
-    const scaleX = W / prevW;
-    const scaleY = H / prevH;
+    const scaleX = prevW > 0 ? W / prevW : 1;
+    const scaleY = prevH > 0 ? H / prevH : 1;
 
-    // Preserve existing stars to avoid visible resets during minor resizes
+    // existierende Sterne mit skalieren, damit kein „Hard Reset“ sichtbar wird
     for (const star of stars) {
       star.x = Math.min(W, Math.max(0, star.x * scaleX));
       star.y = Math.min(H, Math.max(0, star.y * scaleY));
@@ -42,18 +80,6 @@ export default function initStarsCanvas(canvas, opts = {}) {
     } else if (target < stars.length) {
       stars.length = target;
     }
-  }
-
-  function makeStar() {
-    return {
-      x: Math.random() * W,
-      y: Math.random() * H,
-      len: 1 + Math.random() * 2,
-      op: Math.random(),
-      inc: Math.random() * 0.03,
-      fac: 1,
-      rot: Math.random() * Math.PI * 2,
-    };
   }
 
   function drawStar(s) {
@@ -101,14 +127,24 @@ export default function initStarsCanvas(canvas, opts = {}) {
 
   // init
   resize();
-  const ro = new ResizeObserver(resize);
+
+  // >>> NEU: ResizeObserver debouncen <<<
+  let resizeQueued = false;
+  const ro = new ResizeObserver(() => {
+    if (resizeQueued) return;
+    resizeQueued = true;
+    requestAnimationFrame(() => {
+      resizeQueued = false;
+      resize();
+    });
+  });
   ro.observe(canvas);
 
   animId = requestAnimationFrame(tick);
 
   // Cleanup für SPA/Hot-swaps:
-  return () => { ro.disconnect(); cancelAnimationFrame(animId); };
+  return () => {
+    ro.disconnect();
+    cancelAnimationFrame(animId);
+  };
 }
-
-// ===== Hook in deinen Loader =====
-
