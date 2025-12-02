@@ -61,7 +61,7 @@
   --font-size-xs:                   clamp(.75rem, calc(.75rem + .025vw), .95rem);
   --font-size-s:                    clamp(.9rem,  calc(.9rem + .075vw), 1.05rem);
   --font-size-m:                    clamp(1.1rem, calc(1.1rem + .45vw), 1.5rem);
-  --font-size-l:                    clamp(1.02rem, calc(.92rem + .85vw), 1.8rem);
+  --font-size-l:                    clamp(1.2rem, calc(1.2rem + 1.05vw), 1.8rem);
   --font-size-xl:                   clamp(1.75rem, calc(1.75rem + 1.5vw), 3rem);
   --font-size-xxl:                  clamp(3rem, calc(3rem + 1.5vw), 3.6rem);
 
@@ -103,9 +103,15 @@ a {
    /* font-size: calc( .8 * var(--font-size-m));*/
   }
 }
-.footer__nav,
+
 .control--small,
 .control--badge {
+  font-size: var(--font-size-s);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-xxs);
+}
+
+.footer__nav{
   font-size: clamp(var(--font-size-xs), calc(var(--font-size-xs) + .1vw), var(--font-size-s));
   font-weight: var(--font-weight-thin);
   line-height: var(--line-height-xs);

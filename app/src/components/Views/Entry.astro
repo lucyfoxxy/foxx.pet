@@ -120,36 +120,39 @@ const meta = {
   ) : albumView ? (
     <>
     <section class="content-section">
-      {albumView.title || albumView.description ? (
-        
-          <Template.Card class="card--plain card--center">
-            {albumView.title ? (
-              <Fragment slot="head">
-                <h1 class="card__title">{albumView.title}</h1>
-              </Fragment>
-            ) : null}
+      <Template.Card class="card--center" headClass="card__head--column">
+        <Fragment slot="head">
+          {albumView.title && (
+            <h1 class="card__title">{albumView.title}</h1>
+          )}
+          
+          {(albumView.categoryBadge || albumView.dateBadge) && (
+          <div class="card__badges controls controls--center">
+            {albumView.categoryBadge && 
+            <span class="control control--badge">
+              {albumView.categoryBadge}
+            </span>}
+          
+            {albumView.dateBadge && 
+            <span class="control control--badge">
+              {albumView.dateBadge}
+            </span>}                
+          </div>)}
+        </Fragment>
 
-            {albumView.description ? (
-              <Fragment slot="body">
-                <div class="prose">
+        <Fragment slot="body">
+          {albumView.description ? (
+          <div class="prose">
                   <p>{albumView.description}</p>
                 </div>
-              </Fragment>
+
             ) : null}
-          </Template.Card>
-
-      ) : null}
-
-
-        <Template.Card class="card--flush card--center">
-
-          <Fragment slot="body">
             <Template.MediaFrame album={albumView} />
           </Fragment>
         </Template.Card>
 
         <Template.Card class="card--flush card--center">
-          <Fragment slot="body">
+          <Fragment slot="foot">
             <Template.MediaThumbs />
           </Fragment>
         </Template.Card>

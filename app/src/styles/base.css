@@ -32,7 +32,7 @@ body::before {
   box-shadow: var(--base-shadow);
   background-image: 
     var(--overlay-dim), 
-    var(--overlay-nebula), 
+    var(--overlay-nebula-2), 
     var(--overlay-stars), 
     var(--base-bg);
   background-blend-mode:multiply,overlay,soft-light,normal;
@@ -107,7 +107,7 @@ button {
   }
 }
 :focus-visible {
-  outline: 2px solid var(--color-accent);
+  outline: 2px solid var(--color-accent--lilac);
   outline-offset: 2px;
 }
 

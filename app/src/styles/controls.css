@@ -6,7 +6,8 @@
   --control-gap:                    clamp(var(--space-xxs),  calc(var(--space-xxs) + .15rem),    var(--space-xs));
   --control-padding:                clamp(var(--space-xs),  calc(var(--space-xs) + 1.29vw),    var(--space-s));
 
-  --control-bg:                     var(--color-accent-dark);
+  --control-button-bg:              var(--color-accent--lilac);
+  --control-badge-bg:               var(--color-accent--lilac);
   --control-shadow:                 var(--fx-shadow--soft);
   --control-filter--fx:             var(--fx-bright--strong);
 
@@ -49,7 +50,7 @@
   border-radius: var(--radius-m);
   box-shadow: var(--control-shadow);
   vertical-align: middle;
-  background: var(--control-bg);
+  background: var(--control-button-bg);
 
 
   block-size: auto;
@@ -75,6 +76,7 @@
 .control--badge {
   padding-block: calc(var(--control-padding) * 0.65);
   padding-inline: calc(var(--control-padding) * 0.85);
+  background-color: var(--control-badge-bg);
 }
 
 .control--small {

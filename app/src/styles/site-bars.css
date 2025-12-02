@@ -13,18 +13,18 @@
   --bars-border:                    var(--fx-border--soft);
   --bars-shadow:                    var(--fx-shadow),var(--fx-shadow-inset--strong);
                                     
-  --bars-backdrop:                  var(--fx-blur-s) ;
+  --bars-backdrop:                  var(--fx-blur-xl);
 
   --header-transition:              var(--transition-state);
   --header-will-change:             transform, filter;
 
   --header-item-shadow:             none;
-  --header-item-filter:             var(--fx-drop-shadow);
-  --header-item-filter--fx:         var(--fx-glow);
+  --header-item-filter:             drop-shadow(var(--text-shadow));
+  --header-item-filter--fx:         drop-shadow(var(--text-glow));
   --header-item-backdrop:           none;
   --header-item-transform:          var(--transform-raise);
   --header-item-transition:         var(--transition-state);
-  --header-item-will-change:        transform, filter;
+  --header-item-will-change:        transform, filter, opacity, text-shadow;
 
   --header-icon-size:               clamp(var(--icon-size-s), calc(.8rem + .875vw), var(--icon-size-l));
   --header-icon-size--fx:           calc(var(--header-icon-size) * 1.75);
@@ -57,36 +57,23 @@
     z-index: 99;
     backdrop-filter: var(--bars-backdrop);
     box-shadow: var(--bars-shadow);
-   
+    /*animation: hue-rotate 15s linear infinite;    */
     overflow: hidden;
-    isolation: isolate;
-    background-blend-mode: multiply,normal;
+    background-color: var(--color-accent-darker);
     background-size: auto;    
 }
-.site-bar:before {
-    content: "";
-    inset: -2em;
-    isolation: isolate;
-    overflow: hidden;
-    position: absolute;
-    z-index: -1;
-      background-image: linear-gradient(135deg, oklch(21.33% 0.113 294.543), oklch(21.33% 0.113 294.543), oklch(21.33% 0.113 294.543));
-      
-    animation: hue-rotate 45s linear infinite;
-}
+
 @keyframes hue-rotate{
   0%,100%{
     filter:hue-rotate(0deg);
   }
   25%{
-    filter:hue-rotate(-2deg);
+    filter:hue-rotate(-2.5deg);
   }
   50%{
-    filter:hue-rotate(2deg);
+    filter:hue-rotate(2.5deg);
   }
 }
-.site-bar.header {background-position: 50% -54%,top;}
-.site-bar.footer {background-position: 50% 54%,bottom;}
 
 
 /* ------------------------------------ */
@@ -194,7 +181,7 @@
     border-radius: var(--radius-xl) var(--radius-xl) 0 0;
     border-bottom: 0;
     padding-inline: var(--bars-padding);
-
+    filter:saturate(.98) hue-rotate(-4.5deg);
 }
 @media (max-width: 900px) {
 .footer {

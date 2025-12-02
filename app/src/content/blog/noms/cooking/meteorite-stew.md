@@ -5,21 +5,16 @@ title: "Meteorite Stew"
 slug: "noms-cooking-meteorite-stew"
 description: "A hearty vegetable stew slow-simmered with roasted root clusters from the outer belt."
 date: 2024-06-11
-tags:
-  - gluten-free
-  - campfire
 chapters:
-  - slug: overview
-    title: "Prerequisites"
+  - slug: you-gonna-need
+    title: "You Gonna Need"
   - slug: preparation
     title: "Preparations"
 ---
 
-## Prerequisites
+## You Gonna Need
 
-prepTime: "15 minutes"
-cookTime: "45 minutes"
-servings: "Feeds 4 hungry adventurers"
+a lot of stuff
 
 ## Preparations
 

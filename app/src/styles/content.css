@@ -10,7 +10,7 @@
   --card-radius--inner:             var(--radius-m);
   --card-border:                    hidden;
 
-  --card-backdrop:                  var(--fx-blur-xxl) var(--fx-contrast);
+  --card-backdrop:                  var(--fx-blur-xxl) var(--fx-contrast) var(--fx-bright--soft) var(--fx-saturate);
   --card-background:                var(--color-accent-dark--soft);
   --card-shadow:                    var(--fx-shadow--elevated), var(--fx-shadow-inset--strong);
   --card-transition:                var(--transition-state--slow);
@@ -20,8 +20,8 @@
   --card-list-gap:                  var(--space-m);
   --card-list-padding:              var(--space-s);
 
-  --card-list-bg:                   var(--color-dark--soft);
-  --card-list-bg--fx:               var(--color-dark--strong);
+  --card-list-bg:                   var(--color-accent-dark--strong);
+  --card-list-bg--fx:               var(--color-accent--lilac);
   --card-list-shadow:               var(--fx-shadow--soft);
   --card-list-filter--fx:           var(--fx-glow);
   --card-list-transition:           var(--transition-state--slow), var(--transition-fade-in);
