@@ -40,9 +40,9 @@ const isExternalLink = (href: string) => href.startsWith('http');
     <Template.Card class="card--plain card--flush card--center">
       <Fragment slot="body">
 
-        <div class="hero">
-          <div class="hero__backdrop" aria-hidden="true"></div>
-          <div class="hero__content">
+          <div class="hero hero__fx" aria-hidden="true"></div>
+          <div class="hero hero__backdrop" aria-hidden="true"></div>
+          <div class="hero hero__content">
             <div class="hero__grid">
               <span class="hero__welcome is-signature">{hero.heading}</span>
 
@@ -59,7 +59,7 @@ const isExternalLink = (href: string) => href.startsWith('http');
               </div>
             </div>
           </div>
-        </div>
+        
       
       </Fragment>
     </Template.Card>

@@ -4,19 +4,21 @@
 /* ============================================ */
 :root {
   --card-gap:                       var(--space-s);
+  --card-gap--small:                var(--space-xs);
   --card-padding:                   clamp(var(--space-s),  calc(var(--space-s) + 2.25vw),  var(--space-xl));
   --card-radius:                    var(--radius-l);
   --card-radius--inner:             var(--radius-m);
   --card-border:                    hidden;
 
-
   --card-backdrop:                  var(--fx-blur-xxl) var(--fx-contrast);
   --card-background:                var(--color-accent-dark--soft);
-
   --card-shadow:                    var(--fx-shadow--elevated), var(--fx-shadow-inset--strong);
   --card-transition:                var(--transition-state--slow);
   --card-transform--fx:             var(--transform-grow);
   --card-filter--fx:                var(--fx-bright) var(--fx-saturate);
+
+  --card-list-gap:                  var(--space-m);
+  --card-list-padding:              var(--space-s);
 
   --card-list-bg:                   var(--color-dark--soft);
   --card-list-bg--fx:               var(--color-dark--strong);
@@ -101,7 +103,7 @@
 
 /* === CONDENSE (smaller gap) === */
 .card--condense { 
-  gap: var(--flow-gap); 
+  gap: var(--card-gap--small); 
 }
 
 /* === STRETCH === */
@@ -132,7 +134,7 @@
     "title"
     "badges";
   grid-template-columns: 1fr;
-  row-gap: var(--flow-gap); 
+  row-gap: var(--card-gap--small); 
 }
 
 
@@ -142,7 +144,7 @@
   min-width: 0; 
   align-items: center; 
   display: inline-flex; 
-  gap: var(--flow-gap);
+  gap: var(--card-gap--small);
 }
 
 
@@ -156,7 +158,7 @@
   margin: 0;
   display: inline-grid;
   list-style: none;
-  gap: var(--flow-gap);
+  gap: var(--card-gap--small);
 }
 @media (max-width: 900px) {
   .card__body > ol {
@@ -172,7 +174,7 @@
   grid-template-columns: auto 1fr;
   gap: var(--card-gap);
   align-items: flex-start;
-  padding: var(--control-padding);
+  padding: var(--card-list-padding);
   border-radius: var(--card-radius--inner);
   background: var(--card-list-bg);
   box-shadow: var(--card-list-shadow);
@@ -197,7 +199,7 @@
 .card__body > ol > li > a > div {
   display: flex;
   flex-direction: column;
-  gap: calc(var(--flow-gap) * 2);
+  gap: var(--card-list-gap);
   opacity: 0.85;
 }
 

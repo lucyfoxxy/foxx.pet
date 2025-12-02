@@ -1,42 +1,46 @@
 :root {
   --hero-scale: clamp(.55rem, calc(.55rem + 2.5vw), 2.35rem);
 
-    --hero-filter: drop-shadow(2px 2px 3px rgba(0,0,0,.7));
-    --hero-text-filter: drop-shadow(2px 0 14px var(--color-accent--soft));
+    --hero-filter: drop-shadow(2px 2px 12px rgba(0,0,0,.7)) contrast(1.1) saturate(1.2);
+    --hero-text-filter: drop-shadow(0px 3px 2px var(--color-accent)) contrast(1.2);
  
     
 }
 .hero {
   position: relative;
-  isolation: isolate;
+  /* isolation: isolate;  <-- weg damit */
+  isolation: auto;
   display: grid;
   place-items: center;
   font-size: var(--hero-scale);
-  min-inline-size: 18em;
-  inline-size: min(100%, 26em);
+
+  inline-size:100%;
   min-block-size: 9em;
-  mix-blend-mode: screen;
-  filter: var(--hero-filter) var(--hero-text-filter);
+
+  /* mix-blend-mode: screen; <-- ebenfalls weg */
+  
 }
 
 .hero__backdrop {
-  position: fixed;
+  position: absolute;
   inset: 0;
-  filter: drop-shadow( 2px 2px 2px black);
-  opacity: .9;
+  
+  filter: var(--hero-filter);
   background-image: var(--hero--bg);
-  background-position: 7.05em 2.2em;
+  background-position: 40% 0em;
   background-size: 8.25em;
   background-repeat: no-repeat;
+
+  z-index: 1;
   
   animation-name: fly-in, fly-up-down;
   animation-delay: .5s, 4s;
   animation-duration: 3.5s, 2.5s;
   animation-iteration-count: 1, infinite;
   animation-timing-function: cubic-bezier(0.39, 0.575, 0.565, 1), cubic-bezier(.42, 0, .58, 1);
-  z-index: 0;
+
 }
-@media(max-width: 720px) {.hero__backdrop {transform: translateX(-1.25em);}}
+
 @keyframes fly-in {
   0% {
     background-position: -4em -6.5em;
@@ -47,19 +51,21 @@
     background-size: 5.25em;
   }
   100% {
-    background-position: 7.05em 0em;
+    background-position: 40% 0em;
   }
 }
 
 @keyframes fly-up-down {
   0%, 100% {
     background-position-y: 0em;
+    opacity: 1;
   }
   50% {
-    background-position-y: 2.28em;
+    background-position-y: 2.2em;
+    opacity: .8;
   }
 }
-.hero__backdrop::after {
+.hero__fx {
   --hero-nebula-pos: 50%;
   content: "";
   position: absolute;
@@ -67,33 +73,25 @@
   margin-inline: auto;
   inline-size: 100%;
   block-size: 100%;
-  mix-blend-mode: luminosity;
-  background-position: top left,bottom right, 7.05em 2.2em,50% var(--hero-nebula-pos);
-  background-size: 512px,512px,512px,100% 100%;
-  background-repeat: no-repeat,no-repeat,no-repeat,no-repeat;
-  background-blend-mode: screen,screen,screen,normal;
-  background-image: 
-    var(--overlay-stars),
-        var(--overlay-stars),
-         var(--overlay-stars--dense),
-    radial-gradient(
-    ellipse at 50% var(--hero-nebula-pos),
-    oklch(87.5% 0.2975 295 / 10%),
-   oklch(17.5% 0.2975 295 / 10%) 35%,
-    transparent 70%
-  );
+
+  background-position: center;
+  background-size: auto;
+  background-repeat: repeat,no-repeat,repeat,no-repeat;
+  background-blend-mode: screen;
+  background-image:
+
+    var(--overlay-stars--dense);
+  background-blend-mode: screen, screen, screen, normal;
   pointer-events: none;
   z-index: -1;
 }
 
 .hero__content {
   position: relative;
-  z-index: 1;
-  display: grid;
-  place-items: center;
-  pointer-events: none;;
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, .9);
-  
+  z-index: 2;
+  mix-blend-mode: normal;   /* explizit, falls du sicher gehen willst */
+
+  filter: var(--hero-text-filter);
 }
 
 .hero__grid {
@@ -115,7 +113,7 @@
   font-size: .85em;
   opacity: .85;
   transform: rotate(-19deg);
-  filter: var(--hero-text-filter);
+  
 }
 
 .hero__signature-line {
