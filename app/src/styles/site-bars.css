@@ -19,8 +19,8 @@
   --header-will-change:             transform, filter;
 
   --header-item-shadow:             none;
-  --header-item-filter:             drop-shadow(var(--text-shadow));
-  --header-item-filter--fx:         drop-shadow(var(--text-glow));
+  --header-item-filter:             none;
+  --header-item-filter--fx:         none;
   --header-item-backdrop:           none;
   --header-item-transform:          var(--transform-raise);
   --header-item-transition:         var(--transition-state);

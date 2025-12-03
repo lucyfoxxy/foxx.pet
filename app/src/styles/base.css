@@ -22,6 +22,7 @@ body {
   background: none;
   display: flex;
   flex-direction: column;
+  text-shadow: var(--text-shadow);
 }
 
 body::before {
@@ -45,16 +46,10 @@ body::before {
 
 
 :where(h1, h2, h3, h4, a) {
-  text-shadow: var(--text-shadow);
+
   color: var(--color-accent-light);
 }
-a:not(.header__item,.control) {
-  transition: var(--transition-state);
-}
-a:is(:hover,:focus-visible):not(.header__item,.control) {
-  text-shadow: var(--text-glow);
-  opacity: 1;
-}
+
 
 img,
 picture,
@@ -115,7 +110,7 @@ button {
 /* ====== VIEW TRANSITIONS ====== */
 ::view-transition-old(root),
 ::view-transition-new(root) {
-  animation-duration: 500ms;
+  animation-duration: 750ms;
   animation-timing-function: ease-in-out;
 }
 
@@ -133,16 +128,16 @@ button {
   }
   to {
     opacity: 0;
-    filter: saturate(.9);
-    transform: scale(0.975);
+    filter: brightness(.49);
+    transform: scale(0.95);
   }
 }
 
 @keyframes fade-in {
   from {
     opacity: 0;
-    filter: saturate(.9);
-    transform: scale(0.975);
+    filter: brightness(.49);
+    transform: scale(0.95);
   }
   to {
     opacity: 1;

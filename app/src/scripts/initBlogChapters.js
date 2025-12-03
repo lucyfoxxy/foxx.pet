@@ -5,6 +5,7 @@ export function initBlogChapters(options) {
   if (!options) return () => {};
 
   let cleanupListeners = () => {};
+  let cleanupDom = () => {};
 
   const {
     chapters,
@@ -18,6 +19,7 @@ export function initBlogChapters(options) {
 
   const run = () => {
     cleanupListeners();
+    cleanupDom();
 
     const host = document.querySelector(targetSelector);
     if (!host) return;
@@ -142,6 +144,21 @@ export function initBlogChapters(options) {
       if (prevBtn) prevBtn.removeEventListener('click', onPrev);
       if (nextBtn) nextBtn.removeEventListener('click', onNext);
     };
+
+    cleanupDom = () => {
+      document
+        .querySelectorAll('[data-blog-chapter]')
+        .forEach((wrapper) => {
+          while (wrapper.firstChild) {
+            wrapper.parentNode?.insertBefore(wrapper.firstChild, wrapper);
+          }
+          wrapper.remove();
+        });
+
+      document
+        .querySelectorAll('[data-chapter][data-active]')
+        .forEach((link) => link.removeAttribute('data-active'));
+    };
   };
 
   runOnReady(() => {
@@ -151,6 +168,7 @@ export function initBlogChapters(options) {
       'astro:before-swap',
       () => {
         cleanupListeners();
+        cleanupDom();
       },
       { once: true },
     );
@@ -158,6 +176,7 @@ export function initBlogChapters(options) {
 
   return () => {
     cleanupListeners();
+    cleanupDom();
   };
 }
 

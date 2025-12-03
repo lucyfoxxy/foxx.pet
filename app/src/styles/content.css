@@ -10,7 +10,7 @@
   --card-radius--inner:             var(--radius-m);
   --card-border:                    hidden;
 
-  --card-backdrop:                  var(--fx-blur-xxl) var(--fx-contrast) var(--fx-bright--soft) var(--fx-saturate);
+  --card-backdrop:                  var(--fx-blur-xxl) var(--fx-contrast) hue-rotate(-10deg);
   --card-background:                var(--color-accent-dark--soft);
   --card-shadow:                    var(--fx-shadow--elevated), var(--fx-shadow-inset--strong);
   --card-transition:                var(--transition-state--slow);
@@ -82,12 +82,12 @@
 /* === ANIMATE (on hover: scale + filter) === */
 .card--animate { 
   transition: var(--card-transition); 
-  opacity: .9
+
 }
 .card--animate:is(:hover,:focus-visible) {
   transform: var(--card-transform--fx);
   filter: var(--card-filter--fx);
-  opacity: 1
+
 }
 
 

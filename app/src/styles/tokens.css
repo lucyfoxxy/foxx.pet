@@ -24,14 +24,14 @@
   --color-dark--soft:               color-mix(in oklch, var(--color-dark) 50%, transparent);
   --color-dark--ghosty:             color-mix(in oklch, var(--color-dark) 30%, transparent);
 
-  --color-light:                  oklch(92% 0.125 295); 
+  --color-light:                  oklch(0.84 0.08 293.37); 
   --color-light--strong:            color-mix(in oklch, var(--color-light) 70%, transparent);
   --color-light--soft:              color-mix(in oklch, var(--color-light) 50%, transparent);
   --color-light--ghosty:            color-mix(in oklch, var(--color-light) 30%, transparent);
   --color-accent:                 oklch(41% 0.36 300);
   --color-accent--pink:                 oklch(34% 0.23 335);
   --color-accent--lilac:          oklch(45% 0.22 290); 
-  --color-accent--turquoise:      oklch(59% 0.21 215);
+  --color-accent--turquoise:      oklch(79% 0.17 225);
   --color-accent--strong:           color-mix(in oklch, var(--color-accent) 70%, transparent);
   --color-accent--soft:             color-mix(in oklch, var(--color-accent) 50%, transparent);
   --color-accent--ghosty:           color-mix(in oklch, var(--color-accent) 30%, transparent);
@@ -46,17 +46,18 @@
   --color-accent-dark--soft:        color-mix(in oklch, var(--color-accent-dark) 50%, transparent);
   --color-accent-dark--ghosty:      color-mix(in oklch, var(--color-accent-dark) 30%, transparent);
 
-  --color-accent-light:             oklch(91% 0.17 295);
+  --color-accent-light:             oklch(0.84 0.08 293.37); 
   --color-accent-light--strong:     color-mix(in oklch, var(--color-accent-light) 70%, transparent);
   --color-accent-light--soft:       color-mix(in oklch, var(--color-accent-light) 50%, transparent);
   --color-accent-light--ghosty:     color-mix(in oklch, var(--color-accent-light) 30%, transparent);
           
 
   /* ====== Base FX ==================== */  
-  --text-shadow:                    .1em .12em .15em rgba(0,0,0,.5);
-  --icon-shadow:                    var(--text-shadow);
-  --text-glow:                      0 0 .2em var(--color-accent);
-  --icon-glow:                      var(--text-glow);
+  --text-shadow:                    1px 2px 3px rgba(0,0,0,.55);
+    
+  --icon-shadow:                    1px 2px 4px rgba(0,0,0,.55);
+  --text-glow:                      1px 2px 4px var(--color-accent--strong);
+  --icon-glow:                      2px 3px 4px var(--color-accent--strong);
 
   --fx-drop-shadow--soft:           drop-shadow(2px 2px 4px var(--color-dark--ghosty));
   --fx-drop-shadow:                 drop-shadow(2px 3px 1px var(--color-dark--strong));

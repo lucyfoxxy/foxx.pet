@@ -1,6 +1,6 @@
 ---
 import { Template } from '@Frontend';
-
+import ICONS from '@Assets/Icons.astro';
 interface BlogChapterView {
   id: string;
   title: string;
@@ -31,18 +31,14 @@ const hasBlogSummary = blogDescription.length > 0 || blogSummaryParagraphs.lengt
 ---
 
 <section class="content-section content-section--head" id="article-top">
-    <Template.Card class="card--plain card--center" headClass="card__head--column">
-      <Fragment slot="head">
-        <h1>{blog.title}</h1>
-        {blogDescription ? <span class="card__overlay-item"><p>{blogDescription}</p></span> : null}
-      </Fragment>
-    </Template.Card>
-</section>
-<section class="content-section content-section--masonry">
-  <Template.Card class="card--flush card--plain">
+  <Template.Card class="card--center" headClass="card__head--column">
     <Fragment slot="head">
-      <div class="media-frame">
+      <h1>{blog.title}</h1>
+      {blogDescription ? <span class="card__overlay-item"><p>{blogDescription}</p></span> : null}
+    </Fragment>
 
+    <Fragment slot="body">
+      <div class="media-frame">
         <img
           src={blog.cover.src}
           alt={blog.title}
@@ -50,10 +46,11 @@ const hasBlogSummary = blogDescription.length > 0 || blogSummaryParagraphs.lengt
         />
       </div>
     </Fragment>
-
   </Template.Card>
-{hasBlogChapters ? (
-    
+</section>
+
+<section class="content-section content-section--masonry">
+  {hasBlogChapters ? (
     <Template.Card class="">
       <Fragment slot="head">
         <h2 class="card__title">Table of Contents</h2>
@@ -85,18 +82,13 @@ const hasBlogSummary = blogDescription.length > 0 || blogSummaryParagraphs.lengt
 
 
 
-{hasBlogChapters || hasBlogSummary ? (
-
-
-
+  {hasBlogChapters ? (
     <Template.Card headClass={hasBlogChapters ? '' : undefined}>
-      {hasBlogChapters ? (
-        <Fragment slot="head">
-    <h2 class="card__title" data-chapter-title>
-      {hasBlogChapters ? blogChapters[0].title : 'Chapter'}
-    </h2>
-        </Fragment>
-      ) : null}
+      <Fragment slot="head">
+        <h2 class="card__title" data-chapter-title>
+          {hasBlogChapters ? blogChapters[0].title : 'Chapter'}
+        </h2>
+      </Fragment>
 
       <Fragment slot="body">
         <article class="prose" id="blog-chapter-target">
@@ -108,27 +100,27 @@ const hasBlogSummary = blogDescription.length > 0 || blogSummaryParagraphs.lengt
         <Fragment slot="foot">
           <nav class="controls controls--spread">
             <button
-              class="control control--button control--small control--circle"
+              class="control control--button control--circle"
               type="button"
               data-chapter-prev
             >
-              ← Prev
+              <ICONS kind="previous" />
             </button>
 
             <button
-              class="control control--button control--small control--circle"
+              class="control control--button control--circle"
               type="button"
               data-chapter-next
             >
-              Next →
+              <ICONS kind="next" />
             </button>
           </nav>
         </Fragment>
       ) : null}
     </Template.Card>
-
-  </section>
 ) : null}
+  </section>
+
 {hasBlogChapters && blogChapters ? (
   <>
     {/* Daten-Container */}

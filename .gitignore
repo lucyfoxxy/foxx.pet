@@ -38,3 +38,6 @@ sync.ffs_lock
 sync.ffs_db
 deprecated/**
 deprecated
+app/src/assets/logos/logo__lucy-rocket.xcf
+.gitignore
+.gitignore

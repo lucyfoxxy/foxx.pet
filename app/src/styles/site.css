@@ -52,7 +52,7 @@
   position: absolute;
   z-index: -1;
   box-shadow: var(--panel-shadow);
-  background-color: var(--color-accent-darker);
+  background-color: color-mix(in oklab, var(--color-dark) 75%, black 25%);
   background-image: var(--panel-gradient),var(--overlay-nebula-3),  var(--overlay-stars--dense);
   background-repeat: no-repeat,no-repeat, no-repeat, no-repeat, no-repeat;
   background-size:  cover,var(--panel-size),480px 480px, auto, cover;
@@ -82,7 +82,9 @@
     max-inline-size: 100%;
     margin-block: 0;
     margin-inline: 0;
-    background-blend-mode: screen, screen, multiply, normal;
+  }
+  .panel-wrapper::before {
+    background-image: var(--panel-gradient),var(--overlay-nebula-mobile),  var(--overlay-stars--dense);
   }
 }
 

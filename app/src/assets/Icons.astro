@@ -158,6 +158,7 @@ const labelled = !!title;
   aria-hidden={labelled ? 'false' : 'true'}
   role="img"
   focusable="false"
+  data-kind={kind}
 >
   {title ? <title>{title}</title> : null}
   {typeof body === 'string' ? <Fragment set:html={body} /> : body}

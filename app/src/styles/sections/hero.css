@@ -4,8 +4,8 @@
     --hero-filter: drop-shadow(2px 2px 12px rgba(0,0,0,.7)) contrast(1.1) saturate(1.2);
     --hero-text-filter:   drop-shadow(2px 3px 16px var(--color-pink)) drop-shadow(1px 1px 3px var(--color-accent-dark--soft));
     --hero-text-filter:   drop-shadow(2px 3px 4px var(--color-pink));
-    --hero-text-filter:   drop-shadow(1px 1px 3px var(--color-accent-dark--strong));
-    --hero-text-filter:   drop-shadow(1px 1px 6px var(--color-accent--strong));
+    --hero-text-filter:   ;
+    --hero-text-filter:  drop-shadow(0 0 3px var(--color-accent-dark)) drop-shadow(1px 1px 16px var(--color-accent--strong));
     
 }
 .hero {
@@ -47,10 +47,12 @@
   0% {
     background-position: -4em -6.5em;
     background-size: .25em;
+    opacity: 0;
   }
   50% {
     background-position: 4.25em 4em;
     background-size: 5.25em;
+    opacity: 1;
   }
   100% {
     background-position: 40% 0em;
@@ -64,7 +66,7 @@
   }
   50% {
     background-position-y: 2.2em;
-    opacity: .8;
+    opacity: .9;
   }
 }
 .hero__fx {
