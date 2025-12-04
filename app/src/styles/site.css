@@ -15,10 +15,10 @@
   --panel-padding:                  clamp(var(--space-xs),  calc(var(--space-xs) + 2.5vw),    var(--space-xxxl));
 
   --panel-bg-color:                 color-mix(in oklch, var(--color-dark) 75%, black 25%);
-  --panel-gradient:                 radial-gradient(circle at top left,
+  --panel-gradient:                 radial-gradient(circle at 70% -20%,
                                                     var(--color-accent--lilac)25%,
                                                     color-mix(in oklch,transparent,var(--color-accent--pink))50%,
-                                                    var(--color-accent--lilac));
+                                                    var(--color-accent--lilac)75%);
                                    
   --panel-dim:                      ;                      
   --panel-shadow:                   var(--fx-shadow--strong),inset 0 0 144px rgba(0,0,0,.65);

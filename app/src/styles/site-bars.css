@@ -11,12 +11,12 @@
   --bars-gap:                       var(--space-xxs);
 
   --bars-border:                    var(--fx-border--soft);
-  --bars-shadow:                    var(--fx-shadow--elevated), var(--fx-shadow-inset--strong);
+  --bars-shadow:                    var(--fx-shadow-inset--strong);
                                     
   --bars-backdrop:                  var(--fx-blur-xxl) var(--fx-contrast) hue-rotate(-15deg);
-  --bars-bg-color:                  color-mix(in oklch,transparent 10%,var(--color-accent-dark));
+  --bars-bg-color:                  color-mix(in oklch,transparent 15%,var(--color-accent-dark));
 
-
+  --header-shadow:                  var(--fx-shadow--elevated--soft),var(--bars-shadow);
   --header-transition:              var(--transition-state);
   --header-will-change:             transform, filter;
 
@@ -41,6 +41,7 @@
   --header-label-transition:        var(--transition-state);
   --header-label-will-change:       opacity, filter , transform, max-height;
 
+  --footer-shadow:                  var(--fx-shadow--lowered--soft),var(--bars-shadow);
   --footer-meta-border:             var(--fx-border--soft);
   --footer-separator-transform:     translateY(-12%);
   --footer-meta-transform--fx:      translateY(6px);
@@ -61,7 +62,7 @@
     box-shadow: var(--bars-shadow);
     overflow: hidden;
     background-color: var(--bars-bg-color);
-    background-size: auto;    
+    background-size: 150%;    
 }
 
 @keyframes hue-rotate{
@@ -88,6 +89,9 @@
     padding-block: var(--bars-padding);
     transition: var(--header-transition);
     will-change: var(--header-will-change);
+    inset: 0;
+    overflow: hidden;
+    box-shadow: var(--header-shadow);
 }
 
 @media (max-width: 900px) {
@@ -182,7 +186,10 @@
     border-radius: var(--radius-xl) var(--radius-xl) 0 0;
     border-bottom: 0;
     padding-inline: var(--bars-padding);
-    filter:saturate(.98) hue-rotate(-4.5deg);
+    inset: 0;
+    overflow: hidden;
+    filter: hue-rotate(-15deg);
+    box-shadow: var(--footer-shadow);
 }
 @media (max-width: 900px) {
 .footer {

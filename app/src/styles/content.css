@@ -261,8 +261,8 @@
   will-change: var(--card-overlay-will-change);
   box-shadow: var(--card-overlay-shadow);
 }
-.card__overlay--head { inset-block-start: 0; border-radius: var(--card-radius--inner) var(--card-radius--inner) 0 0; }
-.card__overlay--foot { inset-block-end: 0;   border-radius: 0 0 var(--card-radius--inner) var(--card-radius--inner); }
+.card__overlay--head { inset-block-start: 0; border-radius: var(--card-radius) var(--card-radius) 0 0; }
+.card__overlay--foot { inset-block-end: 0;   border-radius: 0 0 var(--card-radius) var(--card-radius); }
 .card__overlay-item  { 
   display: inline-flex;
   flex-wrap: nowrap;

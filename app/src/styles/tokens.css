@@ -70,6 +70,9 @@
   --fx-shadow--soft:                2px 2px 3px -1px rgba(0,0,0,.45);
   --fx-shadow:                      0 0 28px -6px rgba(0,0,0,.5);
   --fx-shadow--elevated:            0 22px 40px rgba(0,0,0,.75);
+  --fx-shadow--lowered:             0 -22px 40px rgba(0,0,0,.75);
+  --fx-shadow--elevated--soft:      0 14px 24px rgba(0,0,0,.5);
+  --fx-shadow--lowered--soft:       0 -14px 24px rgba(0,0,0,.5);
   --fx-shadow--strong:              0 0 74px rgba(0,0,0,.6);
 
   --fx-glow:                        drop-shadow(0 0 4px var(--color-accent--strong));
