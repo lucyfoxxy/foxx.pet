@@ -11,9 +11,11 @@
   --bars-gap:                       var(--space-xxs);
 
   --bars-border:                    var(--fx-border--soft);
-  --bars-shadow:                    var(--fx-shadow),var(--fx-shadow-inset--strong);
+  --bars-shadow:                    var(--fx-shadow--elevated), var(--fx-shadow-inset--strong);
                                     
-  --bars-backdrop:                  var(--fx-blur-xl);
+  --bars-backdrop:                  var(--fx-blur-xxl) var(--fx-contrast) hue-rotate(-15deg);
+  --bars-bg-color:                  color-mix(in oklch,transparent 10%,var(--color-accent-dark));
+
 
   --header-transition:              var(--transition-state);
   --header-will-change:             transform, filter;
@@ -57,9 +59,8 @@
     z-index: 99;
     backdrop-filter: var(--bars-backdrop);
     box-shadow: var(--bars-shadow);
-    /*animation: hue-rotate 15s linear infinite;    */
     overflow: hidden;
-    background-color: var(--color-accent-darker);
+    background-color: var(--bars-bg-color);
     background-size: auto;    
 }
 
