@@ -131,35 +131,7 @@ const hasBlogSummary = blogDescription.length > 0 || blogSummaryParagraphs.lengt
     ></div>
 
     {/* echtes Script */}
-    <script>
-      import initBlogChapters from '@Scripts/initBlogChapters.js';
 
-      const dataEl = document.getElementById('blog-chapters-data');
-      const raw = dataEl?.dataset.chapters || '[]';
-
-      if (!dataEl || !raw) {
-        console.warn('Blog chapters data missing');
-      } else {
-        let chapters = [];
-
-        try {
-          chapters = JSON.parse(raw);
-        } catch (err) {
-          console.warn('Blog chapters JSON broken:', err, raw);
-          chapters = [];
-        }
-
-        if (chapters.length > 0) {
-          initBlogChapters({
-            chapters,
-            targetSelector: '#blog-chapter-target',
-            titleSelector: '[data-chapter-title]',
-            prevSelector: '[data-chapter-prev]',
-            nextSelector: '[data-chapter-next]',
-          });
-        }
-      }
-    </script>
   </>
 ) : null}
 
@@ -167,3 +139,57 @@ const hasBlogSummary = blogDescription.length > 0 || blogSummaryParagraphs.lengt
  
 
 <section class="content-section">{/* Platz für Related / Comments / whatever */}</section>
+<script>
+  (function () {
+    if (window.__blogChaptersBootInstalled) return;
+    window.__blogChaptersBootInstalled = true;
+
+    function bootBlogChapters() {
+      // alte Listener von der vorherigen Seite entfernen
+      if (window.__blogChaptersCleanup) {
+        window.__blogChaptersCleanup();
+        window.__blogChaptersCleanup = null;
+      }
+
+      var dataEl = document.getElementById('blog-chapters-data');
+      if (!dataEl) return; // keine Blogseite
+
+      var raw = dataEl.dataset.chapters;
+      if (!raw) return;
+
+      var chapters;
+      try {
+        chapters = JSON.parse(raw);
+      } catch (err) {
+        console.warn('Blog chapters JSON invalid:', err, raw);
+        return;
+      }
+
+      if (!Array.isArray(chapters) || !chapters.length) return;
+
+      if (typeof window.initBlogChapters === 'function') {
+        window.initBlogChapters({
+          chapters: chapters,
+          targetSelector: '#blog-chapter-target',
+          titleSelector: '[data-chapter-title]',
+          prevSelector: '[data-chapter-prev]',
+          nextSelector: '[data-chapter-next]',
+        });
+      }
+    }
+
+    // erstes Laden der Seite
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', bootBlogChapters, {
+        once: true,
+      });
+    } else {
+      bootBlogChapters();
+    }
+
+    // JEDER Astro-Seitenwechsel
+    document.addEventListener('astro:page-load', function () {
+      bootBlogChapters();
+    });
+  })();
+</script>

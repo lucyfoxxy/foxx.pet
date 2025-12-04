@@ -1,209 +1,166 @@
-import { runOnReady } from './utils/_runOnReady.js';
+// src/scripts/initBlogChapters.js (oder inline im globalen Script,
+// Kern ist: KEIN runOnReady hier drin)
+window.initBlogChapters = function initBlogChapters(options) {
+  if (!options) return;
 
-// src/scripts/initBlogChapters.js
-export function initBlogChapters(options) {
-  if (!options) return () => {};
+  var chapters = options.chapters;
+  var targetSelector = options.targetSelector || '#blog-chapter-target';
+  var titleSelector = options.titleSelector || '[data-chapter-title]';
+  var prevSelector = options.prevSelector || '[data-chapter-prev]';
+  var nextSelector = options.nextSelector || '[data-chapter-next]';
 
-  let cleanupListeners = () => {};
-  let cleanupDom = () => {};
+  if (!Array.isArray(chapters) || !chapters.length) return;
 
-  const {
-    chapters,
-    targetSelector = '#blog-chapter-target',
-    titleSelector = '[data-chapter-title]',
-    prevSelector = '[data-chapter-prev]',
-    nextSelector = '[data-chapter-next]',
-  } = options;
+  var host = document.querySelector(targetSelector);
+  if (!host) return;
 
-  if (!Array.isArray(chapters) || chapters.length === 0) return () => {};
+  // Guard: Seite nicht doppelt initialisieren
+  if (host.dataset.blogChaptersInit === '1') return;
+  host.dataset.blogChaptersInit = '1';
 
-  const run = () => {
-    // alten Zustand wegräumen, falls vorhanden
-    cleanupListeners();
-    cleanupDom();
+  var titleEl = document.querySelector(titleSelector);
+  var prevBtn = document.querySelector(prevSelector);
+  var nextBtn = document.querySelector(nextSelector);
+  var tocLinks = document.querySelectorAll('[data-chapter]');
 
-    const host = document.querySelector(targetSelector);
-    if (!host) return;
-
-    // 🔒 Guard: pro Seite nur EINMAL initialisieren
-    if (host.dataset.blogChaptersInit === '1') {
-      return;
-    }
-    host.dataset.blogChaptersInit = '1';
-
-    const blocks = {};
-    let currentIndex = 0;
-
-    // Headline & Buttons
-    const titleEl = document.querySelector(titleSelector);
-    const prevBtn = document.querySelector(prevSelector);
-    const nextBtn = document.querySelector(nextSelector);
-    const tocLinks = document.querySelectorAll('[data-chapter]');
-
-    // --- Kapitel in Wrapper packen (dein ursprünglicher Code) ---
-    chapters.forEach((ch) => {
-      const el =
-        host.querySelector('#' + ch.id) ||
-        host.querySelector(`[id="${ch.id}"]`);
-      if (!el) return;
-
-      const wrapper = document.createElement('div');
-      wrapper.dataset.blogChapter = ch.id;
-      wrapper.style.opacity = '0';
-      wrapper.style.transition = 'opacity 0.25s ease';
-
-      host.insertBefore(wrapper, el);
-      wrapper.appendChild(el);
-
-      let next = wrapper.nextSibling;
-      while (
-        next &&
-        !(
-          next.nodeType === 1 &&
-          next.id &&
-          chapters.some((c) => c.id === next.id)
-        )
-      ) {
-        const move = next;
-        next = next.nextSibling;
-        wrapper.appendChild(move);
-      }
-
-      blocks[ch.id] = wrapper;
-    });
-
-    const allWrappers = host.querySelectorAll('[data-blog-chapter]');
-
-    if (!allWrappers.length) {
-      // nichts gefunden? Guard zurücksetzen
-      host.dataset.blogChaptersInit = '';
-      return;
-    }
-
-    const showByIndex = (idx) => {
-      if (idx < 0 || idx >= chapters.length) return;
-      const chapter = chapters[idx];
-      currentIndex = idx;
-      const id = chapter.id;
-
-      // Inhalt umschalten
-      allWrappers.forEach((w) => {
-        const active = w.dataset.blogChapter === id;
-        w.style.display = active ? '' : 'none';
-        requestAnimationFrame(() => {
-          w.style.opacity = active ? '1' : '0';
-        });
-      });
-
-      // TOC-Active
-      tocLinks.forEach((a) => {
-        a.toggleAttribute('data-active', a.dataset.chapter === id);
-      });
-
-      // Titel setzen
-      if (titleEl) {
-        titleEl.textContent = chapter.title ?? 'Chapter';
-      }
-
-      // Buttons en/disable
-      if (prevBtn) {
-        prevBtn.disabled = idx === 0;
-        prevBtn.classList.toggle('is-disabled', idx === 0);
-      }
-      if (nextBtn) {
-        nextBtn.disabled = idx === chapters.length - 1;
-        nextBtn.classList.toggle('is-disabled', idx === chapters.length - 1);
-      }
-
-
-
-      // URL aktualisieren
-      history.replaceState?.(null, '', '#' + id);
-    };
-
-    const onTocClick = (ev) => {
-      const a = ev.target.closest('[data-chapter]');
-      if (!a) return;
-      const id = a.dataset.chapter;
-      if (!id) return;
-
-      const idx = chapters.findIndex((c) => c.id === id);
-      if (idx === -1) return;
-
-      ev.preventDefault();
-      showByIndex(idx);
-    };
-
-    document.addEventListener('click', onTocClick);
-
-    // Prev / Next Buttons
-    const onPrev = () => {
-      const nextIdx = currentIndex - 1;
-      if (nextIdx >= 0) showByIndex(nextIdx);
-    };
-    const onNext = () => {
-      const nextIdx = currentIndex + 1;
-      if (nextIdx < chapters.length) showByIndex(nextIdx);
-    };
-    if (prevBtn) prevBtn.addEventListener('click', onPrev);
-    if (nextBtn) nextBtn.addEventListener('click', onNext);
-
-    // Initial: Hash oder erstes Kapitel
-    const initialHash = window.location.hash.replace('#', '');
-    const initialIdx = initialHash
-      ? chapters.findIndex((c) => c.id === initialHash)
-      : 0;
-
-    showByIndex(initialIdx >= 0 ? initialIdx : 0);
-
-    // --- Cleanup-Funktionen definieren ---
-    cleanupListeners = () => {
-      document.removeEventListener('click', onTocClick);
-      if (prevBtn) prevBtn.removeEventListener('click', onPrev);
-      if (nextBtn) nextBtn.removeEventListener('click', onNext);
-    };
-
-    cleanupDom = () => {
-      // Kapitel-Wrapper wieder entpacken
-      host
-        .querySelectorAll('[data-blog-chapter]')
-        .forEach((wrapper) => {
-          const parent = wrapper.parentNode;
-          if (!parent) return;
-
-          while (wrapper.firstChild) {
-            parent.insertBefore(wrapper.firstChild, wrapper);
-          }
-          wrapper.remove();
-        });
-
-      // Active-Marker entfernen
-      document
-        .querySelectorAll('[data-chapter][data-active]')
-        .forEach((link) => link.removeAttribute('data-active'));
-
-      // Init-Flag zurücksetzen
-      host.dataset.blogChaptersInit = '';
-    };
-  };
-
-  runOnReady(() => {
-    run();
-
-    document.addEventListener(
-      'astro:before-swap',
-      () => {
-        cleanupListeners();
-        cleanupDom();
-      },
-      { once: true },
+  var wrappers = [];
+  var allNodes = Array.from(host.childNodes).filter(function (node) {
+    return (
+      node.nodeType === Node.ELEMENT_NODE ||
+      (node.nodeType === Node.TEXT_NODE && node.textContent.trim() !== '')
     );
   });
 
-  return () => {
-    cleanupListeners();
-    cleanupDom();
-  };
-}
+  function findIndexById(id) {
+    return allNodes.findIndex(function (node) {
+      return node.nodeType === Node.ELEMENT_NODE && node.id === id;
+    });
+  }
 
-export default initBlogChapters;
+  for (var i = 0; i < chapters.length; i++) {
+    var chapter = chapters[i];
+    var startIdx = findIndexById(chapter.id);
+    if (startIdx === -1) continue;
+
+    var nextChapterId = i < chapters.length - 1 ? chapters[i + 1].id : null;
+    var endIdx = nextChapterId ? findIndexById(nextChapterId) : allNodes.length;
+
+    if (endIdx !== -1 && endIdx <= startIdx) continue;
+
+    var range = document.createRange();
+    range.setStartBefore(allNodes[startIdx]);
+
+    if (endIdx === -1 || endIdx >= allNodes.length) {
+      range.setEndAfter(allNodes[allNodes.length - 1]);
+    } else {
+      range.setEndBefore(allNodes[endIdx]);
+    }
+
+    var wrapper = document.createElement('div');
+    wrapper.dataset.blogChapter = chapter.id;
+    wrapper.classList.add('blog-chapter-block');
+
+    var contents = range.extractContents();
+    wrapper.appendChild(contents);
+    host.appendChild(wrapper);
+    wrappers.push(wrapper);
+  }
+
+  if (!wrappers.length) {
+    delete host.dataset.blogChaptersInit;
+    return;
+  }
+
+  var currentIndex = 0;
+
+  function showByIndex(idx) {
+    if (idx < 0 || idx >= wrappers.length) return;
+    currentIndex = idx;
+    var chapter = chapters[idx];
+    var activeId = chapter.id;
+
+    wrappers.forEach(function (w) {
+      var active = w.dataset.blogChapter === activeId;
+      if (active) {
+        w.removeAttribute('hidden');
+      } else {
+        w.setAttribute('hidden', '');
+      }
+    });
+
+    tocLinks.forEach(function (a) {
+      a.toggleAttribute('data-active', a.dataset.chapter === activeId);
+    });
+
+    if (titleEl) {
+      titleEl.textContent = chapter.title || 'Chapter';
+    }
+
+    if (prevBtn) {
+      var disabledPrev = idx === 0;
+      prevBtn.disabled = disabledPrev;
+      prevBtn.classList.toggle('is-disabled', disabledPrev);
+    }
+
+    if (nextBtn) {
+      var disabledNext = idx === wrappers.length - 1;
+      nextBtn.disabled = disabledNext;
+      nextBtn.classList.toggle('is-disabled', disabledNext);
+    }
+
+    if (host.scrollTo) {
+      host.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    if (history.replaceState) {
+      history.replaceState(null, '', '#' + activeId);
+    }
+  }
+
+  function onTocClick(ev) {
+    var a = ev.target.closest && ev.target.closest('[data-chapter]');
+    if (!a) return;
+    var id = a.dataset.chapter;
+    if (!id) return;
+
+    var idx = chapters.findIndex(function (c) {
+      return c.id === id;
+    });
+    if (idx === -1) return;
+
+    ev.preventDefault();
+    showByIndex(idx);
+  }
+
+  function onPrev() {
+    var nextIdx = currentIndex - 1;
+    if (nextIdx >= 0) showByIndex(nextIdx);
+  }
+
+  function onNext() {
+    var nextIdx = currentIndex + 1;
+    if (nextIdx < wrappers.length) showByIndex(nextIdx);
+  }
+
+  document.addEventListener('click', onTocClick);
+  if (prevBtn) prevBtn.addEventListener('click', onPrev);
+  if (nextBtn) nextBtn.addEventListener('click', onNext);
+
+  var initialHash = window.location.hash.replace('#', '');
+  var initialIdx = initialHash
+    ? chapters.findIndex(function (c) {
+        return c.id === initialHash;
+      })
+    : 0;
+
+  showByIndex(initialIdx >= 0 ? initialIdx : 0);
+
+  window.__blogChaptersCleanup = function () {
+    document.removeEventListener('click', onTocClick);
+    if (prevBtn) prevBtn.removeEventListener('click', onPrev);
+    if (nextBtn) nextBtn.removeEventListener('click', onNext);
+    if (host && host.dataset) {
+      delete host.dataset.blogChaptersInit;
+    }
+  };
+};
