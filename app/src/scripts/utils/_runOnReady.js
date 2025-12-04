@@ -17,7 +17,11 @@ export function runOnReady(callback) {
   };
 
   const scheduleRun = () => requestAnimationFrame(run);
-
+  
+  document.addEventListener('astro:before-swap', () => {
+    lastUrl = null;
+  });
+  
   if (document.readyState === 'complete' || document.readyState === 'interactive') {
     scheduleRun();
   } else {

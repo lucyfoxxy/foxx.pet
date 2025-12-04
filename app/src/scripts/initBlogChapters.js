@@ -115,8 +115,7 @@ export function initBlogChapters(options) {
         nextBtn.classList.toggle('is-disabled', idx === chapters.length - 1);
       }
 
-      // nach oben
-      host.scrollTo?.({ top: 0, behavior: 'smooth' });
+
 
       // URL aktualisieren
       history.replaceState?.(null, '', '#' + id);
