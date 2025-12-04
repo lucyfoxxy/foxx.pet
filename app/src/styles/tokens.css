@@ -101,7 +101,7 @@
 
 
   /* ====== Motion ====== */
-  --slow: .45s; --fast: .24s; 
+  --slow: .58s; --fast: .24s; 
   --transition-progress:            transform       .12s linear;
   --transition-fade-in:             opacity         var(--fast) ease-out;
   --transition-fade-in--slow:       opacity         var(--slow) ease-out;
@@ -113,19 +113,19 @@
                                     filter          var(--fast) ease,
                                     background      var(--fast) ease,
                                     padding-block   var(--fast) ease, 
-                                    transform       var(--fast) ease-out, 
-                                    font-size       var(--fast) ease-out, 
-                                    max-height      var(--fast) ease-out;
+                                    transform       var(--fast) ease, 
+                                    font-size       var(--fast) ease,
+                                    max-height      var(--fast) ease;
 
   --transition-state--slow:         color           var(--slow) ease,
                                     text-shadow     var(--slow) ease,
                                     box-shadow      var(--slow) ease,
                                     filter          var(--slow) ease,
                                     background      var(--slow) ease,
-                                    padding-block   var(--slow) ease, 
-                                    transform       var(--slow) ease-out, 
-                                    font-size       var(--slow) ease-out, 
-                                    max-height      var(--slow) ease-out;
+                                    padding-block   var(--slow) ease,
+                                    transform       var(--slow) ease,
+                                    font-size       var(--slow) ease, 
+                                    max-height      var(--slow) ease;
   
   --transform-raise:                translateY(-15%);
   --transform-grow:                 scale(1.05);

@@ -19,11 +19,11 @@
   --header-will-change:             transform, filter;
 
   --header-item-shadow:             none;
-  --header-item-filter:             none;
-  --header-item-filter--fx:         none;
+  --header-item-filter:             var(--fx-drop-shadow);
+  --header-item-filter--fx:         var(--fx-drop-shadow) var(--fx-glow--strong);
   --header-item-backdrop:           none;
   --header-item-transform:          var(--transform-raise);
-  --header-item-transition:         var(--transition-state);
+  --header-item-transition:         var(--transition-state--slow);
   --header-item-will-change:        transform, filter, opacity, text-shadow;
 
   --header-icon-size:               clamp(var(--icon-size-s), calc(.8rem + .875vw), var(--icon-size-l));

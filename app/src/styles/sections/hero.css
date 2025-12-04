@@ -1,11 +1,11 @@
 :root {
   --hero-scale: clamp(.55rem, calc(.55rem + 2.5vw), 2.35rem);
 
-    --hero-filter: drop-shadow(2px 2px 12px rgba(0,0,0,.7)) contrast(1.1) saturate(1.2);
+    --hero-filter: drop-shadow(2px 2px 12px rgba(0,0,0,.7)) contrast(1.1) saturate(1.32);
     --hero-text-filter:   drop-shadow(2px 3px 16px var(--color-pink)) drop-shadow(1px 1px 3px var(--color-accent-dark--soft));
     --hero-text-filter:   drop-shadow(2px 3px 4px var(--color-pink));
     --hero-text-filter:   ;
-    --hero-text-filter:  drop-shadow(0 0 3px var(--color-accent-dark)) drop-shadow(1px 1px 16px var(--color-accent--strong));
+    --hero-text-filter:  drop-shadow(2px 2px 3px var(--color-accent-dark)) drop-shadow(0 0 6px var(--color-purple));
     
 }
 .hero {

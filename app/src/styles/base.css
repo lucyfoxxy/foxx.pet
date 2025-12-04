@@ -33,10 +33,10 @@ body::before {
   box-shadow: var(--base-shadow);
   background-image: 
     var(--overlay-dim), 
-    var(--overlay-nebula-2), 
-    var(--overlay-stars), 
+    var(--overlay-nebula-3), 
+    var(--overlay-stars),
     var(--base-bg);
-  background-blend-mode:multiply,overlay,soft-light,normal;
+  background-blend-mode:multiply,screen,soft-light,normal;
   background-repeat: no-repeat,no-repeat,repeat,no-repeat;
   background-size: cover,cover,640px 640px,cover;
   background-position: center, top,center,center;

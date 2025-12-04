@@ -15,7 +15,7 @@
   --panel-padding:                  clamp(var(--space-xs),  calc(var(--space-xs) + 2.5vw),    var(--space-xxxl));
 
 
-
+  --panel-bg-color:                color-mix(in oklch, var(--color-dark) 75%, black 25%);
   --panel-gradient:                linear-gradient(225deg,transparent,var(--color-purple),var(--color-violet),var(--color-pink),var(--color-violet),var(--color-purple),transparent);
                                    
   --panel-dim:                      ;                      
@@ -52,7 +52,7 @@
   position: absolute;
   z-index: -1;
   box-shadow: var(--panel-shadow);
-  background-color: color-mix(in oklab, var(--color-dark) 75%, black 25%);
+  background-color: var(--panel-bg-color);
   background-image: var(--panel-gradient),var(--overlay-nebula-3),  var(--overlay-stars--dense);
   background-repeat: no-repeat,no-repeat, no-repeat, no-repeat, no-repeat;
   background-size:  cover,var(--panel-size),480px 480px, auto, cover;

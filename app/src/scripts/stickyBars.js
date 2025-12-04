@@ -25,9 +25,18 @@ export default function stickyBar(selector) {
     rafId = window.requestAnimationFrame(wrappedUpdate);
   };
 
+  let resizeObserver;
+  const observeLayoutChanges = () => {
+    if (typeof ResizeObserver === 'undefined') return;
+    const targets = [document.documentElement, document.body];
+    resizeObserver = new ResizeObserver(onScrollOrResize);
+    targets.forEach((target) => target && resizeObserver.observe(target));
+  };
+
   controller.update();
   window.addEventListener('scroll', onScrollOrResize, { passive: true });
   window.addEventListener('resize', onScrollOrResize);
+  observeLayoutChanges();
 
   return () => {
     if (rafId) {
@@ -36,6 +45,7 @@ export default function stickyBar(selector) {
     }
     window.removeEventListener('scroll', onScrollOrResize);
     window.removeEventListener('resize', onScrollOrResize);
+    resizeObserver?.disconnect?.();
     if (controller.destroy) controller.destroy();
   };
 }
