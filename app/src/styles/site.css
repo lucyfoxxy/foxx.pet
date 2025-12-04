@@ -53,11 +53,11 @@
   z-index: -1;
   box-shadow: var(--panel-shadow);
   background-color: var(--panel-bg-color);
-  background-image: var(--panel-gradient),var(--overlay-nebula-3),  var(--overlay-stars--dense);
-  background-repeat: no-repeat,no-repeat, no-repeat, no-repeat, no-repeat;
+  background-image: var(--panel-gradient),var(--overlay-nebula-4),  var(--overlay-stars--dense);
+  background-repeat: no-repeat,repeat, no-repeat, no-repeat, no-repeat;
   background-size:  cover,var(--panel-size),480px 480px, auto, cover;
   background-blend-mode: color,screen, screen,normal;
-  background-position: left,center -150px, top, center, center;
+  background-position: left,center -250px, top, center, center;
 }
 .panel-wrapper {
   display: flex;
@@ -85,6 +85,8 @@
   }
   .panel-wrapper::before {
     background-image: var(--panel-gradient),var(--overlay-nebula-mobile),  var(--overlay-stars--dense);
+     background-size:  cover,cover,480px 480px, auto, cover;
+     background-position: left,center, top, center, center;
   }
 }
 

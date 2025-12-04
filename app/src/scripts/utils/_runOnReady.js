@@ -25,6 +25,7 @@ export function runOnReady(callback) {
   }
 
   document.addEventListener('astro:page-load', scheduleRun);
+  document.addEventListener('astro:after-swap', scheduleRun);
 }
 
 export default runOnReady;
