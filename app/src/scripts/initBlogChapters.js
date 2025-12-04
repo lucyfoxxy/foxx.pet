@@ -1,166 +1,152 @@
-// src/scripts/initBlogChapters.js (oder inline im globalen Script,
-// Kern ist: KEIN runOnReady hier drin)
-window.initBlogChapters = function initBlogChapters(options) {
-  if (!options) return;
+export default function initBlogChapters () {
+  var CLEANUP_KEY = '__blogChaptersCleanup';
+  var BOOT_FLAG_KEY = '__blogChaptersBootInstalled';
 
-  var chapters = options.chapters;
-  var targetSelector = options.targetSelector || '#blog-chapter-target';
-  var titleSelector = options.titleSelector || '[data-chapter-title]';
-  var prevSelector = options.prevSelector || '[data-chapter-prev]';
-  var nextSelector = options.nextSelector || '[data-chapter-next]';
+  if (window[BOOT_FLAG_KEY]) return;
+  window[BOOT_FLAG_KEY] = true;
 
-  if (!Array.isArray(chapters) || !chapters.length) return;
+  function initBlogChaptersForCurrentPage() {
+    var dataEl = document.getElementById('blog-chapters-data');
+    var host = document.getElementById('blog-chapter-target');
+    
+    
+    if (!dataEl || !host) return; // keine Blogseite
 
-  var host = document.querySelector(targetSelector);
-  if (!host) return;
+    // Guard: pro Seite nur einmal
+    if (host.dataset.blogChaptersInit === '1') return;
+    host.dataset.blogChaptersInit = '1';
 
-  // Guard: Seite nicht doppelt initialisieren
-  if (host.dataset.blogChaptersInit === '1') return;
-  host.dataset.blogChaptersInit = '1';
+    var raw = dataEl.dataset.chapters;
+    if (!raw) return;
 
-  var titleEl = document.querySelector(titleSelector);
-  var prevBtn = document.querySelector(prevSelector);
-  var nextBtn = document.querySelector(nextSelector);
-  var tocLinks = document.querySelectorAll('[data-chapter]');
-
-  var wrappers = [];
-  var allNodes = Array.from(host.childNodes).filter(function (node) {
-    return (
-      node.nodeType === Node.ELEMENT_NODE ||
-      (node.nodeType === Node.TEXT_NODE && node.textContent.trim() !== '')
-    );
-  });
-
-  function findIndexById(id) {
-    return allNodes.findIndex(function (node) {
-      return node.nodeType === Node.ELEMENT_NODE && node.id === id;
-    });
-  }
-
-  for (var i = 0; i < chapters.length; i++) {
-    var chapter = chapters[i];
-    var startIdx = findIndexById(chapter.id);
-    if (startIdx === -1) continue;
-
-    var nextChapterId = i < chapters.length - 1 ? chapters[i + 1].id : null;
-    var endIdx = nextChapterId ? findIndexById(nextChapterId) : allNodes.length;
-
-    if (endIdx !== -1 && endIdx <= startIdx) continue;
-
-    var range = document.createRange();
-    range.setStartBefore(allNodes[startIdx]);
-
-    if (endIdx === -1 || endIdx >= allNodes.length) {
-      range.setEndAfter(allNodes[allNodes.length - 1]);
-    } else {
-      range.setEndBefore(allNodes[endIdx]);
+    var chapters;
+    try {
+      chapters = JSON.parse(raw);
+    } catch (err) {
+      console.warn('Blog chapters JSON invalid:', err, raw);
+      return;
     }
 
-    var wrapper = document.createElement('div');
-    wrapper.dataset.blogChapter = chapter.id;
-    wrapper.classList.add('blog-chapter-block');
+    if (!Array.isArray(chapters) || !chapters.length) return;
 
-    var contents = range.extractContents();
-    wrapper.appendChild(contents);
-    host.appendChild(wrapper);
-    wrappers.push(wrapper);
-  }
+    var chapterIds = chapters
+      .map(function (c) { return c && c.id; })
+      .filter(function (id) { return !!id; });
 
-  if (!wrappers.length) {
-    delete host.dataset.blogChaptersInit;
-    return;
-  }
+    if (!chapterIds.length) return;
 
-  var currentIndex = 0;
+    var titleEl = document.querySelector('[data-chapter-title]');
+    var prevBtn = document.querySelector('[data-chapter-prev]');
+    var nextBtn = document.querySelector('[data-chapter-next]');
+    var tocLinks = document.querySelectorAll('[data-chapter]');
 
-  function showByIndex(idx) {
-    if (idx < 0 || idx >= wrappers.length) return;
-    currentIndex = idx;
-    var chapter = chapters[idx];
-    var activeId = chapter.id;
+    var children = Array.from(host.children); // nur direkte Elemente
+    var currentIndex = 0;
 
-    wrappers.forEach(function (w) {
-      var active = w.dataset.blogChapter === activeId;
-      if (active) {
-        w.removeAttribute('hidden');
-      } else {
-        w.setAttribute('hidden', '');
+    function showByIndex(idx) {
+      if (idx < 0 || idx >= chapterIds.length) return;
+      currentIndex = idx;
+      var activeId = chapterIds[idx];
+
+      var currentChapterId = null;
+
+      children.forEach(function (el) {
+        // Falls dieses Element ein Kapitel-Header ist, aktuellen Abschnitt setzen
+        if (chapterIds.indexOf(el.id) !== -1) {
+          currentChapterId = el.id;
+        }
+        var visible = currentChapterId === activeId;
+        el.hidden = !visible;
+      });
+
+      // TOC-State
+      tocLinks.forEach(function (a) {
+        a.toggleAttribute('data-active', a.dataset.chapter === activeId);
+      });
+
+      // Titel
+      if (titleEl) {
+        var ch = chapters[idx];
+        titleEl.textContent = ch && ch.title ? ch.title : 'Chapter';
       }
-    });
 
-    tocLinks.forEach(function (a) {
-      a.toggleAttribute('data-active', a.dataset.chapter === activeId);
-    });
-
-    if (titleEl) {
-      titleEl.textContent = chapter.title || 'Chapter';
-    }
-
-    if (prevBtn) {
-      var disabledPrev = idx === 0;
-      prevBtn.disabled = disabledPrev;
-      prevBtn.classList.toggle('is-disabled', disabledPrev);
-    }
-
-    if (nextBtn) {
-      var disabledNext = idx === wrappers.length - 1;
-      nextBtn.disabled = disabledNext;
-      nextBtn.classList.toggle('is-disabled', disabledNext);
-    }
-
-    if (host.scrollTo) {
-      host.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    if (history.replaceState) {
-      history.replaceState(null, '', '#' + activeId);
-    }
+      // Buttons
+  if (prevBtn) {
+    var atFirst = idx === 0;
+    prevBtn.toggleAttribute('hidden', atFirst);
+  }
+  if (nextBtn) {
+    var atLast = idx === chapterIds.length - 1;
+    nextBtn.toggleAttribute('hidden', atLast);
   }
 
-  function onTocClick(ev) {
-    var a = ev.target.closest && ev.target.closest('[data-chapter]');
-    if (!a) return;
-    var id = a.dataset.chapter;
-    if (!id) return;
 
-    var idx = chapters.findIndex(function (c) {
-      return c.id === id;
-    });
-    if (idx === -1) return;
+      if (history.replaceState) {
+        history.replaceState(null, '', '#' + activeId);
+      }
+    }
 
-    ev.preventDefault();
-    showByIndex(idx);
-  }
+    function onTocClick(ev) {
+      var a = ev.target.closest && ev.target.closest('[data-chapter]');
+      if (!a) return;
+      var id = a.dataset.chapter;
+      if (!id) return;
 
-  function onPrev() {
-    var nextIdx = currentIndex - 1;
-    if (nextIdx >= 0) showByIndex(nextIdx);
-  }
+      var idx = chapterIds.indexOf(id);
+      if (idx === -1) return;
 
-  function onNext() {
-    var nextIdx = currentIndex + 1;
-    if (nextIdx < wrappers.length) showByIndex(nextIdx);
-  }
+      ev.preventDefault();
+      showByIndex(idx);
+    }
 
-  document.addEventListener('click', onTocClick);
-  if (prevBtn) prevBtn.addEventListener('click', onPrev);
-  if (nextBtn) nextBtn.addEventListener('click', onNext);
+    function onPrev() {
+      var nextIdx = currentIndex - 1;
+      if (nextIdx >= 0) showByIndex(nextIdx);
+    }
 
-  var initialHash = window.location.hash.replace('#', '');
-  var initialIdx = initialHash
-    ? chapters.findIndex(function (c) {
-        return c.id === initialHash;
-      })
-    : 0;
+    function onNext() {
+      var nextIdx = currentIndex + 1;
+      if (nextIdx < chapterIds.length) showByIndex(nextIdx);
+    }
 
-  showByIndex(initialIdx >= 0 ? initialIdx : 0);
+    document.addEventListener('click', onTocClick);
+    if (prevBtn) prevBtn.addEventListener('click', onPrev);
+    if (nextBtn) nextBtn.addEventListener('click', onNext);
 
-  window.__blogChaptersCleanup = function () {
-    document.removeEventListener('click', onTocClick);
-    if (prevBtn) prevBtn.removeEventListener('click', onPrev);
-    if (nextBtn) nextBtn.removeEventListener('click', onNext);
-    if (host && host.dataset) {
+    // initiales Kapitel bestimmen
+    var initialHash = window.location.hash.replace('#', '');
+    var initialIdx = initialHash ? chapterIds.indexOf(initialHash) : 0;
+    if (initialIdx < 0) initialIdx = 0;
+
+    showByIndex(initialIdx);
+
+    // Cleanup für nächste Seite
+    window[CLEANUP_KEY] = function () {
+      document.removeEventListener('click', onTocClick);
+      if (prevBtn) prevBtn.removeEventListener('click', onPrev);
+      if (nextBtn) nextBtn.removeEventListener('click', onNext);
       delete host.dataset.blogChaptersInit;
+      // im Zweifel alles wieder sichtbar machen
+      children.forEach(function (el) {
+        el.hidden = false;
+      });
+    };
+  }
+
+  function boot() {
+    var oldCleanup = window[CLEANUP_KEY];
+    if (typeof oldCleanup === 'function') {
+      oldCleanup();
+      window[CLEANUP_KEY] = null;
     }
-  };
+    initBlogChaptersForCurrentPage();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot, { once: true });
+  } else {
+    boot();
+  }
+
+  document.addEventListener('astro:page-load', boot);
 };

@@ -10,8 +10,8 @@
   --card-radius--inner:             var(--radius-m);
   --card-border:                    hidden;
 
-  --card-backdrop:                  var(--fx-blur-xxl) var(--fx-contrast) hue-rotate(-10deg);
-  --card-background:                var(--color-accent-dark--soft);
+  --card-backdrop:                  var(--fx-blur-xl) var(--fx-contrast) hue-rotate(-5deg);
+  --card-background:                var(--color-accent-dark--ghosty);
   --card-shadow:                    var(--fx-shadow--elevated), var(--fx-shadow-inset--strong);
   --card-transition:                var(--transition-state--slow);
   --card-transform--fx:             var(--transform-grow);
@@ -187,6 +187,14 @@
 
 #blog-chapter-target [data-blog-chapter] > :is(h1, h2, h3):first-child {
   display: none;
+}
+
+.prose#blog-chapter-target > :is(*[hidden],h2){
+  display: none;
+}
+:is([data-chapter-prev],[data-chapter-next])[hidden] {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .card__body > ol > li > a > span:first-child {

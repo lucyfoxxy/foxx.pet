@@ -16,7 +16,7 @@
 
 
   --panel-bg-color:                color-mix(in oklch, var(--color-dark) 75%, black 25%);
-  --panel-gradient:                linear-gradient(225deg,transparent,var(--color-purple),var(--color-violet),var(--color-pink),var(--color-violet),var(--color-purple),transparent);
+  --panel-gradient:                radial-gradient(circle at 70% -20%,var(--color-accent--lilac)25%,color-mix(in oklch,transparent,var(--color-accent--pink))65%,var(--color-accent--lilac)95%);
                                    
   --panel-dim:                      ;                      
   --panel-shadow:                   var(--fx-shadow--strong),inset 0 0 144px rgba(0,0,0,.65);
@@ -53,11 +53,11 @@
   z-index: -1;
   box-shadow: var(--panel-shadow);
   background-color: var(--panel-bg-color);
-  background-image: var(--panel-gradient),var(--overlay-nebula-4),  var(--overlay-stars--dense);
-  background-repeat: no-repeat,repeat, no-repeat, no-repeat, no-repeat;
-  background-size:  cover,var(--panel-size),480px 480px, auto, cover;
-  background-blend-mode: color,screen, screen,normal;
-  background-position: left,center -250px, top, center, center;
+  background-image: var(--overlay-stars--dense),var(--panel-gradient),var(--overlay-nebula-4);
+  background-repeat: repeat,no-repeat, no-repeat;
+  background-size:  480px, cover,var(--panel-size);
+  background-blend-mode: screen, color, screen;
+  background-position: left,center,center -250px;
 }
 .panel-wrapper {
   display: flex;
