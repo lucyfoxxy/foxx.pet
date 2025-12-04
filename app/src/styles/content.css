@@ -27,8 +27,9 @@
   --card-list-transition:           var(--transition-state--slow), var(--transition-fade-in);
   --card-list-will-change:          opacity, background;
 
-  --card-overlay-backdrop:          var(--fx-blur-xl);
-  --card-overlay-shadow:            var(var(--fx-shadow-inset--ghosty));
+  --card-overlay-bg-color:          var(--color-accent-dark--soft);
+  --card-overlay-backdrop:          var(--fx-blur-xxl) var(--fx-contrast);
+  --card-overlay-shadow:            var(--fx-shadow-inset--ghosty);
   --card-overlay-transition:        var(--transition-fade-in--slow);
   --card-overlay-will-change:       opacity;
   --card-overlay-transition--fx:    var(--transition-fade-out--slow);
@@ -260,6 +261,7 @@
   transition: var(--card-overlay-transition);
   will-change: var(--card-overlay-will-change);
   box-shadow: var(--card-overlay-shadow);
+  background-color: var(--card-overlay-bg-color);
 }
 .card__overlay--head { inset-block-start: 0; border-radius: var(--card-radius) var(--card-radius) 0 0; }
 .card__overlay--foot { inset-block-end: 0;   border-radius: 0 0 var(--card-radius) var(--card-radius); }
@@ -273,7 +275,6 @@
 }
 
 .card__overlay-item :where(h1,h2,h3) {
-  font-size: var(--font-size-m);
   text-wrap: balance;
 }
 

@@ -13,6 +13,8 @@ interface BlogViewData {
   introParagraphs: string[];
   cover: any; // ImageMetadata
   chapters?: BlogChapterView[];
+  category?: string;
+  date?: string;
 }
 
 interface Props {
@@ -33,10 +35,24 @@ const hasBlogSummary = blogDescription.length > 0 || blogSummaryParagraphs.lengt
 <section class="content-section content-section--head" id="article-top">
   <Template.Card class="card--center card--flush" headClass="card__head--column">
     <Fragment slot="headOverlay">
-      <span class="card__overlay-item"><h1>{blog.title}</h1></span>
+      <span class="card__overlay-item"><h2 class="is-fancy">{blog.title}</h2></span>
+          {(blog.date || blog.category || blog) && (
+          <div class="card__badges controls controls--center">
+            
+            <span class="control control--badge">
+              {blog.category ? blog.category : '1900-01-01'}
+            </span>}
+          
+            {blog.date && 
+            <span class="control control--badge">
+              {blog.date}
+            </span>}                
+          </div>)}      
+    </Fragment>
+    <Fragment slot="footOverlay">
+      
       {blogDescription ? <span class="card__overlay-item"><p>{blogDescription}</p></span> : null}
     </Fragment>
-
     <Fragment slot="body">
       <div class="media-frame">
         <img
