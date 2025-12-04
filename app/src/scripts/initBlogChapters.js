@@ -18,11 +18,18 @@ export function initBlogChapters(options) {
   if (!Array.isArray(chapters) || chapters.length === 0) return () => {};
 
   const run = () => {
+    // alten Zustand wegräumen, falls vorhanden
     cleanupListeners();
     cleanupDom();
 
     const host = document.querySelector(targetSelector);
     if (!host) return;
+
+    // 🔒 Guard: pro Seite nur EINMAL initialisieren
+    if (host.dataset.blogChaptersInit === '1') {
+      return;
+    }
+    host.dataset.blogChaptersInit = '1';
 
     const blocks = {};
     let currentIndex = 0;
@@ -33,7 +40,7 @@ export function initBlogChapters(options) {
     const nextBtn = document.querySelector(nextSelector);
     const tocLinks = document.querySelectorAll('[data-chapter]');
 
-    // --- Kapitel in Wrapper packen ---
+    // --- Kapitel in Wrapper packen (dein ursprünglicher Code) ---
     chapters.forEach((ch) => {
       const el =
         host.querySelector('#' + ch.id) ||
@@ -51,7 +58,11 @@ export function initBlogChapters(options) {
       let next = wrapper.nextSibling;
       while (
         next &&
-        !(next.nodeType === 1 && next.id && chapters.some((c) => c.id === next.id))
+        !(
+          next.nodeType === 1 &&
+          next.id &&
+          chapters.some((c) => c.id === next.id)
+        )
       ) {
         const move = next;
         next = next.nextSibling;
@@ -62,6 +73,12 @@ export function initBlogChapters(options) {
     });
 
     const allWrappers = host.querySelectorAll('[data-blog-chapter]');
+
+    if (!allWrappers.length) {
+      // nichts gefunden? Guard zurücksetzen
+      host.dataset.blogChaptersInit = '';
+      return;
+    }
 
     const showByIndex = (idx) => {
       if (idx < 0 || idx >= chapters.length) return;
@@ -117,6 +134,7 @@ export function initBlogChapters(options) {
       ev.preventDefault();
       showByIndex(idx);
     };
+
     document.addEventListener('click', onTocClick);
 
     // Prev / Next Buttons
@@ -139,6 +157,7 @@ export function initBlogChapters(options) {
 
     showByIndex(initialIdx >= 0 ? initialIdx : 0);
 
+    // --- Cleanup-Funktionen definieren ---
     cleanupListeners = () => {
       document.removeEventListener('click', onTocClick);
       if (prevBtn) prevBtn.removeEventListener('click', onPrev);
@@ -146,18 +165,26 @@ export function initBlogChapters(options) {
     };
 
     cleanupDom = () => {
-      document
+      // Kapitel-Wrapper wieder entpacken
+      host
         .querySelectorAll('[data-blog-chapter]')
         .forEach((wrapper) => {
+          const parent = wrapper.parentNode;
+          if (!parent) return;
+
           while (wrapper.firstChild) {
-            wrapper.parentNode?.insertBefore(wrapper.firstChild, wrapper);
+            parent.insertBefore(wrapper.firstChild, wrapper);
           }
           wrapper.remove();
         });
 
+      // Active-Marker entfernen
       document
         .querySelectorAll('[data-chapter][data-active]')
         .forEach((link) => link.removeAttribute('data-active'));
+
+      // Init-Flag zurücksetzen
+      host.dataset.blogChaptersInit = '';
     };
   };
 
@@ -179,7 +206,5 @@ export function initBlogChapters(options) {
     cleanupDom();
   };
 }
-
-
 
 export default initBlogChapters;

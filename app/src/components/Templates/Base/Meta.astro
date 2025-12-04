@@ -56,6 +56,7 @@ const goatCounterScriptSrc = 'https://stats.foxx.pet/count.js';
   <script data-goatcounter={`${goatCounterBase}/count`} async src={goatCounterScriptSrc}></script>
 )}-->
 <script>
+  
   import _runOnReady from '@Scripts/utils/_runOnReady.js';
 
   import initStarsCanvas from '@Scripts/stars-overlay.js';
@@ -68,6 +69,7 @@ const goatCounterScriptSrc = 'https://stats.foxx.pet/count.js';
   };
 
   const initStars = () => {
+
     if (_isMobile()) return;
 
     stopAllStars();

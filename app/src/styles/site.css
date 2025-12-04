@@ -91,7 +91,7 @@
 .panel-wrapper .stars-canvas {
   position: absolute;
   inline-size: 90%;
-  min-height: 90%;
+  height: 90%;
   isolation: isolate;
   inset: 0;
   z-index: -1;
