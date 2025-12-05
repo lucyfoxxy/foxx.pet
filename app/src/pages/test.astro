@@ -261,6 +261,73 @@ const mascotGallery = [
     description: 'Original hero render used throughout the landing + blog hero cards.',
   },
 ];
+
+const chapters = [
+  'Launch prep',
+  'Golden-hour ascent',
+  'Nebula glide',
+  'Night docking',
+  'Tiny paw notes',
+];
+
+const blogDemoChapters = chapters.map((title, index) => {
+  const slug = title
+    .toLowerCase()
+    .replace(/[^\p{Letter}\p{Number}]+/gu, '-')
+    .replace(/(^-|-$)+/g, '');
+
+  return {
+    id: slug || `chapter-${index + 1}`,
+    title,
+    summary: index === 0 ? 'Crew check-in and warmup.' : undefined,
+  };
+});
+
+const sampleBlog = {
+  title: 'Rocket Lucy — Launch Day',
+  description: 'How a cozy launch sequence sets up the whole journey.',
+  introParagraphs: [
+    'A short, readable summary that mirrors the real blog entry layout.',
+    'Shows how badges, overlays and the hero cover look with default spacing.',
+  ],
+  cover: COVERS.lucys_journeys,
+  chapters: blogDemoChapters,
+};
+
+const SampleBlogContent = () => (
+  <>
+    {blogDemoChapters.map((chapter, index) => (
+      <section id={chapter.id}>
+        <h3>{chapter.title}</h3>
+        <p>
+          {index === 0
+            ? 'Lucy and the ground crew sync their checklists, making sure every system glows green before the climb.'
+            : 'A calm narrative paragraph to mirror the live blog layout without any extra styling.'}
+        </p>
+        <p>
+          The prose uses the global `.prose` rhythm from <code>styles/typography.css</code> so this preview matches the
+          production article pages.
+        </p>
+      </section>
+    ))}
+  </>
+);
+
+const albumPreview = {
+  title: 'Eurofurence 2024 — Berlin, DE',
+  description: 'Live gallery layout with badges, controls and hero frame pulled straight from the album page.',
+  shareKey: 'demo-share',
+  albumSlug: 'eurofurence-2024',
+  categoryBadge: 'Conventions',
+  dateBadge: 'August 2024',
+  initialThumb: {
+    src: COVERS.conventions.src,
+    width: COVERS.conventions.width,
+    height: COVERS.conventions.height,
+    alt: 'Crowded convention hallway with Lucy posing',
+    full: COVERS.conventions.src,
+  },
+};
 ---
 <Template.Base>
   <section class="content-section">
@@ -284,6 +351,57 @@ const mascotGallery = [
             </a>
           ))}
         </div>
+      </Fragment>
+    </Template.Card>
+  </section>
+
+  <section class="content-section" id="entry-layouts">
+    <Template.Card class="card--plain" headClass="card__head--column">
+      <Fragment slot="head">
+        <h2 class="card__title">Entry layout previews</h2>
+        <p>
+          Direct renderings of the existing blog and album layouts, using only the shared styles from
+          <code>app/src/styles</code>. These blocks mirror the live entry pages without any test-page-only CSS.
+        </p>
+      </Fragment>
+    </Template.Card>
+  </section>
+
+  <Template.EntryBlog blog={sampleBlog} BlogContent={SampleBlogContent} />
+
+  <section class="content-section content-section--masonry" id="album-layout-preview">
+    <Template.Card class="card--center" headClass="card__head--column">
+      <Fragment slot="head">
+        {albumPreview.title && (
+          <h1 class="card__title">{albumPreview.title}</h1>
+        )}
+
+        {(albumPreview.categoryBadge || albumPreview.dateBadge) && (
+          <div class="card__badges controls controls--center">
+            {albumPreview.categoryBadge && (
+              <span class="control control--badge">{albumPreview.categoryBadge}</span>
+            )}
+
+            {albumPreview.dateBadge && (
+              <span class="control control--badge">{albumPreview.dateBadge}</span>
+            )}
+          </div>
+        )}
+      </Fragment>
+
+      <Fragment slot="body">
+        {albumPreview.description ? (
+          <div class="prose">
+            <p>{albumPreview.description}</p>
+          </div>
+        ) : null}
+        <Template.MediaFrame album={albumPreview} />
+      </Fragment>
+    </Template.Card>
+
+    <Template.Card class="card--flush card--center">
+      <Fragment slot="foot">
+        <Template.MediaThumbs />
       </Fragment>
     </Template.Card>
   </section>
@@ -656,7 +774,6 @@ const mascotGallery = [
       gap: var(--section-gap);
       grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
     }
-
     .token-card {
       display: grid;
       gap: var(--flow-gap);
