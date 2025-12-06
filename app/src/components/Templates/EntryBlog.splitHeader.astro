@@ -45,15 +45,16 @@ const formattedDate =
   }
 
   .entry-header__media {
-    border-radius: var(--radius-xl);
+    border-radius: var(--radius-l);
     overflow: hidden;
     box-shadow: var(--shadow-soft, 0 0 40px rgba(0, 0, 0, 0.6));
   }
 
   .entry-header__image {
     display: block;
-    inline-size: 100%;
-    block-size: 100%;
+    inline-size: 50%;
+    block-size: auto;
+    aspect-ratio: 1/1;
     object-fit: cover;
   }
 
@@ -88,8 +89,8 @@ const formattedDate =
 
 <section class="content-section content-section--head" id="article-top">
   <Template.Card
-    class="card--center card--flush"
-    headClass="entry-header entry-header--split"
+    class="card--center"
+    headClass="entry-header"
   >
     <Fragment slot="head">
       <header class="entry-header entry-header--split">
@@ -97,7 +98,7 @@ const formattedDate =
           <img
             src={blog.cover.src}
             alt={blog.title}
-            class="entry-header__image media-image media-image--cover"
+            class=" media-image media-image--cover"
           />
         </div>
 
