@@ -1,11 +1,69 @@
 ---
 import { Template } from '@Frontend';
-import Icons from '@Assets/Icons.astro';
-import { ASSETS, COVERS, ICON_REGISTRY } from '@Assets/assets.registry';
-import { Picture } from 'astro:assets';
-import { isProd } from '@utils/env';
+import { PLACEHOLDER_COVER } from '@Assets/covers';
+import { getEntriesBySectionAndCategory } from '@utils/getEntries';
+import { getSectionBaseHref, loadSectionContext } from '@utils/sectionContext';
+import { createBlogEntryView, matchesEntrySlug } from '@utils/entryTransforms';
+import type { CollectionEntry } from 'astro:content';
+
+const testSection = 'tails';
+const testSlug = 'tails-lucys-journeys-starlit-liftoff';
+
+const {
+  sectionSlug,
+  categorySlug,
+  page: parentPage,
+  category,
+  error: contextError,
+} = await loadSectionContext({
+  url: Astro.url,
+  section:testSection,          // → auf der Testpage ersetzen wir das durch einen festen Wert
+  kind: 'entry',
+  missingSectionMessage: 'We could not resolve this page — please try again later.',
+});
+
+let errorMessage = contextError;
+
+const targetCategory = categorySlug ?? testSlug;
+
+const entries = !errorMessage
+  ? await getEntriesBySectionAndCategory(sectionSlug, targetCategory)
+  : [];
+
+const entry = entries.find((candidate) => matchesEntrySlug(candidate, testSlug));
+if (!entry && !errorMessage) {
+  errorMessage = 'We could not find that entry yet. Please check back soon!';
+}
+
+let blogView: ReturnType<typeof createBlogEntryView>['blog'] | undefined;
+let BlogContent: Awaited<
+  ReturnType<CollectionEntry<'blog'>['render']>
+>['Content'] | undefined;
+
+if (!errorMessage && entry) {
+  const parentHref = getSectionBaseHref(sectionSlug, parentPage);
+
+  const rendered = await entry.render();
+  BlogContent = rendered.Content;
+
+  const blogData = createBlogEntryView(entry, parentHref, {
+    categorySlug,
+    categoryDescription: category?.description,
+    parentPage,
+
+  });
+
+  blogView = blogData.blog;
+}
+
 
 ---
 <Template.Base>
+    <Template.EntryBlog blog={{
+      title:' blogView.title',
+      description: 'blogView.description',
 
+      cover: blogView.cover,
+      chapters: blogView.chapters,
+    }} BlogContent={BlogContent} />
 </Template.Base>
