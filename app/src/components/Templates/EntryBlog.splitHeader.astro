@@ -63,6 +63,8 @@ const formattedDate =
     line-height: var(--line-height-xxs);
     letter-spacing: var(--letter-spacing-xxl)
   }
+
+  
 </style>
 
 <section class="content-section content-section--head" id="article-top">
@@ -147,6 +149,10 @@ const formattedDate =
 
   {hasBlogChapters ? (
     <Template.Card headClass={hasBlogChapters ? '' : undefined}>
+
+
+
+      
       <Fragment slot="head">
         <h2 class="card__title" data-chapter-title>
           {hasBlogChapters ? blogChapters[0].title : 'Chapter'}
