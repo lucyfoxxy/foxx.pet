@@ -39,24 +39,16 @@ const formattedDate =
 <style>
   .entry-header {
     display: grid;
-    grid-template-columns: 60% auto;
+    grid-template-columns: 55% auto;
     gap: var(--card-gap, 2rem);
     align-items: center;
   }
   @media (max-width: 900px) {
     .entry-header {
       grid-template-columns: 1fr;
-      place-items: center;
-    
+      place-items: center;  
     }
   }
-  .entry-header__media {
-    border-radius: var(--radius-l);
-    overflow: hidden;
-    box-shadow: var(--fx-shadow--medium);
-  }
-
-
   .entry-header__content {
     display: flex;
     flex-direction: column;
@@ -69,53 +61,31 @@ const formattedDate =
     font-size: var(--font-size-s);
     opacity: 0.7;
     line-height: var(--line-height-xxs);
-    letter-spacing: 0.18em;
-  }
-    .entry-header__media {
-      max-block-size: 16rem;
-      inline-size: 100%;
-    }
-  .entry-header__summary {
-    opacity: 0.9;
-  }
-
-  @media (max-width: 900px) {
-    .entry-header {
-      grid-template-columns: 1fr;
-      place-items: center;
-    
-    }
-    .entry-header__media {
-      max-block-size: 16rem;
-      
-    }
-
+    letter-spacing: var(--letter-spacing-xxl)
   }
 </style>
 
 <section class="content-section content-section--head" id="article-top">
-  <Template.Card
-    class="card--center "
-
-  >
+  <Template.Card class="card--center">
     <Fragment slot="body">
       <header class="entry-header">
-
-
         <div class="entry-header__content">
           {/* Eyebrow / Kategorie oben klein */}
           {blog.category ? (
-            <p class="entry-header__eyebrow is-signature is-italic">{blog.category}</p>
+            <p class="entry-header__eyebrow is-signature is-italic">
+              {blog.category}
+            </p>
           ) : null}
 
-          <h1 class="card__title is-fancy">{blog.title}</h1>
+          <h1 class="card__title is-fancy">
+            {blog.title}
+          </h1>
 
           {blogDescription ? (
             <div class="prose">
               <p class="is-italic">{blogDescription}</p>
             </div>
           ) : null}
-
 
           {(formattedDate || blog.category) && (
             <div class="card__badges controls controls--tight">

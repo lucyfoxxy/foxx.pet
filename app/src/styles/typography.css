@@ -57,6 +57,7 @@
   --letter-spacing-m:               clamp(.0065em, calc(0.225em + .01vw ), .0225em);
   --letter-spacing-l:               clamp(.0225em, calc(0.225em + .03vw ), .0525em);
   --letter-spacing-xl:              clamp(.0525em, calc(0.525em + .05vw ), .0650em);
+  --letter-spacing-xxl:              clamp(.0650em, calc(0.650em + .07vw ), .0950em);
 
   --font-size-xs:                   clamp(.75rem, calc(.75rem + .025vw), .95rem);
   --font-size-s:                    clamp(.9rem,  calc(.9rem + .075vw), 1.05rem);

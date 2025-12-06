@@ -116,15 +116,7 @@
 
 }
 
-@media (max-width: 800px) {
-  .media-frame,
-  .content-section.cols-2 :where(.media-frame),
-  .content-section.cols-3 :where(.media-frame) {
-    aspect-ratio: 1 / 1;
-  max-block-size: 35vh;
-  inline-size: auto;
-  }
-}
+
 
 /* ---->  FRAME THUMB  <---------------- */
 .media-frame--thumb {
