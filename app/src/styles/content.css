@@ -38,13 +38,9 @@
 
 /* ====== CONTENT CARD ====== */
 .card{
-  display: grid;
   position: relative;
-  grid-template-areas:
-    "card-head"
-    "card-body"
-    "card-foot";
-  grid-template-rows: auto 1fr auto;
+  display: flex;
+  flex-direction: column;
   border: var(--card-border);
   min-block-size: 100%;
   padding: var(--card-padding);
@@ -93,9 +89,9 @@
 
 
 /* === CENTER === */
-.card--center { 
-  justify-items: center; 
-  text-align: center; 
+.card--center {
+  align-items: center;
+  text-align: center;
 }
 .card--center :where(.prose) {
    margin-inline: auto; 

@@ -31,7 +31,7 @@ const blogDescription = blog.description ?? '';
 const hasBlogSummary = blogDescription.length > 0 || blogSummaryParagraphs.length > 0;
 const formattedDate =
   blog.date instanceof Date
-    ? new Intl.DateTimeFormat('en', { month: 'short', year: 'numeric' }).format(blog.date)
+    ? new Intl.DateTimeFormat('de', { month: 'short', year: 'numeric' }).format(blog.date)
     : typeof blog.date === 'string' && blog.date.trim().length
     ? blog.date
     : undefined;
