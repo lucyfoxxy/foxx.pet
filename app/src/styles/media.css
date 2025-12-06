@@ -96,6 +96,10 @@
   box-shadow: var(--media-frame-shadow);
 }
 
+.media-frame--banner {
+    max-block-size: 16rem;
+}
+
 .media-frame[data-lightbox="true"] {
   max-block-size: 80vh;
   backdrop-filter: blur(18px) brightness(.95);
