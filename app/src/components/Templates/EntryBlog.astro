@@ -14,7 +14,7 @@ interface BlogViewData {
   cover: any; // ImageMetadata
   chapters?: BlogChapterView[];
   category?: string;
-  date?: string;
+  date?: Date | string;
 }
 
 interface Props {
@@ -29,7 +29,12 @@ const hasBlogChapters = blogChapters.length > 0;
 const blogSummaryParagraphs = blog.introParagraphs ?? [];
 const blogDescription = blog.description ?? '';
 const hasBlogSummary = blogDescription.length > 0 || blogSummaryParagraphs.length > 0;
-
+const formattedDate =
+  blog.date instanceof Date
+    ? new Intl.DateTimeFormat('en', { month: 'short', year: 'numeric' }).format(blog.date)
+    : typeof blog.date === 'string' && blog.date.trim().length
+    ? blog.date
+    : undefined;
 ---
 
 <section class="content-section content-section--head" id="article-top">
@@ -42,11 +47,11 @@ const hasBlogSummary = blogDescription.length > 0 || blogSummaryParagraphs.lengt
 
     </Fragment>
     <Fragment slot="footOverlay">
-                            {(blog.date || blog.category || blog) && (
+                            {(formattedDate || blog.category || blog) && (
           <div class="card__overlay-item card__badges controls controls--end">
             
             <span class="control control--badge">
-              {blog.date ? blog.date : '1900-01-01'}
+              {formattedDate ? formattedDate : '1900-01-01'}
             </span>
 
             <span class="control control--badge">

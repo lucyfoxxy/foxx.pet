@@ -2,37 +2,19 @@
 import { Template } from '@Frontend';
 import { PLACEHOLDER_COVER } from '@Assets/covers';
 import { getEntriesBySectionAndCategory } from '@utils/getEntries';
-import { getSectionBaseHref, loadSectionContext } from '@utils/sectionContext';
 import { createBlogEntryView, matchesEntrySlug } from '@utils/entryTransforms';
 import type { CollectionEntry } from 'astro:content';
 
 const placeholderCover = PLACEHOLDER_COVER.src;
 
-// → hier stellst du ein, welchen Blog-Eintrag du auf der Testseite sehen willst
-const section = 'tails';
-const categorySlug='lucys-journeys';
+// 👉 Hier stellst du ein, welchen Blog-Entry du testen willst:
+const sectionSlug = 'tails';
+const categorySlug = 'lucys-journeys';
 const slug = 'tails-lucys-journeys-starlit-liftoff';
 
-const {
-  sectionSlug,
-  page: parentPage,
-  category,
-  error: contextError,
-} = await loadSectionContext({
-  url: Astro.url,
-  section,
-  kind: 'entry',
-  missingSectionMessage: 'We could not resolve this page — please try again later.',
-});
+let errorMessage: string | undefined;
 
-let errorMessage = contextError;
-
-const targetCategory = categorySlug ?? slug;
-
-const entries = !errorMessage
-  ? await getEntriesBySectionAndCategory(sectionSlug, targetCategory)
-  : [];
-
+const entries = await getEntriesBySectionAndCategory(sectionSlug, categorySlug);
 const entry = entries.find((candidate) => matchesEntrySlug(candidate, slug));
 
 let blogView: ReturnType<typeof createBlogEntryView>['blog'] | undefined;
@@ -40,20 +22,19 @@ let BlogContent: Awaited<
   ReturnType<CollectionEntry<'blog'>['render']>
 >['Content'] | undefined;
 
-if (!entry && !errorMessage) {
+if (!entry) {
   errorMessage = 'We could not find that entry yet. Please check back soon!';
-}
-
-if (!errorMessage && entry) {
-  const parentHref = getSectionBaseHref(sectionSlug, parentPage);
+} else {
+  // Parent-URL einfach selber bauen, wir brauchen sie nur für Back-Link / Header
+  const parentHref = `/${sectionSlug}/${categorySlug}/`;
 
   const rendered = await entry.render();
   BlogContent = rendered.Content;
 
   const blogData = createBlogEntryView(entry, parentHref, {
     categorySlug,
-    categoryDescription: category?.description,
-    parentPage,
+    categoryDescription: undefined,
+    parentPage: undefined,
     placeholderCover,
   });
 
@@ -71,18 +52,30 @@ if (!errorMessage && entry) {
       </Template.Card>
     </section>
   ) : blogView && BlogContent ? (
-    <Template.EntryBlog
-      blog={{
-        title: blogView.title,
-        description: blogView.description,
-        introParagraphs: blogView.introParagraphs,
-        cover: blogView.cover,
-        chapters: blogView.chapters,
-        // optional, aber dann stimmen Datum/Badge auch:
-        category: blogView.category,
-        date: blogView.date,
-      }}
-      BlogContent={BlogContent}
-    />
+    <>
+      {/* Variante A: aktuelles Live-Layout 1:1 */}
+      <section class="content-section">
+        <Template.Card class="card--center card--plain">
+          <Fragment slot="head">
+            <h2 class="card__title">Variante A – Current EntryBlog</h2>
+          </Fragment>
+        </Template.Card>
+      </section>
+
+      <Template.EntryBlog
+        blog={{
+          title: blogView.title,
+          description: blogView.description,
+          introParagraphs: blogView.introParagraphs,
+          cover: blogView.cover,
+          chapters: blogView.chapters,
+          date: entry?.data?.date,
+          category: entry?.data?.category,
+        }}
+        BlogContent={BlogContent}
+      />
+
+      {/* Hier drunter können wir später Varianten B/C/D einhängen */}
+    </>
   ) : null}
 </Template.Base>

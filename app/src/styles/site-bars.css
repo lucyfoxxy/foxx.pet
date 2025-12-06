@@ -188,7 +188,7 @@
     padding-inline: var(--bars-padding);
     inset: 0;
     overflow: hidden;
-    filter: hue-rotate(-15deg);
+    filter: hue-rotate(-5deg);
     box-shadow: var(--footer-shadow);
 }
 @media (max-width: 900px) {
