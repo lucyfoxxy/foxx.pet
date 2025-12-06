@@ -39,25 +39,23 @@ const formattedDate =
 <style>
   .entry-header {
     display: grid;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 60% auto;
     gap: var(--card-gap, 2rem);
     align-items: center;
-    
   }
-
+  @media (max-width: 900px) {
+    .entry-header {
+      grid-template-columns: 1fr;
+      place-items: center;
+    
+    }
+  }
   .entry-header__media {
     border-radius: var(--radius-l);
     overflow: hidden;
     box-shadow: var(--fx-shadow--medium);
   }
 
-  .entry-header__image {
-    display: block;
-    inline-size: 50%;
-    block-size: auto;
-    aspect-ratio: 1/1;
-    object-fit: cover;
-  }
 
   .entry-header__content {
     display: flex;
@@ -74,14 +72,14 @@ const formattedDate =
     letter-spacing: 0.18em;
   }
     .entry-header__media {
-      max-block-size: 13rem;
+      max-block-size: 16rem;
       
     }
   .entry-header__summary {
     opacity: 0.9;
   }
 
-  @media (max-width: 56rem) {
+  @media (max-width: 900px) {
     .entry-header {
       grid-template-columns: 1fr;
       place-items: center;
@@ -91,7 +89,7 @@ const formattedDate =
       max-block-size: 16rem;
       
     }
-    .card__head {gap: 0}
+
   }
 </style>
 
@@ -100,7 +98,7 @@ const formattedDate =
     class="card--center "
     headClass="entry-header"
   >
-    <Fragment slot="head">
+    <Fragment slot="body">
       <header class="entry-header">
 
 
@@ -113,12 +111,11 @@ const formattedDate =
           <h1 class="card__title is-fancy">{blog.title}</h1>
 
           {blogDescription ? (
-            <p class="card__subtitle">{blogDescription}</p>
+          <div class="prose">
+            <p class="is-italic">{blogDescription}</p>
+          </div>
           ) : null}
 
-          {hasBlogSummary && blogSummaryParagraphs.length ? (
-            <p class="entry-header__summary">{blogSummaryParagraphs[0]}</p>
-          ) : null}
 
           {(formattedDate || blog.category) && (
             <div class="card__badges controls controls--tight">
@@ -132,11 +129,11 @@ const formattedDate =
             </div>
           )}
         </div>
-        <div class="entry-header__media">
+        <div class="media-frame">
           <img
             src={blog.cover.src}
             alt={blog.title}
-            class=" media-image media-image--cover"
+            class=" media-image media-image--cover media-image--top"
           />
         </div>        
       </header>
