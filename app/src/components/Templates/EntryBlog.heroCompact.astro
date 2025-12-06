@@ -1,0 +1,177 @@
+---
+import { Template } from '@Frontend';
+import ICONS from '@Assets/Icons.astro';
+interface BlogChapterView {
+  id: string;
+  title: string;
+  summary?: string;
+}
+
+interface BlogViewData {
+  title: string;
+  description?: string;
+  introParagraphs: string[];
+  cover: any; // ImageMetadata
+  chapters?: BlogChapterView[];
+  category?: string;
+  date?: Date | string;
+}
+
+interface Props {
+  blog: BlogViewData;
+  BlogContent?: any;
+}
+
+const { blog, BlogContent } = Astro.props;
+
+const blogChapters = blog.chapters ?? [];
+const hasBlogChapters = blogChapters.length > 0;
+const blogSummaryParagraphs = blog.introParagraphs ?? [];
+const blogDescription = blog.description ?? '';
+const hasBlogSummary = blogDescription.length > 0 || blogSummaryParagraphs.length > 0;
+const formattedDate =
+  blog.date instanceof Date
+    ? new Intl.DateTimeFormat('en', { month: 'short', year: 'numeric' }).format(blog.date)
+    : typeof blog.date === 'string' && blog.date.trim().length
+    ? blog.date
+    : undefined;
+---
+
+<section class="content-section content-section--head" id="article-top">
+  <Template.Card class="card--center card--flush" footOverlayClass="card__overlay--plain">
+
+    <Fragment slot="headOverlay">
+      <span class="card__overlay-item"><h2 class="is-fancy">{blog.title}</h2></span>
+
+      {blogDescription ? <span class="card__overlay-item"><p>{blogDescription}</p></span> : null}
+
+    </Fragment>
+    <Fragment slot="footOverlay">
+                            {(formattedDate || blog.category || blog) && (
+          <div class="card__overlay-item card__badges controls controls--end">
+            
+            <span class="control control--badge">
+              {formattedDate ? formattedDate : '1900-01-01'}
+            </span>
+
+            <span class="control control--badge">
+              {blog.category ? blog.category : 'category'}
+            </span>               
+          </div>)} 
+
+    </Fragment>
+    <Fragment slot="body">
+      <div class="media-frame">
+        <img
+          src={blog.cover.src}
+          alt={blog.title}
+          class="media-image media-image--top media-image--cover"
+        />
+      </div>
+    </Fragment>
+  </Template.Card>
+</section>
+
+<section class="content-section content-section--masonry">
+  {hasBlogChapters ? (
+    <Template.Card class="">
+      <Fragment slot="head">
+        <h2 class="card__title">Table of Contents</h2>
+        <div class="card__badges controls controls--tight">
+          <span class="control control--badge">{blogChapters.length} total</span>
+        </div>
+      </Fragment>
+      <Fragment slot="body">
+        <ol>
+          {blogChapters.map((chapter, index) => (
+            <li>
+              <a
+                href={`#${chapter.id}`}
+                data-chapter={chapter.id}
+              >
+                <span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+                <div>
+                  <strong>{chapter.title}</strong>
+                  {chapter.summary ? <span>{chapter.summary}</span> : null}
+                </div>
+              </a>
+            </li>
+          ))}
+        </ol>
+
+      </Fragment>
+    </Template.Card>
+  ) : null}
+
+
+
+  {hasBlogChapters ? (
+    <Template.Card headClass={hasBlogChapters ? '' : undefined}>
+      <Fragment slot="head">
+        <h2 class="card__title" data-chapter-title>
+          {hasBlogChapters ? blogChapters[0].title : 'Chapter'}
+        </h2>
+      </Fragment>
+
+      <Fragment slot="body">
+        <article class="prose" id="blog-chapter-target">
+          {BlogContent ? <BlogContent /> : <p>There is no article content to show just yet.</p>}
+        </article>
+      </Fragment>
+
+      {hasBlogChapters ? (
+        <Fragment slot="foot">
+          <nav class="controls controls--spread">
+            <button
+              class="control control--button control--circle"
+              type="button"
+              data-chapter-prev
+            >
+              <ICONS class="media-icon media-icon--small" kind="previous" />
+            </button>
+
+            <button
+              class="control control--button control--circle"
+              type="button"
+              data-chapter-next
+            >
+              <ICONS class="media-icon media-icon--small" kind="next" />
+            </button>
+          </nav>
+        </Fragment>
+      ) : null}
+    </Template.Card>
+) : null}
+  </section>
+
+{hasBlogChapters && blogChapters ? (
+  <>
+    {/* Daten-Container */}
+    <div
+      id="blog-chapters-data"
+      data-chapters={JSON.stringify(blogChapters)}
+      hidden
+    ></div>
+
+    {/* echtes Script */}
+
+  </>
+) : null}
+
+
+ 
+
+<section class="content-section">{/* Platz für Related / Comments / whatever */}</section>
+
+<script>
+  import initBlogChapters from '@Scripts/initBlogChapters.js';
+  import { runOnReady } from '@Scripts/utils/_runOnReady.js';
+
+  runOnReady(() => {
+    const cleanup = initBlogChapters();
+    if (typeof cleanup === 'function') {
+      window.addEventListener('astro:before-swap', cleanup, { once: true });
+    }
+  });
+</script>
+
