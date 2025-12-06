@@ -31,7 +31,7 @@ const blogDescription = blog.description ?? '';
 const hasBlogSummary = blogDescription.length > 0 || blogSummaryParagraphs.length > 0;
 const formattedDate =
   blog.date instanceof Date
-    ? new Intl.DateTimeFormat('de', { month: 'short', year: 'numeric' }).format(blog.date)
+    ? new Intl.DateTimeFormat('de', { month: 'long', year: 'numeric' }).format(blog.date)
     : typeof blog.date === 'string' && blog.date.trim().length
     ? blog.date
     : undefined;
@@ -39,15 +39,16 @@ const formattedDate =
 <style>
   .entry-header {
     display: grid;
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.4fr);
+    grid-template-columns: 1fr auto;
     gap: var(--card-gap, 2rem);
     align-items: center;
+    
   }
 
   .entry-header__media {
     border-radius: var(--radius-l);
     overflow: hidden;
-    box-shadow: var(--shadow-soft, 0 0 40px rgba(0, 0, 0, 0.6));
+    box-shadow: var(--fx-shadow--medium);
   }
 
   .entry-header__image {
@@ -63,6 +64,7 @@ const formattedDate =
     flex-direction: column;
     gap: var(--flow-gap);
     align-items: center;
+    padding: var(--card-padding);
   }
 
   .entry-header__eyebrow {
@@ -72,7 +74,8 @@ const formattedDate =
     letter-spacing: 0.18em;
   }
     .entry-header__media {
-      max-block-size: 12rem;
+      max-block-size: 13rem;
+      
     }
   .entry-header__summary {
     opacity: 0.9;
@@ -80,29 +83,26 @@ const formattedDate =
 
   @media (max-width: 56rem) {
     .entry-header {
-      grid-template-columns: minmax(0, 1fr);
-      align-items: center;
-      justify-content: center;
+      grid-template-columns: 1fr;
+      place-items: center;
+    
     }
-
-
+    .entry-header__media {
+      max-block-size: 16rem;
+      
+    }
+    .card__head {gap: 0}
   }
 </style>
 
 <section class="content-section content-section--head" id="article-top">
   <Template.Card
-    class="card--center"
+    class="card--center "
     headClass="entry-header"
   >
     <Fragment slot="head">
       <header class="entry-header">
-        <div class="entry-header__media">
-          <img
-            src={blog.cover.src}
-            alt={blog.title}
-            class=" media-image media-image--cover"
-          />
-        </div>
+
 
         <div class="entry-header__content">
           {/* Eyebrow / Kategorie oben klein */}
@@ -127,11 +127,18 @@ const formattedDate =
               ) : null}
 
               {blog.category ? (
-                <span class="control control--badge">{blog.category}</span>
+                <span class="control control--badge">*some tag*</span>
               ) : null}
             </div>
           )}
         </div>
+        <div class="entry-header__media">
+          <img
+            src={blog.cover.src}
+            alt={blog.title}
+            class=" media-image media-image--cover"
+          />
+        </div>        
       </header>
     </Fragment>
   </Template.Card>
