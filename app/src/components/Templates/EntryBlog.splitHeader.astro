@@ -41,7 +41,7 @@ const formattedDate =
     display: grid;
     grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.4fr);
     gap: var(--card-gap, 2rem);
-    align-items: stretch;
+    align-items: center;
   }
 
   .entry-header__media {
@@ -61,17 +61,19 @@ const formattedDate =
   .entry-header__content {
     display: flex;
     flex-direction: column;
-    gap: var(--flow-gap, 0.75rem);
-    justify-content: center;
+    gap: var(--flow-gap);
+    align-items: center;
   }
 
   .entry-header__eyebrow {
-    font-size: 0.8rem;
-    opacity: 0.8;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
+    font-size: var(--font-size-s);
+    opacity: 0.7;
+    line-height: var(--line-height-xxs);
+    letter-spacing: 0.18em;
   }
-
+    .entry-header__media {
+      max-block-size: 12rem;
+    }
   .entry-header__summary {
     opacity: 0.9;
   }
@@ -79,11 +81,11 @@ const formattedDate =
   @media (max-width: 56rem) {
     .entry-header {
       grid-template-columns: minmax(0, 1fr);
+      align-items: center;
+      justify-content: center;
     }
 
-    .entry-header__media {
-      max-block-size: 18rem;
-    }
+
   }
 </style>
 
@@ -93,7 +95,7 @@ const formattedDate =
     headClass="entry-header"
   >
     <Fragment slot="head">
-      <header class="entry-header entry-header--split">
+      <header class="entry-header">
         <div class="entry-header__media">
           <img
             src={blog.cover.src}
@@ -105,7 +107,7 @@ const formattedDate =
         <div class="entry-header__content">
           {/* Eyebrow / Kategorie oben klein */}
           {blog.category ? (
-            <p class="entry-header__eyebrow">{blog.category}</p>
+            <p class="entry-header__eyebrow is-signature is-italic">{blog.category}</p>
           ) : null}
 
           <h1 class="card__title is-fancy">{blog.title}</h1>
