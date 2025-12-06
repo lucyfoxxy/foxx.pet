@@ -1,6 +1,7 @@
 ---
 import { Template } from '@Frontend';
 import ICONS from '@Assets/Icons.astro';
+
 interface BlogChapterView {
   id: string;
   title: string;
@@ -29,43 +30,94 @@ const hasBlogChapters = blogChapters.length > 0;
 const blogSummaryParagraphs = blog.introParagraphs ?? [];
 const blogDescription = blog.description ?? '';
 const hasBlogSummary = blogDescription.length > 0 || blogSummaryParagraphs.length > 0;
+
 const formattedDate =
   blog.date instanceof Date
-    ? new Intl.DateTimeFormat('en', { month: 'short', year: 'numeric' }).format(blog.date)
+    ? new Intl.DateTimeFormat('en', { month: 'short', year: 'numeric' }).format(
+        blog.date,
+      )
     : typeof blog.date === 'string' && blog.date.trim().length
     ? blog.date
     : undefined;
 ---
+<style>
+/* content.css */
 
+.card__head-row {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--flow-gap, 1rem);
+
+}
+ .controls{  padding: var(--card-padding);}
+.card__head-main {
+  flex: 1 1 auto;
+}
+
+.card__subtitle {
+  margin-block-start: var(--flow-gap-xs, 0.5rem);
+  opacity: 0.9;
+}
+
+/* mobile: Badges unter den Titel */
+@media (max-width: 50rem) {
+  .card__head-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .card__badges {
+    margin-block-start: var(--flow-gap-xs, 0.5rem);
+  }
+}
+/* media.css */
+
+.media-frame--banner {
+  max-block-size: min(22rem, 45vh);
+  overflow: hidden;
+}
+
+.media-image--banner {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
+</style>
 <section class="content-section content-section--head" id="article-top">
-  <Template.Card class="card--center card--flush" footOverlayClass="card__overlay--plain">
+  <Template.Card class="card--center card--flush" headClass="card__head--row">
+    <!-- kompakter Header: Titel + Teaser + Badges in einer Reihe -->
+    <Fragment slot="head">
+      <div class="controls controls--center">
+        <div class="card__head-main">
+          <h1 class="card__title is-fancy">{blog.title}</h1>
 
-    <Fragment slot="headOverlay">
-      <span class="card__overlay-item"><h2 class="is-fancy">{blog.title}</h2></span>
+          {blogDescription ? (
+            <p class="card__subtitle">{blogDescription}</p>
+          ) : null}
+        </div>
 
-      {blogDescription ? <span class="card__overlay-item"><p>{blogDescription}</p></span> : null}
+        {(formattedDate || blog.category) && (
+          <div class="card__badges controls controls--tight">
+            {formattedDate ? (
+              <span class="control control--badge">{formattedDate}</span>
+            ) : null}
 
+            {blog.category ? (
+              <span class="control control--badge">{blog.category}</span>
+            ) : null}
+          </div>
+        )}
+      </div>
     </Fragment>
-    <Fragment slot="footOverlay">
-                            {(formattedDate || blog.category || blog) && (
-          <div class="card__overlay-item card__badges controls controls--end">
-            
-            <span class="control control--badge">
-              {formattedDate ? formattedDate : '1900-01-01'}
-            </span>
 
-            <span class="control control--badge">
-              {blog.category ? blog.category : 'category'}
-            </span>               
-          </div>)} 
-
-    </Fragment>
     <Fragment slot="body">
-      <div class="media-frame">
+      {/* kompaktes Banner-Bild unter dem Header */}
+      <div class="media-frame media-frame--banner">
         <img
           src={blog.cover.src}
           alt={blog.title}
-          class="media-image media-image--top media-image--cover"
+          class="media-image media-image--top media-image--cover media-image--banner"
         />
       </div>
     </Fragment>
@@ -85,11 +137,10 @@ const formattedDate =
         <ol>
           {blogChapters.map((chapter, index) => (
             <li>
-              <a
-                href={`#${chapter.id}`}
-                data-chapter={chapter.id}
-              >
-                <span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+              <a href={`#${chapter.id}`} data-chapter={chapter.id}>
+                <span aria-hidden="true">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
                 <div>
                   <strong>{chapter.title}</strong>
                   {chapter.summary ? <span>{chapter.summary}</span> : null}
@@ -98,12 +149,9 @@ const formattedDate =
             </li>
           ))}
         </ol>
-
       </Fragment>
     </Template.Card>
   ) : null}
-
-
 
   {hasBlogChapters ? (
     <Template.Card headClass={hasBlogChapters ? '' : undefined}>
@@ -115,7 +163,11 @@ const formattedDate =
 
       <Fragment slot="body">
         <article class="prose" id="blog-chapter-target">
-          {BlogContent ? <BlogContent /> : <p>There is no article content to show just yet.</p>}
+          {BlogContent ? (
+            <BlogContent />
+          ) : (
+            <p>There is no article content to show just yet.</p>
+          )}
         </article>
       </Fragment>
 
@@ -141,8 +193,8 @@ const formattedDate =
         </Fragment>
       ) : null}
     </Template.Card>
-) : null}
-  </section>
+  ) : null}
+</section>
 
 {hasBlogChapters && blogChapters ? (
   <>
@@ -153,15 +205,13 @@ const formattedDate =
       hidden
     ></div>
 
-    {/* echtes Script */}
-
+    {/* Script wird zentral über initBlogChapters gehandhabt */}
   </>
 ) : null}
 
-
- 
-
-<section class="content-section">{/* Platz für Related / Comments / whatever */}</section>
+<section class="content-section">
+  {/* Platz für Related / Comments / whatever */}
+</section>
 
 <script>
   import initBlogChapters from '@Scripts/initBlogChapters.js';
@@ -174,4 +224,3 @@ const formattedDate =
     }
   });
 </script>
-
