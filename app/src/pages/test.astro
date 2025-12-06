@@ -43,6 +43,19 @@ if (!entry) {
 ---
 
 <Template.Base title="Entry layout test">
+  <section class="content-section">
+    <Template.Card class="card--center card--plain">
+      <Fragment slot="body">
+        <nav class="controls controls--tight controls--center">
+          <a class="control control--button control--small" href="#variant-a">Variante A – Hero Full</a>
+          <a class="control control--button control--small" href="#variant-b">Variante B – Hero Compact</a>
+          <a class="control control--button control--small" href="#variant-c">Variante C – Split Header</a>
+          <a class="control control--button control--small" href="#variant-d">Variante D – Clean Header</a>
+          <a class="control control--button control--small" href="#variant-e">Variante E – Rail Layout</a>
+        </nav>
+      </Fragment>
+    </Template.Card>
+  </section>
   {errorMessage ? (
     <section class="content-section">
       <Template.Card class="card--center">
@@ -54,33 +67,13 @@ if (!entry) {
   ) : blogView && BlogContent ? (
     <>
 
-      {/***** Variante A: aktuelles Live-Layout 1:1 *****/}
-      <section class="content-section">
+
+
+      {/***** Variante A: heroFull *****/}
+      <section class="content-section" id="variant-a">
         <Template.Card class="card--center card--plain">
           <Fragment slot="head">
-            <h2 class="card__title">Variante A – Current EntryBlog</h2>
-          </Fragment>
-        </Template.Card>
-      </section>
-
-      <Template.EntryBlog
-        blog={{
-          title: blogView.title,
-          description: blogView.description,
-          introParagraphs: blogView.introParagraphs,
-          cover: blogView.cover,
-          chapters: blogView.chapters,
-          date: entry?.data?.date,
-          category: entry?.data?.category,
-        }}
-        BlogContent={BlogContent}
-      />
-
-      {/***** Variante B: heroFull *****/}
-      <section class="content-section">
-        <Template.Card class="card--center card--plain">
-          <Fragment slot="head">
-            <h2 class="card__title">Variante B: heroFull</h2>
+            <h2 class="card__title">Variante A: heroFull</h2>
           </Fragment>
         </Template.Card>
       </section>
@@ -98,11 +91,11 @@ if (!entry) {
         BlogContent={BlogContent}
       />
 
-      {/***** Variante C: heroCompact *****/}
-      <section class="content-section">
+      {/***** Variante B: heroCompact *****/}
+      <section class="content-section" id="variant-b">
         <Template.Card class="card--center card--plain">
           <Fragment slot="head">
-            <h2 class="card__title">Variante C: heroCompact</h2>
+            <h2 class="card__title">Variante B: heroCompact</h2>
           </Fragment>
         </Template.Card>
       </section>
@@ -120,11 +113,11 @@ if (!entry) {
         BlogContent={BlogContent}
       />
  
-      {/***** Variante D: splitHeader *****/}
-      <section class="content-section">
+      {/***** Variante C: splitHeader *****/}
+      <section class="content-section" id="variant-c">
         <Template.Card class="card--center card--plain">
           <Fragment slot="head">
-            <h2 class="card__title">Variante B: splitHeader</h2>
+            <h2 class="card__title">Variante C: splitHeader</h2>
           </Fragment>
         </Template.Card>
       </section>
@@ -142,8 +135,30 @@ if (!entry) {
         BlogContent={BlogContent}
       />
 
+      {/***** Variante D: cleanHeader *****/}
+      <section class="content-section" id="variant-d">
+        <Template.Card class="card--center card--plain">
+          <Fragment slot="head">
+            <h2 class="card__title">Variante D – CleanHeader</h2>
+          </Fragment>
+        </Template.Card>
+      </section>
+
+      <Template.EntryBlogCleanHeader
+        blog={{
+          title: blogView.title,
+          description: blogView.description,
+          introParagraphs: blogView.introParagraphs,
+          cover: blogView.cover,
+          chapters: blogView.chapters,
+          date: entry?.data?.date,
+          category: entry?.data?.category,
+        }}
+        BlogContent={BlogContent}
+      />
+
       {/***** Variante E: railLayout *****/}
-      <section class="content-section">
+      <section class="content-section" id="variant-e">
         <Template.Card class="card--center card--plain">
           <Fragment slot="head">
             <h2 class="card__title">Variante E: railLayout</h2>

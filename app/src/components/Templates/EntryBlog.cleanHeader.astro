@@ -1,6 +1,7 @@
 ---
 import { Template } from '@Frontend';
 import ICONS from '@Assets/Icons.astro';
+
 interface BlogChapterView {
   id: string;
   title: string;
@@ -28,68 +29,94 @@ const blogChapters = blog.chapters ?? [];
 const hasBlogChapters = blogChapters.length > 0;
 const blogSummaryParagraphs = blog.introParagraphs ?? [];
 const blogDescription = blog.description ?? '';
-const hasBlogSummary = blogDescription.length > 0 || blogSummaryParagraphs.length > 0;
+const hasBlogSummary =
+  blogDescription.length > 0 || blogSummaryParagraphs.length > 0;
+
 const formattedDate =
   blog.date instanceof Date
-    ? new Intl.DateTimeFormat('en', { month: 'short', year: 'numeric' }).format(blog.date)
+    ? new Intl.DateTimeFormat('en', { month: 'short', year: 'numeric' }).format(
+        blog.date,
+      )
     : typeof blog.date === 'string' && blog.date.trim().length
     ? blog.date
     : undefined;
 ---
 
+<!-- 1) Nur das Bild als eigene Hero-Card -->
 <section class="content-section content-section--head" id="article-top">
-  <Template.Card class="card--center card--flush" footOverlayClass="card__overlay--plain">
-
-    <Fragment slot="headOverlay">
-      <span class="card__overlay-item"><h2 class="is-fancy">{blog.title}</h2></span>
-
-      {blogDescription ? <span class="card__overlay-item"><p>{blogDescription}</p></span> : null}
-
-    </Fragment>
-    <Fragment slot="footOverlay">
-                            {(formattedDate || blog.category || blog) && (
-          <div class="card__overlay-item card__badges controls controls--end">
-            
-            <span class="control control--badge">
-              {formattedDate ? formattedDate : '1900-01-01'}
-            </span>
-
-            <span class="control control--badge">
-              {blog.category ? blog.category : 'category'}
-            </span>               
-          </div>)} 
-
-    </Fragment>
+  <Template.Card class="card--center card--flush">
     <Fragment slot="body">
-      <div class="media-frame">
+      <div class="entry-hero-media">
         <img
           src={blog.cover.src}
           alt={blog.title}
-          class="media-image media-image--top media-image--cover"
+          class="entry-hero-media__image media-image media-image--cover"
         />
       </div>
     </Fragment>
   </Template.Card>
 </section>
 
+<!-- 2) Text-Header als separate Card -->
+<section class="content-section">
+  <Template.Card class="card--center">
+    <Fragment slot="head">
+      <header class="entry-header entry-header--clean">
+        {(formattedDate || blog.category) && (
+          <div class="entry-header__meta controls controls--spread">
+            <div class="entry-header__meta-left">
+              <!-- hier später Back-Button o.ä. reinstecken -->
+            </div>
+            <div class="entry-header__meta-right controls controls--tight">
+              {formattedDate ? (
+                <span class="control control--badge">{formattedDate}</span>
+              ) : null}
+
+              {blog.category ? (
+                <span class="control control--badge">{blog.category}</span>
+              ) : null}
+            </div>
+          </div>
+        )}
+
+        <h1 class="card__title is-fancy">{blog.title}</h1>
+
+        {blogDescription ? (
+          <p class="card__subtitle">{blogDescription}</p>
+        ) : null}
+      </header>
+    </Fragment>
+
+    <Fragment slot="body">
+      {hasBlogSummary && blogSummaryParagraphs.length ? (
+        <div class="prose entry-intro">
+          {blogSummaryParagraphs.map((p) => <p>{p}</p>)}
+        </div>
+      ) : null}
+    </Fragment>
+  </Template.Card>
+</section>
+
+<!-- 3) TOC + Kapitel-Card wie gewohnt -->
 <section class="content-section content-section--masonry">
   {hasBlogChapters ? (
-    <Template.Card class="">
+    <Template.Card>
       <Fragment slot="head">
         <h2 class="card__title">Table of Contents</h2>
         <div class="card__badges controls controls--tight">
-          <span class="control control--badge">{blogChapters.length} total</span>
+          <span class="control control--badge">
+            {blogChapters.length} total
+          </span>
         </div>
       </Fragment>
       <Fragment slot="body">
         <ol>
           {blogChapters.map((chapter, index) => (
             <li>
-              <a
-                href={`#${chapter.id}`}
-                data-chapter={chapter.id}
-              >
-                <span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+              <a href={`#${chapter.id}`} data-chapter={chapter.id}>
+                <span aria-hidden="true">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
                 <div>
                   <strong>{chapter.title}</strong>
                   {chapter.summary ? <span>{chapter.summary}</span> : null}
@@ -98,15 +125,12 @@ const formattedDate =
             </li>
           ))}
         </ol>
-
       </Fragment>
     </Template.Card>
   ) : null}
 
-
-
   {hasBlogChapters ? (
-    <Template.Card headClass={hasBlogChapters ? '' : undefined}>
+    <Template.Card>
       <Fragment slot="head">
         <h2 class="card__title" data-chapter-title>
           {hasBlogChapters ? blogChapters[0].title : 'Chapter'}
@@ -115,51 +139,46 @@ const formattedDate =
 
       <Fragment slot="body">
         <article class="prose" id="blog-chapter-target">
-          {BlogContent ? <BlogContent /> : <p>There is no article content to show just yet.</p>}
+          {BlogContent ? (
+            <BlogContent />
+          ) : (
+            <p>There is no article content to show just yet.</p>
+          )}
         </article>
       </Fragment>
 
-      {hasBlogChapters ? (
-        <Fragment slot="foot">
-          <nav class="controls controls--spread">
-            <button
-              class="control control--button control--circle"
-              type="button"
-              data-chapter-prev
-            >
-              <ICONS class="media-icon media-icon--small" kind="previous" />
-            </button>
+      <Fragment slot="foot">
+        <nav class="controls controls--spread">
+          <button
+            class="control control--button control--circle"
+            type="button"
+            data-chapter-prev
+          >
+            <ICONS class="media-icon media-icon--small" kind="previous" />
+          </button>
 
-            <button
-              class="control control--button control--circle"
-              type="button"
-              data-chapter-next
-            >
-              <ICONS class="media-icon media-icon--small" kind="next" />
-            </button>
-          </nav>
-        </Fragment>
-      ) : null}
+          <button
+            class="control control--button control--circle"
+            type="button"
+            data-chapter-next
+          >
+            <ICONS class="media-icon media-icon--small" kind="next" />
+          </button>
+        </nav>
+      </Fragment>
     </Template.Card>
-) : null}
-  </section>
+  ) : null}
+</section>
 
 {hasBlogChapters && blogChapters ? (
   <>
-    {/* Daten-Container */}
     <div
       id="blog-chapters-data"
       data-chapters={JSON.stringify(blogChapters)}
       hidden
     ></div>
-
-    {/* echtes Script */}
-
   </>
 ) : null}
-
-
- 
 
 <section class="content-section">{/* Platz für Related / Comments / whatever */}</section>
 
@@ -175,3 +194,38 @@ const formattedDate =
   });
 </script>
 
+<style>
+  .entry-hero-media {
+    max-block-size: min(22rem, 45vh);
+    overflow: hidden;
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-soft, 0 0 40px rgba(0, 0, 0, 0.6));
+  }
+
+  .entry-hero-media__image {
+    display: block;
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
+  }
+
+  .entry-header--clean {
+    display: flex;
+    flex-direction: column;
+    gap: var(--flow-gap, 0.75rem);
+  }
+
+  .entry-header__meta {
+    margin-block-end: var(--flow-gap-xs, 0.5rem);
+  }
+
+  .entry-intro {
+    margin-block-start: var(--flow-gap, 1rem);
+  }
+
+  @media (max-width: 50rem) {
+    .entry-hero-media {
+      max-block-size: 18rem;
+    }
+  }
+</style>

@@ -36,41 +36,104 @@ const formattedDate =
     ? blog.date
     : undefined;
 ---
+<style>
+  .entry-header {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.4fr);
+    gap: var(--card-gap, 2rem);
+    align-items: stretch;
+  }
+
+  .entry-header__media {
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-soft, 0 0 40px rgba(0, 0, 0, 0.6));
+  }
+
+  .entry-header__image {
+    display: block;
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
+  }
+
+  .entry-header__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--flow-gap, 0.75rem);
+    justify-content: center;
+  }
+
+  .entry-header__eyebrow {
+    font-size: 0.8rem;
+    opacity: 0.8;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+  }
+
+  .entry-header__summary {
+    opacity: 0.9;
+  }
+
+  @media (max-width: 56rem) {
+    .entry-header {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .entry-header__media {
+      max-block-size: 18rem;
+    }
+  }
+</style>
 
 <section class="content-section content-section--head" id="article-top">
-  <Template.Card class="card--center card--flush" footOverlayClass="card__overlay--plain">
+  <Template.Card
+    class="card--center card--flush"
+    headClass="entry-header entry-header--split"
+  >
+    <Fragment slot="head">
+      <header class="entry-header entry-header--split">
+        <div class="entry-header__media">
+          <img
+            src={blog.cover.src}
+            alt={blog.title}
+            class="entry-header__image media-image media-image--cover"
+          />
+        </div>
 
-    <Fragment slot="headOverlay">
-      <span class="card__overlay-item"><h2 class="is-fancy">{blog.title}</h2></span>
+        <div class="entry-header__content">
+          {/* Eyebrow / Kategorie oben klein */}
+          {blog.category ? (
+            <p class="entry-header__eyebrow">{blog.category}</p>
+          ) : null}
 
-      {blogDescription ? <span class="card__overlay-item"><p>{blogDescription}</p></span> : null}
+          <h1 class="card__title is-fancy">{blog.title}</h1>
 
-    </Fragment>
-    <Fragment slot="footOverlay">
-                            {(formattedDate || blog.category || blog) && (
-          <div class="card__overlay-item card__badges controls controls--end">
-            
-            <span class="control control--badge">
-              {formattedDate ? formattedDate : '1900-01-01'}
-            </span>
+          {blogDescription ? (
+            <p class="card__subtitle">{blogDescription}</p>
+          ) : null}
 
-            <span class="control control--badge">
-              {blog.category ? blog.category : 'category'}
-            </span>               
-          </div>)} 
+          {hasBlogSummary && blogSummaryParagraphs.length ? (
+            <p class="entry-header__summary">{blogSummaryParagraphs[0]}</p>
+          ) : null}
 
-    </Fragment>
-    <Fragment slot="body">
-      <div class="media-frame">
-        <img
-          src={blog.cover.src}
-          alt={blog.title}
-          class="media-image media-image--top media-image--cover"
-        />
-      </div>
+          {(formattedDate || blog.category) && (
+            <div class="card__badges controls controls--tight">
+              {formattedDate ? (
+                <span class="control control--badge">{formattedDate}</span>
+              ) : null}
+
+              {blog.category ? (
+                <span class="control control--badge">{blog.category}</span>
+              ) : null}
+            </div>
+          )}
+        </div>
+      </header>
     </Fragment>
   </Template.Card>
 </section>
+
 
 <section class="content-section content-section--masonry">
   {hasBlogChapters ? (
