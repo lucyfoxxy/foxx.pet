@@ -141,10 +141,11 @@ const formattedDate =
           </div>
         </div>
         <div class="card__body">
-          <ol>
+          <ol class="card__list">
             {blogChapters.map((chapter, index) => (
-              <li>
-                <a
+              <li class="card__list-item">
+                <a 
+                  class="card__list-link"
                   href={`#${chapter.id}`}
                   data-chapter={chapter.id}
                 >
