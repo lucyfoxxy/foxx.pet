@@ -1,9 +1,13 @@
 {
-  "name": "foxx-pet-dev",
+  "name": "foxx-pet",
   "version": "0.1.0",
   "private": true,
   "type": "module",
   "scripts": {
+    "prebuild": "node ./scripts/write-build-info.mjs",
+    "release:patch": "npm version patch && npm run build",
+    "release:minor": "npm version minor && npm run build",
+    "release:major": "npm version major && npm run build",
     "dev": "astro dev --host",
     "build": "astro build",
     "preview": "astro preview",
