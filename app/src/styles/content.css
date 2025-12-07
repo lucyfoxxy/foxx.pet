@@ -105,10 +105,6 @@
 /* ====== CARD AREAS ====== */
 /* === HEAD === */
 .card__head { 
-  /*grid-area: card-head; 
-  display: grid;
-  grid-template-areas: "title badges";
-  grid-template-columns: minmax(0,1fr) auto;*/
   display: flex;
   flex-direction: row;
   place-items: stretch;
@@ -184,7 +180,6 @@
 }
 
 .card__list-index,.card__list-title {
-
   font-size: var(--font-size-m);
   line-height: var(--line-height-m);
   color: var(--color-accent-light);
@@ -222,6 +217,135 @@
 }
 
 
+/* ──────────────────────────────
+ * Blog Entry – Header Layout
+ * ──────────────────────────── */
+
+.entry-header {
+  display: grid;
+  grid-template-columns: 55% auto;
+  gap: var(--card-gap);
+  align-items: center;
+}
+
+@media (max-width: 900px) {
+  .entry-header {
+    grid-template-columns: 1fr;
+    place-items: center;
+  }
+}
+
+.entry-header__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--flow-gap);
+  align-items: center;
+  padding: var(--card-padding);
+}
+
+.entry-header__eyebrow {
+  font-size: var(--font-size-s);
+  opacity: 0.7;
+  line-height: var(--line-height-xxs);
+  letter-spacing: var(--letter-spacing-xxl);
+}
+
+/* ──────────────────────────────
+ * Blog Entry – Content Split
+ * (ToC + Chapter)
+ * ──────────────────────────── */
+
+.entry-content {
+  display: grid;
+  grid-template-columns: 33% auto;
+  gap: var(--card-gap);
+  position: relative;
+}
+
+@media (max-width: 900px) {
+  .entry-content {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr auto;
+  }
+}
+
+/* Vertikaler Divider zwischen ToC und Inhalt */
+.entry-content::before {
+  content: "";
+  position: absolute;
+  inset-block: var(--card-padding); /* oben/unten bündig mit Card-Padding */
+  inset-inline-start: calc(33% + (var(--card-gap) / 2));
+  inline-size: 1px;
+  background: linear-gradient(
+    to bottom,
+    transparent -5%,
+    color-mix(in oklab, var(--color-accent-light--ghosty) 70%, transparent),
+    transparent 105%
+  );
+  pointer-events: none;
+}
+
+@media (max-width: 900px) {
+  .entry-content::before {
+    display: none;
+  }
+}
+
+/* ──────────────────────────────
+ * Card Variants für Entry-Layout
+ * ──────────────────────────── */
+
+.card--chapter {
+  display: flex;
+  flex-direction: column;
+  padding-block: 0;
+  padding-inline-end: 0;
+}
+
+.card--chapter .card__body {
+  display: block;
+  flex: 1 1 auto;
+}
+
+.card--chapter .card__foot {
+  margin-block-start: auto;
+}
+
+.card--content {
+  padding-block: 0;
+  padding-inline-start: 0;
+}
+
+.card__divider {
+  display: none;
+}
+
+/* ──────────────────────────────
+ * Mobile Tweaks
+ * ──────────────────────────── */
+
+@media (max-width: 900px) {
+  .card--content,
+  .card--chapter {
+    padding-inline: 0;
+  }
+
+  .card--content + .card__divider {
+    display: inline-block;
+    height: 1px;
+    margin-block: var(--card-gap);
+    background: linear-gradient(
+      to right,
+      transparent -5%,
+      color-mix(in oklab, var(--color-accent-light--ghosty) 70%, transparent),
+      transparent 105%
+    );
+  }
+
+  .card--content :where(.card__list-summary) {
+    display: none;
+  }
+}
 
 
 

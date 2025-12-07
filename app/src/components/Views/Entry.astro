@@ -165,6 +165,8 @@ const meta = {
       introParagraphs: blogView.introParagraphs,
       cover: blogView.cover,
       chapters: blogView.chapters,
+      date: entry?.data?.date,
+      category: entry?.data?.category,      
     }} BlogContent={BlogContent} />
   ) : (
     <section class="content-section">

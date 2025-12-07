@@ -98,10 +98,20 @@ const formattedDate =
   display: none;
   }
 }
-
-.card--ghost {
-  background-color: transparent;
+.card--chapter {
+  display: flex;
+  flex-direction: column;
 }
+
+.card--chapter .card__body {
+  display: block;
+  flex: 1 1 auto;
+}
+
+.card--chapter .card__foot {
+  margin-block-start: auto;
+}
+
 .card__divider {display: none;}
 .card--content {
   padding-block: 0; padding-inline-start: 0;
