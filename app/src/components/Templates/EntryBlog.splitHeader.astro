@@ -79,8 +79,19 @@ const formattedDate =
   .card--ghost {
     background-color: transparent;
   }
-  .card--content {min-block-size: 0; block-size: auto; max-block-size: fit-content;}
-  
+  .card--content {
+
+    padding-block-start: 0;
+    border-radius: 0;
+    border-inline-end: 1px solid var(--color-accent-light--ghosty);
+  }
+  .card--chapter {padding-block-start: 0;}
+  @media (max-width: 900px) {
+    .card--content {
+      border-inline-end: none;
+      border-block-end: 1px solid var(--color-accent-light--ghosty);
+    }
+  }  
 </style>
 
 <section class="content-section content-section--head" id="article-top">
@@ -133,7 +144,7 @@ const formattedDate =
 <section class="content-section">
   {hasBlogChapters ? (
     <div class="card entry-content">
-      <div class="card card--ghost card--content">
+      <div class="card card--plain card--content">
         <div class="card__head">
           <h3 class="card__title">Table of Contents</h3>
           <div class="card__badges controls controls--tight">
@@ -161,11 +172,11 @@ const formattedDate =
         </div>
       </div>
 
-      <div class="card card--plain">
+      <div class="card card--plain card--chapter">
         <div class="card__head">
-          <h2 class="card__title" data-chapter-title>
+          <h1 class="card__title" data-chapter-title>
             {hasBlogChapters ? blogChapters[0].title : 'Chapter'}
-          </h2>
+          </h1>
         </div>
 
         <div class="card__body">

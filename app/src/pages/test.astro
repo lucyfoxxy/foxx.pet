@@ -67,51 +67,6 @@ if (!entry) {
   ) : blogView && BlogContent ? (
     <>
 
-
-
-      {/***** Variante A: heroFull *****/}
-      <section class="content-section" id="variant-a">
-        <Template.Card class="card--center card--plain">
-          <Fragment slot="head">
-            <h2 class="card__title">Variante A: heroFull</h2>
-          </Fragment>
-        </Template.Card>
-      </section>
-
-      <Template.EntryBlogHeroFull
-        blog={{
-          title: blogView.title,
-          description: blogView.description,
-          introParagraphs: blogView.introParagraphs,
-          cover: blogView.cover,
-          chapters: blogView.chapters,
-          date: entry?.data?.date,
-          category: entry?.data?.category,
-        }}
-        BlogContent={BlogContent}
-      />
-
-      {/***** Variante B: heroCompact *****/}
-      <section class="content-section" id="variant-b">
-        <Template.Card class="card--center card--plain">
-          <Fragment slot="head">
-            <h2 class="card__title">Variante B: heroCompact</h2>
-          </Fragment>
-        </Template.Card>
-      </section>
-
-      <Template.EntryBlogHeroCompact
-        blog={{
-          title: blogView.title,
-          description: blogView.description,
-          introParagraphs: blogView.introParagraphs,
-          cover: blogView.cover,
-          chapters: blogView.chapters,
-          date: entry?.data?.date,
-          category: entry?.data?.category,
-        }}
-        BlogContent={BlogContent}
-      />
  
       {/***** Variante C: splitHeader *****/}
       <section class="content-section" id="variant-c">
@@ -135,50 +90,7 @@ if (!entry) {
         BlogContent={BlogContent}
       />
 
-      {/***** Variante D: cleanHeader *****/}
-      <section class="content-section" id="variant-d">
-        <Template.Card class="card--center card--plain">
-          <Fragment slot="head">
-            <h2 class="card__title">Variante D – CleanHeader</h2>
-          </Fragment>
-        </Template.Card>
-      </section>
-
-      <Template.EntryBlogCleanHeader
-        blog={{
-          title: blogView.title,
-          description: blogView.description,
-          introParagraphs: blogView.introParagraphs,
-          cover: blogView.cover,
-          chapters: blogView.chapters,
-          date: entry?.data?.date,
-          category: entry?.data?.category,
-        }}
-        BlogContent={BlogContent}
-      />
-
-      {/***** Variante E: railLayout *****/}
-      <section class="content-section" id="variant-e">
-        <Template.Card class="card--center card--plain">
-          <Fragment slot="head">
-            <h2 class="card__title">Variante E: railLayout</h2>
-          </Fragment>
-        </Template.Card>
-      </section>
-
-      <Template.EntryBlogRailLayout
-        blog={{
-          title: blogView.title,
-          description: blogView.description,
-          introParagraphs: blogView.introParagraphs,
-          cover: blogView.cover,
-          chapters: blogView.chapters,
-          date: entry?.data?.date,
-          category: entry?.data?.category,
-        }}
-        BlogContent={BlogContent}
-      />
-
+  
                              
     </>
   ) : null}
