@@ -40,7 +40,7 @@ const formattedDate =
   .entry-header {
     display: grid;
     grid-template-columns: 55% auto;
-    gap: var(--card-gap, 2rem);
+    gap: var(--card-gap);
     align-items: center;
   }
   @media (max-width: 900px) {
@@ -67,7 +67,8 @@ const formattedDate =
   .entry-content {
     display: grid;
     grid-template-columns: 33% auto;
-    gap: var(--card-gap, 2rem);
+    gap: var(--card-gap);
+    position: relative;
   }
 
   @media (max-width: 900px) {
@@ -75,21 +76,41 @@ const formattedDate =
       grid-template-columns: 1fr;
     }
   }
+/* Vertikaler Divider zwischen ToC und Inhalt */
+.entry-content::before {
+  content: "";
+  position: absolute;
+  inset-block: var(--card-padding); /* oben/unten bündig mit Card-Padding */
+  inset-inline-start: calc(33% + (var(--card-gap) / 2));
+  inline-size: 1px;
+  background: linear-gradient(
+    to bottom,
+    transparent -5%,
+    color-mix(in oklab, var(--color-accent-light--ghosty) 70%, transparent),
+    transparent 105%
+  );
+  pointer-events: none;
+}
+
+@media (max-width: 900px) {
+  .entry-content::before {
+    display: none;   /* auf Mobile kein Divider, da stacked */
+  }
+}
 
   .card--ghost {
     background-color: transparent;
   }
   .card--content {
 
-    padding-block-start: 0;
-    border-radius: 0;
-    border-inline-end: 1px solid var(--color-accent-light--ghosty);
+    padding-block: 0; padding-inline-start: 0;
+    
   }
-  .card--chapter {padding-block-start: 0;}
+  .card--chapter {padding-block: 0; padding-inline-end: 0;}
   @media (max-width: 900px) {
     .card--content {
       border-inline-end: none;
-      border-block-end: 1px solid var(--color-accent-light--ghosty);
+    
     }
   }  
 </style>
@@ -144,26 +165,26 @@ const formattedDate =
 <section class="content-section">
   {hasBlogChapters ? (
     <div class="card entry-content">
+
       <div class="card card--plain card--content">
         <div class="card__head">
           <h3 class="card__title">Table of Contents</h3>
           <div class="card__badges controls controls--tight">
-            <span class="control control--badge">{blogChapters.length} total</span>
+            <span class="control control--badge">{blogChapters.length} Chapters</span>
           </div>
         </div>
+
         <div class="card__body">
           <ol class="card__list">
             {blogChapters.map((chapter, index) => (
               <li class="card__list-item">
-                <a 
-                  class="card__list-link"
-                  href={`#${chapter.id}`}
-                  data-chapter={chapter.id}
-                >
-                  <span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
-                  <div>
-                    <strong>{chapter.title}</strong>
-                    {chapter.summary ? <span>{chapter.summary}</span> : null}
+                <a class="card__list-link" href={`#${chapter.id}`} data-chapter={chapter.id}>
+                  <strong class="card__list-index" aria-hidden="true">{String(index + 1).padStart(2, '0')}</strong>
+                  <div class="card__list-chapter">
+                    <strong class="card__list-title">{chapter.title}</strong>
+                    {chapter.summary ? 
+                      <span class="card__list-summary">{chapter.summary}</span> 
+                    : null}
                   </div>
                 </a>
               </li>
