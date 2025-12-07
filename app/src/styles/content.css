@@ -106,26 +106,20 @@
 /* ====== CARD AREAS ====== */
 /* === HEAD === */
 .card__head { 
-  grid-area: card-head; 
+  /*grid-area: card-head; 
   display: grid;
   grid-template-areas: "title badges";
-  grid-template-columns: minmax(0,1fr) auto;
-  align-items: flex-start;             /* vertikal mittig */
+  grid-template-columns: minmax(0,1fr) auto;*/
+  display: flex;
+  flex-direction: row;
+  place-items: stretch;
+  justify-content: space-between;
   column-gap: var(--card-gap);
 }
 .card__badges{ grid-area: badges; }
-@media (max-width: 900px) {
-  .card__head{
-    grid-template-areas:
-      "title"
-      "badges"; 
-  } 
-}
+
 .card__head--column {
-  grid-template-areas:
-    "title"
-    "badges";
-  grid-template-columns: 1fr;
+  flex-direction: column;
   row-gap: var(--card-gap--small); 
 }
 
