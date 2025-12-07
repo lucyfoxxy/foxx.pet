@@ -102,6 +102,7 @@ const formattedDate =
 .card--ghost {
   background-color: transparent;
 }
+.card__divider {display: none;}
 .card--content {
   padding-block: 0; padding-inline-start: 0;
 }
@@ -111,8 +112,9 @@ const formattedDate =
   .card--chapter {
     padding-inline: 0;
   }
-.card__divider {  
-    background-size: 100% 1px;
+  .card--content + .card__divider {  
+    display: inline-block;
+    height: 1px;
     margin-block: var(--card-gap);
     background: linear-gradient(
     to right,
@@ -120,6 +122,10 @@ const formattedDate =
     color-mix(in oklab, var(--color-accent-light--ghosty) 70%, transparent),
     transparent 105%
   );}  
+  .card--content :where(.card__list-summary)
+  {
+    display: none;
+  }
 }  
 </style>
 
@@ -145,7 +151,7 @@ const formattedDate =
             </div>
           ) : null}
 
-          {(formattedDate || blog.category) && (
+          {(formattedDate || blog.category || hasBlogChapters) && (
             <div class="card__badges controls controls--tight">
               {formattedDate ? (
                 <span class="control control--badge">{formattedDate}</span>
@@ -153,6 +159,9 @@ const formattedDate =
 
               {blog.category ? (
                 <span class="control control--badge">*some tag*</span>
+              ) : null}
+              {hasBlogChapters ? (
+                <span class="control control--badge">Chapters: {blogChapters.length}</span>
               ) : null}
             </div>
           )}
@@ -176,10 +185,7 @@ const formattedDate =
 
       <div class="card card--plain card--content">
         <div class="card__head">
-          <h3 class="card__title">Table of Contents</h3>
-          <div class="card__badges controls controls--tight">
-            <span class="control control--badge">{blogChapters.length} Chapters</span>
-          </div>
+          <h2 class="card__title">Table of Contents</h2>
         </div>
 
         <div class="card__body">
@@ -200,7 +206,7 @@ const formattedDate =
           </ol>
         </div>
       </div>
-
+      <span class="card__divider"></span>
       <div class="card card--plain card--chapter">
         <div class="card__head">
           <h1 class="card__title" data-chapter-title>

@@ -57,7 +57,6 @@
   background: transparent; 
   box-shadow: none; 
   backdrop-filter: none;
-  padding-block-end: 0;
   border-style: hidden;
 }
 
@@ -117,7 +116,9 @@
   column-gap: var(--card-gap);
 }
 .card__badges{ grid-area: badges; }
-
+.card__head--center {
+  justify-content: center;
+}
 .card__head--column {
   flex-direction: column;
   row-gap: var(--card-gap--small); 
