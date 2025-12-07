@@ -33,6 +33,8 @@ fetch:
 ## DEV-Build: bauen & nach dev.foxx.pet deployen
 dev-build:
 	@echo "🌱 Building DEV in ${APP}"
+	cd ${APP} && ${NPM} run prebuild
+	@echo "🌱 Building DEV in ${APP}"
 	cd ${APP} && ${NPM} run build
 	@echo "📤 Deploying DEV dist/ → ${DEV_PUB}"
 	rsync -av --delete "${DIST}/" "${DEV_PUB}/"

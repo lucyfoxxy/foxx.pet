@@ -1,6 +1,7 @@
 ---
 import ICONS from '@Assets/Icons.astro';
 import { isProd } from '@utils/env';
+import { BUILD_INFO } from "@/generated/build-info";
 type Breadcrumb = {
   label: string;
   href: string;
@@ -82,9 +83,8 @@ const crumbItems = breadcrumbs.reduce<Array<Breadcrumb | 'separator'>>(
     </span>
     <span class="col--right">
       <p>
-        <em>
-          using<a href="https://astro.build">&nbsp;astro</a>
-        </em>
+        
+          {BUILD_INFO.version} <em>(build: {BUILD_INFO.gitHash})</em>
         {!isProd ? (<a href="/test">&nbsp;–&nbsp;Test</a>):null}
       </p>
     </span>
