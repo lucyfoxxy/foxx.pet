@@ -59,7 +59,7 @@
   background-repeat:     repeat,                      repeat,             repeat;
   background-size:       480px,                       var(--panel-size),                 var(--panel-size);
   background-blend-mode: screen,                      color,                 screen;
-  background-position:   left,                        top left,                center -250px;
+  background-position:   top left,                        top left,                center -250px;
 }
 .panel-wrapper {
   display: flex;
@@ -89,10 +89,11 @@
 
 .panel-wrapper .stars-canvas {
   position: absolute;
+  left: 0;
   inline-size: 90%;
   height: 90%;
   isolation: isolate;
-  inset: 0;
+  inset-inline: 0;
   overflow: hidden;
   z-index: -1;
   pointer-events: none;

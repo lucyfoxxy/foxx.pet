@@ -15,7 +15,7 @@ export default function initStarsCanvas(canvas, opts = {}) {
 
   // >>> NEU: Toleranzen für Resize <<<
   const resizeTolerancePx = opts.resizeTolerancePx ?? 1140;   // min. absolute Änderung
-  const resizeToleranceRatio = opts.resizeToleranceRatio ?? 0.06; // min. relative Änderung (~6%)
+  const resizeToleranceRatio = opts.resizeToleranceRatio ?? 0.16; // min. relative Änderung (~6%)
 
   let stars = [];
   let last = 0;
@@ -135,7 +135,7 @@ export default function initStarsCanvas(canvas, opts = {}) {
     resizeQueued = true;
     requestAnimationFrame(() => {
       resizeQueued = false;
-      resize();
+      //resize();
     });
   });
   ro.observe(canvas);

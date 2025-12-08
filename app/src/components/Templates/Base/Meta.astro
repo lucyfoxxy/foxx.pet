@@ -83,8 +83,8 @@ const goatCounterScriptSrc = 'https://stats.foxx.pet/count.js';
 
   const registerStars = () => {
     initStars();
-    document.addEventListener('astro:page-load', initStars);
-    document.addEventListener('astro:before-swap', stopAllStars);
+    //document.addEventListener('astro:page-load', initStars);
+    //document.addEventListener('astro:before-swap', stopAllStars);
   };
 
   _runOnReady(registerStars);
@@ -92,7 +92,7 @@ const goatCounterScriptSrc = 'https://stats.foxx.pet/count.js';
   export function stopStars(canvas: HTMLCanvasElement) {
     const stop = starsRegistry.get(canvas);
     if (stop) stop();
-    starsRegistry.delete(canvas);
+    //starsRegistry.delete(canvas);
   }
 
 </script>
