@@ -8,11 +8,6 @@ import MediaFrame from '@Templates/Media/Frame.astro';
 import MediaThumbs from '@Templates/Media/Thumbs.astro';
 import MediaLightbox from '@Templates/Media/Lightbox.astro';
 import EntryBlog from '@Templates/EntryBlog.astro';
-import EntryBlogHeroFull from '@Templates/EntryBlog.heroFull.astro';
-import EntryBlogHeroCompact from '@Templates/EntryBlog.heroCompact.astro';
-import EntryBlogSplitHeader from '@Templates/EntryBlog.splitHeader.astro';
-import EntryBlogCleanHeader from '@Templates/EntryBlog.cleanHeader.astro';
-import EntryBlogRailLayout from '@Templates/EntryBlog.railLayout.astro';
 import HeaderActions from '@Templates/HeaderActions.astro';
 import TileView from '@Templates/TileView.astro';
 import TitleWithIcon from '@Templates/TitleWithIcon.astro';
@@ -41,11 +36,6 @@ export const Template = {
   MediaThumbs,
   MediaLightbox,
   EntryBlog,
-  EntryBlogHeroFull,
-  EntryBlogHeroCompact,
-  EntryBlogSplitHeader,
-  EntryBlogCleanHeader,
-  EntryBlogRailLayout,
 };
 
 export const BaseParts = {
