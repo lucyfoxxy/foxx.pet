@@ -180,10 +180,12 @@
 }
 
 .card__list-index,.card__list-title {
-  font-size: var(--font-size-m);
+
   line-height: var(--line-height-m);
   color: var(--color-accent-light);
 }
+
+.card__list-index { font-weight: ;}
 
 .card__list-chapter {
   display: flex;
