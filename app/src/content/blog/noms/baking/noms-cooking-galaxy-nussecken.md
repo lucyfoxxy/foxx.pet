@@ -8,21 +8,21 @@ date: 2025-02-04
 chapters:
   - slug: you-gonna-need
     title: "You Gonna Need"
-  - slug: base
+  - slug: boden-vorbereiten
     title: "Boden vorbereiten"
-  - slug: apricot-layer
+  - slug: aprikosen-schicht
     title: "Aprikosen-Schicht"
-  - slug: nut-mixture
+  - slug: nussmischung-herstellen
     title: "Nussmischung herstellen"
-  - slug: assemble
+  - slug: alles-zusammenfuehren
     title: "Alles zusammenführen"
-  - slug: baking
+  - slug: backen
     title: "Backen"
-  - slug: cooling
+  - slug: abkuehlen-und-schneiden
     title: "Abkühlen & Schneiden"
-  - slug: chocolate
+  - slug: schoki-time
     title: "Schoki-Time"
-  - slug: serving
+  - slug: servieren
     title: "Servieren"
 ---
 
