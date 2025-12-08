@@ -93,6 +93,7 @@
   height: 90%;
   isolation: isolate;
   inset: 0;
+  overflow: hidden;
   z-index: -1;
   pointer-events: none;
   mix-blend-mode: screen;
