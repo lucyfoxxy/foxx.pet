@@ -184,8 +184,8 @@
   line-height: var(--line-height-m);
   color: var(--color-accent-light);
 }
-
-.card__list-index { font-weight: ;}
+.card__list-title { font-weight: var(--font-weight-thick);}
+.card__list-index { font-weight: var(--font-weight-bold);}
 
 .card__list-chapter {
   display: flex;
@@ -314,8 +314,9 @@
 }
 
 .card--content {
-  padding-block: 0;
-  padding-inline-start: 0;
+  padding: 0;
+  block-size: min-content;
+  padding-inline-end: var(--card-padding);
 }
 
 .card__divider {

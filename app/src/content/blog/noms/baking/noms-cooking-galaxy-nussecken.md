@@ -6,8 +6,8 @@ slug: "noms-baking-galaxy-nussecken"
 description: "Saftige Hasel-Pistazien-Nussecken mit Aprikose, Zimt, Kakao und zweierlei Schokolade. Perfekt für Buffets – und in unter einer Stunde vergriffen."
 date: 2025-02-04
 chapters:
-  - slug: shopping-list
-    title: "Einkaufsliste"
+  - slug: you-gonna-need
+    title: "You Gonna Need"
   - slug: base
     title: "Boden vorbereiten"
   - slug: apricot-layer
@@ -26,7 +26,7 @@ chapters:
     title: "Servieren"
 ---
 
-## Shopping List
+## You Gonna Need
 
 ### Für den Mürbeteigboden  
 - 300 g Mehl  
