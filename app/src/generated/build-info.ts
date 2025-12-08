@@ -3,10 +3,10 @@
 
 export const BUILD_INFO = {
   version: "v1.0.1",
-  id: "2025-12-07_1449-ee06a2d",
-  timestampIso: "2025-12-07T14:49:30.991Z",
-  timestampId: "2025-12-07_1449",
-  gitHash: "ee06a2d",
+  id: "2025-12-08_1027-1dd80c3",
+  timestampIso: "2025-12-08T10:27:05.631Z",
+  timestampId: "2025-12-08_1027",
+  gitHash: "1dd80c3",
 } as const;
 
 export type BuildInfo = typeof BUILD_INFO;
