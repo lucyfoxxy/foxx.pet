@@ -59,8 +59,6 @@ chapters:
 - Optional: 50–80 g weiße Schokolade  
 - Kokosraspeln oder Pistazienstreusel  
 
----
-
 ## Boden vorbereiten
 
 1. Mehl, Zucker, Butter, Ei, Backpulver und Salz zu einem glatten Teig verkneten.  
