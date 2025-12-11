@@ -66,14 +66,10 @@ chapters:
 3. Den Mürbeteig **gleichmäßig und fest** in die Form drücken.  
 4. Mit einer Gabel mehrfach einstechen.  
 
----
-
 ## Aprikosen-Schicht
 
 1. Den Boden dünn, aber vollständig mit Aprikosenmarmelade bestreichen.  
    Das sorgt später für die ikonische „Nussecken-Saftigkeit“.
-
----
 
 ## Nussmischung herstellen
 
@@ -92,14 +88,10 @@ chapters:
 > Wenn sie zu trocken wirkt: 1–2 EL Wasser extra.  
 > Wenn sie zu nass wirkt: 1–2 EL Mandeln nachwerfen.
 
----
-
 ## Alles zusammenführen
 
 1. Die noch warme Nussmasse auf den Marmeladenboden geben.  
 2. Gleichmäßig verteilen und **leicht festdrücken**.
-
----
 
 ## Backen
 
@@ -107,14 +99,10 @@ chapters:
 - Backzeit: **25–30 Minuten**  
 - Oberfläche soll leicht bräunen, aber nicht hart werden.
 
----
-
 ## Abkühlen & Schneiden
 
 1. Komplett abkühlen lassen – sonst zerbröseln sie.  
 2. Erst in Quadrate, dann in Dreiecke schneiden.
-
----
 
 ## Schoki-Time
 
@@ -122,8 +110,6 @@ chapters:
 2. Dreiecke an den Seiten eintauchen oder nur Kanten bestreichen.  
 3. Weiße Schokolade optional drüberdrizzlen.  
 4. Sofort Kokos oder Pistazien darüber streuen.
-
----
 
 ## Servieren
 
